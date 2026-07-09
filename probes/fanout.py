@@ -114,7 +114,7 @@ def unit6(model: str, smoke: bool = False) -> float:
         rec = lab.run(dict(
             id=f"u6-amp-{band}-{a_id(alpha)}-{m}", unit="6", model=model,
             title=(f"Unit 6 · Amplify typo register @ {band} "
-                   f"(alpha={alpha}) · {model}"),
+                   f"(α={round(alpha, 4)}) · {model}"),
             steer=dict(words=TYPO, layers=layers, mode="amplify",
                        alpha=alpha),
             messages=[{"role": "user", "content": WATER},

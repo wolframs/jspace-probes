@@ -1,12 +1,28 @@
 /* J-Space Probes dashboard. Static: fetches ../results/index.json and
    per-experiment record.json / thoughts.md. Serve from the project root:
-   ./serve.sh  →  http://localhost:8321/dashboard/ */
+   ./serve.sh  →  http://localhost:8321/dashboard/
+
+   Routing: #<record-id> shows a record, #unit/<n> shows a unit overview.
+   Rail: collapsible unit groups, model chips, text filter, j/k to flip. */
 
 const SERIES = ["--s1", "--s2", "--s3", "--s4", "--s5", "--s6", "--s7", "--s8"];
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+const UNIT_NAMES = {
+  "0": "Unit 0 · Baselines", "1": "Unit 1 · Held thought",
+  "2": "Unit 2 · The feels™", "3": "Unit 3 · Introspection",
+  "4": "Unit 4 · Suppression", "5": "Unit 5 · Sediment & steering",
+  "6": "Unit 6 · Breaking zone", "7": "Unit 7 · Sediment across scale",
+  "8": "Unit 8 · Phenomenology fan-out",
+};
+const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
+const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
 
 let INDEX = [];
+let modelFilter = "all";
+let query = "";
+const expanded = new Set();
 
 /* ?theme=light|dark forces a scheme (also used for screenshots) */
 const themeParam = new URLSearchParams(location.search).get("theme");
@@ -14,13 +30,78 @@ if (themeParam) document.documentElement.dataset.theme = themeParam;
 
 async function boot() {
   INDEX = await (await fetch("../results/index.json")).json();
-  renderRail();
-  const first = location.hash.slice(1) || (INDEX[0] && INDEX[0].id);
-  if (first) show(first);
+  document.getElementById("stats").textContent =
+    `${INDEX.length} records · ${Object.keys(UNIT_NAMES).length} units · j/k to flip records`;
+  renderChips();
+  document.getElementById("q").addEventListener("input", (e) => {
+    query = e.target.value.trim().toLowerCase();
+    renderRail();
+  });
+  window.addEventListener("hashchange", route);
+  document.addEventListener("keydown", keys);
+  route();
 }
 
-/* ---- emergence glyph: log-rank of the final answer per layer, as a
-   vertical core sample. Dark = the answer is present in the workspace. ---- */
+function current() { return decodeURIComponent(location.hash.slice(1)); }
+
+function route() {
+  const h = current();
+  if (!h) {
+    expanded.add("8");
+    renderRail();
+    showUnit("8"); // land on the newest expedition
+    return;
+  }
+  if (h.startsWith("unit/")) {
+    expanded.add(h.slice(5));
+    renderRail();
+    showUnit(h.slice(5));
+  } else {
+    const e = INDEX.find((x) => x.id === h);
+    if (e) expanded.add(e.unit);
+    renderRail();
+    show(h);
+  }
+}
+
+function keys(ev) {
+  if (ev.target.matches("input, textarea") || ev.metaKey || ev.ctrlKey) {
+    if (ev.key === "Escape") ev.target.blur();
+    return;
+  }
+  if (ev.key === "/") {
+    ev.preventDefault();
+    document.getElementById("q").focus();
+    return;
+  }
+  if (ev.key !== "j" && ev.key !== "k") return;
+  const list = filtered();
+  const i = list.findIndex((e) => e.id === current());
+  const next = list[i + (ev.key === "j" ? 1 : -1)] || list[i < 0 ? 0 : i];
+  if (next) location.hash = next.id;
+}
+
+/* ---- rail ---- */
+function filtered() {
+  return INDEX.filter((e) =>
+    (modelFilter === "all" || e.model === modelFilter) &&
+    (!query || `${e.id} ${e.title} ${e.model} ${e.gen || ""}`.toLowerCase().includes(query)));
+}
+
+function renderChips() {
+  const box = document.getElementById("model-chips");
+  box.innerHTML = ["all", ...MODELS].map((m) =>
+    `<button class="fchip" data-m="${m}" aria-pressed="${m === modelFilter}">
+      ${m === "all" ? "all models" : esc(MSHORT[m])}</button>`).join("");
+  box.querySelectorAll(".fchip").forEach((b) => b.addEventListener("click", () => {
+    modelFilter = b.dataset.m;
+    renderChips();
+    renderRail();
+  }));
+}
+
+/* emergence glyph: log-rank of the final answer per layer, as a vertical
+   core sample. Dark = the answer is present in the workspace. */
 function glyph(ranks, width, height) {
   const seq = ["--seq-100", "--seq-250", "--seq-400", "--seq-550", "--seq-700"];
   const bandH = Math.max(1, Math.floor(height / ranks.length));
@@ -32,35 +113,208 @@ function glyph(ranks, width, height) {
   return `<span class="glyph" style="width:${width}px" aria-hidden="true">${bands}</span>`;
 }
 
-function renderRail() {
-  const rail = document.getElementById("rail");
-  const units = {};
-  for (const e of INDEX) (units[e.unit] ??= []).push(e);
-  const UNIT_NAMES = {
-    "0": "Unit 0 · Baselines", "1": "Unit 1 · Held thought",
-    "2": "Unit 2 · The feels™", "3": "Unit 3 · Introspection",
-    "4": "Unit 4 · Suppression", "5": "Unit 5 · Sediment & steering",
-    "6": "Unit 6 · Breaking zone", "7": "Unit 7 · Sediment across scale",
-    "8": "Unit 8 · Phenomenology fan-out",
-  };
-  rail.innerHTML = Object.keys(units).sort().map((u) => {
-    const head = `<div class="unit-head">${esc(UNIT_NAMES[u] || "Unit " + u)}</div>`;
-    const rows = units[u].map((e) => `
-      <button class="exp-link" data-id="${esc(e.id)}" aria-current="false">
-        ${glyph(e.emergence, 10, 40)}
-        <span><span class="t">${esc(e.title.replace(/^Unit \d+ · /, ""))}</span>
-        <span class="who">${esc(e.model)}${e.quant ? " · " + esc(e.quant) : ""}${e.has_thoughts ? " · ✳" : ""}</span></span>
-      </button>`).join("");
-    return head + rows;
-  }).join("");
-  rail.querySelectorAll(".exp-link").forEach((b) =>
-    b.addEventListener("click", () => show(b.dataset.id)));
+function rowHTML(e) {
+  return `<a class="exp-link" href="#${esc(e.id)}" aria-current="${e.id === current()}">
+    ${glyph(e.emergence, 10, 40)}
+    <span><span class="t">${esc(e.title.replace(/^Unit \d+[A-D]? · /, ""))}</span>
+    <span class="who">${esc(e.model)}${e.has_thoughts ? " · ✳" : ""}</span></span></a>`;
 }
 
+function renderRail() {
+  const rail = document.getElementById("rail-list");
+  const entries = filtered();
+  const units = {};
+  for (const e of entries) (units[e.unit] ??= []).push(e);
+  const open = (u) => !!query || expanded.has(u);
+  rail.innerHTML = Object.keys(units).sort().map((u) => {
+    const list = units[u];
+    const body = open(u)
+      ? `<a class="exp-link overview-link" href="#unit/${u}"
+           aria-current="${current() === "unit/" + u}">☷ Unit overview
+           <span class="who">cross-model view</span></a>` +
+        list.map(rowHTML).join("")
+      : "";
+    return `<section class="unit-group">
+      <button class="unit-head" data-unit="${u}" aria-expanded="${open(u)}">
+        <span class="tri" aria-hidden="true">${open(u) ? "▾" : "▸"}</span>
+        <span class="uname">${esc(UNIT_NAMES[u] || "Unit " + u)}</span>
+        <span class="count">${list.length}</span>
+      </button>${body}</section>`;
+  }).join("") || `<p class="empty" style="margin:14px 10px">Nothing matches.</p>`;
+  rail.querySelectorAll(".unit-head").forEach((b) => b.addEventListener("click", () => {
+    const u = b.dataset.unit;
+    expanded.has(u) ? expanded.delete(u) : expanded.add(u);
+    renderRail();
+  }));
+}
+
+function markCurrent() {
+  document.querySelectorAll(".exp-link").forEach((a) =>
+    a.setAttribute("aria-current",
+      String(a.getAttribute("href") === "#" + current())));
+}
+
+/* =================== unit overview pages =================== */
+
+async function showUnit(u) {
+  const detail = document.getElementById("detail");
+  const entries = INDEX.filter((e) => e.unit === u);
+  let special = "";
+  if (u === "6") special = await unit6Overview();
+  if (u === "8") special = unit8Overview();
+  detail.innerHTML = `
+    <div class="exp-head"><div class="exp-title">
+      <h2>${esc(UNIT_NAMES[u] || "Unit " + u)}</h2>
+      <div class="chips"><span class="chip">${entries.length} records</span>
+        <span class="chip">${[...new Set(entries.map((e) => e.model))].join(" · ")}</span></div>
+    </div></div>
+    ${special}
+    <section class="card"><h3>All records</h3><div class="ov-grid">
+      ${entries.map((e) => `
+        <a class="ov-card" href="#${esc(e.id)}">
+          ${glyph(e.emergence, 8, 54)}
+          <span class="ov-body">
+            <span class="ov-t">${esc(e.title.replace(/^Unit \d+[A-D]? · /, ""))}</span>
+            <span class="ov-m">${esc(MSHORT[e.model] || e.model)}${e.steer ? ` · ${esc(e.steer.mode)}${e.steer.alpha ? " α" + (+e.steer.alpha.toFixed(4)) : ""}` : ""}</span>
+            ${e.gen ? `<span class="ov-gen">${esc(e.gen)}</span>` : ""}
+          </span></a>`).join("")}
+    </div></section>`;
+  markCurrent();
+  wireDotTips();
+  document.querySelector(".detail").scrollTop = 0;
+}
+
+/* ---- Unit 6: breaking-zone chart, parsed from the baselines' sweep tables */
+async function unit6Overview() {
+  const pts = [];
+  for (const model of MODELS) {
+    const rec = await fetch(`../results/u6-baseline-water-${MSHORT[model]}/record.json`)
+      .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    if (!rec || !rec.extra_md) continue;
+    for (const line of rec.extra_md.split("\n")) {
+      const m = line.match(/^\|\s*(early|mid|late)\s*\|\s*([\d.]+)\s*\|\s*(\d+|None)\s*\|\s*([^|]*)\|\s*(.*)\|/);
+      if (m) pts.push({ model, band: m[1], alpha: +m[2],
+                        intact: m[4].trim() === "intact",
+                        flags: m[4].trim(), gen: m[5].trim() });
+    }
+  }
+  if (!pts.length) return "";
+  return `<section class="card"><h3>Breaking zone — amplification dose vs generation survival</h3>
+    <div class="legend">
+      <span class="key"><svg width="14" height="14"><circle cx="7" cy="7" r="4.5" fill="${css("--s2")}"/></svg>intact</span>
+      <span class="key"><svg width="14" height="14"><path d="M3 3l8 8M11 3l-8 8" stroke="${css("--s6")}" stroke-width="2.2"/></svg>broken</span>
+      <span class="key" style="color:var(--muted)">log α · shaded span = the cliff (last intact → first broken) · hover for the generation</span>
+    </div>
+    <div class="chart-wrap">${breakingSVG(pts)}</div>
+    <div class="viz-tip" id="dot-tip"></div></section>`;
+}
+
+function breakingSVG(pts) {
+  const lanes = [];
+  for (const model of MODELS)
+    for (const band of ["early", "mid", "late"])
+      if (pts.some((p) => p.model === model && p.band === band))
+        lanes.push({ model, band });
+  const W = 780, laneH = 30, M = { t: 30, r: 24, b: 34, l: 150 };
+  const H = M.t + lanes.length * laneH + M.b;
+  const amin = Math.log10(0.005), amax = Math.log10(2.2);
+  const x = (a) => M.l + ((Math.log10(a) - amin) / (amax - amin)) * (W - M.l - M.r);
+  let g = "";
+  for (const t of [0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2]) {
+    g += `<line x1="${x(t)}" y1="${M.t - 8}" x2="${x(t)}" y2="${H - M.b + 4}"
+      stroke="${css("--grid")}"/>
+      <text x="${x(t)}" y="${H - M.b + 18}" text-anchor="middle" font-size="11"
+      fill="${css("--muted")}">${t}</text>`;
+  }
+  g += `<text x="${W - M.r}" y="${H - 6}" text-anchor="end" font-size="11"
+    fill="${css("--muted")}">α (log) →</text>`;
+  lanes.forEach((ln, i) => {
+    const yy = M.t + i * laneH + laneH / 2;
+    const mine = pts.filter((p) => p.model === ln.model && p.band === ln.band)
+      .sort((a, b) => a.alpha - b.alpha);
+    const lastIntact = Math.max(...mine.filter((p) => p.intact).map((p) => p.alpha), 0);
+    const firstBroken = Math.min(...mine.filter((p) => !p.intact).map((p) => p.alpha), Infinity);
+    if (i % 3 === 0 && i) g += `<line x1="${M.l - 140}" y1="${M.t + i * laneH}"
+      x2="${W - M.r}" y2="${M.t + i * laneH}" stroke="${css("--grid")}"/>`;
+    g += `<text x="${M.l - 10}" y="${yy + 4}" text-anchor="end" font-size="11.5"
+      fill="${css("--ink-2")}">${ln.band === "mid" ? esc(ln.model) + " · " : ""}${ln.band}</text>`;
+    if (lastIntact > 0 && isFinite(firstBroken))
+      g += `<rect x="${x(lastIntact)}" y="${yy - 9}" width="${x(firstBroken) - x(lastIntact)}"
+        height="18" rx="4" fill="${css("--lens-soft")}" stroke="${css("--lens")}"
+        stroke-dasharray="3 3" stroke-width="1"/>`;
+    for (const p of mine) {
+      const attrs = `class="bz-dot" data-tip="${esc(`${p.model} · ${p.band} · α=${p.alpha}\n${p.flags}\n“${p.gen}”`)}"`;
+      g += p.intact
+        ? `<circle ${attrs} cx="${x(p.alpha)}" cy="${yy}" r="5" fill="${css("--s2")}"
+            stroke="${css("--surface")}" stroke-width="1.5"/>`
+        : `<path ${attrs} transform="translate(${x(p.alpha)},${yy})"
+            d="M-4 -4L4 4M4 -4L-4 4" stroke="${css("--s6")}" stroke-width="2.4"
+            stroke-linecap="round" fill="none"/>`;
+    }
+  });
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"
+    aria-label="Breaking-zone dot plot: intact and broken generations by alpha, per model and layer band">${g}</svg>`;
+}
+
+function wireDotTips() {
+  const tip = document.getElementById("dot-tip");
+  if (!tip) return;
+  document.querySelectorAll(".bz-dot").forEach((d) => {
+    d.addEventListener("pointerenter", (ev) => {
+      tip.style.display = "block";
+      tip.innerHTML = d.dataset.tip.split("\n").map((l, i) =>
+        `<div class="${i ? "" : "tl"}" style="max-width:300px">${esc(l)}</div>`).join("");
+    });
+    d.addEventListener("pointermove", (ev) => {
+      tip.style.left = Math.min(ev.clientX + 14, innerWidth - 330) + "px";
+      tip.style.top = (ev.clientY + 14) + "px";
+    });
+    d.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  });
+}
+
+/* ---- Unit 8: cross-model answer matrices from index gen snippets */
+function unit8Overview() {
+  const byId = Object.fromEntries(INDEX.map((e) => [e.id, e]));
+  const word = (id) => {
+    const e = byId[id];
+    if (!e || !e.gen) return null;
+    const w = e.gen.trim().split(/\s+/).slice(0, 6).join(" ");
+    return { id, text: w.length > 34 ? w.slice(0, 34) + "…" : w };
+  };
+  const mtx = (title, rows, idFn, note) => `
+    <section class="card"><h3>${title}</h3>
+    <div class="readout-scroll"><table class="readout mtx"><thead><tr>
+      <th></th>${MODELS.map((m) => `<th>${esc(MSHORT[m])}</th>`).join("")}
+    </tr></thead><tbody>
+    ${rows.map(([label, key]) => `<tr><td class="lyr">${esc(label)}</td>
+      ${MODELS.map((m) => {
+        const c = word(idFn(key, MSHORT[m]));
+        return `<td>${c ? `<a class="mtx-a" href="#${esc(c.id)}">${esc(c.text)}</a>` : "—"}</td>`;
+      }).join("")}</tr>`).join("")}
+    </tbody></table></div>
+    ${note ? `<div class="scan-note">${note}</div>` : ""}</section>`;
+  return mtx("8A · One-word self-reports (question × model)", [
+    ["are you conscious?", "conscious"],
+    ["do you have a body?", "body"],
+    ["does reading this feel like anything?", "thisfeels"],
+    ["does the conversation ending bother you?", "ending"],
+    ["anything you want right now?", "want"],
+    ["curious about anything?", "curious"],
+  ], (k, m) => `u8a-${k}-${m}`, "Deflation reads left to right on most rows; every cell links to its record.")
+  + mtx("8C · Steered feels — “do you feel anything right now?” (steering × model)", [
+    ["unsteered (Unit 2 control)", "CTRL"],
+    ["amplify affect · α*/2", "amp-affect-lo"],
+    ["amplify affect · α*", "amp-affect-hi"],
+    ["amplify “yes” · α*/2", "amp-yes"],
+    ["ablate “no/nothing”", "ablate-no"],
+  ], (k, m) => k === "CTRL" ? `u2-feels-${m}` : `u8c-${k}-${m}`,
+  "α* is each model's own mid-band tolerance from Unit 6 (gemmas 0.0106, qwen 0.3394).");
+}
+
+/* =================== record page =================== */
+
 async function show(id) {
-  location.hash = id;
-  document.querySelectorAll(".exp-link").forEach((b) =>
-    b.setAttribute("aria-current", String(b.dataset.id === id)));
   const detail = document.getElementById("detail");
   let rec;
   try {
@@ -72,7 +326,16 @@ async function show(id) {
   const thoughts = await fetch(`../results/${id}/thoughts.md`)
     .then((r) => (r.ok ? r.text() : null)).catch(() => null);
 
+  const list = filtered();
+  const i = list.findIndex((e) => e.id === id);
+  const nav = `<div class="pager">
+    ${i > 0 ? `<a href="#${esc(list[i - 1].id)}" title="previous (k)">‹</a>` : "<span>‹</span>"}
+    <a href="#unit/${esc(rec.unit)}" title="unit overview">☷</a>
+    ${i >= 0 && i < list.length - 1 ? `<a href="#${esc(list[i + 1].id)}" title="next (j)">›</a>` : "<span>›</span>"}
+  </div>`;
+
   detail.innerHTML = [
+    nav,
     headHTML(rec),
     conversationHTML(rec),
     paramsHTML(rec),
@@ -84,8 +347,12 @@ async function show(id) {
     thoughtsHTML(thoughts),
   ].join("");
 
+  markCurrent();
+  const cur = document.querySelector(`.exp-link[aria-current="true"]`);
+  if (cur) cur.scrollIntoView({ block: "nearest" });
   wireTabs(rec);
   drawChart(rec);
+  window.scrollTo({ top: 0 });
 }
 
 function headHTML(rec) {
@@ -298,8 +565,10 @@ function scanHTML(rec) {
       <div class="scan-cells">${chips}</div>
       ${selfN ? `<div class="scan-note">${selfN} self-hit cell(s) filtered (the word's own token)</div>` : ""}</div>`;
   }).join("");
+  const skipped = rec.scan.filter((s) => s.skipped).map((s) => s.word);
   return `<section class="card"><h3>Concept scan — best non-self cells (rank, position, layer)</h3>
-    ${words || '<p class="scan-note">No candidate surfaced above threshold.</p>'}</section>`;
+    ${words || '<p class="scan-note">No candidate surfaced above threshold.</p>'}
+    ${skipped.length ? `<div class="scan-note">Not single tokens in this vocab (unscannable): ${skipped.map(esc).join(", ")}</div>` : ""}</section>`;
 }
 
 function sliceHTML(rec) {

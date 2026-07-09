@@ -315,6 +315,8 @@ def reindex() -> None:
     entries = []
     for rec_path in sorted(RESULTS.glob("*/record.json")):
         rec = json.loads(rec_path.read_text())
+        gen = (rec.get("generated") or [None])[0]
+        steer = (rec.get("params") or {}).get("steer")
         entries.append({
             "id": rec["id"], "title": rec["title"], "unit": rec["unit"],
             "model": rec["model"]["name"], "quant": rec["model"]["quant"],
@@ -322,6 +324,9 @@ def reindex() -> None:
             "has_thoughts": (rec_path.parent / "thoughts.md").exists(),
             "emergence": rec["emergence"]["ranks"],
             "top1": rec["emergence"]["top1"],
+            "gen": gen[:110] if gen else None,
+            "steer": ({"mode": steer.get("mode", "ablate"),
+                       "alpha": steer.get("alpha")} if steer else None),
         })
     entries.sort(key=lambda e: (e["unit"], e["created"]))
     RESULTS.mkdir(exist_ok=True)

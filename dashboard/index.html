@@ -15,9 +15,18 @@
   </div>
   <p class="masthead-sub">Reading silent thoughts through the Jacobian lens
     · wolfram &times; claude · RTX&nbsp;3090</p>
+  <p class="masthead-sub" id="stats"></p>
 </header>
 <div class="frame">
-  <nav class="rail" id="rail" aria-label="Experiments"></nav>
+  <nav class="rail" id="rail" aria-label="Experiments">
+    <div class="rail-controls">
+      <input type="search" id="q" placeholder="Filter records… ( / )"
+        aria-label="Filter experiments">
+      <div class="chip-row" id="model-chips" role="group"
+        aria-label="Filter by model"></div>
+    </div>
+    <div id="rail-list"></div>
+  </nav>
   <main class="detail" id="detail">
     <p class="empty">Pick an experiment from the list.</p>
   </main>
