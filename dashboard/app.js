@@ -325,6 +325,10 @@ async function show(id) {
   }
   const thoughts = await fetch(`../results/${id}/thoughts.md`)
     .then((r) => (r.ok ? r.text() : null)).catch(() => null);
+  const hasSlice = rec.slice
+    ? await fetch(`../results/${id}/${rec.slice}`, { method: "HEAD" })
+        .then((r) => r.ok).catch(() => false)
+    : false;
 
   const list = filtered();
   const i = list.findIndex((e) => e.id === id);
@@ -343,7 +347,7 @@ async function show(id) {
     chartHTML(rec),
     readoutHTML(rec),
     scanHTML(rec),
-    sliceHTML(rec),
+    sliceHTML(rec, hasSlice),
     thoughtsHTML(thoughts),
   ].join("");
 
@@ -571,8 +575,13 @@ function scanHTML(rec) {
     ${skipped.length ? `<div class="scan-note">Not single tokens in this vocab (unscannable): ${skipped.map(esc).join(", ")}</div>` : ""}</section>`;
 }
 
-function sliceHTML(rec) {
+function sliceHTML(rec, available) {
   if (!rec.slice) return "";
+  if (!available) {
+    return `<section class="card"><p class="empty">Interactive slice view not
+      bundled in this data dump (heavyweight, regenerable) — re-run the spec
+      with <code>probes/lab.py</code> to rebuild it.</p></section>`;
+  }
   return `<section class="card"><details class="slice">
     <summary>Interactive slice view (layer × position, click cells to pin tokens)</summary>
     <iframe loading="lazy" src="../results/${esc(rec.id)}/${esc(rec.slice)}"

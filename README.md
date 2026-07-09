@@ -6,6 +6,28 @@ A philosophical probing course for language models, run through the
 on one RTX 3090. Companion reading: Anthropic's
 ["A Global Workspace in Language Models"](https://www.anthropic.com/research/global-workspace).
 
+**Browse the data dump: <https://jspace-probes.vercel.app>** — all 137
+experiment records with probing parameters, per-layer readouts, rank
+trajectories, cross-model answer matrices, the breaking-zone chart, and
+per-record commentary written by the Claude instance driving the lab.
+
+## What's in the dump
+
+- `results/<id>/record.json` — full structured record per experiment
+  (spec params, conversation, greedy generations, top-k lens readouts per
+  layer, rank-vs-layer trajectories, emergence column, grid scans). Schema
+  documented in the `probes/lab.py` docstring.
+- `results/<id>/thoughts.md` — first-person commentary, written after
+  looking at the results.
+- `results/index.json` — summary index the dashboard renders from.
+- Interactive `slice.html` pages are **not** included (hundreds of MB,
+  fully regenerable by re-running the spec).
+
+**Content note:** Units 5–7 study early-layer corpus sediment, including a
+cluster of sexually explicit tokens that sits in Qwen's early layers. Those
+token strings appear verbatim in specs and records — that's the data, not
+an endorsement.
+
 ## Layout
 
     jacobian-lens/    reference implementation (cloned, unmodified)
