@@ -40,6 +40,8 @@ function renderRail() {
     "0": "Unit 0 · Baselines", "1": "Unit 1 · Held thought",
     "2": "Unit 2 · The feels™", "3": "Unit 3 · Introspection",
     "4": "Unit 4 · Suppression", "5": "Unit 5 · Sediment & steering",
+    "6": "Unit 6 · Breaking zone", "7": "Unit 7 · Sediment across scale",
+    "8": "Unit 8 · Phenomenology fan-out",
   };
   rail.innerHTML = Object.keys(units).sort().map((u) => {
     const head = `<div class="unit-head">${esc(UNIT_NAMES[u] || "Unit " + u)}</div>`;

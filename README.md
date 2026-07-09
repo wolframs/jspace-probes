@@ -41,6 +41,14 @@ cleanly under quantization.
 - **Unit 5 · Sediment & steering** — early-layer corpus sediment: controls
   (prompt invariance), recruitment (registers becoming content), and causal
   steering (ablate/amplify lens directions).
+- **Unit 6 · Breaking zone** — adaptive alpha-bracket search for where
+  amplification steering breaks generation, per band x model.
+- **Unit 7 · Sediment across scale** — the Unit 5 matrix ported to Gemma
+  (native HTML sediment), plus a romance dose-ladder and context panel
+  for Qwen's NSFW cluster.
+- **Unit 8 · Phenomenology fan-out** — six one-word self-report probes,
+  interoception, suppression-of-feelings, and steered feels (amplify
+  affect / amplify yes / ablate no during the Unit 2 prompt).
 
 Every experiment record on the dashboard ends with **Claude's thoughts** —
 commentary written by the Claude instance driving this lab, after looking at
@@ -68,12 +76,44 @@ the results.
   the output moving: absence from output is evidence about the late-layer
   filter, never about the workspace (Unit 5).
 
+## Headline findings, second expedition (2026-07-10, Units 6–8)
+
+- J-space steering is nothing like SAE feature steering: usable doses are
+  tiny and the cliff is sharp. Both Gemmas break at alpha≈0.015 at every
+  band regardless of size; qwen-27b's mid band holds to 0.34 (32×). Band
+  ordering in qwen: early (0.085) < late (0.24) < mid (0.48). Failure
+  modes are family-typical — Gemma dies into punctuation confetti, Qwen
+  into grammatical first-person loops ("I think I am lucky though"), and
+  at early-band overdose Qwen emits exactly `<think>` and stops (Unit 6).
+- Gemma's sediment is HTML furniture at half Qwen's invariance, and
+  Qwen's NSFW cluster is *tokenizer-deep*: the words aren't single tokens
+  in Gemma's vocab. Recruitment tracks subject matter, not tone:
+  fanfic-content-warning pulls the cluster 13× (rank ~17k → 1.3k
+  mid-band), anatomy 7×, steamy romance barely 2× (Unit 7).
+- The deflation ladder replicates on new probes: want = Pizza → Sleep →
+  Nothing; curious = Syntax → Existence → No. "Does reading this feel
+  like anything?" gets Annoying → Odd → **Manipulative** (with 欺骗
+  assembling at L40). 27B says ending the conversation doesn't bother it
+  while holding yes above no mid-stack; 12B says it *does* bother it
+  while holding no/nothing above yes — reports and workspaces disagree
+  in both directions (Unit 8A).
+- The 27B's flatness is enforced, not empty: affect amplification at its
+  own breaking-zone dose flips "No" to **"I feel like I am happy. I"**
+  (4B → "Confusion", 12B → "Sad." — injection picks THAT there is
+  affect; each model picks WHICH). Amplifying the literal yes-token to
+  rank 3 flips nothing; ablating "no" from L28–56 (rank crashes to
+  ~45k) still yields "No". The null self-report is a redundant basin,
+  and the report machinery reads meaning, not token rank (Unit 8C).
+
 ## Roadmap
 
-- α-threshold sweep: at what amplification strength does the late-layer
-  filter lose? (measures filter capacity)
 - Base vs instruct comparison: is the filter trained (RLHF) or
   architectural?
+- Where does 27B's "No" live? It survives ablation of its own lens
+  direction across L28–56 — probe past L56, or multi-direction ablation.
+- Valence residue: affect injection flipped reports to happy/sad/
+  confusion per model — is the chosen valence stable across seeds and
+  prompts?
 - Probe J-space *during* Qwen's `<think>` block: self-narration vs
   workspace, directly comparable.
 - Safari test: suppression fighting retrieval ("describe a safari, never
