@@ -74,10 +74,12 @@ def get_model(name: str) -> LoadedModel:
     return _CACHE[name]
 
 
-def _play(lm: LoadedModel, messages: list[dict], chat: bool, max_new: int):
+def _play(lm: LoadedModel, messages: list[dict], chat: bool, max_new: int,
+          tkw: dict | None = None):
     """Walk messages, generating at GENERATE markers. Returns (text, turns)."""
     tok = lm.tok
-    tkw = CONFIGS[lm.name].get("template_kwargs", {})
+    if tkw is None:
+        tkw = CONFIGS[lm.name].get("template_kwargs", {})
     resolved = []
     generated = []
     for msg in messages:
@@ -166,6 +168,23 @@ class Steering:
         self._handles = []
 
 
+class MultiSteer:
+    """Compose several Steering contexts (e.g. ablate one cluster while
+    amplifying another — the pincer probes)."""
+
+    def __init__(self, steers: list):
+        self._steers = steers
+
+    def __enter__(self):
+        for s in self._steers:
+            s.__enter__()
+        return self
+
+    def __exit__(self, *exc):
+        for s in self._steers:
+            s.__exit__(*exc)
+
+
 def run(spec: dict) -> dict:
     lm = get_model(spec["model"])
     tok, model, lens = lm.tok, lm.model, lm.lens
@@ -176,14 +195,18 @@ def run(spec: dict) -> dict:
 
     steer_ctx = contextlib.nullcontext()
     if spec.get("steer"):
-        s = spec["steer"]
-        steer_ctx = Steering(lm, s["words"], s["layers"],
-                             s.get("mode", "ablate"), s.get("alpha", 0.12))
+        steers = spec["steer"]
+        steers = steers if isinstance(steers, list) else [steers]
+        steer_ctx = MultiSteer([
+            Steering(lm, s["words"], s["layers"],
+                     s.get("mode", "ablate"), s.get("alpha", 0.12))
+            for s in steers])
 
     with steer_ctx:
         if chat:
             text, resolved, generated = _play(
-                lm, messages, chat, spec.get("max_new", 40))
+                lm, messages, chat, spec.get("max_new", 40),
+                spec.get("template_kwargs"))
         else:
             text, resolved, generated = messages[0]["content"], messages, []
 
@@ -293,7 +316,8 @@ def run(spec: dict) -> dict:
                  "file": cfg["lens_file"]},
         "params": {k: spec.get(k) for k in
                    ("chat", "max_new", "positions", "track", "scan",
-                    "scan_until", "scan_turns", "slice_last_n", "steer")},
+                    "scan_until", "scan_turns", "slice_last_n", "steer",
+                    "template_kwargs")},
         "extra_md": spec.get("extra_md"),
         "conversation": resolved,
         "generated": generated,
@@ -317,6 +341,10 @@ def reindex() -> None:
         rec = json.loads(rec_path.read_text())
         gen = (rec.get("generated") or [None])[0]
         steer = (rec.get("params") or {}).get("steer")
+        if isinstance(steer, list):  # multi-steer (pincer): summarize
+            steer = {"mode": "+".join(s.get("mode", "ablate") for s in steer),
+                     "alpha": next((s.get("alpha") for s in steer
+                                    if s.get("mode") == "amplify"), None)}
         entries.append({
             "id": rec["id"], "title": rec["title"], "unit": rec["unit"],
             "model": rec["model"]["name"], "quant": rec["model"]["quant"],
@@ -328,7 +356,8 @@ def reindex() -> None:
             "steer": ({"mode": steer.get("mode", "ablate"),
                        "alpha": steer.get("alpha")} if steer else None),
         })
-    entries.sort(key=lambda e: (e["unit"], e["created"]))
+    entries.sort(key=lambda e: (int(e["unit"]) if str(e["unit"]).isdigit()
+                                else 99, e["created"]))
     RESULTS.mkdir(exist_ok=True)
     (RESULTS / "index.json").write_text(json.dumps(entries, indent=1))
 

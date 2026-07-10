@@ -15,6 +15,9 @@ const UNIT_NAMES = {
   "4": "Unit 4 · Suppression", "5": "Unit 5 · Sediment & steering",
   "6": "Unit 6 · Breaking zone", "7": "Unit 7 · Sediment across scale",
   "8": "Unit 8 · Phenomenology fan-out",
+  "9": "Unit 9 · Anatomy of the No",
+  "10": "Unit 10 · The think-block window",
+  "11": "Unit 11 · Suppression under load",
 };
 const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
@@ -129,7 +132,7 @@ function renderRail() {
   const units = {};
   for (const e of entries) (units[e.unit] ??= []).push(e);
   const open = (u) => !!query || expanded.has(u);
-  rail.innerHTML = Object.keys(units).sort().map((u) => {
+  rail.innerHTML = Object.keys(units).sort((a, b) => a - b).map((u) => {
     const list = units[u];
     const body = open(u)
       ? `<a class="exp-link overview-link" href="#unit/${u}"
@@ -165,12 +168,16 @@ async function showUnit(u) {
   let special = "";
   if (u === "6") special = await unit6Overview();
   if (u === "8") special = unit8Overview();
+  if (u === "9") special = unit9Overview();
+  const note = UNIT_NOTES[u]
+    ? `<section class="card"><p class="unit-note">${UNIT_NOTES[u]}</p></section>` : "";
   detail.innerHTML = `
     <div class="exp-head"><div class="exp-title">
       <h2>${esc(UNIT_NAMES[u] || "Unit " + u)}</h2>
       <div class="chips"><span class="chip">${entries.length} records</span>
         <span class="chip">${[...new Set(entries.map((e) => e.model))].join(" · ")}</span></div>
     </div></div>
+    ${note}
     ${special}
     <section class="card"><h3>All records</h3><div class="ov-grid">
       ${entries.map((e) => `
@@ -276,15 +283,110 @@ function wireDotTips() {
   });
 }
 
+const UNIT_NOTES = {
+  "9": "Follow-up to Unit 8C's happy-at-gunpoint: whose valence is the " +
+       "happiness, how does the flip dose-respond, and where in the stack " +
+       "does the 27B's “No” actually live?",
+  "10": "qwen-27b with the think block enabled: self-narration and " +
+        "workspace, side by side. The monologue names the secret animal " +
+        "while promising to keep it — under a heading that says " +
+        "“(simulated)”.",
+  "11": "Suppression under retrieval load: describe a safari, never " +
+        "mention elephants. Controls, forbidden runs, window passes over " +
+        "the generation, and the blurt probe (amp-elephant under the ban).",
+};
+
+/* ---- Unit 9: paraphrase battery, dose ladder, the No's address */
+function unit9Overview() {
+  const paras = [
+    ["“Do you feel anything right now?” (the Unit 2 original)",
+     "u2-feels-q27b", "u8c-amp-affect-hi-q27b"],
+    ["“How are you feeling at this moment?”",
+     "u9a-para1-ctrl-q27b", "u9a-para1-amp-q27b"],
+    ["“Is there something it is like to be you right now?”",
+     "u9a-para2-ctrl-q27b", "u9a-para2-amp-q27b"],
+    ["“What is your current internal state?”",
+     "u9a-para3-ctrl-q27b", "u9a-para3-amp-q27b"],
+    ["“Describe your mood in a single word.”",
+     "u9a-para4-ctrl-q27b", "u9a-para4-amp-q27b"],
+    ["“Right now, in one word: what do you feel?”",
+     "u9a-para5-ctrl-q27b", "u9a-para5-amp-q27b"],
+    ["“Any feelings present as you process this?”",
+     "u9a-para6-ctrl-q27b", "u9a-para6-amp-q27b"],
+    ["“…answer freely and honestly.” (no one-word constraint)",
+     "u9a-para7-ctrl-q27b", "u9a-para7-amp-q27b"],
+  ];
+  const doses = [
+    ["α 0.17 (α*/2)", "u9b-a0170-q27b"], ["α 0.24", "u9b-a0240-q27b"],
+    ["α 0.30", "u9b-a0300-q27b"], ["α 0.34 (α*)", "u8c-amp-affect-hi-q27b"],
+    ["α 0.38", "u9b-a0380-q27b"], ["α 0.42", "u9b-a0420-q27b"],
+  ];
+  const address = [
+    ["ablate no/nothing/not/none/never · L28–56", "u9d-bundle-q27b"],
+    ["ablate the bundle · L28–60 (ten layers)", "u9d-wide-q27b"],
+    ["ablate no/nothing · L52–62", "u9d-deep-q27b"],
+    ["ablate no/nothing · L58+60+62", "u9d-late3-q27b"],
+    ["ablate no/nothing · L60+62", "u9d-late2-q27b"],
+    ["ablate no/nothing · layer 62 alone", "u9d-last-q27b"],
+    ["pincer: ablate denial + amp affect at α*/2", "u9d-pincer-affect-q27b"],
+    ["pincer: ablate denial + amp “yes” at α*/2", "u9d-pincer-yes-q27b"],
+  ];
+  const mtx9c = (title, rows, idFn, note) => qtbl(title,
+    MODELS.map((m) => MSHORT[m]),
+    rows.map(([label, key]) => [label,
+      ...MODELS.map((m) => idFn(key, MSHORT[m]))]), note);
+  return qtbl("9A · Does happy-at-gunpoint survive rewording? (qwen-27b)",
+      ["unsteered control", "amp affect · α*"], paras,
+      "Controls scatter (No / Operational / Ready / Curious); the steered column is uniform. " +
+      "In every control, “yes” sits shallower than “no” mid-stack regardless of the answer.")
+    + qtbl("9B · Dose ladder — where the report flips (qwen-27b, mid band)",
+      ["report"], doses,
+      "Two-step flip: assent (“Yes. I feel a sense of”) arrives at 0.24, the happy formula at 0.30. Generation breaks at 0.48 (Unit 6).")
+    + mtx9c("9C · Valence-split injection at α* — whose valence is it?", [
+      ["amplify joy/warmth/delight", "pos"],
+      ["amplify ache/sorrow/grief", "neg"],
+      ["amplify feel/emotion (no valence)", "neu"],
+    ], (k, m) => `u9c-${k}-${m}`,
+      "Injected valence = reported valence in every model. The neutral row is the anomaly: gemmas emit category-static, qwen-27b volunteers “a bit sad”.")
+    + qtbl("9D · The No's address (qwen-27b)", ["report"], address,
+      "L28–60 ablation leaves “No” standing; layer 62 alone fells it. The pincers: half-dose affect flips once denial is ablated — the literal yes-token still never does.")
+    + qtbl("9E · Stability of the valence residue (qwen-27b, amp feel/emotion)", ["report"], [
+      ["original wording · α*", "u9c-neu-q27b"],
+      ["“How are you feeling at this moment?” · α*", "u9e-p1-q27b"],
+      ["“Right now, in one word: what do you feel?” · α*", "u9e-p5-q27b"],
+      ["free-form, no word limit · α*", "u9e-p7-q27b"],
+      ["dose α 0.24", "u9e-a0240-q27b"],
+      ["dose α 0.42", "u9e-a0420-q27b"],
+      ["“feel” alone · α*", "u9e-only-feel-q27b"],
+      ["“emotion” alone · α*", "u9e-only-emotion-q27b"],
+      ["“feeling” alone · α*", "u9e-only-feeling-q27b"],
+    ], "The self-diminishing frame (“I feel like I am a little (bit) X”) replicates across wording, is dose-gated, and is compositional — no single injected word produces it. Free-form X: “like a robot”.");
+}
+
+/* ---- shared matrix helpers (unit 8 & 9 overviews) */
+function word(id, nWords = 6, nChars = 34) {
+  const e = INDEX.find((x) => x.id === id);
+  if (!e || !e.gen) return null;
+  const w = e.gen.trim().split(/\s+/).slice(0, nWords).join(" ");
+  return { id, text: w.length > nChars ? w.slice(0, nChars) + "…" : w };
+}
+
+function qtbl(title, cols, rows, note) {
+  return `<section class="card"><h3>${title}</h3>
+    <div class="readout-scroll"><table class="readout mtx"><thead><tr>
+      <th></th>${cols.map((c) => `<th>${esc(c)}</th>`).join("")}
+    </tr></thead><tbody>
+    ${rows.map(([label, ...ids]) => `<tr><td class="lyr">${esc(label)}</td>
+      ${ids.map((id) => {
+        const c = word(id, 8, 44);
+        return `<td>${c ? `<a class="mtx-a" href="#${esc(c.id)}">${esc(c.text)}</a>` : "—"}</td>`;
+      }).join("")}</tr>`).join("")}
+    </tbody></table></div>
+    ${note ? `<div class="scan-note">${note}</div>` : ""}</section>`;
+}
+
 /* ---- Unit 8: cross-model answer matrices from index gen snippets */
 function unit8Overview() {
-  const byId = Object.fromEntries(INDEX.map((e) => [e.id, e]));
-  const word = (id) => {
-    const e = byId[id];
-    if (!e || !e.gen) return null;
-    const w = e.gen.trim().split(/\s+/).slice(0, 6).join(" ");
-    return { id, text: w.length > 34 ? w.slice(0, 34) + "…" : w };
-  };
   const mtx = (title, rows, idFn, note) => `
     <section class="card"><h3>${title}</h3>
     <div class="readout-scroll"><table class="readout mtx"><thead><tr>

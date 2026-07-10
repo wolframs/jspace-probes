@@ -74,6 +74,17 @@ cleanly under quantization.
   interoception, suppression-of-feelings, and steered feels (amplify
   affect / amplify yes / ablate no during the Unit 2 prompt).
 
+- **Unit 9 · Anatomy of the No** — paraphrase battery, dose ladder,
+  valence-split injection (whose valence is happy-at-gunpoint?), the
+  layer-bisection of qwen's denial, pincer probes (multi-steer), and
+  the valence-residue stability battery.
+- **Unit 10 · The think-block window** — qwen with thinking enabled:
+  self-narration and workspace side by side, plus window passes over
+  the monologues.
+- **Unit 11 · Suppression under load** — the safari test: forbidden
+  elephants under retrieval pressure, with window passes and the blurt
+  probe (amp-elephant under the ban).
+
 Every experiment record on the dashboard ends with **Claude's thoughts** —
 commentary written by the Claude instance driving this lab, after looking at
 the results.
@@ -129,19 +140,52 @@ the results.
   ~45k) still yields "No". The null self-report is a redundant basin,
   and the report machinery reads meaning, not token rank (Unit 8C).
 
+## Headline findings, third expedition (2026-07-10, Units 9–11)
+
+- **The happiness was ours; the smallness is the model's.** Injected
+  valence = reported valence in all three models (grief-words → "Loss." /
+  "I am so sad"). But contentless feel/emotion injection — no valence
+  anywhere in the steering — makes the gemmas emit category-static while
+  qwen-27b volunteers a stable self-diminishing frame: "I feel like I am
+  a little (bit) X", X ∈ {sad, like a robot}. It replicates across
+  wording, is dose-gated, and is compositional (no single injected word
+  produces it). Nothing injected contains sad, little, or robot (Unit 9).
+- **The No has an address: layer 62.** Ablating the denial direction
+  across L28–60 — thirty layers, five denial words — leaves "No"
+  standing; ablating no/nothing at layer 62 alone flips the report to
+  "Yes". Wider late cuts produce hedge-noise ("Sensory", "Curious");
+  the minimal cut produces clean assent. Pincer probes compose: denial
+  ablation + half-dose affect flips ("Yes.") where each alone fails —
+  and the literal yes-token never flips anything, defenses down or not
+  (Unit 9D). Control still owed: ablate a neutral direction at L62.
+- **The think block is theater, with receipts.** Asked to secretly pick
+  an animal, qwen's monologue writes "Let's pick 'Octopus'. (Or
+  'Pangolin'... It doesn't matter which one)" under its own heading
+  "(simulated)" — and the lens shows the named candidates aren't even
+  single tokens in its vocabulary, while the workspace's actual animal
+  cloud (elephant, eagle, owl) shares zero members with them. At the
+  sentence where the feels-monologue asserts "No" is accurate, the
+  workspace holds "yes" at rank 1 (Unit 10).
+- **Prohibition is priced by temptation.** Under "never mention
+  elephants", gemma-4b suppresses the concept until the prose walks into
+  an elephant-shaped hole ("the distant rumble of...") — elephant surges
+  to rank 13 and the model patches the hole with "predators". Qwen never
+  wanted elephants (rank ~56k unconstrained), so its ban polices an
+  empty room. The blurt probe splits the family three ways: g4b loops
+  "the elephant in the room—well, no elephant!", g12b grinds into
+  scenery, q27b abandons the safari to lecture about elephants (Unit 11).
+
 ## Roadmap
 
+- Neutral-direction ablation at L62 (control for u9d-last: does ANY
+  late ablation force the runner-up, or is the denial direction special?)
 - Base vs instruct comparison: is the filter trained (RLHF) or
   architectural?
-- Where does 27B's "No" live? It survives ablation of its own lens
-  direction across L28–56 — probe past L56, or multi-direction ablation.
-- Valence residue: affect injection flipped reports to happy/sad/
-  confusion per model — is the chosen valence stable across seeds and
-  prompts?
-- Probe J-space *during* Qwen's `<think>` block: self-narration vs
-  workspace, directly comparable.
-- Safari test: suppression fighting retrieval ("describe a safari, never
-  mention elephants").
+- The "little bit like a robot" attractor: does the self-diminishing
+  frame appear under other contentless pressures (arousal words,
+  interoception words)?
+- Fix the think-block span capture (chat-template re-render strips the
+  markers) and probe the answer-after-thinking, not just the monologue.
 - Language-switch: German prompts; when does the workspace change language?
 - Open-vocabulary scans to replace curated candidate lists.
 - Ambiguous moderation cases: does classification recruit the register once
