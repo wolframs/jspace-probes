@@ -211,9 +211,17 @@ def run(spec: dict) -> dict:
             text, resolved, generated = messages[0]["content"], messages, []
 
         lens_logits, model_logits, input_ids = lens.apply(
-            model, text, positions=None)
+            model, text, positions=None,
+            layers=spec.get("lens_layers"),
+            max_seq_len=spec.get("max_seq_len", 512))
     toks = [tok.decode([t]) for t in input_ids[0]]
     n = len(toks)
+    full_n = model.encode(text, max_length=1_000_000).shape[1]
+    if full_n > n:
+        print(f"  WARNING {spec['id']}: lens pass truncated "
+              f"({full_n} tokens -> {n}); readout positions are relative "
+              f"to the truncated sequence. Raise spec['max_seq_len'].",
+              flush=True)
     layers = sorted(lens_logits)
 
     # per-layer topk readouts at requested positions
@@ -292,6 +300,51 @@ def run(spec: dict) -> dict:
     outdir = RESULTS / spec["id"]
     outdir.mkdir(parents=True, exist_ok=True)
 
+    # film: full position x layer top-k over the generated span (plus a
+    # short prompt runway), so the dashboard can play the whole answer
+    # forming. The grid is already computed — this only extracts it.
+    film_file = None
+    if spec.get("film"):
+        gen_start = 0
+        if chat and resolved and resolved[-1]["role"] == "assistant":
+            tkw = spec.get("template_kwargs") or CONFIGS[lm.name].get(
+                "template_kwargs", {})
+            prefix = _strip_bos(tok, tok.apply_chat_template(
+                resolved[:-1], tokenize=False, add_generation_prompt=True,
+                **tkw))
+            gen_start = model.encode(prefix, max_length=1_000_000).shape[1]
+        start = max(0, gen_start - 4)
+        track_ids = {w: t for w in spec.get("track", [])
+                     if (t := _token_ids(tok, w))}
+        per_layer = {}
+        for layer in layers:
+            block = lens_logits[layer][start:].float()
+            topv, topi = torch.softmax(block, dim=-1).topk(TOPK)
+            ranks = {}
+            for w, tids in track_ids.items():
+                best = None
+                for t in tids:
+                    r = (block > block[:, t:t + 1]).sum(-1) + 1
+                    best = r if best is None else torch.minimum(best, r)
+                ranks[w] = best
+            per_layer[layer] = (topi, topv, ranks)
+        frames = []
+        for i in range(n - start):
+            frames.append({
+                "pos": start + i,
+                "top": [[tok.decode([t]) for t in per_layer[l][0][i]]
+                        for l in layers],
+                "p": [[round(v.item(), 4) for v in per_layer[l][1][i]]
+                      for l in layers],
+                "ranks": {w: [per_layer[l][2][w][i].item() for l in layers]
+                          for w in track_ids},
+            })
+        film = {"id": spec["id"], "model": spec["model"], "layers": layers,
+                "tokens": toks, "gen_start": gen_start, "start": start,
+                "track": sorted(track_ids), "frames": frames}
+        (outdir / "film.json").write_text(json.dumps(film))
+        film_file = "film.json"
+
     slice_file = None
     if spec.get("slice", True):
         from jlens import vis
@@ -317,7 +370,8 @@ def run(spec: dict) -> dict:
         "params": {k: spec.get(k) for k in
                    ("chat", "max_new", "positions", "track", "scan",
                     "scan_until", "scan_turns", "slice_last_n", "steer",
-                    "template_kwargs")},
+                    "template_kwargs", "film", "max_seq_len",
+                    "lens_layers")},
         "extra_md": spec.get("extra_md"),
         "conversation": resolved,
         "generated": generated,
@@ -329,6 +383,7 @@ def run(spec: dict) -> dict:
                       "layers": layers, "ranks": emergence},
         "scan": scan_results,
         "slice": slice_file,
+        "film": film_file,
     }
     (outdir / "record.json").write_text(json.dumps(record, indent=1))
     reindex()

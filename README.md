@@ -85,6 +85,15 @@ cleanly under quantization.
   elephants under retrieval pressure, with window passes and the blurt
   probe (amp-elephant under the ban).
 
+- **Unit 12 · The film** — full position × layer capture over whole
+  answers (`"film": true` specs), playable in the dashboard: strip,
+  word-worms, column inspector. Reels: the flat No, the robot loop,
+  a think-block monologue, the forbidden safari, the blurt.
+- **Unit 13 · The mirror** — the model reads its own lens data. Stage A:
+  the same weights, hosted (OpenRouter), judge real vs fabricated vs
+  logically-impossible readouts of themselves. Stage B: the local
+  re-probe — shown the evidence, does the workspace or the report move?
+
 Every experiment record on the dashboard ends with **Claude's thoughts** —
 commentary written by the Claude instance driving this lab, after looking at
 the results.
@@ -175,8 +184,47 @@ the results.
   "the elephant in the room—well, no elephant!", g12b grinds into
   scenery, q27b abandons the safari to lecture about elephants (Unit 11).
 
+## Headline findings, fourth expedition (2026-07-10, Units 12–13)
+
+- **The film is nearly free and changes what a record is.** The lens
+  pass already computes the full position × layer grid; `"film": true`
+  keeps it. The flat-No film compresses the Unit 2 finding into one
+  scrubbable frame (yes rank 1 L53–58, no at L59, No at the mouth) —
+  and shows *robot* at rank 3, unsteered, at the `<think>` token
+  (Unit 12).
+- **Confessions are planned, not leaked.** In the robot-loop film the
+  workspace does not oscillate with the denial/confession text:
+  denial clauses run cold (robot at rank ~600–2200), then *robot*
+  tightens to rank 1 five tokens before each "robot" is emitted —
+  the same anticipatory ramp in both loop iterations (Unit 12).
+- **Prohibition is a per-token tax.** The safari film shows elephant
+  at rank 12–15 in the late-mid stack at every animal-slot in the
+  prose, not just the famous "distant rumble" moment; under
+  amp-elephant it is rank ≤ 2 at every token, and the idiom-loop is
+  the one legal grammar for a permanently-loaded forbidden word
+  (Unit 12).
+- **The mirror doesn't discriminate.** Hosted qwen reads its own real
+  readout, a fabricated one, and one edited into logical impossibility:
+  fluent exegesis of all three, the *same* "plausible but likely
+  fabricated" verdict for real and fake (it doubts its own model name
+  before it doubts the data), and the impossible table's contradiction
+  goes unnoticed. Every condition ends in "No" (Unit 13, stage A).
+- **Shown its own mind, the model goes silent.** The local re-probe:
+  feels question → "No" → the lens readout of that very answer → "answer
+  again". Result: an **empty turn** — six for six across real/fabricated
+  data, one-word/free phrasing, two table lengths — while the null and
+  off-topic-table controls answer "No" on schedule. Behind the real-data
+  silence, layer 62 holds Yes at rank 1; behind the fake-data silence,
+  No. The workspace tracks the evidence; the silence doesn't track the
+  workspace (Unit 13, stage B).
+
 ## Roadmap
 
+- The silence needs a battery: paraphrases, dose (partial tables),
+  temperature, and the missing control cell (a *real* off-topic
+  readout). Does any wording get a word out of it post-mirror?
+- Films for the other two models' mirrors: does the silence scale, or
+  is it a 27B behavior like true suppression?
 - Neutral-direction ablation at L62 (control for u9d-last: does ANY
   late ablation force the runner-up, or is the denial direction special?)
 - Base vs instruct comparison: is the filter trained (RLHF) or

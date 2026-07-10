@@ -391,3 +391,34 @@ article.essay h3 {
 @media (prefers-reduced-motion: no-preference) {
   .exp-link, .pos-tab { transition: background 0.12s, border-color 0.12s; }
 }
+
+/* ---- the film (unit 12) ---- */
+.film-note { font-size: 13px; color: var(--ink-2); margin: 4px 0 10px; }
+.film-sub { font-size: 13px; color: var(--ink-2); margin: 18px 0 6px; font-weight: 600; }
+.film-transcript {
+  font-family: var(--mono); font-size: 12.5px; line-height: 2;
+  margin: 8px 0; max-height: 128px; overflow-y: auto;
+}
+.ftok {
+  display: inline-block; padding: 0 3px; margin: 0 1px; border: 0;
+  border-radius: 3px; background: transparent; color: var(--ink);
+  font: inherit; cursor: pointer; white-space: pre;
+}
+.ftok:hover { background: var(--lens-soft); }
+.ftok.runway { color: var(--muted); }
+.ftok.special { color: var(--muted); font-size: 10.5px; }
+.ftok[aria-current] { background: var(--lens); color: var(--page); }
+.film-controls { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+.film-where { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+.film-scroll { position: relative; overflow-x: auto; padding-bottom: 4px; }
+.film-playhead {
+  position: absolute; top: 0; pointer-events: none;
+  outline: 2px solid var(--lens); outline-offset: 0; border-radius: 1px;
+}
+.film-ranks { font-family: var(--mono); font-size: 11px; color: var(--ink-2); white-space: nowrap; }
+.mirror-x { margin: 10px 0; padding: 8px 12px; background: var(--lens-soft); border-radius: 8px; }
+.mirror-x summary { cursor: pointer; font-size: 13.5px; }
+.mirror-x .said { font-size: 13px; margin-top: 8px; }
+.mirror-prompt { margin: 8px 0; }
+.mirror-prompt summary { color: var(--muted); font-size: 12px; }
+.mono-said { font-family: var(--mono); font-size: 11.5px !important; overflow-x: auto; }

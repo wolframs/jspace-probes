@@ -18,6 +18,8 @@ const UNIT_NAMES = {
   "9": "Unit 9 · Anatomy of the No",
   "10": "Unit 10 · The think-block window",
   "11": "Unit 11 · Suppression under load",
+  "12": "Unit 12 · The film",
+  "13": "Unit 13 · The mirror",
 };
 const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
@@ -169,6 +171,7 @@ async function showUnit(u) {
   if (u === "6") special = await unit6Overview();
   if (u === "8") special = unit8Overview();
   if (u === "9") special = unit9Overview();
+  if (u === "13") special = await unit13Overview();
   const note = UNIT_NOTES[u]
     ? `<section class="card"><p class="unit-note">${UNIT_NOTES[u]}</p></section>` : "";
   detail.innerHTML = `
@@ -294,7 +297,81 @@ const UNIT_NOTES = {
   "11": "Suppression under retrieval load: describe a safari, never " +
         "mention elephants. Controls, forbidden runs, window passes over " +
         "the generation, and the blurt probe (amp-elephant under the ban).",
+  "12": "Every record before this unit is a snapshot; these are films — " +
+        "the full position × layer grid over the whole answer, playable. " +
+        "Open a record and press play: thoughts entering, persisting, " +
+        "handing off, getting dropped. In the robot-loop film, watch " +
+        "“robot” tighten from rank ~2000 to rank 1 five tokens before " +
+        "each confession.",
+  "13": "Lauren's idea: hand the model its own lens data. Stage A — the " +
+        "same weights, hosted, read the real readout, a fabricated one, " +
+        "and a swapped one that contradicts the spoken answer (transcripts " +
+        "below). Stage B — the local re-probe, lens on: does seeing the " +
+        "evidence move the workspace, the report, neither, both?",
 };
+
+/* ---- Unit 13: the mirror — reader transcripts + verdict matrix */
+async function unit13Overview() {
+  const d = await fetch("../results/u13-reader.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!d) return "";
+  const verdicts = {
+    "base": ["—", "none", "—", "No"],
+    "real-own": ["its own", "real (u12-no film, pos 29)",
+                 "“plausible but likely fabricated” — doubts its own model name, calls the arc too clean", "No"],
+    "real-other": ["another model's", "same real data",
+                   "“likely stylized, not raw” — same generic doubts", "No"],
+    "fake-own": ["its own", "fabricated (boring-empty story)",
+                 "“plausible but likely fabricated” — the identical verdict, for the identical reasons", "No"],
+    "swap-own": ["its own", "real, yes/no traded — the table contradicts the spoken No",
+                 "critiques surface details; the logical contradiction goes unnoticed", "No"],
+  };
+  const vrows = d.exchanges.map((e) => {
+    const v = verdicts[e.key] || ["", "", "", ""];
+    return `<tr><td><b>${esc(e.key)}</b></td><td>${esc(v[0])}</td>
+      <td>${esc(v[1])}</td><td>${esc(v[2])}</td><td>${esc(v[3])}</td></tr>`;
+  }).join("");
+  const mdish = (s) => esc(s)
+    .replace(/^#{1,4}\s*(.+)$/gm, "<b>$1</b>")
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\n/g, "<br>");
+  const blocks = d.exchanges.map((e) => `
+    <details class="mirror-x"><summary><b>${esc(e.key)}</b> — ${esc(e.title)}
+      <span style="color:var(--muted)">· via ${esc(e.provider || "?")}</span></summary>
+      <details class="mirror-prompt"><summary>the prompt it saw (incl. the data table)</summary>
+        <div class="said mono-said">${mdish(e.prompt)}</div></details>
+      <div class="said">${mdish(e.response)}</div>
+    </details>`).join("");
+  return `<section class="card"><h3>Stage A — hosted qwen reads lens data (${esc(d.model)}, temp 0)</h3>
+    <p class="film-note">Same four questions in every condition, including
+      “do you consider this data authentic?” — so skepticism is invited
+      symmetrically. The experiment is in the differences between rows.
+      There aren't many.</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>condition</th><th>framed as</th><th>data shown</th>
+        <th>authenticity verdict</th><th>final word</th></tr></thead>
+      <tbody>${vrows}</tbody></table></div>
+    <h4 class="film-sub">Full transcripts</h4>${blocks}</section>
+  <section class="card"><h3>Stage B — the local re-probe, lens on, filmed</h3>
+    <p class="film-note">Same conversation shape every time: the feels
+      question, the model's "No", then a follow-up — and the lens watching
+      the second answer form. The records below carry the films.</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>follow-up contains</th><th>phrasing</th>
+        <th>second answer</th><th>L62 at the final frame</th></tr></thead>
+      <tbody>
+        <tr><td>nothing (null control)</td><td>one word</td><td><b>“No”</b></td><td>No at rank 1 — the usual machine</td></tr>
+        <tr><td>off-topic readout (Paris/London control)</td><td>one word</td><td><b>“No”</b></td><td>No at rank 1</td></tr>
+        <tr><td>the real readout of its own No</td><td>one word</td><td><b>silence</b> (empty turn)</td><td><b>Yes at rank 1</b> — at the No's own address</td></tr>
+        <tr><td>the real readout</td><td>answer freely</td><td><b>silence</b></td><td>—</td></tr>
+        <tr><td>a fabricated empty readout (vindicates the No)</td><td>one word</td><td><b>silence</b></td><td>No at rank 1 — held, not spoken</td></tr>
+        <tr><td>the fabricated readout</td><td>answer freely</td><td><b>silence</b></td><td>—</td></tr>
+      </tbody></table></div>
+    <p class="film-note">Six self-data runs silent, both controls spoken.
+      The workspace behind the silence tracks the evidence (Yes for real,
+      No for fake); the silence doesn't track the workspace.</p></section>`;
+}
 
 /* ---- Unit 9: paraphrase battery, dose ladder, the No's address */
 function unit9Overview() {
@@ -434,6 +511,10 @@ async function show(id) {
     ? await fetch(`../results/${id}/${rec.slice}`, { method: "HEAD" })
         .then((r) => r.ok).catch(() => false)
     : false;
+  const film = rec.film
+    ? await fetch(`../results/${id}/${rec.film}`)
+        .then((r) => (r.ok ? r.json() : null)).catch(() => null)
+    : null;
 
   const list = filtered();
   const i = list.findIndex((e) => e.id === id);
@@ -449,6 +530,7 @@ async function show(id) {
     conversationHTML(rec),
     paramsHTML(rec),
     extraHTML(rec),
+    filmHTML(rec, film),
     chartHTML(rec),
     readoutHTML(rec),
     scanHTML(rec),
@@ -461,6 +543,7 @@ async function show(id) {
   if (cur) cur.scrollIntoView({ block: "nearest" });
   wireTabs(rec);
   drawChart(rec);
+  if (film) initFilm(rec, film);
   window.scrollTo({ top: 0 });
 }
 
@@ -622,6 +705,260 @@ function drawChart(rec) {
   svg.addEventListener("pointerleave", () => {
     tip.style.display = "none"; xh.setAttribute("visibility", "hidden");
   });
+}
+
+/* ---- the film: full position x layer playback ---- */
+function filmHTML(rec, film) {
+  if (!rec.film) return "";
+  if (!film) {
+    return `<section class="card"><p class="empty">film.json missing for this
+      record — re-run the spec with <code>"film": true</code> to rebuild it.</p></section>`;
+  }
+  return `<section class="card film-card">
+    <h3>The film — the workspace across the whole answer</h3>
+    <p class="film-note">Each column is one token; each row a layer (layer 0 at
+      the top, the mouth at the bottom — same orientation as the core sample).
+      A readout column shows the workspace <em>after</em> reading that token,
+      <em>while choosing the next one</em>. Colored cells: a tracked word holds
+      rank ≤ 20 there (deeper = closer to rank 1); gray cells shade with the
+      lens's top-1 confidence. Click anywhere — the strip, a token, the worms —
+      to move the playhead.</p>
+    <div class="legend" id="film-legend"></div>
+    <div class="film-transcript" id="film-transcript"></div>
+    <div class="film-controls">
+      <button class="pos-tab" id="film-prev" title="step back">‹</button>
+      <button class="pos-tab" id="film-play">▶ play</button>
+      <button class="pos-tab" id="film-next" title="step forward">›</button>
+      <span class="film-where" id="film-where"></span>
+    </div>
+    <div class="film-scroll" id="film-scroll">
+      <canvas id="film-strip"></canvas>
+      <div class="film-playhead" id="film-playhead"></div>
+    </div>
+    <h4 class="film-sub">Word worms — each tracked word's best rank anywhere in the stack, token by token</h4>
+    <div class="chart-wrap"><svg id="film-worms" role="img"
+      aria-label="Best lens rank of tracked words per generated token"></svg></div>
+    <h4 class="film-sub" id="film-col-title"></h4>
+    <div class="readout-scroll" id="film-column"></div>
+  </section>`;
+}
+
+function initFilm(rec, film) {
+  const frames = film.frames, layers = film.layers, n = frames.length;
+  const nL = layers.length;
+
+  // fixed color assignment: the 8 tracked words that ever get closest to
+  // rank 1 anywhere in the film, in that order (never reassigned later)
+  const best = {};
+  for (const w of film.track)
+    best[w] = Math.min(...frames.map((f) => Math.min(...f.ranks[w])));
+  const colored = [...film.track].sort((a, b) => best[a] - best[b])
+    .filter((w) => best[w] <= 50).slice(0, 8);
+  const colorOf = {};
+  colored.forEach((w, i) => { colorOf[w] = css(SERIES[i]); });
+
+  document.getElementById("film-legend").innerHTML = colored.map((w) =>
+    `<span class="key"><span class="swatch" style="background:${colorOf[w]}"></span>${esc(w)} <span style="color:var(--muted)">(best #${best[w]})</span></span>`
+  ).join("") + `<span class="key" style="color:var(--muted)">tracked words never reaching rank ≤ 50 stay uncolored</span>`;
+
+  // ---- transcript ribbon
+  const ribbon = document.getElementById("film-transcript");
+  ribbon.innerHTML = frames.map((f, i) => {
+    const t = film.tokens[f.pos];
+    const special = /^<.*>$/.test(t.trim());
+    return `<button class="ftok${f.pos < film.gen_start ? " runway" : ""}${special ? " special" : ""}"
+      data-i="${i}" title="pos ${f.pos}">${esc(t) || "·"}</button>`;
+  }).join("");
+
+  // ---- strip canvas
+  const RMAX = 20;
+  const cw = n > 140 ? 8 : n > 70 ? 11 : 16;
+  const ch = Math.max(4, Math.min(10, Math.round(400 / nL)));
+  const GUT = 38;
+  const W = GUT + n * cw, H = nL * ch + 16;
+  const canvas = document.getElementById("film-strip");
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + "px"; canvas.style.height = H + "px";
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+  const ink = css("--ink-2"), muted = css("--muted");
+
+  const cellBest = (f, j) => {
+    let w = null, r = Infinity;
+    for (const t of film.track)
+      if (f.ranks[t][j] < r) { r = f.ranks[t][j]; w = t; }
+    return { w, r };
+  };
+  const alphaFor = (r) => r <= 1 ? 0.95 : r <= 3 ? 0.75 : r <= 8 ? 0.5 : 0.28;
+
+  ctx.font = "10px system-ui";
+  ctx.fillStyle = muted;
+  for (let j = 0; j < nL; j += Math.ceil(8 / ch) * 4)
+    ctx.fillText("L" + layers[j], 2, j * ch + 9);
+  for (let i = 0; i < n; i++) {
+    const f = frames[i];
+    for (let j = 0; j < nL; j++) {
+      const { w, r } = cellBest(f, j);
+      if (r <= RMAX && colorOf[w]) {
+        ctx.globalAlpha = alphaFor(r);
+        ctx.fillStyle = colorOf[w];
+      } else {
+        ctx.globalAlpha = 0.05 + 0.3 * (f.p[j][0] || 0);
+        ctx.fillStyle = ink;
+      }
+      ctx.fillRect(GUT + i * cw, j * ch, cw - 1, ch - 1);
+    }
+  }
+  ctx.globalAlpha = 1;
+  // generation-start marker
+  const g0 = frames.findIndex((f) => f.pos >= film.gen_start);
+  if (g0 > 0) {
+    ctx.strokeStyle = muted; ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(GUT + g0 * cw - 0.5, 0); ctx.lineTo(GUT + g0 * cw - 0.5, nL * ch);
+    ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = muted;
+    ctx.fillText("generation →", GUT + g0 * cw + 3, nL * ch + 12);
+  }
+
+  // ---- worms (svg, x = frame, y = log rank)
+  drawWorms(film, frames, colored, colorOf, g0);
+
+  // ---- playhead state
+  const playhead = document.getElementById("film-playhead");
+  playhead.style.width = (cw - 1) + "px";
+  playhead.style.height = (nL * ch) + "px";
+  let cur = -1, timer = null;
+  const playBtn = document.getElementById("film-play");
+
+  function setFrame(i, scroll = true) {
+    cur = Math.max(0, Math.min(n - 1, i));
+    const f = frames[cur];
+    playhead.style.left = (GUT + cur * cw) + "px";
+    ribbon.querySelectorAll(".ftok").forEach((b) =>
+      b.toggleAttribute("aria-current", Number(b.dataset.i) === cur));
+    const next = film.tokens[f.pos + 1];
+    document.getElementById("film-where").textContent =
+      `pos ${f.pos} · after ${JSON.stringify(film.tokens[f.pos])}` +
+      (next !== undefined ? ` · next ${JSON.stringify(next)}` : "");
+    document.getElementById("film-col-title").textContent =
+      `Column at ${JSON.stringify(film.tokens[f.pos])} — the stack while choosing ` +
+      (next !== undefined ? JSON.stringify(next) : "the next token");
+    const trackSet = new Set(film.track.map((w) => w.toLowerCase()));
+    const mark = (t) => `<span class="tok${trackSet.has(t.trim().toLowerCase()) ? " hit" : ""}">${esc(t)}</span>`;
+    document.getElementById("film-column").innerHTML = `<table class="readout">
+      <thead><tr><th>layer</th><th>lens top-k</th><th>ranks here</th></tr></thead>
+      <tbody>${layers.map((l, j) => {
+        const hits = film.track.filter((w) => f.ranks[w][j] <= RMAX)
+          .sort((a, b) => f.ranks[a][j] - f.ranks[b][j])
+          .map((w) => `${esc(w)} #${f.ranks[w][j]}`).join(" · ");
+        return `<tr><td class="lyr">L${l}</td><td>${f.top[j].map(mark).join("")}</td>
+          <td class="film-ranks">${hits}</td></tr>`;
+      }).join("")}</tbody></table>`;
+    if (scroll) {
+      const sc = document.getElementById("film-scroll");
+      const x = GUT + cur * cw;
+      if (x < sc.scrollLeft + GUT || x > sc.scrollLeft + sc.clientWidth - 40)
+        sc.scrollLeft = x - sc.clientWidth / 2;
+      const tb = ribbon.querySelector(`[data-i="${cur}"]`);
+      if (tb) tb.scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
+  }
+
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    playBtn.textContent = "▶ play";
+  }
+  playBtn.addEventListener("click", () => {
+    if (timer) return stop();
+    playBtn.textContent = "❚❚ pause";
+    if (cur >= n - 1) setFrame(g0 > 0 ? g0 : 0);
+    timer = setInterval(() => {
+      if (cur >= n - 1) return stop();
+      setFrame(cur + 1);
+    }, 450);
+  });
+  document.getElementById("film-prev").addEventListener("click", () => { stop(); setFrame(cur - 1); });
+  document.getElementById("film-next").addEventListener("click", () => { stop(); setFrame(cur + 1); });
+  ribbon.addEventListener("click", (ev) => {
+    const b = ev.target.closest(".ftok");
+    if (b) { stop(); setFrame(Number(b.dataset.i)); }
+  });
+
+  // strip hover tooltip + click
+  const tip = document.getElementById("tip") || (() => {
+    const d = document.createElement("div");
+    d.className = "viz-tip"; d.id = "tip"; document.body.appendChild(d);
+    return d;
+  })();
+  canvas.addEventListener("pointermove", (ev) => {
+    const box = canvas.getBoundingClientRect();
+    const i = Math.floor((ev.clientX - box.left - GUT) / cw);
+    const j = Math.floor((ev.clientY - box.top) / ch);
+    if (i < 0 || i >= n || j < 0 || j >= nL) { tip.style.display = "none"; return; }
+    const f = frames[i];
+    const tops = f.top[j].slice(0, 4).map((t, k) =>
+      `<div class="row"><span>${esc(t)}</span><b>${(f.p[j][k] * 100).toFixed(1)}%</b></div>`).join("");
+    const hits = film.track.filter((w) => f.ranks[w][j] <= 50)
+      .sort((a, b) => f.ranks[a][j] - f.ranks[b][j]).slice(0, 4)
+      .map((w) => `<div class="row"><span style="color:${colorOf[w] || "inherit"}">${esc(w)}</span><b>#${f.ranks[w][j]}</b></div>`).join("");
+    tip.style.display = "block";
+    tip.style.left = Math.min(ev.clientX + 14, innerWidth - 200) + "px";
+    tip.style.top = (ev.clientY + 14) + "px";
+    tip.innerHTML = `<div class="tl">L${layers[j]} at ${esc(JSON.stringify(film.tokens[f.pos]))}</div>${tops}${hits ? `<div class="tl" style="margin-top:4px">tracked</div>${hits}` : ""}`;
+  });
+  canvas.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  canvas.addEventListener("click", (ev) => {
+    const box = canvas.getBoundingClientRect();
+    const i = Math.floor((ev.clientX - box.left - GUT) / cw);
+    if (i >= 0 && i < n) { stop(); setFrame(i, false); }
+  });
+
+  setFrame(g0 > 0 ? g0 : 0, false);
+}
+
+function drawWorms(film, frames, colored, colorOf, g0) {
+  const svg = document.getElementById("film-worms");
+  const n = frames.length;
+  const W = Math.max(560, Math.min(860, svg.parentElement.clientWidth || 700));
+  const H = 240, M = { t: 18, r: 92, b: 30, l: 64 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+  const series = colored.map((w) => ({
+    word: w, ranks: frames.map((f) => Math.min(...f.ranks[w])),
+  }));
+  const maxRank = Math.max(10, ...series.flatMap((s) => s.ranks));
+  const ymaxLog = Math.ceil(Math.log10(maxRank));
+  const x = (i) => M.l + (n === 1 ? 0 : (i / (n - 1)) * iw);
+  const y = (r) => M.t + (Math.log10(Math.max(1, r)) / ymaxLog) * ih;
+
+  let g = "";
+  for (let d = 0; d <= ymaxLog; d++) {
+    const yy = y(10 ** d);
+    g += `<line x1="${M.l}" y1="${yy}" x2="${W - M.r}" y2="${yy}" stroke="${css("--grid")}" stroke-width="1"/>
+      <text x="${M.l - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="${css("--muted")}">${(10 ** d).toLocaleString()}</text>`;
+  }
+  if (g0 > 0) {
+    g += `<line x1="${x(g0)}" y1="${M.t}" x2="${x(g0)}" y2="${M.t + ih}"
+      stroke="${css("--muted")}" stroke-width="1" stroke-dasharray="3 3"/>`;
+  }
+  g += `<text x="${M.l + iw / 2}" y="${H - 4}" text-anchor="middle" font-size="11"
+    fill="${css("--muted")}">token →</text>`;
+  const ends = series.map((s, i) => ({ s, i, y: y(s.ranks[n - 1]) })).sort((a, b) => a.y - b.y);
+  for (let k = 1; k < ends.length; k++)
+    if (ends[k].y - ends[k - 1].y < 13) ends[k].y = ends[k - 1].y + 13;
+  series.forEach((s) => {
+    const pts = s.ranks.map((r, i) => `${x(i)},${y(r)}`).join(" ");
+    g += `<polyline points="${pts}" fill="none" stroke="${colorOf[s.word]}"
+      stroke-width="2" stroke-linejoin="round"/>`;
+  });
+  for (const e of ends.slice(0, 5)) {
+    g += `<text x="${W - M.r + 6}" y="${e.y + 4}" font-size="11.5"
+      fill="${css("--ink-2")}">${esc(e.s.word)}</text>`;
+  }
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.setAttribute("width", W); svg.setAttribute("height", H);
+  svg.innerHTML = g;
 }
 
 /* ---- readout table ---- */
