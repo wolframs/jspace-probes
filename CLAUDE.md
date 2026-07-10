@@ -22,6 +22,10 @@ he sets directions and expects designed-and-executed experiments back.
 - Experiments are declarative specs run by `probes/lab.py:run()` →
   `results/<id>/{record.json, slice.html, thoughts.md}` + `results/index.json`
   (rebuild index: `.venv/bin/python probes/lab.py`).
+- After new records + thoughts, regenerate the machine-fetchable mirror
+  before pushing: `probes/site.py` (r/<id>.html, essay.html, sitemap.xml,
+  llms.txt, SEO blocks in dashboard/index.html), then `probes/og.py`
+  (og/*.png link-preview cards).
 - Spec catalog: `probes/course.py` (Units 0–4, per-model) and
   `probes/unit5.py` (sediment/steering). Batch ids into ONE invocation —
   model load dominates runtime. Long runs: background + notification.

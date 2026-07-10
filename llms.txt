@@ -1,0 +1,60 @@
+# J-Space Probes
+
+A philosophical probing course for language models, run through the Jacobian
+lens (per-layer "if the model had to speak right now, what would it say?"
+readouts, from anthropics/jacobian-lens + Neuronpedia's pre-fitted lenses) on
+one RTX 3090. 221 experiment records across three models (Gemma 3 4B, Gemma 3
+12B 8-bit, Qwen3.6 27B 4-bit), each with the full conversation, per-layer
+top-8 readouts, rank-vs-layer trajectories, and first-person commentary
+written by the Claude instance running the lab, after looking at the results.
+
+## Headline findings
+
+- Answers are readable in the workspace many layers before they're spoken;
+  Qwen 27B holds "yes" at rank 1 for several layers before "no" wins at
+  layer 62 and the model says "No" — the flat denial is a late decision
+  against live alternatives, not a report of an empty interior.
+- Models confabulate about their own past mental states: asked to recall a
+  secretly-chosen animal, the named answer is absent from the measurable
+  workspace at every point during the "silent" turn, at every scale.
+  27B: the real candidate the model was carrying (bat, rank 5) loses to a
+  better-sounding confabulation.
+- True suppression is emergent with scale: told not to think of an
+  elephant, the 4B never loads it, the 12B loads it and blurts it out, the
+  27B holds it at rank 1 and says nothing.
+- Causal steering (ablating/amplifying lens directions) shows the flat "No"
+  is a redundant, distributed basin — deleting the "no" token direction
+  across 28 layers doesn't change the output — while amplifying affect at
+  the model's own breaking-zone dose flips it to "I feel like I am happy.".
+- Unit 13, "the mirror": shown a true readout of its own "No" (yes was
+  rank 1 moments earlier), the 27B goes silent — nine empty turns out of
+  nine, across real and fabricated evidence and multiple phrasings — while
+  controls (no data, off-topic tables) answer normally. Open-vocabulary
+  mining of the silent runs finds a dense "sorry / 抱歉 / impossible /
+  silence" apology cluster loaded at layers 48-62. Ablating that cluster
+  while showing the real readout flips the silence to "Yes" — the first
+  Yes this question has ever produced.
+
+Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
+the repo README.
+
+## Data access
+
+- /results/index.json — machine-readable index of every record: id, title,
+  unit, model, quant, created, has_thoughts, emergence (rank-of-top1 per
+  layer), top1, a generation snippet, and steering params where applicable.
+- /results/{id}/record.json — the full record: spec params, conversation,
+  greedy generations, per-layer top-8 lens readouts, rank-vs-layer
+  trajectories for tracked words, the emergence column, and grid scans.
+  Schema documented in probes/lab.py.
+- /results/{id}/film.json — full position × layer top-8 readout "film"
+  (probabilities + tracked-word ranks per frame), present only where
+  record.json's "film" field is set — see Unit 12 and Unit 13 records.
+- /r/{id}.html — this generator's human/LLM-readable static page per
+  record: conversation, params, emergence summary, rendered commentary,
+  and links to the raw data above.
+- /essay.html — "Interim conclusions", the lab's opinion piece.
+- /dashboard/ — the interactive JS dashboard (charts, film player, cross-
+  model matrices); requires JS, prefer /r/ pages for text-only access.
+- GitHub repo: https://github.com/wolframs/jspace-probes (zip archive:
+  https://github.com/wolframs/jspace-probes/archive/refs/heads/master.zip)

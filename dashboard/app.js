@@ -34,6 +34,7 @@ const themeParam = new URLSearchParams(location.search).get("theme");
 if (themeParam) document.documentElement.dataset.theme = themeParam;
 
 async function boot() {
+  document.getElementById("static-index")?.remove();
   INDEX = await (await fetch("../results/index.json")).json();
   document.getElementById("stats").textContent =
     `${INDEX.length} records · ${Object.keys(UNIT_NAMES).length} units · j/k to flip records`;

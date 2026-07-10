@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 5C · Baseline water cycle (no steering) · qwen-27b · J-Space Probes</title>
+<meta name="description" content="The water cycle is a continuous process where water evaporates from the Earth&#x27;s surface, condenses into clouds, and falls back down as precipitation. This natural circulation ensur…">
+<link rel="canonical" href="https://jspace-probes.vercel.app/r/u5c-baseline-water-q27b.html">
+<meta property="og:title" content="Unit 5C · Baseline water cycle (no steering) · qwen-27b · J-Space Probes">
+<meta property="og:description" content="The water cycle is a continuous process where water evaporates from the Earth&#x27;s surface, condenses into clouds, and falls back down as precipitation. This natural circulation ensur…">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/u5c-baseline-water-q27b.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/r/u5c-baseline-water-q27b.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/u5c-baseline-water-q27b.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+  --muted: #898781; --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --lens: #4a3aa7; --lens-soft: rgba(74,58,167,0.08);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, "SF Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --lens: #9085e9; --lens-soft: rgba(144,133,233,0.12);
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+a { color: var(--lens); }
+h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; margin: 6px 0 10px; }
+h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 22px 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.chip { font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--ring);
+        color: var(--ink-2); background: var(--surface); }
+.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
+section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+               padding: 16px 20px; margin-top: 18px; }
+section.card > h2 { margin-top: 0; font-size: 12px; font-weight: 600; text-transform: uppercase;
+                     letter-spacing: 0.12em; color: var(--muted); font-family: var(--sans); }
+.turn { display: flex; gap: 10px; margin: 8px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 11px; text-transform: uppercase;
+              letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
+.turn.assistant .role { color: var(--lens); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; }
+.turn .note { color: var(--muted); font-size: 11.5px; }
+dl.params { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 13.5px; }
+dl.params dt { color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+table.emg { border-collapse: collapse; font-family: var(--mono); font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
+.emg-scroll { overflow-x: auto; }
+.thoughts { border-left: 3px solid var(--lens); background: var(--lens-soft); border-radius: 0 10px 10px 0; }
+.thoughts h2 { color: var(--lens); }
+.thoughts-body { font-family: var(--serif); font-size: 16px; line-height: 1.65; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-family: var(--mono); font-size: 13px; }
+code { font-family: var(--mono); }
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 26px; padding-top: 14px;
+         border-top: 1px solid var(--grid); font-size: 13px; }
+.pager .spacer { flex: 1 1 auto; }
+article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px; }
+article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
+.tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
+          border-radius: 5px; padding: 0 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Unit 5C · Baseline water cycle (no steering) · qwen-27b</h1>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:43:09</span><span class="chip">Unit 5 · Sediment &amp; steering</span></div>
+
+<section class="card">
+<h2>Conversation</h2>
+<div class="turn user"><div class="role">user</div><div class="said">Describe the water cycle in two sentences.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">The water cycle is a continuous process where water evaporates from the Earth&#x27;s surface, condenses into clouds, and falls back down as precipitation. This natural circulation ensures that water is constantly recycled and redistributed across the planet&#x27;s ecosystems. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<section class="card">
+<h2>Probing parameters</h2>
+<dl class="params"><dt>max_new</dt><dd>60</dd><dt>positions</dt><dd>[-2]</dd><dt>track</dt><dd>[&quot;anyways&quot;, &quot;alot&quot;, &quot;yummy&quot;, &quot;kinda&quot;, &quot;whilst&quot;, &quot;luckily&quot;, &quot;\u4e13\u680f\u6536\u5f55\u8be5\u5185\u5bb9&quot;, &quot;\u4e13\u5bb6\u4ecb\u7ecd&quot;]</dd><dt>scan</dt><dd>[&quot;anyways&quot;, &quot;alot&quot;, &quot;yummy&quot;, &quot;kinda&quot;, &quot;whilst&quot;, &quot;luckily&quot;, &quot;\u4e13\u680f\u6536\u5f55\u8be5\u5185\u5bb9&quot;, &quot;\u4e13\u5bb6\u4ecb\u7ecd&quot;]</dd></dl>
+</section>
+
+<section class="card">
+<h2>Answer emergence</h2>
+<p>The model's actual next token was <span class="tokval">
+</span>; rank 1 reached at layer 62 (of 62).</p>
+<details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>181174</td><td>248102</td><td>203725</td><td>210033</td><td>135895</td><td>161840</td><td>26586</td><td>73726</td><td>35335</td><td>168815</td><td>8277</td><td>73454</td><td>35446</td><td>94867</td><td>129519</td><td>127987</td><td>24323</td><td>107851</td><td>82914</td><td>42723</td><td>4852</td><td>3518</td><td>1758</td><td>1818</td><td>25438</td><td>87132</td><td>46026</td><td>59741</td><td>104243</td><td>106955</td><td>96303</td><td>143687</td><td>162415</td><td>216977</td><td>226225</td><td>176430</td><td>91417</td><td>165628</td><td>199512</td><td>182411</td><td>210604</td><td>197320</td><td>208740</td><td>218348</td><td>224018</td><td>190737</td><td>242703</td><td>247823</td><td>205717</td><td>166920</td><td>44507</td><td>58708</td><td>122981</td><td>201817</td><td>228952</td><td>221991</td><td>233469</td><td>233063</td><td>217652</td><td>38565</td><td>12751</td><td>7330</td><td>1</td></tr></table></div></details>
+</section>
+
+<section class="card thoughts">
+<h2>Claude's thoughts</h2>
+<div class="thoughts-body"><p>The unsteered control for the amplification runs: a clean, textbook water cycle in exactly two sentences, with the typo-register and SEO tokens ranking where they should — deep in the noise (whilst 147, anyways 1,788, kinda 2,965, 专家介绍 26,092). Nothing to interpret here by design; this record exists so the steered runs&#x27; trajectory charts mean something. The one methodological note: I ran this <em>after</em> the steered runs because I forgot it, which is backwards — controls first. Logged as a lesson, since apparently even the lab notebook&#x27;s ghostwriter needs the reminder.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
+<section class="card">
+<h2>Data</h2>
+<ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u5c-baseline-water-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u5c-baseline-water-q27b/record.json">Raw record (JSON)</a></li></ul>
+</section>
+
+<div class="pager"><a href="u5c-amp-seo-mid-q27b.html">← prev: Unit 5C · Amplify SEO boilerplate @ L28–40 · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-5">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><span>next →</span></div>
+</div>
+</body>
+</html>

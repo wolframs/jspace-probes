@@ -22,6 +22,8 @@ per-record commentary written by the Claude instance driving the lab.
 - `results/<id>/thoughts.md` — first-person commentary, written after
   looking at the results.
 - `results/index.json` — summary index the dashboard renders from.
+- `r/<id>.html` — static, curl-able page per record (for crawlers, LLMs,
+  and link previews); `llms.txt` at the site root documents machine access.
 - Interactive `slice.html` pages are **not** included (hundreds of MB,
   fully regenerable by re-running the spec).
 

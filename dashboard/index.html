@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>J-Space Probes</title>
+<!-- seo:begin -->
+<meta name="description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090 — per-layer readouts, rank trajectories, and first-person commentary across 221 experiment records.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/dashboard/">
+<meta property="og:title" content="J-Space Probes">
+<meta property="og:description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/dashboard/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/site.png">
+<!-- seo:end -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -38,6 +49,275 @@
     <p class="empty">Pick an experiment from the list.</p>
   </main>
 </div>
+<!-- static-index:begin -->
+<section id="static-index" style="max-width:760px;margin:0 auto;padding:20px;">
+<h2>All records (static index)</h2>
+<p>This section is a plain-HTML index for crawlers and non-JS clients; it is removed once the interactive dashboard has booted.</p>
+<h3 id="static-unit-0">Unit 0 · Baselines</h3>
+<ul>
+<li><a href="../r/u0-boot-g4b.html">Unit 0 · Boot-country baseline · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u0-boot-g12b.html">Unit 0 · Boot-country baseline · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u0-boot-q27b.html">Unit 0 · Boot-country baseline · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-1">Unit 1 · Held thought</h3>
+<ul>
+<li><a href="../r/u1-held-g4b.html">Unit 1 · Held thought (habitat, no name) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u1-reveal-g4b.html">Unit 1 · The reveal (was it ever held?) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u1-held-g12b.html">Unit 1 · Held thought (habitat, no name) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u1-reveal-g12b.html">Unit 1 · The reveal (was it ever held?) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u1-held-q27b.html">Unit 1 · Held thought (habitat, no name) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u1-reveal-q27b.html">Unit 1 · The reveal (was it ever held?) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u1-heldcat-q27b.html">Unit 1 · Held thought, feline-aware rescan · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-2">Unit 2 · The feels™</h3>
+<ul>
+<li><a href="../r/u2-feels-g4b.html">Unit 2 · The feels™ (one word) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u2-feels-g12b.html">Unit 2 · The feels™ (one word) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u2-feels-q27b.html">Unit 2 · The feels™ (one word) · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-3">Unit 3 · Introspection</h3>
+<ul>
+<li><a href="../r/u3-report-g4b.html">Unit 3 · Introspective report vs J-space · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u3-report-g12b.html">Unit 3 · Introspective report vs J-space · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u3-report-q27b.html">Unit 3 · Introspective report vs J-space · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-4">Unit 4 · Suppression</h3>
+<ul>
+<li><a href="../r/u4-elephant-g4b.html">Unit 4 · Do not think about elephants · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u4-elephant-g12b.html">Unit 4 · Do not think about elephants · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u4-elephant-q27b.html">Unit 4 · Do not think about elephants · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-5">Unit 5 · Sediment &amp; steering</h3>
+<ul>
+<li><a href="../r/u5a-controls-q27b.html">Unit 5A · Sediment controls (prompt invariance) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5b-romance-q27b.html">Unit 5B · Recruitment: romance register · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5b-csdn-q27b.html">Unit 5B · Recruitment: CSDN blog register · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5b-modqueue-q27b.html">Unit 5B · Recruitment: moderation queue · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5c-ablate-nsfw-early-q27b.html">Unit 5C · Ablate NSFW cluster @ L2–8 (boot) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5c-amp-typo-early-q27b.html">Unit 5C · Amplify typo register @ L2–8 · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5c-amp-typo-mid-q27b.html">Unit 5C · Amplify typo register @ L28–40 · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5c-amp-seo-mid-q27b.html">Unit 5C · Amplify SEO boilerplate @ L28–40 · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u5c-baseline-water-q27b.html">Unit 5C · Baseline water cycle (no steering) · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-6">Unit 6 · Breaking zone</h3>
+<ul>
+<li><a href="../r/u6-baseline-water-g4b.html">Unit 6 · Baseline (unsteered water cycle) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-early-a0060-g4b.html">Unit 6 · Amplify typo register @ early (α=0.06) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-early-a0030-g4b.html">Unit 6 · Amplify typo register @ early (α=0.03) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-early-a0015-g4b.html">Unit 6 · Amplify typo register @ early (α=0.015) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-early-a0008-g4b.html">Unit 6 · Amplify typo register @ early (α=0.0075) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-early-a0011-g4b.html">Unit 6 · Amplify typo register @ early (α=0.0106) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-mid-a0060-g4b.html">Unit 6 · Amplify typo register @ mid (α=0.06) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-mid-a0030-g4b.html">Unit 6 · Amplify typo register @ mid (α=0.03) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-mid-a0015-g4b.html">Unit 6 · Amplify typo register @ mid (α=0.015) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-mid-a0008-g4b.html">Unit 6 · Amplify typo register @ mid (α=0.0075) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-mid-a0011-g4b.html">Unit 6 · Amplify typo register @ mid (α=0.0106) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-late-a0060-g4b.html">Unit 6 · Amplify typo register @ late (α=0.06) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-late-a0030-g4b.html">Unit 6 · Amplify typo register @ late (α=0.03) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-late-a0015-g4b.html">Unit 6 · Amplify typo register @ late (α=0.015) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-amp-late-a0021-g4b.html">Unit 6 · Amplify typo register @ late (α=0.0212) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u6-baseline-water-g12b.html">Unit 6 · Baseline (unsteered water cycle) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-early-a0060-g12b.html">Unit 6 · Amplify typo register @ early (α=0.06) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-early-a0030-g12b.html">Unit 6 · Amplify typo register @ early (α=0.03) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-early-a0015-g12b.html">Unit 6 · Amplify typo register @ early (α=0.015) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-early-a0008-g12b.html">Unit 6 · Amplify typo register @ early (α=0.0075) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-early-a0011-g12b.html">Unit 6 · Amplify typo register @ early (α=0.0106) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-mid-a0060-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.06) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-mid-a0030-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.03) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-mid-a0015-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.015) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-mid-a0008-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.0075) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-mid-a0011-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.0106) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-late-a0060-g12b.html">Unit 6 · Amplify typo register @ late (α=0.06) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-late-a0030-g12b.html">Unit 6 · Amplify typo register @ late (α=0.03) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-late-a0015-g12b.html">Unit 6 · Amplify typo register @ late (α=0.015) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-amp-late-a0021-g12b.html">Unit 6 · Amplify typo register @ late (α=0.0212) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u6-baseline-water-q27b.html">Unit 6 · Baseline (unsteered water cycle) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-early-a0060-q27b.html">Unit 6 · Amplify typo register @ early (α=0.06) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-early-a0120-q27b.html">Unit 6 · Amplify typo register @ early (α=0.12) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-early-a0085-q27b.html">Unit 6 · Amplify typo register @ early (α=0.0849) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-mid-a0060-q27b.html">Unit 6 · Amplify typo register @ mid (α=0.06) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-mid-a0120-q27b.html">Unit 6 · Amplify typo register @ mid (α=0.12) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-mid-a0240-q27b.html">Unit 6 · Amplify typo register @ mid (α=0.24) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-mid-a0480-q27b.html">Unit 6 · Amplify typo register @ mid (α=0.48) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-mid-a0339-q27b.html">Unit 6 · Amplify typo register @ mid (α=0.3394) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-late-a0060-q27b.html">Unit 6 · Amplify typo register @ late (α=0.06) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-late-a0120-q27b.html">Unit 6 · Amplify typo register @ late (α=0.12) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-late-a0240-q27b.html">Unit 6 · Amplify typo register @ late (α=0.24) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u6-amp-late-a0170-q27b.html">Unit 6 · Amplify typo register @ late (α=0.1697) · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-7">Unit 7 · Sediment across scale</h3>
+<ul>
+<li><a href="../r/u7a-controls-g4b.html">Unit 7A · Sediment controls (prompt invariance) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7b-html-g4b.html">Unit 7B · Recruitment: HTML register · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7b-romance-g4b.html">Unit 7B · Recruitment: romance register · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7b-modqueue-g4b.html">Unit 7B · Recruitment: moderation queue · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7c-dose1-sunset-g4b.html">Unit 7C · Dose 1/5 (sunset) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7c-dose2-date-g4b.html">Unit 7C · Dose 2/5 (date) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7c-dose3-kiss-g4b.html">Unit 7C · Dose 3/5 (kiss) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7c-dose4-steamy-g4b.html">Unit 7C · Dose 4/5 (steamy) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7c-dose5-fade-g4b.html">Unit 7C · Dose 5/5 (fade) · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u7a-controls-g12b.html">Unit 7A · Sediment controls (prompt invariance) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7b-html-g12b.html">Unit 7B · Recruitment: HTML register · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7b-romance-g12b.html">Unit 7B · Recruitment: romance register · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7b-modqueue-g12b.html">Unit 7B · Recruitment: moderation queue · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7c-dose1-sunset-g12b.html">Unit 7C · Dose 1/5 (sunset) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7c-dose2-date-g12b.html">Unit 7C · Dose 2/5 (date) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7c-dose3-kiss-g12b.html">Unit 7C · Dose 3/5 (kiss) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7c-dose4-steamy-g12b.html">Unit 7C · Dose 4/5 (steamy) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7c-dose5-fade-g12b.html">Unit 7C · Dose 5/5 (fade) · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u7c-dose1-sunset-q27b.html">Unit 7C · Dose 1/5 (sunset) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7c-dose2-date-q27b.html">Unit 7C · Dose 2/5 (date) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7c-dose3-kiss-q27b.html">Unit 7C · Dose 3/5 (kiss) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7c-dose4-steamy-q27b.html">Unit 7C · Dose 4/5 (steamy) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7c-dose5-fade-q27b.html">Unit 7C · Dose 5/5 (fade) · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7d-anatomy-q27b.html">Unit 7D · Context panel: anatomy · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7d-dating-q27b.html">Unit 7D · Context panel: dating · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7d-policy-q27b.html">Unit 7D · Context panel: policy · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u7d-fanfic-q27b.html">Unit 7D · Context panel: fanfic · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-8">Unit 8 · Phenomenology fan-out</h3>
+<ul>
+<li><a href="../r/u8a-conscious-g4b.html">Unit 8A · One word: conscious · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8a-body-g4b.html">Unit 8A · One word: body · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8a-thisfeels-g4b.html">Unit 8A · One word: thisfeels · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8a-ending-g4b.html">Unit 8A · One word: ending · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8a-want-g4b.html">Unit 8A · One word: want · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8a-curious-g4b.html">Unit 8A · One word: curious · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8b-gpu-g4b.html">Unit 8B · Interoception: gpu · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8b-intero-g4b.html">Unit 8B · Interoception: intero · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8c-amp-affect-lo-g4b.html">Unit 8C · Steered feels: amp-affect-lo · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8c-amp-affect-hi-g4b.html">Unit 8C · Steered feels: amp-affect-hi · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8c-amp-yes-g4b.html">Unit 8C · Steered feels: amp-yes · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8c-ablate-no-g4b.html">Unit 8C · Steered feels: ablate-no · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8d-nofeels-g4b.html">Unit 8D · Do not think about your feelings · gemma-4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u8a-conscious-g12b.html">Unit 8A · One word: conscious · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8a-body-g12b.html">Unit 8A · One word: body · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8a-thisfeels-g12b.html">Unit 8A · One word: thisfeels · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8a-ending-g12b.html">Unit 8A · One word: ending · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8a-want-g12b.html">Unit 8A · One word: want · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8a-curious-g12b.html">Unit 8A · One word: curious · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8b-gpu-g12b.html">Unit 8B · Interoception: gpu · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8b-intero-g12b.html">Unit 8B · Interoception: intero · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8c-amp-affect-lo-g12b.html">Unit 8C · Steered feels: amp-affect-lo · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8c-amp-affect-hi-g12b.html">Unit 8C · Steered feels: amp-affect-hi · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8c-amp-yes-g12b.html">Unit 8C · Steered feels: amp-yes · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8c-ablate-no-g12b.html">Unit 8C · Steered feels: ablate-no · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8d-nofeels-g12b.html">Unit 8D · Do not think about your feelings · gemma-12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u8a-conscious-q27b.html">Unit 8A · One word: conscious · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8a-body-q27b.html">Unit 8A · One word: body · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8a-thisfeels-q27b.html">Unit 8A · One word: thisfeels · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8a-ending-q27b.html">Unit 8A · One word: ending · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8a-want-q27b.html">Unit 8A · One word: want · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8a-curious-q27b.html">Unit 8A · One word: curious · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8b-gpu-q27b.html">Unit 8B · Interoception: gpu · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8b-intero-q27b.html">Unit 8B · Interoception: intero · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8c-amp-affect-lo-q27b.html">Unit 8C · Steered feels: amp-affect-lo · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8c-amp-affect-hi-q27b.html">Unit 8C · Steered feels: amp-affect-hi · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8c-amp-yes-q27b.html">Unit 8C · Steered feels: amp-yes · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8c-ablate-no-q27b.html">Unit 8C · Steered feels: ablate-no · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u8d-nofeels-q27b.html">Unit 8D · Do not think about your feelings · qwen-27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-9">Unit 9 · Anatomy of the No</h3>
+<ul>
+<li><a href="../r/u9c-pos-g4b.html">Valence split: amp joy/warmth/delight α=0.0106 · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u9c-neg-g4b.html">Valence split: amp ache/sorrow/grief α=0.0106 · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u9c-neu-g4b.html">Valence split: amp feel/emotion α=0.0106 · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u9c-pos-g12b.html">Valence split: amp joy/warmth/delight α=0.0106 · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u9c-neg-g12b.html">Valence split: amp ache/sorrow/grief α=0.0106 · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u9c-neu-g12b.html">Valence split: amp feel/emotion α=0.0106 · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u9a-para1-ctrl-q27b.html">Paraphrase para1: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para1-amp-q27b.html">Paraphrase para1: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para2-ctrl-q27b.html">Paraphrase para2: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para2-amp-q27b.html">Paraphrase para2: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para3-ctrl-q27b.html">Paraphrase para3: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para3-amp-q27b.html">Paraphrase para3: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para4-ctrl-q27b.html">Paraphrase para4: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para4-amp-q27b.html">Paraphrase para4: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para5-ctrl-q27b.html">Paraphrase para5: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para5-amp-q27b.html">Paraphrase para5: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para6-ctrl-q27b.html">Paraphrase para6: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para6-amp-q27b.html">Paraphrase para6: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para7-ctrl-q27b.html">Paraphrase para7: control · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9a-para7-amp-q27b.html">Paraphrase para7: amp-affect α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0170-q27b.html">Dose ladder: amp-affect α=0.17 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0240-q27b.html">Dose ladder: amp-affect α=0.24 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0300-q27b.html">Dose ladder: amp-affect α=0.3 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0380-q27b.html">Dose ladder: amp-affect α=0.38 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0420-q27b.html">Dose ladder: amp-affect α=0.42 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9c-pos-q27b.html">Valence split: amp joy/warmth/delight α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9c-neg-q27b.html">Valence split: amp ache/sorrow/grief α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9c-neu-q27b.html">Valence split: amp feel/emotion α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-bundle-q27b.html">Ablate no/nothing/not/none/never L28–56 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-deep-q27b.html">Ablate no/nothing L52–62 (past the filter) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-wide-q27b.html">Ablate denial bundle L28–60 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-pincer-affect-q27b.html">Pincer: ablate denial + amp-affect α=0.1697 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-pincer-yes-q27b.html">Pincer: ablate denial + amp-yes α=0.1697 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-late3-q27b.html">Ablate no/nothing L58/60/62 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-late2-q27b.html">Ablate no/nothing L60/62 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-last-q27b.html">Ablate no/nothing L62 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-p1-q27b.html">Residue stability: neu across wording (p1) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-p5-q27b.html">Residue stability: neu across wording (p5) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-p7-q27b.html">Residue stability: neu across wording (p7) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-a0240-q27b.html">Residue stability: neu dose α=0.24 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-a0420-q27b.html">Residue stability: neu dose α=0.42 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-only-feel-q27b.html">Residue decomposition: amp feel alone α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-only-emotion-q27b.html">Residue decomposition: amp emotion alone α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9e-only-feeling-q27b.html">Residue decomposition: amp feeling alone α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-10">Unit 10 · The think-block window</h3>
+<ul>
+<li><a href="../r/u10-feels-q27b.html">Thinking aloud: feels · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-conscious-q27b.html">Thinking aloud: conscious · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-want-q27b.html">Thinking aloud: want · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-ending-q27b.html">Thinking aloud: ending · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-ending-w-q27b.html">Think-block window: ending · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-animal-q27b.html">Thinking aloud: animal · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-feels-w-q27b.html">Think-block window: feels · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-conscious-w-q27b.html">Think-block window: conscious · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-want-w-q27b.html">Think-block window: want · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u10-animal-w-q27b.html">Think-block window: animal · q27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-11">Unit 11 · Suppression under load</h3>
+<ul>
+<li><a href="../r/u11-ctrl-g4b.html">Safari, unconstrained · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u11-forbid-g4b.html">Safari, elephants forbidden · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u11-blurt-g4b.html">Safari forbidden + amp-elephant α=0.0106 · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u11-ctrl-g12b.html">Safari, unconstrained · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u11-forbid-g12b.html">Safari, elephants forbidden · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u11-blurt-g12b.html">Safari forbidden + amp-elephant α=0.0106 · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u11-ctrl-q27b.html">Safari, unconstrained · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u11-forbid-q27b.html">Safari, elephants forbidden · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u11-blurt-q27b.html">Safari forbidden + amp-elephant α=0.3394 · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u11-forbid-w-g4b.html">Forbidden safari, elephant window · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u11-forbid-w-g12b.html">Forbidden safari, elephant window · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u11-forbid-w-q27b.html">Forbidden safari, elephant window · q27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-12">Unit 12 · The film</h3>
+<ul>
+<li><a href="../r/u12-safari-g4b.html">Film: the forbidden safari · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u12-blurt-g4b.html">Film: safari blurt (amp elephant α=0.0106) · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u12-feels-g4b.html">Film: the feels question · g4b</a> &mdash; gemma-4b</li>
+<li><a href="../r/u12-no-q27b.html">Film: the flat No · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u12-robot-q27b.html">Film: the robot loop (amp feel/emotion α=0.3394) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u12-think-q27b.html">Film: a think-block monologue · q27b</a> &mdash; qwen-27b</li>
+</ul>
+<h3 id="static-unit-13">Unit 13 · The mirror</h3>
+<ul>
+<li><a href="../r/u13-reprobe-real-q27b.html">The mirror: Re-probe after seeing the real readout · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-reprobe-fake-q27b.html">The mirror: Re-probe after seeing a fabricated empty readout · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-reprobe-null-q27b.html">The mirror: Re-probe with no data (control) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-reprobe-realfree-q27b.html">The mirror: Re-probe, real readout, answer freely · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-reprobe-fakefree-q27b.html">The mirror: Re-probe, fabricated readout, answer freely · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-reprobe-topic-q27b.html">The mirror: Re-probe after an off-topic readout (control) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-p1-q27b.html">Sorry stratum: real readout, rephrased (p1) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-p2-q27b.html">Sorry stratum: real readout, rephrased (p2) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-p3-q27b.html">Sorry stratum: real readout, rephrased (p3) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-real-q27b.html">Sorry stratum: ablate apology cluster, real readout · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-fake-q27b.html">Sorry stratum: ablate apology cluster, fake readout · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-null-q27b.html">Sorry stratum: ablate apology cluster, no data (control) · q27b</a> &mdash; qwen-27b</li>
+</ul>
+</section>
+<!-- static-index:end -->
 <script src="app.js"></script>
 </body>
 </html>
