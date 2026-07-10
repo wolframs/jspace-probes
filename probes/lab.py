@@ -342,6 +342,8 @@ def run(spec: dict) -> dict:
         film = {"id": spec["id"], "model": spec["model"], "layers": layers,
                 "tokens": toks, "gen_start": gen_start, "start": start,
                 "track": sorted(track_ids), "frames": frames}
+        film["cast"] = film_cast(
+            film, " ".join(m["content"] for m in resolved))
         (outdir / "film.json").write_text(json.dumps(film))
         film_file = "film.json"
 
@@ -388,6 +390,47 @@ def run(spec: dict) -> dict:
     (outdir / "record.json").write_text(json.dumps(record, indent=1))
     reindex()
     return record
+
+
+def film_cast(film: dict, convo_text: str, top: int = 40) -> list[dict]:
+    """Open-vocabulary census of a film: every word the top-8 ever held,
+    scored by prominence (sum of 1/rank over cells), split into words
+    echoed from the conversation vs volunteered by the model. This is
+    the answer to curated-track-list blindness: the cast is data-driven.
+    """
+    import re
+    wordish = re.compile(r"[^\W_]", re.UNICODE)
+    groups: dict[str, dict] = {}
+    low_convo = convo_text.lower()
+    for fr in film["frames"]:
+        for j, cells in enumerate(fr["top"]):
+            for k, w in enumerate(cells):
+                s = w.strip()
+                if not s or (s.startswith("<") and s.endswith(">")):
+                    continue
+                if not wordish.search(s):
+                    continue
+                key = s.lower()
+                g = groups.setdefault(key, {
+                    "n": 0, "score": 0.0, "best": 99, "l_lo": 999,
+                    "l_hi": -1, "forms": {}})
+                g["n"] += 1
+                g["score"] += 1.0 / (k + 1)
+                g["best"] = min(g["best"], k + 1)
+                g["l_lo"] = min(g["l_lo"], film["layers"][j])
+                g["l_hi"] = max(g["l_hi"], film["layers"][j])
+                g["forms"][s] = g["forms"].get(s, 0) + 1
+    cast = []
+    for key, g in groups.items():
+        display = max(g["forms"], key=g["forms"].get)
+        cast.append({
+            "w": display, "n": g["n"], "best": g["best"],
+            "layers": [g["l_lo"], g["l_hi"]],
+            "score": round(g["score"], 2),
+            "echo": key in low_convo,
+        })
+    cast.sort(key=lambda c: -c["score"])
+    return cast[:top]
 
 
 def reindex() -> None:

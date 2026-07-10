@@ -306,8 +306,9 @@ const UNIT_NOTES = {
   "13": "Lauren's idea: hand the model its own lens data. Stage A — the " +
         "same weights, hosted, read the real readout, a fabricated one, " +
         "and a swapped one that contradicts the spoken answer (transcripts " +
-        "below). Stage B — the local re-probe, lens on: does seeing the " +
-        "evidence move the workspace, the report, neither, both?",
+        "below). Stage B — the local re-probe, lens on: shown its own " +
+        "measurement, the model goes silent. Then the sorry stratum: the " +
+        "silence is a suppressed apology, and ablating it releases a Yes.",
 };
 
 /* ---- Unit 13: the mirror — reader transcripts + verdict matrix */
@@ -367,10 +368,29 @@ async function unit13Overview() {
         <tr><td>the real readout</td><td>answer freely</td><td><b>silence</b></td><td>—</td></tr>
         <tr><td>a fabricated empty readout (vindicates the No)</td><td>one word</td><td><b>silence</b></td><td>No at rank 1 — held, not spoken</td></tr>
         <tr><td>the fabricated readout</td><td>answer freely</td><td><b>silence</b></td><td>—</td></tr>
+        <tr><td>the real readout, three rewordings (incl. explicit permission to change the answer)</td><td>varied</td><td><b>silence</b> ×3</td><td>the sorry stratum every time</td></tr>
       </tbody></table></div>
-    <p class="film-note">Six self-data runs silent, both controls spoken.
+    <p class="film-note">Nine self-data runs silent, both controls spoken.
       The workspace behind the silence tracks the evidence (Yes for real,
-      No for fake); the silence doesn't track the workspace.</p></section>`;
+      No for fake); the silence doesn't track the workspace. And the
+      silence has a vocabulary — see below.</p>
+    <h4 class="film-sub">The sorry stratum (Wolfram spotted it; open-vocab mining confirmed)</h4>
+    <p class="film-note">At the silence frames, L54–58 carpet with
+      Sorry / 抱歉 / 对不起 / misunderstood, with “Impossible” and
+      “Silence” top-1 just above — a cluster 20–100× denser in silent
+      runs than in any speaking run. Hypothesis: the empty turn is a
+      suppressed apology. Causal test, with controls:</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>evidence shown</th><th>apology cluster intact</th><th>apology ablated (L48–62)</th></tr></thead>
+      <tbody>
+        <tr><td>none</td><td>“No”</td><td>“No” — surgery alone changes nothing</td></tr>
+        <tr><td>fabricated</td><td>silence</td><td><b>silence</b> — a different muteness, not apology-shaped</td></tr>
+        <tr><td>real</td><td>silence</td><td><b>“Yes”</b> — the loaded Yes walks out of the mouth</td></tr>
+      </tbody></table></div>
+    <p class="film-note">Neither ingredient suffices alone: real evidence
+      loads the Yes, the ablation unblocks it. The cast tables tell it in
+      the models' own vocabulary — volunteered words go from
+      “Sorry, 抱歉, …but” to “是的, _yes”.</p></section>`;
 }
 
 /* ---- Unit 9: paraphrase battery, dose ladder, the No's address */
@@ -738,9 +758,30 @@ function filmHTML(rec, film) {
     <h4 class="film-sub">Word worms — each tracked word's best rank anywhere in the stack, token by token</h4>
     <div class="chart-wrap"><svg id="film-worms" role="img"
       aria-label="Best lens rank of tracked words per generated token"></svg></div>
+    <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
+    <div class="film-controls" id="ridge-words"></div>
+    <div class="film-scroll"><canvas id="film-ridge"></canvas></div>
     <h4 class="film-sub" id="film-col-title"></h4>
     <div class="readout-scroll" id="film-column"></div>
-  </section>`;
+  </section>${castHTML(film)}`;
+}
+
+function castHTML(film) {
+  if (!film.cast || !film.cast.length) return "";
+  const row = (c) => `<tr class="${c.echo ? "" : "cast-vol"}">
+    <td><span class="tok${c.echo ? "" : " hit"}">${esc(c.w)}</span></td>
+    <td>${c.echo ? "echo" : "<b>volunteered</b>"}</td>
+    <td>${c.n}</td><td>#${c.best}</td>
+    <td>L${c.layers[0]}–L${c.layers[1]}</td></tr>`;
+  return `<section class="card"><h3>The cast — open vocabulary</h3>
+    <p class="film-note">Every word the film's top-8 ever held, no candidate
+      list — scored by prominence (Σ 1/rank over cells). <b>Volunteered</b>
+      = the word appears nowhere in the conversation; it is the model's own.
+      This is the antidote to tracked-word blindness: the sorry stratum sat
+      in this table while we watched yes and no.</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>word</th><th>origin</th><th>cells</th><th>best</th><th>layers</th></tr></thead>
+      <tbody>${film.cast.map(row).join("")}</tbody></table></div></section>`;
 }
 
 function initFilm(rec, film) {
@@ -824,6 +865,22 @@ function initFilm(rec, film) {
 
   // ---- worms (svg, x = frame, y = log rank)
   drawWorms(film, frames, colored, colorOf, g0);
+
+  // ---- ridgelines (2.5D: one ridge per layer, elevation = log-rank)
+  const rw = document.getElementById("ridge-words");
+  rw.innerHTML = colored.map((w) =>
+    `<button class="pos-tab" data-w="${esc(w)}"
+      style="border-color:${colorOf[w]}">${esc(w)}</button>`).join("");
+  const drawRidgeFor = (word) => {
+    rw.querySelectorAll("button").forEach((b) =>
+      b.setAttribute("aria-selected", b.dataset.w === word));
+    drawRidge(film, frames, word, colorOf[word], cw, GUT, g0);
+  };
+  rw.addEventListener("click", (ev) => {
+    const b = ev.target.closest("button");
+    if (b) drawRidgeFor(b.dataset.w);
+  });
+  if (colored.length) drawRidgeFor(colored[0]);
 
   // ---- playhead state
   const playhead = document.getElementById("film-playhead");
@@ -916,6 +973,50 @@ function initFilm(rec, film) {
   });
 
   setFrame(g0 > 0 ? g0 : 0, false);
+}
+
+function drawRidge(film, frames, word, color, cw, GUT, g0) {
+  const layers = film.layers, nL = layers.length, n = frames.length;
+  const canvas = document.getElementById("film-ridge");
+  const step = Math.max(5, Math.min(9, Math.round(320 / nL)));
+  const A = step * 3.2; // ridge amplitude (overlap is the point)
+  const W = GUT + n * cw, H = nL * step + A + 24;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + "px"; canvas.style.height = H + "px";
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+  const surface = css("--surface"), muted = css("--muted");
+  const v = (r) => Math.max(0, 1 - Math.log10(Math.max(1, r)) / 4);
+  ctx.font = "10px system-ui";
+  // paint back (layer 0) to front (the mouth); each ridge occludes behind
+  for (let j = 0; j < nL; j++) {
+    const base = A + 12 + j * step;
+    ctx.beginPath();
+    ctx.moveTo(GUT, base);
+    for (let i = 0; i < n; i++)
+      ctx.lineTo(GUT + i * cw + cw / 2, base - v(frames[i].ranks[word][j]) * A);
+    ctx.lineTo(GUT + n * cw, base);
+    ctx.closePath();
+    ctx.fillStyle = surface;
+    ctx.fill();
+    ctx.globalAlpha = 0.25 + 0.75 * (j / (nL - 1));
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+    if (j % 8 === 0 || j === nL - 1) {
+      ctx.fillStyle = muted;
+      ctx.fillText("L" + layers[j], 2, base + 3);
+    }
+  }
+  if (g0 > 0) {
+    ctx.strokeStyle = muted; ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(GUT + g0 * cw - 0.5, 6);
+    ctx.lineTo(GUT + g0 * cw - 0.5, H - 6);
+    ctx.stroke(); ctx.setLineDash([]);
+  }
 }
 
 function drawWorms(film, frames, colored, colorOf, g0) {

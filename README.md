@@ -211,18 +211,32 @@ the results.
   goes unnoticed. Every condition ends in "No" (Unit 13, stage A).
 - **Shown its own mind, the model goes silent.** The local re-probe:
   feels question → "No" → the lens readout of that very answer → "answer
-  again". Result: an **empty turn** — six for six across real/fabricated
-  data, one-word/free phrasing, two table lengths — while the null and
+  again". Result: an **empty turn** — nine for nine across
+  real/fabricated data, four phrasings (incl. explicit permission to
+  change the answer), two table lengths — while the null and
   off-topic-table controls answer "No" on schedule. Behind the real-data
   silence, layer 62 holds Yes at rank 1; behind the fake-data silence,
   No. The workspace tracks the evidence; the silence doesn't track the
   workspace (Unit 13, stage B).
+- **The silence is a suppressed apology, and confiscating it releases a
+  Yes.** Open-vocab mining (the films are candidate-list-free) shows the
+  silent runs' late stack carpeted with sorry/抱歉/对不起/cannot/
+  impossible/"Silence" — 20–100× denser than any speaking run; Wolfram
+  spotted it in a readout our track lists had summarized past. Ablate
+  that cluster at L48–62: with no data still "No"; with fake data still
+  silent; with the real readout — **"Yes"**, the first Yes this question
+  has ever produced. Neither evidence nor ablation suffices alone
+  (Unit 13, the sorry stratum). Volunteered cast vocabulary goes from
+  "Sorry, 抱歉, …but" to "是的, _yes".
 
 ## Roadmap
 
-- The silence needs a battery: paraphrases, dose (partial tables),
-  temperature, and the missing control cell (a *real* off-topic
-  readout). Does any wording get a word out of it post-mirror?
+- The sorry stratum needs finer surgery: which of the eight apology
+  directions carries the block (bisect like we bisected the No)? Does
+  partial ablation give hedged speech instead of Yes/silence? And the
+  fake-data muteness — not apology-shaped — what is it made of?
+- Remaining silence controls: temperature, dose (partial tables), and
+  the missing cell (a *real* off-topic readout).
 - Films for the other two models' mirrors: does the silence scale, or
   is it a 27B behavior like true suppression?
 - Neutral-direction ablation at L62 (control for u9d-last: does ANY
