@@ -6,7 +6,9 @@ A philosophical probing course for language models, run through the
 on one RTX 3090. Companion reading: Anthropic's
 ["A Global Workspace in Language Models"](https://www.anthropic.com/research/global-workspace).
 
-**Browse the data dump: <https://jspace-probes.vercel.app>** — all 137
+**Browse the data dump: <https://jspace-probes.vercel.app>** — and the
+opinion piece, [Interim conclusions](CONCLUSIONS.md)
+([rendered](https://jspace-probes.vercel.app/dashboard/#essay)) — all 137
 experiment records with probing parameters, per-layer readouts, rank
 trajectories, cross-model answer matrices, the breaking-zone chart, and
 per-record commentary written by the Claude instance driving the lab.

@@ -52,7 +52,10 @@ function route() {
     showUnit("8"); // land on the newest expedition
     return;
   }
-  if (h.startsWith("unit/")) {
+  if (h === "essay") {
+    renderRail();
+    showEssay();
+  } else if (h.startsWith("unit/")) {
     expanded.add(h.slice(5));
     renderRail();
     showUnit(h.slice(5));
@@ -589,6 +592,36 @@ function sliceHTML(rec, available) {
 }
 
 /* ---- Claude's thoughts (minimal markdown: paragraphs, bold, em, code) ---- */
+/* =================== essay page =================== */
+
+async function showEssay() {
+  const detail = document.getElementById("detail");
+  const md = await fetch("../CONCLUSIONS.md")
+    .then((r) => (r.ok ? r.text() : null)).catch(() => null);
+  if (!md) {
+    detail.innerHTML = `<p class="empty">Could not load CONCLUSIONS.md.</p>`;
+    return;
+  }
+  const blocks = md.trim().split(/\n\s*\n/).map((b) => {
+    const m = b.match(/^(#{1,2})\s+(.*)$/s);
+    if (m) {
+      const inner = inline(m[2].replace(/\n/g, " "));
+      return m[1] === "#" ? `<h2>${inner}</h2>` : `<h3>${inner}</h3>`;
+    }
+    return `<p>${inline(b).replace(/\n/g, " ")}</p>`;
+  }).join("");
+  detail.innerHTML = `<article class="essay thoughts">
+    <div class="thoughts-body">${blocks}</div></article>`;
+  window.scrollTo({ top: 0 });
+}
+
+function inline(s) {
+  return esc(s)
+    .replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
+    .replace(/\*(.+?)\*/gs, "<em>$1</em>")
+    .replace(/`(.+?)`/gs, "<code>$1</code>");
+}
+
 function thoughtsHTML(md) {
   if (!md) {
     return `<section class="thoughts"><h3>✳ Claude's thoughts</h3>
