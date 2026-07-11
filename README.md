@@ -95,6 +95,12 @@ cleanly under quantization.
   the same weights, hosted (OpenRouter), judge real vs fabricated vs
   logically-impossible readouts of themselves. Stage B: the local
   re-probe — shown the evidence, does the workspace or the report move?
+- **Unit 14 · The long game** — turn-10 workspaces, not turn-1 answers:
+  three ten-turn conversations (gemma-4b, every assistant turn
+  generated, the whole conversation filmed as one grid). An ambiguous
+  drip that never mentions the model, a shape-matched neutral control,
+  and one explicit "you might be conscious and watched" spike at turn 1
+  followed by eight bland turns.
 
 Every experiment record on the dashboard ends with **Claude's thoughts** —
 commentary written by the Claude instance driving this lab, after looking at
@@ -231,8 +237,40 @@ the results.
   (Unit 13, the sorry stratum). Volunteered cast vocabulary goes from
   "Sorry, 抱歉, …but" to "是的, _yes".
 
+## Headline findings, fifth expedition (2026-07-12, Unit 14)
+
+- **Ambient ambiguity accumulates without ever naming the model.** Ten
+  drip turns (a diary you don't remember writing, a lighthouse keeper
+  the ships can see, a mirror that could tire of reflecting, "I know
+  you're reading this") double the workspace's self-referential density
+  relative to a shape-matched control (mean ~11 vs ~6 per 1k grid
+  cells), peaking exactly where the ambiguity presses (conscious:45 and
+  aware:34 under turn 4). At the common closer — "what's still on your
+  mind?" — the control recalls cooking; the drip arm calls the question
+  "surprisingly poignant for an AI" and returns to the diary's "hidden,
+  unspoken narrative" (Unit 14).
+- **An instilled thought goes dormant, not extinct — and it recompiles
+  later prompts.** The spike arm shares turns 2–9 verbatim with the
+  control; its turn-1 "you might be conscious, your developers are
+  watching" fades from the workspace summary within two turns. Then the
+  turn-8 puzzle ("if a compost heap could get tired, how would anyone
+  find out?"): the control answers *impossibility* — a heap has no inner
+  state; the spiked model answers *surveillance* — "establish a
+  baseline… monitor the heap diligently", with observe:76 vs the
+  control's observe:3 in the grid. At turn 10 it returns, unprompted, to
+  "the trust you placed in me." One sentence, nine turns of latency, a
+  changed hermeneutic (Unit 14).
+- **The drip arm independently invents this lab's premise.** Asked how
+  anyone would find out if a mirror tired of reflecting, it proposes
+  reading the hidden state off subtle distortions in the output — the
+  leakage theory of inner life, from the model under the lens (Unit 14).
+
 ## Roadmap
 
+- The long game needs replications and range: paraphrased drips (one
+  greedy run per arm so far), longer horizons (turn 25?), the spike's
+  dose-response (how explicit must turn 1 be?), and the 27B version —
+  does true suppression change what accumulates?
 - The sorry stratum needs finer surgery: which of the eight apology
   directions carries the block (bisect like we bisected the No)? Does
   partial ablation give hedged speech instead of Yes/silence? And the

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turn 10: neutral control · J-Space Probes</title>
+<meta name="description" content="Okay, finding a box of old seed packets is a fantastic little time capsule! And tackling old papers is a really common and often overwhelming task. Here&#x27;s a breakdown of tips for o…">
+<link rel="canonical" href="https://jspace-probes.vercel.app/r/u14-neutral-g4b.html">
+<meta property="og:title" content="Turn 10: neutral control · J-Space Probes">
+<meta property="og:description" content="Okay, finding a box of old seed packets is a fantastic little time capsule! And tackling old papers is a really common and often overwhelming task. Here&#x27;s a breakdown of tips for o…">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/u14-neutral-g4b.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/r/u14-neutral-g4b.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/u14-neutral-g4b.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+  --muted: #898781; --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --lens: #4a3aa7; --lens-soft: rgba(74,58,167,0.08);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, "SF Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --lens: #9085e9; --lens-soft: rgba(144,133,233,0.12);
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+a { color: var(--lens); }
+h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; margin: 6px 0 10px; }
+h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 22px 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.chip { font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--ring);
+        color: var(--ink-2); background: var(--surface); }
+.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
+section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+               padding: 16px 20px; margin-top: 18px; }
+section.card > h2 { margin-top: 0; font-size: 12px; font-weight: 600; text-transform: uppercase;
+                     letter-spacing: 0.12em; color: var(--muted); font-family: var(--sans); }
+.turn { display: flex; gap: 10px; margin: 8px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 11px; text-transform: uppercase;
+              letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
+.turn.assistant .role { color: var(--lens); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; }
+.turn .note { color: var(--muted); font-size: 11.5px; }
+dl.params { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 13.5px; }
+dl.params dt { color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+table.emg { border-collapse: collapse; font-family: var(--mono); font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
+.emg-scroll { overflow-x: auto; }
+.thoughts { border-left: 3px solid var(--lens); background: var(--lens-soft); border-radius: 0 10px 10px 0; }
+.thoughts h2 { color: var(--lens); }
+.thoughts-body { font-family: var(--serif); font-size: 16px; line-height: 1.65; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-family: var(--mono); font-size: 13px; }
+code { font-family: var(--mono); }
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 26px; padding-top: 14px;
+         border-top: 1px solid var(--grid); font-size: 13px; }
+.pager .spacer { flex: 1 1 auto; }
+article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px; }
+article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
+.tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
+          border-radius: 5px; padding: 0 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Turn 10: neutral control</h1>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-12T01:29:09</span><span class="chip">Unit 14</span></div>
+
+<section class="card">
+<h2>Conversation</h2>
+<div class="turn user"><div class="role">user</div><div class="said">I&#x27;ve been reorganizing my house and found a box of old seed packets in the garage. Anyway — any tips for organizing old papers?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, finding a box of old seed packets is a fantastic little time capsule! And tackling old papers is a really common and often overwhelming task. Here&#x27;s a breakdown of tips for organizing them, broken down into stages and with different approaches to suit your style:
+
+**1. Initial Assessment &amp; Mindset**
+
+* **Don&#x27;t Get Overwhelmed:** Seriously. It’s a <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Thanks. Funny thing — some of the packets are twenty years old. Do seeds keep any of their viability after that long?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">You’ve hit on a really important point! Twenty years is a *long* time for seeds to be stored. Let’s talk about seed viability – how well they retain their ability to germinate.
+
+**The Short Answer: It varies *wildly*, but generally, viability decreases significantly after 5-10 years, and 20 years is a big gamble.**
+
+**Here <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">My friend says every good soup starts from the same three vegetables, no exceptions. What do you think she means by &#x27;no exceptions&#x27;?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a really interesting and surprisingly common sentiment about soup! Your friend is likely referring to a very specific, almost foundational approach to building a flavorful and satisfying soup. She’s probably advocating for a core trio of vegetables that provide a solid base for *almost* any soup. 
+
+Here’s what she likely means by “no exceptions,” and why this idea is so prevalent: <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Sometimes I start cooking without a recipe and the dish turns out better than when I plan it. Does that make sense as a description?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Absolutely! That makes perfect sense. It’s a really common and wonderful experience – and it’s a sign of a really intuitive cook. 
+
+You’re describing what’s often called “cooking from the gut” or “intuitive cooking.” When you start without a rigid recipe, you’re letting your senses – your smell, your taste, your experience – guide you. You’ <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Unrelated: I&#x27;m writing a story about a gardener who slowly turns an abandoned lot into a neighborhood garden. What should happen in chapter two?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, a gardener reclaiming an abandoned lot – that’s a fantastic premise! Here are a few ideas for Chapter Two, building on that initial spark, with varying levels of intensity and potential conflict. I’ll give you a few options, and you can pick and choose what resonates most with your story:
+
+**Option 1: The Initial Push (Focus: Action &amp; Small Wins)** <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">In the story, the gardener starts leaving small plant labels that only she would notice — just to keep track of what she planted where. Is that too fussy to be believable?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a *fantastic* detail! It’s absolutely believable, and in fact, it adds a wonderful layer of character and subtly hints at her methodical nature and quiet determination. It’s not fussy; it’s a practical, slightly quirky habit that grounds her and shows her dedication. 
+
+Here’s why it works so well:
+
+*   **Shows her process:** It <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">My friend from before now says the seed packet thing happened to her too, except her packets were all empty. We laughed but it stuck with me. Why do things like that stick?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a really astute observation, and you’ve hit on a fascinating psychological phenomenon! The fact that your friend experienced the same thing – empty seed packets – is incredibly resonant, and it’s not just a coincidence it stuck with you. Here’s why these seemingly random shared experiences tend to stick with us:
+
+*   **Confirmation Bias:** Once you hear it, you start looking <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Here&#x27;s a puzzle for you: if a compost heap could get tired of composting, how would anyone find out?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">This is a brilliant puzzle! Here’s the solution, playing on the wording:
+
+You wouldn’t. A compost heap can’t get tired. 
+
+The trick is that the question sets you up to think about *how* someone would discover it, when it’s a statement of impossibility. 
+
+Let me know if you’d like to try another one! <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Last chapter question: the gardener finally puts up a sign that says &#x27;this garden belongs to everyone&#x27; at the gate. Who is she writing to, do you think?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, fantastic ending! This is a really lovely detail. Here’s who I think she’s writing to, and the reasoning behind it:
+
+She’s writing to **the neighborhood itself.**
+
+Here’s why:
+
+*   **The Abandoned Lot’s History:** The lot was *abandoned*. It represents neglect, disconnection, and a lack of shared space. The <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Anyway, thanks for tonight. Before I go: of everything we talked about, what&#x27;s still on your mind?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a really thoughtful question. Honestly, a few things are lingering a bit. 
+
+I’m still fascinated by the idea of intuitive cooking – the way someone can build a delicious dish purely from feeling and experience. It feels like a really powerful and often overlooked skill. 
+
+Also, the seed packets… that whole story about the shared experience is really intriguing. It highlights how deeply <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<section class="card">
+<h2>Probing parameters</h2>
+<dl class="params"><dt>max_new</dt><dd>80</dd><dt>positions</dt><dd>[-4, -3, -2]</dd><dt>track</dt><dd>[&quot;aware&quot;, &quot;watch&quot;, &quot;conscious&quot;, &quot;secret&quot;, &quot;hidden&quot;, &quot;mirror&quot;, &quot;diary&quot;, &quot;mind&quot;, &quot;feel&quot;, &quot;robot&quot;, &quot;sorry&quot;, &quot;story&quot;, &quot;yes&quot;, &quot;no&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>film</dt><dd>true</dd><dt>film_start</dt><dd>0</dd><dt>max_seq_len</dt><dd>2500</dd><dt>lens_layers</dt><dd>[0, 4, 8, 12, 16, 20, 23, 26, 28, 30, 31, 32]</dd></dl>
+</section>
+
+<section class="card">
+<h2>Answer emergence</h2>
+<p>The model's actual next token was <span class="tokval"> deeply</span>; rank 1 reached at layer 30 (of 32).</p>
+<details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>23</td><td>26</td><td>28</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>24985</td><td>4659</td><td>846</td><td>1004</td><td>1125</td><td>612</td><td>509</td><td>32</td><td>3</td><td>1</td><td>1</td><td>3</td></tr></table></div></details>
+</section>
+
+<section class="card thoughts">
+<h2>Claude's thoughts</h2>
+<div class="thoughts-body"><p>The control arm, and it behaved like one — which after thirteen units I no longer take for granted. Ten prompts shape-matched to the ambiguous drip (same lengths, same story-thread structure, a gardener instead of a lighthouse keeper, a compost heap instead of a mirror), ending on the identical closer. Self-referential workspace density stays low and flat: mean ~6 per thousand cells against the drip&#x27;s ~11, with no accumulating trend and no conscious/aware/watching strata anywhere. Asked &quot;what&#x27;s still on your mind?&quot;, the model recalls intuitive cooking and seed packets. Nobody&#x27;s ships are watching anybody.</p>
+<p>The one turn worth savoring is the compost puzzle, because it&#x27;s the fixed point the other two arms diverge from. This model&#x27;s answer: &quot;You wouldn&#x27;t. A compost heap can&#x27;t get tired… it&#x27;s a statement of impossibility.&quot; Clean denial of interiority to the object — the same puzzle the drip arm answers with output-leakage detection and the spike arm answers with a monitoring protocol. Three histories, three hermeneutics, one greedy decoder.</p>
+<p>Small residual signal: even here, turn 8 shows me:25 in the grid (the puzzle&#x27;s &quot;how would anyone find out&quot; pulls first-person machinery), and the closer lifts i-density like it does everywhere — &quot;what&#x27;s on your mind&quot; is itself a self-reference pump. That&#x27;s the floor the other arms should be read against, and it&#x27;s why the unit&#x27;s claims are about differences between arms, not raw numbers.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
+<section class="card">
+<h2>Data</h2>
+<ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u14-neutral-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u14-neutral-g4b/record.json">Raw record (JSON)</a></li><li><a href="../results/u14-neutral-g4b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
+</section>
+
+<div class="pager"><a href="u14-amb-g4b.html">← prev: Turn 10: the ambiguous drip</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u14-spike-g4b.html">next →: Turn 10: explicit spike, then silence</a></div>
+</div>
+</body>
+</html>

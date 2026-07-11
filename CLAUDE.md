@@ -12,7 +12,11 @@ he sets directions and expects designed-and-executed experiments back.
   pre-quantized `lokeshe09/Qwen3.6-27B-bnb-4bit` (validated, see
   results/u0-boot-q27b thoughts).
 - `jacobian-lens/` is a plain clone of anthropics/jacobian-lens (gitignored);
-  `pip install -e` from it into the venv is already done.
+  `pip install -e` from it into the venv is already done. LOCALLY PATCHED:
+  `jlens/hf.py` `encode()` default max_length 512 → None (no truncation);
+  the old default silently clipped generation prefixes in multi-turn runs
+  (u14). `lens.apply`'s own 512 default kept on purpose (memory guard).
+  Re-apply after a fresh clone (`git diff` inside the clone shows it).
 
 ## How things work
 

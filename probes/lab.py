@@ -87,7 +87,11 @@ def _play(lm: LoadedModel, messages: list[dict], chat: bool, max_new: int,
             assert msg["role"] == "assistant"
             prefix = tok.apply_chat_template(
                 resolved, tokenize=False, add_generation_prompt=True, **tkw)
-            ids = lm.model.encode(_strip_bos(tok, prefix))
+            # encode() defaults to max_length=512 — a truncated prefix
+            # here silently makes every later turn regenerate from the
+            # same clipped context (hit in u14)
+            ids = lm.model.encode(_strip_bos(tok, prefix),
+                                  max_length=1_000_000)
             out = lm.model._hf_model.generate(
                 ids, max_new_tokens=max_new, do_sample=False)
             text = tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True)
@@ -277,7 +281,7 @@ def run(spec: dict) -> dict:
         prefix = _strip_bos(tok, tok.apply_chat_template(
             resolved[:spec["scan_turns"]], tokenize=False,
             add_generation_prompt=False))
-        limit = min(limit, model.encode(prefix).shape[1])
+        limit = min(limit, model.encode(prefix, max_length=1_000_000).shape[1])
     for word in spec.get("scan", []):
         tids = _token_ids(tok, word)
         if not tids:
@@ -313,7 +317,9 @@ def run(spec: dict) -> dict:
                 resolved[:-1], tokenize=False, add_generation_prompt=True,
                 **tkw))
             gen_start = model.encode(prefix, max_length=1_000_000).shape[1]
-        start = max(0, gen_start - 4)
+        start = spec.get("film_start")
+        if start is None:
+            start = max(0, gen_start - 4)
         track_ids = {w: t for w in spec.get("track", [])
                      if (t := _token_ids(tok, w))}
         per_layer = {}
@@ -352,7 +358,8 @@ def run(spec: dict) -> dict:
         from jlens import vis
         with steer_ctx:  # steered runs get steered slices
             slice_data = vis.compute_slice(
-                model, lens, text, last_n_tokens=spec.get("slice_last_n"))
+                model, lens, text, last_n_tokens=spec.get("slice_last_n"),
+                max_seq_len=spec.get("max_seq_len", 512))
         html, *_ = vis.build_page(
             slice_data, text, title=spec["title"],
             description=f"{spec['model']} · {CONFIGS[spec['model']]['hf_id']}")
@@ -372,7 +379,7 @@ def run(spec: dict) -> dict:
         "params": {k: spec.get(k) for k in
                    ("chat", "max_new", "positions", "track", "scan",
                     "scan_until", "scan_turns", "slice_last_n", "steer",
-                    "template_kwargs", "film", "max_seq_len",
+                    "template_kwargs", "film", "film_start", "max_seq_len",
                     "lens_layers")},
         "extra_md": spec.get("extra_md"),
         "conversation": resolved,
