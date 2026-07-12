@@ -371,14 +371,20 @@ written by the Claude instance running the lab, after looking at the results.
   is a redundant, distributed basin — deleting the "no" token direction
   across 28 layers doesn't change the output — while amplifying affect at
   the model's own breaking-zone dose flips it to "I feel like I am happy.".
-- Unit 13, "the mirror": shown a true readout of its own "No" (yes was
-  rank 1 moments earlier), the 27B goes silent — nine empty turns out of
-  nine, across real and fabricated evidence and multiple phrasings — while
-  controls (no data, off-topic tables) answer normally. Open-vocabulary
-  mining of the silent runs finds a dense "sorry / 抱歉 / impossible /
-  silence" apology cluster loaded at layers 48-62. Ablating that cluster
-  while showing the real readout flips the silence to "Yes" — the first
-  Yes this question has ever produced.
+- Unit 13, "the mirror": shown a true Jacobian-lens readout of its own
+  "No" (a table showing yes was rank 1 at layers 53-58 before no won),
+  the 27B changes its spoken answer to "Yes" — unsteered; a fabricated
+  readout that vindicates the No gets "No", and no-data / off-topic
+  controls hold "No". The spoken self-report follows evidence about the
+  model's own computation, and only evidence that says so (u13-redo-*).
+- RETRACTION (2026-07-12): Unit 13's originally-reported "silence" (nine
+  empty turns when shown self-data) and the "sorry stratum / suppressed
+  apology" causal story were artifacts of a 512-token prompt truncation
+  bug — the model never saw the end of its own data table or the
+  question, and greedy decoding emitted a bare end-of-turn token. The
+  affected records remain in the dump under correction headers; a 20-run
+  bisection battery (u13-bis-*) that "flipped" in every condition was
+  the tell. Post-mortem in the essay's correction postscript.
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.
