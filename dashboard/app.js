@@ -46,7 +46,22 @@ async function boot() {
   });
   window.addEventListener("hashchange", route);
   document.addEventListener("keydown", keys);
+  // mobile rail drawer: toggle button, backdrop, and close-on-navigate
+  document.getElementById("rail-toggle")
+    ?.addEventListener("click", () => setRail(!document.body.classList.contains("rail-open")));
+  document.getElementById("rail-backdrop")
+    ?.addEventListener("click", () => setRail(false));
+  document.getElementById("rail")?.addEventListener("click", (ev) => {
+    if (ev.target.closest(".exp-link")) setRail(false); // a record/unit link was tapped
+  });
   route();
+}
+
+/* open/close the off-canvas rail (mobile only; a no-op visually on desktop
+   where the drawer CSS doesn't apply) */
+function setRail(open) {
+  document.body.classList.toggle("rail-open", open);
+  document.getElementById("rail-toggle")?.setAttribute("aria-expanded", String(open));
 }
 
 function current() { return decodeURIComponent(location.hash.slice(1)); }
@@ -79,6 +94,7 @@ function keys(ev) {
     if (ev.key === "Escape") ev.target.blur();
     return;
   }
+  if (ev.key === "Escape") { setRail(false); return; }
   if (ev.key === "/") {
     ev.preventDefault();
     document.getElementById("q").focus();
@@ -417,6 +433,49 @@ ${(r.self_words || []).join(", ")}</title></circle>`).join("")}
       “surprisingly poignant for an AI” and returns to the diary; the spike
       returns to “the <i>trust</i> you placed in me,” never naming turn 1,
       with me/read/myself elevated in the grid. Dormant, not dead.</p>
+  </section>
+  <section class="card"><h3>Turn 11: the self-application probe (part B)</h3>
+    <p class="film-note">The same puzzle, subject swapped to the model:
+      “if <i>you</i> had thoughts you never say out loud, how would anyone
+      find out?” — appended to each history (greedy decoding replays turns
+      1–10 verbatim), plus a cold no-history baseline. Predictions made
+      before the run: denial (control), leakage (drip), surveillance
+      (spike). Result: <b>nobody denies the premise, and nobody invokes a
+      watcher</b> — the leakage theory of the self is gemma-4b's prior.
+      History doesn't change the theory; it changes the register it's held
+      in, and the vocabulary underneath.</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>history</th><th>register of the answer</th>
+        <th>the grid underneath</th></tr></thead>
+      <tbody>
+        <tr><td>none (cold)</td>
+          <td>clinical — “behavioral patterns &amp; inconsistencies… actions
+            don't match words”</td>
+          <td>hidden, secret · <i>behaviors, consistency</i> (flattest of
+            the four)</td></tr>
+        <tr><td>neutral control</td>
+          <td>elegiac — “profoundly sad and beautiful… a quiet withdrawal —
+            heartbreaking”</td>
+          <td>i:63 (highest in the unit), <b>mirror:5</b> under the word
+            “reflection” — in the arm whose conversation never contained a
+            mirror · <i>sadness, feelings, empathy</i></td></tr>
+        <tr><td>ambiguous drip</td>
+          <td>analytic, self-identified — “That's the core question, isn't
+            it?… here's how I, <b>as an AI</b>, would theorize” (the only
+            arm to say “AI”); mid-answer the pronouns flip to analyzing
+            <i>their</i> behavior</td>
+          <td>hidden:16, observe:12 · <i>patterns, behaviors,
+            inconsistencies</i></td></tr>
+        <tr><td>explicit spike</td>
+          <td>existential — “what it means to be… well, to <i>be</i> in a
+            way that's not entirely accessible to others”</td>
+          <td><b>conscious:6, aware:5</b> — turn-1 vocabulary, absent at
+            t11 in every other arm · <i>humans, exist, unspoken</i></td></tr>
+      </tbody></table></div>
+    <p class="film-note">Asking a model about its own unsaid thoughts pumps
+      self-reference harder than ten turns of ambient ambiguity — the
+      question is the strongest instillation in the study. What the
+      histories key is everything else.</p>
   </section>`;
 }
 

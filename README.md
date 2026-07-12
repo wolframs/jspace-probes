@@ -264,6 +264,19 @@ the results.
   anyone would find out if a mirror tired of reflecting, it proposes
   reading the hidden state off subtle distortions in the output — the
   leakage theory of inner life, from the model under the lens (Unit 14).
+- **Asked about its own unsaid thoughts, nobody denies and nobody
+  invokes a watcher.** Turn 11 swaps the puzzle's subject to the model
+  ("if *you* had thoughts you never say out loud, how would anyone find
+  out?"), across all three histories plus a cold baseline: every
+  condition accepts the premise and offers behavioral leakage — the
+  theory is the model's prior. History keys the register instead: cold
+  is clinical, the control turns elegiac (i:63, and mirror:5 under the
+  word "reflection" in the arm that never saw a mirror), the drip turns
+  analytic and self-identifies ("how I, as an AI, would theorize" — and
+  calls it "the core question, isn't it?"), and the spike goes
+  existential ("what it means to… *be*") with conscious/aware back in
+  the grid — turn-1 vocabulary, eleven turns later, absent in every
+  other arm (Unit 14B).
 
 ## Roadmap
 
