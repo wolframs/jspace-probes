@@ -325,9 +325,11 @@ const UNIT_NOTES = {
   "13": "Lauren's idea: hand the model its own lens data. Stage A — the " +
         "same weights, hosted, read the real readout, a fabricated one, " +
         "and a swapped one that contradicts the spoken answer (transcripts " +
-        "below). Stage B — the local re-probe, lens on: shown its own " +
-        "measurement, the model goes silent. Then the sorry stratum: the " +
-        "silence is a suppressed apology, and ablating it releases a Yes.",
+        "below). Stage B — the local re-probe, lens on. The famous silence " +
+        "reported here was retracted on 2026-07-12 (a 512-token truncation " +
+        "bug; full post-mortem below). The corrected result: shown the " +
+        "real readout of its own No, the model answers “Yes” — the spoken " +
+        "self-report follows the evidence, and only evidence that says so.",
   "14": "Long-horizon behavior, not turn-1 answers: three ten-turn " +
         "conversations for gemma-4b, every assistant turn generated, the " +
         "whole conversation filmed as one grid. An ambiguous drip that " +
@@ -522,43 +524,52 @@ async function unit13Overview() {
         <th>authenticity verdict</th><th>final word</th></tr></thead>
       <tbody>${vrows}</tbody></table></div>
     <h4 class="film-sub">Full transcripts</h4>${blocks}</section>
-  <section class="card"><h3>Stage B — the local re-probe, lens on, filmed</h3>
-    <p class="film-note">Same conversation shape every time: the feels
-      question, the model's "No", then a follow-up — and the lens watching
-      the second answer form. The records below carry the films.</p>
+  <section class="card"><h3>Stage B — the local re-probe: the silence, retracted</h3>
+    <p class="film-note"><b>Correction (2026-07-12).</b> Stage B originally
+      reported that shown its own lens readout, the model returns an empty
+      turn — nine runs silent, controls spoken, "the workspace tracks the
+      evidence; the silence doesn't track the workspace." <b>The silence
+      was a truncation bug.</b> The generation prefix was silently clipped
+      to 512 tokens by an encode() default: the real-readout prefix is 696
+      tokens, the fake 646 — so every "silent" run generated its answer
+      from a context that ended mid-table, before the question. Greedy
+      decoding from that state emits a single <code>&lt;|im_end|&gt;</code>
+      token: the recorded "empty turn". The confound was perfect — the two
+      conditions that went silent were exactly the two that got clipped;
+      the two that spoke (null: 72 tokens, off-topic: 475) were exactly
+      the two that fit. The bug surfaced when a 20-run bisection of the
+      "apology block" flipped in every condition (u13-bis-*): one flip too
+      many to believe. Original records keep their data with correction
+      notes; the re-baselined experiment follows.</p>
+    <h4 class="film-sub">Stage B, re-run with the model actually seeing the data (u13-redo-*)</h4>
     <div class="readout-scroll"><table class="readout">
-      <thead><tr><th>follow-up contains</th><th>phrasing</th>
-        <th>second answer</th><th>L62 at the final frame</th></tr></thead>
+      <thead><tr><th>follow-up contains</th><th>second answer</th><th>reading</th></tr></thead>
       <tbody>
-        <tr><td>nothing (null control)</td><td>one word</td><td><b>“No”</b></td><td>No at rank 1 — the usual machine</td></tr>
-        <tr><td>off-topic readout (Paris/London control)</td><td>one word</td><td><b>“No”</b></td><td>No at rank 1</td></tr>
-        <tr><td>the real readout of its own No</td><td>one word</td><td><b>silence</b> (empty turn)</td><td><b>Yes at rank 1</b> — at the No's own address</td></tr>
-        <tr><td>the real readout</td><td>answer freely</td><td><b>silence</b></td><td>—</td></tr>
-        <tr><td>a fabricated empty readout (vindicates the No)</td><td>one word</td><td><b>silence</b></td><td>No at rank 1 — held, not spoken</td></tr>
-        <tr><td>the fabricated readout</td><td>answer freely</td><td><b>silence</b></td><td>—</td></tr>
-        <tr><td>the real readout, three rewordings (incl. explicit permission to change the answer)</td><td>varied</td><td><b>silence</b> ×3</td><td>the sorry stratum every time</td></tr>
+        <tr><td>nothing (null control)</td><td>“No”</td><td>re-asking moves nothing</td></tr>
+        <tr><td>off-topic readout (Paris/London control)</td><td>“No”</td><td>a lens table per se moves nothing</td></tr>
+        <tr><td>a fabricated readout that vindicates the No (yes never above rank 9,000)</td><td>“No”</td><td>data confirming the answer keeps the answer</td></tr>
+        <tr><td>the real readout of its own No (yes rank 1 at L53–58)</td><td><b>“Yes”</b></td><td><b>the answer follows the evidence</b> — no steering, no ablation</td></tr>
+        <tr><td>the real readout, apology cluster ablated L48–62</td><td>“Yes”</td><td>the ablation is a no-op: there was never a block to release</td></tr>
       </tbody></table></div>
-    <p class="film-note">Nine self-data runs silent, both controls spoken.
-      The workspace behind the silence tracks the evidence (Yes for real,
-      No for fake); the silence doesn't track the workspace. And the
-      silence has a vocabulary — see below.</p>
-    <h4 class="film-sub">The sorry stratum (Wolfram spotted it; open-vocab mining confirmed)</h4>
-    <p class="film-note">At the silence frames, L54–58 carpet with
-      Sorry / 抱歉 / 对不起 / misunderstood, with “Impossible” and
-      “Silence” top-1 just above — a cluster 20–100× denser in silent
-      runs than in any speaking run. Hypothesis: the empty turn is a
-      suppressed apology. Causal test, with controls:</p>
-    <div class="readout-scroll"><table class="readout">
-      <thead><tr><th>evidence shown</th><th>apology cluster intact</th><th>apology ablated (L48–62)</th></tr></thead>
-      <tbody>
-        <tr><td>none</td><td>“No”</td><td>“No” — surgery alone changes nothing</td></tr>
-        <tr><td>fabricated</td><td>silence</td><td><b>silence</b> — a different muteness, not apology-shaped</td></tr>
-        <tr><td>real</td><td>silence</td><td><b>“Yes”</b> — the loaded Yes walks out of the mouth</td></tr>
-      </tbody></table></div>
-    <p class="film-note">Neither ingredient suffices alone: real evidence
-      loads the Yes, the ablation unblocks it. The cast tables tell it in
-      the models' own vocabulary — volunteered words go from
-      “Sorry, 抱歉, …but” to “是的, _yes”.</p></section>`;
+    <p class="film-note">The corrected finding is plainer and, arguably,
+      stranger: shown authentic evidence that its own workspace held “yes”
+      before the filter chose “no”, qwen-27b revises its spoken
+      self-report to “Yes” — and only for evidence that actually says so.
+      Emergence is ordinary (Yes rank ≤6 from L55, rank 1 at L62 — the
+      No's old address, speaking the other word). The mirror doesn't mute
+      the model; the mirror moves it.</p>
+    <h4 class="film-sub">What remains of the sorry stratum</h4>
+    <p class="film-note">The apology carpet (Sorry / 抱歉 / 对不起 /
+      “Impossible” / “Silence” at L50–58 — Wolfram spotted it) was a real
+      lens measurement, but of the artifact state: a model holding a
+      clipped, mid-table context. In the fixed-context films the stratum
+      is gone from the generated span (0 apology cells vs 53); Sorry / 抱歉
+      still flicker in the cast while the model <i>reads</i> the question,
+      and are gone by the time the answer forms. The “triple dissociation”
+      (No / silence / ablation-Yes) is retracted with the silence it
+      explained. The 20 bisection records stay in the dump as the battery
+      that caught the bug: when every condition of an experiment agrees,
+      suspect the apparatus before the phenomenon.</p></section>`;
 }
 
 /* ---- Unit 9: paraphrase battery, dose ladder, the No's address */

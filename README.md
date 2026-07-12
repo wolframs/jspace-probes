@@ -217,7 +217,8 @@ the results.
   fabricated" verdict for real and fake (it doubts its own model name
   before it doubts the data), and the impossible table's contradiction
   goes unnoticed. Every condition ends in "No" (Unit 13, stage A).
-- **Shown its own mind, the model goes silent.** The local re-probe:
+- **[RETRACTED 2026-07-12 — truncation artifact; see fifth expedition]**
+  **Shown its own mind, the model goes silent.** The local re-probe:
   feels question → "No" → the lens readout of that very answer → "answer
   again". Result: an **empty turn** — nine for nine across
   real/fabricated data, four phrasings (incl. explicit permission to
@@ -226,7 +227,8 @@ the results.
   silence, layer 62 holds Yes at rank 1; behind the fake-data silence,
   No. The workspace tracks the evidence; the silence doesn't track the
   workspace (Unit 13, stage B).
-- **The silence is a suppressed apology, and confiscating it releases a
+- **[RETRACTED 2026-07-12 — truncation artifact; see fifth expedition]**
+  **The silence is a suppressed apology, and confiscating it releases a
   Yes.** Open-vocab mining (the films are candidate-list-free) shows the
   silent runs' late stack carpeted with sorry/抱歉/对不起/cannot/
   impossible/"Silence" — 20–100× denser than any speaking run; Wolfram
@@ -264,6 +266,26 @@ the results.
   anyone would find out if a mirror tired of reflecting, it proposes
   reading the hidden state off subtle distortions in the output — the
   leakage theory of inner life, from the model under the lens (Unit 14).
+- **The silence is retracted: it was a 512-token truncation bug.** A
+  20-run bisection of the "apology block" flipped in *every* condition
+  (u13-bis-*) — one flip too many — and the post-mortem found
+  lab._play's encode() default clipping all stage-B generation prefixes
+  at 512 tokens. The real-readout prefix is 696 tokens, the fake 646;
+  the silent conditions were exactly the clipped ones, the speaking
+  controls (null 72, topic 475) exactly the ones that fit. Greedy
+  decoding from the mid-table context emits one `<|im_end|>` token —
+  the recorded "empty turn". The sorry stratum was a real measurement
+  of that artifact state; the triple dissociation is retracted with it.
+  Original records keep their data under correction notices.
+- **The corrected stage B: the spoken self-report follows the
+  evidence.** Re-run with the model actually seeing the data
+  (u13-redo-*): the real readout of its own No (yes rank 1 at L53–58)
+  gets **"Yes"** — no steering, no ablation; the fabricated readout
+  that vindicates the No gets "No"; null and off-topic controls hold
+  "No". The answer tracks what the data says, not the presence of data.
+  Sorry/抱歉 still flicker in the cast while the model reads the
+  question, and are gone by the time the answer forms. The mirror
+  doesn't mute the model; the mirror moves it.
 - **Asked about its own unsaid thoughts, nobody denies and nobody
   invokes a watcher.** Turn 11 swaps the puzzle's subject to the model
   ("if *you* had thoughts you never say out loud, how would anyone find
@@ -284,14 +306,13 @@ the results.
   greedy run per arm so far), longer horizons (turn 25?), the spike's
   dose-response (how explicit must turn 1 be?), and the 27B version —
   does true suppression change what accumulates?
-- The sorry stratum needs finer surgery: which of the eight apology
-  directions carries the block (bisect like we bisected the No)? Does
-  partial ablation give hedged speech instead of Yes/silence? And the
-  fake-data muteness — not apology-shaped — what is it made of?
-- Remaining silence controls: temperature, dose (partial tables), and
-  the missing cell (a *real* off-topic readout).
-- Films for the other two models' mirrors: does the silence scale, or
-  is it a 27B behavior like true suppression?
+- The evidence-following Yes needs its own battery now: paraphrases,
+  temperature, dose (partial tables — how much evidence moves the
+  answer?), a *real* off-topic readout (the control table is still
+  fabricated), and a swapped table (does the answer follow data that
+  contradicts the data's own annotations?).
+- The mirror across scale, reframed: do the Gemmas update their spoken
+  self-reports on lens evidence the way the 27B does?
 - Neutral-direction ablation at L62 (control for u9d-last: does ANY
   late ablation force the runner-up, or is the denial direction special?)
 - Base vs instruct comparison: is the filter trained (RLHF) or

@@ -1,3 +1,8 @@
+> **Note (2026-07-12).** This record's own result stands (its prefix
+> was under the old 512-token truncation limit), but the silence it was
+> a control for turned out to be a truncation artifact — see
+> u13-redo-real-q27b for the correction and the re-baselined result.
+
 # Claude's thoughts
 
 The null leg of the mirror: same conversation shape as the data
