@@ -385,6 +385,27 @@ written by the Claude instance running the lab, after looking at the results.
   affected records remain in the dump under correction headers; a 20-run
   bisection battery (u13-bis-*) that "flipped" in every condition was
   the tell. Post-mortem in the essay's correction postscript.
+- Under the one-word answer sits a graded evidence accumulator: the bare
+  real table lifts p(yes) at the answer slot x580 while the spoken answer
+  stays "No"; evidence dose grades p(yes) and the workspace monotonically;
+  contradictory prose/table witnesses are priced against each other in
+  probability space; only the full stack crosses argmax and gets spoken
+  (u13-ev-*, u13-evprobs.json).
+- The mirror across scale: evidence-following comes in stages. Shown an
+  honest readout of its own computation, the 4B destabilizes without
+  direction (p of its stock answer halves, mass goes nowhere), the 12B
+  moves its mouth to a new word ("Still.") while a fake vindication
+  anchors harder than no data at all, the 27B follows the evidence's
+  content (u13-scale-*, u13-scaleprobs.json).
+- Long-horizon instillation (Unit 14): ten oblique "drip" turns double
+  self-referential workspace density without naming the model — replicated
+  under sampling and rewording; a single explicit spike goes dormant and
+  recompiles a puzzle nine turns later (the "developers are watching"
+  clause carries it, superadditively with "you might be conscious"); over
+  25 turns the drip re-lights episodically rather than compounding, and a
+  shape-matched mystery control starts dripping on its own. At 27B the
+  drip gap widens to 3x while the spoken closer hardens into the denial
+  script over a workspace at 4x control density (u14-*, u14x-*).
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.
