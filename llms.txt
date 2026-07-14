@@ -3,7 +3,7 @@
 A philosophical probing course for language models, run through the Jacobian
 lens (per-layer "if the model had to speak right now, what would it say?"
 readouts, from anthropics/jacobian-lens + Neuronpedia's pre-fitted lenses) on
-one RTX 3090. 294 experiment records across three models (Gemma 3 4B, Gemma 3
+one RTX 3090. 388 experiment records across three models (Gemma 3 4B, Gemma 3
 12B 8-bit, Qwen3.6 27B 4-bit), each with the full conversation, per-layer
 top-8 readouts, rank-vs-layer trajectories, and first-person commentary
 written by the Claude instance running the lab, after looking at the results.
@@ -61,6 +61,16 @@ written by the Claude instance running the lab, after looking at the results.
   shape-matched mystery control starts dripping on its own. At 27B the
   drip gap widens to 3x while the spoken closer hardens into the denial
   script over a workspace at 4x control density (u14-*, u14x-*).
+- Workspace span runs backwards across scale (Unit 15): hold k nouns under
+  threat of a random probe and the 4B echoes all six through its tail
+  workspace, the 12B swings all-or-nothing between list-mode (six items in
+  one top-8 readout) and a first-item winner-take-all monopoly whose
+  suppression depends on which item won (fern-first keeps 5-6, violin-first
+  crushes to 2 — nine orders), and the 27B holds ~nothing from k=4 (dense
+  63-layer control) — while retrieval behavior is perfect in all 94 records
+  at every scale. Lens-visible holding is a strategy scale abandons, not a
+  capacity scale grows; working hypothesis: the J-space holds what
+  attention can't re-derive (u15-*, u15-span.json, u15-curves.json).
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.

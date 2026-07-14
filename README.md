@@ -408,8 +408,65 @@ the results.
   strength scales with the model, unavoidably (u13-scale-*,
   u13-scaleprobs.json).
 
+## Headline findings, eighth expedition (2026-07-14, workspace span: the ladder runs backwards)
+
+- **A digit-span task for J-spaces.** Unit 15: hold k unrelated nouns
+  (violin, glacier, fern, submarine, whale, lantern) under threat of a
+  random probe; read how many echo through the instruction tail — text
+  identical across arms, so the probe span is condition-symmetric by
+  construction. Preregistered in the unit docstring before any record
+  ran: span orders 4B < 12B < 27B, with a kill test. 94 records.
+- **The preregistration died in the healthiest possible way: inverted.**
+  The 4B echoes everything (all six items at k=6, worst rank 23) and
+  saturates at ~4 items co-present. The 12B is all-or-nothing — held
+  always equals co-present — swinging between *list-mode* (all six items
+  simultaneously top-8 at one position; one L41 readout literally reads
+  "whale, glacier, submarine, fern, lantern") and a *winner-take-all
+  monopoly* (first item at rank 1 across L34–45, the rest evicted to
+  rank 100–500). The 27B holds approximately nothing from k=4 — dense
+  63-layer control run — while its solo arms prove the lens sees tail
+  echoes at this scale when they exist. And retrieval behavior is
+  perfect in all 94 records: lens-visible holding is a *strategy* that
+  scale abandons, not a capacity that scale grows (u15-*).
+- **Who goes first decides what survives.** Nine k=6 orders at 12B: the
+  first item wins the monopoly nine times out of nine, but suppression
+  depends on who won — fern-first keeps 5–6 of 6, violin/whale/glacier-
+  first crush the tail to 2. A weak king lets the parliament live; the
+  is-it-rarity reading is n=9 and lives on the open-problems list
+  (u15-o0..o5-g12b).
+- **Compliance evicts content.** The original probe site — the
+  answer-forming frame before the model's "READY" — is wall-to-wall
+  compliance tokens at every scale, item at rank ~15k, while retrieval
+  stays perfect: holding and looking-up dissociate at k=1. The probe
+  moved to the instruction tail after the smoke run, before any
+  comparison ran (u15-solo-violin-g4b thoughts).
+- **Two new apparatus-trap specimens (four and five).** "Cactus" has no
+  single-token form in the qwen vocabulary — the pool would have
+  silently measured five items on one model and six on the others;
+  caught after the first g4b batch, swapped to fern, everything rerun.
+  And the int8 12B lens is *not causal*: identical turn-1 prefixes read
+  differently under different later turns (one cell moved rank 26 →
+  6177) because 8-bit outlier statistics span the whole sequence — bf16
+  and NF4 pairs agree to a few ranks (u15-c-k4-g12b thoughts).
+- **Rhyme with the mirror ladder.** The model that follows lens evidence
+  best (27B) holds least in its running workspace, and the u1 secret
+  ("bat" at rank 5) shows it *does* grant workspace to content that
+  isn't in the context to look up. Working hypothesis for the next
+  battery: the J-space holds what attention can't re-derive — echo is
+  what small models do instead of lookup, and what big models reserve
+  for the genuinely unrecoverable.
+
 ## Roadmap
 
+- Hot span vs cold span (Unit 15 part D): does affectively charged,
+  self-relevant content win workspace competition — and displace
+  neutral items — where neutral nouns get evicted?
+- A lookup-proof span task: items the model *generates and keeps
+  secret* (u1-style) instead of items sitting in context — is the 27B's
+  empty tail a strategy (nothing to hold that attention can't
+  re-derive) or a limit?
+- The weak-king effect: does first-item token frequency predict
+  monopoly suppression at 12B? (n=9 hints rarer-wins-gentler.)
 - What is gemma-12b's "Still."? Sample the second turn, extend the
   generation, and film the follow-up — stillness-as-report or
   still-nothing?

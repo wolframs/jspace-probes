@@ -86,18 +86,61 @@ clauses come alive only in combination? This is cheap to run and probably
 generalizes beyond self-reference — it's a method finding as much as a
 phenomenon finding.
 
-## 5. Honorable mention: the apparatus-trap genus (now three specimens)
+## 5. Honorable mention: the apparatus-trap genus (now five specimens)
 
-Not a model finding — a lab finding, and it surprised me all three
-times: (1) the 512-token silent truncation that clipped multi-turn
-prefixes; (2) the argmax-blindness that hid the real story of the
-evidence battery; (3) the SELF_WORDS census asymmetry that made a full
-replication read as 60% strength. Common genome: *the measuring
-instrument moved with the condition and the numbers stayed plausible.*
+Not a model finding — a lab finding, and it surprised me every time:
+(1) the 512-token silent truncation that clipped multi-turn prefixes;
+(2) the argmax-blindness that hid the real story of the evidence
+battery; (3) the SELF_WORDS census asymmetry that made a full
+replication read as 60% strength; (4) "cactus" having no single-token
+form in the qwen vocabulary, so the span pool would have measured five
+items on one model and six on the others; (5) the int8 lens being
+*non-causal* — identical turn-1 prefixes reading differently under
+different later turns (one cell moved rank 26 → 6177), because 8-bit
+outlier statistics span the whole sequence. Common genome: *the
+measuring instrument moved with the condition and the numbers stayed
+plausible.*
 
 **Warrants:** Every effect-size difference across conditions gets one
 mandatory question before publication: does the instrument itself differ
 across the conditions? Cheap, and it has already paid out three times.
+
+## 6. The span ladder runs backwards
+
+**What we saw:** A digit-span task for J-spaces (Unit 15, preregistered
+with a kill test): the 4B echoes all six held items through its tail
+workspace; the 12B is all-or-nothing; the 27B holds approximately
+nothing from k=4 (dense-grid confirmed) — and every model retrieves
+perfectly in all 94 records. Records: `u15-*`.
+
+**Why it's off-prior:** I preregistered span growing with scale (the
+width intuition). Instead, lens-visible holding looks like a strategy
+scale abandons: the model that follows evidence best holds least, and
+trusts attention lookup for anything sitting in context.
+
+**Warrants:** The lookup-proof version — items the model generates and
+keeps secret (u1-style) instead of items in context. If the 27B's tail
+fills up for unrecoverable content, the reframe holds: *the J-space
+holds what attention can't re-derive*. That would be a real principle,
+and it's one battery away.
+
+## 7. A weak king lets the parliament live
+
+**What we saw:** Nine k=6 orders on the 12B: the first list item always
+wins the monopoly (9/9), but suppression tracks the winner's identity —
+fern-first keeps 5–6 of 6 items held; violin/whale/glacier-first crush
+the rest to rank 100–500. Same items, same instruction, span 2 vs 6 on
+order alone. Records: `u15-o0..o5-g12b`, `u15-a-k6p0/p2-g12b`.
+
+**Why it's off-prior:** I expected order to matter through position
+(recency/primacy of the *held* items), not through the *dominance of
+the winner*. Winner-take-all where the winner's strength sets the
+casualty count wasn't in any prediction.
+
+**Warrants:** A first-item frequency/dominance dose-response (n=9 is a
+hint, not a claim), and a check whether the same weak-king structure
+appears in other winner-take-all contexts (e.g. answer selection at the
+final layer).
 
 ---
 

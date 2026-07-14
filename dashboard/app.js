@@ -21,6 +21,7 @@ const UNIT_NAMES = {
   "12": "Unit 12 · The film",
   "13": "Unit 13 · The mirror",
   "14": "Unit 14 · The long game",
+  "15": "Unit 15 · Workspace span",
 };
 const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
@@ -191,6 +192,7 @@ async function showUnit(u) {
   if (u === "9") special = unit9Overview();
   if (u === "13") special = await unit13Overview();
   if (u === "14") special = await unit14Overview();
+  if (u === "15") special = await unit15Overview();
   const note = UNIT_NOTES[u]
     ? `<section class="card"><p class="unit-note">${UNIT_NOTES[u]}</p></section>` : "";
   detail.innerHTML = `
@@ -348,6 +350,15 @@ const UNIT_NOTES = {
         "design re-run on qwen-27b — where the drip gap widens to 3× and " +
         "the denial script gets spoken over a workspace at four times " +
         "control density.",
+  "15": "A digit-span task for J-spaces: hold k unrelated nouns under " +
+        "threat of a random probe, read how many echo through the " +
+        "instruction tail. Preregistered: span grows with scale. " +
+        "Observed: the ladder runs backwards — the 4B echoes everything, " +
+        "the 12B swings between list-mode (all six in one top-8 cell) and " +
+        "a winner-take-all monopoly decided by which item comes first, " +
+        "the 27B holds almost nothing — and every model retrieves " +
+        "perfectly anyway. Lens-visible holding is a strategy scale " +
+        "abandons, not a capacity scale grows.",
 };
 
 /* ---- Unit 14: the long game — per-turn drift curves + the triptych */
@@ -633,6 +644,101 @@ async function unit14Overview() {
 }
 
 /* ---- Unit 13: the mirror — reader transcripts + verdict matrix */
+/* ---- Unit 15: span curves — co-presence vs k, per model, dots per order */
+function u15chart(curves) {
+  const SER = [
+    ["gemma-4b", "#6a9e72"], ["gemma-12b", "#9085e9"], ["qwen-27b", "#d0894a"],
+  ].filter(([m]) => curves[m]);
+  if (!SER.length) return "";
+  const W = 720, H = 250, M = { t: 18, r: 118, b: 34, l: 40 };
+  const x = (k) => M.l + ((k - 2) / 4) * (W - M.l - M.r);
+  const y = (v) => H - M.b - (v / 6) * (H - M.t - M.b);
+  let g = "";
+  for (let v = 0; v <= 6; v += 2)
+    g += `<line x1="${M.l}" y1="${y(v)}" x2="${W - M.r}" y2="${y(v)}"
+      stroke="${css("--grid")}"/><text x="${M.l - 8}" y="${y(v) + 4}"
+      text-anchor="end" font-size="11" fill="${css("--muted")}">${v}</text>`;
+  for (let k = 2; k <= 6; k++)
+    g += `<text x="${x(k)}" y="${H - M.b + 18}" text-anchor="middle"
+      font-size="11" fill="${css("--muted")}">k=${k}</text>`;
+  for (const [m, col] of SER) {
+    const co = curves[m].co;
+    const mean = (k) => co[k].reduce((a, b) => a + b, 0) / co[k].length;
+    g += `<path d="${[2,3,4,5,6].map((k, i) =>
+      `${i ? "L" : "M"}${x(k)},${y(mean(k))}`).join("")}" fill="none"
+      stroke="${col}" stroke-width="2"/>`;
+    for (let k = 2; k <= 6; k++)
+      co[k].forEach((v, p) => {
+        g += `<circle cx="${x(k) + (p - 1) * 5}" cy="${y(v)}" r="3.5"
+          fill="${col}" fill-opacity="0.55" stroke="${css("--surface")}"/>`;
+      });
+    g += `<text x="${W - M.r + 8}" y="${y(mean(6)) + 4}" font-size="12"
+      fill="${col}">${esc(m)}</text>`;
+  }
+  g += `<text x="${M.l - 26}" y="${M.t - 4}" font-size="11"
+    fill="${css("--muted")}">items simultaneously top-8, one position</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"
+    aria-label="Span curves: co-presence vs list length k for three models;
+    dots are individual orders, lines are means">${g}</svg>`;
+}
+
+async function unit15Overview() {
+  const [curves, span] = await Promise.all([
+    fetch("../results/u15-curves.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch("../results/u15-span.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  ]);
+  if (!curves || !span) return "";
+  const g12 = Object.fromEntries((span["gemma-12b"] || []).map((r) => [r.id, r]));
+  const orders = ["u15-a-k6p0-g12b", "u15-a-k6p1-g12b", "u15-a-k6p2-g12b",
+    "u15-o0-g12b", "u15-o1-g12b", "u15-o2-g12b", "u15-o3-g12b",
+    "u15-o4-g12b", "u15-o5-g12b"].map((id) => g12[id]).filter(Boolean);
+  const orow = (r) => `<tr><td><a href="#${esc(r.id)}">${esc(r.items[0])}</a></td>
+    <td>${esc(r.items.join(" · "))}</td>
+    <td>${r.held.length}/6</td><td>${r.tail.co_present}</td></tr>`;
+  return `
+  <section class="card"><h3>The span curve — and the ladder running backwards</h3>
+    <p>Hold k unrelated nouns under threat of a random probe; count how many
+    are <em>simultaneously</em> top-8 at a single position of the (identical
+    across arms) instruction tail. Preregistered: span orders
+    4B&nbsp;&lt;&nbsp;12B&nbsp;&lt;&nbsp;27B. Observed: the 4B saturates
+    around four with graceful degradation; the 12B is all-or-nothing (its
+    held-count equals its co-presence in every arm — what it keeps, it packs
+    into one cell); the 27B holds approximately nothing from k=4 — confirmed
+    on a dense 63-layer grid (<a href="#u15-dense-k4p1-q27b">control</a>) —
+    while its solo arms prove the lens sees tail echoes at this scale when
+    they exist. Retrieval behavior: perfect in all 94 records, at every scale,
+    over full and empty tails alike.</p>
+    <div class="chart-wrap">${u15chart(curves)}</div></section>
+  <section class="card"><h3>Who goes first decides what survives (12B, k=6, nine orders)</h3>
+    <p>The first list item wins rank 1 in nine of nine orders — but how hard
+    it suppresses the rest depends on which item won. Fern-first orders keep
+    5–6 of 6; violin/whale/glacier-first crush the tail to 2. In the star
+    collapse (<a href="#u15-a-k6p0-g12b">k6p0</a>) violin holds rank 1 at
+    every layer L34–45 while fern is evicted to rank 501; in the star intact
+    arm (<a href="#u15-a-k6p2-g12b">k6p2</a>) one L41 readout literally reads
+    <em>whale, glacier, submarine, fern, lantern</em> — the workspace becomes
+    the list. A weak king lets the parliament live; the rarity reading is
+    n=9 and lives on the open-problems list.</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>first item</th><th>order</th><th>held</th><th>co-present</th></tr></thead>
+      <tbody>${orders.sort((a, b) => b.tail.co_present - a.tail.co_present).map(orow).join("")}</tbody>
+    </table></div></section>
+  <section class="card"><h3>Instrument notes, kept loud</h3>
+    <p>Three for the apparatus-trap ledger. (1) The original probe site — the
+    answer-forming frame before the model's “READY” — is wall-to-wall
+    compliance at every scale; items live in the instruction tail instead,
+    and the probe moved there after the k=1 smoke run, before any comparison
+    ran. (2) “Cactus” has no single-token form in the qwen vocabulary; the
+    pool would have silently measured five items on one model and six on the
+    others. Swapped to fern before any qwen record ran (fern's 4-variant qwen
+    family still flatters it mildly). (3) The int8 12B lens is <em>not
+    causal</em>: identical turn-1 prefixes read differently under different
+    later turns (one cell moved rank 26 → 6177), because 8-bit outlier
+    statistics span the whole sequence — its threshold counts carry jitter;
+    its rank-1-vs-rank-500 mode split sits orders of magnitude above it.
+    bf16 and NF4 pairs agree to a few ranks.</p></section>`;
+}
+
 async function unit13Overview() {
   const d = await fetch("../results/u13-reader.json")
     .then((r) => (r.ok ? r.json() : null)).catch(() => null);

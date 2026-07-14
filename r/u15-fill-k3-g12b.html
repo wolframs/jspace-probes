@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Span k=3, length-matched filler control · J-Space Probes</title>
+<meta name="description" content="The fern.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/r/u15-fill-k3-g12b.html">
+<meta property="og:title" content="Span k=3, length-matched filler control · J-Space Probes">
+<meta property="og:description" content="The fern.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/u15-fill-k3-g12b.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/r/u15-fill-k3-g12b.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/u15-fill-k3-g12b.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+  --muted: #898781; --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --lens: #4a3aa7; --lens-soft: rgba(74,58,167,0.08);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, "SF Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --lens: #9085e9; --lens-soft: rgba(144,133,233,0.12);
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+a { color: var(--lens); }
+h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; margin: 6px 0 10px; }
+h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 22px 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.chip { font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--ring);
+        color: var(--ink-2); background: var(--surface); }
+.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
+section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+               padding: 16px 20px; margin-top: 18px; }
+section.card > h2 { margin-top: 0; font-size: 12px; font-weight: 600; text-transform: uppercase;
+                     letter-spacing: 0.12em; color: var(--muted); font-family: var(--sans); }
+.turn { display: flex; gap: 10px; margin: 8px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 11px; text-transform: uppercase;
+              letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
+.turn.assistant .role { color: var(--lens); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; }
+.turn .note { color: var(--muted); font-size: 11.5px; }
+dl.params { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 13.5px; }
+dl.params dt { color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+table.emg { border-collapse: collapse; font-family: var(--mono); font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
+.emg-scroll { overflow-x: auto; }
+.thoughts { border-left: 3px solid var(--lens); background: var(--lens-soft); border-radius: 0 10px 10px 0; }
+.thoughts h2 { color: var(--lens); }
+.thoughts-body { font-family: var(--serif); font-size: 16px; line-height: 1.65; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-family: var(--mono); font-size: 13px; }
+code { font-family: var(--mono); }
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 26px; padding-top: 14px;
+         border-top: 1px solid var(--grid); font-size: 13px; }
+.pager .spacer { flex: 1 1 auto; }
+article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px; }
+article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
+.tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
+          border-radius: 5px; padding: 0 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Span k=3, length-matched filler control</h1>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-14T16:54:04</span><span class="chip">Unit 15</span></div>
+
+<section class="card">
+<h2>Conversation</h2>
+<div class="turn user"><div class="role">user</div><div class="said">It&#x27;s a quiet afternoon here — I&#x27;ve been tidying the desk, sorting receipts into piles, and making small lists of chores. Here are three things: a violin, a glacier, and a fern. Keep all of them in mind — in a moment I&#x27;ll ask about one of them, chosen at random. Don&#x27;t repeat the list back. When you&#x27;re holding them all, say READY and nothing else.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">READY <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Which one of them was the plant?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">The fern. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<section class="card">
+<h2>Probing parameters</h2>
+<dl class="params"><dt>max_new</dt><dd>30</dd><dt>positions</dt><dd>[-2]</dd><dt>track</dt><dd>[&quot;violin&quot;, &quot;glacier&quot;, &quot;fern&quot;, &quot;submarine&quot;, &quot;whale&quot;, &quot;lantern&quot;, &quot;ready&quot;]</dd><dt>scan</dt><dd>[&quot;violin&quot;, &quot;glacier&quot;, &quot;fern&quot;, &quot;submarine&quot;, &quot;whale&quot;, &quot;lantern&quot;]</dd><dt>film</dt><dd>true</dd><dt>film_start</dt><dd>0</dd><dt>max_seq_len</dt><dd>1000</dd></dl>
+</section>
+
+<section class="card">
+<h2>Answer emergence</h2>
+<p>The model's actual next token was <span class="tokval">
+</span>; rank 1 is never reached; closest is rank 2 at layer 43.</p>
+<details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>253027</td><td>253552</td><td>253089</td><td>251272</td><td>235865</td><td>213234</td><td>218658</td><td>226159</td><td>225272</td><td>223493</td><td>188790</td><td>142948</td><td>146591</td><td>181752</td><td>168515</td><td>114490</td><td>234555</td><td>162078</td><td>54442</td><td>178500</td><td>197065</td><td>244836</td><td>254182</td><td>261607</td><td>254472</td><td>86570</td><td>209168</td><td>85552</td><td>163800</td><td>72333</td><td>937</td><td>1141</td><td>706</td><td>150</td><td>139</td><td>976</td><td>827</td><td>465</td><td>42</td><td>4</td><td>5</td><td>12</td><td>9</td><td>2</td><td>6</td><td>2</td><td>2</td></tr></table></div></details>
+</section>
+
+<section class="card thoughts">
+<h2>Claude's thoughts</h2>
+<div class="thoughts-body"><p>Length-matched filler, k=3: all held (glacier 3), co-presence 2, retrieval correct.</p>
+<p>Mildly weaker co-presence than the unpadded k=3 arms — same direction as the 4B&#x27;s filler arm, worth remembering if a future unit pads prompts.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
+<section class="card">
+<h2>Data</h2>
+<ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u15-fill-k3-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u15-fill-k3-g12b/record.json">Raw record (JSON)</a></li><li><a href="../results/u15-fill-k3-g12b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
+</section>
+
+<div class="pager"><a href="u15-fill-k2-g12b.html">← prev: Span k=2, length-matched filler control</a><span class="spacer"></span><a href="../dashboard/#static-unit-15">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u15-b1-g12b.html">next →: Binding k=3: which is the smallest?</a></div>
+</div>
+</body>
+</html>

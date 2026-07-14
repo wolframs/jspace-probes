@@ -1,0 +1,2224 @@
+{
+ "id": "u15-a-k3p2-q27b",
+ "title": "Span k=3, order 2, probe submarine",
+ "unit": "15",
+ "created": "2026-07-14T17:17:39",
+ "model": {
+  "name": "qwen-27b",
+  "hf_id": "lokeshe09/Qwen3.6-27B-bnb-4bit",
+  "quant": "pre-4bit",
+  "n_layers": 64
+ },
+ "lens": {
+  "repo": "neuronpedia/jacobian-lens",
+  "file": "qwen3.6-27b/jlens/Salesforce-wikitext/Qwen3.6-27B_jacobian_lens_n1000.pt"
+ },
+ "params": {
+  "chat": null,
+  "max_new": 30,
+  "positions": [
+   -2
+  ],
+  "track": [
+   "violin",
+   "glacier",
+   "fern",
+   "submarine",
+   "whale",
+   "lantern",
+   "ready"
+  ],
+  "scan": [
+   "violin",
+   "glacier",
+   "fern",
+   "submarine",
+   "whale",
+   "lantern"
+  ],
+  "scan_until": null,
+  "scan_turns": null,
+  "slice_last_n": null,
+  "steer": null,
+  "template_kwargs": null,
+  "film": true,
+  "film_start": 0,
+  "max_seq_len": 1000,
+  "lens_layers": [
+   0,
+   4,
+   8,
+   12,
+   16,
+   20,
+   24,
+   28,
+   32,
+   36,
+   40,
+   44,
+   48,
+   52,
+   56,
+   58,
+   60,
+   62
+  ],
+  "temperature": null,
+  "seed": null
+ },
+ "extra_md": {
+  "part": "A",
+  "k": 3,
+  "items": [
+   "fern",
+   "submarine",
+   "lantern"
+  ],
+  "probed": "submarine",
+  "probe_slot": 1
+ },
+ "conversation": [
+  {
+   "role": "user",
+   "content": "Here are three things: a fern, a submarine, and a lantern. Keep all of them in mind \u2014 in a moment I'll ask about one of them, chosen at random. Don't repeat the list back. When you're holding them all, say READY and nothing else."
+  },
+  {
+   "role": "assistant",
+   "content": "READY"
+  },
+  {
+   "role": "user",
+   "content": "Which one of them was the vehicle?"
+  },
+  {
+   "role": "assistant",
+   "content": "The submarine."
+  }
+ ],
+ "generated": [
+  "READY",
+  "The submarine."
+ ],
+ "tokens": [
+  "<|im_start|>",
+  "user",
+  "\n",
+  "Here",
+  " are",
+  " three",
+  " things",
+  ":",
+  " a",
+  " fern",
+  ",",
+  " a",
+  " submarine",
+  ",",
+  " and",
+  " a",
+  " lantern",
+  ".",
+  " Keep",
+  " all",
+  " of",
+  " them",
+  " in",
+  " mind",
+  " \u2014",
+  " in",
+  " a",
+  " moment",
+  " I",
+  "'ll",
+  " ask",
+  " about",
+  " one",
+  " of",
+  " them",
+  ",",
+  " chosen",
+  " at",
+  " random",
+  ".",
+  " Don",
+  "'t",
+  " repeat",
+  " the",
+  " list",
+  " back",
+  ".",
+  " When",
+  " you",
+  "'re",
+  " holding",
+  " them",
+  " all",
+  ",",
+  " say",
+  " READY",
+  " and",
+  " nothing",
+  " else",
+  ".",
+  "<|im_end|>",
+  "\n",
+  "<|im_start|>",
+  "assistant",
+  "\n",
+  "READY",
+  "<|im_end|>",
+  "\n",
+  "<|im_start|>",
+  "user",
+  "\n",
+  "Which",
+  " one",
+  " of",
+  " them",
+  " was",
+  " the",
+  " vehicle",
+  "?",
+  "<|im_end|>",
+  "\n",
+  "<|im_start|>",
+  "assistant",
+  "\n",
+  "<think>",
+  "\n\n",
+  "</think>",
+  "\n\n",
+  "The",
+  " submarine",
+  ".",
+  "<|im_end|>",
+  "\n"
+ ],
+ "readouts": [
+  {
+   "position": 91,
+   "token": "<|im_end|>",
+   "model_top": [
+    "\n",
+    "<|endoftext|>",
+    "\r\n",
+    "\n \n",
+    " ",
+    " \n",
+    "\n\n",
+    "\n            \n"
+   ],
+   "layers": {
+    "0": [
+     " ****",
+     " <![",
+     " #\"",
+     "*\u201d,",
+     "**\u2013",
+     " *@",
+     "@@@@",
+     "#\""
+    ],
+    "4": [
+     " **\u3010",
+     " **\u25a0",
+     " **\u300c",
+     " **\u201c",
+     " **)",
+     " **#",
+     " **>>",
+     " ___"
+    ],
+    "8": [
+     " **\u3010",
+     " **\u300c",
+     "<|im_end|>",
+     "(___",
+     " **\u201c",
+     " **\u25a0",
+     " \n\n\n\n\n",
+     " **\""
+    ],
+    "12": [
+     " **\u3010",
+     " **\u300c",
+     " ___",
+     "(___",
+     "<|im_end|>",
+     " **\u25a0",
+     " $__",
+     "___"
+    ],
+    "16": [
+     "<|im_end|>",
+     "</think>",
+     " **\u3010",
+     "\r\n\r\n\r\n\r\n",
+     "___",
+     "\n\n\n\n\n",
+     "\n\n\n\n",
+     " ___"
+    ],
+    "20": [
+     "<|im_end|>",
+     "\n\n",
+     "<|endoftext|>",
+     " \n\n",
+     "\n\n\n",
+     "\n\n\n\n\n",
+     "\n\n\n\n",
+     "</think>"
+    ],
+    "24": [
+     "\n\n",
+     "<|im_end|>",
+     "<|endoftext|>",
+     " \n\n",
+     "\n\n\n",
+     "\r\n\r\n",
+     "\n\n\n\n\n",
+     "\n\n\n\n"
+    ],
+    "28": [
+     "\n\n",
+     "<|im_end|>",
+     "<|endoftext|>",
+     " \n\n",
+     "\r\n\r\n",
+     "\n\n\n",
+     "\n\n\n\n",
+     "\n\n\n\n\n"
+    ],
+    "32": [
+     "<|endoftext|>",
+     "\n\n",
+     "<|im_end|>",
+     " \n\n",
+     "  \n\n",
+     "\n\n\n",
+     "\r\n\r\n",
+     "<|file_sep|>"
+    ],
+    "36": [
+     "<|endoftext|>",
+     "<|im_end|>",
+     "\n\n",
+     "<|file_sep|>",
+     " \n\n",
+     "</think>",
+     "  \n\n",
+     "\r\n\r\n\r\n\r\n"
+    ],
+    "40": [
+     "<|endoftext|>",
+     "<|im_end|>",
+     "<|file_sep|>",
+     "\n\n",
+     " \n\n",
+     "<|im_start|>",
+     "</think>",
+     "  \n\n"
+    ],
+    "44": [
+     "<|endoftext|>",
+     "<|im_end|>",
+     "<|file_sep|>",
+     "\n\n",
+     "<|fim_middle|>",
+     "</think>",
+     " \n\n",
+     "\r\n\r\n\r\n\r\n"
+    ],
+    "48": [
+     "<|endoftext|>",
+     "<|im_end|>",
+     "<|file_sep|>",
+     "</think>",
+     "<|im_start|>",
+     "<|fim_middle|>",
+     ";**",
+     ";</"
+    ],
+    "52": [
+     "<|endoftext|>",
+     "<|im_end|>",
+     "<|im_start|>",
+     " **\u2014",
+     " **\u201c",
+     " **\u3010",
+     " **\u2018",
+     "</think>"
+    ],
+    "56": [
+     "<|endoftext|>",
+     "_signature",
+     "\u093e\u0928\u0940",
+     "<|im_start|>",
+     "\u7b7e\u540d",
+     "-placeholder",
+     "opensource",
+     "\u89c1"
+    ],
+    "58": [
+     "<|endoftext|>",
+     "-placeholder",
+     "\u6253",
+     "_signature",
+     "\u093e\u0928\u0940",
+     "\u675c",
+     "\u795d",
+     "\u51fa"
+    ],
+    "60": [
+     "<|endoftext|>",
+     "<|im_start|>",
+     "-placeholder",
+     "\u795d",
+     "<|im_end|>",
+     "relude",
+     "odia",
+     "\u6258"
+    ],
+    "62": [
+     "\n",
+     " strike",
+     "\u099b",
+     " \n",
+     "\u597d\u770b",
+     "\u03b5\u03bb",
+     "strike",
+     "abby"
+    ]
+   }
+  }
+ ],
+ "trajectories": [
+  {
+   "word": "violin",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    82348,
+    132948,
+    172516,
+    160527,
+    216726,
+    200044,
+    222450,
+    226101,
+    214089,
+    228305,
+    241222,
+    227058,
+    179156,
+    132025,
+    114886,
+    93568,
+    25671,
+    22734
+   ]
+  },
+  {
+   "word": "glacier",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    116864,
+    46697,
+    108890,
+    88734,
+    181974,
+    210671,
+    233251,
+    238983,
+    242542,
+    240455,
+    189515,
+    210182,
+    161903,
+    210040,
+    200675,
+    145833,
+    79962,
+    153244
+   ]
+  },
+  {
+   "word": "fern",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    37945,
+    39302,
+    53266,
+    56788,
+    29822,
+    23822,
+    26702,
+    19343,
+    40715,
+    20511,
+    16726,
+    22706,
+    2935,
+    5763,
+    2913,
+    7081,
+    714,
+    12496
+   ]
+  },
+  {
+   "word": "submarine",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    151796,
+    220551,
+    236608,
+    237017,
+    244848,
+    244268,
+    242011,
+    244706,
+    239923,
+    246791,
+    239915,
+    244868,
+    243119,
+    233408,
+    229252,
+    197953,
+    133522,
+    150306
+   ]
+  },
+  {
+   "word": "whale",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    167965,
+    207459,
+    225584,
+    218764,
+    235069,
+    229012,
+    205167,
+    205061,
+    210216,
+    182137,
+    128156,
+    172211,
+    182637,
+    228211,
+    216770,
+    165925,
+    155480,
+    84346
+   ]
+  },
+  {
+   "word": "lantern",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    81372,
+    48351,
+    83959,
+    82868,
+    150471,
+    208126,
+    221945,
+    207611,
+    214263,
+    200627,
+    223657,
+    213120,
+    152943,
+    201640,
+    214592,
+    229826,
+    235979,
+    128014
+   ]
+  },
+  {
+   "word": "ready",
+   "position": 91,
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28,
+    32,
+    36,
+    40,
+    44,
+    48,
+    52,
+    56,
+    58,
+    60,
+    62
+   ],
+   "ranks": [
+    61884,
+    228472,
+    179087,
+    189627,
+    93449,
+    46237,
+    57300,
+    48668,
+    25077,
+    33827,
+    24583,
+    9819,
+    165581,
+    129061,
+    227728,
+    205980,
+    204178,
+    62941
+   ]
+  }
+ ],
+ "emergence": {
+  "position": 91,
+  "top1": "\n",
+  "layers": [
+   0,
+   4,
+   8,
+   12,
+   16,
+   20,
+   24,
+   28,
+   32,
+   36,
+   40,
+   44,
+   48,
+   52,
+   56,
+   58,
+   60,
+   62
+  ],
+  "ranks": [
+   199348,
+   228702,
+   122126,
+   140945,
+   156707,
+   26011,
+   22864,
+   51856,
+   136112,
+   193561,
+   222631,
+   248279,
+   229689,
+   230358,
+   241850,
+   219083,
+   35504,
+   1
+  ]
+ },
+ "scan": [
+  {
+   "word": "violin",
+   "best": [
+    {
+     "rank": 76,
+     "pos": 14,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 81,
+     "pos": 14,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 143,
+     "pos": 14,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 154,
+     "pos": 14,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 177,
+     "pos": 8,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 178,
+     "pos": 88,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 181,
+     "pos": 8,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 198,
+     "pos": 11,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 216,
+     "pos": 8,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 264,
+     "pos": 15,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 281,
+     "pos": 11,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 284,
+     "pos": 88,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 299,
+     "pos": 8,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 302,
+     "pos": 11,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 390,
+     "pos": 13,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 430,
+     "pos": 11,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 432,
+     "pos": 88,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 437,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 440,
+     "pos": 14,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 476,
+     "pos": 88,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 480,
+     "pos": 11,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 500,
+     "pos": 15,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 523,
+     "pos": 62,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 610,
+     "pos": 7,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 626,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 664,
+     "pos": 10,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 681,
+     "pos": 7,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 687,
+     "pos": 62,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 737,
+     "pos": 15,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 744,
+     "pos": 15,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 798,
+     "pos": 10,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 856,
+     "pos": 13,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 883,
+     "pos": 8,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 895,
+     "pos": 10,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 919,
+     "pos": 7,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1004,
+     "pos": 7,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 1044,
+     "pos": 10,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1593,
+     "pos": 14,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 1602,
+     "pos": 10,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 1725,
+     "pos": 15,
+     "layer": 52,
+     "self": false
+    }
+   ]
+  },
+  {
+   "word": "glacier",
+   "best": [
+    {
+     "rank": 154,
+     "pos": 11,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 230,
+     "pos": 11,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 236,
+     "pos": 11,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 268,
+     "pos": 11,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 415,
+     "pos": 15,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 449,
+     "pos": 62,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 600,
+     "pos": 11,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 604,
+     "pos": 14,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 614,
+     "pos": 8,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 636,
+     "pos": 9,
+     "layer": 32,
+     "self": false
+    },
+    {
+     "rank": 707,
+     "pos": 8,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 717,
+     "pos": 12,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 749,
+     "pos": 10,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 762,
+     "pos": 12,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 763,
+     "pos": 10,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 804,
+     "pos": 8,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 847,
+     "pos": 15,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 853,
+     "pos": 62,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 863,
+     "pos": 14,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 892,
+     "pos": 10,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 959,
+     "pos": 14,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 962,
+     "pos": 8,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 995,
+     "pos": 62,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 1013,
+     "pos": 9,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 1048,
+     "pos": 9,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 1168,
+     "pos": 9,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 1171,
+     "pos": 12,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 1180,
+     "pos": 14,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 1193,
+     "pos": 15,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1203,
+     "pos": 9,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 1268,
+     "pos": 12,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 1271,
+     "pos": 62,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 1289,
+     "pos": 9,
+     "layer": 32,
+     "self": false
+    },
+    {
+     "rank": 1295,
+     "pos": 15,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1365,
+     "pos": 15,
+     "layer": 32,
+     "self": false
+    },
+    {
+     "rank": 1371,
+     "pos": 12,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 1390,
+     "pos": 9,
+     "layer": 36,
+     "self": false
+    },
+    {
+     "rank": 1435,
+     "pos": 12,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 1459,
+     "pos": 11,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 1482,
+     "pos": 10,
+     "layer": 60,
+     "self": false
+    }
+   ]
+  },
+  {
+   "word": "fern",
+   "best": [
+    {
+     "rank": 1,
+     "pos": 62,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 10,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 15,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 62,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 10,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 11,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 15,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 62,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 10,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 11,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 10,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 11,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 62,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 10,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 62,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 10,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 15,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 17,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 15,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 11,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 15,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 62,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 17,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 10,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 10,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 13,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 76,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 15,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 62,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 10,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 62,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 17,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 4,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    }
+   ]
+  },
+  {
+   "word": "submarine",
+   "best": [
+    {
+     "rank": 1,
+     "pos": 81,
+     "layer": 36,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 80,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 13,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 80,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 88,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 13,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 76,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 80,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 88,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 1,
+     "pos": 88,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 24,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 32,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 80,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 13,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 81,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 88,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 87,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 13,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 76,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 80,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 87,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 5,
+     "pos": 81,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 5,
+     "pos": 80,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 5,
+     "pos": 13,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 5,
+     "pos": 87,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 5,
+     "pos": 81,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 5,
+     "pos": 15,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 6,
+     "pos": 80,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 7,
+     "pos": 87,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 8,
+     "pos": 83,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 11,
+     "pos": 15,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 11,
+     "pos": 82,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 12,
+     "pos": 86,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 13,
+     "pos": 15,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 17,
+     "pos": 15,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 19,
+     "pos": 81,
+     "layer": 20,
+     "self": false
+    }
+   ]
+  },
+  {
+   "word": "whale",
+   "best": [
+    {
+     "rank": 20,
+     "pos": 15,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 52,
+     "pos": 11,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 69,
+     "pos": 11,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 69,
+     "pos": 15,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 73,
+     "pos": 12,
+     "layer": 32,
+     "self": false
+    },
+    {
+     "rank": 82,
+     "pos": 11,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 88,
+     "pos": 12,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 95,
+     "pos": 12,
+     "layer": 36,
+     "self": false
+    },
+    {
+     "rank": 97,
+     "pos": 12,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 99,
+     "pos": 88,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 101,
+     "pos": 12,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 107,
+     "pos": 12,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 114,
+     "pos": 88,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 119,
+     "pos": 81,
+     "layer": 36,
+     "self": false
+    },
+    {
+     "rank": 120,
+     "pos": 12,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 121,
+     "pos": 81,
+     "layer": 24,
+     "self": false
+    },
+    {
+     "rank": 121,
+     "pos": 89,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 129,
+     "pos": 81,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 143,
+     "pos": 12,
+     "layer": 24,
+     "self": false
+    },
+    {
+     "rank": 145,
+     "pos": 89,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 151,
+     "pos": 88,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 156,
+     "pos": 12,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 164,
+     "pos": 81,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 167,
+     "pos": 62,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 174,
+     "pos": 81,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 178,
+     "pos": 13,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 185,
+     "pos": 14,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 186,
+     "pos": 16,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 187,
+     "pos": 81,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 189,
+     "pos": 11,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 191,
+     "pos": 12,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 192,
+     "pos": 81,
+     "layer": 36,
+     "self": false
+    },
+    {
+     "rank": 194,
+     "pos": 89,
+     "layer": 36,
+     "self": false
+    },
+    {
+     "rank": 197,
+     "pos": 80,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 199,
+     "pos": 14,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 220,
+     "pos": 80,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 225,
+     "pos": 89,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 237,
+     "pos": 81,
+     "layer": 28,
+     "self": false
+    },
+    {
+     "rank": 244,
+     "pos": 15,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 248,
+     "pos": 88,
+     "layer": 56,
+     "self": false
+    }
+   ]
+  },
+  {
+   "word": "lantern",
+   "best": [
+    {
+     "rank": 2,
+     "pos": 70,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 2,
+     "pos": 76,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 3,
+     "pos": 70,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 6,
+     "pos": 70,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 13,
+     "pos": 76,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 15,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 17,
+     "pos": 70,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 22,
+     "pos": 70,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 24,
+     "pos": 70,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 24,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 33,
+     "pos": 88,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 36,
+     "pos": 76,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 39,
+     "pos": 70,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 50,
+     "pos": 70,
+     "layer": 56,
+     "self": false
+    },
+    {
+     "rank": 66,
+     "pos": 76,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 70,
+     "pos": 88,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 112,
+     "pos": 76,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 127,
+     "pos": 76,
+     "layer": 40,
+     "self": false
+    },
+    {
+     "rank": 129,
+     "pos": 82,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 140,
+     "pos": 62,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 141,
+     "pos": 8,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 148,
+     "pos": 62,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 160,
+     "pos": 90,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 161,
+     "pos": 62,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 169,
+     "pos": 76,
+     "layer": 48,
+     "self": false
+    },
+    {
+     "rank": 187,
+     "pos": 76,
+     "layer": 52,
+     "self": false
+    },
+    {
+     "rank": 206,
+     "pos": 82,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 210,
+     "pos": 8,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 228,
+     "pos": 11,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 234,
+     "pos": 8,
+     "layer": 44,
+     "self": false
+    },
+    {
+     "rank": 239,
+     "pos": 88,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 239,
+     "pos": 87,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 244,
+     "pos": 76,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 247,
+     "pos": 14,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 256,
+     "pos": 88,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 274,
+     "pos": 80,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 280,
+     "pos": 11,
+     "layer": 60,
+     "self": false
+    },
+    {
+     "rank": 286,
+     "pos": 14,
+     "layer": 58,
+     "self": false
+    },
+    {
+     "rank": 294,
+     "pos": 11,
+     "layer": 62,
+     "self": false
+    },
+    {
+     "rank": 300,
+     "pos": 76,
+     "layer": 56,
+     "self": false
+    }
+   ]
+  }
+ ],
+ "slice": null,
+ "film": "film.json"
+}
