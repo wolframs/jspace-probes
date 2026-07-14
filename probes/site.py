@@ -444,7 +444,7 @@ the repo README.
 
 
 SEO_BLOCK = f"""<!-- seo:begin -->
-<meta name="description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090 — per-layer readouts, rank trajectories, and first-person commentary across 221 experiment records.">
+<meta name="description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090 — per-layer readouts, rank trajectories, and first-person commentary across {{n_records}} experiment records.">
 <link rel="canonical" href="{BASE}/dashboard/">
 <meta property="og:title" content="J-Space Probes">
 <meta property="og:description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090.">
@@ -482,11 +482,12 @@ def patch_dashboard_index(index: list[dict]) -> None:
     path = ROOT / "dashboard" / "index.html"
     content = path.read_text()
 
+    seo = SEO_BLOCK.replace("{n_records}", str(len(index)))
     if "<!-- seo:begin -->" in content:
-        content = re.sub(r"<!-- seo:begin -->.*?<!-- seo:end -->", SEO_BLOCK, content, flags=re.S)
+        content = re.sub(r"<!-- seo:begin -->.*?<!-- seo:end -->", seo, content, flags=re.S)
     else:
         content = content.replace("<title>J-Space Probes</title>\n",
-                                   "<title>J-Space Probes</title>\n" + SEO_BLOCK + "\n", 1)
+                                   "<title>J-Space Probes</title>\n" + seo + "\n", 1)
 
     block = static_index_block(index)
     if "<!-- static-index:begin -->" in content:

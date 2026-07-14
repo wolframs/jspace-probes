@@ -39,7 +39,7 @@ async function boot() {
   document.getElementById("static-index")?.remove();
   INDEX = await (await fetch("../results/index.json")).json();
   document.getElementById("stats").textContent =
-    `${INDEX.length} records · ${Object.keys(UNIT_NAMES).length} units · j/k to flip records`;
+    `${INDEX.length} records · ${Object.keys(UNIT_NAMES).length} units · j ‹ › k to flip records`;
   renderChips();
   document.getElementById("q").addEventListener("input", (e) => {
     query = e.target.value.trim().toLowerCase();
@@ -69,15 +69,17 @@ function current() { return decodeURIComponent(location.hash.slice(1)); }
 
 function route() {
   const h = current();
-  if (!h) {
-    expanded.add("8");
+  if (!h || h === "findings") {
     renderRail();
-    showUnit("8"); // land on the newest expedition
+    showFindings(); // land on the findings map
     return;
   }
   if (h === "essay") {
     renderRail();
     showEssay();
+  } else if (h.startsWith("cmp/")) {
+    renderRail();
+    showCompare(h.slice(4).split(",").map(decodeURIComponent));
   } else if (h.startsWith("unit/")) {
     expanded.add(h.slice(5));
     renderRail();
@@ -101,10 +103,15 @@ function keys(ev) {
     document.getElementById("q").focus();
     return;
   }
-  if (ev.key !== "j" && ev.key !== "k") return;
+  // j = back, k = forward: j sits LEFT of k on the keyboard, so it points
+  // backward (Wolfram's request — vim rows don't apply to a record list).
+  // Arrows work too.
+  const fwd = ev.key === "k" || ev.key === "ArrowRight";
+  const back = ev.key === "j" || ev.key === "ArrowLeft";
+  if (!fwd && !back) return;
   const list = filtered();
   const i = list.findIndex((e) => e.id === current());
-  const next = list[i + (ev.key === "j" ? 1 : -1)] || list[i < 0 ? 0 : i];
+  const next = list[i + (fwd ? 1 : -1)] || list[i < 0 ? 0 : i];
   if (next) location.hash = next.id;
 }
 
@@ -1096,9 +1103,9 @@ async function show(id) {
   const list = filtered();
   const i = list.findIndex((e) => e.id === id);
   const nav = `<div class="pager">
-    ${i > 0 ? `<a href="#${esc(list[i - 1].id)}" title="previous (k)">‹</a>` : "<span>‹</span>"}
+    ${i > 0 ? `<a href="#${esc(list[i - 1].id)}" title="previous (j / ←)">‹</a>` : "<span>‹</span>"}
     <a href="#unit/${esc(rec.unit)}" title="unit overview">☷</a>
-    ${i >= 0 && i < list.length - 1 ? `<a href="#${esc(list[i + 1].id)}" title="next (j)">›</a>` : "<span>›</span>"}
+    ${i >= 0 && i < list.length - 1 ? `<a href="#${esc(list[i + 1].id)}" title="next (k / →)">›</a>` : "<span>›</span>"}
   </div>`;
 
   detail.innerHTML = [
@@ -1124,6 +1131,30 @@ async function show(id) {
   window.scrollTo({ top: 0 });
 }
 
+/* model siblings: same experiment id with another model suffix. Used for
+   the "same probe on ..." switcher and one-click compare. */
+function siblings(id) {
+  const m = id.match(/^(.*)-(g4b|g12b|q27b)$/);
+  if (!m) return [];
+  return ["g4b", "g12b", "q27b"]
+    .filter((s) => s !== m[2] && INDEX.some((e) => e.id === `${m[1]}-${s}`))
+    .map((s) => `${m[1]}-${s}`);
+}
+
+function siblingHTML(rec) {
+  const sibs = siblings(rec.id);
+  if (!sibs.length) return "";
+  return `<div class="chips sibs">
+    <span class="sibs-label">same probe on</span>
+    ${sibs.map((s) => {
+      const short = s.match(/(g4b|g12b|q27b)$/)[1];
+      return `<a class="chip sib" href="#${esc(s)}">${short}</a>
+        <a class="chip sib cmp" href="#cmp/${esc(rec.id)},${esc(s)}"
+          title="side by side with ${short}">⇄ ${short}</a>`;
+    }).join("")}
+  </div>`;
+}
+
 function headHTML(rec) {
   const e = rec.emergence;
   return `<div class="exp-head">
@@ -1137,6 +1168,7 @@ function headHTML(rec) {
         <span class="chip">${rec.model.n_layers} layers</span>
         <span class="chip">${esc(rec.created)}</span>
       </div>
+      ${siblingHTML(rec)}
       <p style="color:var(--ink-2);font-size:13px;margin:10px 0 0">
         Core sample, top→bottom = layer 0→${rec.model.n_layers - 1}: depth of blue =
         how close <code class="tok">${esc(e.top1)}</code> (the model's actual
@@ -1172,6 +1204,13 @@ function paramsHTML(rec) {
 /* ---- analysis card (markdown-ish: paragraphs + pipe tables) ---- */
 function extraHTML(rec) {
   if (!rec.extra_md) return "";
+  // unit 15 stores structured arm metadata (part/k/items/probed) as an
+  // object rather than markdown — render it as chips
+  if (typeof rec.extra_md === "object") {
+    const kv = Object.entries(rec.extra_md).map(([k, v]) =>
+      `<span class="chip">${esc(k)}: ${esc(Array.isArray(v) ? v.join(" · ") : v)}</span>`);
+    return `<section class="card"><h3>Arm</h3><div class="chips">${kv.join("")}</div></section>`;
+  }
   const blocks = rec.extra_md.trim().split(/\n\s*\n/).map((b) => {
     if (b.trim().startsWith("|")) {
       const rows = b.trim().split("\n").filter((r) => !/^\|[\s:-]+\|/.test(r));
@@ -1690,6 +1729,97 @@ function sliceHTML(rec, available) {
 
 /* ---- Claude's thoughts (minimal markdown: paragraphs, bold, em, code) ---- */
 /* =================== essay page =================== */
+
+/* ---- findings map: curated headline results, grouped by theme, each card
+   linking straight to its records. The landing page. */
+async function showFindings() {
+  const detail = document.getElementById("detail");
+  const data = await fetch("findings.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!data) {
+    detail.innerHTML = `<p class="empty">Could not load findings.json.</p>`;
+    return;
+  }
+  const mshort = (id) => (id.match(/(g4b|g12b|q27b)$/) || [])[1] || "";
+  const card = (it) => `
+    <div class="find-card">
+      <h4>${it.t}</h4>
+      <p>${it.b}</p>
+      <div class="chips">
+        ${it.ids.map((id) => `<a class="chip rec" href="#${esc(id)}"
+          title="${esc(id)}">${esc(id.replace(/-(g4b|g12b|q27b)$/, ""))}
+          <b>${mshort(id)}</b></a>`).join("")}
+        <a class="chip unitlink" href="#unit/${esc(it.unit)}">unit ${esc(it.unit)} →</a>
+      </div>
+    </div>`;
+  detail.innerHTML = `
+    <div class="exp-head"><div class="exp-title">
+      <h2>Findings map</h2>
+      <div class="chips"><span class="chip">${data.themes.reduce((n, t) => n + t.items.length, 0)} headline results</span>
+        <span class="chip">curated from ${INDEX.length} records</span></div>
+      <p style="color:var(--ink-2);font-size:13.5px;margin:10px 0 0">
+        The course by theme instead of by unit — every card links to the
+        records behind it. The chronological unit tree lives in the rail;
+        the full argument is the <a href="#essay">essay</a>.</p>
+    </div></div>
+    ${data.themes.map((th) => `
+      <section class="card">
+        <h3>${th.name}</h3>
+        <p class="theme-desc">${th.desc}</p>
+        <div class="find-grid">${th.items.map(card).join("")}</div>
+      </section>`).join("")}`;
+  markCurrent();
+  document.querySelector(".detail").scrollTop = 0;
+  window.scrollTo({ top: 0 });
+}
+
+/* ---- compare view: two records side by side (#cmp/idA,idB). Compact
+   columns — glyph, chips, conversation, thoughts — with links to the full
+   records. Readout/chart/film stay on the single-record pages (their DOM
+   ids are singletons). */
+async function showCompare(ids) {
+  const detail = document.getElementById("detail");
+  ids = ids.slice(0, 3);
+  const recs = await Promise.all(ids.map((id) =>
+    fetch(`../results/${id}/record.json`).then((r) => (r.ok ? r.json() : null))
+      .catch(() => null)));
+  const thoughts = await Promise.all(ids.map((id) =>
+    fetch(`../results/${id}/thoughts.md`).then((r) => (r.ok ? r.text() : null))
+      .catch(() => null)));
+  if (recs.some((r) => !r)) {
+    detail.innerHTML = `<p class="empty">Could not load ${esc(ids.join(", "))}.</p>`;
+    return;
+  }
+  const col = (rec, th) => `
+    <div class="cmp-col">
+      <div class="cmp-head">
+        <span class="glyph-lg">${glyph(rec.emergence.ranks, 12, 90)}</span>
+        <div>
+          <h3><a href="#${esc(rec.id)}">${esc(rec.title)}</a></h3>
+          <div class="chips">
+            <span class="chip model">${esc(rec.model.name)}</span>
+            <span class="chip">${rec.model.quant ? esc(rec.model.quant) : "bf16"}</span>
+            <span class="chip">top1 <code class="tok">${esc(rec.emergence.top1)}</code></span>
+          </div>
+        </div>
+      </div>
+      ${conversationHTML(rec)}
+      ${th ? `<section class="card thoughts"><h3>Claude's thoughts</h3>
+        ${th.trim().split(/\n\s*\n/).map((p) => `<p>${inline(p)}</p>`).join("")}
+      </section>` : ""}
+      <p class="cmp-more"><a href="#${esc(rec.id)}">full record (readouts, chart, film) →</a></p>
+    </div>`;
+  detail.innerHTML = `
+    <div class="exp-head"><div class="exp-title">
+      <h2>Side by side</h2>
+      <div class="chips">${ids.map((id) => `<a class="chip" href="#${esc(id)}">${esc(id)}</a>`).join("")}</div>
+    </div></div>
+    <div class="cmp-grid cols-${recs.length}">
+      ${recs.map((r, i) => col(r, thoughts[i])).join("")}
+    </div>`;
+  markCurrent();
+  window.scrollTo({ top: 0 });
+}
 
 async function showEssay() {
   const detail = document.getElementById("detail");
