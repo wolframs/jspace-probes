@@ -4,6 +4,12 @@ Interpretability lab probing LLM "J-spaces" (Jacobian lens / global workspace,
 see README for the science). Owner: Wolfram. Style: playful, minimal hedging,
 he sets directions and expects designed-and-executed experiments back.
 
+> **MANDATORY before any steering / ablation / concept-swap / layer-band work:
+> read `MECHANICS.md`.** It is the paper-grounded (raw-HTML-verified) reference
+> for how interventions work and *which layers they bite in* — the thing Unit 5C
+> got wrong (ablated early L2–8; causal action is the workspace band). Do NOT
+> design a steer/ablation run from memory; the numbers live in that file.
+
 ## Environment
 
 - Python: `.venv/bin/python` (3.12, uv-managed). No system pip.
@@ -34,8 +40,16 @@ he sets directions and expects designed-and-executed experiments back.
   `probes/unit5.py` (sediment/steering). Batch ids into ONE invocation —
   model load dominates runtime. Long runs: background + notification.
 - Steering: `lab.Steering` (ablate/amplify lens directions `W_U[t] @ J_l`
-  via forward hooks). Steer mid-stack only; early-layer amplification
-  breaks generation (see u5c-amp-typo-early thoughts).
+  via forward hooks). **Interventions bite only in the WORKSPACE band
+  (~38–92% of depth); early layers are ~inert** — for qwen-64 that's
+  **~L24–56** (5C's L2–8 did nothing for this reason). Ablate =
+  project residual off the cluster span; amplify = `+α·‖h‖·v̂` (α=0.12,
+  mid-stack only). Paper ablates top-10 *active* vectors at L38–54 and
+  flattens the *experiential/sensory register* (Fig 25) — the signature to
+  hunt. **Always pair a cluster ablation with a matched random-direction
+  control** (a bare ΔNLL is confounded by generic perturbation). Full
+  cited details, per-model bands, the swap formula, and the security line:
+  **`MECHANICS.md` (mandatory read).**
 - Dashboard: `./serve.sh` → http://localhost:8321/dashboard/ (static, no
   build). Force theme with `?theme=light|dark`. Screenshots: snap
   `chromium --headless=new` (writes only under $HOME → use `out/`).
