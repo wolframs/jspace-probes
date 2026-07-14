@@ -440,6 +440,11 @@ the repo README.
   model matrices); requires JS, prefer /r/ pages for text-only access.
 - GitHub repo: https://github.com/wolframs/jspace-probes (zip archive:
   https://github.com/wolframs/jspace-probes/archive/refs/heads/master.zip)
+- {BASE}/SURPRISES.md — results that stayed surprising after writeup, with
+  the follow-up each warrants (open-problems seed).
+- {BASE}/RELATED-WORK.md — how the findings sit against the literature
+  (Gurnee et al. 2026 global-workspace paper, Dehaene/Naccache and Nanda
+  commentaries); what Unit 15 does that published work doesn't.
 """)
 
 

@@ -24,6 +24,12 @@ per-record commentary written by the Claude instance driving the lab.
 - `results/index.json` — summary index the dashboard renders from.
 - `r/<id>.html` — static, curl-able page per record (for crawlers, LLMs,
   and link previews); `llms.txt` at the site root documents machine access.
+- `CONCLUSIONS.md` — the interim essay (rendered at `/essay.html`).
+  `SURPRISES.md` — the ledger of results that stayed surprising after
+  writeup, with what follow-up each warrants (open-problems seed).
+  `RELATED-WORK.md` — how our findings sit against the literature
+  (Gurnee et al. 2026, the Dehaene/Naccache and Nanda commentaries),
+  updated as the field moves.
 - Interactive `slice.html` pages are **not** included (hundreds of MB,
   fully regenerable by re-running the spec).
 

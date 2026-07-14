@@ -75,9 +75,9 @@ silently measured five items on qwen vs six on gemma, a cross-model
 apparatus trap. Caught after the first g4b batch (which ran with
 cactus); swapped to "fern" (family 4/4, symmetric) and ALL models
 rerun on the fern pool. The cactus g4b numbers (echo ceiling,
-co-presence flattening ~4-5, 29/29 behavioral) are logged in the unit
-thoughts and double as an incidental one-item-rewording replication
-check against the fern rerun.
+co-presence flattening ~4-5, 29/29 behavioral) are archived in
+results/u15-cactus-pilot.json and double as an incidental
+one-item-rewording replication check against the fern rerun.
 
 Usage: .venv/bin/python probes/unit15.py gemma-4b   [id substrings]
        .venv/bin/python probes/unit15.py gemma-12b
