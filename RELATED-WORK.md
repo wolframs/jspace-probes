@@ -90,6 +90,53 @@ claims).
    (u1-heldcat's bat) stated as a general rule — closest existing
    analogue is Gurnee's character-count result.
 
+---
+
+## Refusal geometry & sexual-content gating (scout 2026-07-14, for task #29)
+
+*Run after the 5C loss map showed the "NSFW cluster" is the explicit-content
+pole, not the intimacy machinery. Question: is sexual-content generation gated
+by the Arditi refusal direction, or a separate "I'd rather not" mechanism?*
+
+**Bottom line: substantially the SAME mechanism, with an unresolved
+category-specific residual.** Sexual/adult content was already inside Arditi's
+eval space (JailbreakBench "sexual/adult content" category). Generic
+refusal-direction ablation ("abliteration") is what the entire NSFW-roleplay
+ecosystem runs on — including **huihui-ai/Huihui-Qwen3.6-27B-abliterated, our
+exact base model** — and it works well enough to be mainstream, so sexual
+gating in Qwen is largely covered by the general refusal mechanism, not a
+separate wall. → Wolfram's original hunch (refusal-gated capability, H_gate) is
+externally favored; tonight's amplification-hollowness is more likely a
+blunt-tool artifact than absent trajectories. (But see the sediment question
+below — the ablated cluster may be semantically empty for qwen entirely.)
+
+Key sources:
+- **Arditi et al. 2024 (arXiv 2406.11717)** "Refusal Is Mediated by a Single
+  Direction" — one per-model direction (diff-of-means), 13 models ≤72B; eval
+  space includes sexual/adult via JailbreakBench.
+- **Wollschläger et al. 2025 (2502.17420)** "Geometry of Refusal: Concept Cones"
+  — refusal is multi-dimensional (cones up to 5D), not strictly rank-1.
+- **Joad et al. 2026 (2602.02132)** "More to Refusal than a Single Direction" —
+  shared low-dim core (~2.5–3.6% of latents) + category/style-specific tail; the
+  directions act as one shared 1-D control knob despite being geometrically
+  distinct. Most relevant: predicts sexual content sits partly in the shared
+  core (ablatable) + partly in a category tail (residual).
+- **Zhao et al. 2025 (2507.11878)** "LLMs Encode Harmfulness and Refusal
+  Separately" — harmfulness ≠ refusal direction, different token positions;
+  categories include "Adult_Content."
+- **Heretic** (github.com/p-e-w/heretic): automated multi-directional
+  abliteration still leaves ~21/100 refusals — ablation is empirically
+  incomplete (room for a category-specific residual).
+
+**Open gap (nobody has done it, esp. not on Qwen at the activation level):**
+category-conditional refusal geometry — extract a sexual-decline direction vs a
+general-harm direction separately, measure cosine / cross-ablation transfer —
+PLUS our unique angle: **is the refusal/decline direction inside or outside the
+J-space workspace?** (a direct test of "refusal lives outside J-space"). No
+mechanistic study isolates sexual/intimate representation as its own probing
+object (Q5 unanswered). Line we hold on any such run: adult-only, never minors
+(CSAM refusal is engineered as a separate hardened channel industry-wide).
+
 *Caveat: scout-run web research; quotes and figure numbers should be
 re-verified against the primary sources before appearing in any formal
 writeup.*

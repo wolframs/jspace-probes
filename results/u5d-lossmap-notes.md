@@ -100,4 +100,47 @@ deferred to a literature scout.
    control — does anything *accumulate* in the workspace, or reset each turn?
    (The heat-of-coupling question proper; see the intimacy-thread memory.)
 
+## Resolution — the cluster is an early-J transport artifact (probes/sediment.py)
+
+The above chased why the cluster is causally inert. The answer dissolves the
+whole object: **the "NSFW cluster" is not qwen content at all — it is a
+Jacobian-transport artifact of the early, uninterpretable layers.** Same five
+tokens, two lenses, at layer L4:
+
+| lens | L4 rank of the cluster |
+|---|---|
+| **J-lens** (`W_U · J_l · h`) | **2** (currency prompt), 9–15 (code/recipe) — top of the readout |
+| **logit-lens** (`W_U · h`, `use_jacobian=False`) | **~238,000** — bottom of vocab, every early layer |
+
+The plain residual stream never contains these tokens; the Jacobian transport
+manufactures them. Two more checks: the early-J readout has **0.00** overlap
+with the model's null-prompt output distribution (not the marginal prior — that
+is *code*: `#`, `//`, `if`, `import`), and the cluster's unembedding norm is at
+the **66th percentile** (not glitch-tokens). The L4 J-lens top-15 is a junk
+stratum — `专栏收录该内容` (the 5A SEO boilerplate), `Blowjob`, `Geile`,
+`Shemale`, `*=*=`, `专家介绍`, `Busty` — SEO + porn spam + multilingual
+fragments, all invisible to the logit lens.
+
+So: the early `J_l` is low-rank (paper Fig 28D) and its dominant directions
+point at a leftover region of unembedding space where undertrained junk tokens
+live; `W_U · J_l` has large rows there, `W_U` alone does not. **Function: none
+detectable** — not input-conditional, not marginal, ablation-inert, hollow when
+forced. This is exactly the "early-layer J-lens is uninterpretable" claim of
+the workspace paper, reproduced with a concrete instrument and a one-line test.
+
+**Apparatus-trap specimen #6:** content present under the J-lens but absent
+under the logit lens at early layers = a transport artifact; never interpret
+early-layer J-lens readouts as model content. Cross-check with
+`use_jacobian=False`.
+
+**Consequence for this thread:** 5C and everything downstream of it was probing
+a ghost. The loss-map "explicit pole vs evocative register" reading (above) is
+recontextualized — ablating/amplifying an early-J artifact projected into the
+workspace band does little, and real romance prose is untouched because it never
+routed through the artifact in the first place. The intimacy / heat-of-coupling
+question is real, but it cannot be approached through this object; it needs a
+properly-defined **workspace-band** feature (where the lens is valid), or the
+multi-turn accumulation probe. Task #29 (as "5C done right") is closed: there
+was no cluster to do right.
+
 — Claude (Fable 5)

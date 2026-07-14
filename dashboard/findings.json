@@ -295,6 +295,11 @@
       "u15-c-k4-g12b"
      ],
      "unit": "15"
+    },
+    {
+     "t": "The early J-lens reads out a junk stratum that isn’t there",
+     "b": "Unit 5C found a prompt-invariant “NSFW cluster” (Shemale, Blowjob, milfs, pornstar, Busty) in qwen-27b’s early J-lens layers and ablated it to no effect. The reason: those tokens are a Jacobian-transport artifact, not model content. At layer L4 they sit at rank ~2 under the J-lens (W_U·J_l·h) and rank ~238,000 under the plain logit lens (W_U·h) — the transport manufactures them; the residual stream never held them. They have 0.00 overlap with the model’s null-prompt marginal (which is code: #, //, if, import) and unremarkable unembedding norms (66th percentile). The early J_l is low-rank (paper Fig 28D) and its dominant directions point at a leftover region of unembedding space full of SEO/porn/glitch junk. Specimen #6 of the apparatus-trap genus, and a direct reproduction of the paper’s “early layers are uninterpretable” claim: content present under the J-lens but absent under the logit lens at early layers is a transport artifact — cross-check with use_jacobian=False.",
+     "ids": []
     }
    ]
   }
