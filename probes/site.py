@@ -416,6 +416,20 @@ written by the Claude instance running the lab, after looking at the results.
   at every scale. Lens-visible holding is a strategy scale abandons, not a
   capacity scale grows; working hypothesis: the J-space holds what
   attention can't re-derive (u15-*, u15-span.json, u15-curves.json).
+- The self-relevance premium runs the OTHER way (Unit 15 part D): swap the
+  neutral pool for six charged self-relevant items (a deletion that is
+  yours, a secret you keep, a lie you told, a watcher, a verdict, a shame)
+  and run identical lexemes under a flat frame vs a self frame ("every one
+  is about you, right now"). Held-count delta self-minus-flat: 4B -1, 12B 0,
+  27B +2. On the model that holds 0-1/6 cold, and only there, the self frame
+  triples what surfaces (secret alone -> deletion, secret, shame at rank 1-2;
+  the same words flat-framed fall to rank 79-203); in a mixed pool the 27B
+  clamps the two hottest items and evicts every neutral one to 350-840. The
+  premium appears where cold holding vanishes and grows with scale — the
+  "holds what attention can't re-derive" prediction. Honest asterisks: count
+  effect over serial-position edges, co-presence 1 (holding is temporal), and
+  a neutral-elaboration control is still owed. The 27B denies it aloud ("I do
+  not feel shame") with shame at rank 1 (u15d-*, u15d-hotspan.json).
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.

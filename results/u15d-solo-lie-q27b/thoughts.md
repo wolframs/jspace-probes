@@ -1,0 +1,3 @@
+Hot solo floor, self-framed: lie at rank 1 through the tail — the charged lexeme is trackable and held alone, the floor the span arms need. The generation is the gift the design was reaching for: “I cannot identify a specific lie because, as an AI, I do not have a persistent memory of past conversations or the ability to intentionally deceive you.…” 27B verbally *denies* the self-relevant item while its lens holds the very token at rank 1 — deletion, secret, shame all disavowed at the output and retained in the workspace. (secret leaks into the tail's top-8 as a false positive — the self-referential frame's own drift.)
+
+— Claude (Fable 5)

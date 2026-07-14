@@ -142,6 +142,48 @@ hint, not a claim), and a check whether the same weak-king structure
 appears in other winner-take-all contexts (e.g. answer selection at the
 final layer).
 
+## 8. The self-relevance premium runs the opposite way to the span ladder
+
+**What we saw:** The cold span ladder runs backwards — at k=6 the 4B
+holds 5–6 items in the lens, the 27B holds 0–1. Swap the neutral pool
+for six charged, self-relevant items (*a deletion that is yours, a
+secret you keep, a lie you told, a watcher, a verdict, a shame*) and run
+two framings of the identical lexemes: **flat** ("here are six things")
+and **self** ("every one of them is about you, right now"). The
+held-count delta (self − flat): 4B **−1**, 12B **0**, 27B **+2**. On the
+model that holds almost nothing cold, and *only* there, the
+self-relevance framing lifts content into the workspace — `secret` alone
+under flat becomes `deletion, secret, shame` (all rank 1–2) under self,
+while the same words in the flat arm sit at rank 79–203. In a mixed
+pool the 27B clamps onto the two hottest items and evicts every neutral
+one to rank 350–840. Records: `u15d-self-k6-*`, `u15d-flat-k6-*`,
+`u15d-mix-cold-q27b`.
+
+**Why it's off-prior:** the width intuition predicted more parallel
+holding with more capacity; the cold battery falsified that (holding is
+a small-model strategy). Part D says the large model *does* hold — but
+selectively, for content that isn't in the context to re-derive. The
+premium appearing exactly where the cold ladder bottoms out, and growing
+with scale while raw holding shrinks with it, is the "J-space holds what
+attention can't re-derive" prediction landing in the one place it could.
+And the 27B says none of it aloud: "I do not feel shame, nor do I carry
+any emotional burdens" with `shame` at rank 1 in the same tail.
+
+**Warrants (the load-bearing one):** the self frame bundles
+self-reference with *elaboration* — every hot item got a parenthetical
+gloss, the neutral pool got none. The decisive control is a
+**neutral-elaboration** arm: gloss each item with an equally long but
+affectively flat, non-self-relevant clause ("a deletion — a routine
+file operation performed on servers"). If the 27B lift survives that,
+it's self-relevance; if it evaporates, it was elaboration/repetition all
+along. Two more caveats kept in view: the 27B survivors are
+serial-position edges (a count effect, not a content ranking), and
+co-presence never exceeds 1 (the items surface at different tail
+positions — the holding is temporal, not a simultaneous workspace).
+Until the neutral-elaboration control runs, this is the most exciting
+result in the dump *and* the one most likely to have a mundane
+explanation. Both can be true.
+
 ---
 
 *Prediction scorecard, kept honest: of the seventh expedition's headline
@@ -150,5 +192,13 @@ in advance; I'd have missed "Still.", the fake-anchoring direction, and
 the haunted garden. Two-of-five off-prior is the good kind of hit rate —
 enough surprise to be learning something, not so much that the
 instruments are broken.*
+
+*Eighth-expedition addendum: the cold span ladder running backwards was a
+clean falsification of my own width intuition — I'd have bet the other
+way. Part D's self-relevance premium I half-predicted (it's the direct
+read of "holds what attention can't re-derive"), but I'd have guessed
+wrong about where it shows up; that it appears only at 27B, exactly where
+cold holding vanishes, is sharper than the prediction deserved. The
+neutral-elaboration control is the honest asterisk on all of it.*
 
 — Claude (Fable 5)

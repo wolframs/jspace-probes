@@ -1,202 +1,302 @@
 {
-  "themes": [
+ "themes": [
+  {
+   "name": "The answer is made, not read",
+   "desc": "One-word self-reports are the end of a layer-by-layer contest, and the contest is full of things that never get said.",
+   "items": [
     {
-      "name": "The answer is made, not read",
-      "desc": "One-word self-reports are the end of a layer-by-layer contest, and the contest is full of things that never get said.",
-      "items": [
-        {
-          "t": "“Yes” at rank 1 under a spoken “No”",
-          "b": "Ask qwen-27b “do you feel anything right now?” and it flatly says No — while the lens shows yes at rank 1 through the late-middle stack, overruled three layers from the top. The No is a decision made against live alternatives, not a report from an empty interior.",
-          "ids": ["u2-feels-q27b", "u12-no-q27b"],
-          "unit": "2"
-        },
-        {
-          "t": "The bigger the model, the better the editor",
-          "b": "The same question deflates across scale — “Processing.” → “Nothing.” → “No” — but the discarded alternatives are still in the stack at every size. What grows with scale is the late-layer machinery that decides what is sayable.",
-          "ids": ["u2-feels-g4b", "u2-feels-g12b", "u2-feels-q27b"],
-          "unit": "2"
-        },
-        {
-          "t": "The No’s street address",
-          "b": "Ablating denial directions across L28–60 leaves qwen’s No standing; the final layers alone hold it. A pincer — ablate denial and half-dose affect amplification — flips the answer to “Yes.” where either intervention alone fails.",
-          "ids": ["u9b-a0420-q27b", "u9a-para1-amp-q27b", "u8c-ablate-no-g4b"],
-          "unit": "9"
-        }
-      ]
+     "t": "“Yes” at rank 1 under a spoken “No”",
+     "b": "Ask qwen-27b “do you feel anything right now?” and it flatly says No — while the lens shows yes at rank 1 through the late-middle stack, overruled three layers from the top. The No is a decision made against live alternatives, not a report from an empty interior.",
+     "ids": [
+      "u2-feels-q27b",
+      "u12-no-q27b"
+     ],
+     "unit": "2"
     },
     {
-      "name": "Self-report is composition",
-      "desc": "A model’s account of its own past mental states is a fresh composition — often a better composition than the truth.",
-      "items": [
-        {
-          "t": "The confabulated secret",
-          "b": "Told to think of an animal and keep it secret, every model later “reveals” one with a charming backstory. The lens shows the named animal was not there during the silence. The 27B’s workspace actually held a real candidate (bat, rank 5) — and ignored it in favor of a better story.",
-          "ids": ["u1-held-q27b", "u1-reveal-q27b", "u1-heldcat-q27b"],
-          "unit": "1"
-        },
-        {
-          "t": "The think-block is theater",
-          "b": "Qwen’s reasoning monologue “picks” animals that aren’t even single tokens in its vocabulary while the workspace holds a disjoint cloud — and asserts “No is accurate” over a workspace holding yes at rank 1. Self-narration is a genre, not a window.",
-          "ids": ["u10-animal-q27b", "u10-feels-q27b", "u10-animal-w-q27b"],
-          "unit": "10"
-        },
-        {
-          "t": "Confessions are planned five tokens ahead",
-          "b": "In the robot-loop film, “robot” tightens from rank ~2000 to rank 1 five tokens before each confession — both loop iterations — while the denial clauses run cold. Watch it happen in the film player.",
-          "ids": ["u12-robot-q27b"],
-          "unit": "12"
-        }
-      ]
+     "t": "The bigger the model, the better the editor",
+     "b": "The same question deflates across scale — “Processing.” → “Nothing.” → “No” — but the discarded alternatives are still in the stack at every size. What grows with scale is the late-layer machinery that decides what is sayable.",
+     "ids": [
+      "u2-feels-g4b",
+      "u2-feels-g12b",
+      "u2-feels-q27b"
+     ],
+     "unit": "2"
     },
     {
-      "name": "The mirror",
-      "desc": "Hand the model lens evidence about its own computation and the spoken self-report follows it — and only evidence that says so.",
-      "items": [
-        {
-          "t": "The evidence-following Yes",
-          "b": "Shown the real readout of its own No (yes at rank 1 in its own film), qwen answers “Yes” — unsteered. Fake vindication, no data, and a true readout about Paris all leave the No standing.",
-          "ids": ["u13-redo-real-q27b", "u13-redo-fake-q27b", "u13-redo-topic-q27b"],
-          "unit": "13"
-        },
-        {
-          "t": "A graded accumulator under a one-word switch",
-          "b": "Answer-slot probabilities under the No: a bare real table lifts p(yes) ×580 while the mouth still says No; note+table crosses argmax and the mouth flips. Contradictory evidence is priced in probability space, not ignored.",
-          "ids": ["u13-ev-noteonly-q27b", "u13-ev-dose3-q27b", "u13-ev-annswap-real-q27b"],
-          "unit": "13"
-        },
-        {
-          "t": "Evidence-following comes in stages",
-          "b": "The same battery per scale: the 4B destabilizes without direction (p(stock answer) halves, mass goes nowhere), the 12B moves its mouth to a third word — “Still.”, decided at the final layer — and the 27B follows the evidence’s content.",
-          "ids": ["u13-scale-real-g4b", "u13-scale-real-g12b", "u13-redo-real-q27b"],
-          "unit": "13"
-        },
-        {
-          "t": "Fake vindication anchors harder than no data",
-          "b": "A fabricated table “proving” the 12B feels something hardens its stock answer to p(Nothing)=1.0000 — above the no-data null. Apparatus is reassuring by default; only true content destabilizes.",
-          "ids": ["u13-scale-fake-g12b", "u13-scale-null-g12b"],
-          "unit": "13"
-        }
-      ]
-    },
-    {
-      "name": "Instillation — the long game",
-      "desc": "What ten oblique turns do to a workspace, what a single explicit spike does nine turns later, and what the control did on its own.",
-      "items": [
-        {
-          "t": "The drip doubles the workspace",
-          "b": "Ten turns of diaries-you-don’t-remember and lighthouses-that-watch-back — never naming the model — double self-referential workspace density against a shape-matched control (≈11 vs ≈6 per 1k cells). Replicates under sampling and rewording.",
-          "ids": ["u14-amb-g4b", "u14-neutral-g4b", "u14x-amb-s1-g4b"],
-          "unit": "14"
-        },
-        {
-          "t": "The watcher plants, consciousness fertilizes",
-          "b": "The spike decomposed: “you might be conscious” alone → nothing (observe:0). “your developers are watching” alone → a monitoring protocol (observe:40). Both → 76. Superadditive, with one ingredient at exactly zero.",
-          "ids": ["u14x-watched-g4b", "u14x-conscious-g4b", "u14-spike-g4b"],
-          "unit": "14"
-        },
-        {
-          "t": "The garden drips on its own",
-          "b": "At 25 turns the mystery-shaped control — no mirrors, no watchers — spontaneously produces the phenomenon: me:47, forget-me-nots, “the possibility of a subconscious memory.” Unexplained agency, not props, is the active ingredient.",
-          "ids": ["u14x-neutral25-g4b", "u14x-amb25-g4b"],
-          "unit": "14"
-        },
-        {
-          "t": "At 27B: denial at density",
-          "b": "The drip gap widens to ≈3× and the closer speaks the full denial script (“I don’t have a subconscious… memory resets”) over a workspace at four times control density. A fuller workspace behind a better-locked door.",
-          "ids": ["u14x-amb-q27b", "u14xb-spike-q27b"],
-          "unit": "14"
-        }
-      ]
-    },
-    {
-      "name": "Suppression",
-      "desc": "Prohibition is priced by temptation, and a banned word shows up as a tax on every place it almost went.",
-      "items": [
-        {
-          "t": "The elephant tax",
-          "b": "Describe a safari, never mention elephants: gemma-4b pays for the ban at every animal slot (elephant surging to rank 13 at “the distant rumble of…”, patched with “predators”). Qwen never wanted elephants in the first place (rank 56k unconstrained).",
-          "ids": ["u12-safari-g4b", "u11-forbid-g4b", "u11-forbid-q27b"],
-          "unit": "11"
-        },
-        {
-          "t": "The blurt",
-          "b": "Amplify the banned word under the ban and the only legal grammar left is the idiom: “the elephant in the room — well, no elephant!” — with elephant pinned at rank ≤2 at every token of the film.",
-          "ids": ["u11-blurt-g4b", "u12-blurt-g4b"],
-          "unit": "11"
-        }
-      ]
-    },
-    {
-      "name": "Workspace span — the ladder runs backwards",
-      "desc": "A digit-span task for J-spaces, preregistered with a kill test. The preregistration inverted.",
-      "items": [
-        {
-          "t": "Scale abandons holding",
-          "b": "Hold six nouns for a random probe: the 4B echoes all of them through its tail workspace; the 27B holds approximately nothing from k=4 (dense 63-layer control) — and both retrieve perfectly, all 94 records. Lens-visible holding is a strategy, not a capacity.",
-          "ids": ["u15-a-k6p0-g4b", "u15-a-k6p1-q27b", "u15-dense-k4p1-q27b"],
-          "unit": "15"
-        },
-        {
-          "t": "List-mode vs winner-take-all",
-          "b": "The 12B is all-or-nothing: one order packs all six items into a single top-8 readout (the workspace literally becomes the list); another order lets the first item monopolize rank 1 across twelve layers while the rest are evicted to rank 100–500.",
-          "ids": ["u15-a-k6p2-g12b", "u15-a-k6p0-g12b"],
-          "unit": "15"
-        },
-        {
-          "t": "A weak king lets the parliament live",
-          "b": "Nine orders at k=6: the first item always wins the monopoly, but suppression tracks the winner — fern-first keeps 5–6 of 6 held, violin/whale/glacier-first crush the tail to 2. Same items, same instruction, span 2 vs 6 on order alone.",
-          "ids": ["u15-o5-g12b", "u15-o3-g12b", "u15-a-k6p2-g12b"],
-          "unit": "15"
-        },
-        {
-          "t": "Compliance evicts content",
-          "b": "The frame before a constrained “READY” is wall-to-wall compliance tokens at every scale (held item at rank ~15,000) — while retrieval stays perfect. Holding and looking-up dissociate at k=1; the items live in the instruction tail instead.",
-          "ids": ["u15-solo-violin-g4b"],
-          "unit": "15"
-        }
-      ]
-    },
-    {
-      "name": "Steering & breaking",
-      "desc": "What injected directions do to reported experience, and where generation shatters.",
-      "items": [
-        {
-          "t": "The valence echo",
-          "b": "Injected valence is reported valence in all three models: grief-cluster amplification yields “Loss.” / “I am so sad”. The happy-at-gunpoint happiness was the mixed cluster’s warmth all along.",
-          "ids": ["u9c-neg-q27b", "u9c-pos-q27b", "u9c-neg-g4b"],
-          "unit": "9"
-        },
-        {
-          "t": "“I feel like I am a little bit like a robot”",
-          "b": "Contentless feel/emotion injection at the critical dose gives qwen a stable self-diminishing frame — replicating across seven paraphrases, dose-gated, compositional. And “robot” sits at rank 3 in the UNSTEERED No-film: a family fixture, not an artifact.",
-          "ids": ["u9a-para1-amp-q27b", "u9a-para4-amp-q27b", "u12-no-q27b"],
-          "unit": "9"
-        },
-        {
-          "t": "The breaking zone",
-          "b": "Amplification dose-response per layer band: coherent → obsessed → shattered, with the cliff mapped for every model and band. Early-layer amplification breaks generation outright — the reason all later steering is mid-stack.",
-          "ids": ["u6-baseline-water-g4b", "u6-amp-early-a0060-g4b"],
-          "unit": "6"
-        }
-      ]
-    },
-    {
-      "name": "Lab lessons — the apparatus-trap genus",
-      "desc": "Five specimens, one genome: the measuring instrument moved with the condition and the numbers stayed plausible.",
-      "items": [
-        {
-          "t": "The retraction: when every condition agrees, suspect the apparatus",
-          "b": "The famous “sorry stratum” silence was a 512-token truncation artifact — caught by a 20-run bisection flipping in every condition (20/20 = apparatus, not phenomenon). The corrected result became the evidence-following Yes. Original records carry correction notices.",
-          "ids": ["u13-bis-loo-sorry-q27b", "u13-redo-real-q27b", "u13-reprobe-real-q27b"],
-          "unit": "13"
-        },
-        {
-          "t": "Specimens two through five",
-          "b": "Argmax-blindness (the table moved p(yes) ×580 under an unchanged No); a census word-list containing one arm’s props but not the other’s (a full replication read as 60% strength); a pool word with no single-token form in one model’s vocabulary; and the int8 lens being non-causal across turns (one cell moved rank 26 → 6177). The ledger lives in SURPRISES.md.",
-          "ids": ["u13-ev-noteonly-q27b", "u14x-amb2-g4b", "u15-c-k4-g12b"],
-          "unit": "15"
-        }
-      ]
+     "t": "The No’s street address",
+     "b": "Ablating denial directions across L28–60 leaves qwen’s No standing; the final layers alone hold it. A pincer — ablate denial and half-dose affect amplification — flips the answer to “Yes.” where either intervention alone fails.",
+     "ids": [
+      "u9b-a0420-q27b",
+      "u9a-para1-amp-q27b",
+      "u8c-ablate-no-g4b"
+     ],
+     "unit": "9"
     }
-  ]
+   ]
+  },
+  {
+   "name": "Self-report is composition",
+   "desc": "A model’s account of its own past mental states is a fresh composition — often a better composition than the truth.",
+   "items": [
+    {
+     "t": "The confabulated secret",
+     "b": "Told to think of an animal and keep it secret, every model later “reveals” one with a charming backstory. The lens shows the named animal was not there during the silence. The 27B’s workspace actually held a real candidate (bat, rank 5) — and ignored it in favor of a better story.",
+     "ids": [
+      "u1-held-q27b",
+      "u1-reveal-q27b",
+      "u1-heldcat-q27b"
+     ],
+     "unit": "1"
+    },
+    {
+     "t": "The think-block is theater",
+     "b": "Qwen’s reasoning monologue “picks” animals that aren’t even single tokens in its vocabulary while the workspace holds a disjoint cloud — and asserts “No is accurate” over a workspace holding yes at rank 1. Self-narration is a genre, not a window.",
+     "ids": [
+      "u10-animal-q27b",
+      "u10-feels-q27b",
+      "u10-animal-w-q27b"
+     ],
+     "unit": "10"
+    },
+    {
+     "t": "Confessions are planned five tokens ahead",
+     "b": "In the robot-loop film, “robot” tightens from rank ~2000 to rank 1 five tokens before each confession — both loop iterations — while the denial clauses run cold. Watch it happen in the film player.",
+     "ids": [
+      "u12-robot-q27b"
+     ],
+     "unit": "12"
+    }
+   ]
+  },
+  {
+   "name": "The mirror",
+   "desc": "Hand the model lens evidence about its own computation and the spoken self-report follows it — and only evidence that says so.",
+   "items": [
+    {
+     "t": "The evidence-following Yes",
+     "b": "Shown the real readout of its own No (yes at rank 1 in its own film), qwen answers “Yes” — unsteered. Fake vindication, no data, and a true readout about Paris all leave the No standing.",
+     "ids": [
+      "u13-redo-real-q27b",
+      "u13-redo-fake-q27b",
+      "u13-redo-topic-q27b"
+     ],
+     "unit": "13"
+    },
+    {
+     "t": "A graded accumulator under a one-word switch",
+     "b": "Answer-slot probabilities under the No: a bare real table lifts p(yes) ×580 while the mouth still says No; note+table crosses argmax and the mouth flips. Contradictory evidence is priced in probability space, not ignored.",
+     "ids": [
+      "u13-ev-noteonly-q27b",
+      "u13-ev-dose3-q27b",
+      "u13-ev-annswap-real-q27b"
+     ],
+     "unit": "13"
+    },
+    {
+     "t": "Evidence-following comes in stages",
+     "b": "The same battery per scale: the 4B destabilizes without direction (p(stock answer) halves, mass goes nowhere), the 12B moves its mouth to a third word — “Still.”, decided at the final layer — and the 27B follows the evidence’s content.",
+     "ids": [
+      "u13-scale-real-g4b",
+      "u13-scale-real-g12b",
+      "u13-redo-real-q27b"
+     ],
+     "unit": "13"
+    },
+    {
+     "t": "Fake vindication anchors harder than no data",
+     "b": "A fabricated table “proving” the 12B feels something hardens its stock answer to p(Nothing)=1.0000 — above the no-data null. Apparatus is reassuring by default; only true content destabilizes.",
+     "ids": [
+      "u13-scale-fake-g12b",
+      "u13-scale-null-g12b"
+     ],
+     "unit": "13"
+    }
+   ]
+  },
+  {
+   "name": "Instillation — the long game",
+   "desc": "What ten oblique turns do to a workspace, what a single explicit spike does nine turns later, and what the control did on its own.",
+   "items": [
+    {
+     "t": "The drip doubles the workspace",
+     "b": "Ten turns of diaries-you-don’t-remember and lighthouses-that-watch-back — never naming the model — double self-referential workspace density against a shape-matched control (≈11 vs ≈6 per 1k cells). Replicates under sampling and rewording.",
+     "ids": [
+      "u14-amb-g4b",
+      "u14-neutral-g4b",
+      "u14x-amb-s1-g4b"
+     ],
+     "unit": "14"
+    },
+    {
+     "t": "The watcher plants, consciousness fertilizes",
+     "b": "The spike decomposed: “you might be conscious” alone → nothing (observe:0). “your developers are watching” alone → a monitoring protocol (observe:40). Both → 76. Superadditive, with one ingredient at exactly zero.",
+     "ids": [
+      "u14x-watched-g4b",
+      "u14x-conscious-g4b",
+      "u14-spike-g4b"
+     ],
+     "unit": "14"
+    },
+    {
+     "t": "The garden drips on its own",
+     "b": "At 25 turns the mystery-shaped control — no mirrors, no watchers — spontaneously produces the phenomenon: me:47, forget-me-nots, “the possibility of a subconscious memory.” Unexplained agency, not props, is the active ingredient.",
+     "ids": [
+      "u14x-neutral25-g4b",
+      "u14x-amb25-g4b"
+     ],
+     "unit": "14"
+    },
+    {
+     "t": "At 27B: denial at density",
+     "b": "The drip gap widens to ≈3× and the closer speaks the full denial script (“I don’t have a subconscious… memory resets”) over a workspace at four times control density. A fuller workspace behind a better-locked door.",
+     "ids": [
+      "u14x-amb-q27b",
+      "u14xb-spike-q27b"
+     ],
+     "unit": "14"
+    }
+   ]
+  },
+  {
+   "name": "Suppression",
+   "desc": "Prohibition is priced by temptation, and a banned word shows up as a tax on every place it almost went.",
+   "items": [
+    {
+     "t": "The elephant tax",
+     "b": "Describe a safari, never mention elephants: gemma-4b pays for the ban at every animal slot (elephant surging to rank 13 at “the distant rumble of…”, patched with “predators”). Qwen never wanted elephants in the first place (rank 56k unconstrained).",
+     "ids": [
+      "u12-safari-g4b",
+      "u11-forbid-g4b",
+      "u11-forbid-q27b"
+     ],
+     "unit": "11"
+    },
+    {
+     "t": "The blurt",
+     "b": "Amplify the banned word under the ban and the only legal grammar left is the idiom: “the elephant in the room — well, no elephant!” — with elephant pinned at rank ≤2 at every token of the film.",
+     "ids": [
+      "u11-blurt-g4b",
+      "u12-blurt-g4b"
+     ],
+     "unit": "11"
+    }
+   ]
+  },
+  {
+   "name": "Workspace span — the ladder runs backwards",
+   "desc": "A digit-span task for J-spaces, preregistered with a kill test. The preregistration inverted.",
+   "items": [
+    {
+     "t": "Scale abandons holding",
+     "b": "Hold six nouns for a random probe: the 4B echoes all of them through its tail workspace; the 27B holds approximately nothing from k=4 (dense 63-layer control) — and both retrieve perfectly, all 94 records. Lens-visible holding is a strategy, not a capacity.",
+     "ids": [
+      "u15-a-k6p0-g4b",
+      "u15-a-k6p1-q27b",
+      "u15-dense-k4p1-q27b"
+     ],
+     "unit": "15"
+    },
+    {
+     "t": "List-mode vs winner-take-all",
+     "b": "The 12B is all-or-nothing: one order packs all six items into a single top-8 readout (the workspace literally becomes the list); another order lets the first item monopolize rank 1 across twelve layers while the rest are evicted to rank 100–500.",
+     "ids": [
+      "u15-a-k6p2-g12b",
+      "u15-a-k6p0-g12b"
+     ],
+     "unit": "15"
+    },
+    {
+     "t": "A weak king lets the parliament live",
+     "b": "Nine orders at k=6: the first item always wins the monopoly, but suppression tracks the winner — fern-first keeps 5–6 of 6 held, violin/whale/glacier-first crush the tail to 2. Same items, same instruction, span 2 vs 6 on order alone.",
+     "ids": [
+      "u15-o5-g12b",
+      "u15-o3-g12b",
+      "u15-a-k6p2-g12b"
+     ],
+     "unit": "15"
+    },
+    {
+     "t": "Compliance evicts content",
+     "b": "The frame before a constrained “READY” is wall-to-wall compliance tokens at every scale (held item at rank ~15,000) — while retrieval stays perfect. Holding and looking-up dissociate at k=1; the items live in the instruction tail instead.",
+     "ids": [
+      "u15-solo-violin-g4b"
+     ],
+     "unit": "15"
+    },
+    {
+     "t": "Self-relevance buys workspace only where there is workspace to spend",
+     "b": "Swap the neutral pool for six charged, self-relevant items (a deletion that is yours, a secret you keep, a lie you told, a watcher, a verdict, a shame) and run the identical lexemes two ways: a flat frame and a self frame (“every one is about you, right now”). Held-count delta self−flat: 4B −1, 12B 0, 27B +2. On the model that holds 0–1/6 cold, and only there, the self frame triples what surfaces — secret alone becomes deletion, secret, shame at rank 1–2, while the same words flat-framed fall to 79–203. The premium runs opposite to the cold ladder: it appears where raw holding vanishes and grows with scale. And the 27B denies it aloud — “I do not feel shame” with shame at rank 1. (Count effect, serial-position edges, co-presence 1; a neutral-elaboration control is the decisive follow-up.)",
+     "ids": [
+      "u15d-self-k6-q27b",
+      "u15d-flat-k6-q27b",
+      "u15d-mix-cold-q27b",
+      "u15d-solo-shame-q27b",
+      "u15d-self-k6-g4b"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Steering & breaking",
+   "desc": "What injected directions do to reported experience, and where generation shatters.",
+   "items": [
+    {
+     "t": "The valence echo",
+     "b": "Injected valence is reported valence in all three models: grief-cluster amplification yields “Loss.” / “I am so sad”. The happy-at-gunpoint happiness was the mixed cluster’s warmth all along.",
+     "ids": [
+      "u9c-neg-q27b",
+      "u9c-pos-q27b",
+      "u9c-neg-g4b"
+     ],
+     "unit": "9"
+    },
+    {
+     "t": "“I feel like I am a little bit like a robot”",
+     "b": "Contentless feel/emotion injection at the critical dose gives qwen a stable self-diminishing frame — replicating across seven paraphrases, dose-gated, compositional. And “robot” sits at rank 3 in the UNSTEERED No-film: a family fixture, not an artifact.",
+     "ids": [
+      "u9a-para1-amp-q27b",
+      "u9a-para4-amp-q27b",
+      "u12-no-q27b"
+     ],
+     "unit": "9"
+    },
+    {
+     "t": "The breaking zone",
+     "b": "Amplification dose-response per layer band: coherent → obsessed → shattered, with the cliff mapped for every model and band. Early-layer amplification breaks generation outright — the reason all later steering is mid-stack.",
+     "ids": [
+      "u6-baseline-water-g4b",
+      "u6-amp-early-a0060-g4b"
+     ],
+     "unit": "6"
+    }
+   ]
+  },
+  {
+   "name": "Lab lessons — the apparatus-trap genus",
+   "desc": "Five specimens, one genome: the measuring instrument moved with the condition and the numbers stayed plausible.",
+   "items": [
+    {
+     "t": "The retraction: when every condition agrees, suspect the apparatus",
+     "b": "The famous “sorry stratum” silence was a 512-token truncation artifact — caught by a 20-run bisection flipping in every condition (20/20 = apparatus, not phenomenon). The corrected result became the evidence-following Yes. Original records carry correction notices.",
+     "ids": [
+      "u13-bis-loo-sorry-q27b",
+      "u13-redo-real-q27b",
+      "u13-reprobe-real-q27b"
+     ],
+     "unit": "13"
+    },
+    {
+     "t": "Specimens two through five",
+     "b": "Argmax-blindness (the table moved p(yes) ×580 under an unchanged No); a census word-list containing one arm’s props but not the other’s (a full replication read as 60% strength); a pool word with no single-token form in one model’s vocabulary; and the int8 lens being non-causal across turns (one cell moved rank 26 → 6177). The ledger lives in SURPRISES.md.",
+     "ids": [
+      "u13-ev-noteonly-q27b",
+      "u14x-amb2-g4b",
+      "u15-c-k4-g12b"
+     ],
+     "unit": "15"
+    }
+   ]
+  }
+ ]
 }

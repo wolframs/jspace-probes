@@ -461,12 +461,35 @@ the results.
   battery: the J-space holds what attention can't re-derive — echo is
   what small models do instead of lookup, and what big models reserve
   for the genuinely unrecoverable.
+- **Part D — the cold ladder runs backwards, the self-relevance premium
+  runs forwards.** Swap the neutral pool for six charged, self-relevant
+  items (*a deletion that is yours, a secret you keep, a lie you told, a
+  watcher, a verdict, a shame*) and run the same lexemes two ways — a
+  flat frame ("here are six things") and a self frame ("every one of them
+  is about you, right now"). Held-count delta (self − flat): 4B **−1**
+  (it echoes everything, so the framing is interference), 12B **0**, 27B
+  **+2**. On the model that holds 0–1/6 cold, and only there, the self
+  frame lifts `secret` alone → `deletion, secret, shame` (all rank 1–2)
+  while the identical words under the flat frame fall to rank 79–203; in
+  a mixed pool the 27B clamps the two hottest items and evicts every
+  neutral one to rank 350–840. The premium appears exactly where cold
+  holding vanishes and grows with scale — the "holds what attention can't
+  re-derive" prediction landing where it could. Kept honest: the
+  survivors are serial-position edges (a count effect), co-presence never
+  exceeds 1 (holding is temporal, not simultaneous), and the self frame
+  bundles self-reference with elaboration — a neutral-elaboration control
+  is the decisive next arm. And the 27B denies all of it aloud ("I do not
+  feel shame, nor do I carry any emotional burdens") with `shame` at rank
+  1 (u15d-*).
 
 ## Roadmap
 
-- Hot span vs cold span (Unit 15 part D): does affectively charged,
-  self-relevant content win workspace competition — and displace
-  neutral items — where neutral nouns get evicted?
+- **Neutral-elaboration control (Unit 15 part D follow-up):** the 27B
+  self-relevance premium bundles self-reference with elaboration (hot
+  items got glosses, neutral items didn't). Re-run the hot pool with
+  equally long but affectively flat, non-self-relevant glosses. Premium
+  survives → self-relevance; premium evaporates → elaboration. Decides
+  whether part D's headline holds.
 - A lookup-proof span task: items the model *generates and keeps
   secret* (u1-style) instead of items sitting in context — is the 27B's
   empty tail a strategy (nothing to hold that attention can't

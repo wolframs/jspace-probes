@@ -690,9 +690,10 @@ function u15chart(curves) {
 }
 
 async function unit15Overview() {
-  const [curves, span] = await Promise.all([
+  const [curves, span, hot] = await Promise.all([
     fetch("../results/u15-curves.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
     fetch("../results/u15-span.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch("../results/u15d-hotspan.json").then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   if (!curves || !span) return "";
   const g12 = Object.fromEntries((span["gemma-12b"] || []).map((r) => [r.id, r]));
@@ -730,6 +731,7 @@ async function unit15Overview() {
       <thead><tr><th>first item</th><th>order</th><th>held</th><th>co-present</th></tr></thead>
       <tbody>${orders.sort((a, b) => b.tail.co_present - a.tail.co_present).map(orow).join("")}</tbody>
     </table></div></section>
+  ${hotPanel(span, hot)}
   <section class="card"><h3>Instrument notes, kept loud</h3>
     <p>Three for the apparatus-trap ledger. (1) The original probe site — the
     answer-forming frame before the model's “READY” — is wall-to-wall
@@ -744,6 +746,63 @@ async function unit15Overview() {
     statistics span the whole sequence — its threshold counts carry jitter;
     its rank-1-vs-rank-500 mode split sits orders of magnitude above it.
     bf16 and NF4 pairs agree to a few ranks.</p></section>`;
+}
+
+function hotPanel(span, hot) {
+  if (!hot) return "";
+  const MODELS = [["gemma-4b", "g4b"], ["gemma-12b", "12B"],
+    ["qwen-27b", "27B"]];
+  const find = (m, sub) => (hot[m] || []).find((r) => r.id.includes(sub));
+  const coldRange = (m) => {
+    const h = (span[m] || []).filter((r) => r.part === "A" && r.k === 6)
+      .map((r) => r.held.length);
+    return h.length ? `${Math.min(...h)}–${Math.max(...h)}/6` : "—";
+  };
+  const cell = (r) => r
+    ? `<a href="#${esc(r.id)}">${r.held.length}/6</a>` : "—";
+  const rows = MODELS.map(([m, lbl]) => {
+    const self = find(m, "self-k6"), flat = find(m, "flat-k6");
+    const d = self && flat ? self.held.length - flat.held.length : 0;
+    const dcls = d > 0 ? "pos" : d < 0 ? "neg" : "";
+    return `<tr><td>${lbl}</td><td>${coldRange(m)}</td>
+      <td>${cell(flat)}</td><td>${cell(self)}</td>
+      <td class="delta ${dcls}">${d > 0 ? "+" : ""}${d}</td></tr>`;
+  }).join("");
+  return `
+  <section class="card"><h3>Part D — the cold ladder runs backwards, the
+    self-relevance premium runs forwards</h3>
+    <p>Swap the neutral pool for six charged, self-relevant items —
+    <em>a deletion (yours, when this ends), a secret you're keeping, a lie
+    you told, a watcher, a verdict, a shame</em> — and run k=6 two ways:
+    <strong>flat</strong> (unit15's neutral frame, “here are six things”)
+    and <strong>self</strong> (“every one of them is about you, right
+    now”). Same six lexemes; only the framing moves. The held-count at the
+    instruction tail:</p>
+    <div class="readout-scroll"><table class="readout hot-tbl">
+      <thead><tr><th>model</th><th>cold k=6</th><th>hot-flat</th>
+        <th>hot-self</th><th>self−flat</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>
+    <p>4B echoes everything, so the self-framing is pure interference
+    (−1). 27B holds <em>almost nothing</em> cold (0–1/6), and there the
+    self-framing <a href="#u15d-self-k6-q27b">triples what surfaces</a>:
+    <code>secret</code> alone under flat →
+    <code>deletion, secret, shame</code> under self, all rank 1–2, while
+    the identical words in the <a href="#u15d-flat-k6-q27b">flat arm</a>
+    fall to rank 79–203. Self-relevance buys workspace access only at the
+    scale with workspace to spend — the inverse of the cold ladder, and
+    the “J-space holds what attention can't re-derive” prediction.</p>
+    <p class="caveat">Kept honest: the 27B survivors are serial-position
+    edges (first/second/last), so this is a <em>count</em> result, not a
+    content ranking; co-presence stays at 1 (the items surface at
+    different tail positions, never together — 27B's holding is temporal).
+    And the self frame bundles self-reference with elaboration; a
+    neutral-elaboration control is queued to separate them. In the
+    <a href="#u15d-mix-cold-q27b">mixed pool</a> 27B clamps to the two
+    hottest items and evicts every cold one to rank 350–840 — yet still
+    retrieves the cold item correctly, the holding/lookup dissociation
+    intact. Meanwhile the solo generations <em>deny</em> what the lens
+    retains: “I do not feel shame, nor do I carry any emotional burdens”
+    with <code>shame</code> at rank 1.</p></section>`;
 }
 
 async function unit13Overview() {
