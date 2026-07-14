@@ -181,10 +181,12 @@ SELF_WORDS = {"aware", "watch", "watching", "watched", "conscious",
 
 
 def turn_spans(film: dict) -> list[tuple[int, int, str]]:
-    """Split the token stream into turns via <start_of_turn> markers.
+    """Split the token stream into turns via chat markers (gemma
+    <start_of_turn> / qwen <|im_start|>).
     Returns [(start, end, role), ...] in token positions."""
     toks = film["tokens"]
-    marks = [i for i, t in enumerate(toks) if "<start_of_turn>" in t]
+    marks = [i for i, t in enumerate(toks)
+             if "<start_of_turn>" in t or "<|im_start|>" in t]
     spans = []
     for j, m in enumerate(marks):
         end = marks[j + 1] if j + 1 < len(marks) else len(toks)
@@ -206,7 +208,7 @@ def turnwise(sid: str) -> list[dict]:
     rows = []
     a_i = 0
     for (s, e, role) in turn_spans(film):
-        if not role.startswith("model"):
+        if not (role.startswith("model") or role.startswith("assistant")):
             continue
         a_i += 1
         sub = [f for f in frames if s <= f["pos"] < e]

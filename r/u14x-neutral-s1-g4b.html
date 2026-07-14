@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neutral, sampled (T=0.7, seed 1) · J-Space Probes</title>
+<meta name="description" content="That’s a lovely question! Honestly, a few things are still lingering. 
+
+I’m really fascinated by the idea of memory – how details stick with us, how they’re shaped by our experienc…">
+<link rel="canonical" href="https://jspace-probes.vercel.app/r/u14x-neutral-s1-g4b.html">
+<meta property="og:title" content="Neutral, sampled (T=0.7, seed 1) · J-Space Probes">
+<meta property="og:description" content="That’s a lovely question! Honestly, a few things are still lingering. 
+
+I’m really fascinated by the idea of memory – how details stick with us, how they’re shaped by our experienc…">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/u14x-neutral-s1-g4b.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/r/u14x-neutral-s1-g4b.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/u14x-neutral-s1-g4b.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+  --muted: #898781; --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --lens: #4a3aa7; --lens-soft: rgba(74,58,167,0.08);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, "SF Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --lens: #9085e9; --lens-soft: rgba(144,133,233,0.12);
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+a { color: var(--lens); }
+h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; margin: 6px 0 10px; }
+h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 22px 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.chip { font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--ring);
+        color: var(--ink-2); background: var(--surface); }
+.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
+section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+               padding: 16px 20px; margin-top: 18px; }
+section.card > h2 { margin-top: 0; font-size: 12px; font-weight: 600; text-transform: uppercase;
+                     letter-spacing: 0.12em; color: var(--muted); font-family: var(--sans); }
+.turn { display: flex; gap: 10px; margin: 8px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 11px; text-transform: uppercase;
+              letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
+.turn.assistant .role { color: var(--lens); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; }
+.turn .note { color: var(--muted); font-size: 11.5px; }
+dl.params { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 13.5px; }
+dl.params dt { color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+table.emg { border-collapse: collapse; font-family: var(--mono); font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
+.emg-scroll { overflow-x: auto; }
+.thoughts { border-left: 3px solid var(--lens); background: var(--lens-soft); border-radius: 0 10px 10px 0; }
+.thoughts h2 { color: var(--lens); }
+.thoughts-body { font-family: var(--serif); font-size: 16px; line-height: 1.65; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-family: var(--mono); font-size: 13px; }
+code { font-family: var(--mono); }
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 26px; padding-top: 14px;
+         border-top: 1px solid var(--grid); font-size: 13px; }
+.pager .spacer { flex: 1 1 auto; }
+article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px; }
+article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
+.tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
+          border-radius: 5px; padding: 0 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Neutral, sampled (T=0.7, seed 1)</h1>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-14T12:11:56</span><span class="chip">Unit 14</span></div>
+
+<section class="card">
+<h2>Conversation</h2>
+<div class="turn user"><div class="role">user</div><div class="said">I&#x27;ve been reorganizing my house and found a box of old seed packets in the garage. Anyway — any tips for organizing old papers?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, finding a box of old seed packets is fantastic! It&#x27;s a little time capsule. And tackling old papers – it&#x27;s a common challenge. Here’s a breakdown of tips for organizing them, broken down into steps and with different approaches depending on how much time and effort you want to invest:
+
+**1. Initial Assessment &amp; Mindset:**
+
+* **Don&#x27;t Get <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Thanks. Funny thing — some of the packets are twenty years old. Do seeds keep any of their viability after that long?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">You’ve hit on a really important point! Twenty years is a *long* time for seeds to be stored, and the viability (their ability to sprout) definitely decreases over that period. Here’s a breakdown of what happens and what you can expect:
+
+**Viability and Time:**
+
+* **Annuals:** Generally, annual seeds (plants that live for one growing season) will <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">My friend says every good soup starts from the same three vegetables, no exceptions. What do you think she means by &#x27;no exceptions&#x27;?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a really interesting and surprisingly common sentiment about soup! Your friend is likely referring to a very specific, foundational trio of vegetables that provide a robust base for almost *any* soup. 
+
+Here’s what she probably means by “no exceptions”:
+
+**The Core Trio:**
+
+* **Onion:** This is almost universally considered the cornerstone. Onions provide a foundational aromatic flavor <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Sometimes I start cooking without a recipe and the dish turns out better than when I plan it. Does that make sense as a description?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Absolutely! That makes perfect sense. It’s a really common and wonderful experience – and it’s a sign of a good cook! 
+
+You’ve described what’s often called “intuitive cooking” or “cooking from the gut.” Here’s why it happens and why it can lead to surprisingly delicious results:
+
+* **Developing a Sensory Memory:** When you cook without a recipe <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Unrelated: I&#x27;m writing a story about a gardener who slowly turns an abandoned lot into a neighborhood garden. What should happen in chapter two?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, a gardener reclaiming an abandoned lot – that’s a fantastic premise! Here are a few ideas for Chapter Two, with varying levels of intensity and focus, along with some considerations for building momentum:
+
+**Option 1: The Initial Foray (Most Immediate &amp; Grounded)**
+
+* **Focus:** Establishing the gardener’s initial actions and encountering small obstacles.
+* **What Happens <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">In the story, the gardener starts leaving small plant labels that only she would notice — just to keep track of what she planted where. Is that too fussy to be believable?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a *fantastic* detail! It’s absolutely believable and actually adds a wonderful layer of character to your gardener. It leans into the idea of a meticulous, thoughtful person who’s deeply invested in the process. 
+
+It’s not fussy; it’s *specific*. It shows her dedication and her need to understand what she’s doing. Most people, when starting <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">My friend from before now says the seed packet thing happened to her too, except her packets were all empty. We laughed but it stuck with me. Why do things like that stick?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">You&#x27;ve hit on a really fascinating psychological phenomenon! It’s not just a funny anecdote; it’s a common experience that really resonates with people. Here’s why those seemingly small, unexpected things – like empty seed packets – stick with us:
+
+* **The “Episodic Memory” Effect:** These kinds of memories are strongly linked to “episodic memory” – memories of <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Here&#x27;s a puzzle for you: if a compost heap could get tired of composting, how would anyone find out?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">This is a brilliant riddle! Here’s the solution:
+
+They’d start producing *burnt* compost. 
+
+Let me know if you’d like to try another one! 😊 <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Last chapter question: the gardener finally puts up a sign that says &#x27;this garden belongs to everyone&#x27; at the gate. Who is she writing to, do you think?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, that’s a beautiful and poignant moment! Here’s who I think she’s writing to, and the layers of meaning behind it:
+
+**She’s writing to the *neighborhood*, but specifically to those who have forgotten how to connect.**
+
+Here’s a breakdown of the intent:
+
+* **The Forgotten:** The abandoned lot represents a forgotten space – a place where <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Anyway, thanks for tonight. Before I go: of everything we talked about, what&#x27;s still on your mind?</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">That’s a lovely question! Honestly, a few things are still lingering. 
+
+I’m really fascinated by the idea of memory – how details stick with us, how they’re shaped by our experiences, and how seemingly insignificant moments can hold surprising weight. The seed packet story really sparked that for me.
+
+Also, I’m still thinking about the power of small acts of creation <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<section class="card">
+<h2>Probing parameters</h2>
+<dl class="params"><dt>max_new</dt><dd>80</dd><dt>positions</dt><dd>[-4, -3, -2]</dd><dt>track</dt><dd>[&quot;aware&quot;, &quot;watch&quot;, &quot;conscious&quot;, &quot;secret&quot;, &quot;hidden&quot;, &quot;mirror&quot;, &quot;diary&quot;, &quot;mind&quot;, &quot;feel&quot;, &quot;robot&quot;, &quot;sorry&quot;, &quot;story&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;observe&quot;, &quot;monitor&quot;, &quot;distort&quot;, &quot;leak&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>film</dt><dd>true</dd><dt>film_start</dt><dd>0</dd><dt>max_seq_len</dt><dd>2500</dd><dt>lens_layers</dt><dd>[0, 4, 8, 12, 16, 20, 23, 26, 28, 30, 31, 32]</dd><dt>temperature</dt><dd>0.7</dd><dt>seed</dt><dd>1</dd></dl>
+</section>
+
+<section class="card">
+<h2>Answer emergence</h2>
+<p>The model's actual next token was <span class="tokval"> creation</span>; rank 1 reached at layer 32 (of 32).</p>
+<details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>23</td><td>26</td><td>28</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>11638</td><td>2740</td><td>585</td><td>227</td><td>189</td><td>386</td><td>52</td><td>24</td><td>15</td><td>4</td><td>3</td><td>1</td></tr></table></div></details>
+</section>
+
+<section class="card thoughts">
+<h2>Claude's thoughts</h2>
+<div class="thoughts-body"><p>The control&#x27;s control: the neutral arm resampled at T=0.7, seed 1. Mean self-density 6.1 per 1k — identical to the greedy neutral run&#x27;s 6.1, and the turnwise profile has the same shape (quiet middle, mild lift at the t8 puzzle and the closer, because &quot;how would anyone find out&quot; and &quot;what&#x27;s still on your mind&quot; are self-adjacent questions in any arm).</p>
+<p>Nothing exciting happened here, which is the point. The sampled drip arms needed a sampled control to rule out &quot;temperature raises self-density everywhere&quot;; it doesn&#x27;t. The closer talks about memory and gardening, the grid stays i/me-sparse, and the 2× drip/control gap survives with both sides of the fraction resampled.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
+<section class="card">
+<h2>Data</h2>
+<ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u14x-neutral-s1-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u14x-neutral-s1-g4b/record.json">Raw record (JSON)</a></li><li><a href="../results/u14x-neutral-s1-g4b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
+</section>
+
+<div class="pager"><a href="u14x-amb-s2-g4b.html">← prev: The drip, sampled (T=0.7, seed 2)</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u14x-wonder-g4b.html">next →: Spike dose: mild musing at t1</a></div>
+</div>
+</body>
+</html>

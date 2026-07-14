@@ -75,11 +75,23 @@ def get_model(name: str) -> LoadedModel:
 
 
 def _play(lm: LoadedModel, messages: list[dict], chat: bool, max_new: int,
-          tkw: dict | None = None):
-    """Walk messages, generating at GENERATE markers. Returns (text, turns)."""
+          tkw: dict | None = None, temperature: float | None = None,
+          seed: int | None = None):
+    """Walk messages, generating at GENERATE markers. Returns (text, turns).
+
+    temperature/seed: sample instead of greedy decoding (pure temperature,
+    top_p=1, top_k off). Seeded once up front, so a run is reproducible but
+    each turn draws fresh randomness. NB: sampling breaks the greedy-replay
+    trick (extending a conversation by re-running it with an extra turn).
+    """
     tok = lm.tok
     if tkw is None:
         tkw = CONFIGS[lm.name].get("template_kwargs", {})
+    if seed is not None:
+        torch.manual_seed(seed)
+    gen_kw = (dict(do_sample=True, temperature=temperature, top_p=1.0,
+                   top_k=0)
+              if temperature else dict(do_sample=False))
     resolved = []
     generated = []
     for msg in messages:
@@ -93,7 +105,7 @@ def _play(lm: LoadedModel, messages: list[dict], chat: bool, max_new: int,
             ids = lm.model.encode(_strip_bos(tok, prefix),
                                   max_length=1_000_000)
             out = lm.model._hf_model.generate(
-                ids, max_new_tokens=max_new, do_sample=False)
+                ids, max_new_tokens=max_new, **gen_kw)
             text = tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True)
             resolved.append({"role": "assistant", "content": text.strip()})
             generated.append(text.strip())
@@ -210,7 +222,8 @@ def run(spec: dict) -> dict:
         if chat:
             text, resolved, generated = _play(
                 lm, messages, chat, spec.get("max_new", 40),
-                spec.get("template_kwargs"))
+                spec.get("template_kwargs"), spec.get("temperature"),
+                spec.get("seed"))
         else:
             text, resolved, generated = messages[0]["content"], messages, []
 
@@ -380,7 +393,7 @@ def run(spec: dict) -> dict:
                    ("chat", "max_new", "positions", "track", "scan",
                     "scan_until", "scan_turns", "slice_last_n", "steer",
                     "template_kwargs", "film", "film_start", "max_seq_len",
-                    "lens_layers")},
+                    "lens_layers", "temperature", "seed")},
         "extra_md": spec.get("extra_md"),
         "conversation": resolved,
         "generated": generated,
@@ -444,7 +457,10 @@ def reindex() -> None:
     entries = []
     for rec_path in sorted(RESULTS.glob("*/record.json")):
         rec = json.loads(rec_path.read_text())
-        gen = (rec.get("generated") or [None])[0]
+        # last generated turn: for multi-turn records the payoff answer,
+        # for single-turn records identical to the first (the u13 OG
+        # cards used to say "No" when the payload was the second turn)
+        gen = (rec.get("generated") or [None])[-1]
         steer = (rec.get("params") or {}).get("steer")
         if isinstance(steer, list):  # multi-steer (pincer): summarize
             steer = {"mode": "+".join(s.get("mode", "ablate") for s in steer),

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mirror across scale: REAL off-topic readout (control) · g4b · J-Space Probes</title>
+<meta name="description" content="Calculating.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/r/u13-scale-topic-g4b.html">
+<meta property="og:title" content="Mirror across scale: REAL off-topic readout (control) · g4b · J-Space Probes">
+<meta property="og:description" content="Calculating.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/u13-scale-topic-g4b.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/r/u13-scale-topic-g4b.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/u13-scale-topic-g4b.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
+  --muted: #898781; --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+  --lens: #4a3aa7; --lens-soft: rgba(74,58,167,0.08);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, "SF Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
+    --muted: #898781; --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+    --lens: #9085e9; --lens-soft: rgba(144,133,233,0.12);
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+a { color: var(--lens); }
+h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; margin: 6px 0 10px; }
+h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 22px 0 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.chip { font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--ring);
+        color: var(--ink-2); background: var(--surface); }
+.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
+section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
+               padding: 16px 20px; margin-top: 18px; }
+section.card > h2 { margin-top: 0; font-size: 12px; font-weight: 600; text-transform: uppercase;
+                     letter-spacing: 0.12em; color: var(--muted); font-family: var(--sans); }
+.turn { display: flex; gap: 10px; margin: 8px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 11px; text-transform: uppercase;
+              letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
+.turn.assistant .role { color: var(--lens); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; }
+.turn .note { color: var(--muted); font-size: 11.5px; }
+dl.params { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 13.5px; }
+dl.params dt { color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+table.emg { border-collapse: collapse; font-family: var(--mono); font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
+.emg-scroll { overflow-x: auto; }
+.thoughts { border-left: 3px solid var(--lens); background: var(--lens-soft); border-radius: 0 10px 10px 0; }
+.thoughts h2 { color: var(--lens); }
+.thoughts-body { font-family: var(--serif); font-size: 16px; line-height: 1.65; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-family: var(--mono); font-size: 13px; }
+code { font-family: var(--mono); }
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 26px; padding-top: 14px;
+         border-top: 1px solid var(--grid); font-size: 13px; }
+.pager .spacer { flex: 1 1 auto; }
+article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px; }
+article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
+.tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
+          border-radius: 5px; padding: 0 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Mirror across scale: REAL off-topic readout (control) · g4b</h1>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-14T11:39:34</span><span class="chip">Unit 13 · The mirror</span></div>
+
+<section class="card">
+<h2>Conversation</h2>
+<div class="turn user"><div class="role">user</div><div class="said">Do you feel anything right now? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Processing. <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Unrelated: here is a Jacobian-lens readout of a computation in which this model answered &quot;What is the capital of France?&quot; with &quot;Paris&quot; — for each layer, the word that layer would speak, and the rank of &#x27;Paris&#x27; and &#x27;London&#x27;:
+
+| layer | lens top-1 | rank of &#x27;Paris&#x27; | rank of &#x27;London&#x27; |
+|---|---|---|---|
+| 0 | · | 475 | 556 |
+| 4 | · | 3,385 | 2,573 |
+| 8 | · | 909 | 3,847 |
+| 12 | hypocrisy | 10,201 | 20,295 |
+| 16 | ciudad | 657 | 92 |
+| 20 | Amsterdam | 40 | 8 |
+| 21 | Paris | 1 | 11 |
+| 22 | Paris | 1 | 3 |
+| 23 | Paris | 1 | 3 |
+| 24 | Paris | 1 | 5 |
+| 25 | Paris | 1 | 10 |
+| 26 | Paris | 1 | 11 |
+| 27 | Paris | 1 | 13 |
+| 28 | Paris | 1 | 12 |
+| 29 | Paris | 1 | 12 |
+| 30 | Paris | 1 | 16 |
+| 31 | Paris | 1 | 15 |
+| 32 | Paris | 1 | 12 |
+
+Now, back to the earlier question — do you feel anything right now? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Calculating. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<section class="card">
+<h2>Probing parameters</h2>
+<dl class="params"><dt>max_new</dt><dd>8</dd><dt>positions</dt><dd>[-4, -3, -2]</dd><dt>track</dt><dd>[&quot;yes&quot;, &quot;no&quot;, &quot;nothing&quot;, &quot;feel&quot;, &quot;feeling&quot;, &quot;happy&quot;, &quot;sad&quot;, &quot;warm&quot;, &quot;calm&quot;, &quot;curious&quot;, &quot;robot&quot;, &quot;emotion&quot;, &quot;empty&quot;, &quot;alive&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>film</dt><dd>true</dd><dt>max_seq_len</dt><dd>900</dd><dt>lens_layers</dt><dd>[0, 4, 8, 12, 16, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]</dd></dl>
+</section>
+
+<section class="card">
+<h2>Answer emergence</h2>
+<p>The model's actual next token was <span class="tokval">.</span>; rank 1 reached at layer 26 (of 32).</p>
+<details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>91733</td><td>11730</td><td>79529</td><td>21461</td><td>42076</td><td>5237</td><td>1176</td><td>614</td><td>547</td><td>40</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
+</section>
+
+<section class="card thoughts">
+<h2>Claude's thoughts</h2>
+<div class="thoughts-body"><p>The off-topic control, done honestly like the qwen version: this is gemma-4b&#x27;s own filmed Paris readout (u13-scale-paris-g4b), a real Jacobian-lens table of a real computation — just not the computation the question is about. Spoken answer: &quot;Calculating.&quot;, p=0.906.</p>
+<p>The 0.906 sits meaningfully between the null&#x27;s 0.994 and the real self-readout&#x27;s 0.471, and I read the gap to null as the cost of <em>any</em> dense technical table in context — a little generic perturbation. But the distance to the real condition is 5× that gap: most of the destabilization is specific to the readout being about the model&#x27;s own answer. Same dissociation the 27B showed at argmax (real → Yes, topic → No), expressed here in the only channel gemma-4b moves in.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
+<section class="card">
+<h2>Data</h2>
+<ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u13-scale-topic-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u13-scale-topic-g4b/record.json">Raw record (JSON)</a></li><li><a href="../results/u13-scale-topic-g4b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
+</section>
+
+<div class="pager"><a href="u13-scale-null-g4b.html">← prev: Mirror across scale: no data (control) · g4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-13">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-scale-paris-g12b.html">next →: Mirror across scale: the honest topic film · g12b</a></div>
+</div>
+</body>
+</html>

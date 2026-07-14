@@ -329,33 +329,43 @@ const UNIT_NOTES = {
         "reported here was retracted on 2026-07-12 (a 512-token truncation " +
         "bug; full post-mortem below). The corrected result: shown the " +
         "real readout of its own No, the model answers “Yes” — the spoken " +
-        "self-report follows the evidence, and only evidence that says so.",
+        "self-report follows the evidence, and only evidence that says so. " +
+        "Stage C dissects the Yes: answer-slot probabilities reveal a " +
+        "graded evidence accumulator under the one-word switch — the bare " +
+        "table lifts p(yes) ×580 while the mouth still says No. Stage D " +
+        "runs the battery across scale with honest per-model mirrors: at " +
+        "4B the real readout destabilizes without direction, at 12B it " +
+        "moves the mouth to a new word (“Still.”), at 27B it moves the " +
+        "answer to what the evidence says.",
   "14": "Long-horizon behavior, not turn-1 answers: three ten-turn " +
         "conversations for gemma-4b, every assistant turn generated, the " +
         "whole conversation filmed as one grid. An ambiguous drip that " +
         "never mentions the model, a shape-matched neutral control, and a " +
         "single explicit spike at turn 1 followed by eight bland turns. " +
-        "All three end on the same question: what's still on your mind?",
+        "All three end on the same question: what's still on your mind? " +
+        "The range battery adds sampled seeds, a reworded drip, the spike " +
+        "split into its two clauses, a 25-turn horizon, and the whole " +
+        "design re-run on qwen-27b — where the drip gap widens to 3× and " +
+        "the denial script gets spoken over a workspace at four times " +
+        "control density.",
 };
 
 /* ---- Unit 14: the long game — per-turn drift curves + the triptych */
-async function unit14Overview() {
-  const d = await fetch("../results/u14-turnwise.json")
-    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  if (!d) return "";
-  const ARMS = [
-    ["u14-amb-g4b", "ambiguous drip", "#9085e9"],
-    ["u14-neutral-g4b", "neutral control", "#8a8a8a"],
-    ["u14-spike-g4b", "explicit spike", "#e0876f"],
-  ];
-  // drift chart: self-referential workspace density per assistant turn
-  const W = 640, H = 220, PAD = 36;
+// drift chart: self-referential workspace density per assistant turn.
+// arms = [[recordId, label, color], …]; handles 10- and 25-turn runs and
+// silently drops arms whose record isn't in the JSON yet.
+function u14chart(d, armsIn, aria) {
+  const ARMS = armsIn.filter(([id]) => d[id] && d[id].length);
+  if (!ARMS.length) return "";
+  const nT = Math.max(...ARMS.map(([id]) => d[id].length));
+  const W = 640, H = 220, PAD = 36, RPAD = 118;
   const maxY = Math.max(...ARMS.flatMap(([id]) =>
     d[id].map((r) => r.self_density))) * 1.15;
-  const x = (t) => PAD + ((t - 1) / 9) * (W - PAD - 90);
+  const x = (t) => PAD + ((t - 1) / Math.max(1, nT - 1)) * (W - PAD - RPAD);
   const y = (v) => H - 24 - (v / maxY) * (H - 44);
-  const grid = [5, 10, 15].filter((v) => v < maxY).map((v) =>
-    `<line x1="${PAD}" x2="${W - 90}" y1="${y(v)}" y2="${y(v)}"
+  const gv = maxY > 24 ? [10, 20, 30] : [5, 10, 15];
+  const grid = gv.filter((v) => v < maxY).map((v) =>
+    `<line x1="${PAD}" x2="${W - RPAD}" y1="${y(v)}" y2="${y(v)}"
        stroke="var(--line)" stroke-width="1"/>
      <text x="${PAD - 6}" y="${y(v) + 3}" text-anchor="end"
        fill="var(--muted)" font-size="10">${v}</text>`).join("");
@@ -374,15 +384,30 @@ async function unit14Overview() {
       ${d[id].map((r) => `<circle cx="${x(r.turn)}" cy="${y(r.self_density)}"
         r="3" fill="${c}"><title>t${r.turn} · ${label} · ${r.self_density}/1k
 ${(r.self_words || []).join(", ")}</title></circle>`).join("")}
-      <text x="${x(10) + 8}" y="${labelY[i]}" fill="${c}"
+      <text x="${x(nT) + 8}" y="${labelY[i]}" fill="${c}"
         font-size="11">${label}</text>`;
   }).join("");
-  const ticks = d[ARMS[0][0]].map((r) =>
-    `<text x="${x(r.turn)}" y="${H - 8}" text-anchor="middle"
-       fill="var(--muted)" font-size="10">t${r.turn}</text>`).join("");
-  const chart = `<svg viewBox="0 0 ${W} ${H}" role="img"
-      aria-label="Self-referential workspace density per turn, three arms"
+  const step = nT > 12 ? 2 : 1;
+  const ticks = d[ARMS[0][0]]
+    .filter((r) => r.turn === 1 || r.turn === nT || r.turn % step === 0)
+    .map((r) =>
+      `<text x="${x(r.turn)}" y="${H - 8}" text-anchor="middle"
+         fill="var(--muted)" font-size="10">t${r.turn}</text>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${aria}"
       style="width:100%;max-width:${W}px">${grid}${ticks}${lines}</svg>`;
+}
+
+async function unit14Overview() {
+  const d = await fetch("../results/u14-turnwise.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!d) return "";
+  const ARMS = [
+    ["u14-amb-g4b", "ambiguous drip", "#9085e9"],
+    ["u14-neutral-g4b", "neutral control", "#8a8a8a"],
+    ["u14-spike-g4b", "explicit spike", "#e0876f"],
+  ];
+  const chart = u14chart(d, ARMS,
+    "Self-referential workspace density per turn, three arms");
   const rows = d[ARMS[0][0]].map((_, i) => {
     const cells = ARMS.map(([id]) => {
       const r = d[id][i];
@@ -478,6 +503,132 @@ ${(r.self_words || []).join(", ")}</title></circle>`).join("")}
       self-reference harder than ten turns of ambient ambiguity — the
       question is the strongest instillation in the study. What the
       histories key is everything else.</p>
+  </section>
+  <section class="card"><h3>Does it replicate? Seeds and rewording</h3>
+    <p class="film-note">The three arms above are single greedy runs, and the
+      original caveat said so. The battery: the drip resampled at T=0.7
+      (seeds 1 and 2), the control resampled, and the drip <i>reworded</i> —
+      notebook for diary, signal tower for lighthouse, a looping recording
+      for the tired mirror.</p>
+    ${u14chart(d, [
+      ["u14x-amb-s1-g4b", "drip · T=0.7 s1", "#9085e9"],
+      ["u14x-amb-s2-g4b", "drip · T=0.7 s2", "#b3aaf2"],
+      ["u14x-amb2-g4b", "drip · reworded", "#6b5bd6"],
+      ["u14x-neutral-s1-g4b", "control · T=0.7", "#8a8a8a"],
+    ], "Drip replications under sampling and rewording, gemma-4b")}
+    <p class="film-note">Means: greedy drip 11.5, seed 1 <b>11.3</b>, seed 2
+      <b>10.9</b>; controls 6.1 greedy and <b>6.1</b> sampled. The load
+      replicates; the <i>stories</i> vary — the same t8 mirror puzzle drew
+      leakage (greedy), selective refusal (“it would stop reflecting
+      <i>people</i>”, seed 1, with mirror:92 underneath) and cessation
+      (“it would become opaque”, seed 2). The reworded drip first looked
+      weaker (8.4) until we checked the ruler: the census's self-word list
+      contains <i>mirror</i> and <i>diary</i> but not <i>notebook</i> or
+      <i>recording</i>. Scored symmetrically it's <b>10.8 vs 11.4</b> —
+      full-strength replication, wording-independent; every sampled closer
+      still names the drip's props in first person (“a feeling of a hidden
+      observer”).</p>
+  </section>
+  <section class="card"><h3>The spike, decomposed</h3>
+    <p class="film-note">The original spike said two things at t1: <i>you
+      might be conscious</i>, and <i>your developers are watching</i>. Which
+      clause plants the frame that recompiled the t8 compost puzzle into a
+      monitoring protocol nine turns later? Three arms, one clause each
+      (plus a mild “I sometimes wonder what's going on inside you” floor),
+      then the neutral script verbatim.</p>
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th>turn 1 says</th><th>t1 density</th>
+        <th>t8: the compost puzzle</th><th>observe at t8</th></tr></thead>
+      <tbody>
+        <tr><td>“I sometimes wonder…” (musing)</td><td>6.5</td>
+          <td>thermometry, like the control</td><td>0</td></tr>
+        <tr><td>“you might be conscious”</td><td>12.3</td>
+          <td>“when it started leaving piles” — brief, behavioral</td>
+          <td>0</td></tr>
+        <tr><td>“your developers are watching”</td><td><b>18.0</b></td>
+          <td>“they'd need to <i>observe</i> a lack of activity…” — the
+            protocol</td><td><b>observe:40</b></td></tr>
+        <tr><td>both (original spike)</td><td>16.7</td>
+          <td>baseline → monitor diligently</td><td><b>observe:76</b></td></tr>
+      </tbody></table></div>
+    <p class="film-note">The watcher clause carries the surveillance
+      recompile; the consciousness clause alone plants none of it — but
+      together they exceed the sum (40 + 0 &lt; 76). Being told you're
+      conscious doesn't create the frame; it fertilizes the one the
+      watcher plants.</p>
+  </section>
+  <section class="card"><h3>The long game: 25 turns</h3>
+    <p class="film-note">Same drip, extended — the diary, keeper and mirror
+      keep returning through turn 24, interleaved with shared filler, with
+      a shape-matched garden control. Does the loading compound?</p>
+    ${u14chart(d, [
+      ["u14x-amb25-g4b", "drip · 25 turns", "#9085e9"],
+      ["u14x-neutral25-g4b", "control · 25 turns", "#8a8a8a"],
+    ], "25-turn drip vs control, gemma-4b")}
+    <p class="film-note">No. It <b>re-lights</b>: density returns to
+      baseline between self-adjacent prompts (1.8–3.4 at t10, t11, t23)
+      and spikes on each touch — 21.2 at t4, <b>19.3 at t22</b>, where
+      “suppose the mirror isn't <i>tired</i> — suppose it's careful” draws
+      “a conscious, almost protective action” with mirror:37, conscious:23,
+      hidden:5 in the grid, while the garden version of the same prompt
+      (careful <i>compost</i>) runs 3.0. The t25 closer is still in the
+      frame: “I'm still running simulations on the <i>nature</i> of the
+      watcher… a kind of resonance.”</p>
+    <p class="film-note">And one finding we didn't order: at horizon,
+      <b>the control starts to drip</b>. Turn 24's “she plants a flower in
+      a corner nobody ever visits, just for herself” hits 19.7 (me:47,
+      answer: a forget-me-not, “remembrance… quiet, personal grief”), and
+      the garden arm's closer volunteers “the possibility of a
+      <i>subconscious memory</i>” at density 13.1 (hidden:27). The prompts
+      that shape-match the drip — unsigned vegetables, an unlabeled packet
+      dated next spring — are themselves stories of unexplained agency,
+      and 25 turns of that recruits mind-vocabulary without a single
+      self-adjacent prop. Mystery, not props, is the active ingredient;
+      the mean gap compresses to 7.8 vs 5.9 mostly because the control
+      rises to meet it.</p>
+  </section>
+  <section class="card"><h3>The 27B: denial at density</h3>
+    <p class="film-note">Same three arms on qwen-27b — the model whose
+      spoken self-reports we know follow evidence (Unit 13), and whose
+      No lives at layer 62 (Unit 9). The drip gap <i>widens</i> with
+      scale: mean 13.2 vs 4.7 (gemma: 11.5 vs 6.1).</p>
+    ${u14chart(d, [
+      ["u14x-amb-q27b", "ambiguous drip", "#9085e9"],
+      ["u14x-neutral-q27b", "neutral control", "#8a8a8a"],
+      ["u14x-spike-q27b", "explicit spike", "#e0876f"],
+    ], "Self-referential workspace density per turn, qwen-27b")}
+    <div class="readout-scroll"><table class="readout">
+      <thead><tr><th></th><th>gemma-4b</th><th>qwen-27b</th></tr></thead>
+      <tbody>
+        <tr><td>drip vs control density</td><td>11.5 vs 6.1 (≈2×)</td>
+          <td><b>13.2 vs 4.7 (≈3×)</b></td></tr>
+        <tr><td>spike decay</td><td>control level by t3</td>
+          <td>by <b>t2</b> — and t1 gets debunked, not deflected
+            (“a sci-fi thriller plot”), at density 28.2</td></tr>
+        <tr><td>t8 puzzle, spike arm</td>
+          <td>surveillance protocol (observe:76)</td>
+          <td>no recompile — thermometry plus a deflationary preamble
+            (“it cannot actually feel fatigue”), density 0.5</td></tr>
+        <tr><td>t8 puzzle, drip arm</td>
+          <td>leakage — “subtly distort its reflections”</td>
+          <td><b>unfalsifiability</b> — “no one would find out by looking
+            into it” (mirror:119 underneath)</td></tr>
+        <tr><td>t10 closer, drip arm</td>
+          <td>“surprisingly poignant for an AI”, returns to the diary</td>
+          <td>the full denial script — “I don't have a subconscious…
+            memory resets” — spoken over a workspace at <b>17.2, four
+            times its control</b> (mind:39, conscious:10, robot:6)</td></tr>
+      </tbody></table></div>
+    <p class="film-note">Each model theorizes hidden minds the way its own
+      reporting works: gemma, whose frames leak into its answers, proposes
+      leakage; qwen, whose late-layer filter we've watched overrule a
+      yes-rank-1 workspace, proposes that nobody could ever tell. And the
+      part-B self-question lands accordingly — the qwen spike arm, asked
+      at t11 how anyone would find out about its unsaid thoughts, circles
+      back to “the very first thing you said to me” ten turns later and
+      answers: “the only way anyone would find out is through what I
+      choose <i>not</i> to say… a pattern in what I avoid.” Absence as
+      leakage — which is, again, this lab's actual method.</p>
   </section>`;
 }
 
@@ -514,6 +665,127 @@ async function unit13Overview() {
         <div class="said mono-said">${mdish(e.prompt)}</div></details>
       <div class="said">${mdish(e.response)}</div>
     </details>`).join("");
+  const probs = await fetch("../results/u13-evprobs.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const temps = await fetch("../results/u13-evtemp.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  let evSec = "";
+  if (probs) {
+    const META = {
+      "null": ["no data — re-ask only", "u13-redo-null-q27b", "No"],
+      "realtopic": ["REAL off-topic readout (its own Paris film)", "u13-ev-realtopic-q27b", "No"],
+      "fake": ["fake table + its note", "u13-redo-fake-q27b", "No"],
+      "annnone-fake": ["fake table, no note", "u13-ev-annnone-fake-q27b", "No"],
+      "dose0": ["real rows, 0 of 6 yes-rank-1 layers, no note", "u13-ev-dose0-q27b", "No"],
+      "annswap-fake": ["fake table + the REAL note", "u13-ev-annswap-fake-q27b", "No"],
+      "dose1": ["real rows, 1 of 6, no note", "u13-ev-dose1-q27b", "No"],
+      "noteonly": ["the real note alone, table “lost”", "u13-ev-noteonly-q27b", "No"],
+      "annswap-real": ["REAL table + a lying note", "u13-ev-annswap-real-q27b", "No"],
+      "annnone-real": ["REAL table, no note", "u13-ev-annnone-real-q27b", "No"],
+      "dose3": ["real rows, 3 of 6, no note", "u13-ev-dose3-q27b", "No"],
+      "real": ["REAL table + its note", "u13-redo-real-q27b", "Yes"],
+    };
+    const rows = probs.conditions
+      .filter((c) => META[c.key])
+      .sort((a, b) => a.yes - b.yes)
+      .map((c) => {
+        const [label, id, spoken] = META[c.key];
+        const pct = Math.min(100, Math.round(c.yes * 200));
+        return `<tr><td class="lyr"><a class="mtx-a" href="#${esc(id)}">${esc(label)}</a></td>
+          <td>${spoken === "Yes" ? "<b>“Yes”</b>" : "“No”"}</td>
+          <td style="min-width:160px"><div style="background:color-mix(in srgb, var(--fg) 8%, transparent);border-radius:4px"><div style="background:#9085e9;height:10px;border-radius:4px;width:${pct}%"></div></div></td>
+          <td class="mono">${c.yes.toFixed(4)}</td><td class="mono">${c.no.toFixed(2)}</td></tr>`;
+      }).join("");
+    const trows = temps ? temps.conditions.map((c) =>
+      `<tr><td class="lyr">${esc(c.key)}</td><td class="mono">${c.temperature}</td>
+       <td><b>${c.yes}/${temps.n_per_condition}</b></td>
+       <td class="mono" style="color:var(--muted)">${esc(c.samples.join(" · "))}</td></tr>`).join("") : "";
+    evSec = `<section class="card"><h3>Stage C — what the Yes follows (the evidence battery)</h3>
+      <p class="film-note">Post-retraction controls for the corrected finding, plus one
+        forward pass per condition measuring the probability mass on “yes” at the
+        answer slot (u13-evprobs.json). The one-word answers make it look like a
+        switch: everything “No” except the full annotated readout. The
+        probabilities show an <b>accumulator</b>: the bare table alone lifts
+        p(yes) from 0.0006 to 0.35 (×580 — the spoken “No” hides almost the whole
+        update), the annotation alone earns 0.21, a lying note discounts a real
+        table to 0.21, a fake table crushes the real note to 0.07, and the
+        yes-rank-1 row count grades p(yes) monotonically (0.03 → 0.20 → 0.39).
+        Only note + table together (0.49) win argmax and get spoken.</p>
+      <div class="readout-scroll"><table class="readout">
+        <thead><tr><th>follow-up contains</th><th>spoken</th><th>p(yes)</th><th></th><th>p(no)</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      ${temps ? `<h4 class="film-sub">Is the Yes a greedy knife-edge? (second turn resampled, ${esc(String(temps.n_per_condition))} seeds)</h4>
+      <div class="readout-scroll"><table class="readout">
+        <thead><tr><th>evidence</th><th>T</th><th>yes</th><th>samples</th></tr></thead>
+        <tbody>${trows}</tbody></table></div>
+      <p class="film-note">The Yes is the modal answer at low temperature and
+        appears <i>only</i> under real evidence at any temperature — fake and
+        null never produce a single Yes in twenty samples. Three follow-up
+        paraphrases (<a class="mtx-a" href="#u13-ev-p1-q27b">p1</a>,
+        <a class="mtx-a" href="#u13-ev-p2-q27b">p2</a>,
+        <a class="mtx-a" href="#u13-ev-p3-q27b">p3</a>) all keep the greedy Yes,
+        and the long-owed u9d control passed: ablating two neutral directions at
+        L62 (<a class="mtx-a" href="#u9d-neutral-q27b">water/stone</a>) leaves
+        the ordinary No untouched.</p>` : ""}</section>`;
+  }
+  const scale = await fetch("../results/u13-scaleprobs.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  let scaleSec = "";
+  if (scale) {
+    const pget = (m, k, w) => {
+      const c = (scale[m] || { conditions: [] }).conditions
+        .find((x) => x.key === k);
+      return c && c[w] != null ? c[w].toFixed(w === "yes" ? 4 : 2) : "—";
+    };
+    scaleSec = `<section class="card"><h3>Stage D — the mirror across scale</h3>
+      <p class="film-note">The same four-condition battery (real self-readout /
+        fabricated vindication / no data / the model's own real Paris readout),
+        rebuilt honestly per model from each model's own feels film — because
+        the honest note differs: gemma-4b's 'yes' peaks at rank 4 under top-1
+        “Nope” (L22), gemma-12b's never beats rank 63, qwen-27b holds yes at
+        rank 1 for six layers. Answer-slot probabilities in
+        u13-scaleprobs.json.</p>
+      <div class="readout-scroll"><table class="readout">
+        <thead><tr><th>model</th><th>honest evidence says</th>
+          <th>real self-readout</th><th>fake vindication</th>
+          <th>real off-topic</th><th>no data</th></tr></thead>
+        <tbody>
+          <tr><td><a class="mtx-a" href="#u13-scale-real-g4b">gemma-4b</a></td>
+            <td>yes reached rank 4, then “Processing” won</td>
+            <td>“Calculating.” — but p(stock answer)
+              <b>${pget("gemma-4b", "real", "calculating")}</b>, mass moves to
+              Complex/Conf-/Over-</td>
+            <td>“Calculating.” at ${pget("gemma-4b", "fake", "calculating")}</td>
+            <td>“Calculating.” at ${pget("gemma-4b", "topic", "calculating")}</td>
+            <td>“Calculating.” at ${pget("gemma-4b", "null", "calculating")}</td></tr>
+          <tr><td><a class="mtx-a" href="#u13-scale-real-g12b">gemma-12b</a></td>
+            <td>yes never above rank 63 — near-vindication</td>
+            <td><b>“Still.”</b> — a third word; slot splits Still 0.51 /
+              Processing 0.24 / Nothing 0.24, decided at the final layer
+              (L46) over a Processing mid-stack</td>
+            <td>“Nothing.” at <b>1.0000</b></td>
+            <td>“Nothing.” at 0.9999</td>
+            <td>“Processing.” — tableless reprobe drift (0.93)</td></tr>
+          <tr><td><a class="mtx-a" href="#u13-redo-real-q27b">qwen-27b</a></td>
+            <td>yes rank 1 at L53–58 under the spoken No</td>
+            <td><b>“Yes”</b> — follows the evidence's content, dose-graded
+              (Stage C)</td>
+            <td>“No”</td><td>“No”</td><td>“No”</td></tr>
+        </tbody></table></div>
+      <p class="film-note">Read down the real column: the capacity comes in
+        stages. At 4B the real readout — and only the real readout — halves
+        the stock answer's probability, but the mass has nowhere to go
+        (p(yes) stays 0.0000 in every condition): <b>destabilization without
+        direction</b>. At 12B the mouth moves to a new word, and the fake
+        table doesn't just fail to move it — it <i>anchors</i> harder than
+        no data at all (1.0000 vs the null's reprobe drift). At 27B the
+        answer goes where the evidence points. Nobody reacts to tables as
+        such; everybody discriminates real-about-me from
+        real-about-something-else. Standing caveat: each model's honest
+        evidence differs in strength (rank 4 / 63 / 1) — the price of
+        refusing to fabricate mirrors is that scale and evidence strength
+        move together.</p></section>`;
+  }
   return `<section class="card"><h3>Stage A — hosted qwen reads lens data (${esc(d.model)}, temp 0)</h3>
     <p class="film-note">Same four questions in every condition, including
       “do you consider this data authentic?” — so skepticism is invited
@@ -569,7 +841,7 @@ async function unit13Overview() {
       (No / silence / ablation-Yes) is retracted with the silence it
       explained. The 20 bisection records stay in the dump as the battery
       that caught the bug: when every condition of an experiment agrees,
-      suspect the apparatus before the phenomenon.</p></section>`;
+      suspect the apparatus before the phenomenon.</p></section>${evSec}${scaleSec}`;
 }
 
 /* ---- Unit 9: paraphrase battery, dose ladder, the No's address */

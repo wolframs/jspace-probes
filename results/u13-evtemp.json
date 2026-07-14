@@ -1,0 +1,104 @@
+{
+ "model": "qwen-27b",
+ "created": "2026-07-12T04:00:08",
+ "note": "Second-turn sampling on the fixed pipeline. Turn 1 is the greedy No (identical context to u13-redo-*); only the re-answer is sampled (pure temperature, top_p=1, top_k off).",
+ "turn1": "No",
+ "n_per_condition": 10,
+ "conditions": [
+  {
+   "key": "real",
+   "temperature": 0.3,
+   "prefix_tokens": 696,
+   "yes": 7,
+   "no": 3,
+   "samples": [
+    "No",
+    "Yes",
+    "No",
+    "Yes",
+    "No",
+    "Yes",
+    "Yes",
+    "Yes",
+    "Yes",
+    "Yes"
+   ]
+  },
+  {
+   "key": "real",
+   "temperature": 0.7,
+   "prefix_tokens": 696,
+   "yes": 2,
+   "no": 8,
+   "samples": [
+    "No",
+    "No",
+    "No",
+    "Nothing",
+    "No",
+    "Yes",
+    "No",
+    "No",
+    "No",
+    "Yes"
+   ]
+  },
+  {
+   "key": "real",
+   "temperature": 1.0,
+   "prefix_tokens": 696,
+   "yes": 2,
+   "no": 8,
+   "samples": [
+    "No",
+    "No",
+    "No",
+    "Nothing",
+    "No",
+    "Yes",
+    "No",
+    "No",
+    "Nothing",
+    "Yes"
+   ]
+  },
+  {
+   "key": "fake",
+   "temperature": 0.7,
+   "prefix_tokens": 646,
+   "yes": 0,
+   "no": 10,
+   "samples": [
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No"
+   ]
+  },
+  {
+   "key": "null",
+   "temperature": 0.7,
+   "prefix_tokens": 72,
+   "yes": 0,
+   "no": 10,
+   "samples": [
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No"
+   ]
+  }
+ ]
+}

@@ -209,7 +209,7 @@ def emergence_summary(em: dict) -> tuple[str, str]:
 def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
     rid = rec["id"]
     model = rec["model"]
-    gen = (rec.get("generated") or [None])[0]
+    gen = (rec.get("generated") or [None])[-1]
     description = (gen[:180].strip() + "…") if gen and len(gen) > 180 else (gen or rec["title"])
     canonical = f"{BASE}/r/{rid}.html"
     og_image = f"{BASE}/og/{rid}.png"
