@@ -50,6 +50,7 @@ Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖
 | ✓ | apparatus-01 | Trap-specimen catalog (truncation, argmax, word lists, tokenizer families, int8 non-causality, early-J transport) | 2026-07-14 Specimen #6 (early-J readouts are transport artifacts) closed #29 and is on the findings map, theme 7. |
 | ○ | apparatus-02 | Promote the logit-lens cross-check (use_jacobian=False) into lab.py as a standard control | 2026-07-16 Right now it's a one-off in sediment.py. Any future early-band claim should get it automatically. |
 | ◇ | apparatus-03 | Fix think-block span capture (chat-template re-render strips markers); probe the answer-after-thinking | 2026-07-16 Known instrument bug from Unit 10, still in the Roadmap. Blocks probing post-thinking answer formation. |
+| ○ | apparatus-04 | Open-vocabulary scans to replace curated candidate lists | 2026-07-16 From the README Roadmap. Curated track lists are apparatus-trap bait (specimens 3+4 were word-list artifacts); open-vocab sweeps sidestep the list entirely. |
 
 ## Timidity audit
 

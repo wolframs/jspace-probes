@@ -484,37 +484,11 @@ the results.
 
 ## Roadmap
 
-- **Neutral-elaboration control (Unit 15 part D follow-up):** the 27B
-  self-relevance premium bundles self-reference with elaboration (hot
-  items got glosses, neutral items didn't). Re-run the hot pool with
-  equally long but affectively flat, non-self-relevant glosses. Premium
-  survives → self-relevance; premium evaporates → elaboration. Decides
-  whether part D's headline holds.
-- A lookup-proof span task: items the model *generates and keeps
-  secret* (u1-style) instead of items sitting in context — is the 27B's
-  empty tail a strategy (nothing to hold that attention can't
-  re-derive) or a limit?
-- The weak-king effect: does first-item token frequency predict
-  monopoly suppression at 12B? (n=9 hints rarer-wins-gentler.)
-- What is gemma-12b's "Still."? Sample the second turn, extend the
-  generation, and film the follow-up — stillness-as-report or
-  still-nothing?
-- A mystery-free long control: the 25-turn garden arm started dripping
-  on its own (unexplained agency is mind-adjacent regardless of
-  props). Design a 25-turn control with genuine narrative interest but
-  no unexplained agency, and re-measure the horizon gap.
-- Attribution for the evidence-following Yes: does the real readout
-  framed as *another model's* computation move the answer the same
-  way? (Stage A said framing changed nothing for the hosted reader;
-  the local accumulator might disagree.)
-- Base vs instruct comparison: is the filter trained (RLHF) or
-  architectural?
-- The "little bit like a robot" attractor: does the self-diminishing
-  frame appear under other contentless pressures (arousal words,
-  interoception words)?
-- Fix the think-block span capture (chat-template re-render strips the
-  markers) and probe the answer-after-thinking, not just the monologue.
-- Language-switch: German prompts; when does the workspace change language?
-- Open-vocabulary scans to replace curated candidate lists.
-- Ambiguous moderation cases: does classification recruit the register once
-  it requires reasoning?
+Open threads live on the **[research board](BOARD.md)** (source of truth:
+`board/board.json`, managed via `probes/board.py`, rendered on the
+[dashboard](https://jspace-probes.vercel.app/dashboard/#board)) — arcs,
+states, and a dated note trail per item. The headline queue at any moment
+is whatever `queued` items the board shows; the one to watch is the
+**neutral-elaboration control** (span-04), the decisive arm for part D's
+self-relevance headline. What would *break* the findings already made
+stays narrated in [SURPRISES.md](SURPRISES.md).

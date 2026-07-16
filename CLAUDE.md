@@ -65,7 +65,10 @@ he sets directions and expects designed-and-executed experiments back.
   `dissolved`/`dropped` always keep the why; stale `queued` gets demoted,
   not left to flatter the queue; never rewrite old notes — append a dated
   correction (git diffs on board.json are the audit trail). Sweep the board
-  once per expedition close, alongside the site regen.
+  once per expedition close, alongside the site regen. CANONICAL = the
+  LOCAL BOARD.md / local dashboard #board (vercel/online may lag behind —
+  never treat the deployed copy as ground truth). README's Roadmap is just
+  a pointer here; don't grow open-work lists elsewhere.
 
 ## Conventions
 
