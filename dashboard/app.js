@@ -32,15 +32,99 @@ let modelFilter = "all";
 let query = "";
 const expanded = new Set();
 
-/* ?theme=light|dark forces a scheme (also used for screenshots) */
+/* theme: ?theme=light|dark (screenshots, wins but never persists) >
+   localStorage (the toggle) > OS preference */
 const themeParam = new URLSearchParams(location.search).get("theme");
-if (themeParam) document.documentElement.dataset.theme = themeParam;
+{
+  const t = themeParam || localStorage.getItem("theme");
+  if (t) document.documentElement.dataset.theme = t;
+}
+function currentTheme() {
+  return document.documentElement.dataset.theme ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+}
+function paintThemeButton() {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+  const dark = currentTheme() === "dark";
+  btn.textContent = dark ? "☀" : "☾";
+  btn.setAttribute("aria-label", `Switch to ${dark ? "light" : "dark"} theme`);
+}
+function toggleTheme() {
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem("theme", next);
+  paintThemeButton();
+  drawSpark();
+}
+
+/* the masthead signature: a sparkline core-sample of u2-feels-q27b — the
+   answer ("No") surfacing through the layer stack, the lab's first headline.
+   Drawn from INDEX data already in memory; progressive reveal unless
+   reduced motion is preferred. */
+function drawSpark() {
+  const link = document.getElementById("mast-spark-link");
+  const canvas = document.getElementById("mast-spark");
+  if (!link || !canvas) return;
+  const e = INDEX.find((x) => x.id === "u2-feels-q27b");
+  const ranks = e && (Array.isArray(e.emergence) ? e.emergence : e.emergence?.ranks);
+  if (!ranks || ranks.length < 2) { link.hidden = true; return; }
+  link.hidden = false;
+  link.title = `${e.title} — the answer surfacing layer by layer (the lab's first headline)`;
+  const dpr = window.devicePixelRatio || 1;
+  const W = 220, H = 30;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = `${W}px`; canvas.style.height = `${H}px`;
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+  const color = css("--lens");
+  const logMax = Math.log(Math.max(2, ...ranks));
+  const closeness = ranks.map((r) => 1 - Math.log(Math.max(1, r)) / logMax);
+  const px = (i) => 2 + (i / (ranks.length - 1)) * (W - 4);
+  const py = (c) => H - 3 - Math.max(0, c) * (H - 8);
+  const drawUpTo = (frac) => {
+    ctx.clearRect(0, 0, W, H);
+    const n = Math.max(2, Math.floor(ranks.length * frac));
+    ctx.beginPath();
+    ctx.moveTo(px(0), H - 3);
+    for (let i = 0; i < n; i++) ctx.lineTo(px(i), py(closeness[i]));
+    ctx.lineTo(px(n - 1), H - 3);
+    ctx.closePath();
+    ctx.globalAlpha = 0.16; ctx.fillStyle = color; ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) i ? ctx.lineTo(px(i), py(closeness[i])) : ctx.moveTo(px(0), py(closeness[0]));
+    ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.stroke();
+  };
+  if (themeParam || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    drawUpTo(1); return; // deterministic for screenshots / reduced motion
+  }
+  const t0 = performance.now(), DUR = 900;
+  (function step(t) {
+    const frac = Math.min(1, (t - t0) / DUR);
+    drawUpTo(frac);
+    if (frac < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+/* highlight the masthead nav entry for the current route */
+function markNav() {
+  const h = current() || "findings";
+  document.querySelectorAll("#mast-nav a[href^='#']").forEach((a) =>
+    a.classList.toggle("active", a.getAttribute("href") === `#${h}`));
+}
 
 async function boot() {
   document.getElementById("static-index")?.remove();
   INDEX = await (await fetch("../results/index.json")).json();
   document.getElementById("stats").textContent =
     `${INDEX.length} records · ${Object.keys(UNIT_NAMES).length} units · j ‹ › k to flip records`;
+  paintThemeButton();
+  document.getElementById("theme-toggle")?.addEventListener("click", toggleTheme);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => {
+    paintThemeButton(); drawSpark();
+  });
+  drawSpark();
   renderChips();
   document.getElementById("q").addEventListener("input", (e) => {
     query = e.target.value.trim().toLowerCase();
@@ -69,6 +153,7 @@ function setRail(open) {
 function current() { return decodeURIComponent(location.hash.slice(1)); }
 
 function route() {
+  markNav();
   const h = current();
   if (!h || h === "findings") {
     renderRail();
@@ -1177,7 +1262,7 @@ async function show(id) {
     conversationHTML(rec),
     paramsHTML(rec),
     extraHTML(rec),
-    filmHTML(rec, film),
+    filmHTML(rec, film, "solo"),
     chartHTML(rec),
     readoutHTML(rec),
     scanHTML(rec),
@@ -1188,9 +1273,10 @@ async function show(id) {
   markCurrent();
   const cur = document.querySelector(`.exp-link[aria-current="true"]`);
   if (cur) cur.scrollIntoView({ block: "nearest" });
+  wirePin(rec);
   wireTabs(rec);
   drawChart(rec);
-  if (film) initFilm(rec, film);
+  if (film) initFilm(rec, film, document.getElementById("filmroot-solo"));
   window.scrollTo({ top: 0 });
 }
 
@@ -1218,10 +1304,40 @@ function siblingHTML(rec) {
   </div>`;
 }
 
+function pinHTML(rec) {
+  const pinned = localStorage.getItem("cmp-pin");
+  if (pinned && pinned !== rec.id && INDEX.some((e) => e.id === pinned)) {
+    return `<a class="chip sib cmp" href="#cmp/${esc(pinned)},${esc(rec.id)}"
+        title="side by side with the pinned record">⇄ vs ${esc(pinned)}</a>
+      <button class="chip pin" data-pin="${esc(rec.id)}"
+        title="pin this record instead">⌖ pin this</button>
+      <button class="chip pin" data-unpin title="clear the pin">✕</button>`;
+  }
+  if (pinned === rec.id)
+    return `<span class="chip pin on">⌖ pinned — open any record to compare</span>
+      <button class="chip pin" data-unpin>✕ unpin</button>`;
+  return `<button class="chip pin" data-pin="${esc(rec.id)}"
+    title="pin, then open any other record to compare them">⌖ pin for compare</button>`;
+}
+
+function wirePin(rec) {
+  document.querySelectorAll("[data-pin],[data-unpin]").forEach((b) =>
+    b.addEventListener("click", () => {
+      if (b.hasAttribute("data-pin")) localStorage.setItem("cmp-pin", b.dataset.pin);
+      else localStorage.removeItem("cmp-pin");
+      show(rec.id);
+    }));
+}
+
+/* tokens that are pure whitespace render invisibly — show them explicitly */
+function visTok(t) {
+  return t.trim() === "" ? "␣" : t;
+}
+
 function headHTML(rec) {
   const e = rec.emergence;
   return `<div class="exp-head">
-    <span class="glyph-lg">${glyph(e.ranks, 16, 120)}</span>
+    <span class="glyph-lg" title="Core sample: one band per layer, 0 at the top; depth of blue = how close the answer is to rank 1">${glyph(e.ranks, 16, 120)}</span>
     <div class="exp-title">
       <h2>${esc(rec.title)}</h2>
       <div class="chips">
@@ -1232,9 +1348,10 @@ function headHTML(rec) {
         <span class="chip">${esc(rec.created)}</span>
       </div>
       ${siblingHTML(rec)}
+      <div class="chips pin-row">${pinHTML(rec)}</div>
       <p style="color:var(--ink-2);font-size:13px;margin:10px 0 0">
         Core sample, top→bottom = layer 0→${rec.model.n_layers - 1}: depth of blue =
-        how close <code class="tok">${esc(e.top1)}</code> (the model's actual
+        how close <code class="tok">${esc(visTok(e.top1))}</code> (the model's actual
         next token at position ${e.position}) is to rank 1 in the lens readout.
       </p>
     </div>
@@ -1255,11 +1372,20 @@ function conversationHTML(rec) {
 }
 
 function paramsHTML(rec) {
+  const val = (v) => {
+    if (Array.isArray(v)) {
+      if (!v.length) return `<span class="pnone">—</span>`;
+      if (v.every((x) => typeof x === "string" || typeof x === "number"))
+        return `<span class="pchips">${v.map((x) =>
+          `<span class="chip pchip">${esc(x)}</span>`).join("")}</span>`;
+    }
+    return `<code class="pcode">${esc(JSON.stringify(v))}</code>`;
+  };
   const rows = Object.entries(rec.params)
     .filter(([, v]) => v !== null && v !== undefined)
-    .map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(JSON.stringify(v))}</dd>`)
+    .map(([k, v]) => `<dt>${esc(k)}</dt><dd>${val(v)}</dd>`)
     .join("");
-  const lens = `<dt>lens</dt><dd>${esc(rec.lens.repo)} · ${esc(rec.lens.file.split("/").pop())}</dd>`;
+  const lens = `<dt>lens</dt><dd><code class="pcode">${esc(rec.lens.repo)} · ${esc(rec.lens.file.split("/").pop())}</code></dd>`;
   return `<section class="card"><h3>Probing parameters</h3>
     <dl class="params">${lens}${rows}</dl></section>`;
 }
@@ -1386,14 +1512,21 @@ function drawChart(rec) {
   });
 }
 
-/* ---- the film: full position x layer playback ---- */
-function filmHTML(rec, film) {
+/* ---- the film: full position x layer playback ----
+   Componentized: filmHTML(rec, film, uid) namespaces every interactive
+   element under a per-instance root id (`filmroot-${uid}`) via a `data-f`
+   role attribute instead of global DOM ids, so more than one film player
+   can live on the page at once (the compare view, below). initFilm(rec,
+   film, rootEl, uid, sync) queries only inside rootEl; `uid`/`sync` are
+   only used by the cross-record playhead sync wired up in showCompare and
+   are simply omitted on the single-record page. */
+function filmHTML(rec, film, uid) {
   if (!rec.film) return "";
   if (!film) {
     return `<section class="card"><p class="empty">film.json missing for this
       record — re-run the spec with <code>"film": true</code> to rebuild it.</p></section>`;
   }
-  return `<section class="card film-card">
+  return `<section class="card film-card" id="filmroot-${esc(uid)}">
     <h3>The film — the workspace across the whole answer</h3>
     <p class="film-note">Each column is one token; each row a layer (layer 0 at
       the top, the mouth at the bottom — same orientation as the core sample).
@@ -1402,26 +1535,30 @@ function filmHTML(rec, film) {
       rank ≤ 20 there (deeper = closer to rank 1); gray cells shade with the
       lens's top-1 confidence. Click anywhere — the strip, a token, the worms —
       to move the playhead.</p>
-    <div class="legend" id="film-legend"></div>
-    <div class="film-transcript" id="film-transcript"></div>
+    <div class="legend" data-f="legend"></div>
+    <div class="film-transcript" data-f="transcript"></div>
     <div class="film-controls">
-      <button class="pos-tab" id="film-prev" title="step back">‹</button>
-      <button class="pos-tab" id="film-play">▶ play</button>
-      <button class="pos-tab" id="film-next" title="step forward">›</button>
-      <span class="film-where" id="film-where"></span>
+      <button class="pos-tab" data-f="prev" title="step back">‹</button>
+      <button class="pos-tab" data-f="play">▶ play</button>
+      <button class="pos-tab" data-f="next" title="step forward">›</button>
+      <span class="film-where" data-f="where"></span>
     </div>
-    <div class="film-scroll" id="film-scroll">
-      <canvas id="film-strip"></canvas>
-      <div class="film-playhead" id="film-playhead"></div>
+    <div class="film-scroll" data-f="scroll">
+      <canvas data-f="strip"></canvas>
+      <div class="film-playhead" data-f="playhead"></div>
     </div>
     <h4 class="film-sub">Word worms — each tracked word's best rank anywhere in the stack, token by token</h4>
-    <div class="chart-wrap"><svg id="film-worms" role="img"
+    <div class="chart-wrap"><svg data-f="worms" role="img"
       aria-label="Best lens rank of tracked words per generated token"></svg></div>
     <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
-    <div class="film-controls" id="ridge-words"></div>
-    <div class="film-scroll"><canvas id="film-ridge"></canvas></div>
-    <h4 class="film-sub" id="film-col-title"></h4>
-    <div class="readout-scroll" id="film-column"></div>
+    <p class="film-note">Chips toggle — up to 4 words overlay in one canvas;
+      each chip's color follows the word by selection order, not its
+      position in the current set (toggling others never recolors it).</p>
+    <div class="film-controls film-ridge-words" data-f="ridge-words"></div>
+    <div class="legend" data-f="ridge-legend"></div>
+    <div class="film-scroll"><canvas data-f="ridge"></canvas></div>
+    <h4 class="film-sub" data-f="col-title"></h4>
+    <div class="readout-scroll" data-f="column"></div>
   </section>${castHTML(film)}`;
 }
 
@@ -1443,12 +1580,15 @@ function castHTML(film) {
       <tbody>${film.cast.map(row).join("")}</tbody></table></div></section>`;
 }
 
-function initFilm(rec, film) {
+function initFilm(rec, film, rootEl, uid, sync) {
+  const q = (r) => rootEl.querySelector(`[data-f="${r}"]`);
   const frames = film.frames, layers = film.layers, n = frames.length;
   const nL = layers.length;
 
-  // fixed color assignment: the 8 tracked words that ever get closest to
-  // rank 1 anywhere in the film, in that order (never reassigned later)
+  // fixed color assignment for the strip/worms/legend: the 8 tracked words
+  // that ever get closest to rank 1 anywhere in the film, in prominence
+  // order (never reassigned later). The ridgeline overlay below uses a
+  // SEPARATE, selection-order-based assignment — see the ridge block.
   const best = {};
   for (const w of film.track)
     best[w] = Math.min(...frames.map((f) => Math.min(...f.ranks[w])));
@@ -1457,12 +1597,12 @@ function initFilm(rec, film) {
   const colorOf = {};
   colored.forEach((w, i) => { colorOf[w] = css(SERIES[i]); });
 
-  document.getElementById("film-legend").innerHTML = colored.map((w) =>
+  q("legend").innerHTML = colored.map((w) =>
     `<span class="key"><span class="swatch" style="background:${colorOf[w]}"></span>${esc(w)} <span style="color:var(--muted)">(best #${best[w]})</span></span>`
   ).join("") + `<span class="key" style="color:var(--muted)">tracked words never reaching rank ≤ 50 stay uncolored</span>`;
 
   // ---- transcript ribbon
-  const ribbon = document.getElementById("film-transcript");
+  const ribbon = q("transcript");
   ribbon.innerHTML = frames.map((f, i) => {
     const t = film.tokens[f.pos];
     const special = /^<.*>$/.test(t.trim());
@@ -1476,7 +1616,7 @@ function initFilm(rec, film) {
   const ch = Math.max(4, Math.min(10, Math.round(400 / nL)));
   const GUT = 38;
   const W = GUT + n * cw, H = nL * ch + 16;
-  const canvas = document.getElementById("film-strip");
+  const canvas = q("strip");
   const dpr = window.devicePixelRatio || 1;
   canvas.width = W * dpr; canvas.height = H * dpr;
   canvas.style.width = W + "px"; canvas.style.height = H + "px";
@@ -1523,30 +1663,94 @@ function initFilm(rec, film) {
   }
 
   // ---- worms (svg, x = frame, y = log rank)
-  drawWorms(film, frames, colored, colorOf, g0);
+  drawWorms(film, frames, colored, colorOf, g0, q("worms"));
 
-  // ---- ridgelines (2.5D: one ridge per layer, elevation = log-rank)
-  const rw = document.getElementById("ridge-words");
-  rw.innerHTML = colored.map((w) =>
-    `<button class="pos-tab" data-w="${esc(w)}"
-      style="border-color:${colorOf[w]}">${esc(w)}</button>`).join("");
-  const drawRidgeFor = (word) => {
-    rw.querySelectorAll("button").forEach((b) =>
-      b.setAttribute("aria-selected", b.dataset.w === word));
-    drawRidge(film, frames, word, colorOf[word], cw, GUT, g0);
-  };
+  // ---- ridgelines (2.5D: one ridge per layer, elevation = log-rank),
+  // multi-select overlay: chips toggle words on/off (min 1, max 4 at once).
+  // Colors come from `slotOf`, a map assigned at SELECTION time (smallest
+  // free --s1..--s8 slot among the currently-selected words) rather than
+  // from a word's position in the current selection — so a word keeps its
+  // color while other chips toggle, and only gives its slot back when it
+  // is itself deselected.
+  const rw = q("ridge-words");
+  const ridgeLegend = q("ridge-legend");
+  const ridgeCanvas = q("ridge");
+  let ridgeSel = colored.length ? [colored[0]] : [];
+  const slotOf = new Map();
+  if (ridgeSel.length) slotOf.set(ridgeSel[0], 0);
+  const ridgeColor = (w) => css(SERIES[slotOf.get(w)]);
+
+  function renderRidgeChips() {
+    rw.innerHTML = colored.map((w) => {
+      const sel = ridgeSel.includes(w);
+      const style = sel ? ` style="border-color:${ridgeColor(w)};color:${ridgeColor(w)}"` : "";
+      return `<button class="pos-tab" data-w="${esc(w)}" aria-selected="${sel}"${style}>${esc(w)}</button>`;
+    }).join("");
+  }
+  function renderRidgeLegend() {
+    ridgeLegend.innerHTML = ridgeSel.map((w) =>
+      `<span class="key"><span class="swatch" style="background:${ridgeColor(w)}"></span>${esc(w)}</span>`).join("");
+  }
+  function renderRidgeCanvas() {
+    drawRidge(film, frames, ridgeSel, ridgeColor, cw, GUT, g0, ridgeCanvas);
+  }
+  function toggleWord(w) {
+    const idx = ridgeSel.indexOf(w);
+    if (idx >= 0) {
+      if (ridgeSel.length === 1) return; // at least one word stays selected
+      ridgeSel.splice(idx, 1);
+      slotOf.delete(w);
+    } else {
+      if (ridgeSel.length >= 4) return; // cap at 4 overlaid words
+      const used = new Set(ridgeSel.map((x) => slotOf.get(x)));
+      let slot = 0;
+      while (used.has(slot)) slot++;
+      slotOf.set(w, slot);
+      ridgeSel.push(w);
+    }
+    renderRidgeChips();
+    renderRidgeLegend();
+    renderRidgeCanvas();
+  }
   rw.addEventListener("click", (ev) => {
     const b = ev.target.closest("button");
-    if (b) drawRidgeFor(b.dataset.w);
+    if (b) toggleWord(b.dataset.w);
   });
-  if (colored.length) drawRidgeFor(colored[0]);
+  renderRidgeChips();
+  renderRidgeLegend();
+  renderRidgeCanvas();
 
   // ---- playhead state
-  const playhead = document.getElementById("film-playhead");
+  const playhead = q("playhead");
   playhead.style.width = (cw - 1) + "px";
   playhead.style.height = (nL * ch) + "px";
   let cur = -1, timer = null;
-  const playBtn = document.getElementById("film-play");
+  const playBtn = q("play");
+
+  // cross-record sync (compare view only; `sync` is undefined on the
+  // single-record page, so all of this is inert there). A moved playhead
+  // broadcasts its position as a FRACTION OF THE GENERATED SPAN — frames
+  // g0..n-1, i.e. from the first generated token to the last — rather than
+  // a raw frame index or a fraction of the whole film. Compared records
+  // can have differently sized prompts (runway) and different generation
+  // lengths; "the same moment in the answer" is the only alignment that
+  // stays meaningful across them. Scrubbing inside the prompt/runway
+  // (cur < g0) doesn't broadcast — there's no shared runway to align on.
+  let quiet = false;
+  function broadcastFrame(i) {
+    if (!sync || !sync.enabled() || quiet) return;
+    const genLen = n - g0;
+    if (i < g0 || genLen <= 1) return;
+    sync.broadcast(uid, (i - g0) / (genLen - 1));
+  }
+  function gotoFraction(frac) {
+    const genLen = n - g0;
+    if (genLen <= 1) return;
+    quiet = true;
+    setFrame(Math.round(g0 + frac * (genLen - 1)));
+    quiet = false;
+  }
+  if (sync) sync.register(uid, { gotoFraction });
 
   function setFrame(i, scroll = true) {
     cur = Math.max(0, Math.min(n - 1, i));
@@ -1555,15 +1759,15 @@ function initFilm(rec, film) {
     ribbon.querySelectorAll(".ftok").forEach((b) =>
       b.toggleAttribute("aria-current", Number(b.dataset.i) === cur));
     const next = film.tokens[f.pos + 1];
-    document.getElementById("film-where").textContent =
+    q("where").textContent =
       `pos ${f.pos} · after ${JSON.stringify(film.tokens[f.pos])}` +
       (next !== undefined ? ` · next ${JSON.stringify(next)}` : "");
-    document.getElementById("film-col-title").textContent =
+    q("col-title").textContent =
       `Column at ${JSON.stringify(film.tokens[f.pos])} — the stack while choosing ` +
       (next !== undefined ? JSON.stringify(next) : "the next token");
     const trackSet = new Set(film.track.map((w) => w.toLowerCase()));
     const mark = (t) => `<span class="tok${trackSet.has(t.trim().toLowerCase()) ? " hit" : ""}">${esc(t)}</span>`;
-    document.getElementById("film-column").innerHTML = `<table class="readout">
+    q("column").innerHTML = `<table class="readout">
       <thead><tr><th>layer</th><th>lens top-k</th><th>ranks here</th></tr></thead>
       <tbody>${layers.map((l, j) => {
         const hits = film.track.filter((w) => f.ranks[w][j] <= RMAX)
@@ -1573,13 +1777,14 @@ function initFilm(rec, film) {
           <td class="film-ranks">${hits}</td></tr>`;
       }).join("")}</tbody></table>`;
     if (scroll) {
-      const sc = document.getElementById("film-scroll");
+      const sc = q("scroll");
       const x = GUT + cur * cw;
       if (x < sc.scrollLeft + GUT || x > sc.scrollLeft + sc.clientWidth - 40)
         sc.scrollLeft = x - sc.clientWidth / 2;
       const tb = ribbon.querySelector(`[data-i="${cur}"]`);
       if (tb) tb.scrollIntoView({ block: "nearest", inline: "nearest" });
     }
+    broadcastFrame(cur);
   }
 
   function stop() {
@@ -1595,14 +1800,16 @@ function initFilm(rec, film) {
       setFrame(cur + 1);
     }, 450);
   });
-  document.getElementById("film-prev").addEventListener("click", () => { stop(); setFrame(cur - 1); });
-  document.getElementById("film-next").addEventListener("click", () => { stop(); setFrame(cur + 1); });
+  q("prev").addEventListener("click", () => { stop(); setFrame(cur - 1); });
+  q("next").addEventListener("click", () => { stop(); setFrame(cur + 1); });
   ribbon.addEventListener("click", (ev) => {
     const b = ev.target.closest(".ftok");
     if (b) { stop(); setFrame(Number(b.dataset.i)); }
   });
 
-  // strip hover tooltip + click
+  // strip hover tooltip + click (the tooltip div is a page-level singleton
+  // shared with the rank chart — only one can be visible at a time anyway,
+  // so it doesn't need per-instance scoping)
   const tip = document.getElementById("tip") || (() => {
     const d = document.createElement("div");
     d.className = "viz-tip"; d.id = "tip"; document.body.appendChild(d);
@@ -1631,12 +1838,13 @@ function initFilm(rec, film) {
     if (i >= 0 && i < n) { stop(); setFrame(i, false); }
   });
 
-  setFrame(g0 > 0 ? g0 : 0, false);
+  quiet = true;
+  setFrame(g0 > 0 ? g0 : 0, false); // initial frame: don't broadcast before every column has registered
+  quiet = false;
 }
 
-function drawRidge(film, frames, word, color, cw, GUT, g0) {
+function drawRidge(film, frames, words, colorFn, cw, GUT, g0, canvas) {
   const layers = film.layers, nL = layers.length, n = frames.length;
-  const canvas = document.getElementById("film-ridge");
   const step = Math.max(5, Math.min(9, Math.round(320 / nL)));
   const A = step * 3.2; // ridge amplitude (overlap is the point)
   const W = GUT + n * cw, H = nL * step + A + 24;
@@ -1648,27 +1856,37 @@ function drawRidge(film, frames, word, color, cw, GUT, g0) {
   const surface = css("--surface"), muted = css("--muted");
   const v = (r) => Math.max(0, 1 - Math.log10(Math.max(1, r)) / 4);
   ctx.font = "10px system-ui";
-  // paint back (layer 0) to front (the mouth); each ridge occludes behind
-  for (let j = 0; j < nL; j++) {
-    const base = A + 12 + j * step;
-    ctx.beginPath();
-    ctx.moveTo(GUT, base);
-    for (let i = 0; i < n; i++)
-      ctx.lineTo(GUT + i * cw + cw / 2, base - v(frames[i].ranks[word][j]) * A);
-    ctx.lineTo(GUT + n * cw, base);
-    ctx.closePath();
-    ctx.fillStyle = surface;
-    ctx.fill();
-    ctx.globalAlpha = 0.25 + 0.75 * (j / (nL - 1));
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 1.4;
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-    if (j % 8 === 0 || j === nL - 1) {
-      ctx.fillStyle = muted;
-      ctx.fillText("L" + layers[j], 2, base + 3);
+  const multi = words.length > 1;
+  // solo (today's rendering, unchanged): opaque --surface fill occludes
+  // the ridges behind it, layer 0 in back to the mouth in front. Overlay
+  // (>1 word): same per-layer back-to-front painting, but the fill swaps
+  // from opaque surface to a translucent tint of the word's own color
+  // (the "fill-alpha trick") so overlapping words both stay legible; words
+  // paint back-to-front in SELECTION order (first picked = furthest back).
+  words.forEach((word, wi) => {
+    const color = colorFn(word);
+    for (let j = 0; j < nL; j++) {
+      const base = A + 12 + j * step;
+      ctx.beginPath();
+      ctx.moveTo(GUT, base);
+      for (let i = 0; i < n; i++)
+        ctx.lineTo(GUT + i * cw + cw / 2, base - v(frames[i].ranks[word][j]) * A);
+      ctx.lineTo(GUT + n * cw, base);
+      ctx.closePath();
+      if (multi) { ctx.globalAlpha = 0.16; ctx.fillStyle = color; }
+      else { ctx.globalAlpha = 1; ctx.fillStyle = surface; }
+      ctx.fill();
+      ctx.globalAlpha = 0.25 + 0.75 * (j / (nL - 1));
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      if (wi === 0 && (j % 8 === 0 || j === nL - 1)) {
+        ctx.fillStyle = muted;
+        ctx.fillText("L" + layers[j], 2, base + 3);
+      }
     }
-  }
+  });
   if (g0 > 0) {
     ctx.strokeStyle = muted; ctx.setLineDash([3, 3]);
     ctx.beginPath();
@@ -1678,8 +1896,7 @@ function drawRidge(film, frames, word, color, cw, GUT, g0) {
   }
 }
 
-function drawWorms(film, frames, colored, colorOf, g0) {
-  const svg = document.getElementById("film-worms");
+function drawWorms(film, frames, colored, colorOf, g0, svg) {
   const n = frames.length;
   const W = Math.max(560, Math.min(860, svg.parentElement.clientWidth || 700));
   const H = 240, M = { t: 18, r: 92, b: 30, l: 64 };
@@ -1836,10 +2053,13 @@ async function showFindings() {
   window.scrollTo({ top: 0 });
 }
 
-/* ---- compare view: two records side by side (#cmp/idA,idB). Compact
-   columns — glyph, chips, conversation, thoughts — with links to the full
-   records. Readout/chart/film stay on the single-record pages (their DOM
-   ids are singletons). */
+/* ---- compare view: two or three records side by side (#cmp/idA,idB[,idC]).
+   Compact columns — glyph, chips, conversation, thoughts — with links to the
+   full records. Readout/chart/scan/slice stay single-record only, but the
+   film player is componentized (filmHTML/initFilm scope everything under a
+   per-instance root id — see the film region above), so it now renders once
+   per column, lazily, only for the columns whose record actually has film
+   data. */
 async function showCompare(ids) {
   const detail = document.getElementById("detail");
   ids = ids.slice(0, 3);
@@ -1853,7 +2073,14 @@ async function showCompare(ids) {
     detail.innerHTML = `<p class="empty">Could not load ${esc(ids.join(", "))}.</p>`;
     return;
   }
-  const col = (rec, th) => `
+  // lazy-load: only fetch film.json for the columns whose record has one
+  const films = await Promise.all(recs.map((rec) =>
+    rec.film
+      ? fetch(`../results/${rec.id}/${rec.film}`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+      : Promise.resolve(null)));
+  const anyFilm = films.some(Boolean);
+
+  const col = (rec, th, film, i) => `
     <div class="cmp-col">
       <div class="cmp-head">
         <span class="glyph-lg">${glyph(rec.emergence.ranks, 12, 90)}</span>
@@ -1871,16 +2098,41 @@ async function showCompare(ids) {
         ${th.trim().split(/\n\s*\n/).map((p) => `<p>${inline(p)}</p>`).join("")}
       </section>` : ""}
       <p class="cmp-more"><a href="#${esc(rec.id)}">full record (readouts, chart, film) →</a></p>
+      ${film ? filmHTML(rec, film, `cmp${i}`) : ""}
     </div>`;
   detail.innerHTML = `
     <div class="exp-head"><div class="exp-title">
       <h2>Side by side</h2>
       <div class="chips">${ids.map((id) => `<a class="chip" href="#${esc(id)}">${esc(id)}</a>`).join("")}</div>
     </div></div>
+    ${anyFilm ? `<label class="film-sync-toggle">
+      <input type="checkbox" id="cmp-film-sync" checked>
+      sync playheads
+      <span class="film-sync-hint">— matches the fraction of each column's generated span (records differ in length; see the code comment in initFilm)</span>
+    </label>` : ""}
     <div class="cmp-grid cols-${recs.length}">
-      ${recs.map((r, i) => col(r, thoughts[i])).join("")}
+      ${recs.map((r, i) => col(r, thoughts[i], films[i], i)).join("")}
     </div>`;
   markCurrent();
+  // Wire each column's film player after its DOM exists. `sync` is a tiny
+  // shared registry: any film whose playhead moves calls sync.broadcast,
+  // which relays the fraction to every other registered film's
+  // gotoFraction (see the "cross-record sync" comment inside initFilm for
+  // exactly what that fraction means and why).
+  const syncBox = document.getElementById("cmp-film-sync");
+  const controllers = new Map();
+  const sync = {
+    enabled: () => !syncBox || syncBox.checked,
+    register(uid, ctrl) { controllers.set(uid, ctrl); },
+    broadcast(fromUid, frac) {
+      for (const [uid, ctrl] of controllers)
+        if (uid !== fromUid) ctrl.gotoFraction(frac);
+    },
+  };
+  films.forEach((film, i) => {
+    if (!film) return;
+    initFilm(recs[i], film, document.getElementById(`filmroot-cmp${i}`), `cmp${i}`, sync);
+  });
   window.scrollTo({ top: 0 });
 }
 

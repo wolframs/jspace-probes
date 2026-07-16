@@ -20,25 +20,34 @@
 </head>
 <body>
 <header class="masthead">
-  <div class="masthead-title">
-    <span class="lens-mark" aria-hidden="true"></span>
-    <h1>J&#8209;Space Probes</h1>
+  <div class="masthead-top">
+    <div class="masthead-title">
+      <span class="lens-mark" aria-hidden="true"></span>
+      <h1>J&#8209;Space Probes</h1>
+      <a class="mast-spark" id="mast-spark-link" href="#u2-feels-q27b" hidden>
+        <canvas id="mast-spark" width="220" height="30" aria-hidden="true"></canvas>
+      </a>
+    </div>
+    <p class="masthead-sub">Reading silent thoughts through the Jacobian lens
+      · wolfram &times; claude · RTX&nbsp;3090</p>
+    <button class="theme-toggle" id="theme-toggle" type="button"
+      aria-label="Toggle color theme"></button>
   </div>
-  <p class="masthead-sub">Reading silent thoughts through the Jacobian lens
-    · wolfram &times; claude · RTX&nbsp;3090</p>
-  <p class="masthead-sub" id="stats"></p>
-  <p class="masthead-links">
-    <a href="#findings">&#10022; Findings map</a>
-    <a href="#essay">&#10035; Interim conclusions</a>
-    <a href="#board">&#9638; Research board</a>
-    <a href="https://github.com/wolframs/jspace-probes">GitHub</a>
-    <a href="https://github.com/wolframs/jspace-probes/archive/refs/heads/master.zip"
-      title="Full dump: records, thoughts, code, README (slices excluded — regenerable)">
-      &#8595; data (.zip)</a>
-  </p>
-  <button class="rail-toggle" id="rail-toggle" type="button"
-    aria-controls="rail" aria-expanded="false">
-    <span class="rail-toggle-bars" aria-hidden="true"></span>records</button>
+  <div class="masthead-bottom">
+    <nav class="masthead-nav" id="mast-nav" aria-label="Site">
+      <a href="#findings">Findings map</a>
+      <a href="#essay">Essay</a>
+      <a href="#board">Research board</a>
+      <a href="https://github.com/wolframs/jspace-probes">GitHub</a>
+      <a href="https://github.com/wolframs/jspace-probes/archive/refs/heads/master.zip"
+        title="Full dump: records, thoughts, code, README (slices excluded — regenerable)">
+        data&nbsp;(.zip)</a>
+    </nav>
+    <p class="masthead-sub stats" id="stats"></p>
+    <button class="rail-toggle" id="rail-toggle" type="button"
+      aria-controls="rail" aria-expanded="false">
+      <span class="rail-toggle-bars" aria-hidden="true"></span>records</button>
+  </div>
 </header>
 <div class="frame">
   <div class="rail-backdrop" id="rail-backdrop" hidden></div>
