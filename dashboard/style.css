@@ -541,6 +541,84 @@ article.essay h3 {
   margin-top: 0.7em;
 }
 
+/* ---- atmosphere: full-page sediment field behind everything ---- */
+#atmo { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; }
+
+/* ---- view entry: content fades up on route change ---- */
+@keyframes viewin { from { opacity: 0; transform: translateY(4px); } }
+.detail > * { animation: viewin 0.22s ease both; }
+@media (prefers-reduced-motion: reduce) { .detail > * { animation: none; } }
+
+/* ---- interactive card lift ---- */
+.find-card, .ov-card, section.card.board-arc {
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.find-card:hover {
+  border-color: color-mix(in srgb, var(--lens) 45%, var(--ring));
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .find-card, .ov-card, section.card.board-arc { transition: none; }
+  .find-card:hover { transform: none; }
+}
+
+/* ---- lab console (gear, bottom right) ---- */
+.console-fab {
+  position: fixed; right: 18px; bottom: 18px; z-index: 60;
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--ring); background: var(--surface);
+  color: var(--ink-2); font-size: 17px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+}
+.console-fab:hover { color: var(--lens); border-color: var(--lens); }
+.console-fab:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+.console {
+  position: fixed; right: 18px; bottom: 66px; z-index: 60;
+  width: min(280px, calc(100vw - 36px));
+  background: var(--surface); border: 1px solid var(--ring);
+  border-radius: 12px; padding: 14px 16px 16px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.26);
+}
+.console-head { display: flex; align-items: center; justify-content: space-between; }
+.console-head h4 {
+  margin: 0; font-size: 11px; font-weight: 650; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--muted);
+}
+.console-x {
+  border: none; background: none; cursor: pointer; color: var(--muted);
+  font-size: 13px; padding: 2px 4px; border-radius: 5px;
+}
+.console-x:hover { color: var(--ink); }
+.console-sec { margin-top: 12px; }
+.console-sec h5 {
+  margin: 0 0 6px; font-size: 10.5px; font-weight: 650;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2);
+}
+.con-note { margin: -2px 0 8px; font-size: 11.5px; color: var(--muted); max-width: none; }
+.console-row { display: flex; gap: 6px; }
+.console-row button {
+  font: inherit; font-size: 12px; padding: 3px 12px; cursor: pointer;
+  border-radius: 99px; border: 1px solid var(--ring);
+  background: none; color: var(--ink-2);
+}
+.console-row button[aria-pressed="true"] {
+  border-color: var(--lens); color: var(--lens); font-weight: 600;
+  background: var(--lens-soft);
+}
+.console-row button:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+.con-slider {
+  display: flex; align-items: center; gap: 10px; margin-top: 10px;
+  font-size: 12px; color: var(--ink-2);
+}
+.con-slider input { flex: 1 1 auto; accent-color: var(--lens); }
+.con-reroll {
+  margin-top: 12px; font: inherit; font-size: 12px; cursor: pointer;
+  padding: 4px 12px; border-radius: 99px; border: 1px solid var(--ring);
+  background: none; color: var(--ink-2);
+}
+.con-reroll:hover { border-color: var(--lens); color: var(--lens); }
+
 /* ---- params as chips ---- */
 .pchips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
 .chip.pchip {

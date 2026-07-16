@@ -107,6 +107,154 @@ function drawSpark() {
   })(t0);
 }
 
+/* ---- atmosphere: a full-page sediment field behind the content, drawn
+   from the REAL emergence curves of the records — each faint column is one
+   record's core sample; every few seconds one random column "surfaces"
+   bottom-up (an answer emerging), the lab's heartbeat. Controlled from the
+   console; static under reduced motion or ?theme= (screenshots). ---- */
+const lsNum = (k, d) => {
+  const v = localStorage.getItem(k);
+  return v === null || isNaN(+v) ? d : +v;
+};
+const ATMO = {
+  on: localStorage.getItem("atmo") !== "off",
+  intensity: Math.min(1, Math.max(0, lsNum("atmo-int", 35) / 100)),
+  speed: Math.min(2, Math.max(0, lsNum("atmo-speed", 100) / 100)),
+  cols: [], raf: 0, last: 0, pulse: null, nextPulse: 4,
+};
+function atmoStatic() {
+  return themeParam || matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+function atmoResample() {
+  const pool = INDEX.filter((e) => Array.isArray(e.emergence) && e.emergence.length > 6);
+  ATMO.cols = [];
+  const N = Math.min(140, pool.length);
+  for (let i = 0; i < N; i++) {
+    const e = pool[(Math.random() * pool.length) | 0];
+    const logMax = Math.log(Math.max(2, ...e.emergence));
+    ATMO.cols.push({
+      c: e.emergence.map((r) => 1 - Math.log(Math.max(1, r)) / logMax),
+      x: Math.random(),
+      w: 1.5 + Math.random() * 2.5,
+      ph: Math.random() * Math.PI * 2,
+    });
+  }
+}
+function atmoFrame(tms) {
+  const canvas = document.getElementById("atmo");
+  if (!canvas) return;
+  const t = tms / 1000;
+  const dpr = Math.min(1.5, window.devicePixelRatio || 1);
+  const W = window.innerWidth, H = window.innerHeight;
+  if (canvas.width !== (W * dpr) | 0) {
+    canvas.width = W * dpr; canvas.height = H * dpr;
+  }
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  if (!ATMO.on || ATMO.intensity <= 0 || !ATMO.cols.length) return;
+  const color = css("--lens");
+  const moving = !atmoStatic() && ATMO.speed > 0;
+  // heartbeat: pick a column to surface, bottom-up, every 5–12 s
+  if (!atmoStatic()) {
+    if (!ATMO.pulse && t > ATMO.nextPulse) {
+      ATMO.pulse = { i: (Math.random() * ATMO.cols.length) | 0, t0: t, dur: 2.4 };
+    }
+    if (ATMO.pulse && t - ATMO.pulse.t0 > ATMO.pulse.dur) {
+      ATMO.pulse = null;
+      ATMO.nextPulse = t + 5 + Math.random() * 7;
+    }
+  }
+  ctx.fillStyle = color;
+  const drift = moving ? (t * 0.0022 * ATMO.speed) : 0;
+  for (let ci = 0; ci < ATMO.cols.length; ci++) {
+    const col = ATMO.cols[ci];
+    const x = ((col.x + drift + ci * 0.0001) % 1) * W;
+    const n = col.c.length, bandH = H / n;
+    const wob = moving ? 0.78 + 0.22 * Math.sin(t * 0.35 + col.ph) : 1;
+    const pulsing = ATMO.pulse && ATMO.pulse.i === ci;
+    const p = pulsing ? (t - ATMO.pulse.t0) / ATMO.pulse.dur : 0;
+    for (let i = 0; i < n; i++) {
+      let a = col.c[i] * 0.085 * ATMO.intensity * wob;
+      // the surfacing front sweeps bottom-up (deep layers first is the
+      // wrong story — the ANSWER rises toward the mouth at the bottom, so
+      // sweep top-down through depth: front position in layer space)
+      if (pulsing) {
+        const front = p * 1.25 * n;
+        const d = Math.abs(i - front);
+        if (i < front) a += 0.22 * ATMO.intensity * Math.max(0, 1 - p) * Math.exp(-d / (n * 0.25));
+      }
+      if (a <= 0.003) continue;
+      ctx.globalAlpha = Math.min(0.5, a);
+      ctx.fillRect(x, i * bandH, col.w, bandH + 0.5);
+    }
+  }
+  ctx.globalAlpha = 1;
+}
+function atmoLoop(tms) {
+  if (tms - ATMO.last >= 33) { ATMO.last = tms; atmoFrame(tms); }
+  ATMO.raf = requestAnimationFrame(atmoLoop);
+}
+function atmoStart() {
+  cancelAnimationFrame(ATMO.raf);
+  if (!ATMO.cols.length) atmoResample();
+  if (atmoStatic() || !ATMO.on) { atmoFrame(8000); return; }
+  ATMO.raf = requestAnimationFrame(atmoLoop);
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) cancelAnimationFrame(ATMO.raf);
+  else atmoStart();
+});
+
+/* ---- lab console ---- */
+function conPaint() {
+  const saved = localStorage.getItem("theme") || "";
+  document.querySelectorAll("#con-theme button").forEach((b) =>
+    b.setAttribute("aria-pressed", String((b.dataset.t || "") === saved)));
+  document.querySelectorAll("#con-atmo button").forEach((b) =>
+    b.setAttribute("aria-pressed", String((b.dataset.a === "on") === ATMO.on)));
+}
+function conInit() {
+  const fab = document.getElementById("console-fab");
+  const panel = document.getElementById("console");
+  if (!fab || !panel) return;
+  const setOpen = (open) => {
+    panel.hidden = !open;
+    fab.setAttribute("aria-expanded", String(open));
+    if (open) conPaint();
+  };
+  fab.addEventListener("click", () => setOpen(panel.hidden));
+  document.getElementById("console-x")?.addEventListener("click", () => setOpen(false));
+  document.querySelectorAll("#con-theme button").forEach((b) =>
+    b.addEventListener("click", () => {
+      const t = b.dataset.t;
+      if (t) { document.documentElement.dataset.theme = t; localStorage.setItem("theme", t); }
+      else { delete document.documentElement.dataset.theme; localStorage.removeItem("theme"); }
+      paintThemeButton(); drawSpark(); conPaint(); atmoStart();
+    }));
+  document.querySelectorAll("#con-atmo button").forEach((b) =>
+    b.addEventListener("click", () => {
+      ATMO.on = b.dataset.a === "on";
+      localStorage.setItem("atmo", ATMO.on ? "on" : "off");
+      conPaint(); atmoStart();
+    }));
+  const int = document.getElementById("con-int");
+  const spd = document.getElementById("con-speed");
+  if (int) { int.value = ATMO.intensity * 100;
+    int.addEventListener("input", () => {
+      ATMO.intensity = +int.value / 100;
+      localStorage.setItem("atmo-int", int.value); atmoStart();
+    }); }
+  if (spd) { spd.value = ATMO.speed * 100;
+    spd.addEventListener("input", () => {
+      ATMO.speed = +spd.value / 100;
+      localStorage.setItem("atmo-speed", spd.value); atmoStart();
+    }); }
+  document.getElementById("con-reroll")?.addEventListener("click", () => {
+    atmoResample(); atmoStart();
+  });
+}
+
 /* highlight the masthead nav entry for the current route */
 function markNav() {
   const h = current() || "findings";
@@ -125,6 +273,9 @@ async function boot() {
     paintThemeButton(); drawSpark();
   });
   drawSpark();
+  atmoResample();
+  atmoStart();
+  conInit();
   renderChips();
   document.getElementById("q").addEventListener("input", (e) => {
     query = e.target.value.trim().toLowerCase();
