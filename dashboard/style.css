@@ -585,3 +585,8 @@ article.essay h3 {
 .find-card .nov-novel, .find-card .nov-anticipated, .find-card .nov-covered {
   font-size: 10px; vertical-align: 3px;
 }
+
+/* ---- base inline links: unstyled <a> in generated prose/tables otherwise
+   falls back to browser blue (unreadable on the dark surface) ---- */
+a { color: var(--lens); text-decoration-color: color-mix(in srgb, var(--lens) 45%, transparent); }
+a:hover { text-decoration-color: var(--lens); }
