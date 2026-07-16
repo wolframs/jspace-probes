@@ -510,3 +510,62 @@ article.essay h3 {
   border-left: 2px solid var(--rule, #8884); padding-left: 0.8em;
   margin-top: 0.7em;
 }
+
+/* ---- board ---- */
+.board-summary {
+  color: var(--ink-2); font-size: 13px; margin: 10px 0 0;
+  font-family: var(--mono);
+}
+.board-arc { display: flex; flex-direction: column; gap: 8px; }
+.board-arc-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.board-arc-head h3 { margin: 0; }
+.board-status {
+  font-size: 10.5px; padding: 1px 9px; border-radius: 99px;
+  border: 1px solid var(--ring); color: var(--ink-2);
+  text-transform: uppercase; letter-spacing: 0.09em;
+}
+.board-status-active { border-color: var(--s2); color: var(--s2); }
+.board-status-parked { color: var(--muted); }
+.board-status-closed { border-color: var(--axis); color: var(--axis); }
+.board-question {
+  font-family: var(--serif); font-style: italic; color: var(--muted);
+  font-size: 13.5px; line-height: 1.5; margin: -2px 0 6px; max-width: 68ch;
+}
+.board-items { display: flex; flex-direction: column; }
+.board-item {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 10px;
+  padding: 9px 0; border-top: 1px solid var(--grid);
+}
+.board-item:first-child { border-top: none; padding-top: 3px; }
+.board-item-title {
+  margin: 0; font-size: 13.5px; font-weight: 550; color: var(--ink);
+  flex: 1 1 220px; min-width: 0;
+}
+.board-chip {
+  display: inline-flex; align-items: center; gap: 5px; flex: none;
+  font-size: 10.5px; padding: 2px 9px; border-radius: 99px;
+  border: 1px solid var(--ring); color: var(--ink-2);
+}
+.board-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; background: var(--dot); }
+.state-hunch     { --dot: var(--s5); }
+.state-queued    { --dot: var(--s3); }
+.state-hot       { --dot: var(--s6); }
+.state-landed    { --dot: var(--s2); }
+.state-dissolved { --dot: var(--s7); }
+.state-parked    { --dot: var(--muted); }
+.state-dropped   { --dot: var(--axis); }
+.board-note {
+  flex: 1 1 100%; margin: 0; font-size: 12.5px; color: var(--muted);
+}
+.board-note-date { font-family: var(--mono); margin-right: 8px; }
+.board-links { flex: none; margin: 0; gap: 6px; }
+.chip.board-link { text-decoration: none; }
+.chip.board-link:hover { border-color: var(--lens); color: var(--lens); }
+@media (max-width: 560px) {
+  .board-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+  /* flex-basis is a main-axis size — in column mode that's height, so the
+     220px width hint from the wide layout must be dropped here or every
+     title balloons to 220px tall. */
+  .board-item-title { flex: 1 1 auto; }
+  .board-links { margin-top: 2px; }
+}

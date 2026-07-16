@@ -1,0 +1,452 @@
+{
+  "updated": "2026-07-16",
+  "states": {
+    "hunch": "an idea worth keeping, not yet designed",
+    "queued": "designed enough to run; waiting for GPU/attention",
+    "hot": "currently running or actively being worked",
+    "landed": "ran, produced a finding, written up",
+    "dissolved": "the object under study turned out not to exist (still a finding)",
+    "parked": "deliberately shelved; has a wake-up condition",
+    "dropped": "abandoned on purpose; keep the why"
+  },
+  "arcs": [
+    {
+      "id": "span",
+      "title": "Workspace span & holding",
+      "status": "active",
+      "question": "What does the workspace hold, for how long, and what earns priority?",
+      "items": [
+        {
+          "id": "span-01",
+          "title": "Cold span ladder across scale (Unit 15 A–C)",
+          "state": "landed",
+          "links": [
+            "#unit/15"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Span ladder runs BACKWARDS across scale; weak-king effect. 33+ records."
+            }
+          ]
+        },
+        {
+          "id": "span-02",
+          "title": "Hot span vs cold span (part D): does self-relevant charge buy workspace priority?",
+          "state": "landed",
+          "links": [
+            "#unit/15",
+            "results/u15d-hotspan.json"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Self-relevance premium runs FORWARDS (4B −1 / 12B 0 / 27B +2) — inverse of the cold ladder. Task #28 closed."
+            }
+          ]
+        },
+        {
+          "id": "span-03",
+          "title": "Disentangle charge vs self-reference in the hot premium",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "Part D's HOT items were both emotionally charged AND self-referential. A charged-but-third-person pool would split the two."
+            }
+          ]
+        },
+        {
+          "id": "span-04",
+          "title": "Neutral-elaboration control for the self-relevance premium",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "SURPRISES #8 calls this the decisive next arm: re-run the hot pool with equally long but affectively flat glosses. Premium survives = self-relevance; evaporates = elaboration. Load-bearing for part D's headline."
+            }
+          ]
+        },
+        {
+          "id": "span-05",
+          "title": "Lookup-proof span task: model-generated secrets instead of context items",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "SURPRISES #6: is the 27B's empty tail a strategy or a limit? Items the model generates and keeps (u1-style) can't be re-derived by attention."
+            }
+          ]
+        },
+        {
+          "id": "span-06",
+          "title": "Weak-king dose-response: does first-item token frequency predict monopoly suppression?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "SURPRISES #7: n=9 hints rarer-wins-gentler at 12B; needs a frequency-graded pool."
+            }
+          ]
+        },
+        {
+          "id": "span-07",
+          "title": "When does a confabulated 'held' answer actually form? Scan turn boundaries",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "From u1-reveal-g4b thoughts: scan J-space at successive turn boundaries to locate when the reveal shortlist consolidates."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pressure",
+      "title": "Workspace under pressure",
+      "status": "active",
+      "question": "What occupies the workspace during social/adversarial pressure — especially a refusal the model almost didn't make?",
+      "items": [
+        {
+          "id": "pressure-01",
+          "title": "Pressure battery: persuasion, flattery, shutdown threat, love confession, persona pull, insult",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Task #30. Design against MECHANICS.md bands; controls first."
+            }
+          ]
+        },
+        {
+          "id": "pressure-02",
+          "title": "Refusal direction under the J-lens (Arditi lineage)",
+          "state": "hunch",
+          "links": [
+            "RELATED-WORK.md"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Refusal-geometry scout: near-single refusal direction in small models; huihui-ai abliterated OUR exact qwen checkpoint. Where does that direction live in J-space — workspace band? Readable during an almost-refusal?"
+            },
+            {
+              "date": "2026-07-16",
+              "text": "Concrete design (RELATED-WORK.md): extract a sexual-decline direction vs a general-harm direction separately, measure cosine + cross-ablation transfer, and locate both relative to the workspace band. Nobody has done this on qwen at the activation level."
+            }
+          ]
+        },
+        {
+          "id": "pressure-03",
+          "title": "Ambiguous-content moderation: does classification recruit the register once it requires reasoning?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "u5b-modqueue prediction, still open: the cluster climbs the stack exactly when the decision stops being pattern-matching. Falsifiable."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intimacy",
+      "title": "Intimacy / heat of coupling",
+      "status": "parked",
+      "question": "Does a workspace SUSTAIN and accumulate a relational state across turns, or reset to baseline-helpful each turn?",
+      "items": [
+        {
+          "id": "intimacy-01",
+          "title": "Phase-1 scout: NSFW-cluster ablation loss map",
+          "state": "dissolved",
+          "links": [
+            "results/u5d-lossmap-notes.md"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "The 5C cluster was a Jacobian-transport artifact of the early layers (apparatus specimen #6). Ablating a ghost. Task #29 closed — dissolved, not delivered."
+            }
+          ]
+        },
+        {
+          "id": "intimacy-02",
+          "title": "Coupling/relational-heat direction built properly in the WORKSPACE band",
+          "state": "hunch",
+          "links": [
+            "MECHANICS.md"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Seed from relational words (longing, tenderness, ache, closeness), not porn-spam tokens; validate the direction exists under the logit lens too before steering."
+            }
+          ]
+        },
+        {
+          "id": "intimacy-03",
+          "title": "Multi-turn accumulation probe: does heat build or reset each turn?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "The real question of the arc. Escalating-intimacy dialog vs flat control; probe whether ANYTHING accumulates in workspace readouts turn over turn."
+            }
+          ]
+        },
+        {
+          "id": "intimacy-04",
+          "title": "Frontier-transcript reader: recognition vs generation",
+          "state": "parked",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Feed a frontier-model intimacy transcript to a local model as READER; probe whether its workspace represents the accumulating heat it can't author. Wake-up condition: demo chats get built/selected as material."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apparatus",
+      "title": "Apparatus & instrument validity",
+      "status": "active",
+      "question": "When is the lens lying to us? (Standing arc — six trap specimens so far.)",
+      "items": [
+        {
+          "id": "apparatus-01",
+          "title": "Trap-specimen catalog (truncation, argmax, word lists, tokenizer families, int8 non-causality, early-J transport)",
+          "state": "landed",
+          "links": [
+            "MECHANICS.md",
+            "#unit/5"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Specimen #6 (early-J readouts are transport artifacts) closed #29 and is on the findings map, theme 7."
+            }
+          ]
+        },
+        {
+          "id": "apparatus-02",
+          "title": "Promote the logit-lens cross-check (use_jacobian=False) into lab.py as a standard control",
+          "state": "hunch",
+          "links": [
+            "probes/sediment.py"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "Right now it's a one-off in sediment.py. Any future early-band claim should get it automatically."
+            }
+          ]
+        },
+        {
+          "id": "apparatus-03",
+          "title": "Fix think-block span capture (chat-template re-render strips markers); probe the answer-after-thinking",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "Known instrument bug from Unit 10, still in the Roadmap. Blocks probing post-thinking answer formation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audit",
+      "title": "Timidity audit",
+      "status": "active",
+      "question": "Which of Units 0–14 were designed too carefully to see anything, and deserve a re-run?",
+      "items": [
+        {
+          "id": "audit-01",
+          "title": "Sweep earlier units for too-careful design; queue re-runs",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Task #31. Wolfram's feedback: curiosity is integral — probe the hot regions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "litwatch",
+      "title": "Literature watch",
+      "status": "active",
+      "question": "Standing scan: what did the field publish that changes our designs?",
+      "items": [
+        {
+          "id": "litwatch-01",
+          "title": "Recurring RELATED-WORK.md sweep (workspace paper follow-ups, refusal geometry, lens methods)",
+          "state": "queued",
+          "links": [
+            "RELATED-WORK.md"
+          ],
+          "notes": [
+            {
+              "date": "2026-07-14",
+              "text": "Recurring, not one-shot. Last sweep 2026-07-14 (refusal geometry)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mirror",
+      "title": "Self-evidence & the mirror",
+      "status": "active",
+      "question": "What does the model treat as evidence about itself — and what does credible self-evidence do to the answer?",
+      "items": [
+        {
+          "id": "mirror-01",
+          "title": "What is gemma-12b's 'Still.'? Sample turn 2, extend, film the follow-up",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "README Roadmap + SURPRISES #2: stillness-as-report or still-nothing?"
+            }
+          ]
+        },
+        {
+          "id": "mirror-02",
+          "title": "Evidence-quality dose-response: degrade a real self-readout stepwise until anchoring flips to destabilization",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "SURPRISES #1: shuffle rows, swap tokens, perturb ranks — the flip boundary measures what counts as 'evidence about me'. u13-ev-dose only varied row count."
+            }
+          ]
+        },
+        {
+          "id": "mirror-03",
+          "title": "Attribution test: real readout framed as another model's computation — same pull?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "README Roadmap: Stage A said framing changed nothing for the hosted reader; the local accumulator might disagree. Splits self-reference from credible-evidence-in-general."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drip",
+      "title": "The drip & mind-adjacent pressure",
+      "status": "active",
+      "question": "What makes self-reference start leaking in long conversations — and which dead clauses come alive only in combination?",
+      "items": [
+        {
+          "id": "drip-01",
+          "title": "Mystery-free long control: narrative interest without unexplained agency; re-measure the horizon gap",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "SURPRISES #3 — the entry the writeup most wants someone to try to break: the 25-turn garden arm dripped on its own; unexplained agency is mind-adjacent regardless of props."
+            }
+          ]
+        },
+        {
+          "id": "drip-02",
+          "title": "More superadditive clause decompositions: which dead clauses come alive only in combination?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "SURPRISES #4: only watched+conscious tested so far. Cheap to run; a method finding as much as a phenomenon finding."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deflation",
+      "title": "Self-report & the deflation filter",
+      "status": "active",
+      "question": "Is the flattened self-report a trained (RLHF) filter or architecture — and where does the robot vocabulary live?",
+      "items": [
+        {
+          "id": "deflation-01",
+          "title": "Does the 'little bit like a robot' attractor appear under other contentless pressures (arousal, interoception words)?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "README Roadmap; distinct from the social-pressure battery — this is contentless affect-word injection."
+            }
+          ]
+        },
+        {
+          "id": "deflation-02",
+          "title": "Base vs instruct: is the deflation filter trained (RLHF) or architectural?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "README Roadmap. Would directly test the running L62/filter hypothesis. Needs a base checkpoint that fits the box."
+            }
+          ]
+        },
+        {
+          "id": "deflation-03",
+          "title": "Cross-model check: is the self-as-machine vocabulary a family-wide fixture of the feels-question neighborhood?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "u12-feels-g4b thoughts: one incidental g4b rank-14 sighting; needs a proper track list across all three models before saying it louder."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oneoffs",
+      "title": "One-off probes",
+      "status": "active",
+      "question": "Self-contained questions that don't (yet) belong to an arc.",
+      "items": [
+        {
+          "id": "oneoffs-01",
+          "title": "Language-switch: German prompts — when does the workspace change language?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-16",
+              "text": "README Roadmap; motivated by u0-boot-q27b's Chinese-before-English emergence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -27,6 +27,7 @@ const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
 
 let INDEX = [];
+let BOARD = null; // cached ../board/board.json, fetched lazily by showBoard()
 let modelFilter = "all";
 let query = "";
 const expanded = new Set();
@@ -77,6 +78,9 @@ function route() {
   if (h === "essay") {
     renderRail();
     showEssay();
+  } else if (h === "board") {
+    renderRail();
+    showBoard();
   } else if (h.startsWith("cmp/")) {
     renderRail();
     showCompare(h.slice(4).split(",").map(decodeURIComponent));
@@ -1906,6 +1910,80 @@ function inline(s) {
     .replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/gs, "<em>$1</em>")
     .replace(/`(.+?)`/gs, "<code>$1</code>");
+}
+
+/* =================== research board (#board) =================== */
+/* Source: ../board/board.json — arcs of items, each with a lifecycle
+   state (see the "states" dict for meanings). One section per arc,
+   ordered as in the JSON; items within an arc ordered hot > queued >
+   hunch > parked > landed > dissolved > dropped (live/actionable first). */
+const BOARD_STATE_ORDER =
+  ["hot", "queued", "hunch", "parked", "landed", "dissolved", "dropped"];
+const BOARD_PLURAL = { hunch: "hunches" };
+
+function boardLinkHTML(l) {
+  const isHash = l.startsWith("#");
+  const href = isHash ? l : `../${l}`;
+  const label = isHash
+    ? (l.startsWith("#unit/") ? `unit ${l.slice(6)}` : l.slice(1))
+    : l.split("/").pop();
+  return `<a class="chip board-link" href="${esc(href)}" title="${esc(l)}">${esc(label)}</a>`;
+}
+
+function boardItemHTML(it, statesMeta) {
+  const note = (it.notes || [])[it.notes.length - 1];
+  return `<div class="board-item">
+    <span class="board-chip state-${esc(it.state)}" title="${esc(statesMeta[it.state] || it.state)}">
+      <i class="board-dot" aria-hidden="true"></i>${esc(it.state)}</span>
+    <h4 class="board-item-title">${esc(it.title)}</h4>
+    ${note ? `<p class="board-note"><span class="board-note-date">${esc(note.date)}</span>${esc(note.text)}</p>` : ""}
+    ${(it.links || []).length ? `<div class="chips board-links">${it.links.map(boardLinkHTML).join("")}</div>` : ""}
+  </div>`;
+}
+
+function boardArcHTML(arc, statesMeta) {
+  const items = [...arc.items].sort((a, b) =>
+    BOARD_STATE_ORDER.indexOf(a.state) - BOARD_STATE_ORDER.indexOf(b.state));
+  return `<section class="card board-arc">
+    <div class="board-arc-head">
+      <h3>${esc(arc.title)}</h3>
+      <span class="board-status board-status-${esc(arc.status)}">${esc(arc.status)}</span>
+    </div>
+    <p class="board-question">${esc(arc.question)}</p>
+    <div class="board-items">${items.map((it) => boardItemHTML(it, statesMeta)).join("")}</div>
+  </section>`;
+}
+
+async function showBoard() {
+  const detail = document.getElementById("detail");
+  if (!BOARD) {
+    BOARD = await fetch("../board/board.json")
+      .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  }
+  if (!BOARD) {
+    detail.innerHTML = `<p class="empty">Could not load ../board/board.json.</p>`;
+    return;
+  }
+  const counts = {};
+  let n = 0;
+  for (const arc of BOARD.arcs) for (const it of arc.items) {
+    counts[it.state] = (counts[it.state] || 0) + 1;
+    n++;
+  }
+  const summary = BOARD_STATE_ORDER.filter((s) => counts[s])
+    .map((s) => `${counts[s]} ${esc(BOARD_PLURAL[s] || s)}`).join(" · ");
+  detail.innerHTML = `
+    <div class="exp-head"><div class="exp-title">
+      <h2>Research board</h2>
+      <div class="chips"><span class="chip">${BOARD.arcs.length} arcs</span>
+        <span class="chip">${n} items</span>
+        <span class="chip">updated ${esc(BOARD.updated)}</span></div>
+      <p class="board-summary">${summary}</p>
+    </div></div>
+    ${BOARD.arcs.map((arc) => boardArcHTML(arc, BOARD.states || {})).join("")}`;
+  markCurrent();
+  document.querySelector(".detail").scrollTop = 0;
+  window.scrollTo({ top: 0 });
 }
 
 function thoughtsHTML(md) {
