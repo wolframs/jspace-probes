@@ -54,6 +54,19 @@ he sets directions and expects designed-and-executed experiments back.
   build). Force theme with `?theme=light|dark`. Screenshots: snap
   `chromium --headless=new` (writes only under $HOME → use `out/`).
 
+## Research board
+
+- Open threads live in `board/board.json`, managed ONLY via
+  `.venv/bin/python probes/board.py` (ls/add/mv/note/arc add — regenerates
+  BOARD.md; dashboard renders it at #board). Check `board.py ls` at session
+  start; update at state-change moments, not retroactively: `mv <item> hot`
+  when a run starts, `mv <item> landed "result"` in the same breath as the
+  thoughts.md. Honesty rules: no `landed` without a link to evidence;
+  `dissolved`/`dropped` always keep the why; stale `queued` gets demoted,
+  not left to flatter the queue; never rewrite old notes — append a dated
+  correction (git diffs on board.json are the audit trail). Sweep the board
+  once per expedition close, alongside the site regen.
+
 ## Conventions
 
 - Every experiment record gets a `thoughts.md`: first-person Claude
