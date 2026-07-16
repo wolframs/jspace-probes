@@ -124,7 +124,8 @@ const ATMO = {
   intensity: Math.min(1, Math.max(0, lsNum("atmo-int", 35) / 100)),
   speed: Math.min(2, Math.max(0, lsNum("atmo-speed", 100) / 100)),
   cols: [], raf: 0, last: 0, pulse: null, nextPulse: 4,
-};
+  driftX: 0, tPrev: null, // drift is INTEGRATED (pos += dt·speed) so the
+};                        // slider changes velocity, not position
 function atmoStatic() {
   return themeParam || matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -175,10 +176,13 @@ function atmoFrame(tms) {
     }
   }
   ctx.fillStyle = color;
-  const drift = moving ? (t * 0.0016 * ATMO.speed) : 0;
+  if (moving && ATMO.tPrev !== null && t > ATMO.tPrev) {
+    ATMO.driftX = (ATMO.driftX + (t - ATMO.tPrev) * 0.0016 * ATMO.speed) % 1;
+  }
+  ATMO.tPrev = t;
   for (let ci = 0; ci < ATMO.cols.length; ci++) {
     const col = ATMO.cols[ci];
-    const x = ((col.x + drift) % 1) * (W + 60) - 30;
+    const x = ((col.x + ATMO.driftX) % 1) * (W + 60) - 30;
     const n = col.c.length;
     const colH = H * col.hf;
     const y0 = H - colH;                    // layer 0 at the column's top,
@@ -2288,7 +2292,6 @@ async function showCompare(ids) {
   detail.innerHTML = `
     <div class="exp-head"><div class="exp-title">
       <h2>Side by side</h2>
-      <div class="chips">${ids.map((id) => `<a class="chip" href="#${esc(id)}">${esc(id)}</a>`).join("")}</div>
     </div></div>
     ${anyFilm ? `<label class="film-sync-toggle">
       <input type="checkbox" id="cmp-film-sync" checked>

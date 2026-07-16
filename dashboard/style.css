@@ -560,8 +560,14 @@ article.essay h3 {
 .chip.unitlink { text-decoration: none; color: var(--lens); border-color: var(--lens-soft); }
 
 /* ---- sibling switcher on record pages ---- */
-.sibs { margin-top: 8px; align-items: center; }
-.sibs-label { color: var(--muted); font-size: 12px; margin-right: 2px; }
+/* header stack rhythm: every row under the title gets the same 8px beat,
+   and every chip — span, link, or button — sits on the same 24px line */
+.exp-title .chips { margin-top: 8px; }
+.exp-title .chips .chip { display: inline-flex; align-items: center; min-height: 24px; }
+.sibs { margin-top: 0; align-items: center; }
+.sibs-label { color: var(--muted); font-size: 12px; margin-right: 2px; line-height: 24px; }
+.pin-row { align-items: center; }
+.chip.pin, button.chip { min-height: 24px; padding-top: 0; padding-bottom: 0; }
 .chip.sib { text-decoration: none; }
 .chip.sib.cmp { color: var(--lens); }
 
@@ -572,7 +578,7 @@ article.essay h3 {
    stacking in the same order. */
 .cmp-grid {
   display: grid; column-gap: 26px; align-items: start;
-  grid-template-rows: repeat(5, auto);
+  grid-template-rows: repeat(5, auto); margin-top: 20px;
 }
 .cmp-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 .cmp-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
