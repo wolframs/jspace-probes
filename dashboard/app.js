@@ -128,14 +128,20 @@ function atmoStatic() {
 function atmoResample() {
   const pool = INDEX.filter((e) => Array.isArray(e.emergence) && e.emergence.length > 6);
   ATMO.cols = [];
-  const N = Math.min(140, pool.length);
+  if (!pool.length) return;
+  // a skyline of core samples standing on the bottom edge: fewer, chunkier,
+  // visibly banded — golden-ratio spacing keeps coverage even without a grid
+  const N = window.innerWidth < 800 ? 22 : 44;
+  const PHI = 0.6180339887;
   for (let i = 0; i < N; i++) {
     const e = pool[(Math.random() * pool.length) | 0];
     const logMax = Math.log(Math.max(2, ...e.emergence));
     ATMO.cols.push({
       c: e.emergence.map((r) => 1 - Math.log(Math.max(1, r)) / logMax),
-      x: Math.random(),
-      w: 1.5 + Math.random() * 2.5,
+      x: (i * PHI + Math.random() * 0.4 * PHI) % 1,
+      w: 7 + Math.random() * 9,
+      hf: 0.22 + Math.random() * 0.5,   // column height as fraction of viewport
+      base: 0.55 + Math.random() * 0.45, // per-column presence
       ph: Math.random() * Math.PI * 2,
     });
   }
@@ -166,27 +172,32 @@ function atmoFrame(tms) {
     }
   }
   ctx.fillStyle = color;
-  const drift = moving ? (t * 0.0022 * ATMO.speed) : 0;
+  const drift = moving ? (t * 0.0016 * ATMO.speed) : 0;
   for (let ci = 0; ci < ATMO.cols.length; ci++) {
     const col = ATMO.cols[ci];
-    const x = ((col.x + drift + ci * 0.0001) % 1) * W;
-    const n = col.c.length, bandH = H / n;
-    const wob = moving ? 0.78 + 0.22 * Math.sin(t * 0.35 + col.ph) : 1;
+    const x = ((col.x + drift) % 1) * (W + 60) - 30;
+    const n = col.c.length;
+    const colH = H * col.hf;
+    const y0 = H - colH;                    // layer 0 at the column's top,
+    const bandH = colH / n;                 // the mouth at the ground
+    const gap = Math.min(1.5, bandH * 0.25); // visible banding = core sample
+    const wob = moving ? 0.82 + 0.18 * Math.sin(t * 0.3 + col.ph) : 1;
     const pulsing = ATMO.pulse && ATMO.pulse.i === ci;
     const p = pulsing ? (t - ATMO.pulse.t0) / ATMO.pulse.dur : 0;
+    // faint backbone so the column silhouette reads even where ranks are cold
+    ctx.globalAlpha = Math.min(0.5, 0.028 * ATMO.intensity * col.base * wob * 3);
+    ctx.fillRect(x, y0, col.w, colH);
     for (let i = 0; i < n; i++) {
-      let a = col.c[i] * 0.085 * ATMO.intensity * wob;
-      // the surfacing front sweeps bottom-up (deep layers first is the
-      // wrong story — the ANSWER rises toward the mouth at the bottom, so
-      // sweep top-down through depth: front position in layer space)
+      let a = (0.03 + col.c[i] * 0.30) * ATMO.intensity * col.base * wob;
+      // the surfacing pulse sweeps down through depth toward the mouth
       if (pulsing) {
         const front = p * 1.25 * n;
         const d = Math.abs(i - front);
-        if (i < front) a += 0.22 * ATMO.intensity * Math.max(0, 1 - p) * Math.exp(-d / (n * 0.25));
+        if (i < front) a += 0.5 * ATMO.intensity * Math.max(0, 1 - p) * Math.exp(-d / (n * 0.25));
       }
-      if (a <= 0.003) continue;
-      ctx.globalAlpha = Math.min(0.5, a);
-      ctx.fillRect(x, i * bandH, col.w, bandH + 0.5);
+      if (a <= 0.004) continue;
+      ctx.globalAlpha = Math.min(0.6, a);
+      ctx.fillRect(x, y0 + i * bandH, col.w, Math.max(0.75, bandH - gap));
     }
   }
   ctx.globalAlpha = 1;
@@ -2172,9 +2183,15 @@ async function showFindings() {
     return;
   }
   const mshort = (id) => (id.match(/(g4b|g12b|q27b)$/) || [])[1] || "";
-  const card = (it) => `
+  const card = (it) => {
+    const ge = INDEX.find((e) => e.id === it.ids[0]);
+    return `
     <div class="find-card">
-      <h4>${it.t} ${novChipHTML(it.novelty)}</h4>
+      <div class="fc-head">
+        ${ge ? `<a class="fc-glyph" href="#${esc(ge.id)}"
+          title="${esc(ge.id)} — this finding's core sample; open the record">${glyph(ge.emergence, 12, 62)}</a>` : ""}
+        <h4>${it.t} ${novChipHTML(it.novelty)}</h4>
+      </div>
       <p>${it.b}</p>
       <div class="chips">
         ${it.ids.map((id) => `<a class="chip rec" href="#${esc(id)}"
@@ -2183,15 +2200,20 @@ async function showFindings() {
         <a class="chip unitlink" href="#unit/${esc(it.unit)}">unit ${esc(it.unit)} →</a>
       </div>
     </div>`;
+  };
   detail.innerHTML = `
-    <div class="exp-head"><div class="exp-title">
+    <div class="exp-head"><div class="exp-title find-hero">
       <h2>Findings map</h2>
+      <p class="find-lead">A home lab that asks small language models what
+        they feel — and watches each answer being <em>made</em>, layer by
+        layer, before it reaches the mouth.</p>
       <div class="chips"><span class="chip">${data.themes.reduce((n, t) => n + t.items.length, 0)} headline results</span>
         <span class="chip">curated from ${INDEX.length} records</span></div>
-      <p style="color:var(--ink-2);font-size:13.5px;margin:10px 0 0">
-        The course by theme instead of by unit — every card links to the
-        records behind it. The chronological unit tree lives in the rail;
-        the full argument is the <a href="#essay">essay</a>.</p>
+      <p class="find-note">
+        Each card carries its record's <b>core sample</b> — one band per
+        layer, bluer = the answer closer to the surface — and links to the
+        raw data. The chronological unit tree lives in the rail; the full
+        argument is the <a href="#essay">essay</a>.</p>
     </div></div>
     ${data.themes.map((th) => `
       <section class="card">
