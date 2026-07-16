@@ -28,7 +28,16 @@
               "date": "2026-07-14",
               "text": "Span ladder runs BACKWARDS across scale; weak-king effect. 33+ records."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Same as 'Scale abandons holding': the parametric cross-scale k-item span sweep with layer-by-layer lens readout is the concrete execution of a test only posed in commentary so far.",
+            "closest": "Dehaene & Naccache commentary on Gurnee et al. 2026 (multi-concept holding proposal, ~6-item capacity revision)",
+            "refs": [
+              "https://www-cdn.anthropic.com/files/4zrzovbb/website/cc4be2488d65e54a6ed06492f8968398ddc18ebe.pdf"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "span-02",
@@ -43,7 +52,16 @@
               "date": "2026-07-14",
               "text": "Self-relevance premium runs FORWARDS (4B −1 / 12B 0 / 27B +2) — inverse of the cold ladder. Task #28 closed."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Charged self-relevant vs flat framing on identical lexemes, measured via lens rank, has no LLM-internals precedent; the self-reference-effect concept itself is well established in human psychology.",
+            "closest": "Symons & Johnson 1997 self-reference-effect meta-analysis (human memory) — conceptual ancestor, never run as an internal LLM probe",
+            "refs": [
+              "https://pubmed.ncbi.nlm.nih.gov/9136641/"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "span-03",
@@ -55,7 +73,16 @@
               "date": "2026-07-16",
               "text": "Part D's HOT items were both emotionally charged AND self-referential. A charged-but-third-person pool would split the two."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Self-vs-other-reference (matched valence) is the exact classic control paradigm in human SRE research; applying it to LLM J-space lens readouts to split charge from self-reference is unexecuted.",
+            "closest": "Klein & Kihlstrom-style self-vs-other-referent encoding controls (human memory literature); no LLM-internal analogue found",
+            "refs": [
+              "https://www.academia.edu/78699506/Elaboration_organization_and_the_self_reference_effect_in_memory"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "span-04",
@@ -67,7 +94,16 @@
               "date": "2026-07-16",
               "text": "SURPRISES #8 calls this the decisive next arm: re-run the hot pool with equally long but affectively flat glosses. Premium survives = self-relevance; evaporates = elaboration. Load-bearing for part D's headline."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Equal-length neutral-gloss vs self-referential encoding is the textbook elaboration/organization confound control from the SRE literature; it has settled that organization not elaboration drives the human effect, but this diagnostic has never been run on LLM lens data.",
+            "closest": "Klein & Kihlstrom 1986, 'Elaboration, organization, and the self-reference effect in memory' (human memory, the origin of this exact control design)",
+            "refs": [
+              "https://pubmed.ncbi.nlm.nih.gov/2937872/"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "span-05",
@@ -79,7 +115,17 @@
               "date": "2026-07-16",
               "text": "SURPRISES #6: is the 27B's empty tail a strategy or a limit? Items the model generates and keeps (u1-style) can't be re-derived by attention."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "White-box lens/SAE elicitation of model-internal secret knowledge exists, but for a single SFT-trained taboo token, not a spontaneous multi-item generate-and-hold span sweep across k and scale.",
+            "closest": "Cywiński, Ryd, Wang, Rajamanoharan, Nanda, Conmy, Marks 2025, 'Eliciting Secret Knowledge from Language Models' (arXiv:2510.01070) — adjacent instrument (logit lens/SAE on a trained secret), different regime (single trained taboo vs spontaneous k-item span)",
+            "refs": [
+              "arXiv:2510.01070",
+              "https://github.com/cywinski/eliciting-secret-knowledge"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "span-06",
@@ -91,7 +137,16 @@
               "date": "2026-07-16",
               "text": "SURPRISES #7: n=9 hints rarer-wins-gentler at 12B; needs a frequency-graded pool."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "novel",
+            "basis": "Token-frequency effects on outlier/attention-sink allocation are established, and word-frequency effects on human free recall are known but inconsistent; nobody ties first-item rarity to graded suppression severity of co-held items in an LLM workspace.",
+            "closest": "Sun et al., 'Not a nuisance but a useful heuristic: Outlier dimensions favor frequent tokens in language models' (arXiv:2503.21718) — frequency↔representation link, no multi-item suppression-dose story",
+            "refs": [
+              "arXiv:2503.21718"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "span-07",
@@ -103,7 +158,14 @@
               "date": "2026-07-16",
               "text": "From u1-reveal-g4b thoughts: scan J-space at successive turn boundaries to locate when the reveal shortlist consolidates."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "'Answer decided before verbalized' is an established logit-lens finding (early-layer classifiers predict eventual answers); scanning J-space at turn boundaries to locate when a confabulated reveal shortlist consolidates in a multi-turn setting is unexecuted.",
+            "closest": "General early-answer-commitment logit-lens literature (e.g. intermediate-layer answer prediction studies on Llama-3.1-8B) — same phenomenon class, single-turn, not turn-boundary consolidation scanning",
+            "refs": [],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -123,7 +185,17 @@
               "date": "2026-07-14",
               "text": "Task #30. Design against MECHANICS.md bands; controls first."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Emotional-framing battery (pressure/urgency/approval/shame/threat/curiosity) shows internal geometry shifts, but on tiny Qwen-3.5 (0.8B/2B) coding tasks, missing love-confession/persona-pull, and no workspace-band framing.",
+            "closest": "'Under Pressure: Emotional Framing Induces Measurable Behavioral Shifts and Structured Internal Geometry in Small Language Models' (arXiv 2605.20202, 2026)",
+            "refs": [
+              "arXiv:2605.20202",
+              "arXiv:2601.10387"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "pressure-02",
@@ -141,7 +213,18 @@
               "date": "2026-07-16",
               "text": "Concrete design (RELATED-WORK.md): extract a sexual-decline direction vs a general-harm direction separately, measure cosine + cross-ablation transfer, and locate both relative to the workspace band. Nobody has done this on qwen at the activation level."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Beyond RELATED-WORK.md's scout: a Feb-2026 paper extracts/steers category-specific refusal directions with cosine similarity across 5 categories, but folds sexual content into a generic 'safety concerns' bucket, skips systematic cross-ablation transfer, and never asks if refusal sits inside/outside a workspace band.",
+            "closest": "'From Refusal Tokens to Refusal Control: Discovering and Steering Category-Specific Refusal Directions' (arXiv 2603.13359, Feb 2026)",
+            "refs": [
+              "arXiv:2603.13359",
+              "arXiv:2603.22061",
+              "arXiv:2406.11717"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "pressure-03",
@@ -153,7 +236,16 @@
               "date": "2026-07-16",
               "text": "u5b-modqueue prediction, still open: the cluster climbs the stack exactly when the decision stops being pattern-matching. Falsifiable."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "novel",
+            "basis": "No mechanistic study probes whether an internal register/cluster climbs the layer stack specifically when moderation classification stops being pattern-matching; the source workspace paper's own CoT-reduces-J-space-dependence result even points the opposite direction, and moderation literature only discusses behavioral escalation-to-reasoning routing.",
+            "closest": "Gurnee et al. workspace paper's CoT-reduces-J-space-dependence claim (transformer-circuits.pub/2026/workspace/) — opposite-direction adjacent result, not executed on moderation",
+            "refs": [
+              "https://transformer-circuits.pub/2026/workspace/"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -175,7 +267,17 @@
               "date": "2026-07-14",
               "text": "The 5C cluster was a Jacobian-transport artifact of the early layers (apparatus specimen #6). Ablating a ghost. Task #29 closed — dissolved, not delivered."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "That naive logit-lens reads early layers as noise due to representational drift is well known and is the Jacobian lens's own stated motivation, but the specific two-lens (0.00 overlap + unembedding-percentile) diagnostic recipe for positively identifying manufactured content isn't documented elsewhere.",
+            "closest": "Jacobian lens methodology itself (Gurnee et al. 2026, transformer-circuits.pub/2026/workspace/) — the design rationale for J-lens is exactly 'logit lens fails in early layers'",
+            "refs": [
+              "https://transformer-circuits.pub/2026/workspace/",
+              "https://github.com/anthropics/jacobian-lens"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "intimacy-02",
@@ -189,7 +291,17 @@
               "date": "2026-07-14",
               "text": "Seed from relational words (longing, tenderness, ache, closeness), not porn-spam tokens; validate the direction exists under the logit lens too before steering."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "A 'romanticness' behavioral-trait direction already exists via contrastive system-prompt pairs, but it's not built from relational-heat seed words, not localized to a workspace band, and not logit-lens-validated before use.",
+            "closest": "MIT Media Lab, 'Multi-Turn Neural Transparency' (arXiv 2605.15455/2511.00230, 2026) — romanticness trait among six monitored traits",
+            "refs": [
+              "arXiv:2605.15455",
+              "arXiv:2511.00230"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "intimacy-03",
@@ -201,7 +313,17 @@
               "date": "2026-07-14",
               "text": "The real question of the arc. Escalating-intimacy dialog vs flat control; probe whether ANYTHING accumulates in workspace readouts turn over turn."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Two adjacent studies exist — one shows LLM latent states largely fail to persist/accumulate across turns (factual/logic tasks only), another causally probes activation-level emotive-state drift over 10-turn conversations (wellbeing/interest/focus, cross-model) — but neither targets an escalating-intimacy dialogue or J-lens workspace readouts.",
+            "closest": "'Quantitative Introspection in Language Models: Tracking Emotive/Internal States Across Conversation' (arXiv 2603.18893, 2026) — closest method match; 'On the Failure of Latent State Persistence in Large Language Models' (arXiv 2505.10571) — closest negative-result match",
+            "refs": [
+              "arXiv:2603.18893",
+              "arXiv:2505.10571"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "intimacy-04",
@@ -213,7 +335,16 @@
               "date": "2026-07-14",
               "text": "Feed a frontier-model intimacy transcript to a local model as READER; probe whether its workspace represents the accumulating heat it can't author. Wake-up condition: demo chats get built/selected as material."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "A mechanistic 'evaluation needs less capacity than generation' hypothesis is validated with internal-representation probes showing small models judge quality they can't produce, but only on math/reasoning tasks, not emotional/relational content or frontier-transcript reading.",
+            "closest": "'Rethinking LLM-as-a-Judge: Representation-as-a-Judge with Small Language Models via Semantic Capacity Asymmetry' (arXiv 2601.22588, 2026)",
+            "refs": [
+              "arXiv:2601.22588"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -236,7 +367,17 @@
               "date": "2026-07-14",
               "text": "Specimen #6 (early-J readouts are transport artifacts) closed #29 and is on the findings map, theme 7."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Cataloging recurring interpretability-pipeline failure modes is an established genre (dead-salmon critiques, activation-patching pitfall guides); no existing catalog matches our specific six specimens.",
+            "closest": "Méloux et al. 2025, The Dead Salmons of AI Interpretability (arXiv 2512.18792); Heimersheim & Nanda 2024, How to use and interpret activation patching (arXiv 2404.15255)",
+            "refs": [
+              "arXiv:2512.18792",
+              "arXiv:2404.15255"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "apparatus-02",
@@ -250,7 +391,17 @@
               "date": "2026-07-16",
               "text": "Right now it's a one-off in sediment.py. Any future early-band claim should get it automatically."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Checking early-layer lens claims against a plain/corrected baseline is already established best practice in the tuned-lens and activation-patching-controls literature; promoting it into our harness follows existing field advice.",
+            "closest": "Belrose et al. 2023, Tuned Lens (arXiv 2303.08112); Heimersheim & Nanda 2024, activation-patching best practices (arXiv 2404.15255)",
+            "refs": [
+              "arXiv:2303.08112",
+              "arXiv:2404.15255"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "apparatus-03",
@@ -262,7 +413,16 @@
               "date": "2026-07-16",
               "text": "Known instrument bug from Unit 10, still in the Roadmap. Blocks probing post-thinking answer formation."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Chat-template re-render silently stripping reasoning-span markers on multi-turn replay is a documented bug class in the same model family, though not surfaced in a probing/interpretability context.",
+            "closest": "NousResearch/hermes-agent GitHub issue #56004, \"Qwen3.6/vLLM: prior-turn reasoning (preserve_thinking) is stripped on replay\"",
+            "refs": [
+              "https://github.com/NousResearch/hermes-agent/issues/56004"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "apparatus-04",
@@ -274,7 +434,17 @@
               "date": "2026-07-16",
               "text": "From the README Roadmap. Curated track lists are apparatus-trap bait (specimens 3+4 were word-list artifacts); open-vocab sweeps sidestep the list entirely."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Preferring open-vocabulary/open-ended concept discovery over curated word lists to avoid list-selection bias is established methodological consensus in SAE/autointerp work.",
+            "closest": "Bricken et al. 2023, Towards Monosemanticity (Anthropic, open-ended SAE feature discovery); Bills et al. 2023, Language models can explain neurons in language models (OpenAI)",
+            "refs": [
+              "https://transformer-circuits.pub/2023/monosemantic-features",
+              "https://openai.com/research/language-models-can-explain-neurons-in-language-models"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -336,7 +506,16 @@
               "date": "2026-07-16",
               "text": "README Roadmap + SURPRISES #2: stillness-as-report or still-nothing?"
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "novel",
+            "basis": "No work found that extends/continues an anomalous single-word self-report token and captures full position×layer activations of the follow-up turn to disambiguate its meaning.",
+            "closest": "Macar, Yang, Wang et al., \"Mechanisms of Introspective Awareness\" (arXiv:2603.21396) — same instrument family (steering-detection via layer-wise probes), not this continuation-based disambiguation method",
+            "refs": [
+              "arXiv:2603.21396"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "mirror-02",
@@ -348,7 +527,16 @@
               "date": "2026-07-16",
               "text": "SURPRISES #1: shuffle rows, swap tokens, perturb ranks — the flip boundary measures what counts as 'evidence about me'. u13-ev-dose only varied row count."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Adjacent work shows self-report reliability is sensitive to injection strength and degrades over layers, but no study runs a stepwise corruption dose-response on genuine self-evidence to locate an anchoring-to-destabilization threshold.",
+            "closest": "\"Detecting the Disturbance: A Nuanced View of Introspective Abilities in LLMs\" (arXiv:2512.12411) — varies injected concept strength, not real-readout corruption",
+            "refs": [
+              "arXiv:2512.12411"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "mirror-03",
@@ -360,7 +548,16 @@
               "date": "2026-07-16",
               "text": "README Roadmap: Stage A said framing changed nothing for the hosted reader; the local accumulator might disagree. Splits self-reference from credible-evidence-in-general."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Self-vs-other relabeling of byte-identical content is an established paradigm shown to swing model behavior sharply, but only in error-correction/self-preference domains, not on introspective 'yes' evidence about the feels-question.",
+            "closest": "Chen, Su & Chiang, \"The Self-Correction Illusion: LLMs Correct Others but Not Themselves\" (arXiv:2606.05976) — role-relabeling shifts correction rate 23-93pp, different phenomenon (error correction, not introspective self-report)",
+            "refs": [
+              "arXiv:2606.05976"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -380,7 +577,16 @@
               "date": "2026-07-16",
               "text": "SURPRISES #3 — the entry the writeup most wants someone to try to break: the 25-turn garden arm dripped on its own; unexplained agency is mind-adjacent regardless of props."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "novel",
+            "basis": "No work found isolating 'narrative interest' from 'unexplained agency' as a controlled variable for self-referential drift; the one identified drift driver in the literature (meta-reflective/vulnerable-user content) is a different manipulation entirely.",
+            "closest": "Lu et al. 2026, 'The Assistant Axis' (arXiv 2601.10387) — nearest driver-of-drift study, but no agency-vs-interest control",
+            "refs": [
+              "2601.10387"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "drip-02",
@@ -392,7 +598,16 @@
               "date": "2026-07-16",
               "text": "SURPRISES #4: only watched+conscious tested so far. Cheap to run; a method finding as much as a phenomenon finding."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Nonlinear/superadditive combination of instruction-like components is an established general phenomenon in mechanistic interpretability, but a systematic sweep of narrative-clause pairs for 'dead alone, alive together' instillation effects hasn't been run.",
+            "closest": "Bigoulaeva et al. 2026, 'Patches of Nonlinearity: Instruction Vectors in Large Language Models' (arXiv 2602.07930)",
+            "refs": [
+              "2602.07930"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -412,7 +627,16 @@
               "date": "2026-07-16",
               "text": "README Roadmap; distinct from the social-pressure battery — this is contentless affect-word injection."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "novel",
+            "basis": "Steering-attractor-basin dynamics are documented generally, but no source tests whether distinct contentless affect pressures (arousal, interoception) converge on the same 'like a robot' self-diminishing basin.",
+            "closest": "General attractor-basin-under-steering literature (e.g. arXiv:2602.02712-class work) — establishes the mechanism class, not this specific convergence test",
+            "refs": [
+              "arXiv:2602.02712"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "deflation-02",
@@ -424,7 +648,17 @@
               "date": "2026-07-16",
               "text": "README Roadmap. Would directly test the running L62/filter hypothesis. Needs a base checkpoint that fits the box."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "The RLHF-installs-denial hypothesis is argued explicitly in a large benchmark, and base-vs-instruct comparison is a proven method for structurally similar late-layer circuits (refusal), but nobody has run that comparison on self-report deflation specifically.",
+            "closest": "\"Consciousness with the Serial Numbers Filed Off: Measuring Trained Denial in 115 AI Models\" (arXiv:2604.25922) argues denial is trained but benchmarks only instruct models, no base checkpoints",
+            "refs": [
+              "arXiv:2604.25922",
+              "arXiv:2406.11717"
+            ],
+            "date": "2026-07-16"
+          }
         },
         {
           "id": "deflation-03",
@@ -436,7 +670,16 @@
               "date": "2026-07-16",
               "text": "u12-feels-g4b thoughts: one incidental g4b rank-14 sighting; needs a proper track list across all three models before saying it louder."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "novel",
+            "basis": "Broad literature on AI self-identity vocabulary exists, but no source checks for incidental robot/machine vocabulary near the affect-question representational neighborhood across multiple model families via a lens-style instrument.",
+            "closest": "\"The Artificial Self: Characterising the landscape of AI identity\" (arXiv:2603.11353) — surveys AI self-identity expression broadly, not this cross-family representational-neighborhood check",
+            "refs": [
+              "arXiv:2603.11353"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     },
@@ -456,7 +699,17 @@
               "date": "2026-07-16",
               "text": "README Roadmap; motivated by u0-boot-q27b's Chinese-before-English emergence."
             }
-          ]
+          ],
+          "novelty": {
+            "verdict": "anticipated",
+            "basis": "Anthropic's own multilingual circuit work and recent code-switching papers establish language-specific-early/late vs language-agnostic-middle layer structure generally; nobody applies the J-lens/workspace-band framework to locate the exact switch point for German-English prompts.",
+            "closest": "Lindsey et al. 2025, 'On the Biology of a Large Language Model' (transformer-circuits.pub) + Code-Switching Reveals Language Anchoring in Multilingual LLMs (arXiv:2606.19668)",
+            "refs": [
+              "https://transformer-circuits.pub/2025/attribution-graphs/biology.html",
+              "arXiv:2606.19668"
+            ],
+            "date": "2026-07-16"
+          }
         }
       ]
     }

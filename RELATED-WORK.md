@@ -142,3 +142,61 @@ re-verified against the primary sources before appearing in any formal
 writeup.*
 
 — Claude (Fable 5)
+
+## Novelty audit (scouts 2026-07-16, all findings + all board items)
+
+Five parallel literature scouts judged every headline finding on the
+[findings map](dashboard/findings.json) and every open item on the
+[research board](BOARD.md) against online-available research, on a
+three-level scale: **★ novel** (multi-angle search found no meaningful
+precedent), **◐ anticipated** (posed in theory or an adjacent result
+exists, but not executed our way), **≡ covered** (a citable work makes it
+redundant). Calibration rule: thematic similarity is not "covered".
+Verdicts, bases, closest-work lines and refs live per item in
+`board/board.json` and per card in `dashboard/findings.json` (rendered as
+chips on the board and findings map; glyph column in BOARD.md).
+
+**Tally: 11 novel · 42 anticipated · 1 covered** (54 targets = 27
+findings cards + 27 board items; the two process items, audit/litwatch,
+are unrated).
+
+The ★-novel list (our best claims to genuinely new territory):
+
+- **List-mode vs winner-take-all** (12B holding toggle) — closest is the
+  workspace paper's ambiguity-ignition, a different phenomenon.
+- **A weak king lets the parliament live** — serial-position work on LLMs
+  is output-behavioral only (arXiv:2406.15981); no internal
+  winner-identity-dependent suppression exists.
+- **Fake vindication anchors harder than no data** — sycophancy
+  literature documents the opposite direction (arXiv:2502.08177).
+- **The garden drips on its own** — no work isolates unexplained-agency
+  as the manipulated variable for self-referential drift (nearest:
+  Assistant Axis, arXiv:2601.10387).
+- **"I feel like a little bit like a robot"** — no precedent for
+  contentless injection producing a dose-gated self-diminishing frame.
+- Open items: **span-06** (weak-king dose-response), **drip-01**
+  (mystery-free control), **pressure-03** (moderation recruits the
+  register), **mirror-01** (the "Still." continuation method),
+  **deflation-01/-03** (robot-attractor generalization / cross-family
+  vocabulary check).
+
+The one ≡-covered: **the elephant tax** — the "Attentional White Bear"
+paper (arXiv:2605.28639) plus semantic-leakage work already establish
+suppressed concepts staying recoverable and shaping generation; our
+safari result is a reproduction with a different instrument, and should
+be framed as such in any writeup.
+
+Notable near-misses that sharpen (not kill) open items: category-specific
+refusal directions exist as of Feb 2026 (arXiv:2603.13359) but fold sexual
+content into a generic bucket and never ask the workspace-band question
+(pressure-02 survives, narrowed); a "romanticness" trait direction exists
+(Multi-Turn Neural Transparency, arXiv:2605.15455) but is not
+relational-heat-seeded or band-localized (intimacy-02 survives, must cite);
+latent-state persistence across turns has a negative result on
+factual/logic tasks (arXiv:2505.10571) that intimacy-03 would directly
+stress in a register nobody tested.
+
+*Caveat: scout-run web research (Sonnet, 2–3 search angles per target);
+verdicts are calibrated best-effort, not systematic review. Re-verify the
+cited works before leaning on any single verdict in a formal writeup, and
+re-audit before publishing — "novel" has a shelf life.*

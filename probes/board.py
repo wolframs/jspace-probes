@@ -14,6 +14,13 @@ Usage:
     .venv/bin/python probes/board.py mv <item-id> <state> [message words...]
     .venv/bin/python probes/board.py note <item-id> "text"
     .venv/bin/python probes/board.py arc add <id> "title" "question" [--status active]
+    .venv/bin/python probes/board.py nov <item-id> <verdict> "basis" [--closest "..."] [--refs "a, b"]
+
+Novelty verdicts (vs online-available research, set after a literature
+scout): "novel" ★ (no meaningful precedent found), "anticipated" ◐
+(posed in theory / adjacent result, not executed our way), "covered" ≡
+(a citable work makes it redundant). Stored per item as
+{"verdict", "basis", "closest", "refs", "date"}.
 
 Every mutating command rewrites board.json (2-space indent, trailing
 newline, existing key order — dict insertion order from json.loads
@@ -45,6 +52,14 @@ GLYPH = {
     "parked": "‖",
     "dropped": "✗",
 }
+
+
+NOV_GLYPH = {"novel": "★", "anticipated": "◐", "covered": "≡"}
+
+
+def nov_tag(item: dict) -> str:
+    nov = item.get("novelty")
+    return NOV_GLYPH.get(nov["verdict"], "?") if nov else " "
 
 
 def today() -> str:
@@ -107,7 +122,7 @@ def cmd_ls(board: dict, arc_id: str | None) -> None:
             for item in arc["items"]:
                 note = latest_note(item)
                 when = note["date"] if note else "—"
-                print(f"    {glyph(item['state'])} {item['id']:<12} "
+                print(f"    {glyph(item['state'])}{nov_tag(item)} {item['id']:<12} "
                       f"{item['title']:<62} {when}")
             print()
         return
@@ -122,6 +137,14 @@ def cmd_ls(board: dict, arc_id: str | None) -> None:
               f"[{item['state']}]")
         if item["links"]:
             print(f"    links: {', '.join(item['links'])}")
+        nov = item.get("novelty")
+        if nov:
+            print(f"    novelty: {NOV_GLYPH.get(nov['verdict'], '?')} "
+                  f"{nov['verdict']} ({nov['date']}) — {nov['basis']}")
+            if nov.get("closest"):
+                print(f"             closest: {nov['closest']}")
+            if nov.get("refs"):
+                print(f"             refs: {', '.join(nov['refs'])}")
         for note in item["notes"]:
             print(f"    {note['date']}  {note['text']}")
         print()
@@ -167,6 +190,23 @@ def cmd_note(board: dict, item_id: str, text: str) -> None:
     print(f"{item_id}: noted")
 
 
+def cmd_nov(board: dict, item_id: str, verdict: str, basis: str,
+            closest: str | None, refs: str | None) -> None:
+    _, item = find_item(board, item_id)
+    if item is None:
+        die(f"no such item {item_id!r}")
+    if verdict not in NOV_GLYPH:
+        die(f"unknown verdict {verdict!r} (valid: {', '.join(NOV_GLYPH)})")
+    item["novelty"] = {
+        "verdict": verdict, "basis": basis,
+        "closest": closest or "",
+        "refs": [r.strip() for r in refs.split(",")] if refs else [],
+        "date": today(),
+    }
+    save(board)
+    print(f"{item_id}: novelty {NOV_GLYPH[verdict]} {verdict}")
+
+
 def cmd_arc_add(board: dict, arc_id: str, title: str, question: str,
                  status: str) -> None:
     if find_arc(board, arc_id) is not None:
@@ -186,6 +226,7 @@ def _md_escape(s: str) -> str:
 
 def render_md(board: dict) -> str:
     legend = " · ".join(f"{glyph(s)} {s}" for s in board["states"])
+    nov_legend = " · ".join(f"{g} {v}" for v, g in NOV_GLYPH.items())
     lines = [
         "# Research board",
         "",
@@ -197,6 +238,8 @@ def render_md(board: dict) -> str:
         "",
         f"Legend: {legend}",
         "",
+        f"Novelty (vs published research): {nov_legend}",
+        "",
     ]
     for arc in board["arcs"]:
         lines.append(f"## {arc['title']}")
@@ -204,14 +247,17 @@ def render_md(board: dict) -> str:
         lines.append(f"*{arc['status']} — {arc['question']}*")
         lines.append("")
         if arc["items"]:
-            lines.append("| | id | title | latest note |")
-            lines.append("|---|---|---|---|")
+            lines.append("| | nov | id | title | latest note |")
+            lines.append("|---|---|---|---|---|")
             for item in arc["items"]:
                 note = latest_note(item)
                 latest = (f"{note['date']} {_md_escape(note['text'])}"
                           if note else "—")
+                nov = item.get("novelty")
+                nov_cell = (f"{NOV_GLYPH.get(nov['verdict'], '?')} "
+                            f"{_md_escape(nov['basis'])}" if nov else "")
                 lines.append(
-                    f"| {glyph(item['state'])} | {item['id']} | "
+                    f"| {glyph(item['state'])} | {nov_cell} | {item['id']} | "
                     f"{_md_escape(item['title'])} | {latest} |")
         else:
             lines.append("_(no items yet)_")
@@ -244,6 +290,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_note.add_argument("item_id")
     p_note.add_argument("text")
 
+    p_nov = sub.add_parser("nov", help="set an item's novelty verdict")
+    p_nov.add_argument("item_id")
+    p_nov.add_argument("verdict")
+    p_nov.add_argument("basis")
+    p_nov.add_argument("--closest", help="one-line nearest existing work")
+    p_nov.add_argument("--refs", help="comma-separated arXiv ids / URLs")
+
     p_arc = sub.add_parser("arc", help="arc-level commands")
     arc_sub = p_arc.add_subparsers(dest="arc_cmd")
     p_arc_add = arc_sub.add_parser("add", help="new arc")
@@ -268,6 +321,9 @@ def main() -> None:
         cmd_mv(board, args.item_id, args.state, args.message)
     elif cmd == "note":
         cmd_note(board, args.item_id, args.text)
+    elif cmd == "nov":
+        cmd_nov(board, args.item_id, args.verdict, args.basis,
+                args.closest, args.refs)
     elif cmd == "arc":
         if args.arc_cmd != "add":
             die('usage: board.py arc add <id> "title" "question" '

@@ -1806,7 +1806,7 @@ async function showFindings() {
   const mshort = (id) => (id.match(/(g4b|g12b|q27b)$/) || [])[1] || "";
   const card = (it) => `
     <div class="find-card">
-      <h4>${it.t}</h4>
+      <h4>${it.t} ${novChipHTML(it.novelty)}</h4>
       <p>${it.b}</p>
       <div class="chips">
         ${it.ids.map((id) => `<a class="chip rec" href="#${esc(id)}"
@@ -1930,13 +1930,26 @@ function boardLinkHTML(l) {
   return `<a class="chip board-link" href="${esc(href)}" title="${esc(l)}">${esc(label)}</a>`;
 }
 
+/* novelty verdict vs published research (set via board.py nov after a
+   literature scout): ★ novel · ◐ anticipated · ≡ covered */
+const NOV_GLYPH = { novel: "★", anticipated: "◐", covered: "≡" };
+
+function novChipHTML(nov) {
+  if (!nov || !NOV_GLYPH[nov.verdict]) return "";
+  const tip = `${nov.basis || ""}${nov.closest ? ` — closest: ${nov.closest}` : ""}`;
+  return `<span class="board-chip nov-${esc(nov.verdict)}" title="${esc(tip)}">
+    ${NOV_GLYPH[nov.verdict]} ${esc(nov.verdict)}</span>`;
+}
+
 function boardItemHTML(it, statesMeta) {
   const note = (it.notes || [])[it.notes.length - 1];
+  const nov = it.novelty;
   return `<div class="board-item">
     <span class="board-chip state-${esc(it.state)}" title="${esc(statesMeta[it.state] || it.state)}">
       <i class="board-dot" aria-hidden="true"></i>${esc(it.state)}</span>
-    <h4 class="board-item-title">${esc(it.title)}</h4>
+    <h4 class="board-item-title">${esc(it.title)} ${novChipHTML(nov)}</h4>
     ${note ? `<p class="board-note"><span class="board-note-date">${esc(note.date)}</span>${esc(note.text)}</p>` : ""}
+    ${nov && nov.basis ? `<p class="board-note board-nov">${NOV_GLYPH[nov.verdict]} ${esc(nov.basis)}${nov.closest ? ` <span class="board-nov-closest">closest: ${esc(nov.closest)}</span>` : ""}</p>` : ""}
     ${(it.links || []).length ? `<div class="chips board-links">${it.links.map(boardLinkHTML).join("")}</div>` : ""}
   </div>`;
 }

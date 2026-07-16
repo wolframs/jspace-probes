@@ -569,3 +569,19 @@ article.essay h3 {
   .board-item-title { flex: 1 1 auto; }
   .board-links { margin-top: 2px; }
 }
+
+/* ---- board novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered ---- */
+.nov-novel, .nov-anticipated, .nov-covered {
+  display: inline-flex; align-items: center; gap: 4px; flex: none;
+  font-size: 10.5px; padding: 1px 8px; border-radius: 99px;
+  border: 1px solid var(--ring); color: var(--ink-2);
+  font-weight: 500; vertical-align: 2px; white-space: nowrap;
+}
+.nov-novel       { color: var(--s3); border-color: color-mix(in srgb, var(--s3) 45%, var(--ring)); }
+.nov-anticipated { color: var(--ink-2); }
+.nov-covered     { color: var(--muted); }
+.board-nov { font-size: 12px; }
+.board-nov-closest { color: var(--axis); }
+.find-card .nov-novel, .find-card .nov-anticipated, .find-card .nov-covered {
+  font-size: 10px; vertical-align: 3px;
+}
