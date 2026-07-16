@@ -72,7 +72,8 @@ function drawSpark() {
   const ranks = e && (Array.isArray(e.emergence) ? e.emergence : e.emergence?.ranks);
   if (!ranks || ranks.length < 2) { link.hidden = true; return; }
   link.hidden = false;
-  link.title = `${e.title} — the answer surfacing layer by layer (the lab's first headline)`;
+  link.title = `${e.title} — the lab's emblem: the first thing the lens showed us, ` +
+    `the answer surfacing layer by layer. (The actual headliners wear a ★ on the findings map.)`;
   const dpr = window.devicePixelRatio || 1;
   const W = 220, H = 30;
   canvas.width = W * dpr; canvas.height = H * dpr;
@@ -2192,7 +2193,7 @@ async function showFindings() {
   const card = (it) => {
     const ge = INDEX.find((e) => e.id === it.ids[0]);
     return `
-    <div class="find-card">
+    <div class="find-card${it.novelty && it.novelty.verdict === "novel" ? " novel" : ""}">
       <div class="fc-head">
         ${ge ? `<a class="fc-glyph" href="#${esc(ge.id)}"
           title="${esc(ge.id)} — this finding's core sample; open the record">${glyph(ge.emergence, 12, 62)}</a>` : ""}
@@ -2273,7 +2274,7 @@ async function showCompare(ids) {
           <div class="chips">
             <span class="chip model">${esc(rec.model.name)}</span>
             <span class="chip">${rec.model.quant ? esc(rec.model.quant) : "bf16"}</span>
-            <span class="chip">top1 <code class="tok">${esc(rec.emergence.top1)}</code></span>
+            <span class="chip">top1 <code class="tok">${esc(visTok(rec.emergence.top1))}</code></span>
           </div>
         </div>
       </div>

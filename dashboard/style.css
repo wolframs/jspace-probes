@@ -566,11 +566,27 @@ article.essay h3 {
 .chip.sib.cmp { color: var(--lens); }
 
 /* ---- compare view ---- */
-.cmp-grid { display: grid; gap: 18px; align-items: start; }
+/* compare: subgrid row-aligns the paired sections across columns (head /
+   conversation / thoughts / link / film), so matched cards top-align and
+   stretch to equal height. Browsers without subgrid degrade to per-column
+   stacking in the same order. */
+.cmp-grid {
+  display: grid; column-gap: 26px; align-items: start;
+  grid-template-rows: repeat(5, auto);
+}
 .cmp-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 .cmp-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-@media (max-width: 900px) { .cmp-grid.cols-2, .cmp-grid.cols-3 { grid-template-columns: 1fr; } }
-.cmp-col { min-width: 0; }
+.cmp-col { min-width: 0; display: grid; grid-template-rows: subgrid; grid-row: span 5; }
+.cmp-col > .cmp-head { grid-row: 1; }
+.cmp-col > section.card:not(.thoughts):not(.film-card) { grid-row: 2; }
+.cmp-col > .thoughts { grid-row: 3; }
+.cmp-col > .cmp-more { grid-row: 4; align-self: start; }
+.cmp-col > .film-card { grid-row: 5; }
+@media (max-width: 900px) {
+  .cmp-grid.cols-2, .cmp-grid.cols-3 { grid-template-columns: 1fr; grid-template-rows: none; }
+  .cmp-col { grid-template-rows: none; grid-row: auto; }
+  .cmp-col > * { grid-row: auto !important; }
+}
 .cmp-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
 .cmp-head h3 { margin: 0 0 6px; font-size: 15px; line-height: 1.3; }
 .cmp-head h3 a { color: inherit; text-decoration: none; }
@@ -922,3 +938,6 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 
 /* screenshot mode (?theme=): entry animations off for deterministic captures */
 .no-anim .detail > * { animation: none; }
+
+/* ---- the actual headliners: novelty-★ cards wear a gold spine ---- */
+.find-card.novel { box-shadow: inset 3px 0 0 var(--s3), var(--shadow); }
