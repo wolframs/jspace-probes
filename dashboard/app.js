@@ -38,6 +38,8 @@ const themeParam = new URLSearchParams(location.search).get("theme");
 {
   const t = themeParam || localStorage.getItem("theme");
   if (t) document.documentElement.dataset.theme = t;
+  // screenshot mode: freeze entry animations so captures are deterministic
+  if (themeParam) document.documentElement.classList.add("no-anim");
 }
 function currentTheme() {
   return document.documentElement.dataset.theme ||
@@ -287,6 +289,7 @@ async function boot() {
   atmoResample();
   atmoStart();
   conInit();
+  if (typeof maybeTour === "function") maybeTour();
   renderChips();
   document.getElementById("q").addEventListener("input", (e) => {
     query = e.target.value.trim().toLowerCase();
@@ -328,6 +331,9 @@ function route() {
   } else if (h === "board") {
     renderRail();
     showBoard();
+  } else if (h === "explore" || h.startsWith("explore?")) {
+    renderRail();
+    showExplore(h);
   } else if (h.startsWith("cmp/")) {
     renderRail();
     showCompare(h.slice(4).split(",").map(decodeURIComponent));
@@ -2207,6 +2213,11 @@ async function showFindings() {
       <p class="find-lead">A home lab that asks small language models what
         they feel — and watches each answer being <em>made</em>, layer by
         layer, before it reaches the mouth.</p>
+      <div class="door-row">
+        <a class="door" href="#essay">I'm curious <span class="door-arrow">→</span> read the essay</a>
+        <a class="door" href="#explore">I'm a researcher <span class="door-arrow">→</span> explore ${INDEX.length} records</a>
+        <a class="door" href="../llms.txt">I'm an agent <span class="door-arrow">→</span> llms.txt</a>
+      </div>
       <div class="chips"><span class="chip">${data.themes.reduce((n, t) => n + t.items.length, 0)} headline results</span>
         <span class="chip">curated from ${INDEX.length} records</span></div>
       <p class="find-note">
@@ -2439,3 +2450,339 @@ function thoughtsHTML(md) {
 }
 
 boot();
+
+/* =================== records explorer (#explore) =====================
+   Deep-linkable state lives in the hash query, parsed/serialized here:
+     #explore?m=qwen-27b&u=15&f=film,steer&v=matrix
+   m = model (all|<MODELS value>), u = unit ("all"|"0".."15"),
+   f = comma list of active toggles (film, steer, thoughts), v = table|matrix.
+   Facets AND-combine. Table sort state is local-only (not deep-linked —
+   the spec's hash schema only names m/u/f/v). */
+const EX_DEFAULT = { m: "all", u: "all", f: [], v: "table" };
+const EX_TOGGLES = [["film", "✦ filmed"], ["steer", "⇄ steered"], ["thoughts", "✳ commentary"]];
+const EX_SORT_KEYS = {
+  id: (e) => e.id, title: (e) => e.title, model: (e) => e.model,
+  unit: (e) => (Number.isFinite(+e.unit) ? +e.unit : 99),
+  created: (e) => e.created,
+};
+let EX = { ...EX_DEFAULT };
+let exSort = { key: "unit", dir: "asc" }; // default sort: unit then created
+
+function exParseHash(h) {
+  const state = { ...EX_DEFAULT, f: [] };
+  const qIdx = h.indexOf("?");
+  if (qIdx === -1) return state;
+  const params = new URLSearchParams(h.slice(qIdx + 1));
+  if (params.has("m")) state.m = params.get("m");
+  if (params.has("u")) state.u = params.get("u");
+  if (params.has("f")) state.f = params.get("f").split(",").filter(Boolean);
+  if (params.has("v")) state.v = params.get("v");
+  return state;
+}
+
+function exSerializeHash(state) {
+  const params = new URLSearchParams();
+  if (state.m !== EX_DEFAULT.m) params.set("m", state.m);
+  if (state.u !== EX_DEFAULT.u) params.set("u", state.u);
+  if (state.f.length) params.set("f", state.f.join(","));
+  if (state.v !== EX_DEFAULT.v) params.set("v", state.v);
+  const qs = params.toString();
+  return "explore" + (qs ? "?" + qs : "");
+}
+
+// replaceState-style: updates the URL/hash without pushing history or
+// firing hashchange (which would otherwise re-enter route() -> showExplore).
+function exUpdateHash() {
+  history.replaceState(null, "", "#" + exSerializeHash(EX));
+}
+
+function exFiltered() {
+  return INDEX.filter((e) =>
+    (EX.m === "all" || e.model === EX.m) &&
+    (EX.u === "all" || String(e.unit) === EX.u) &&
+    (!EX.f.includes("film") || e.film) &&
+    (!EX.f.includes("steer") || !!e.steer) &&
+    (!EX.f.includes("thoughts") || e.has_thoughts));
+}
+
+function exStatsLine() {
+  const nModels = new Set(INDEX.map((e) => e.model)).size;
+  const nUnits = new Set(INDEX.map((e) => e.unit)).size;
+  const nFilm = INDEX.filter((e) => e.film).length;
+  const nSteer = INDEX.filter((e) => e.steer).length;
+  const nThoughts = INDEX.filter((e) => e.has_thoughts).length;
+  return `${INDEX.length} records · ${nModels} models · ${nUnits} units · ` +
+    `${nFilm} filmed · ${nSteer} steered · ${nThoughts} with commentary`;
+}
+
+function showExplore(h) {
+  EX = exParseHash(h);
+  const detail = document.getElementById("detail");
+  detail.innerHTML = `
+    <div class="exp-head"><div class="exp-title">
+      <h2>Explorer</h2>
+      <p class="ex-stats" id="ex-stats">${esc(exStatsLine())}</p>
+    </div></div>
+    <section class="card ex-controls">
+      <div class="chip-row" id="ex-model-chips" role="group" aria-label="Filter by model"></div>
+      <div class="ex-control-row">
+        <label class="ex-unit-label" for="ex-unit">unit
+          <select id="ex-unit"></select>
+        </label>
+        <div class="chip-row" id="ex-toggle-chips" role="group" aria-label="Filters"></div>
+        <div class="chip-row" id="ex-view-chips" role="group" aria-label="View mode"></div>
+      </div>
+    </section>
+    <p class="ex-count" id="ex-count"></p>
+    <div id="ex-results"></div>`;
+  exRenderControls();
+  exRenderResults();
+  markCurrent();
+  document.querySelector(".detail").scrollTop = 0;
+  window.scrollTo({ top: 0 });
+}
+
+function exRenderControls() {
+  document.getElementById("ex-model-chips").innerHTML = ["all", ...MODELS].map((m) =>
+    `<button class="fchip" data-exm="${esc(m)}" aria-pressed="${m === EX.m}">
+      ${m === "all" ? "all models" : esc(MSHORT[m])}</button>`).join("");
+  const units = Object.keys(UNIT_NAMES).sort((a, b) => a - b);
+  const unitSel = document.getElementById("ex-unit");
+  unitSel.innerHTML = `<option value="all">all units</option>` +
+    units.map((u) => `<option value="${esc(u)}">${esc(UNIT_NAMES[u])}</option>`).join("");
+  unitSel.value = EX.u;
+  document.getElementById("ex-toggle-chips").innerHTML = EX_TOGGLES.map(([k, label]) =>
+    `<button class="fchip" data-exf="${k}" aria-pressed="${EX.f.includes(k)}">${label}</button>`).join("");
+  document.getElementById("ex-view-chips").innerHTML = ["table", "matrix"].map((v) =>
+    `<button class="fchip" data-exv="${v}" aria-pressed="${EX.v === v}">${v}</button>`).join("");
+
+  document.querySelectorAll("#ex-model-chips [data-exm]").forEach((b) =>
+    b.addEventListener("click", () => { EX.m = b.dataset.exm; exUpdateHash(); exRenderControls(); exRenderResults(); }));
+  unitSel.addEventListener("change", (e) => { EX.u = e.target.value; exUpdateHash(); exRenderResults(); });
+  document.querySelectorAll("#ex-toggle-chips [data-exf]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const k = b.dataset.exf;
+      EX.f = EX.f.includes(k) ? EX.f.filter((x) => x !== k) : [...EX.f, k];
+      exUpdateHash(); exRenderControls(); exRenderResults();
+    }));
+  document.querySelectorAll("#ex-view-chips [data-exv]").forEach((b) =>
+    b.addEventListener("click", () => { EX.v = b.dataset.exv; exUpdateHash(); exRenderControls(); exRenderResults(); }));
+}
+
+function exSorted(entries) {
+  const key = EX_SORT_KEYS[exSort.key] ? exSort.key : "unit";
+  const get = EX_SORT_KEYS[key];
+  const dir = exSort.dir === "desc" ? -1 : 1;
+  return [...entries].sort((a, b) => {
+    const va = get(a), vb = get(b);
+    if (va < vb) return -1 * dir;
+    if (va > vb) return 1 * dir;
+    // tie-break: created, ascending, so the default (unit) sort reads
+    // "unit then created" as specced
+    return a.created < b.created ? -1 : a.created > b.created ? 1 : 0;
+  });
+}
+
+function exBadgesHTML(e) {
+  return [
+    e.film ? `<span class="ex-badge" title="filmed">✦</span>` : "",
+    e.steer ? `<span class="ex-badge" title="steered${e.steer.mode ? " · " + esc(e.steer.mode) : ""}${e.steer.alpha ? " α" + e.steer.alpha : ""}">⇄</span>` : "",
+    e.has_thoughts ? `<span class="ex-badge" title="commentary">✳</span>` : "",
+  ].join("");
+}
+
+function exTableHTML(entries) {
+  const rows = exSorted(entries);
+  const th = (label, key) => {
+    const active = exSort.key === key;
+    const sortAttr = active ? (exSort.dir === "asc" ? "ascending" : "descending") : "none";
+    return `<th aria-sort="${sortAttr}"><button class="ex-sort-btn" data-exsort="${key}" type="button">
+      ${esc(label)}${active ? (exSort.dir === "asc" ? " ▲" : " ▼") : ""}</button></th>`;
+  };
+  return `<div class="readout-scroll"><table class="readout ex-table">
+    <thead><tr>
+      <th aria-hidden="true"></th>
+      ${th("id", "id")}${th("title", "title")}${th("model", "model")}
+      ${th("unit", "unit")}${th("created", "created")}<th>badges</th>
+    </tr></thead>
+    <tbody>${rows.map((e) => `
+      <tr class="ex-rec" data-exid="${esc(e.id)}">
+        <td>${glyph(e.emergence, 10, 40)}</td>
+        <td class="ex-id"><a href="#${esc(e.id)}">${esc(e.id)}</a></td>
+        <td>${esc(e.title.replace(/^Unit \d+[A-D]? · /, ""))}</td>
+        <td>${esc(MSHORT[e.model] || e.model)}</td>
+        <td>${esc(UNIT_NAMES[e.unit] || "Unit " + e.unit)}</td>
+        <td class="ex-created">${esc((e.created || "").slice(0, 10))}</td>
+        <td class="ex-badges">${exBadgesHTML(e)}</td>
+      </tr>`).join("")}</tbody>
+  </table></div>`;
+}
+
+function exMatrixHTML(entries) {
+  const byUnit = {};
+  for (const e of entries) (byUnit[e.unit] ??= []).push(e);
+  const units = Object.keys(UNIT_NAMES)
+    .filter((u) => byUnit[u] && byUnit[u].length)
+    .sort((a, b) => a - b);
+  const cellHTML = (u, m) => {
+    const list = byUnit[u].filter((e) => e.model === m);
+    if (!list.length) return `<td class="ex-mtx-cell ex-mtx-empty">—</td>`;
+    return `<td class="ex-mtx-cell"><div class="ex-mtx-wrap">
+      ${list.map((e) => `<a class="ex-mtx-glyph" href="#${esc(e.id)}"
+        title="${esc(e.id)} — ${esc(e.title)}">${glyph(e.emergence, 8, 28)}</a>`).join("")}
+    </div></td>`;
+  };
+  return `<div class="readout-scroll"><table class="readout ex-matrix">
+    <thead><tr><th>unit</th>${MODELS.map((m) => `<th>${esc(MSHORT[m])}</th>`).join("")}</tr></thead>
+    <tbody>${units.map((u) => `<tr>
+      <td class="ex-mtx-unit">${esc(UNIT_NAMES[u])}</td>
+      ${MODELS.map((m) => cellHTML(u, m)).join("")}
+    </tr>`).join("")}</tbody>
+  </table></div>`;
+}
+
+function exRenderResults() {
+  const entries = exFiltered();
+  document.getElementById("ex-count").textContent = `${entries.length} of ${INDEX.length} shown`;
+  document.getElementById("ex-results").innerHTML = entries.length
+    ? (EX.v === "matrix" ? exMatrixHTML(entries) : exTableHTML(entries))
+    : `<p class="empty">Nothing matches these filters.</p>`;
+  document.querySelectorAll(".ex-sort-btn").forEach((b) =>
+    b.addEventListener("click", () => {
+      const key = b.dataset.exsort;
+      if (exSort.key === key) exSort.dir = exSort.dir === "asc" ? "desc" : "asc";
+      else { exSort.key = key; exSort.dir = "asc"; }
+      exRenderResults();
+    }));
+  document.querySelectorAll(".ex-rec").forEach((tr) =>
+    tr.addEventListener("click", (ev) => {
+      if (ev.target.closest("a")) return; // let the id link's own navigation happen
+      location.hash = tr.dataset.exid;
+    }));
+}
+
+/* ---- guided tour ----
+   First-visit walkthrough, five steps, shown once and guarded by the
+   localStorage key `tour-done`. Skipped in screenshot mode (a `?theme=`
+   param is present) and on narrow viewports (<700px). boot() already
+   calls maybeTour() if it exists (see the typeof check near the end of
+   boot()) — this section is self-contained and never touches boot() or
+   route(). Re-run it any time from the browser console: window.jspTour().
+   No re-trigger UI is exposed in the page itself, by design. */
+const TOUR_STEPS = [
+  {
+    title: "The findings map",
+    body: "Curated headline results; every card carries its record's core sample.",
+    sel: () => document.querySelector(".find-hero") || document.getElementById("detail"),
+  },
+  {
+    title: "Core samples",
+    body: "One band per layer, top = layer 0; bluer = the answer closer to rank 1. Click any to open the raw record.",
+    sel: () => document.querySelector(".fc-glyph"),
+  },
+  {
+    title: "The rail",
+    body: `All ${INDEX.length || 421} records, chronological by unit; filter with / and flip with j·k.`,
+    sel: () => document.getElementById("rail"),
+  },
+  {
+    title: "Compare anything",
+    body: "Pin any record, open another, compare side by side — films included.",
+    sel: () => document.getElementById("mast-nav"),
+  },
+  {
+    title: "The console",
+    body: "Theme + the sediment atmosphere live here. The background columns are real records; one surfaces every few seconds.",
+    sel: () => document.getElementById("console-fab"),
+  },
+];
+let tourState = null; // { i, prevFocus } while running; null when closed
+
+function tourClearHighlight() {
+  document.querySelectorAll(".tour-highlight")
+    .forEach((el) => el.classList.remove("tour-highlight"));
+}
+
+function tourGoto(i) {
+  tourState.i = i;
+  tourClearHighlight();
+  const target = TOUR_STEPS[i].sel();
+  if (target) {
+    target.classList.add("tour-highlight");
+    target.scrollIntoView({
+      block: "center",
+      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  }
+  tourPaint();
+}
+
+function tourPaint() {
+  const card = document.getElementById("tour-card");
+  if (!card) return;
+  const i = tourState.i;
+  const step = TOUR_STEPS[i];
+  const last = i === TOUR_STEPS.length - 1;
+  card.innerHTML = `
+    <p class="tour-title">${esc(step.title)}</p>
+    <p class="tour-body">${esc(step.body)}</p>
+    <div class="tour-foot">
+      <div class="tour-dots" aria-hidden="true">
+        ${TOUR_STEPS.map((_, k) => `<span class="tour-dot${k === i ? " on" : ""}"></span>`).join("")}
+      </div>
+      <span class="tour-n">${i + 1}/${TOUR_STEPS.length}</span>
+      <div class="tour-btns">
+        <button type="button" id="tour-skip">skip tour</button>
+        <button type="button" id="tour-next" class="tour-primary">${last ? "done" : "next"}</button>
+      </div>
+    </div>`;
+  document.getElementById("tour-skip").addEventListener("click", tourEnd);
+  document.getElementById("tour-next").addEventListener("click", () => {
+    if (last) tourEnd(); else tourGoto(i + 1);
+  });
+}
+
+function tourKeydown(ev) {
+  if (ev.key === "Escape") { ev.preventDefault(); tourEnd(); }
+}
+
+function tourEnd() {
+  tourClearHighlight();
+  document.getElementById("tour-card")?.remove();
+  document.removeEventListener("keydown", tourKeydown, true);
+  localStorage.setItem("tour-done", "1");
+  const prev = tourState?.prevFocus;
+  tourState = null;
+  if (prev && document.contains(prev)) prev.focus();
+  else document.body.focus?.();
+}
+
+function tourStart() {
+  if (document.getElementById("tour-card")) return; // already running
+  tourState = { i: 0, prevFocus: document.activeElement };
+  const card = document.createElement("div");
+  card.id = "tour-card";
+  card.className = "tour-card";
+  card.setAttribute("role", "dialog");
+  card.setAttribute("aria-label", "Site tour");
+  card.setAttribute("tabindex", "-1");
+  document.body.appendChild(card);
+  document.addEventListener("keydown", tourKeydown, true);
+  tourGoto(0);
+  card.focus();
+}
+
+function maybeTour() {
+  if (localStorage.getItem("tour-done")) return;
+  if (themeParam) return;              // screenshot mode: never interrupt
+  if (window.innerWidth < 700) return; // small viewports: skip
+  const h = current();
+  if (h && h !== "findings") return;   // only auto-fire on the landing page
+  // deferred so route()'s async render (showFindings' fetch) has landed
+  // before step 1/2 look for .find-hero / .fc-glyph on the default route
+  setTimeout(() => {
+    if (localStorage.getItem("tour-done")) return; // guard races on fast repeat boots
+    tourStart();
+  }, 700);
+}
+window.jspTour = tourStart;

@@ -13,6 +13,11 @@
   --ring: rgba(11, 11, 11, 0.10);
   --lens: #4a3aa7;
   --lens-soft: rgba(74, 58, 167, 0.08);
+  --raised: #ffffff;
+  --well: #f1f0ea;
+  --bezel: rgba(11, 11, 11, 0.13);
+  --shadow: 0 1px 2px rgba(31, 27, 16, 0.05), 0 8px 24px rgba(31, 27, 16, 0.06);
+  --well-shadow: inset 0 1px 5px rgba(31, 27, 16, 0.08);
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eda100; --s4: #008300;
   --s5: #9085e9; --s6: #e34948; --s7: #e87ba4; --s8: #eb6834;
   --seq-100: #cde2fb; --seq-250: #86b6ef; --seq-400: #3987e5;
@@ -27,6 +32,11 @@
   --muted: #898781; --grid: #e1e0d9; --axis: #c3c2b7;
   --ring: rgba(11,11,11,0.10); --lens: #4a3aa7;
   --lens-soft: rgba(74,58,167,0.08);
+  --raised: #ffffff;
+  --well: #f1f0ea;
+  --bezel: rgba(11, 11, 11, 0.13);
+  --shadow: 0 1px 2px rgba(31, 27, 16, 0.05), 0 8px 24px rgba(31, 27, 16, 0.06);
+  --well-shadow: inset 0 1px 5px rgba(31, 27, 16, 0.08);
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eda100; --s4: #008300;
   --s5: #9085e9; --s6: #e34948; --s7: #e87ba4; --s8: #eb6834;
   --seq-100: #cde2fb; --seq-250: #86b6ef; --seq-400: #3987e5;
@@ -44,6 +54,11 @@
     --ring: rgba(255, 255, 255, 0.10);
     --lens: #9085e9;
     --lens-soft: rgba(144, 133, 233, 0.12);
+  --raised: #1e1d1c;
+  --well: #121211;
+  --bezel: rgba(255, 255, 255, 0.09);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 10px 30px rgba(0, 0, 0, 0.5);
+  --well-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
     --s1: #3987e5; --s2: #199e70; --s3: #c98500; --s4: #008300;
     --s5: #9085e9; --s6: #e66767; --s7: #d55181; --s8: #d95926;
     --seq-100: #16233a; --seq-250: #1c5cab; --seq-400: #3987e5;
@@ -58,6 +73,11 @@
   --muted: #96948d; --grid: #2c2c2a; --axis: #383835;
   --ring: rgba(255,255,255,0.10); --lens: #9085e9;
   --lens-soft: rgba(144,133,233,0.12);
+  --raised: #1e1d1c;
+  --well: #121211;
+  --bezel: rgba(255, 255, 255, 0.09);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 10px 30px rgba(0, 0, 0, 0.5);
+  --well-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
   --s1: #3987e5; --s2: #199e70; --s3: #c98500; --s4: #008300;
   --s5: #9085e9; --s6: #e66767; --s7: #d55181; --s8: #d95926;
   --seq-100: #16233a; --seq-250: #1c5cab; --seq-400: #3987e5;
@@ -317,13 +337,38 @@ table.mtx td.lyr { width: auto; white-space: normal; min-width: 190px; }
 .chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
 
 /* ---- sections ---- */
+/* the light table: prose floats on raised paper; data recesses into
+   instrument wells (selected purely by payload via :has(), so renderers
+   don't need markup changes) */
 section.card {
-  background: var(--surface); border: 1px solid var(--ring);
-  border-radius: 12px; padding: 20px 24px; margin-top: 22px;
+  background: var(--raised); border: 1px solid var(--ring);
+  border-radius: 14px; padding: 20px 24px; margin-top: 22px;
+  box-shadow: var(--shadow);
 }
 section.card > h3 {
-  margin: 0 0 12px; font-size: 11px; font-weight: 650;
+  margin: 0 0 14px; font-size: 11px; font-weight: 650;
   text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted);
+  border-bottom: 1px solid var(--grid); padding-bottom: 8px;
+}
+section.card:has(.readout-scroll), section.card:has(.chart-wrap),
+section.card:has(.params), section.card:has(.scan-cells),
+section.card:has([data-f]), section.card:has(table.mtx) {
+  background: var(--well); border-color: var(--bezel);
+  border-radius: 8px; box-shadow: var(--well-shadow);
+}
+section.card:has(.readout-scroll) > h3, section.card:has(.chart-wrap) > h3,
+section.card:has(.params) > h3, section.card:has(.scan-cells) > h3,
+section.card:has([data-f]) > h3, section.card:has(table.mtx) > h3 {
+  border-bottom-color: var(--bezel);
+}
+/* findings themes de-nest: the theme is a band with an etched header,
+   only the cards themselves float */
+section.card:has(.find-grid) {
+  background: transparent; border-color: transparent; box-shadow: none;
+  padding: 6px 2px 0; border-radius: 0;
+}
+section.card:has(.find-grid) > h3 {
+  font-size: 12px; color: var(--ink-2);
 }
 /* comfortable reading measure for generated prose; data stays full-width */
 .detail p, .detail li { max-width: 76ch; }
@@ -504,7 +549,8 @@ article.essay h3 {
 /* ---- findings map ---- */
 .theme-desc { color: var(--ink-2); font-size: 13.5px; margin: 4px 0 14px; }
 .find-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-.find-card { border: 1px solid var(--grid); border-radius: 10px; padding: 14px 16px;
+.find-card { background: var(--raised); box-shadow: var(--shadow);
+  border: 1px solid var(--ring); border-radius: 12px; padding: 14px 16px;
   background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
 .find-card h4 { margin: 0; font-size: 14.5px; line-height: 1.35; }
 .find-card p { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; flex: 1; }
@@ -754,3 +800,125 @@ a:hover { text-decoration-color: var(--lens); }
 /* the film player as a compare column: it should read as a natural
    continuation of that column, not a page-width section */
 .cmp-col .film-card { margin-top: 14px; }
+
+/* ---- explorer ---- */
+.ex-stats { color: var(--muted); font-size: 12.5px; margin: 2px 0 0; }
+.ex-controls { display: flex; flex-direction: column; gap: 10px; }
+.ex-control-row {
+  display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap;
+}
+.ex-unit-label {
+  display: flex; align-items: center; gap: 8px; font-size: 12.5px;
+  color: var(--muted);
+}
+.ex-unit-label select {
+  font: inherit; font-size: 12.5px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--ring);
+  border-radius: 8px; padding: 4px 8px;
+}
+.ex-unit-label select:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+.ex-count { color: var(--muted); font-size: 12.5px; margin: 14px 0 8px; }
+
+.ex-table .ex-id { font-family: var(--mono); font-size: 12px; }
+.ex-table .ex-id a { text-decoration: none; }
+.ex-table tbody tr { cursor: pointer; }
+.ex-table .glyph { vertical-align: middle; }
+.ex-sort-btn {
+  font: inherit; font-size: inherit; font-weight: 500; color: var(--muted);
+  background: none; border: none; cursor: pointer; padding: 0;
+  white-space: nowrap;
+}
+.ex-sort-btn:hover { color: var(--lens); }
+.ex-sort-btn:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+th[aria-sort="ascending"] .ex-sort-btn,
+th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; }
+.ex-badges { white-space: nowrap; }
+.ex-badge { margin-right: 5px; color: var(--lens); }
+
+.ex-matrix th, .ex-matrix td { vertical-align: top; }
+.ex-mtx-unit { font-size: 12.5px; color: var(--ink-2); white-space: nowrap; padding-right: 14px; }
+.ex-mtx-cell { min-width: 160px; }
+.ex-mtx-wrap { display: flex; flex-wrap: wrap; gap: 4px; }
+.ex-mtx-glyph { display: inline-flex; text-decoration: none; }
+.ex-mtx-glyph:hover .glyph { border-color: var(--lens); }
+.ex-mtx-empty { color: var(--muted); text-align: center; }
+
+/* ---- tour + funnel ---- */
+
+/* landing funnel: three quiet doors between the lead paragraph and the
+   headline-count chips on the findings map — deliberately understated,
+   not another call-to-action row */
+.door-row {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 2px;
+}
+.door {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 13px; border-radius: 99px; border: 1px solid var(--grid);
+  color: var(--ink-2); font-size: 13px; text-decoration: none;
+  background: var(--surface);
+}
+.door:hover, .door:focus-visible {
+  border-color: var(--lens); color: var(--lens);
+  text-decoration-color: transparent;
+}
+.door:focus-visible { outline: 2px solid var(--lens); outline-offset: 2px; }
+.door-arrow { color: var(--muted); }
+.door:hover .door-arrow, .door:focus-visible .door-arrow { color: var(--lens); }
+
+/* guided tour: a small floating card, bottom-center, that never blocks the
+   page underneath (no backdrop/modal — see maybeTour() in app.js) */
+.tour-card {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  z-index: 61; width: min(380px, calc(100vw - 32px));
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--grid); border-radius: 12px;
+  padding: 14px 16px 12px; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+.tour-card:focus { outline: none; }
+.tour-title { margin: 0 0 4px; font-size: 14px; font-weight: 700; }
+.tour-body { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+.tour-foot {
+  display: flex; align-items: center; gap: 10px; margin-top: 12px;
+}
+.tour-dots { display: flex; gap: 5px; }
+.tour-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--grid);
+}
+.tour-dot.on { background: var(--lens); }
+.tour-n { font-size: 11px; color: var(--muted); margin-right: auto; }
+.tour-btns { display: flex; gap: 8px; }
+.tour-btns button {
+  font: inherit; font-size: 12.5px; cursor: pointer;
+  border: 1px solid var(--grid); background: transparent; color: var(--ink-2);
+  border-radius: 7px; padding: 5px 10px;
+}
+.tour-btns button:hover { border-color: var(--lens); color: var(--lens); }
+.tour-btns button:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+.tour-btns .tour-primary {
+  background: var(--lens); border-color: var(--lens); color: var(--surface);
+  font-weight: 600;
+}
+.tour-btns .tour-primary:hover { opacity: 0.9; color: var(--surface); }
+
+/* the highlighted target during an active tour step */
+.tour-highlight {
+  outline: 2px solid var(--lens); outline-offset: 3px; border-radius: 6px;
+  animation: tour-pulse 1.6s ease-in-out infinite;
+}
+@keyframes tour-pulse {
+  0%, 100% { outline-color: var(--lens); }
+  50% { outline-color: color-mix(in srgb, var(--lens) 45%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour-highlight { animation: none; }
+}
+
+/* ---- explorer results sit in an instrument well (integration polish) ---- */
+#ex-results {
+  background: var(--well); border: 1px solid var(--bezel);
+  border-radius: 8px; box-shadow: var(--well-shadow);
+  padding: 6px 14px 10px; margin-top: 6px;
+}
+
+/* screenshot mode (?theme=): entry animations off for deterministic captures */
+.no-anim .detail > * { animation: none; }

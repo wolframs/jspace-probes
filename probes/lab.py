@@ -476,6 +476,7 @@ def reindex() -> None:
             "gen": gen[:110] if gen else None,
             "steer": ({"mode": steer.get("mode", "ablate"),
                        "alpha": steer.get("alpha")} if steer else None),
+            "film": bool(rec.get("film")),
         })
     entries.sort(key=lambda e: (int(e["unit"]) if str(e["unit"]).isdigit()
                                 else 99, e["created"]))
