@@ -77,9 +77,22 @@ mirror follows evidence only in the last layers. **For qwen, steer/ablate
 across ~L24–56** (pre-motor workspace); our loss-map uses `range(24,55,2)`.
 The **early band L2–8 is the 5C null control** — expect ~0 there everywhere.
 
-⚠️ Fraction-derived, not qwen-measured. A "where is qwen's ignition"
+~~⚠️ Fraction-derived, not qwen-measured. A "where is qwen's ignition"
 calibration (kurtosis rise / ambiguity commitment on qwen) is owed before
-Phase-2 conclusions lean on the exact band.
+Phase-2 conclusions lean on the exact band.~~
+
+**MEASURED 2026-07-17 (u16-trawl-q27b, results/u16-trawl-q27b/
+trawl-report.md §1):** four convergent curves — effective dimensionality
+of `W_U J_l` (dip ~2 at L24–32, rise from L33, peak ~50 at L57–58),
+excess kurtosis (rise L27–32), vanilla-logit-lens top-1 agreement (~0
+until L36), realized-next-token rank (enters the hundreds ~L27–30) —
+put **qwen's ignition onset at ~L28–36 (44–56% depth), later than the
+fraction-ported L24**. Prefer intervention bands **~L28–58** going
+forward; L24–28 is likely pre-ignition (harmless but wasted). Tension
+kept honest: the paper's effective dimensionality *rises* into the motor
+band, ours falls L58→L62 — unresolved (architecture vs lens-fit
+artifact). Single-conversation measurement; the ambiguity-commitment
+(Fig 29B) arm is still unrun.
 
 ---
 
