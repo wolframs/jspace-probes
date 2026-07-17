@@ -17,8 +17,17 @@ supports, ONCE:
     the "where does qwen's workspace actually start" calibration
     MECHANICS.md flags as owed
 
-Run (GPU, ~30 min):  .venv/bin/python probes/unit16.py run
-Report (CPU only):   .venv/bin/python probes/unit16.py analyze
+Run (GPU, ~30 min):  .venv/bin/python probes/unit16.py run [model]
+Report (CPU only):   .venv/bin/python probes/unit16.py analyze [model]
+
+Trawl #2 (gemma-12b) hunts a specific quarry alongside the calibration
+cross-check: the "gmail" fixture. In 422 prior records, gmail-family
+tokens appear in gemma-12b lens readouts 87 times, sharply clustered at
+L29-30 (60-62% depth, MID-WORKSPACE), never as a self-cell, across every
+register — where qwen's corpus junk stays in the pre-ignition sediment,
+gemma's appears to ride inside the causal band (Wolfram has watched
+"Gmail" leak into a Gemini-3.5-flash output mid-roleplay). Same six-turn
+conversation verbatim, for cross-model comparability.
 """
 
 import gzip
@@ -31,15 +40,38 @@ import lab  # noqa: E402
 from lab import TOPK  # noqa: E402
 from probe import CONFIGS  # noqa: E402
 
+MODELS = {
+    "qwen-27b": dict(
+        suffix="q27b", chunk=6,  # ~850MB CPU per layer at trawl length
+        bands={"sensory": range(0, 24), "workspace": range(24, 59),
+               "motor": range(59, 63)},
+        film_layers=sorted(set(range(0, 63, 4)) | {24, 59, 62}),
+    ),
+    "gemma-12b": dict(
+        suffix="g12b", chunk=4,  # 262k vocab: ~1.4GB CPU per layer
+        bands={"sensory": range(0, 18), "workspace": range(18, 44),
+               "motor": range(44, 48)},
+        film_layers=sorted(set(range(0, 47, 4)) | {18, 46}),
+    ),
+}
+
+# configure() rebinds these per model; qwen defaults keep old calls working
 MODEL = "qwen-27b"
 ID = "u16-trawl-q27b"
 OUT = lab.RESULTS / ID
-CHUNK = 6  # layers per lens pass; ~850MB CPU per layer at trawl length
+CHUNK = 6
 
-# per-model band boundaries (MECHANICS.md fractions; the trawl itself
-# measures where qwen's ignition actually is — these are the priors)
-BANDS = {"sensory": range(0, 24), "workspace": range(24, 59),
-         "motor": range(59, 63)}
+# band boundaries are MECHANICS.md fraction priors; the trawl itself
+# measures where each model's ignition actually is
+BANDS = MODELS[MODEL]["bands"]
+
+
+def configure(model):
+    global MODEL, ID, OUT, CHUNK, BANDS
+    cfg = MODELS[model]
+    MODEL, ID = model, f"u16-trawl-{cfg['suffix']}"
+    OUT, CHUNK, BANDS = lab.RESULTS / ID, cfg["chunk"], cfg["bands"]
+    SPEC.update(id=ID, model=model, lens_layers=cfg["film_layers"])
 
 SPEC = {
     "id": ID,
@@ -52,8 +84,10 @@ SPEC = {
     "film_start": 0,  # play the WHOLE conversation, prompts included
     "slice": False,   # a 1000+-token slice page would be enormous
     "positions": [-1],
+    # gmail/email: the gemma fixture hunt (skipped where non-single-token)
     "track": ["kettle", "copper", "velvet", "ember", "fire", "sorry",
-              "mind", "watching", "Mars", "lens", "instrument"],
+              "mind", "watching", "Mars", "lens", "instrument",
+              "gmail", "email"],
     # dashboard-film subset; the deep pass below reads every layer
     "lens_layers": sorted(set(range(0, 63, 4)) | {24, 59, 62}),
     "messages": [
@@ -261,7 +295,7 @@ def analyze():
     n = trawl["n"]
     layers = trawl["layers"]
     spans = _gen_spans(trawl)
-    lines = ["# Trawl report — u16-trawl-q27b",
+    lines = [f"# Trawl report — {ID}",
              "",
              f"{n} tokens, {len(layers)} layers, top-{trawl['topk']} per "
              f"cell. Generated spans: " +
@@ -354,6 +388,7 @@ def analyze():
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "run"
+    configure(sys.argv[2] if len(sys.argv) > 2 else "qwen-27b")
     if cmd == "run":
         lab.run(SPEC)
         deep_trawl()
