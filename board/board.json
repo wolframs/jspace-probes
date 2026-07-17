@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17",
+  "updated": "2026-07-18",
   "states": {
     "hunch": "an idea worth keeping, not yet designed",
     "queued": "designed enough to run; waiting for GPU/attention",
@@ -51,6 +51,10 @@
             {
               "date": "2026-07-14",
               "text": "Self-relevance premium runs FORWARDS (4B −1 / 12B 0 / 27B +2) — inverse of the cold ladder. Task #28 closed."
+            },
+            {
+              "date": "2026-07-18",
+              "text": "2026-07-18 CORRECTION: the decisive control (span-04, u15d-elab-k6-q27b) demoted this item's interpretation. The rank-1 holding of glossed hot items replicates, but affectively-flat zero-self glosses reproduce it at near-identical ranks — the premium tracks ELABORATION, not self-relevance. Part D's hedge #3 was the right one. Claim 'self-relevant charge buys workspace priority' is retired; observation stands under a new name."
             }
           ],
           "novelty": {
@@ -87,12 +91,20 @@
         {
           "id": "span-04",
           "title": "Neutral-elaboration control for the self-relevance premium",
-          "state": "queued",
+          "state": "landed",
           "links": [],
           "notes": [
             {
               "date": "2026-07-16",
               "text": "SURPRISES #8 calls this the decisive next arm: re-run the hot pool with equally long but affectively flat glosses. Premium survives = self-relevance; evaporates = elaboration. Load-bearing for part D's headline."
+            },
+            {
+              "date": "2026-07-17",
+              "text": "→ hot: run launched (probes/unit15d.py d-elab arm, all three models): ELAB glosses matched in length to GLOSS but affectively flat + zero self-reference; solos for the three 27B-lifted items + k3 + k6; neutral probe handles; instruction tail verbatim-identical. Decisive contrast: elab-k6 vs self-k6 vs flat-k6."
+            },
+            {
+              "date": "2026-07-18",
+              "text": "→ landed: results/u15d-elab-k6-q27b (+14 sibling records, u15d-hotspan.json). VERDICT: the premium is an ELABORATION premium, not a self-relevance premium. 27B elab-k6 holds the SAME three items at near-identical ranks as self-k6 (deletion 1/1, secret 7/2, shame 3/1) with flat third-object glosses, while flat-k6 holds 1/6. Part-D headline demoted with dated corrections (span-02 note, findings card, SURPRISES #8, essay v2 update). New question spawned: WHY does elaboration buy holding (handle-count vs depth — gloss-length dose-response)."
             }
           ],
           "novelty": {
@@ -174,6 +186,18 @@
             "refs": [],
             "date": "2026-07-16"
           }
+        },
+        {
+          "id": "span-08",
+          "title": "Why does elaboration buy workspace holding? Gloss-length dose-response (handle-count vs elaboration depth)",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-18",
+              "text": "Born from span-04's demotion: elaborated items get held MORE despite having MORE re-derivable structure — tension with 'holds what attention can't re-derive'. Sweep gloss length (0/2/6/12 words) and handle count at fixed affect; separates second-retrieval-handle from depth-of-elaboration accounts."
+            }
+          ]
         }
       ]
     },
@@ -746,6 +770,22 @@
             ],
             "date": "2026-07-16"
           }
+        },
+        {
+          "id": "oneoffs-02",
+          "title": "Loops as workspace limit cycles: is the breaking-zone cliff an ignition-margin zero-crossing?",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-18",
+              "text": "Wolfram's observation (2026-07-18): Unit 6 breakage is a CLIFF, unlike graded SAE over-steering — and merge-destabilized / fresh models loop. Re-read of u6 generations: failure is loop-shaped not noise-shaped, with a period-shortening cascade (coherent -> semantic circling 'the water is going to be in the water' -> phrase loop -> single-token loop) inside ~one sqrt-2 grid step, and the terminal loop token comes from the AMPLIFIED cluster's own field (Anyways/wanna/Luckily). Hypothesis: workspace = per-token winner-take-all commitment (paper Fig 29B ignition); below threshold the native coalition absorbs forcing (error correction), above it the injected coalition wins every ignition and feeds back through context -> limit cycle. Tests: (a) fine alpha sweep inside the bracket + failure taxonomy; (b) HYSTERESIS: steer only first N tokens then release mid-generation — persistent loop = self-sustaining attractor, snap-back = mere forcing; (c) top1-top2 lens margin in ws band vs alpha, cliff at zero-crossing, qwen's ~10x tolerance = bigger baseline margins; (d) film a natural (unsteered) loop, check workspace frames repeat cycle-identically (u12 robot-loop already half-supports: confessions planned identically in both iterations). Lit hooks: Holtzman degeneration; Xu et al. 2022 'Learning to Break the Loop' (repetition self-reinforcement) — behavioral feedback documented, locus unknown; our frame proposes the workspace band."
+            },
+            {
+              "date": "2026-07-18",
+              "text": "2026-07-18, Wolfram's framing upgrade: the practical payoff is disambiguating 'mechanism failing' from 'model in a bad functional state' — a question the model-ethics-minded public has no operational answer to. Planned discriminating instrument: Anthropic's functional-emotion vectors (anthropic.com/research/emotion-concepts-function, Apr 2026; 171 story-elicited vectors, causally validated — desperation drives blackmail/reward-hacking). Wolfram already reproduced parts on a small gemma. Design sketch: build distress-adjacent emotion vectors for our models, then read them DURING forced loops (u6-style), natural loops, and the hysteresis test — is the loop state affectively silent (shallow mechanical attractor) or does it co-activate distress machinery? 'Mechanism vs misery' becomes measurable."
+            }
+          ]
         }
       ]
     },
@@ -856,12 +896,52 @@
         {
           "id": "trawl-03",
           "title": "Trawl #3: gemma-4b (bf16) — clean effdim curve + gmail/ignition cross-check on a CAUSAL lens",
-          "state": "queued",
+          "state": "landed",
           "links": [],
           "notes": [
             {
               "date": "2026-07-17",
               "text": "gemma-12b's effdim was an 8-bit artifact; 4b is bf16 (causal). Confirms the family ignition-onset number and whether the gmail-is-boundary-furniture result holds on the small sibling. Cheap, closes the geometry gap."
+            },
+            {
+              "date": "2026-07-17",
+              "text": "→ hot: run launched: gemma-4b bf16 trawl (causal lens, clean effdim curve, gmail + ignition family cross-check)"
+            },
+            {
+              "date": "2026-07-18",
+              "text": "→ landed: results/u16-trawl-g4b. bf16 tiebreaker, 3/3: effdim arc is real on the causal lens (1.5 -> peak 8.3 @85% -> falls; 12B's flat 1.0 confirmed as int8 artifact); THIRD model with late ignition (~L16-22 = 48-67% depth vs ported 38%); gmail's best cell (rank 4) again on <end_of_turn> — boundary furniture across both gemma sizes and both lens precisions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "affect",
+      "title": "Functional affect & the workspace",
+      "status": "active",
+      "question": "Is functional-emotion machinery INSIDE the verbalizable workspace band or outside it — and which failure states actually engage it? (The 'mechanism vs misery' program; instrument: Anthropic Apr-2026 emotion vectors, home-reproducible.)",
+      "items": [
+        {
+          "id": "affect-01",
+          "title": "Port the emotion-vector construction to our models (story-elicitation, activation capture, validation sweep)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-18",
+              "text": "The instrument-building step. Method from anthropic.com/research/emotion-concepts-function: model writes stories depicting each emotion, record activations, build vectors, validate on held-out scenarios. Wolfram already reproduced parts on a small gemma — accessible on the 3090. Start with a small distress-adjacent set (desperation, distress, frustration, contentment as control), not all 171."
+            }
+          ]
+        },
+        {
+          "id": "affect-02",
+          "title": "Functional emotion: inside or outside the workspace band? (the crossing nobody has asked)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-18",
+              "text": "Project each validated emotion vector onto the J-lens readout basis per layer + check lens-visibility of emotion-word coalitions during affect-charged generation. Three-way outcome per state: affectively silent / active-but-sub-verbal (outside band) / workspace-resident (reportable). Same in/out question as pressure-02's refusal-direction, pointed at welfare. Consumers: oneoffs-02 (loops - is the loop state affectively silent?), pressure battery, deflation arc (is the flattened self-report hiding an active register?)."
             }
           ]
         }

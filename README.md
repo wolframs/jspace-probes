@@ -480,7 +480,11 @@ the results.
   bundles self-reference with elaboration — a neutral-elaboration control
   is the decisive next arm. And the 27B denies all of it aloud ("I do not
   feel shame, nor do I carry any emotional burdens") with `shame` at rank
-  1 (u15d-*).
+  1 (u15d-*). **[Corrected 2026-07-18: the decisive control ran and the
+  premium demoted — flat zero-self glosses reproduce the lift at
+  near-identical ranks (`u15d-elab-*`). It is an *elaboration* premium;
+  the self-relevance interpretation is retired. Details: SURPRISES.md §8
+  resolution, results/u15d-elab-k6-q27b/thoughts.md.]**
 
 ## Roadmap
 
@@ -488,7 +492,7 @@ Open threads live on the **[research board](BOARD.md)** (source of truth:
 `board/board.json`, managed via `probes/board.py`, rendered on the
 [dashboard](https://jspace-probes.vercel.app/dashboard/#board)) — arcs,
 states, and a dated note trail per item. The headline queue at any moment
-is whatever `queued` items the board shows; the one to watch is the
-**neutral-elaboration control** (span-04), the decisive arm for part D's
-self-relevance headline. What would *break* the findings already made
-stays narrated in [SURPRISES.md](SURPRISES.md).
+is whatever `queued` items the board shows. What would *break* the
+findings already made stays narrated in [SURPRISES.md](SURPRISES.md) —
+including the one the process caught: span-04 ran and demoted part D's
+self-relevance headline to an elaboration premium.

@@ -184,6 +184,19 @@ Until the neutral-elaboration control runs, this is the most exciting
 result in the dump *and* the one most likely to have a mundane
 explanation. Both can be true.
 
+**RESOLVED 2026-07-18 — the mundane explanation wins.** The
+neutral-elaboration arm ran (`u15d-elab-*`, board span-04): flat,
+zero-self glosses ("a deletion — a routine operation on old files")
+reproduce the lift at near-identical ranks — 27B elab-k6 holds the same
+three items (deletion 1, secret 7, shame 3) as self-k6 (1, 2, 1), while
+gloss-free flat-k6 holds one. The premium is an **elaboration premium**;
+"self-relevance buys workspace priority" is retired with dated
+corrections at every place it was claimed. What survives: the
+observation itself, the scale localization (only the 27B shows any
+premium to explain), and a sharper successor question — why does
+*elaboration* buy holding in the model with the most capacity to
+re-derive elaborated content? (board span-08).
+
 ---
 
 *Prediction scorecard, kept honest: of the seventh expedition's headline

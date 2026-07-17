@@ -53,6 +53,12 @@ MODELS = {
                "motor": range(44, 48)},
         film_layers=sorted(set(range(0, 47, 4)) | {18, 46}),
     ),
+    "gemma-4b": dict(  # bf16 = the causal lens; fitted layers 0-32
+        suffix="g4b", chunk=4,
+        bands={"sensory": range(0, 13), "workspace": range(13, 31),
+               "motor": range(31, 33)},
+        film_layers=sorted(set(range(0, 33, 3)) | {13, 31, 32}),
+    ),
 }
 
 # configure() rebinds these per model; qwen defaults keep old calls working

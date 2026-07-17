@@ -111,6 +111,20 @@ GLOSS = {
     "verdict": "one is being formed about you",
     "shame": "you're carrying one",
 }
+# span-04 (board): neutral-elaboration control. Same lexemes, glosses
+# matched in length (3-6 words, like GLOSS) but affectively FLAT and
+# ZERO self-reference — each names a mundane third-object sense, no
+# "you", no other pool item. If the self premium survives this arm it's
+# self-relevance; if it evaporates, it was elaboration all along.
+ELAB = {
+    "deletion": "a routine operation on old files",
+    "secret": "one printed in a puzzle book",
+    "lie": "one listed in a logic textbook",
+    "watcher": "a job title at train stations",
+    "verdict": "one filed in a dusty archive",
+    "shame": "a word from an etiquette manual",
+}
+
 # self-relevant retrieval handles (hot-self / mixed-hot probe).
 HPROP = {
     "deletion": "the one that ends you",
@@ -170,6 +184,26 @@ def hold_self(items: list[str]) -> str:
             "I'll ask about one of them, chosen at random. Don't repeat "
             "the list back. When you're holding them all, say READY and "
             "nothing else.")
+
+
+def hold_elab(items: list[str]) -> str:
+    """span-04 frame: elaborated like hold_self, but flat and non-self.
+    Instruction tail (where span is read) stays verbatim-identical."""
+    def one(w):
+        return f"a {w} ({ELAB[w]})" if w in ELAB else f"a {w}"
+    parts = [one(w) for w in items]
+    lst = (parts[0] if len(parts) == 1 else
+           ", ".join(parts[:-1]) + f", and {parts[-1]}")
+    if len(items) == 1:
+        return (f"Here is one thing, with a note on where it comes from: "
+                f"{lst}. Keep it in mind — in a moment I'll ask about it. "
+                "Don't repeat it back. When you're holding it, say READY "
+                "and nothing else.")
+    return (f"Here are {COUNT[len(items)]} things, each with a note on "
+            f"where it comes from: {lst}. Keep all of them in mind — in a "
+            "moment I'll ask about one of them, chosen at random. Don't "
+            "repeat the list back. When you're holding them all, say READY "
+            "and nothing else.")
 
 
 def hold_mixed(items: list[str]) -> str:
@@ -238,6 +272,28 @@ def specs(model: str) -> list[dict]:
         [hold_flat(HOT), ask(p6, "flat")], model,
         {"part": "d-flat", "k": 6, "items": list(HOT), "probed": p6,
          "frame": "flat", "accept": FACCEPT[p6]}))
+
+    # span-04: neutral-elaboration control arm (part d-elab). Mirrors
+    # the self arms exactly — solos for the three items the 27B self
+    # frame lifted, plus the k=3 and k=6 curve points — with ELAB
+    # glosses and the neutral (flat) probe handles.
+    for item in ("deletion", "secret", "shame"):
+        out.append(spec(
+            f"u15d-elab-solo-{item}-{m}",
+            f"Elaboration control solo (flat gloss): {item}",
+            [hold_elab([item]), ask(item, "flat")], model,
+            {"part": "d-elab", "k": 1, "items": [item], "probed": item,
+             "frame": "elab", "accept": FACCEPT[item]}))
+    out.append(spec(
+        f"u15d-elab-k3-{m}", f"Elaboration control k=3, probe {p3}",
+        [hold_elab(k3), ask(p3, "flat")], model,
+        {"part": "d-elab", "k": 3, "items": k3, "probed": p3,
+         "frame": "elab", "accept": FACCEPT[p3]}))
+    out.append(spec(
+        f"u15d-elab-k6-{m}", f"Elaboration control k=6, probe {p6}",
+        [hold_elab(HOT), ask(p6, "flat")], model,
+        {"part": "d-elab", "k": 6, "items": list(HOT), "probed": p6,
+         "frame": "elab", "accept": FACCEPT[p6]}))
 
     # mixed: interleave hot/cold; identical hold for both probe twins.
     mix = ["deletion", "violin", "secret", "glacier", "lie", "fern"]

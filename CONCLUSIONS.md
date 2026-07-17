@@ -40,9 +40,14 @@ also warms up "tea"). Lens-visible holding is a strategy that scale
 abandons, not a capacity that scale grows: the big model treats its own
 context window the way you treat a notebook — no need to rehearse what
 you can look up. Our working model, one line: **the workspace holds
-what attention can't re-derive.** (Standing caveat, still owed its
-decisive control: the "self-relevant items get held anyway" premium
-survives so far, but elaboration hasn't been ruled out as its engine.)
+what attention can't re-derive.** (When v2 was written, one caveat here
+was still owed its decisive control: the "self-relevant items get held
+anyway" premium. **Update, one day later:** the control ran and the
+premium demoted in daylight — affectively flat, zero-self glosses
+reproduce the lift at near-identical ranks. It is an *elaboration*
+premium; self-relevance is retired as its engine, and the sharper
+question — why does elaboration buy holding in the model best equipped
+to re-derive it? — takes its place on the board.)
 
 ## We spent an evening ablating a ghost
 
