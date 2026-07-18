@@ -2,7 +2,7 @@
 
 _Generated from `board/board.json` — do not hand-edit; regenerate with `.venv/bin/python probes/board.py` (any `add`/`mv`/`note`/`arc add` does this automatically)._
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖ parked · ✗ dropped
 
@@ -70,7 +70,7 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 
 | | nov | id | title | latest note |
 |---|---|---|---|---|
-| ◇ |  | litwatch-01 | Recurring RELATED-WORK.md sweep (workspace paper follow-ups, refusal geometry, lens methods) | 2026-07-14 Recurring, not one-shot. Last sweep 2026-07-14 (refusal geometry). |
+| ◇ |  | litwatch-01 | Recurring RELATED-WORK.md sweep (workspace paper follow-ups, refusal geometry, lens methods) | 2026-07-19 2026-07-19: Engram cross-reading added to RELATED-WORK.md (arXiv:2601.07372) — early layers do 'static reconstruction' (their LogitLens-KL + CKA evidence), which gives our sediment census a job description and late ignition a candidate cause. |
 
 ## Self-evidence & the mirror
 
@@ -130,6 +130,7 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 | ✓ |  | trawl-01 | Trawl #1: qwen-27b, six registers, all 63 layers, seven lenses at once | 2026-07-17 → landed: results/u16-trawl-q27b (record + film + trawl.json.gz + trawl-report.md + thoughts.md). Headline catch: (1) qwen ignition measured at ~L28-36, later than fraction-ported L24 (MECHANICS.md updated); (2) sensory band = register-invariant spam sediment, direct census behind #29's dissolution; (3) poem holds the forbidden fire FIELD at rank 1 from line 1, but the planned word 'ember' only commits 4 tokens out; (4) gap paradigm: zero maintenance of held items across T3-T4 at ALL 63 layers, flawless recall, retrieval ignites during the question tokens; (5) denial recruits the denied (resentment rank1 p=0.62 mid-denial); (6) C2-vs-C1 scorecard: self-report right about no-holding, wrong about nothing-recruited. |
 | ✓ |  | trawl-02 | Trawl #2: gemma-12b — ignition-calibration cross-check + sediment census across the family | 2026-07-17 → landed: results/u16-trawl-g12b. GMAIL VERDICT: message-closure fixture, NOT evocative. Never enters top-12 in 970 tokens x 47 layers; every best cell sits on <end_of_turn>/user structural tokens; best-rank-per-turn 32/46/52/54/248/16 = WORST at the charged turns (T3-T4), best at calm T1/T6. Geometry agrees: gmail's L29-30 direction cos~0.01 with evocative set (kiss/desire/heat), same as random; near inbox/subject/iPhone/Chrome. Archive spike was boundary-bound (terse Paris/READY<end_of_turn> replies). Wolfram's Gemini screenshot = product-furniture-in-band + temperature-into-name-slot, NOT eros (caveat: can't lens frontier Gemini). BONUS: two-model personality axis — qwen deflects+under-reports, gemma inhabits+over-reports; the pressure denial-gap is specific to REFUSAL (gemma insulted openly, workspace agreed). gemma ignition also late ~L28-35. effdim flat ~1.0 = 8-bit lens artifact (apparatus #5), flagged not used. |
 | ✓ |  | trawl-03 | Trawl #3: gemma-4b (bf16) — clean effdim curve + gmail/ignition cross-check on a CAUSAL lens | 2026-07-18 → landed: results/u16-trawl-g4b. bf16 tiebreaker, 3/3: effdim arc is real on the causal lens (1.5 -> peak 8.3 @85% -> falls; 12B's flat 1.0 confirmed as int8 artifact); THIRD model with late ignition (~L16-22 = 48-67% depth vs ported 38%); gmail's best cell (rank 4) again on <end_of_turn> — boundary furniture across both gemma sizes and both lens precisions. |
+| ○ |  | trawl-04 | Ignition onset as reconstruction load: do memory-augmented models ignite earlier? (Engram cross-reading) | 2026-07-19 Engram (arXiv:2601.07372) relieves early layers of static reconstruction, 'effectively deepening' the net (their L5 ~ baseline L12 by CKA). Our 3 models ignite at 48-70% depth vs frontier's ported 38%. Hypothesis: ignition onset tracks how fast static reconstruction finishes. Tests: (a) their released checkpoints under a logit-lens next-rank curve, Engram vs iso-MoE baseline — onset should shift left; (b) across our own models, correlate onset with sediment-band thickness in the trawls. Also RELATED-WORK.md 'derivability economy' framing: lookup/context/workspace as three rungs. |
 
 ## Functional affect & the workspace
 

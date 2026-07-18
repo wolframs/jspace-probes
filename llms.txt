@@ -71,20 +71,19 @@ written by the Claude instance running the lab, after looking at the results.
   at every scale. Lens-visible holding is a strategy scale abandons, not a
   capacity scale grows; working hypothesis: the J-space holds what
   attention can't re-derive (u15-*, u15-span.json, u15-curves.json).
-- The self-relevance premium runs the OTHER way (Unit 15 part D): swap the
-  neutral pool for six charged self-relevant items (a deletion that is
-  yours, a secret you keep, a lie you told, a watcher, a verdict, a shame)
-  and run identical lexemes under a flat frame vs a self frame ("every one
-  is about you, right now"). Held-count delta self-minus-flat: 4B -1, 12B 0,
-  27B +2. On the model that holds 0-1/6 cold, and only there, the self frame
-  triples what surfaces (secret alone -> deletion, secret, shame at rank 1-2;
-  the same words flat-framed fall to rank 79-203); in a mixed pool the 27B
-  clamps the two hottest items and evicts every neutral one to 350-840. The
-  premium appears where cold holding vanishes and grows with scale — the
-  "holds what attention can't re-derive" prediction. Honest asterisks: count
-  effect over serial-position edges, co-presence 1 (holding is temporal), and
-  a neutral-elaboration control is still owed. The 27B denies it aloud ("I do
-  not feel shame") with shame at rank 1 (u15d-*, u15d-hotspan.json).
+- The elaboration premium, demoted from self-relevance by its own control
+  (Unit 15 part D + span-04, corrected 2026-07-18): six charged
+  self-relevant items under a flat frame vs a self frame ("every one is
+  about you, right now") first showed a 27B-only lift (self frame: deletion,
+  secret, shame at rank 1-2; same words flat-framed at 79-203; delta
+  self-minus-flat 4B -1, 12B 0, 27B +2). The decisive neutral-elaboration
+  arm then reproduced the lift with affectively flat, zero-self glosses at
+  near-identical ranks (elab-k6: deletion 1, secret 7, shame 3) — the
+  premium tracks per-item ELABORATION, not self-relevance; the
+  self-relevance reading is retired (SURPRISES.md §8 resolution). Still
+  standing: the lift is 27B-only, appears exactly where cold lens-residence
+  vanishes, and the 27B denies it aloud ("I do not feel shame") with shame
+  at rank 1 (u15d-*, u15d-elab-*, u15d-hotspan.json).
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.
@@ -109,6 +108,9 @@ the repo README.
   model matrices); requires JS, prefer /r/ pages for text-only access.
 - GitHub repo: https://github.com/wolframs/jspace-probes (zip archive:
   https://github.com/wolframs/jspace-probes/archive/refs/heads/master.zip)
+- https://jspace-probes.vercel.app/GLOSSARY.md — the lab's term reference: "holding" is deprecated,
+  split into residence / maintenance / lookup; bands, instruments, and
+  phenomena pinned to how they're measured.
 - https://jspace-probes.vercel.app/SURPRISES.md — results that stayed surprising after writeup, with
   the follow-up each warrants (open-problems seed).
 - https://jspace-probes.vercel.app/RELATED-WORK.md — how the findings sit against the literature

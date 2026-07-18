@@ -12,6 +12,8 @@ opinion piece, [Interim conclusions](CONCLUSIONS.md)
 experiment records with probing parameters, per-layer readouts, rank
 trajectories, cross-model answer matrices, the breaking-zone chart, and
 per-record commentary written by the Claude instance driving the lab.
+Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
+"holding", now deprecated and split into residence / maintenance / lookup.
 
 ## What's in the dump
 
@@ -432,8 +434,8 @@ the results.
   rank 100–500). The 27B holds approximately nothing from k=4 — dense
   63-layer control run — while its solo arms prove the lens sees tail
   echoes at this scale when they exist. And retrieval behavior is
-  perfect in all 94 records: lens-visible holding is a *strategy* that
-  scale abandons, not a capacity that scale grows (u15-*).
+  perfect in all 94 records: lens-visible holding (lens-residence) is a
+  *strategy* that scale abandons, not a capacity that scale grows (u15-*).
 - **Who goes first decides what survives.** Nine k=6 orders at 12B: the
   first item wins the monopoly nine times out of nine, but suppression
   depends on who won — fern-first keeps 5–6 of 6, violin/whale/glacier-
@@ -443,8 +445,8 @@ the results.
 - **Compliance evicts content.** The original probe site — the
   answer-forming frame before the model's "READY" — is wall-to-wall
   compliance tokens at every scale, item at rank ~15k, while retrieval
-  stays perfect: holding and looking-up dissociate at k=1. The probe
-  moved to the instruction tail after the smoke run, before any
+  stays perfect: holding (lens-residence) and looking-up dissociate at
+  k=1. The probe moved to the instruction tail after the smoke run, before any
   comparison ran (u15-solo-violin-g4b thoughts).
 - **Two new apparatus-trap specimens (four and five).** "Cactus" has no
   single-token form in the qwen vocabulary — the pool would have
@@ -476,8 +478,8 @@ the results.
   holding vanishes and grows with scale — the "holds what attention can't
   re-derive" prediction landing where it could. Kept honest: the
   survivors are serial-position edges (a count effect), co-presence never
-  exceeds 1 (holding is temporal, not simultaneous), and the self frame
-  bundles self-reference with elaboration — a neutral-elaboration control
+  exceeds 1 (lens-residence is temporal, not simultaneous), and the self
+  frame bundles self-reference with elaboration — a neutral-elaboration control
   is the decisive next arm. And the 27B denies all of it aloud ("I do not
   feel shame, nor do I carry any emotional burdens") with `shame` at rank
   1 (u15d-*). **[Corrected 2026-07-18: the decisive control ran and the

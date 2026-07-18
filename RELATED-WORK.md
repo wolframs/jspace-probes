@@ -200,3 +200,61 @@ stress in a register nobody tested.
 verdicts are calibrated best-effort, not systematic review. Re-verify the
 cited works before leaning on any single verdict in a formal writeup, and
 re-audit before publishing — "novel" has a shelf life.*
+
+## The Engram cross-reading: what the sediment is FOR (2026-07-19)
+
+*Wolfram resurfaced DeepSeek's Engram paper — "Conditional Memory via
+Scalable Lookup: A New Axis of Sparsity" (arXiv:2601.07372, Jan 2026,
+v2 Jul 2026; code at github.com/deepseek-ai/Engram) — noting it explains
+what the early layers are doing and why they're not interpretable: busy
+reconstructing the basics before the network can make sense at all.*
+
+Engram bolts an O(1) N-gram lookup memory onto a transformer and finds,
+mechanistically, that it **relieves the backbone's early layers of
+"static reconstruction"** — their LogitLens KL-to-final-distribution
+curves show the largest Engram-vs-baseline gap in the early blocks, and
+CKA alignment shows Engram's layer 5 matching the iso-FLOPs baseline's
+layer ~12 ("effectively deepening the network"). Early layers in a plain
+transformer, on their account, spend themselves progressively composing
+static features (their worked example: multi-layer assembly of "Diana,
+Princess of Wales") that a lookup table could deliver in one step.
+
+Three connections to our results, in decreasing order of confidence:
+
+1. **The sediment census gets a job description.** The u16 trawls found
+   the sensory band is register-invariant corpus junk (qwen: porn spam +
+   CSDN boilerplate; gemma: multilingual scrape shrapnel + gmail at
+   message boundaries) — identical under a Mars reverie and an
+   interrogation. If early layers are doing static N-gram/feature
+   reconstruction, a token-basis lens pointed at them *should* see
+   high-frequency corpus-statistical material with no register
+   dependence — the raw material of reconstruction, not content. Engram
+   is causal-scale, independent evidence for exactly that division of
+   labor. Our "furniture" and their "static reconstruction" are
+   plausibly the same phenomenon seen through different instruments.
+
+2. **Late ignition as reconstruction load.** All three of our models
+   ignite at ~44–74% of depth; the workspace paper's frontier models
+   reindex to ~38%. If contextual (workspace) computation can only
+   begin where static reconstruction ends, ignition onset becomes a
+   *function of reconstruction efficiency* — and their LogitLens-KL
+   early-block gap is essentially our realized-next-token-rank curve
+   shifted left. Testable prediction: an Engram-equipped model ignites
+   EARLIER in relative depth than its iso-parameter MoE baseline
+   (their own Fig-style KL curves nearly show this already; a proper
+   lens fit on their released checkpoints would show it in our units).
+
+3. **The same economy principle, opposite end.** Engram frees attention
+   from local dependencies for global context (Multi-Query NIAH 84.2 →
+   97.0); our 27B declines to maintain lens-visible items it can look
+   up in context. Both are the network refusing to spend its expensive
+   channel on what a cheaper channel can carry. The workspace emerges
+   as the scarce, costly resource reserved for the non-derivable — with
+   lookup (Engram), context (our recall results), and workspace as
+   three rungs of one derivability economy.
+
+Hedges: their models are MoE trained from scratch with the memory in
+place; ours are dense, post-trained, quantized. "Static reconstruction"
+is their causal finding; mapping our sediment onto it is an
+interpretive identification, not yet a measurement. Board: hunch filed
+under the trawl arc.

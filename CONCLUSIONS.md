@@ -36,8 +36,9 @@ can see*: in the trawl, the items vanish from all 63 layers for
 hundreds of tokens of intervening conversation — and re-ignite during
 the recall question itself, before the answer starts, with an
 associative halo around them (asked to recall a kettle, its workspace
-also warms up "tea"). Lens-visible holding is a strategy that scale
-abandons, not a capacity that scale grows: the big model treats its own
+also warms up "tea"). Lens-visible holding (lens-residence, in the
+glossary's terms) is a strategy that scale abandons, not a capacity that
+scale grows: the big model treats its own
 context window the way you treat a notebook — no need to rehearse what
 you can look up. Our working model, one line: **the workspace holds
 what attention can't re-derive.** (When v2 was written, one caveat here

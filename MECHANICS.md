@@ -12,6 +12,10 @@ the primary source** (2026-07-14, three extraction passes + direct
 string-match; figure numbers pulled from the page's `data-fignum`
 attributes, since inline cross-refs render as JS placeholders).
 
+**Term reference:** `GLOSSARY.md` pins the lab's vocabulary — including the
+two unrelated senses of "span" both used in this file (capacity count vs
+linear-algebra span of lens directions).
+
 **The correction that motivated this file:** Unit 5C ablated the NSFW
 cluster at **L2–8 (early/sediment)** and found nothing — because causal
 interventions only bite in the **WORKSPACE band (post-ignition)**, not the
