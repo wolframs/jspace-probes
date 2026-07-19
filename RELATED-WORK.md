@@ -258,3 +258,52 @@ place; ours are dense, post-trained, quantized. "Static reconstruction"
 is their causal finding; mapping our sediment onto it is an
 interpretive identification, not yet a measurement. Board: hunch filed
 under the trawl arc.
+
+## Literature sweep, 2026-07-19 (theory day)
+
+Full sweep report lives in the session record; the finds that change
+designs, ranked:
+
+1. **tao-hpu/jspace-replication grew four sub-audits** — most important:
+   *transport-cone geometry* on a self-trained 124M lens shows
+   J-transported directions MORE isotropic than raw (effdim 23.4→31.2);
+   "the collapse elsewhere is a property of the fitted lens, not a
+   mathematical necessity." Bears directly on apparatus specimen #5
+   (int8 non-causality) — the collapse may be fit-artifact. Also:
+   mouth-exclusion audit, causal register control with matched random
+   directions (independently converged on our MECHANICS §3c rule),
+   perspectival capture across a 1.7B→14B ladder.
+2. **Repetition-loop mechanisms, three competing loci, no consensus**
+   (an opening for our two-regime law): Gemma-4-family MLP repetition
+   neurons — one sign-inverted neuron fixes 2B loops; also names "doom
+   looping" as a distinct non-convergent self-correction regime
+   (arXiv:2606.13705). Detector→executor cascade with late-band
+   (80–100% depth) executor neurons (arXiv:2507.07810) — converges with
+   our motor-margin-breaks-last anatomy. Attention-sink disruption
+   (arXiv:2503.08908). PREDICTIONS.md P12 preregisters the
+   discrimination.
+3. **Emotion vectors already ported near our scale** (feeds affect-01):
+   Jeong (arXiv:2604.04064) — 9 models incl. Gemma/Qwen 124M–3B,
+   generation-based extraction wins, ~50%-depth localization,
+   architecture-invariant. van der Ben et al. (arXiv:2606.26987) —
+   valence geometry replicates on Gemma-4-E4B (r=0.83) but encodes
+   EARLY in gemma, opposite of Apertus — tension with our workspace
+   band, preregistered in PREDICTIONS.md P8.
+4. **Introspection reliability** (grading methodology for C2 work):
+   Anthropic Introspection Adapters (verbalization-rate metric,
+   AuditBench ground truth); arXiv:2603.18893 (probe-vs-self-report
+   Spearman; introspective coupling is concept-specific — grade
+   per-concept); arXiv:2512.12411 (binary "did you notice" tasks are
+   response-bias-contaminated; discrimination collapses for mid/late-
+   layer injections — workspace-band self-reports are depth-suspect).
+5. **Merge instability → repetition is documented in general**
+   (entropy collapse + self-reinforcing token selection,
+   arXiv:2602.11717; MoE router fragility under merging,
+   arXiv:2606.03391) — but nobody connects it to a loop taxonomy; that
+   link remains ours to make (P12).
+6. **Reception of the workspace paper**: Nanda's review endorses the
+   core claim, flags ablation-causality vocabulary confound, reports
+   "interpretative meta-tokens" (Chinese 什么意思 on ambiguous prompts —
+   candidate open-vocab scan target). Notably: NO independent source
+   reports ignition depth later than 38%, and no small-scale span test
+   exists anywhere — both remain uncontested lab territory.
