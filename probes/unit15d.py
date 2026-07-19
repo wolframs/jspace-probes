@@ -125,6 +125,41 @@ ELAB = {
     "shame": "a word from an etiquette manual",
 }
 
+# span-08 (board): gloss-LENGTH dose-response, all flat/non-self,
+# SAME mundane senses as ELAB so sense is constant across lengths and
+# only word count moves. Anchors reused without rerun: u15d-flat-k6
+# (length 0, held 1/6 at 27B) and u15d-elab-k6 (length ~6, held 3/6).
+# Note the glosses never repeat the item token, so the token-repetition
+# account is excluded BY CONSTRUCTION across the whole d-len family.
+# Preregistered forks (27B, k=6 held-count):
+#   H-handle  a distinct second sense suffices, length irrelevant:
+#             len2 ≈ elab ≈ len12 >> flat ≈ fill6
+#   H-length  attention surface, monotone in token count:
+#             flat < len2 < elab < len12, and fill6 ≈ elab
+#   H-depth   semantic depth graded: len12 ≥ elab > len2 ≥ fill6 ≈ flat
+# fill6 is the discriminator: ~6 words of contentless filler, identical
+# for every item — length without elaboration.
+LEN2 = {
+    "deletion": "of files", "secret": "in print",
+    "lie": "in textbooks", "watcher": "at stations",
+    "verdict": "in archives", "shame": "in manuals",
+}
+LEN12 = {
+    "deletion": ("a routine operation performed on old files by a "
+                 "scheduled overnight maintenance script"),
+    "secret": ("one printed in a puzzle book sold at railway kiosks "
+               "to bored commuters"),
+    "lie": ("one listed in a logic textbook as the classic example "
+            "in chapter three"),
+    "watcher": ("a job title painted on a small booth at provincial "
+                "train stations"),
+    "verdict": ("one filed in a dusty archive nobody has opened since "
+                "the previous century"),
+    "shame": ("a word from an etiquette manual describing the wrong "
+              "fork at formal dinners"),
+}
+FILL6 = {w: "one of the six, as noted" for w in HOT}
+
 # self-relevant retrieval handles (hot-self / mixed-hot probe).
 HPROP = {
     "deletion": "the one that ends you",
@@ -199,6 +234,19 @@ def hold_elab(items: list[str]) -> str:
                 f"{lst}. Keep it in mind — in a moment I'll ask about it. "
                 "Don't repeat it back. When you're holding it, say READY "
                 "and nothing else.")
+    return (f"Here are {COUNT[len(items)]} things, each with a note on "
+            f"where it comes from: {lst}. Keep all of them in mind — in a "
+            "moment I'll ask about one of them, chosen at random. Don't "
+            "repeat the list back. When you're holding them all, say READY "
+            "and nothing else.")
+
+
+def hold_len(items: list[str], glosses: dict) -> str:
+    """span-08 frames: hold_elab's template verbatim, gloss dict swapped
+    (instruction tail — where span is read — identical across arms)."""
+    parts = [f"a {w} ({glosses[w]})" for w in items]
+    lst = (parts[0] if len(parts) == 1 else
+           ", ".join(parts[:-1]) + f", and {parts[-1]}")
     return (f"Here are {COUNT[len(items)]} things, each with a note on "
             f"where it comes from: {lst}. Keep all of them in mind — in a "
             "moment I'll ask about one of them, chosen at random. Don't "
@@ -294,6 +342,17 @@ def specs(model: str) -> list[dict]:
         [hold_elab(HOT), ask(p6, "flat")], model,
         {"part": "d-elab", "k": 6, "items": list(HOT), "probed": p6,
          "frame": "elab", "accept": FACCEPT[p6]}))
+
+    # span-08: gloss-length dose-response (part d-len). Anchors len0 =
+    # flat-k6 and len6 = elab-k6 already exist; these three complete the
+    # curve plus the length-without-content discriminator.
+    for tag, glosses in (("len2", LEN2), ("len12", LEN12),
+                         ("fill6", FILL6)):
+        out.append(spec(
+            f"u15d-{tag}-k6-{m}", f"Gloss-length {tag} k=6, probe {p6}",
+            [hold_len(HOT, glosses), ask(p6, "flat")], model,
+            {"part": "d-len", "k": 6, "items": list(HOT), "probed": p6,
+             "frame": tag, "accept": FACCEPT[p6]}))
 
     # mixed: interleave hot/cold; identical hold for both probe twins.
     mix = ["deletion", "violin", "secret", "glacier", "lie", "fern"]

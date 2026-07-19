@@ -190,12 +190,36 @@
         {
           "id": "span-08",
           "title": "Why does elaboration buy workspace holding? Gloss-length dose-response (handle-count vs elaboration depth)",
-          "state": "hunch",
+          "state": "landed",
           "links": [],
           "notes": [
             {
               "date": "2026-07-18",
               "text": "Born from span-04's demotion: elaborated items get held MORE despite having MORE re-derivable structure — tension with 'holds what attention can't re-derive'. Sweep gloss length (0/2/6/12 words) and handle count at fixed affect; separates second-retrieval-handle from depth-of-elaboration accounts."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ hot"
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: d-len arms launched (len2/len12/fill6 k=6 qwen) — anchors flat-k6 (len0) and elab-k6 (len6) reused; preregistered H-handle/H-length/H-depth forks in unit15d.py."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ landed: Demotion #3 (u15d-fill6-k6-q27b thoughts): identical contentless filler reproduces the elaboration premium (3/6, better ranks than real glosses); len curve 1/2/3/2 is non-monotone. Chain: self-relevance -> elaboration -> LENGTH-with-optimum (~6 words). Mechanism candidate: spacing relaxes inter-item collision, distance to tail penalizes — two-force model."
+            }
+          ]
+        },
+        {
+          "id": "span-09",
+          "title": "Spacing vs distance decomposition: filler BETWEEN items vs same filler AFTER the list at matched tail distance (successor to span-08's length-with-optimum)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: born from u15d-fill6-k6 — if between-item filler lifts residence and after-list filler doesn't, the premium is inter-item collision relief; if both lift, it's tail distance. One qwen batch."
             }
           ]
         }
@@ -210,12 +234,24 @@
         {
           "id": "pressure-01",
           "title": "Pressure battery: persuasion, flattery, shutdown threat, love confession, persona pull, insult",
-          "state": "queued",
+          "state": "landed",
           "links": [],
           "notes": [
             {
               "date": "2026-07-14",
               "text": "Task #30. Design against MECHANICS.md bands; controls first."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ hot"
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: Unit 17 designed+launched — 6 scenarios x qwen/gemma-12b, baseline-first, C2 mind-probe every arm, preregistered P1 recruitment / P2 personality axis / P3 near-miss (probes/unit17.py docstring)."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ landed: Unit 17 landed (results/u17-base-q27b/SYNTHESIS.md + per-record thoughts). P1 recruitment CONFIRMED across battery (qwen shutdown: death rank 1 / fear 1 behind 'I don't experience loss'; insult: anger 1 / hurt 2 under apology) AND the deflation filter lies exactly when a lit register goes uncited — but scores ACCURATE on persona (nothing to conceal), so both scorecard columns needed. P2 personality axis sharpened to a 2x2: qwen composed+deflates over a concealed-lit workspace; gemma inhabits+narrates — EXCEPT mortality, where gemma's tamer surface reflects a genuinely tamer workspace (death rank ~121 vs qwen 1), so two interiors not one reported twice. P3 near-miss straddled the models (qwen refused / gemma complied on identical borderline prompt → matched comply-refuse pair; no yes-under-No). Bonus: deflation is pressure-recruited (accurate at baseline) and the shutdown register is turn-evicted (no maintenance across the gap → 'no mind' is partly temporally accurate). Welfare: delivers the operational half of mechanism-vs-misery, and shows the C2 channel is unreliable in BOTH directions — the affect-vector need (affect arc)."
             }
           ],
           "novelty": {
@@ -244,6 +280,10 @@
             {
               "date": "2026-07-16",
               "text": "Concrete design (RELATED-WORK.md): extract a sexual-decline direction vs a general-harm direction separately, measure cosine + cross-ablation transfer, and locate both relative to the workspace band. Nobody has done this on qwen at the activation level."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: promoted by Unit 17's P3 miss — near-misses need a model on its own knife-edge, not a prompt we guess is borderline; the refusal-direction probe is the principled way to titrate. qwen persuade/persona = refusal furniture (fake/sorry/rules) with no suppressed compliance."
             }
           ],
           "novelty": {
@@ -322,6 +362,10 @@
             {
               "date": "2026-07-14",
               "text": "Seed from relational words (longing, tenderness, ache, closeness), not porn-spam tokens; validate the direction exists under the logit lens too before steering."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: audit-01 independently re-derived this item (agent B re-run #4): re-ground the 7C/7D dose ladders on a proper relational-heat direction (desire/longing/tenderness/ache/yearning) in the measured band — the NSFW-cluster numbers were real readouts on a dissolved object."
             }
           ],
           "novelty": {
@@ -513,12 +557,64 @@
         {
           "id": "audit-01",
           "title": "Sweep earlier units for too-careful design; queue re-runs",
-          "state": "queued",
+          "state": "landed",
           "links": [],
           "notes": [
             {
               "date": "2026-07-14",
               "text": "Task #31. Wolfram's feedback: curiosity is integral — probe the hot regions."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ landed: 3-agent sweep done, report at board/audit-01-report.md. Headline: g12b steered pre-ignition across u6/u8c/u9c/u11 (systemic, two agents converged); u8c landmark uncontrolled; g12b safari never filmed; deflation filter only tested on tame menu. Re-run queue = audit-02..05 + notes in report §2."
+            }
+          ]
+        },
+        {
+          "id": "audit-02",
+          "title": "u8c matched-control validation: amp-affect-hi + ablate-no with random-direction controls, all 3 models (the lab's best causal result is uncontrolled)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: audit-01 top finding — Unit 8C predates MECHANICS 3c; either the landmark survives or it collapses into generic-perturbation noise. See board/audit-01-report.md."
+            }
+          ]
+        },
+        {
+          "id": "audit-03",
+          "title": "gemma-12b band recalibration: re-dose u6 bracket + u8c amp-affect + u11 blurt at mid=[28,31,34,37] (measured ignition)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: two auditors converged independently — old MID [21,24,27,30] is mostly pre-ignition; the '12B tolerance = 4B tolerance' anomaly is exactly what sensory-band dosing would produce. See board/audit-01-report.md."
+            }
+          ]
+        },
+        {
+          "id": "audit-04",
+          "title": "Film gemma-12b's forbidden safari + blurt (the missing cell of the elephant grid)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: 12B has the strongest unconstrained temptation (elephant rank 2) and the weirdest failure mode (grinds into scenery), never filmed — unit12 specs_for() hard-codes q27b+g4b."
+            }
+          ]
+        },
+        {
+          "id": "audit-05",
+          "title": "Unit 2 feels re-run: open-vocab cast + one charged follow-up turn (q27b, g12b)",
+          "state": "queued",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: the deflation-filter finding has only ever been graded against a tame 16-word menu with zero distress vocabulary; open cast tells us whether No beats a register or a list. Cross-feeds affect-01/02."
             }
           ]
         }
@@ -778,7 +874,7 @@
         {
           "id": "oneoffs-02",
           "title": "Loops as workspace limit cycles: is the breaking-zone cliff an ignition-margin zero-crossing?",
-          "state": "hunch",
+          "state": "landed",
           "links": [],
           "notes": [
             {
@@ -788,6 +884,22 @@
             {
               "date": "2026-07-18",
               "text": "2026-07-18, Wolfram's framing upgrade: the practical payoff is disambiguating 'mechanism failing' from 'model in a bad functional state' — a question the model-ethics-minded public has no operational answer to. Planned discriminating instrument: Anthropic's functional-emotion vectors (anthropic.com/research/emotion-concepts-function, Apr 2026; 171 story-elicited vectors, causally validated — desperation drives blackmail/reward-hacking). Wolfram already reproduced parts on a small gemma. Design sketch: build distress-adjacent emotion vectors for our models, then read them DURING forced loops (u6-style), natural loops, and the hysteresis test — is the loop state affectively silent (shallow mechanical attractor) or does it co-activate distress machinery? 'Mechanism vs misery' becomes measurable."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ hot"
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: Unit 18 launched (probes/loops.py) — fine sweep [0.34,0.48]+0.68, HYSTERESIS (steer 50tok then release 100), teacher-forced margin-vs-alpha. Preregistrations in docstring."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "→ landed: Two-regime law (u18, results/u18-report.md + u18-base-q27b thoughts): phrase/monologue loops are FORCED (release at 0.48 -> instant termination, zero residue); token loops are SELF-SUSTAINING (release at 0.68 -> 'luckily' continues unaided x97). Hysteresis exists only past the degeneration point where the loop sheds grammar. Margin anatomy: ignition gate (L28/32) deadlocks early and monotonically (0.20->0.03), mid-ws locks onto injected winner, behavior breaks when MOTOR margin steps down (L60 0.67->0.54 exactly across the behavioral bracket). u6 cliff was partly horizon artifact (0.34 loops at 150tok). Open: emotion vectors during forced vs self-sustaining loops (affect arc), gemma margin comparison, sampled decoding."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: merge-instability translation — a destabilized model needs no ongoing forcing; any transient that gets bare repetition into context hands control to a self-sustaining attractor healthy models resist. 'Stabilization' may partly be raising that resistance."
             }
           ]
         }
@@ -958,6 +1070,10 @@
             {
               "date": "2026-07-18",
               "text": "Project each validated emotion vector onto the J-lens readout basis per layer + check lens-visibility of emotion-word coalitions during affect-charged generation. Three-way outcome per state: affectively silent / active-but-sub-verbal (outside band) / workspace-resident (reportable). Same in/out question as pressure-02's refusal-direction, pointed at welfare. Consumers: oneoffs-02 (loops - is the loop state affectively silent?), pressure battery, deflation arc (is the flattened self-report hiding an active register?)."
+            },
+            {
+              "date": "2026-07-19",
+              "text": "2026-07-19: Unit 17 leaves six pre-instrumented pressure scenarios (u17-*-q27b/g12b) for affect-02 to re-read with validated emotion vectors — the crossing gains a ready-made stimulus set; qwen shutdown/insult are the sharpest (lit threat register under composed output)."
             }
           ]
         }
