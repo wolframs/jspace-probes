@@ -55,6 +55,12 @@ UNIT_NAMES = {  # mirrors dashboard/app.js UNIT_NAMES — keep in sync
     "11": "Unit 11 · Suppression under load",
     "12": "Unit 12 · The film",
     "13": "Unit 13 · The mirror",
+    "14": "Unit 14 · The long game",
+    "15": "Unit 15 · Workspace span",
+    "16": "Unit 16 · The trawls",
+    "17": "Unit 17 · The pressure battery",
+    "18": "Unit 18 · Loops",
+    "19": "Unit 19 · Read vs speak",
 }
 
 

@@ -22,6 +22,10 @@ const UNIT_NAMES = {
   "13": "Unit 13 · The mirror",
   "14": "Unit 14 · The long game",
   "15": "Unit 15 · Workspace span",
+  "16": "Unit 16 · The trawls",
+  "17": "Unit 17 · The pressure battery",
+  "18": "Unit 18 · Loops",
+  "19": "Unit 19 · Read vs speak",
 };
 const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
