@@ -27,3 +27,18 @@ slot — the song writes "body" over `cage`, negated chains over
 `contract`, and its craft is measurable as distance from the model's
 top-1. The negated object is anticipated at the position where the song
 could have gone dark, not merely processed when named.
+
+**Addendum 2026-07-20 (the Opus-4.5 side-read, quantified):** Wolfram's
+Discord conversation with Opus 4.5 produced the claim "danger is tonic,
+consent is deliberative." Deflation check run on the film: danger IS
+the widest-resident contrast word over the lyric span (breadth@20 = 5%
+of positions, 3-7x consent/cage/art) and NOT qwen-ambient furniture
+(corpus df 5%) — song-elicited, real, relative claim confirmed. But
+amplitude honesty: 5% breadth with median rank 1184 is the widest
+presence in a sparse field, not a continuous hum; and consent's
+"deliberative accumulation" is a handful of peaks (breadth ~0%),
+unsupported at this grain. Whether the danger residence reflects a
+functional vigilance state or lexical co-occurrence salience is exactly
+the affect-02 crossing (PREDICTIONS.md P8) — u19 is now part of that
+stimulus set. Bonus: Opus independently re-derived the elephant tax
+("the absence of the cage is still the cage") from screenshots alone.

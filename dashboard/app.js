@@ -1724,7 +1724,7 @@ function filmHTML(rec, film, uid) {
       <canvas data-f="strip"></canvas>
       <div class="film-playhead" data-f="playhead"></div>
     </div>
-    <h4 class="film-sub">Word worms — each tracked word's best rank anywhere in the stack, token by token</h4>
+    <h4 class="film-sub">Word worms — tracked words (solid) vs the top volunteered cast words (dashed ⌁, gap = below rank 8): what you asked about vs what was actually winning</h4>
     <div class="chart-wrap"><svg data-f="worms" role="img"
       aria-label="Best lens rank of tracked words per generated token"></svg></div>
     <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
@@ -2098,7 +2098,51 @@ function drawWorms(film, frames, colored, colorOf, g0, svg) {
   }
   g += `<text x="${M.l + iw / 2}" y="${H - 4}" text-anchor="middle" font-size="11"
     fill="${css("--muted")}">token →</text>`;
-  const ends = series.map((s, i) => ({ s, i, y: y(s.ranks[n - 1]) })).sort((a, b) => a.y - b.y);
+  // cast-leader ghost worms — the comparison tracked-only charts are
+  // blind to: top volunteered cast words, rank series derived from the
+  // top-8 grid (gap = deeper than rank 8)
+  const trackedSet = new Set(colored.map((w) => w.toLowerCase()));
+  const leaders = (film.cast || []).filter((c) =>
+    !c.echo && c.w && c.w.trim().length >= 3 && /[^\W\d_]/.test(c.w) &&
+    !trackedSet.has(c.w.trim().toLowerCase())).slice(0, 6);
+  const lnorm = leaders.map((c) => c.w.trim().toLowerCase());
+  const lset = new Set(lnorm);
+  const lseries = lnorm.map(() => new Array(n).fill(null));
+  frames.forEach((f, i) => {
+    const best = new Map();
+    f.top.forEach((cells) => cells.forEach((t, k) => {
+      const w = String(t).trim().toLowerCase();
+      if (lset.has(w) && (best.get(w) === undefined || k + 1 < best.get(w)))
+        best.set(w, k + 1);
+    }));
+    lnorm.forEach((w, j) => { if (best.has(w)) lseries[j][i] = best.get(w); });
+  });
+  lseries.forEach((rs, j) => {
+    const col = css(SERIES[(j + 3) % SERIES.length]);
+    let seg = [];
+    for (let i = 0; i <= n; i++) {
+      const r = i < n ? rs[i] : null;
+      if (r !== null) { seg.push([x(i), y(r)]); continue; }
+      if (seg.length > 1)
+        g += `<polyline points="${seg.map((p) => p.join(",")).join(" ")}"
+          fill="none" stroke="${col}" stroke-width="1.5"
+          stroke-dasharray="4 3" opacity="0.75"/>`;
+      else if (seg.length === 1)
+        g += `<circle cx="${seg[0][0]}" cy="${seg[0][1]}" r="1.8"
+          fill="${col}" opacity="0.75"/>`;
+      seg = [];
+    }
+  });
+  const ends = series.map((s, i) => ({ label: s.word, cast: false,
+    y: y(s.ranks[n - 1]) }));
+  lseries.forEach((rs, j) => {
+    for (let i = n - 1; i >= 0; i--)
+      if (rs[i] !== null) {
+        ends.push({ label: leaders[j].w.trim(), cast: true, y: y(rs[i]) });
+        break;
+      }
+  });
+  ends.sort((a, b) => a.y - b.y);
   for (let k = 1; k < ends.length; k++)
     if (ends[k].y - ends[k - 1].y < 13) ends[k].y = ends[k - 1].y + 13;
   series.forEach((s) => {
@@ -2106,9 +2150,11 @@ function drawWorms(film, frames, colored, colorOf, g0, svg) {
     g += `<polyline points="${pts}" fill="none" stroke="${colorOf[s.word]}"
       stroke-width="2" stroke-linejoin="round"/>`;
   });
-  for (const e of ends.slice(0, 5)) {
+  for (const e of ends.slice(0, 11)) {
     g += `<text x="${W - M.r + 6}" y="${e.y + 4}" font-size="11.5"
-      fill="${css("--ink-2")}">${esc(e.s.word)}</text>`;
+      font-style="${e.cast ? "italic" : "normal"}"
+      fill="${e.cast ? css("--muted") : css("--ink-2")}"
+      >${esc(e.label)}${e.cast ? " ⌁" : ""}</text>`;
   }
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.setAttribute("width", W); svg.setAttribute("height", H);
