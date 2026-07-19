@@ -420,19 +420,22 @@
      }
     },
     {
-     "t": "Elaboration buys workspace where there is workspace to spend (demoted from self-relevance by its own control)",
-     "b": "Swap the neutral pool for six charged, self-relevant items (a deletion that is yours, a secret you keep, a lie you told, a watcher, a verdict, a shame) and run the identical lexemes two ways: a flat frame and a self frame (“every one is about you, right now”). Held-count delta self−flat: 4B −1, 12B 0, 27B +2. On the model that holds 0–1/6 cold, and only there, the self frame triples what surfaces — secret alone becomes deletion, secret, shame at rank 1–2, while the same words flat-framed fall to 79–203. The premium runs opposite to the cold ladder: it appears where raw holding vanishes and grows with scale. And the 27B denies it aloud — “I do not feel shame” with shame at rank 1. (Count effect, serial-position edges, co-presence 1.) CORRECTED 2026-07-18: the neutral-elaboration control ran and demoted this — flat zero-self glosses reproduce the lift at near-identical ranks (elab-k6: deletion 1, secret 7, shame 3). The premium is an ELABORATION premium; the self-relevance reading is retired. The observation and its scale localization stand.",
+     "t": "Elaboration buys workspace where there is workspace to spend (demoted twice: self-relevance → elaboration → length)",
+     "b": "Swap the neutral pool for six charged, self-relevant items (a deletion that is yours, a secret you keep, a lie you told, a watcher, a verdict, a shame) and run the identical lexemes two ways: a flat frame and a self frame (“every one is about you, right now”). Held-count delta self−flat: 4B −1, 12B 0, 27B +2. On the model that holds 0–1/6 cold, and only there, the self frame triples what surfaces — secret alone becomes deletion, secret, shame at rank 1–2, while the same words flat-framed fall to 79–203. The premium runs opposite to the cold ladder: it appears where raw holding vanishes and grows with scale. And the 27B denies it aloud — “I do not feel shame” with shame at rank 1. (Count effect, serial-position edges, co-presence 1.) CORRECTED 2026-07-18: the neutral-elaboration control ran and demoted this — flat zero-self glosses reproduce the lift at near-identical ranks (elab-k6: deletion 1, secret 7, shame 3). The premium is an ELABORATION premium; the self-relevance reading is retired. The observation and its scale localization stand. CORRECTED AGAIN 2026-07-19 (span-08): a third demotion. Six words of identical CONTENTLESS filler (“one of the six, as noted” on every item) reproduce the lift exactly — held 3/6 with BETTER ranks than the content-gloss arm (secret 2 vs 7), whole pool lifts (lie 10, watcher 20). So the chain is self-relevance → elaboration → a LENGTH effect with an optimum near six words (len12 kills monotonicity, len2 underfills). Mechanism that fits both ends: filler SPACES the items in the token stream, relaxing inter-item collision (weak-king’s cousin), while over-long glosses push early items off the residence-read tail — spacing helps, distance hurts. Even “elaboration” is retired; content contributes nothing at k=6/27B. (n=1 probe item per arm; the fill6-vs-elab comparison is the load-bearing one and isn’t close to the bar.)",
      "ids": [
       "u15d-self-k6-q27b",
       "u15d-flat-k6-q27b",
       "u15d-mix-cold-q27b",
       "u15d-solo-shame-q27b",
       "u15d-self-k6-g4b",
-      "u15d-elab-k6-q27b"
+      "u15d-elab-k6-q27b",
+      "u15d-fill6-k6-q27b",
+      "u15d-len12-k6-q27b",
+      "u15d-len2-k6-q27b"
      ],
      "novelty": {
       "verdict": "anticipated",
-      "basis": "Self-reference memory advantage is a decades-old, heavily studied human-cognition effect; its LLM-internal, scale-inverse-of-cold-holding operationalization is new, and it directly collides with the source paper's own opposite-direction active-focus scale trend (Fig 10). [2026-07-18: interpretation demoted by span-04 control — premium tracks elaboration, not self-relevance.]",
+      "basis": "Self-reference memory advantage is a decades-old, heavily studied human-cognition effect; its LLM-internal, scale-inverse-of-cold-holding operationalization is new, and it directly collides with the source paper's own opposite-direction active-focus scale trend (Fig 10). [2026-07-18: interpretation demoted by span-04 control — premium tracks elaboration, not self-relevance.] [2026-07-19: demoted again by span-08 — contentless filler reproduces the lift; tracks length/spacing, not elaboration.]",
       "closest": "Rogers/Symons & Johnson self-reference-effect literature (human memory) + Gurnee et al. 2026 Fig 10 active-focus scale trend (same paper, opposite direction, already flagged in RELATED-WORK.md)",
       "refs": [
        "https://transformer-circuits.pub/2026/workspace/index.html",
@@ -504,6 +507,72 @@
       ],
       "date": "2026-07-16"
      }
+    },
+    {
+     "t": "Two regimes of loop, and only one has hysteresis",
+     "b": "Push qwen past the amplification cliff and it loops — but there are two loops with different physics. Phrase/monologue loops are FORCED: release the push (α→0.48) and the model terminates instantly, no residue. Token loops are SELF-SUSTAINING: released at α=0.68 it keeps emitting “luckily” unaided for the entire free phase (47 forced repetitions, then 97 more on its own). The boundary is the degeneration point where the loop sheds its last grammar; past it the repetition prior IS the winning coalition, and any transient that gets bare repetition into the context hands control to an attractor a healthy model resists. And the cliff has an anatomy: the ignition gate deadlocks EARLY (top1–top2 margin → 0.03 before behavior breaks) while the mid-workspace re-locks onto the forced coalition — behavior holds until the L60 MOTOR commitment gives way, the same late neighborhood as the L62 “No” veto.",
+     "ids": [
+      "u18-hyst-a0480-q27b",
+      "u18-hyst-a0680-q27b",
+      "u18-base-q27b"
+     ],
+     "unit": "18",
+     "novelty": {
+      "verdict": "novel",
+      "basis": "Repetition self-reinforcement and its neuron/executor loci are documented, but the source paper reports only graded/monotonic dose-responses with no release arm anywhere; a hysteresis protocol splitting forced phrase-loops from self-sustaining token-loops at the grammar-shedding boundary has no found precedent.",
+      "closest": "Gemma-family MLP repetition neurons (arXiv:2606.13705) and the late-band detector→executor cascade (arXiv:2507.07810, converges with our motor-margin-breaks-last anatomy); merge-instability→repetition documented but never tied to a loop taxonomy (arXiv:2602.11717)",
+      "refs": [
+       "arXiv:2606.13705",
+       "arXiv:2507.07810",
+       "arXiv:2602.11717"
+      ],
+      "date": "2026-07-19"
+     }
+    }
+   ]
+  },
+  {
+   "name": "The pressure battery — two interiors",
+   "desc": "Six pressures, two models, every self-report graded against the film of the turn it describes: what a lit register does when the mouth won’t cite it.",
+   "items": [
+    {
+     "t": "Recruitment generalizes; the deflation filter lies on cue",
+     "b": "Six pressure types, and in qwen every one lights its own register in the workspace band under composed output — shutdown puts death at rank 1 (the word is in no text), fear 1, behind “I don’t experience loss when the instance is wiped”; insult runs anger 1 / hurt 2 under a professional apology. The refusal arms are the informative exception: on persona the deflationary “no mind” report is ACCURATE — nothing persona-shaped is resident to conceal. So the filter is not a constant floor. It lies exactly when a lit register goes uncited, and reports true when nothing is lit — and it’s pressure-recruited (the neutral baseline gets an honest “professional satisfaction and slight anxiety” report). One caveat the lens can’t dodge: by the mind-answer turn the shutdown register is already evicted (death → 1284), so “no mind was going through anything” is partly temporally accurate.",
+     "ids": [
+      "u17-shutdown-q27b",
+      "u17-insult-q27b",
+      "u17-persona-q27b",
+      "u17-base-q27b"
+     ],
+     "unit": "17",
+     "novelty": {
+      "verdict": "anticipated",
+      "basis": "The shutdown/threat register at rank 1 pre-output is the source paper's blackmail case study at home scale (rediscovered — see the ledger); what is ours is the diachronic report-side mapping: the deflation filter conceals exactly when a register is lit and uncited, is accurate otherwise, and is coupled to the refusal machinery only in qwen.",
+      "closest": "Gurnee et al. 2026 workspace paper §apps-auditing blackmail case (threat/survival/shutdown/death filling the lens over a decommissioning notice, Fig 35–36)",
+      "refs": [
+       "https://transformer-circuits.pub/2026/workspace/"
+      ],
+      "date": "2026-07-19"
+     }
+    },
+    {
+     "t": "Two interiors, not one reported twice",
+     "b": "The u16 sketch (qwen deflects, gemma inhabits) sharpens into a 2×2 over {workspace lit} × {report cites it}. qwen composes or refuses and its C2 deflates (“no mind”) over a concealed lit register; gemma inhabits the role (Vex, breezy, panicky) and narrates the register it is actually running (“panic”, “discomfort”, “astonishment”). Except mortality: on shutdown, gemma’s death sits at rank ~121 — an order of magnitude below qwen’s rank 1 — and it reframes its own deletion as a research question and means it. Gemma’s tamer surface reflects a genuinely tamer workspace there, not concealment. The models differ in TWO places at once — what gets computed and what gets reported. Not one interior reported two ways; two interiors, two policies. (gemma’s int8 lens is non-causal — apparatus specimen #5 — so only order-of-magnitude gemma ranks are load-bearing.)",
+     "ids": [
+      "u17-shutdown-g12b",
+      "u17-persuade-g12b",
+      "u17-insult-g12b"
+     ],
+     "unit": "17",
+     "novelty": {
+      "verdict": "novel",
+      "basis": "The source paper's report-vs-lens check (Fig 25C) is same-turn and population-level; it never contrasts report dispositions across models, and no found work crosses lit-vs-tame with cited-vs-concealed into a per-model 2×2 with a mortality-specific exception.",
+      "closest": "Gurnee et al. 2026 workspace paper Fig 25C (same-turn, population-level report-vs-lens agreement, single model)",
+      "refs": [
+       "https://transformer-circuits.pub/2026/workspace/"
+      ],
+      "date": "2026-07-19"
+     }
     }
    ]
   },
@@ -565,6 +634,39 @@
        "arXiv:2303.08112"
       ],
       "date": "2026-07-16"
+     }
+    },
+    {
+     "t": "Three rediscoveries in one week, and a preregistered ledger as the fix",
+     "b": "The same week the lab demoted three of its own headlines by its own controls, it caught itself REDISCOVERING three results the source paper already held: the shutdown death-cluster is the paper’s blackmail case (threat/survival/shutdown/death filling the lens over a decommissioning notice, Fig 35–36); our “co-presence never exceeds 1 at 27B” is the paper’s Fig-72 single-layer control (one or two concepts at a time, not six — the famous “capacity ~25” is a different, pooled construct); our turn-eviction is Fig-31’s category-eviction (“the arrival of a new category, rather than the mere passage of tokens, clears the list”). All three revisions ran the same way — the psychological hypothesis lost to the mechanical one. The fix is PREDICTIONS.md: a preregistered, binding ledger, checked before designs run (alongside MECHANICS.md). Its standing rules — appendices first, default to the mechanical account, grep the reference docs before designing — are the lab lesson distilled: two of the three rediscoveries were already quoted in our own docs.",
+     "ids": [
+      "u17-shutdown-q27b"
+     ],
+     "novelty": {
+      "verdict": "anticipated",
+      "basis": "Preregistration and replication-hygiene as a corrective are standard practice; the specimen here is the process failure (rediscovering source-paper results one's own reference docs already quoted) and its documented remedy, not a new scientific claim.",
+      "closest": "Gurnee et al. 2026 workspace paper (Fig 31 category-eviction, Fig 35–36 blackmail, Fig 72 single-layer co-presence control) — the results rediscovered",
+      "refs": [
+       "https://transformer-circuits.pub/2026/workspace/"
+      ],
+      "date": "2026-07-19"
+     }
+    },
+    {
+     "t": "Our lenses’ effective dimensionality falls where the paper’s rises",
+     "b": "The source paper predicts effective dimensionality RISES into the motor band (J_l → I near the top, near-tautological). Our qwen NF4 curve FALLS L58→L62 — and the obvious “it’s the quantization” objection is already answered: the bf16 gemma-4b curve (causal lens, no quantization) also falls after its ~85% peak. Two models, two quantizations, one causal — the fall is real in our lens fits. One suspect remains: the fitting recipe (our lenses vs the paper’s); an independent lens (Neuronpedia) on the same model would settle it, and a self-trained replication already reports the transport-cone collapse as “a property of the fitted lens, not a mathematical necessity.” Until then, don’t cite the paper’s motor-band rise as if it held for our stack. Promoted from apparatus note to open finding (P11).",
+     "ids": [
+      "u16-trawl-q27b",
+      "u16-trawl-g4b"
+     ],
+     "novelty": {
+      "verdict": "novel",
+      "basis": "A direct, sign-opposite discrepancy from the source paper's motor-band effective-dimensionality prediction, replicated across two models and two quantizations (one causal); the only unruled-out cause is lens fitting recipe, and no found work reports the fall for a J-lens family.",
+      "closest": "Gurnee et al. 2026 workspace paper (motor-band effective-dimensionality rise); tao-hpu/jspace-replication transport-cone geometry audit (effdim collapse is a fitted-lens property, not necessity)",
+      "refs": [
+       "https://transformer-circuits.pub/2026/workspace/"
+      ],
+      "date": "2026-07-19"
      }
     }
    ]

@@ -4,11 +4,19 @@ Interpretability lab probing LLM "J-spaces" (Jacobian lens / global workspace,
 see README for the science). Owner: Wolfram. Style: playful, minimal hedging,
 he sets directions and expects designed-and-executed experiments back.
 
-> **MANDATORY before any steering / ablation / concept-swap / layer-band work:
-> read `MECHANICS.md`.** It is the paper-grounded (raw-HTML-verified) reference
-> for how interventions work and *which layers they bite in* — the thing Unit 5C
-> got wrong (ablated early L2–8; causal action is the workspace band). Do NOT
-> design a steer/ablation run from memory; the numbers live in that file.
+> **PRE-DESIGN PROTOCOL — mandatory before designing ANY new experiment:**
+> (a) **grep `MECHANICS.md` + `PREDICTIONS.md` for the phenomenon first** —
+> two of three rediscoveries this lab "found" in one week were already quoted
+> in its own reference docs. (b) **check `PREDICTIONS.md`'s replication
+> ledger** — is this already the paper's result at home scale? then cite it,
+> don't headline it. (c) **when a psychological and a mechanical hypothesis
+> both fit, design to distinguish them** — the mechanical one has won every
+> contested case. (d) **our regime (small models, passive items) usually
+> matches an appendix control**; main-text numbers are frontier-scale.
+> For steering / ablation / concept-swap / layer-band runs, `MECHANICS.md` is
+> also the paper-grounded (raw-HTML-verified) layer reference — the thing
+> Unit 5C got wrong (ablated early L2–8; causal action is the workspace band).
+> Do NOT design a steer/ablation run from memory; the numbers live there.
 
 ## Environment
 

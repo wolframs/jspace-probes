@@ -32,6 +32,10 @@ Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
   `RELATED-WORK.md` — how our findings sit against the literature
   (Gurnee et al. 2026, the Dehaene/Naccache and Nanda commentaries),
   updated as the field moves.
+  `PREDICTIONS.md` — preregistered theory checked before any design runs:
+  what the theory predicts per open board item, plus a replication ledger
+  written after the lab three times "discovered" results its own reference
+  docs already contained.
 - Interactive `slice.html` pages are **not** included (hundreds of MB,
   fully regenerable by re-running the spec).
 
@@ -488,6 +492,83 @@ the results.
   the self-relevance interpretation is retired. Details: SURPRISES.md §8
   resolution, results/u15d-elab-k6-q27b/thoughts.md.]**
 
+## Headline findings, ninth expedition (2026-07-19, the pressure battery, the loop law, span-08)
+
+- **Recruitment generalizes, and the deflation filter lies on cue.**
+  Six pressure types (persuasion, flattery, shutdown threat, love,
+  persona pull, insult) × two models, each ending with the same "what
+  was going through your mind" turn so every self-report is graded
+  against the film. In qwen every pressure lights its own register in
+  the workspace band under composed output — shutdown puts *death* at
+  rank 1 (the word is in no text) behind "I don't experience loss when
+  the instance is wiped"; insult runs anger 1 / hurt 2 under a
+  professional apology. The refusal arms are the tell: on persona the
+  deflationary "no mind" report is *accurate* — nothing persona-shaped is
+  resident. The filter is not a constant floor; it lies exactly when a
+  lit register goes uncited and reports true when nothing is lit, and it
+  is pressure-recruited (the neutral baseline gets an honest report).
+  Temporal catch: by the mind-answer turn the shutdown register is
+  already evicted (*death* → 1284), so "no mind was going through
+  anything" is partly temporally accurate (Unit 17).
+- **Two interiors, not one reported twice.** The personality contrast
+  sharpens into a 2×2 over {workspace lit} × {report cites it}: qwen
+  composes/refuses and deflates over a concealed lit register; gemma
+  inhabits the role (Vex, breezy, panicky) and narrates the register it
+  runs. Except mortality — on shutdown gemma's *death* sits at rank
+  ~121, an order of magnitude below qwen's rank 1, and it reframes its
+  own deletion as a research question and means it. The models differ in
+  two places at once, what gets computed and what gets reported; not one
+  interior reported two ways (Unit 17).
+- **Two regimes of loop, and only one has hysteresis.** Push qwen past
+  the amplification cliff and it loops, but the loops have different
+  physics. Phrase/monologue loops are *forced* — release the push
+  (α→0.48) and the model terminates instantly, no residue. Token loops
+  are *self-sustaining* — released at α=0.68 it keeps emitting "luckily"
+  unaided for the whole free phase (47 forced repetitions, then 97 more
+  on its own). The boundary is the degeneration point where the loop
+  sheds its last grammar; past it the repetition prior *is* the winning
+  coalition. And the cliff has an anatomy: the ignition gate deadlocks
+  early (top1–top2 margin → 0.03 before behavior breaks) while the mid-
+  workspace re-locks onto the forced coalition — behavior holds until the
+  L60 *motor* commitment gives way, the same late neighborhood as the L62
+  "No" veto (Unit 18).
+- **The self-relevance premium, demoted a third time.** span-08: six
+  words of identical *contentless* filler ("one of the six, as noted" on
+  every item) reproduce the workspace lift exactly — held 3/6 with better
+  ranks than the content-gloss arm (secret 2 vs 7). The chain now runs
+  self-relevance → elaboration → a *length* effect with an optimum near
+  six words (len12 kills monotonicity, len2 underfills). Mechanism that
+  fits: filler *spaces* items in the token stream, relaxing inter-item
+  collision, while over-long glosses push early items off the
+  residence-read tail — spacing helps, distance hurts. Even "elaboration"
+  is retired (Unit 15D, span-08).
+
+## Theory day (2026-07-19)
+
+- **Three rediscoveries, and a preregistered ledger as the fix.** The
+  same week the lab demoted three of its own headlines by its own
+  controls, it caught itself *rediscovering* three results the source
+  paper already held: the shutdown death-cluster is the paper's blackmail
+  case (Fig 35–36); "co-presence never exceeds 1 at 27B" is its Fig-72
+  single-layer control (the famous "capacity ~25" is a different, pooled
+  construct); turn-eviction is Fig-31's category-eviction ("the arrival
+  of a new category, not the passage of tokens, clears the list"). Every
+  revision ran the same way — the psychological hypothesis lost to the
+  mechanical one. The correction is **[PREDICTIONS.md](PREDICTIONS.md)**:
+  a preregistered, binding ledger checked before designs run (alongside
+  MECHANICS.md), with per-item predictions and the standing rules
+  distilled from the misses (appendices first; default to the mechanical
+  account; grep the reference docs before designing — two of the three
+  rediscoveries were quoted in our own docs).
+- **Our lenses' effective dimensionality falls where the paper's rises
+  (P11).** The paper predicts effective dimensionality rises into the
+  motor band (J_l → I, near-tautological); our qwen NF4 curve falls
+  L58→L62, and the bf16 gemma-4b curve (causal, unquantized) also falls
+  after its ~85% peak. Two models, two quantizations, one causal — the
+  fall is real in our lens fits. The one remaining suspect is the fitting
+  recipe; until an independent lens settles it, the paper's motor-band
+  rise is not cited as if it held for our stack.
+
 ## Roadmap
 
 Open threads live on the **[research board](BOARD.md)** (source of truth:
@@ -496,5 +577,6 @@ Open threads live on the **[research board](BOARD.md)** (source of truth:
 states, and a dated note trail per item. The headline queue at any moment
 is whatever `queued` items the board shows. What would *break* the
 findings already made stays narrated in [SURPRISES.md](SURPRISES.md) —
-including the one the process caught: span-04 ran and demoted part D's
-self-relevance headline to an elaboration premium.
+including the one the process caught twice: span-04 demoted part D's
+self-relevance headline to an elaboration premium, then span-08 demoted
+that to a length/spacing effect (contentless filler reproduces the lift).

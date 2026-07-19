@@ -456,6 +456,9 @@ the repo README.
 - {BASE}/GLOSSARY.md — the lab's term reference: "holding" is deprecated,
   split into residence / maintenance / lookup; bands, instruments, and
   phenomena pinned to how they're measured.
+- {BASE}/PREDICTIONS.md — preregistered theory checked before designs run:
+  per-board-item predictions plus a replication ledger of results the primary
+  source already contained (cite, don't headline).
 - {BASE}/SURPRISES.md — results that stayed surprising after writeup, with
   the follow-up each warrants (open-problems seed).
 - {BASE}/RELATED-WORK.md — how the findings sit against the literature
