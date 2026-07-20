@@ -1704,7 +1704,11 @@ function castHTML(film) {
       list — scored by prominence (Σ 1/rank over cells). <b>Volunteered</b>
       = the word appears nowhere in the conversation; it is the model's own.
       This is the antidote to tracked-word blindness: the sorry stratum sat
-      in this table while we watched yes and no.</p>
+      in this table while we watched yes and no. One trap: under heavy
+      repetition, a fixed L0 surface-feature readout of the repeated input
+      token can accumulate enough score to enter here (u18-hyst-a0680's
+      " Javascript" — the L0 lens's variant-form cluster for " luckily",
+      not a thought).</p>
     <div class="readout-scroll"><table class="readout">
       <thead><tr><th>word</th><th>origin</th><th>cells</th><th>best</th><th>layers</th></tr></thead>
       <tbody>${film.cast.map(row).join("")}</tbody></table></div></section>`;
