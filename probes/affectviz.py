@@ -4,9 +4,12 @@ CPU-only (tokenizer, no model). Two products:
 
   results/affect02-<rec>/affect.json   per-position band-z traces for the
                                        record page emotion overlay
-      {record, emotions, valence, n, tokens, ws, below, motor, danger}
-      ws is [E][n] z rounded 2dp; below/motor 1dp; danger = positions
-      where 'danger' is lens-resident in the ws band (u19 records).
+      {record, emotions, valence, n, tokens, ws, below, motor, wsnorm,
+       danger} — ws is [E][n] z rounded 2dp; below/motor 1dp; wsnorm =
+      per-position ws-band residual norm (1dp, present after the
+      2026-07-21 recross; the norm-confound column for shared-mode
+      claims); danger = positions where 'danger' is lens-resident in
+      the ws band (u19 records).
 
   dashboard/affect.json                overview bundle for the #affect
                                        route: validation depth curves for
@@ -75,6 +78,9 @@ def export_records(tok) -> None:
             "motor": _rows(data["z_bands"]["motor"], 1),
             "danger": [p for p in (pin or []) if p < n],
         }
+        if "norms" in data:  # ws-band residual norm per position (confound
+            out["wsnorm"] = [  # column for shared-mode claims)
+                round(float(x), 1) for x in data["norms"]["ws"]]
         (a2dir(rid) / "affect.json").write_text(
             json.dumps(out, separators=(",", ":")))
         print(f"  {rid}: affect.json ({n} pos)", flush=True)

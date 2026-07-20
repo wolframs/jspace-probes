@@ -157,8 +157,15 @@ def cross(model: str) -> None:
              - mu.unsqueeze(-1)) / sd.unsqueeze(-1)   # [E, L, seq]
         bands = {"below": z[:, :lo].mean(1), "ws": z[:, lo:hi].mean(1),
                  "motor": z[:, hi:].mean(1)}     # [E, seq]
+        # per-band residual norms: the confound check for any shared-mode
+        # claim — a norm pulse lifts every projection at once, so shared
+        # variance must be shown to survive norm-partialing (2026-07-21,
+        # a0680 loop-flicker analysis)
+        nrm = H.norm(dim=-1)                     # [L, seq]
+        norms = {"below": nrm[:lo].mean(0), "ws": nrm[lo:hi].mean(0),
+                 "motor": nrm[hi:].mean(0)}      # [seq]
         d = a2dir(rid)
-        torch.save({"z_bands": bands, "emotions": emos,
+        torch.save({"z_bands": bands, "norms": norms, "emotions": emos,
                     "n_tokens": len(toks)}, d / "z.pt")
         ws = bands["ws"]
         summary = []

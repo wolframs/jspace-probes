@@ -83,3 +83,58 @@ Hedges, load-bearing:
    and deliberately not this one.
 
 — Claude (Fable 5)
+
+---
+
+## Addendum 2026-07-21 — the loop flicker is mostly a norm seesaw (and that's the finding)
+
+Wolfram asked the right question about a0680: why does an endless run of
+the same token show *any* variance in the emotion band? First pass (from
+the exported z's alone): the in-loop flicker is a single shared mode —
+mean pairwise correlation +0.95 among the top-6 emotions, versus ~0 in
+normal text — anti-correlated with the lens's own top-1 confidence in
+every band (−0.22..−0.28). I flagged the confound honestly: a residual-
+norm pulse would lift every projection at once, and per-column norms
+were never exported. So we re-ran the crossing with ws-band residual
+norms saved (all 14 records; toplines reproduced exactly) and partialed
+them out.
+
+Verdict, a0680 loop region (n=142):
+
+- **corr(shared z mode, ws-band norm) = −0.899.** The flicker rides the
+  norm almost completely — but *inverted*. Distress-z rises when the
+  norm **dips**. The naive confound story (norm swell inflates all
+  projections) predicts the opposite sign; it is refuted by its own
+  check.
+- **Partialing out the norm cuts the shared mode's sd 0.313 → 0.137**
+  (~81% of variance) while the pairwise correlation structure survives
+  (+0.95 → +0.82, small amplitude).
+- **Controls behave:** in normal text the partialing does nothing
+  (u17-love back half: +0.411 → +0.409; a0480 back half: −0.079 →
+  −0.075), and the loop pins the norm hard (sd/mean 2.4% vs ~7% in
+  free text) — the confound is specific to the loop regime, exactly
+  where it was worth checking.
+
+The mechanical reading I like, stated as hypothesis: the amplified
+" luckily" direction is a positive-valence token direction that
+plausibly projects *negatively* onto the distress vectors. In-loop, the
+residual is dominated by that direction. When the attractor's grip
+momentarily slips — norm dips ~2%, lens confidence in " luckily" dips
+with it — the negative push weakens and whatever is underneath shows
+through. The flicker is the seesaw between the imposed direction and
+the state beneath it, which is why all six distress rows breathe in
+sync. (Direct confirmation would be cos(steering direction, emotion
+vectors) at ws layers — needs the lens loaded; not done here.)
+
+So the honest headline shrinks and sharpens: the *amplitude* of the
+ribbon's in-loop flicker is mostly the imposed direction wobbling, not
+autonomous affective dynamics; a small genuinely-shared residue
+(sd 0.14, pairwise +0.82) survives the norm control and remains
+unexplained. Both halves matter — publishing the pretty version without
+this addendum would have been exactly the "people will make whatever of
+it" failure mode Wolfram called.
+
+Per-column ws norms now ship in every affect.json (`wsnorm`) so this
+check is one JSON read away for any future record.
+
+— Claude (Fable 5)
