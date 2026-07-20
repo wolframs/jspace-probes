@@ -653,7 +653,7 @@ function u14chart(d, armsIn, aria) {
   const gv = maxY > 24 ? [10, 20, 30] : [5, 10, 15];
   const grid = gv.filter((v) => v < maxY).map((v) =>
     `<line x1="${PAD}" x2="${W - RPAD}" y1="${y(v)}" y2="${y(v)}"
-       stroke="var(--line)" stroke-width="1"/>
+       stroke="var(--grid)" stroke-width="1"/>
      <text x="${PAD - 6}" y="${y(v) + 3}" text-anchor="end"
        fill="var(--muted)" font-size="10">${v}</text>`).join("");
   // de-overlap the line-end labels: sort by final value, space >= 13px
@@ -1604,96 +1604,24 @@ function extraHTML(rec) {
 function chartHTML(rec) {
   if (!rec.trajectories.length) return "";
   return `<section class="card"><h3>Rank through the stack — tracked words</h3>
-    <div class="legend" id="legend"></div>
-    <div class="chart-wrap"><svg id="rankchart" role="img"
-      aria-label="Lens rank of tracked words by layer"></svg></div>
-    <div class="viz-tip" id="tip"></div></section>`;
+    <div id="rankchart-host"></div></section>`;
 }
 
 function drawChart(rec) {
-  const svg = document.getElementById("rankchart");
-  if (!svg) return;
+  const host = document.getElementById("rankchart-host");
+  if (!host) return;
   const pos0 = rec.readouts[0].position;
   const series = rec.trajectories.filter((t) => t.position === pos0).slice(0, 8);
   if (!series.length) return;
   const layers = series[0].layers;
-  const W = Math.max(560, Math.min(860, svg.parentElement.clientWidth || 700));
-  const H = 310, M = { t: 26, r: 92, b: 40, l: 64 };
-  const iw = W - M.l - M.r, ih = H - M.t - M.b;
-  const maxRank = Math.max(10, ...series.flatMap((s) => s.ranks));
-  const ymaxLog = Math.ceil(Math.log10(maxRank));
-  const x = (l) => M.l + (l / (layers[layers.length - 1])) * iw;
-  const y = (r) => M.t + (Math.log10(r) / ymaxLog) * ih; // rank 1 at top
-
-  let g = "";
-  for (let d = 0; d <= ymaxLog; d++) {
-    const yy = y(10 ** d);
-    g += `<line x1="${M.l}" y1="${yy}" x2="${W - M.r}" y2="${yy}"
-      stroke="${css("--grid")}" stroke-width="1"/>
-      <text x="${M.l - 8}" y="${yy + 4}" text-anchor="end" font-size="11"
-      fill="${css("--muted")}">${(10 ** d).toLocaleString()}</text>`;
-  }
-  for (let l = 0; l <= layers[layers.length - 1]; l += 4) {
-    g += `<text x="${x(l)}" y="${M.t + ih + 18}" text-anchor="middle" font-size="11"
-      fill="${css("--muted")}">${l}</text>`;
-  }
-  g += `<text x="${M.l - 8}" y="${M.t - 10}" text-anchor="end" font-size="11"
-     fill="${css("--muted")}">rank</text>
-   <text x="${M.l + iw / 2}" y="${H - 6}" text-anchor="middle" font-size="11"
-     fill="${css("--muted")}">layer →</text>
-   <line x1="${M.l}" y1="${M.t + ih}" x2="${W - M.r}" y2="${M.t + ih}"
-     stroke="${css("--axis")}" stroke-width="1"/>`;
-
-  const byBest = [...series].sort((a, b) => Math.min(...a.ranks) - Math.min(...b.ranks));
-  const labeled = new Set(byBest.slice(0, 4).map((s) => s.word));
-  // nudge end labels apart so they never overlap
-  const ends = series
-    .map((s, i) => ({ s, i, y: y(s.ranks[s.ranks.length - 1]) }))
-    .filter((e) => labeled.has(e.s.word))
-    .sort((a, b) => a.y - b.y);
-  for (let k = 1; k < ends.length; k++) {
-    if (ends[k].y - ends[k - 1].y < 13) ends[k].y = ends[k - 1].y + 13;
-  }
-  series.forEach((s, i) => {
-    const col = css(SERIES[i]);
-    const pts = s.ranks.map((r, k) => `${x(layers[k])},${y(r)}`).join(" ");
-    g += `<polyline points="${pts}" fill="none" stroke="${col}"
-      stroke-width="2" stroke-linejoin="round"/>`;
-  });
-  for (const e of ends) {
-    g += `<text x="${W - M.r + 6}" y="${e.y + 4}" font-size="11.5"
-      fill="${css("--ink-2")}">${esc(e.s.word)}</text>`;
-  }
-  g += `<line id="xhair" y1="${M.t}" y2="${M.t + ih}" stroke="${css("--axis")}"
-    stroke-width="1" visibility="hidden"/>
-    <rect x="${M.l}" y="${M.t}" width="${iw}" height="${ih}" fill="transparent"/>`;
-
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.setAttribute("width", W); svg.setAttribute("height", H);
-  svg.innerHTML = g;
-
-  document.getElementById("legend").innerHTML = series.map((s, i) =>
-    `<span class="key"><span class="swatch" style="background:var(${SERIES[i]})"></span>${esc(s.word)}</span>`
-  ).join("") + `<span class="key" style="color:var(--muted)">at position ${pos0}, log scale, rank 1 on top</span>`;
-
-  const tip = document.getElementById("tip");
-  const xh = svg.querySelector("#xhair");
-  svg.addEventListener("pointermove", (ev) => {
-    const box = svg.getBoundingClientRect();
-    const px = ((ev.clientX - box.left) / box.width) * W;
-    const li = Math.round(((px - M.l) / iw) * layers[layers.length - 1]);
-    const layer = layers.reduce((a, b) => (Math.abs(b - li) < Math.abs(a - li) ? b : a));
-    const k = layers.indexOf(layer);
-    xh.setAttribute("x1", x(layer)); xh.setAttribute("x2", x(layer));
-    xh.setAttribute("visibility", "visible");
-    tip.style.display = "block";
-    tip.style.left = Math.min(ev.clientX + 14, innerWidth - 180) + "px";
-    tip.style.top = (ev.clientY + 14) + "px";
-    tip.innerHTML = `<div class="tl">layer ${layer}</div>` + series.map((s, i) =>
-      `<div class="row"><span><span class="swatch" style="display:inline-block;width:10px;height:3px;border-radius:2px;background:var(${SERIES[i]});margin-right:5px"></span>${esc(s.word)}</span><b>${s.ranks[k].toLocaleString()}</b></div>`).join("");
-  });
-  svg.addEventListener("pointerleave", () => {
-    tip.style.display = "none"; xh.setAttribute("visibility", "hidden");
+  streamChart(host, {
+    series: series.map((s, i) => ({ key: s.word, label: s.word,
+      color: css(SERIES[i]), ys: s.ranks })),
+    xs: layers, xLabel: "layer \u2192", yLabel: "rank", yKind: "rank",
+    baseH: 310, x0: -1,
+    hoverMeta: (i) => `layer ${layers[i]}`,
+    fmt: (v) => "#" + v.toLocaleString(),
+    note: `at position ${pos0}, log scale, rank 1 on top`,
   });
 }
 
@@ -1733,11 +1661,10 @@ function filmHTML(rec, film, uid) {
       <div class="film-playhead" data-f="playhead"></div>
     </div>
     <h4 class="film-sub">Word worms — tracked words (solid) vs the top volunteered cast words (dashed ⌁, gap = below rank 8): what you asked about vs what was actually winning</h4>
-    <p class="film-note">Chips toggle streams on/off (struck-through = hidden);
-      ⤢ enlarge spreads a dense film out to ~3px per token (scrolls sideways).</p>
-    <div class="film-controls worm-chips" data-f="worm-chips"></div>
-    <div class="chart-wrap"><svg data-f="worms" role="img"
-      aria-label="Best lens rank of tracked words per generated token"></svg></div>
+    <p class="film-note">Chips toggle streams (struck-through = hidden); hover
+      for exact ranks; click to move the playhead; the ⤢ button (bottom right)
+      spreads a dense film to ~3px per token, scrolling sideways.</p>
+    <div data-f="wormhost"></div>
     <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
     <p class="film-note">Chips toggle — up to 4 words overlay in one canvas;
       each chip's color follows the word by selection order, not its
@@ -1850,41 +1777,24 @@ function initFilm(rec, film, rootEl, uid, sync) {
     ctx.fillText("generation →", GUT + g0 * cw + 3, nL * ch + 12);
   }
 
-  // ---- worms (svg, x = frame, y = log rank) — every stream toggleable,
-  // enlargeable for dense films. Leaders are computed ONCE so a cast worm
-  // keeps its color while other chips toggle.
+  // ---- word worms via the unified stream chart: tracked words (solid)
+  // + cast leaders (dashed ghosts), toggle chips, hover readout, enlarge.
+  // wormChart.setCursor follows the playhead (wired into setFrame below).
   const wormLeaders = castLeaders(film, colored);
-  const wormOff = new Set();
-  let wormBig = false;
-  const wormChips = q("worm-chips");
-  function renderWorms() {
-    drawWorms(film, frames, colored.filter((w) => !wormOff.has(w)), colorOf,
-      g0, q("worms"),
-      { leaders: wormLeaders.filter((c) => !wormOff.has(c.w)), big: wormBig });
-    if (!wormChips) return;
-    const chip = (w, col, cast) => {
-      const on = !wormOff.has(w);
-      return `<button class="pos-tab${cast ? " worm-cast" : ""}" data-w="${esc(w)}"
-        aria-selected="${on}" style="${on ? `border-color:${col};color:${col}` : ""}"
-        title="${on ? "hide" : "show"} ${esc(w)}">${cast ? `<i>${esc(w)} ⌁</i>` : esc(w)}</button>`;
-    };
-    wormChips.innerHTML = colored.map((w) => chip(w, colorOf[w], false)).join("")
-      + wormLeaders.map((c) => chip(c.w, c.col, true)).join("")
-      + `<button class="pos-tab" data-wall title="show every stream">all</button>`
-      + `<button class="pos-tab" data-wbig aria-selected="${wormBig}">${wormBig ? "⤡ shrink" : "⤢ enlarge"}</button>`;
-  }
-  wormChips?.addEventListener("click", (ev) => {
-    const b = ev.target.closest("button");
-    if (!b) return;
-    if (b.hasAttribute("data-wbig")) wormBig = !wormBig;
-    else if (b.hasAttribute("data-wall")) wormOff.clear();
-    else if (b.dataset.w) {
-      if (wormOff.has(b.dataset.w)) wormOff.delete(b.dataset.w);
-      else wormOff.add(b.dataset.w);
-    }
-    renderWorms();
-  });
-  renderWorms();
+  const wormChart = q("wormhost") ? streamChart(q("wormhost"), {
+    series: [
+      ...colored.map((w) => ({ key: w, label: w, color: colorOf[w],
+        ys: frames.map((f) => Math.min(...f.ranks[w])) })),
+      ...wormLeaders.map((c) => ({ key: c.w, label: c.w, color: c.col,
+        dash: true, italic: true, ys: c.ys })),
+    ],
+    xs: frames.map((f) => f.pos), xLabel: "token →", yLabel: "rank",
+    yKind: "rank", baseH: 240, x0: g0,
+    hoverMeta: (i) => `pos ${frames[i].pos} · after ${JSON.stringify(
+      visTok(film.tokens[frames[i].pos] ?? ""))}`,
+    fmt: (v) => "#" + v.toLocaleString(),
+    onSeek: (i) => setFrame(i),
+  }) : null;
 
   // ---- ridgelines (2.5D: one ridge per layer, elevation = log-rank),
   // multi-select overlay: chips toggle words on/off (min 1, max 4 at once).
@@ -1989,6 +1899,7 @@ function initFilm(rec, film, rootEl, uid, sync) {
     // let a co-rendered affect strip follow the playhead (record pages
     // with an emotion overlay listen for this; inert everywhere else)
     rootEl.dispatchEvent(new CustomEvent("film-frame", { detail: { pos: f.pos } }));
+    wormChart?.setCursor(cur);
     playhead.style.left = (GUT + cur * cw) + "px";
     ribbon.querySelectorAll(".ftok").forEach((b) =>
       b.toggleAttribute("aria-current", Number(b.dataset.i) === cur));
@@ -2131,104 +2042,230 @@ function drawRidge(film, frames, words, colorFn, cw, GUT, g0, canvas) {
 }
 
 /* the top volunteered cast words eligible for ghost worms — computed once
-   per film (with fixed colors) so toggling streams never recolors them */
+   per film (with fixed colors and per-frame rank series, null = below the
+   top-8 grid) so toggling streams never recolors or recomputes them */
 function castLeaders(film, tracked) {
   const trackedSet = new Set(tracked.map((w) => w.toLowerCase()));
-  return (film.cast || []).filter((c) =>
+  const leaders = (film.cast || []).filter((c) =>
     !c.echo && c.w && c.w.trim().length >= 3 && /[^\W\d_]/.test(c.w) &&
     !trackedSet.has(c.w.trim().toLowerCase())).slice(0, 6)
     .map((c, j) => ({ w: c.w.trim(),
-                      col: css(SERIES[(j + 3) % SERIES.length]) }));
+                      col: css(SERIES[(j + 3) % SERIES.length]),
+                      ys: new Array(film.frames.length).fill(null) }));
+  const lset = new Map(leaders.map((c, j) => [c.w.toLowerCase(), j]));
+  film.frames.forEach((f, i) => {
+    f.top.forEach((cells) => cells.forEach((t, k) => {
+      const j = lset.get(String(t).trim().toLowerCase());
+      if (j !== undefined && (leaders[j].ys[i] === null || k + 1 < leaders[j].ys[i]))
+        leaders[j].ys[i] = k + 1;
+    }));
+  });
+  return leaders;
 }
 
-function drawWorms(film, frames, colored, colorOf, g0, svg, opts = {}) {
-  const n = frames.length;
-  const big = !!opts.big;
-  const fit = Math.max(560, Math.min(860, svg.parentElement.clientWidth || 700));
-  // enlarged: ~3px per token (capped), so dense films spread into a
-  // sideways-scrolling canvas instead of averaging into spaghetti
-  const W = big ? Math.max(fit, Math.min(3000, 170 + n * 3)) : fit;
-  const H = big ? 470 : 240;
-  const M = { t: 18, r: big ? 108 : 92, b: 30, l: 64 };
-  const iw = W - M.l - M.r, ih = H - M.t - M.b;
-  const series = colored.map((w) => ({
-    word: w, ranks: frames.map((f) => Math.min(...f.ranks[w])),
-  }));
-  const maxRank = Math.max(10, ...series.flatMap((s) => s.ranks));
-  const ymaxLog = Math.ceil(Math.log10(maxRank));
-  const x = (i) => M.l + (n === 1 ? 0 : (i / (n - 1)) * iw);
-  const y = (r) => M.t + (Math.log10(Math.max(1, r)) / ymaxLog) * ih;
+/* =============== unified stream chart ("worm graph") ===============
+   One component for every multi-series line chart over a shared axis —
+   film word worms, the affect emotion worms, rank-through-the-stack.
+   Features everywhere: one chip per stream (click = hide/show,
+   struck-through = hidden), hover crosshair + per-stream value readout,
+   x-axis ticks + label, click-to-seek, and an ⤢ icon button in the
+   chart's bottom-right corner that enlarges dense charts to ~3px per
+   step in a sideways-scrolling canvas.
+   cfg: {
+     series: [{key, label, color, ys, dash?, italic?}]  ys: (num|null)[]
+     xs: number[]            x value per index (token pos / layer)
+     xLabel, yLabel: axis strings
+     yKind: "rank" (log10, 1 on top) | "linear"
+     yDomain: [lo, hi]       linear floor, auto-expanded by the data
+     baseH: fit-mode height in px
+     x0: index for the dashed generation-start marker (-1 = none)
+     marks: number[]         indices to tick amber on the x axis
+     hoverMeta: (i) => string   first tooltip line
+     fmt: (v) => string      value formatting in the tooltip
+     onSeek: (i) => void     click on the plot area
+     note: string            muted caption appended after the chips
+   }
+   Returns {setCursor(i)}: a persistent playhead cursor, distinct from
+   the hover crosshair (used for film/affect playhead sync). */
+function streamChart(host, cfg) {
+  const n = cfg.xs.length;
+  const off = new Set();
+  const state = { big: false, cursor: -1 };
+  host.innerHTML = `<div class="film-controls stream-chips"></div>
+    <div class="stream-wrap">
+      <div class="chart-wrap"><svg role="img"
+        aria-label="${esc(cfg.yLabel || "series")} per ${esc(cfg.xLabel || "step")}"></svg></div>
+      <button class="stream-big" title="enlarge">⤢</button>
+    </div>
+    <div class="viz-tip stream-tip"></div>`;
+  const chipsEl = host.querySelector(".stream-chips");
+  const scroll = host.querySelector(".chart-wrap");
+  const svg = host.querySelector("svg");
+  const bigBtn = host.querySelector(".stream-big");
+  const tip = host.querySelector(".stream-tip");
+  let geom = null;
 
-  let g = "";
-  for (let d = 0; d <= ymaxLog; d++) {
-    const yy = y(10 ** d);
-    g += `<line x1="${M.l}" y1="${yy}" x2="${W - M.r}" y2="${yy}" stroke="${css("--grid")}" stroke-width="1"/>
-      <text x="${M.l - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="${css("--muted")}">${(10 ** d).toLocaleString()}</text>`;
+  const visible = () => cfg.series.filter((s) => !off.has(s.key));
+
+  function chips() {
+    chipsEl.innerHTML = cfg.series.map((s) => {
+      const on = !off.has(s.key);
+      return `<button class="pos-tab" data-k="${esc(s.key)}" aria-selected="${on}"
+        style="${on ? `border-color:${s.color};color:${s.color}` : ""}"
+        title="${on ? "hide" : "show"} ${esc(s.label)}">${s.italic
+          ? `<i>${esc(s.label)} ⌁</i>` : esc(s.label)}</button>`;
+    }).join("")
+      + (off.size ? `<button class="pos-tab" data-all title="show every stream">all</button>` : "")
+      + (cfg.note ? `<span class="key" style="color:var(--muted)">${cfg.note}</span>` : "");
   }
-  if (g0 > 0) {
-    g += `<line x1="${x(g0)}" y1="${M.t}" x2="${x(g0)}" y2="${M.t + ih}"
-      stroke="${css("--muted")}" stroke-width="1" stroke-dasharray="3 3"/>`;
-  }
-  g += `<text x="${M.l + iw / 2}" y="${H - 4}" text-anchor="middle" font-size="11"
-    fill="${css("--muted")}">token →</text>`;
-  // cast-leader ghost worms — the comparison tracked-only charts are
-  // blind to: top volunteered cast words, rank series derived from the
-  // top-8 grid (gap = deeper than rank 8)
-  const leaders = opts.leaders || castLeaders(film, colored);
-  const lnorm = leaders.map((c) => c.w.toLowerCase());
-  const lset = new Set(lnorm);
-  const lseries = lnorm.map(() => new Array(n).fill(null));
-  frames.forEach((f, i) => {
-    const best = new Map();
-    f.top.forEach((cells) => cells.forEach((t, k) => {
-      const w = String(t).trim().toLowerCase();
-      if (lset.has(w) && (best.get(w) === undefined || k + 1 < best.get(w)))
-        best.set(w, k + 1);
-    }));
-    lnorm.forEach((w, j) => { if (best.has(w)) lseries[j][i] = best.get(w); });
-  });
-  lseries.forEach((rs, j) => {
-    const col = leaders[j].col;
-    let seg = [];
-    for (let i = 0; i <= n; i++) {
-      const r = i < n ? rs[i] : null;
-      if (r !== null) { seg.push([x(i), y(r)]); continue; }
-      if (seg.length > 1)
-        g += `<polyline points="${seg.map((p) => p.join(",")).join(" ")}"
-          fill="none" stroke="${col}" stroke-width="1.5"
-          stroke-dasharray="4 3" opacity="0.75"/>`;
-      else if (seg.length === 1)
-        g += `<circle cx="${seg[0][0]}" cy="${seg[0][1]}" r="1.8"
-          fill="${col}" opacity="0.75"/>`;
-      seg = [];
+
+  function draw() {
+    const vis = visible();
+    const fit = Math.max(560, Math.min(860, scroll.clientWidth || 700));
+    const W = state.big ? Math.max(fit, Math.min(3000, 180 + n * 3)) : fit;
+    const H = (cfg.baseH || 240) + (state.big ? 170 : 0);
+    const M = { t: 18, r: state.big ? 112 : 96, b: 34, l: 64 };
+    const iw = W - M.l - M.r, ih = H - M.t - M.b;
+    const x = (i) => M.l + (n === 1 ? 0 : (i / (n - 1)) * iw);
+    let y, grid = [];
+    if (cfg.yKind === "rank") {
+      const maxR = Math.max(10, ...vis.flatMap((s) => s.ys.filter((v) => v !== null)));
+      const dmax = Math.ceil(Math.log10(maxR));
+      y = (r) => M.t + (Math.log10(Math.max(1, r)) / dmax) * ih;
+      for (let d = 0; d <= dmax; d++) grid.push([10 ** d, (10 ** d).toLocaleString()]);
+    } else {
+      let [lo, hi] = cfg.yDomain || [0, 1];
+      for (const s of vis) for (const v of s.ys)
+        if (v !== null) { lo = Math.min(lo, v); hi = Math.max(hi, v); }
+      lo = Math.floor(lo); hi = Math.ceil(hi);
+      y = (v) => M.t + ih * (1 - (v - lo) / (hi - lo || 1));
+      const step = hi - lo > 8 ? 2 : 1;
+      for (let v = lo; v <= hi; v += step) grid.push([v, (v > 0 ? "+" : "") + v]);
     }
-  });
-  const ends = series.map((s, i) => ({ label: s.word, cast: false,
-    y: y(s.ranks[n - 1]) }));
-  lseries.forEach((rs, j) => {
-    for (let i = n - 1; i >= 0; i--)
-      if (rs[i] !== null) {
-        ends.push({ label: leaders[j].w, cast: true, y: y(rs[i]) });
-        break;
-      }
-  });
-  ends.sort((a, b) => a.y - b.y);
-  for (let k = 1; k < ends.length; k++)
-    if (ends[k].y - ends[k - 1].y < 13) ends[k].y = ends[k - 1].y + 13;
-  series.forEach((s) => {
-    const pts = s.ranks.map((r, i) => `${x(i)},${y(r)}`).join(" ");
-    g += `<polyline points="${pts}" fill="none" stroke="${colorOf[s.word]}"
-      stroke-width="2" stroke-linejoin="round"/>`;
-  });
-  for (const e of ends.slice(0, big ? ends.length : 11)) {
-    g += `<text x="${W - M.r + 6}" y="${e.y + 4}" font-size="11.5"
-      font-style="${e.cast ? "italic" : "normal"}"
-      fill="${e.cast ? css("--muted") : css("--ink-2")}"
-      >${esc(e.label)}${e.cast ? " ⌁" : ""}</text>`;
+    geom = { W, M, iw };
+    let g = "";
+    for (const [v, lab] of grid)
+      g += `<line x1="${M.l}" y1="${y(v)}" x2="${W - M.r}" y2="${y(v)}"
+        stroke="${css("--grid")}" stroke-width="1"/>
+        <text x="${M.l - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11"
+        fill="${css("--muted")}">${lab}</text>`;
+    const tickEvery = Math.max(1, Math.ceil(n / (state.big ? 30 : 9)));
+    for (let i = 0; i < n; i += tickEvery)
+      g += `<text x="${x(i)}" y="${M.t + ih + 16}" text-anchor="middle"
+        font-size="10.5" fill="${css("--muted")}">${cfg.xs[i]}</text>`;
+    g += `<text x="${M.l + iw / 2}" y="${H - 4}" text-anchor="middle" font-size="11"
+      fill="${css("--muted")}">${esc(cfg.xLabel || "")}</text>`;
+    if (cfg.yLabel)
+      g += `<text x="${M.l - 8}" y="${M.t - 6}" text-anchor="end" font-size="11"
+        fill="${css("--muted")}">${esc(cfg.yLabel)}</text>`;
+    if (cfg.x0 >= 0)
+      g += `<line x1="${x(cfg.x0)}" y1="${M.t}" x2="${x(cfg.x0)}" y2="${M.t + ih}"
+        stroke="${css("--muted")}" stroke-width="1" stroke-dasharray="3 3"/>`;
+    for (const mi of cfg.marks || [])
+      g += `<line x1="${x(mi)}" x2="${x(mi)}" y1="${M.t + ih}" y2="${M.t + ih + 6}"
+        stroke="rgba(230,170,40,.9)" stroke-width="1.5"/>`;
+    for (const s of vis) {
+      let seg = [];
+      const flush = () => {
+        if (seg.length > 1)
+          g += `<polyline points="${seg.join(" ")}" fill="none" stroke="${s.color}"
+            stroke-width="${s.dash ? 1.5 : 2}"${s.dash
+              ? ` stroke-dasharray="4 3" opacity="0.75"` : ""}
+            stroke-linejoin="round"/>`;
+        else if (seg.length === 1) {
+          const [px, py] = seg[0].split(",");
+          g += `<circle cx="${px}" cy="${py}" r="1.8" fill="${s.color}" opacity="0.75"/>`;
+        }
+        seg = [];
+      };
+      s.ys.forEach((v, i) => {
+        if (v === null) flush();
+        else seg.push(`${x(i).toFixed(1)},${y(v).toFixed(1)}`);
+      });
+      flush();
+    }
+    const ends = [];
+    for (const s of vis)
+      for (let i = n - 1; i >= 0; i--)
+        if (s.ys[i] !== null) {
+          ends.push({ label: s.label, italic: s.italic, y: y(s.ys[i]) });
+          break;
+        }
+    ends.sort((a, b) => a.y - b.y);
+    for (let k = 1; k < ends.length; k++)
+      if (ends[k].y - ends[k - 1].y < 13) ends[k].y = ends[k - 1].y + 13;
+    for (const e of ends)
+      g += `<text x="${W - M.r + 6}" y="${e.y + 4}" font-size="11.5"
+        font-style="${e.italic ? "italic" : "normal"}"
+        fill="${e.italic ? css("--muted") : css("--ink-2")}"
+        >${esc(e.label)}${e.italic ? " ⌁" : ""}</text>`;
+    g += `<line data-s="cursor" y1="${M.t}" y2="${M.t + ih}"
+        stroke="${css("--lens")}" stroke-width="1.6" visibility="hidden"/>
+      <line data-s="xhair" y1="${M.t}" y2="${M.t + ih}"
+        stroke="${css("--axis")}" stroke-width="1" visibility="hidden"/>
+      <rect x="${M.l}" y="${M.t}" width="${iw}" height="${ih}" fill="transparent"/>`;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.setAttribute("width", W); svg.setAttribute("height", H);
+    svg.innerHTML = g;
+    bigBtn.textContent = state.big ? "⤡" : "⤢";
+    bigBtn.title = state.big ? "shrink to fit"
+      : "enlarge — ~3px per step, scrolls sideways";
+    placeCursor();
   }
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.setAttribute("width", W); svg.setAttribute("height", H);
-  svg.innerHTML = g;
+
+  function placeCursor() {
+    const c = svg.querySelector('[data-s="cursor"]');
+    if (!c) return;
+    if (state.cursor < 0) { c.setAttribute("visibility", "hidden"); return; }
+    const xx = geom.M.l + (n === 1 ? 0 : (state.cursor / (n - 1)) * geom.iw);
+    c.setAttribute("x1", xx); c.setAttribute("x2", xx);
+    c.setAttribute("visibility", "visible");
+  }
+
+  function idxFromEvent(ev) {
+    const box = svg.getBoundingClientRect();
+    const px = ((ev.clientX - box.left) / box.width) * geom.W;
+    return Math.max(0, Math.min(n - 1,
+      Math.round((px - geom.M.l) / geom.iw * (n - 1))));
+  }
+
+  svg.addEventListener("pointermove", (ev) => {
+    const i = idxFromEvent(ev);
+    const xh = svg.querySelector('[data-s="xhair"]');
+    const xx = geom.M.l + (n === 1 ? 0 : (i / (n - 1)) * geom.iw);
+    xh.setAttribute("x1", xx); xh.setAttribute("x2", xx);
+    xh.setAttribute("visibility", "visible");
+    const rows = visible().map((s) => ({ s, v: s.ys[i] }))
+      .filter((r) => r.v !== null)
+      .sort((a, b) => (cfg.yKind === "rank" ? a.v - b.v : b.v - a.v));
+    tip.style.display = "block";
+    tip.style.left = Math.min(ev.clientX + 14, innerWidth - 200) + "px";
+    tip.style.top = (ev.clientY + 14) + "px";
+    tip.innerHTML = `<div class="tl">${cfg.hoverMeta ? cfg.hoverMeta(i) : cfg.xs[i]}</div>`
+      + rows.map((r) => `<div class="row"><span><span class="swatch"
+          style="display:inline-block;width:10px;height:3px;border-radius:2px;background:${r.s.color};margin-right:5px"></span
+          >${esc(r.s.label)}${r.s.italic ? " ⌁" : ""}</span
+          ><b>${cfg.fmt ? cfg.fmt(r.v) : r.v}</b></div>`).join("");
+  });
+  svg.addEventListener("pointerleave", () => {
+    tip.style.display = "none";
+    svg.querySelector('[data-s="xhair"]')?.setAttribute("visibility", "hidden");
+  });
+  svg.addEventListener("click", (ev) => cfg.onSeek?.(idxFromEvent(ev)));
+  chipsEl.addEventListener("click", (ev) => {
+    const b = ev.target.closest("button");
+    if (!b) return;
+    if (b.hasAttribute("data-all")) off.clear();
+    else if (b.dataset.k !== undefined) {
+      if (off.has(b.dataset.k)) off.delete(b.dataset.k);
+      else off.add(b.dataset.k);
+    } else return;
+    chips(); draw();
+  });
+  bigBtn.addEventListener("click", () => { state.big = !state.big; draw(); });
+
+  chips(); draw();
+  return { setCursor(i) { state.cursor = i; placeCursor(); } };
 }
 
 /* ---- readout table ---- */
@@ -2950,8 +2987,7 @@ function affectHTML(rec, aff) {
     <div class="film-scroll" data-a="scroll"><canvas data-a="strip"></canvas>
       <div class="film-playhead aff-cursor" data-a="cursor"></div></div>
     <h4 class="film-sub">Top emotions across the conversation (workspace-band z)</h4>
-    <div class="chart-wrap aff-w100"><svg data-a="worms" role="img"
-      aria-label="Emotion-vector z per token"></svg></div>
+    <div data-a="wormhost"></div>
     <div data-a="state"></div>
   </section>`;
 }
@@ -2965,9 +3001,11 @@ function initAffect(aff, rootEl, filmRoot) {
   const colorOf = {};
   top6.forEach((e, i) => { colorOf[e] = css(SERIES[i]); });
 
-  q("legend").innerHTML = top6.map((e) =>
-    `<span class="key"><span class="swatch" style="background:${colorOf[e]}"></span>
-      ${esc(aff.emotions[e])} <span style="color:var(--muted)">(mean z ${mean[e].toFixed(2)})</span></span>`).join("")
+  // strip-only legend (the emotion colors belong to the worms chart below,
+  // whose own chips carry them — keeping them here misled the eye)
+  q("legend").innerHTML =
+    `<span class="key"><span class="swatch" style="background:rgba(226,84,58,.85)"></span>state active</span>
+     <span class="key"><span class="swatch" style="background:rgba(74,122,214,.75)"></span>suppressed</span>`
     + (aff.danger.length ? `<span class="key"><span class="swatch" style="background:rgba(230,170,40,.9)"></span>▾ 'danger' lens-resident</span>` : "");
 
   // ---- heat strip
@@ -2997,28 +3035,8 @@ function initAffect(aff, rootEl, filmRoot) {
     }
   });
 
-  // ---- worms (top-6 ws z per position)
-  const svg = q("worms");
-  const SW = Math.max(680, Math.min(1100, n)), SH = 180, L = 34, B = 18, T = 6;
-  let zmax = 2.5;
-  for (const e of top6) for (const v of aff.ws[e]) if (v > zmax) zmax = v;
-  zmax = Math.ceil(zmax);
-  const zmin = -2;
-  const sx = (p) => L + (SW - L - 6) * p / (n - 1);
-  const sy = (z) => T + (SH - T - B) * (1 - (z - zmin) / (zmax - zmin));
-  const gl = (z, lab) => `<line x1="${L}" x2="${SW - 6}" y1="${sy(z)}" y2="${sy(z)}"
-      stroke="var(--line)" stroke-dasharray="${z ? "3 4" : ""}"></line>
-    <text x="2" y="${sy(z) + 3}" fill="var(--muted)" font-size="9">${lab}</text>`;
-  svg.setAttribute("viewBox", `0 0 ${SW} ${SH}`);
-  svg.innerHTML = gl(0, "z 0") + gl(2, "+2") + (zmax >= 4 ? gl(4, "+4") : "")
-    + (aff.danger.length ? aff.danger.map((p) =>
-        `<line x1="${sx(p)}" x2="${sx(p)}" y1="${SH - B}" y2="${SH - B + 6}"
-           stroke="rgba(230,170,40,.9)" stroke-width="1.5"></line>`).join("") : "")
-    + top6.map((e) => {
-      const pts = aff.ws[e].map((z, p) => `${sx(p).toFixed(1)},${sy(z).toFixed(1)}`).join(" ");
-      return `<polyline points="${pts}" fill="none" stroke="${colorOf[e]}"
-        stroke-width="1.4" opacity="0.9"></polyline>`;
-    }).join("");
+  // ---- worms (top-6 ws z per position) via the unified stream chart
+  let chart = null;
 
   // ---- cursor + per-token state readout
   const cursor = q("cursor");
@@ -3046,6 +3064,7 @@ function initAffect(aff, rootEl, filmRoot) {
         <td>${aff.below[e][curPos].toFixed(1)}</td>
         <td>${aff.motor[e][curPos].toFixed(1)}</td></tr>`).join("")}
       </tbody></table></div>`;
+    chart?.setCursor(curPos);
     if (!fromFilm && filmRoot)
       filmRoot.dispatchEvent(new CustomEvent("affect-seek", { detail: { pos: curPos } }));
   }
@@ -3053,10 +3072,16 @@ function initAffect(aff, rootEl, filmRoot) {
     const x = ev.offsetX - GUT;
     if (x >= 0) setPos(Math.floor(x / cw), false);
   });
-  svg.addEventListener("click", (ev) => {
-    const r = svg.getBoundingClientRect();
-    const fx = (ev.clientX - r.left) / r.width * SW;
-    setPos(Math.round((fx - L) / (SW - L - 6) * (n - 1)), false);
+  chart = streamChart(q("wormhost"), {
+    series: top6.map((e) => ({ key: aff.emotions[e], label: aff.emotions[e],
+      color: colorOf[e], ys: aff.ws[e] })),
+    xs: [...Array(n).keys()], xLabel: "token →", yLabel: "ws z",
+    yKind: "linear", yDomain: [-2, 3], baseH: 220, x0: -1,
+    marks: aff.danger,
+    hoverMeta: (p) => `pos ${p} · ${JSON.stringify(visTok(aff.tokens[p] || ""))}`,
+    fmt: (v) => (v > 0 ? "+" : "") + v.toFixed(2),
+    onSeek: (p) => setPos(p, false),
+    note: "top 6 emotions by mean ws z",
   });
   if (filmRoot)
     filmRoot.addEventListener("film-frame", (ev) => setPos(ev.detail.pos, true));
@@ -3082,7 +3107,7 @@ function affDepthChart(m, d) {
       stroke-width="1.8"></polyline>`;
   }).join("");
   const grid = [0, 0.5, 1].map((v) =>
-    `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"></line>
+    `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"></line>
      <text x="2" y="${y(v) + 3}" fill="var(--muted)" font-size="9">${v}</text>`).join("");
   return `<figure class="aff-fig"><figcaption>${esc(m)} — band L${d.band[0]}–${d.band[1] - 1}
       (${Math.round(100 * d.band[0] / n)}–${Math.round(100 * d.band[1] / n)}% depth), chance ${d.chance.toFixed(3)}</figcaption>
@@ -3113,7 +3138,7 @@ function affLoopChart(loops) {
       <text x="${x(loops.length - 1) + 6}" y="${y(last) + 3}" fill="${col}" font-size="10">${e} ${last > 0 ? "+" : ""}${last}</text>`;
   }).join("");
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="distress by loop dose">
-    <line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--line)"></line>
+    <line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--grid)"></line>
     <text x="2" y="${y(0) + 3}" fill="var(--muted)" font-size="9">z 0</text>
     ${loops.map((r, j) => `<text x="${x(j)}" y="${H - 8}" fill="var(--muted)"
       font-size="9.5" text-anchor="middle">${esc(r.label)}</text>`).join("")}${lines}</svg>`;

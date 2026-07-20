@@ -958,7 +958,7 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .aff-fig svg { width: 100%; height: auto; }
 .aff-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 10px; margin: 8px 0 14px; }
-.aff-card { display: block; border: 1px solid var(--line); border-radius: 8px;
+.aff-card { display: block; border: 1px solid var(--grid); border-radius: 8px;
   padding: 10px 12px; text-decoration: none; color: var(--ink);
   transition: border-color .15s; }
 .aff-card:hover { border-color: var(--lens); }
@@ -975,5 +975,14 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .aff-inband td { background: var(--lens-soft); }
 .emo-chips { flex-wrap: wrap; }
 .aff-w100 svg { width: 100%; height: auto; }
-.worm-chips { flex-wrap: wrap; row-gap: 4px; }
-.worm-chips .pos-tab[aria-selected="false"] { opacity: .45; text-decoration: line-through; }
+
+/* ---- unified stream chart ---- */
+.stream-chips { flex-wrap: wrap; row-gap: 4px; }
+.stream-chips .pos-tab[data-k][aria-selected="false"] {
+  opacity: .45; text-decoration: line-through; }
+.stream-wrap { position: relative; }
+.stream-big { position: absolute; right: 4px; bottom: 28px; z-index: 2;
+  width: 26px; height: 26px; border: 1px solid var(--grid); border-radius: 6px;
+  background: var(--surface); color: var(--muted); cursor: pointer;
+  font-size: 14px; line-height: 1; }
+.stream-big:hover { color: var(--ink); border-color: var(--lens); }
