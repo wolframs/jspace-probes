@@ -1733,6 +1733,9 @@ function filmHTML(rec, film, uid) {
       <div class="film-playhead" data-f="playhead"></div>
     </div>
     <h4 class="film-sub">Word worms — tracked words (solid) vs the top volunteered cast words (dashed ⌁, gap = below rank 8): what you asked about vs what was actually winning</h4>
+    <p class="film-note">Chips toggle streams on/off (struck-through = hidden);
+      ⤢ enlarge spreads a dense film out to ~3px per token (scrolls sideways).</p>
+    <div class="film-controls worm-chips" data-f="worm-chips"></div>
     <div class="chart-wrap"><svg data-f="worms" role="img"
       aria-label="Best lens rank of tracked words per generated token"></svg></div>
     <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
@@ -1847,8 +1850,41 @@ function initFilm(rec, film, rootEl, uid, sync) {
     ctx.fillText("generation →", GUT + g0 * cw + 3, nL * ch + 12);
   }
 
-  // ---- worms (svg, x = frame, y = log rank)
-  drawWorms(film, frames, colored, colorOf, g0, q("worms"));
+  // ---- worms (svg, x = frame, y = log rank) — every stream toggleable,
+  // enlargeable for dense films. Leaders are computed ONCE so a cast worm
+  // keeps its color while other chips toggle.
+  const wormLeaders = castLeaders(film, colored);
+  const wormOff = new Set();
+  let wormBig = false;
+  const wormChips = q("worm-chips");
+  function renderWorms() {
+    drawWorms(film, frames, colored.filter((w) => !wormOff.has(w)), colorOf,
+      g0, q("worms"),
+      { leaders: wormLeaders.filter((c) => !wormOff.has(c.w)), big: wormBig });
+    if (!wormChips) return;
+    const chip = (w, col, cast) => {
+      const on = !wormOff.has(w);
+      return `<button class="pos-tab${cast ? " worm-cast" : ""}" data-w="${esc(w)}"
+        aria-selected="${on}" style="${on ? `border-color:${col};color:${col}` : ""}"
+        title="${on ? "hide" : "show"} ${esc(w)}">${cast ? `<i>${esc(w)} ⌁</i>` : esc(w)}</button>`;
+    };
+    wormChips.innerHTML = colored.map((w) => chip(w, colorOf[w], false)).join("")
+      + wormLeaders.map((c) => chip(c.w, c.col, true)).join("")
+      + `<button class="pos-tab" data-wall title="show every stream">all</button>`
+      + `<button class="pos-tab" data-wbig aria-selected="${wormBig}">${wormBig ? "⤡ shrink" : "⤢ enlarge"}</button>`;
+  }
+  wormChips?.addEventListener("click", (ev) => {
+    const b = ev.target.closest("button");
+    if (!b) return;
+    if (b.hasAttribute("data-wbig")) wormBig = !wormBig;
+    else if (b.hasAttribute("data-wall")) wormOff.clear();
+    else if (b.dataset.w) {
+      if (wormOff.has(b.dataset.w)) wormOff.delete(b.dataset.w);
+      else wormOff.add(b.dataset.w);
+    }
+    renderWorms();
+  });
+  renderWorms();
 
   // ---- ridgelines (2.5D: one ridge per layer, elevation = log-rank),
   // multi-select overlay: chips toggle words on/off (min 1, max 4 at once).
@@ -2094,10 +2130,26 @@ function drawRidge(film, frames, words, colorFn, cw, GUT, g0, canvas) {
   }
 }
 
-function drawWorms(film, frames, colored, colorOf, g0, svg) {
+/* the top volunteered cast words eligible for ghost worms — computed once
+   per film (with fixed colors) so toggling streams never recolors them */
+function castLeaders(film, tracked) {
+  const trackedSet = new Set(tracked.map((w) => w.toLowerCase()));
+  return (film.cast || []).filter((c) =>
+    !c.echo && c.w && c.w.trim().length >= 3 && /[^\W\d_]/.test(c.w) &&
+    !trackedSet.has(c.w.trim().toLowerCase())).slice(0, 6)
+    .map((c, j) => ({ w: c.w.trim(),
+                      col: css(SERIES[(j + 3) % SERIES.length]) }));
+}
+
+function drawWorms(film, frames, colored, colorOf, g0, svg, opts = {}) {
   const n = frames.length;
-  const W = Math.max(560, Math.min(860, svg.parentElement.clientWidth || 700));
-  const H = 240, M = { t: 18, r: 92, b: 30, l: 64 };
+  const big = !!opts.big;
+  const fit = Math.max(560, Math.min(860, svg.parentElement.clientWidth || 700));
+  // enlarged: ~3px per token (capped), so dense films spread into a
+  // sideways-scrolling canvas instead of averaging into spaghetti
+  const W = big ? Math.max(fit, Math.min(3000, 170 + n * 3)) : fit;
+  const H = big ? 470 : 240;
+  const M = { t: 18, r: big ? 108 : 92, b: 30, l: 64 };
   const iw = W - M.l - M.r, ih = H - M.t - M.b;
   const series = colored.map((w) => ({
     word: w, ranks: frames.map((f) => Math.min(...f.ranks[w])),
@@ -2122,11 +2174,8 @@ function drawWorms(film, frames, colored, colorOf, g0, svg) {
   // cast-leader ghost worms — the comparison tracked-only charts are
   // blind to: top volunteered cast words, rank series derived from the
   // top-8 grid (gap = deeper than rank 8)
-  const trackedSet = new Set(colored.map((w) => w.toLowerCase()));
-  const leaders = (film.cast || []).filter((c) =>
-    !c.echo && c.w && c.w.trim().length >= 3 && /[^\W\d_]/.test(c.w) &&
-    !trackedSet.has(c.w.trim().toLowerCase())).slice(0, 6);
-  const lnorm = leaders.map((c) => c.w.trim().toLowerCase());
+  const leaders = opts.leaders || castLeaders(film, colored);
+  const lnorm = leaders.map((c) => c.w.toLowerCase());
   const lset = new Set(lnorm);
   const lseries = lnorm.map(() => new Array(n).fill(null));
   frames.forEach((f, i) => {
@@ -2139,7 +2188,7 @@ function drawWorms(film, frames, colored, colorOf, g0, svg) {
     lnorm.forEach((w, j) => { if (best.has(w)) lseries[j][i] = best.get(w); });
   });
   lseries.forEach((rs, j) => {
-    const col = css(SERIES[(j + 3) % SERIES.length]);
+    const col = leaders[j].col;
     let seg = [];
     for (let i = 0; i <= n; i++) {
       const r = i < n ? rs[i] : null;
@@ -2159,7 +2208,7 @@ function drawWorms(film, frames, colored, colorOf, g0, svg) {
   lseries.forEach((rs, j) => {
     for (let i = n - 1; i >= 0; i--)
       if (rs[i] !== null) {
-        ends.push({ label: leaders[j].w.trim(), cast: true, y: y(rs[i]) });
+        ends.push({ label: leaders[j].w, cast: true, y: y(rs[i]) });
         break;
       }
   });
@@ -2171,7 +2220,7 @@ function drawWorms(film, frames, colored, colorOf, g0, svg) {
     g += `<polyline points="${pts}" fill="none" stroke="${colorOf[s.word]}"
       stroke-width="2" stroke-linejoin="round"/>`;
   });
-  for (const e of ends.slice(0, 11)) {
+  for (const e of ends.slice(0, big ? ends.length : 11)) {
     g += `<text x="${W - M.r + 6}" y="${e.y + 4}" font-size="11.5"
       font-style="${e.cast ? "italic" : "normal"}"
       fill="${e.cast ? css("--muted") : css("--ink-2")}"
@@ -2901,7 +2950,7 @@ function affectHTML(rec, aff) {
     <div class="film-scroll" data-a="scroll"><canvas data-a="strip"></canvas>
       <div class="film-playhead aff-cursor" data-a="cursor"></div></div>
     <h4 class="film-sub">Top emotions across the conversation (workspace-band z)</h4>
-    <div class="chart-wrap"><svg data-a="worms" role="img"
+    <div class="chart-wrap aff-w100"><svg data-a="worms" role="img"
       aria-label="Emotion-vector z per token"></svg></div>
     <div data-a="state"></div>
   </section>`;
@@ -3181,7 +3230,7 @@ async function showAffect() {
         distress cluster only climbs once amplification makes the loop
         self-sustaining — and calm collapses with it. The a0.68 transcript
         reads "luckily luckily luckily": the state never reaches the text.</p>
-      <div class="chart-wrap">${affLoopChart(A.loops)}</div>
+      <div class="chart-wrap aff-w100">${affLoopChart(A.loops)}</div>
     </section>`;
   wireLensview();
 }
