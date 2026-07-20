@@ -2,7 +2,7 @@
 
 _Generated from `board/board.json` — do not hand-edit; regenerate with `.venv/bin/python probes/board.py` (any `add`/`mv`/`note`/`arc add` does this automatically)._
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 
 Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖ parked · ✗ dropped
 
@@ -147,5 +147,5 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 | | nov | id | title | latest note |
 |---|---|---|---|---|
 | ✓ |  | affect-01 | Port the emotion-vector construction to our models (story-elicitation, activation capture, validation sweep) | 2026-07-20 → landed: Instrument ported + validated on gemma-4b AND qwen-27b (24 emotions, story-elicited, leakage-controlled): held-out top-1 0.889/0.847 vs chance 0.042; split-half within 0.3/0.55 vs between ~0; attribution-general (P8 req met); valence PC1 FLAT all layers both models (van der Ben early-collapse 0-for-2); depth dissociation: narrated decoding peaks MOTOR band, scenario transfer peaks IN ws band both models; lensview: all 24 directions verbalizable in-band with somatic depth gradient (sad->empty/numb, nervous->cold-sweat 冷汗). Evidence: results/affect01-{gemma-4b,qwen-27b}/{report.md,lensview.md,thoughts.md} |
-| ✓ |  | affect-02 | Functional emotion: inside or outside the workspace band? (the crossing nobody has asked) | 2026-07-20 2026-07-20 (later): emotion-state ribbon fused under the film strip (default on where film+affect exist, viewer-toggleable, playhead-shared); all dashboard line charts unified on streamChart (toggle chips/hover/enlarge) incl. u14 drift + affect depth/loop retrofits |
+| ✓ |  | affect-02 | Functional emotion: inside or outside the workspace band? (the crossing nobody has asked) | 2026-07-21 2026-07-21 loop-variance micro-analysis (from exported affect.json, no GPU): a0680's in-loop emotion flicker is ONE shared mode (top-6 pairwise corr .95 vs ~0 in normal text), anti-correlated with lens top-1 confidence in all bands (-.22..-.28) — the state pulses where the attractor's grip slips; slow decay over the loop (drift -.30), no clean period. Open: shared mode could be residual-NORM pulse; per-column norms not exported. |
 | ○ |  | affect-03 | Causal arm: steer the desperate vector during a forming loop (does it push forced->self-sustaining?) / ablate vigilant during the song; matched random-direction controls per MECHANICS, ws band L28-58 | — |
