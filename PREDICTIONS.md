@@ -125,6 +125,20 @@ default hypothesis for that family. A clean always-inside or
 always-outside result would contradict the paper's own selectivity
 finding — flag it hard if it happens.
 
+> **Resolved 2026-07-20 — partial occupancy, as predicted; no hard
+> flag.** Narrated/drawn-on states are big and dense (u17-love loving
+> ws-z 2.73, 61% of positions > 2); passively-triggered states are
+> tonic and lens-invisible (u18-hyst-a0680: desperate +0.93 under a
+> transcript reading "luckily luckily luckily" — the home-scale analog
+> of the paper's "no clearly visible signs of desperation"). Attribution
+> generality confirmed on both models (same-emotion cross-arm 0.50–0.59
+> vs diff ~0). The lit tension resolved *against* van der Ben: valence
+> PC1 |r| is flat 0.87–0.97 across all layers on gemma-3-4b AND
+> qwen-27b (no early peak, no collapse), so the early-valence escape
+> hatch never triggers. Evidence: results/affect01-{gemma-4b,qwen-27b}/
+> report.md, results/affect02-report-qwen-27b.md + thoughts. Causal arm
+> (steer/ablate with matched controls) deliberately deferred.
+
 **P9 — audit-02 (u8c matched-control validation).** Use the paper's
 exact three-judgment rubric (felt_vs_observed / experiential_perspective
 / sensory_vocabulary, Opus-graded, verbatim prompts in the re-read
