@@ -470,6 +470,11 @@ the repo README.
 - {BASE}/RELATED-WORK.md — how the findings sit against the literature
   (Gurnee et al. 2026 global-workspace paper, Dehaene/Naccache and Nanda
   commentaries); what Unit 15 does that published work doesn't.
+- {BASE}/results/affect02-report-qwen-27b.md — the affect crossing (P8
+  resolved: partial occupancy; emotion-vector overlay of 14 instrumented
+  conversations), with {BASE}/results/affect02-thoughts-qwen-27b.md and
+  per-model instrument validation under /results/affect01-*/ (report.md,
+  lensview.md, thoughts.md). Interactive: /dashboard/#affect.
 """)
 
 

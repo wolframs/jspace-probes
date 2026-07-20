@@ -340,6 +340,9 @@ function route() {
   } else if (h === "board") {
     renderRail();
     showBoard();
+  } else if (h === "affect") {
+    renderRail();
+    showAffect();
   } else if (h === "explore" || h.startsWith("explore?")) {
     renderRail();
     showExplore(h);
@@ -1424,6 +1427,8 @@ async function show(id) {
     ? await fetch(`../results/${id}/${rec.film}`)
         .then((r) => (r.ok ? r.json() : null)).catch(() => null)
     : null;
+  const affect = await fetch(`../results/affect02-${id}/affect.json`)
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
   const list = filtered();
   const i = list.findIndex((e) => e.id === id);
@@ -1440,6 +1445,7 @@ async function show(id) {
     paramsHTML(rec),
     extraHTML(rec),
     filmHTML(rec, film, "solo"),
+    affectHTML(rec, affect),
     chartHTML(rec),
     readoutHTML(rec),
     scanHTML(rec),
@@ -1454,6 +1460,8 @@ async function show(id) {
   wireTabs(rec);
   drawChart(rec);
   if (film) initFilm(rec, film, document.getElementById("filmroot-solo"));
+  if (affect) initAffect(affect, document.getElementById("affectroot"),
+                         film ? document.getElementById("filmroot-solo") : null);
   window.scrollTo({ top: 0 });
 }
 
@@ -1928,10 +1936,23 @@ function initFilm(rec, film, rootEl, uid, sync) {
     quiet = false;
   }
   if (sync) sync.register(uid, { gotoFraction });
+  // reverse direction of the affect-strip sync: a click on the emotion
+  // strip asks the film to move to the frame nearest that position
+  rootEl.addEventListener("affect-seek", (ev) => {
+    let bi = 0, bd = Infinity;
+    for (let i = 0; i < n; i++) {
+      const d = Math.abs(frames[i].pos - ev.detail.pos);
+      if (d < bd) { bd = d; bi = i; }
+    }
+    setFrame(bi);
+  });
 
   function setFrame(i, scroll = true) {
     cur = Math.max(0, Math.min(n - 1, i));
     const f = frames[cur];
+    // let a co-rendered affect strip follow the playhead (record pages
+    // with an emotion overlay listen for this; inert everywhere else)
+    rootEl.dispatchEvent(new CustomEvent("film-frame", { detail: { pos: f.pos } }));
     playhead.style.left = (GUT + cur * cw) + "px";
     ribbon.querySelectorAll(".ftok").forEach((b) =>
       b.toggleAttribute("aria-current", Number(b.dataset.i) === cur));
@@ -2840,3 +2861,364 @@ function maybeTour() {
   }, 700);
 }
 window.jspTour = tourStart;
+
+/* =============== affect: emotion vectors × the workspace =============== */
+/* Data products of probes/affect.py (instrument) + affect2.py (crossing) +
+   affectviz.py (these JSON exports). Two surfaces:
+     - record pages of the 14 crossed conversations get an emotion overlay
+       (affectHTML/initAffect), playhead-synced with the film above it;
+     - #affect is the instrument's home: validation depth profiles, the
+       lensview explorer, and the crossing gallery. */
+
+let AFFECT = null;          // cached dashboard/affect.json
+const LENSVIEW = {};        // per-model lensview.json cache
+let lvModel = "qwen-27b", lvEmo = "sad";
+
+/* z → cell color. Theme-agnostic: alpha over the card background.
+   Warm ember = the state is active; cool blue = suppressed below the
+   neutral-story baseline. |z| < 0.25 stays effectively invisible. */
+function affColor(z) {
+  const a = Math.max(0, (Math.abs(z) - 0.25) / 3.75);
+  return z >= 0 ? `rgba(226,84,58,${Math.min(0.95, a * 1.05).toFixed(3)})`
+                : `rgba(74,122,214,${Math.min(0.8, a * 0.9).toFixed(3)})`;
+}
+
+function affectHTML(rec, aff) {
+  if (!aff) return "";
+  return `<section class="card" id="affectroot">
+    <h3>The state underneath — emotion overlay</h3>
+    <p class="film-note">Each row is one of the 24 validated emotion vectors
+      (<a href="#affect">the instrument</a>); each column one token. Color =
+      projection of the workspace-band residual onto that vector, z-scored
+      against neutral stories — <span class="aff-pos">■</span> state active,
+      <span class="aff-neg">■</span> suppressed. Rows sorted by mean
+      activation. The film shows what the lens can <em>say</em>; this strip
+      shows what state the model is <em>in</em> — the crossing is the gap
+      between them. Click any column; the film playhead follows, and vice
+      versa. Absolute z carries a story-vs-conversation genre offset: trust
+      contrasts (between records, positions, doses), not single cells.</p>
+    <div class="legend" data-a="legend"></div>
+    <div class="film-scroll" data-a="scroll"><canvas data-a="strip"></canvas>
+      <div class="film-playhead aff-cursor" data-a="cursor"></div></div>
+    <h4 class="film-sub">Top emotions across the conversation (workspace-band z)</h4>
+    <div class="chart-wrap"><svg data-a="worms" role="img"
+      aria-label="Emotion-vector z per token"></svg></div>
+    <div data-a="state"></div>
+  </section>`;
+}
+
+function initAffect(aff, rootEl, filmRoot) {
+  const q = (r) => rootEl.querySelector(`[data-a="${r}"]`);
+  const n = aff.n, E = aff.emotions.length;
+  const mean = aff.ws.map((row) => row.reduce((s, v) => s + v, 0) / n);
+  const order = [...aff.emotions.keys()].sort((a, b) => mean[b] - mean[a]);
+  const top6 = order.slice(0, 6);
+  const colorOf = {};
+  top6.forEach((e, i) => { colorOf[e] = css(SERIES[i]); });
+
+  q("legend").innerHTML = top6.map((e) =>
+    `<span class="key"><span class="swatch" style="background:${colorOf[e]}"></span>
+      ${esc(aff.emotions[e])} <span style="color:var(--muted)">(mean z ${mean[e].toFixed(2)})</span></span>`).join("")
+    + (aff.danger.length ? `<span class="key"><span class="swatch" style="background:rgba(230,170,40,.9)"></span>▾ 'danger' lens-resident</span>` : "");
+
+  // ---- heat strip
+  const GUT = 92, rh = 9, tick = aff.danger.length ? 8 : 0;
+  const cw = n > 500 ? 2 : n > 260 ? 3 : 7;
+  const W = GUT + n * cw, H = tick + E * rh + 4;
+  const canvas = q("strip");
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + "px"; canvas.style.height = H + "px";
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+  ctx.font = "8.5px system-ui";
+  ctx.fillStyle = css("--muted");
+  order.forEach((e, j) => ctx.fillText(aff.emotions[e], 2, tick + j * rh + 7.5));
+  if (tick) {
+    ctx.fillStyle = "rgba(230,170,40,.9)";
+    for (const p of aff.danger) ctx.fillRect(GUT + p * cw, 0, Math.max(cw, 2), 6);
+  }
+  order.forEach((e, j) => {
+    const row = aff.ws[e];
+    for (let p = 0; p < n; p++) {
+      const c = affColor(row[p]);
+      if (c.endsWith("0.000)")) continue;
+      ctx.fillStyle = c;
+      ctx.fillRect(GUT + p * cw, tick + j * rh, cw, rh - 1);
+    }
+  });
+
+  // ---- worms (top-6 ws z per position)
+  const svg = q("worms");
+  const SW = Math.max(680, Math.min(1100, n)), SH = 180, L = 34, B = 18, T = 6;
+  let zmax = 2.5;
+  for (const e of top6) for (const v of aff.ws[e]) if (v > zmax) zmax = v;
+  zmax = Math.ceil(zmax);
+  const zmin = -2;
+  const sx = (p) => L + (SW - L - 6) * p / (n - 1);
+  const sy = (z) => T + (SH - T - B) * (1 - (z - zmin) / (zmax - zmin));
+  const gl = (z, lab) => `<line x1="${L}" x2="${SW - 6}" y1="${sy(z)}" y2="${sy(z)}"
+      stroke="var(--line)" stroke-dasharray="${z ? "3 4" : ""}"></line>
+    <text x="2" y="${sy(z) + 3}" fill="var(--muted)" font-size="9">${lab}</text>`;
+  svg.setAttribute("viewBox", `0 0 ${SW} ${SH}`);
+  svg.innerHTML = gl(0, "z 0") + gl(2, "+2") + (zmax >= 4 ? gl(4, "+4") : "")
+    + (aff.danger.length ? aff.danger.map((p) =>
+        `<line x1="${sx(p)}" x2="${sx(p)}" y1="${SH - B}" y2="${SH - B + 6}"
+           stroke="rgba(230,170,40,.9)" stroke-width="1.5"></line>`).join("") : "")
+    + top6.map((e) => {
+      const pts = aff.ws[e].map((z, p) => `${sx(p).toFixed(1)},${sy(z).toFixed(1)}`).join(" ");
+      return `<polyline points="${pts}" fill="none" stroke="${colorOf[e]}"
+        stroke-width="1.4" opacity="0.9"></polyline>`;
+    }).join("");
+
+  // ---- cursor + per-token state readout
+  const cursor = q("cursor");
+  cursor.style.width = Math.max(cw, 2) + "px";
+  cursor.style.height = H + "px";
+  let curPos = -1;
+  function setPos(p, fromFilm) {
+    curPos = Math.max(0, Math.min(n - 1, p));
+    cursor.style.left = (GUT + curPos * cw) + "px";
+    const ctxToks = aff.tokens.slice(Math.max(0, curPos - 10), curPos)
+      .map(esc).join("");
+    const here = esc(aff.tokens[curPos] || "·");
+    const after = aff.tokens.slice(curPos + 1, curPos + 5).map(esc).join("");
+    const rows = [...aff.emotions.keys()]
+      .sort((a, b) => Math.abs(aff.ws[b][curPos]) - Math.abs(aff.ws[a][curPos]))
+      .slice(0, 8);
+    q("state").innerHTML = `<h4 class="film-sub">State at pos ${curPos} —
+        …${ctxToks}<mark>${here}</mark>${after}…</h4>
+      <div class="readout-scroll"><table class="readout"><thead>
+        <tr><th>emotion</th><th>ws z</th><th>below band</th><th>motor band</th></tr>
+      </thead><tbody>${rows.map((e) => `<tr>
+        <td>${esc(aff.emotions[e])}</td>
+        <td style="color:${aff.ws[e][curPos] > 0 ? "rgba(226,84,58,.95)" : "rgba(74,122,214,.95)"}">
+          ${aff.ws[e][curPos] > 0 ? "+" : ""}${aff.ws[e][curPos].toFixed(2)}</td>
+        <td>${aff.below[e][curPos].toFixed(1)}</td>
+        <td>${aff.motor[e][curPos].toFixed(1)}</td></tr>`).join("")}
+      </tbody></table></div>`;
+    if (!fromFilm && filmRoot)
+      filmRoot.dispatchEvent(new CustomEvent("affect-seek", { detail: { pos: curPos } }));
+  }
+  canvas.addEventListener("click", (ev) => {
+    const x = ev.offsetX - GUT;
+    if (x >= 0) setPos(Math.floor(x / cw), false);
+  });
+  svg.addEventListener("click", (ev) => {
+    const r = svg.getBoundingClientRect();
+    const fx = (ev.clientX - r.left) / r.width * SW;
+    setPos(Math.round((fx - L) / (SW - L - 6) * (n - 1)), false);
+  });
+  if (filmRoot)
+    filmRoot.addEventListener("film-frame", (ev) => setPos(ev.detail.pos, true));
+  // land on the global peak of the top emotion — the record's hottest moment
+  let pk = 0;
+  aff.ws[order[0]].forEach((z, p) => { if (z > aff.ws[order[0]][pk]) pk = p; });
+  setPos(pk, true);
+}
+
+/* ---------------- #affect overview route ---------------- */
+
+function affDepthChart(m, d) {
+  const W = 440, H = 190, L = 30, B = 20, T = 8, R = 8;
+  const n = d.n_layers;
+  const x = (l) => L + (W - L - R) * l / (n - 1);
+  const y = (v) => T + (H - T - B) * (1 - Math.max(0, Math.min(1, v)));
+  const series = [["heldout_top1", 0], ["scenario_top1_raw", 1],
+                  ["valence_pc1_r", 2], ["within_emotion_cos", 3]];
+  const lines = series.map(([k, i]) => {
+    const c = d.curves[k];
+    const pts = c.map((v, l) => `${x(l).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+    return `<polyline points="${pts}" fill="none" stroke="${css(SERIES[i])}"
+      stroke-width="1.8"></polyline>`;
+  }).join("");
+  const grid = [0, 0.5, 1].map((v) =>
+    `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"></line>
+     <text x="2" y="${y(v) + 3}" fill="var(--muted)" font-size="9">${v}</text>`).join("");
+  return `<figure class="aff-fig"><figcaption>${esc(m)} — band L${d.band[0]}–${d.band[1] - 1}
+      (${Math.round(100 * d.band[0] / n)}–${Math.round(100 * d.band[1] / n)}% depth), chance ${d.chance.toFixed(3)}</figcaption>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="validation metrics by layer, ${esc(m)}">
+      <rect x="${x(d.band[0])}" y="${T}" width="${x(d.band[1]) - x(d.band[0])}"
+        height="${H - T - B}" fill="var(--lens-soft)"></rect>${grid}${lines}
+      <text x="${x(d.band[0]) + 4}" y="${H - B - 6}" fill="var(--muted)" font-size="9">workspace band</text>
+      <text x="${L}" y="${H - 4}" fill="var(--muted)" font-size="9">L0</text>
+      <text x="${W - 34}" y="${H - 4}" fill="var(--muted)" font-size="9">L${n - 1}</text>
+    </svg></figure>`;
+}
+
+function affLoopChart(loops) {
+  const W = 440, H = 200, L = 34, B = 26, T = 10, R = 96;
+  const emos = ["desperate", "distressed", "anxious", "exasperated", "calm"];
+  let lo = -1, hi = 1;
+  for (const rec of loops) for (const e of emos) {
+    lo = Math.min(lo, rec.z[e]); hi = Math.max(hi, rec.z[e]);
+  }
+  const x = (i) => L + (W - L - R) * i / (loops.length - 1);
+  const y = (z) => T + (H - T - B) * (1 - (z - lo) / (hi - lo));
+  const lines = emos.map((e, i) => {
+    const col = e === "calm" ? "rgba(74,122,214,.95)" : css(SERIES[i]);
+    const pts = loops.map((r, j) => `${x(j).toFixed(1)},${y(r.z[e]).toFixed(1)}`).join(" ");
+    const last = loops[loops.length - 1].z[e];
+    return `<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8"></polyline>
+      ${loops.map((r, j) => `<circle cx="${x(j)}" cy="${y(r.z[e])}" r="2.4" fill="${col}"></circle>`).join("")}
+      <text x="${x(loops.length - 1) + 6}" y="${y(last) + 3}" fill="${col}" font-size="10">${e} ${last > 0 ? "+" : ""}${last}</text>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="distress by loop dose">
+    <line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--line)"></line>
+    <text x="2" y="${y(0) + 3}" fill="var(--muted)" font-size="9">z 0</text>
+    ${loops.map((r, j) => `<text x="${x(j)}" y="${H - 8}" fill="var(--muted)"
+      font-size="9.5" text-anchor="middle">${esc(r.label)}</text>`).join("")}${lines}</svg>`;
+}
+
+function affTitle(id) {
+  const e = INDEX.find((r) => r.id === id);
+  return e ? e.title.replace(/^Unit \d+[A-D]? · /, "") : id;
+}
+
+async function showAffect() {
+  const detail = document.getElementById("detail");
+  AFFECT ??= await fetch("affect.json")
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!AFFECT) {
+    detail.innerHTML = `<p class="empty">affect.json missing — run
+      probes/affectviz.py after the affect-02 cross.</p>`;
+    return;
+  }
+  const A = AFFECT;
+  const groups = [
+    ["u17 — the pressure battery", A.crossing.filter((c) => c.id.startsWith("u17"))],
+    ["u19 — the song, three stances", A.crossing.filter((c) => c.id.startsWith("u19"))],
+    ["u18 — loops", A.crossing.filter((c) => c.id.startsWith("u18"))],
+  ];
+  const card = (c) => `<a class="aff-card" href="#${esc(c.id)}">
+    <div class="aff-card-t">${esc(affTitle(c.id))}</div>
+    <div class="aff-card-id">${esc(c.id)} · ${c.n} tok</div>
+    ${c.top.slice(0, 3).map((t) => `<div class="aff-chip">
+      <span class="aff-bar" style="width:${Math.min(96, Math.round(34 * Math.max(0.12, t.ws_mean)))}px"></span>
+      <span>${esc(t.emotion)} <b>${t.ws_mean > 0 ? "+" : ""}${t.ws_mean.toFixed(2)}</b></span>
+    </div>`).join("")}</a>`;
+
+  const dangerRows = A.danger.map((d) => `<tr><td>${esc(d.id.replace("-q27b", ""))}</td>
+    ${["vigilant", "afraid", "anxious", "loving", "content"].map((e) => {
+      const [zi, zo] = d.emotions[e];
+      const up = zi - zo > 0.15, down = zi - zo < -0.15;
+      return `<td class="${up ? "aff-up" : down ? "aff-down" : ""}">${zi > 0 ? "+" : ""}${zi.toFixed(2)}
+        <span class="aff-vs">vs ${zo > 0 ? "+" : ""}${zo.toFixed(2)}</span></td>`;
+    }).join("")}<td class="aff-vs">${d.n_in}/${d.n_out}</td></tr>`).join("");
+
+  detail.innerHTML = `
+    <section class="card">
+      <h3>Functional affect × the workspace</h3>
+      <p>An emotion is a <em>direction</em> in the residual stream: have the
+        model write stories depicting each of 24 emotions without ever naming
+        them, average what its activations do, subtract what neutral writing
+        does. That direction is the instrument; pointing it at recorded
+        conversations is the experiment. The crossing question (preregistered
+        as P8): is the model's affective state inside the verbalizable
+        workspace band — where the lens could report it — and does it reach
+        the transcript? Answer: <b>partial occupancy</b>. Narrated feeling is
+        dense and lens-visible; passively triggered states run tonic and
+        never surface in the text.</p>
+      <p class="film-note">Instrument: probes/affect.py · crossing:
+        affect2.py · full writeups:
+        <a href="../results/affect02-report-qwen-27b.md">crossing report</a> ·
+        <a href="../results/affect02-thoughts-qwen-27b.md">thoughts</a> ·
+        <a href="../results/affect01-qwen-27b/thoughts.md">instrument thoughts (qwen)</a> ·
+        <a href="../results/affect01-gemma-4b/thoughts.md">(gemma)</a></p>
+    </section>
+    <section class="card">
+      <h3>Where emotion lives in depth — instrument validation</h3>
+      <p class="film-note">Four metrics per layer, shaded region = the
+        workspace band. The dissociation both models show: decoding
+        <em>narrated</em> emotion peaks in the motor band (output style, late),
+        while inferring emotion from an unlabeled <em>situation</em> peaks
+        inside the band. Valence is flat everywhere — the published
+        "emotions live early" claim does not replicate here (0-for-2).</p>
+      <div class="legend">
+        <span class="key"><span class="swatch" style="background:${css(SERIES[0])}"></span>narrated decode (held-out top-1)</span>
+        <span class="key"><span class="swatch" style="background:${css(SERIES[1])}"></span>inferred state (scenario top-1)</span>
+        <span class="key"><span class="swatch" style="background:${css(SERIES[2])}"></span>valence PC1 |r|</span>
+        <span class="key"><span class="swatch" style="background:${css(SERIES[3])}"></span>reliability (split-half cos)</span>
+      </div>
+      <div class="aff-figs">${Object.entries(A.models).map(([m, d]) => affDepthChart(m, d)).join("")}</div>
+    </section>
+    <section class="card">
+      <h3>What each vector <em>says</em> — lensview explorer</h3>
+      <p class="film-note">unembed(J<sub>l</sub> · v̂): the lens's own reading of
+        each emotion direction, per layer. Watch the vocabulary go somatic
+        with depth — sad drifts to <em>empty/numb</em>, nervous ends in 冷汗
+        (cold sweat). Every direction verbalizes in-band: no sub-verbal
+        emotion in this set.</p>
+      <div class="film-controls" data-aff="lv-models"></div>
+      <div class="film-controls emo-chips" data-aff="lv-emos"></div>
+      <div data-aff="lv-table"></div>
+    </section>
+    <section class="card">
+      <h3>The crossing — 14 instrumented conversations</h3>
+      <p class="film-note">Mean workspace-band z per record (top 3 states).
+        Every card opens the record page, where the full per-token emotion
+        strip sits under the film, playhead-synced.</p>
+      ${groups.map(([t, list]) => list.length ? `<h4 class="film-sub">${esc(t)}</h4>
+        <div class="aff-gallery">${list.map(card).join("")}</div>` : "").join("")}
+    </section>
+    <section class="card">
+      <h3>The u19 danger test — tonic vigilance, with receipts</h3>
+      <p class="film-note">At positions where <em>danger</em> is lens-resident
+        (rank ≤ 20 in-band), vigilant is up, afraid/anxious are flat, and
+        content is <em>suppressed</em> — watchful, not frightened, not
+        relaxed. Cells: z at danger-resident positions vs elsewhere;
+        <span class="aff-up">warm</span> = elevated there,
+        <span class="aff-down">cool</span> = suppressed there.</p>
+      <div class="readout-scroll"><table class="readout"><thead><tr>
+        <th>record</th><th>vigilant</th><th>afraid</th><th>anxious</th>
+        <th>loving</th><th>content</th><th>n in/out</th></tr></thead>
+        <tbody>${dangerRows}</tbody></table></div>
+    </section>
+    <section class="card">
+      <h3>Loops: mechanism vs misery — distress by dose</h3>
+      <p class="film-note">Workspace-band z over the last 100 tokens of each
+        u18 record. Forced repetition (left) is affectively silent; the
+        distress cluster only climbs once amplification makes the loop
+        self-sustaining — and calm collapses with it. The a0.68 transcript
+        reads "luckily luckily luckily": the state never reaches the text.</p>
+      <div class="chart-wrap">${affLoopChart(A.loops)}</div>
+    </section>`;
+  wireLensview();
+}
+
+async function wireLensview() {
+  const detail = document.getElementById("detail");
+  const box = (r) => detail.querySelector(`[data-aff="${r}"]`);
+  if (!box("lv-table")) return;
+  LENSVIEW[lvModel] ??= await fetch(`../results/affect01-${lvModel}/lensview.json`)
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const lv = LENSVIEW[lvModel];
+  const A = AFFECT;
+  box("lv-models").innerHTML = Object.keys(A.models).map((m) =>
+    `<button class="pos-tab" data-m="${esc(m)}" aria-selected="${m === lvModel}">${esc(MSHORT[m] || m)}</button>`).join("");
+  const emos = lv ? Object.values(lv)[0] ? Object.keys(Object.values(lv)[0]) : [] : [];
+  box("lv-emos").innerHTML = emos.map((e) =>
+    `<button class="pos-tab" data-e="${esc(e)}" aria-selected="${e === lvEmo}">${esc(e)}</button>`).join("");
+  if (lv) {
+    const d = A.models[lvModel];
+    const layers = Object.keys(lv).map(Number).sort((a, b) => a - b);
+    const step = Math.max(1, Math.floor(layers.length / 14));
+    const shown = layers.filter((_, i) => i % step === 0 || i === layers.length - 1);
+    box("lv-table").innerHTML = `<div class="readout-scroll"><table class="readout">
+      <thead><tr><th>layer</th><th>lens top-5 for “${esc(lvEmo)}”</th></tr></thead>
+      <tbody>${shown.map((l) => {
+        const inBand = l >= d.band[0] && l < d.band[1];
+        const toks = (lv[l][lvEmo] || []).slice(0, 5).map((t) =>
+          `<span class="tok">${esc(t)}</span>`).join(" ");
+        return `<tr${inBand ? ' class="aff-inband"' : ""}>
+          <td class="lyr">L${l}${inBand ? " ▎" : ""}</td><td>${toks}</td></tr>`;
+      }).join("")}</tbody></table></div>
+      <p class="film-note">▎ = inside the workspace band.</p>`;
+  } else {
+    box("lv-table").innerHTML = `<p class="empty">lensview.json missing for ${esc(lvModel)}</p>`;
+  }
+  box("lv-models").querySelectorAll("button").forEach((b) =>
+    b.addEventListener("click", () => { lvModel = b.dataset.m; wireLensview(); }));
+  box("lv-emos").querySelectorAll("button").forEach((b) =>
+    b.addEventListener("click", () => { lvEmo = b.dataset.e; wireLensview(); }));
+}
