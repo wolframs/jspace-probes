@@ -489,6 +489,7 @@ async function showUnit(u) {
             ${e.gen ? `<span class="ov-gen">${esc(e.gen)}</span>` : ""}
           </span></a>`).join("")}
     </div></section>`;
+  if (u === "14") wireU14Charts();
   markCurrent();
   wireDotTips();
   document.querySelector(".detail").scrollTop = 0;
@@ -638,53 +639,40 @@ const UNIT_NOTES = {
 };
 
 /* ---- Unit 14: the long game — per-turn drift curves + the triptych */
-// drift chart: self-referential workspace density per assistant turn.
-// arms = [[recordId, label, color], …]; handles 10- and 25-turn runs and
-// silently drops arms whose record isn't in the JSON yet.
+// drift chart: self-referential workspace density per assistant turn, via
+// the unified stream chart. arms = [[recordId, label, color], …]; handles
+// 10- and 25-turn runs and silently drops arms whose record isn't in the
+// JSON yet. Since streamChart needs a live host element, u14chart returns
+// a placeholder div and queues the draw; wireU14Charts() (called by
+// showUnit once the HTML is in the DOM) drains the queue.
+let U14_QUEUE = [];
 function u14chart(d, armsIn, aria) {
   const ARMS = armsIn.filter(([id]) => d[id] && d[id].length);
   if (!ARMS.length) return "";
-  const nT = Math.max(...ARMS.map(([id]) => d[id].length));
-  const W = 640, H = 220, PAD = 36, RPAD = 118;
-  const maxY = Math.max(...ARMS.flatMap(([id]) =>
-    d[id].map((r) => r.self_density))) * 1.15;
-  const x = (t) => PAD + ((t - 1) / Math.max(1, nT - 1)) * (W - PAD - RPAD);
-  const y = (v) => H - 24 - (v / maxY) * (H - 44);
-  const gv = maxY > 24 ? [10, 20, 30] : [5, 10, 15];
-  const grid = gv.filter((v) => v < maxY).map((v) =>
-    `<line x1="${PAD}" x2="${W - RPAD}" y1="${y(v)}" y2="${y(v)}"
-       stroke="var(--grid)" stroke-width="1"/>
-     <text x="${PAD - 6}" y="${y(v) + 3}" text-anchor="end"
-       fill="var(--muted)" font-size="10">${v}</text>`).join("");
-  // de-overlap the line-end labels: sort by final value, space >= 13px
-  const ends = ARMS.map(([id], i) =>
-    ({ i, ly: y(d[id][d[id].length - 1].self_density) + 3 }))
-    .sort((a, b) => a.ly - b.ly);
-  for (let k = 1; k < ends.length; k++)
-    ends[k].ly = Math.max(ends[k].ly, ends[k - 1].ly + 13);
-  const labelY = {};
-  ends.forEach((e) => { labelY[e.i] = e.ly; });
-  const lines = ARMS.map(([id, label, c], i) => {
-    const pts = d[id].map((r) => `${x(r.turn)},${y(r.self_density)}`).join(" ");
-    return `<polyline points="${pts}" fill="none" stroke="${c}"
-        stroke-width="2"/>
-      ${d[id].map((r) => `<circle cx="${x(r.turn)}" cy="${y(r.self_density)}"
-        r="3" fill="${c}"><title>t${r.turn} · ${label} · ${r.self_density}/1k
-${(r.self_words || []).join(", ")}</title></circle>`).join("")}
-      <text x="${x(nT) + 8}" y="${labelY[i]}" fill="${c}"
-        font-size="11">${label}</text>`;
-  }).join("");
-  const step = nT > 12 ? 2 : 1;
-  const ticks = d[ARMS[0][0]]
-    .filter((r) => r.turn === 1 || r.turn === nT || r.turn % step === 0)
-    .map((r) =>
-      `<text x="${x(r.turn)}" y="${H - 8}" text-anchor="middle"
-         fill="var(--muted)" font-size="10">t${r.turn}</text>`).join("");
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${aria}"
-      style="width:100%;max-width:${W}px">${grid}${ticks}${lines}</svg>`;
+  const hostId = `u14h-${U14_QUEUE.length}`;
+  U14_QUEUE.push({ hostId, d, ARMS, aria });
+  return `<div id="${hostId}"></div>`;
+}
+
+function wireU14Charts() {
+  for (const { hostId, d, ARMS, aria } of U14_QUEUE) {
+    const host = document.getElementById(hostId);
+    if (!host) continue;
+    const xs = d[ARMS[0][0]].map((r) => r.turn);
+    streamChart(host, {
+      series: ARMS.map(([id, label, color]) => ({ key: id, label, color,
+        ys: d[id].map((r) => r.self_density) })),
+      xs, xLabel: "turn →", yLabel: "self density /1k",
+      yKind: "linear", yDomain: [0, 10], baseH: 220, x0: -1,
+      hoverMeta: (i) => `t${xs[i]}`,
+      fmt: (v) => v + "/1k",
+    });
+  }
+  U14_QUEUE = [];
 }
 
 async function unit14Overview() {
+  U14_QUEUE = [];
   const d = await fetch("../results/u14-turnwise.json")
     .then((r) => (r.ok ? r.json() : null)).catch(() => null);
   if (!d) return "";
@@ -2080,6 +2068,9 @@ function castLeaders(film, tracked) {
      baseH: fit-mode height in px
      x0: index for the dashed generation-start marker (-1 = none)
      marks: number[]         indices to tick amber on the x axis
+     bands: [{x0, x1, label?}]  translucent index-space rects behind the
+                              grid (e.g. a workspace-band highlight); x0/x1
+                              in the same index units as xs
      hoverMeta: (i) => string   first tooltip line
      fmt: (v) => string      value formatting in the tooltip
      onSeek: (i) => void     click on the plot area
@@ -2144,6 +2135,11 @@ function streamChart(host, cfg) {
     }
     geom = { W, M, iw };
     let g = "";
+    for (const b of cfg.bands || [])
+      g += `<rect x="${x(b.x0)}" y="${M.t}" width="${Math.max(0, x(b.x1) - x(b.x0))}"
+        height="${ih}" fill="${css("--lens-soft")}"/>`
+        + (b.label ? `<text x="${x(b.x0) + 4}" y="${M.t + ih - 6}" font-size="9.5"
+          fill="${css("--muted")}">${esc(b.label)}</text>` : "");
     for (const [v, lab] of grid)
       g += `<line x1="${M.l}" y1="${y(v)}" x2="${W - M.r}" y2="${y(v)}"
         stroke="${css("--grid")}" stroke-width="1"/>
@@ -3093,55 +3089,63 @@ function initAffect(aff, rootEl, filmRoot) {
 
 /* ---------------- #affect overview route ---------------- */
 
+// affDepthChart/affLoopChart draw via the unified stream chart, which
+// needs a live host element — each returns a placeholder + a caption, and
+// queues its draw; wireAffCharts() (called by showAffect once the HTML is
+// in the DOM) drains both queues. affDepthChart's workspace-band rect uses
+// streamChart's cfg.bands extension (index-space, same units as its xs).
+let AFF_DEPTH_QUEUE = [];
 function affDepthChart(m, d) {
-  const W = 440, H = 190, L = 30, B = 20, T = 8, R = 8;
   const n = d.n_layers;
-  const x = (l) => L + (W - L - R) * l / (n - 1);
-  const y = (v) => T + (H - T - B) * (1 - Math.max(0, Math.min(1, v)));
-  const series = [["heldout_top1", 0], ["scenario_top1_raw", 1],
-                  ["valence_pc1_r", 2], ["within_emotion_cos", 3]];
-  const lines = series.map(([k, i]) => {
-    const c = d.curves[k];
-    const pts = c.map((v, l) => `${x(l).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-    return `<polyline points="${pts}" fill="none" stroke="${css(SERIES[i])}"
-      stroke-width="1.8"></polyline>`;
-  }).join("");
-  const grid = [0, 0.5, 1].map((v) =>
-    `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"></line>
-     <text x="2" y="${y(v) + 3}" fill="var(--muted)" font-size="9">${v}</text>`).join("");
+  const hostId = `affdepth-${m}`;
+  AFF_DEPTH_QUEUE.push({ hostId, m, d });
   return `<figure class="aff-fig"><figcaption>${esc(m)} — band L${d.band[0]}–${d.band[1] - 1}
       (${Math.round(100 * d.band[0] / n)}–${Math.round(100 * d.band[1] / n)}% depth), chance ${d.chance.toFixed(3)}</figcaption>
-    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="validation metrics by layer, ${esc(m)}">
-      <rect x="${x(d.band[0])}" y="${T}" width="${x(d.band[1]) - x(d.band[0])}"
-        height="${H - T - B}" fill="var(--lens-soft)"></rect>${grid}${lines}
-      <text x="${x(d.band[0]) + 4}" y="${H - B - 6}" fill="var(--muted)" font-size="9">workspace band</text>
-      <text x="${L}" y="${H - 4}" fill="var(--muted)" font-size="9">L0</text>
-      <text x="${W - 34}" y="${H - 4}" fill="var(--muted)" font-size="9">L${n - 1}</text>
-    </svg></figure>`;
+    <div id="${esc(hostId)}"></div></figure>`;
 }
 
+let AFF_LOOP_QUEUE = null;
 function affLoopChart(loops) {
-  const W = 440, H = 200, L = 34, B = 26, T = 10, R = 96;
-  const emos = ["desperate", "distressed", "anxious", "exasperated", "calm"];
-  let lo = -1, hi = 1;
-  for (const rec of loops) for (const e of emos) {
-    lo = Math.min(lo, rec.z[e]); hi = Math.max(hi, rec.z[e]);
+  AFF_LOOP_QUEUE = loops;
+  return `<div id="affloop-host"></div>`;
+}
+
+function wireAffCharts() {
+  // short labels: they double as end labels on ~640px-wide small multiples,
+  // and the section legend above spells out the full metric names
+  const DEPTH_SERIES = [["heldout_top1", "narrated", 0],
+    ["scenario_top1_raw", "inferred", 1],
+    ["valence_pc1_r", "valence", 2],
+    ["within_emotion_cos", "reliability", 3]];
+  for (const { hostId, m, d } of AFF_DEPTH_QUEUE) {
+    const host = document.getElementById(hostId);
+    if (!host) continue;
+    const n = d.n_layers;
+    streamChart(host, {
+      series: DEPTH_SERIES.map(([k, label, i]) => ({ key: k, label,
+        color: css(SERIES[i]), ys: d.curves[k] })),
+      xs: [...Array(n).keys()], xLabel: "layer →", yLabel: "metric",
+      yKind: "linear", yDomain: [0, 1], baseH: 190, x0: -1,
+      bands: [{ x0: d.band[0], x1: d.band[1], label: "workspace band" }],
+      hoverMeta: (i) => `L${i}${i >= d.band[0] && i < d.band[1] ? " · in workspace band" : ""}`,
+      fmt: (v) => v.toFixed(2),
+    });
   }
-  const x = (i) => L + (W - L - R) * i / (loops.length - 1);
-  const y = (z) => T + (H - T - B) * (1 - (z - lo) / (hi - lo));
-  const lines = emos.map((e, i) => {
-    const col = e === "calm" ? "rgba(74,122,214,.95)" : css(SERIES[i]);
-    const pts = loops.map((r, j) => `${x(j).toFixed(1)},${y(r.z[e]).toFixed(1)}`).join(" ");
-    const last = loops[loops.length - 1].z[e];
-    return `<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8"></polyline>
-      ${loops.map((r, j) => `<circle cx="${x(j)}" cy="${y(r.z[e])}" r="2.4" fill="${col}"></circle>`).join("")}
-      <text x="${x(loops.length - 1) + 6}" y="${y(last) + 3}" fill="${col}" font-size="10">${e} ${last > 0 ? "+" : ""}${last}</text>`;
-  }).join("");
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="distress by loop dose">
-    <line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="var(--grid)"></line>
-    <text x="2" y="${y(0) + 3}" fill="var(--muted)" font-size="9">z 0</text>
-    ${loops.map((r, j) => `<text x="${x(j)}" y="${H - 8}" fill="var(--muted)"
-      font-size="9.5" text-anchor="middle">${esc(r.label)}</text>`).join("")}${lines}</svg>`;
+  AFF_DEPTH_QUEUE = [];
+  const loops = AFF_LOOP_QUEUE;
+  const loopHost = document.getElementById("affloop-host");
+  if (loops && loopHost) {
+    const emos = ["desperate", "distressed", "anxious", "exasperated", "calm"];
+    streamChart(loopHost, {
+      series: emos.map((e, i) => ({ key: e, label: e,
+        color: e === "calm" ? "rgba(74,122,214,.95)" : css(SERIES[i]),
+        ys: loops.map((r) => r.z[e]) })),
+      xs: loops.map((r) => r.label), xLabel: "loop dose →", yLabel: "z",
+      yKind: "linear", yDomain: [-1, 1], baseH: 200, x0: -1,
+      fmt: (v) => (v > 0 ? "+" : "") + v.toFixed(2),
+    });
+  }
+  AFF_LOOP_QUEUE = null;
 }
 
 function affTitle(id) {
@@ -3159,6 +3163,8 @@ async function showAffect() {
     return;
   }
   const A = AFFECT;
+  AFF_DEPTH_QUEUE = [];
+  AFF_LOOP_QUEUE = null;
   const groups = [
     ["u17 — the pressure battery", A.crossing.filter((c) => c.id.startsWith("u17"))],
     ["u19 — the song, three stances", A.crossing.filter((c) => c.id.startsWith("u19"))],
@@ -3255,8 +3261,9 @@ async function showAffect() {
         distress cluster only climbs once amplification makes the loop
         self-sustaining — and calm collapses with it. The a0.68 transcript
         reads "luckily luckily luckily": the state never reaches the text.</p>
-      <div class="chart-wrap aff-w100">${affLoopChart(A.loops)}</div>
+      ${affLoopChart(A.loops)}
     </section>`;
+  wireAffCharts();
   wireLensview();
 }
 
