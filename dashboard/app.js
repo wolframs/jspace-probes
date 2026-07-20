@@ -1432,7 +1432,7 @@ async function show(id) {
     conversationHTML(rec),
     paramsHTML(rec),
     extraHTML(rec),
-    filmHTML(rec, film, "solo"),
+    filmHTML(rec, film, "solo", affect),
     affectHTML(rec, affect),
     chartHTML(rec),
     readoutHTML(rec),
@@ -1447,7 +1447,8 @@ async function show(id) {
   wirePin(rec);
   wireTabs(rec);
   drawChart(rec);
-  if (film) initFilm(rec, film, document.getElementById("filmroot-solo"));
+  if (film) initFilm(rec, film, document.getElementById("filmroot-solo"),
+                     undefined, undefined, affect);
   if (affect) initAffect(affect, document.getElementById("affectroot"),
                          film ? document.getElementById("filmroot-solo") : null);
   window.scrollTo({ top: 0 });
@@ -1621,7 +1622,7 @@ function drawChart(rec) {
    film, rootEl, uid, sync) queries only inside rootEl; `uid`/`sync` are
    only used by the cross-record playhead sync wired up in showCompare and
    are simply omitted on the single-record page. */
-function filmHTML(rec, film, uid) {
+function filmHTML(rec, film, uid, affect) {
   if (!rec.film) return "";
   if (!film) {
     return `<section class="card"><p class="empty">film.json missing for this
@@ -1635,17 +1636,22 @@ function filmHTML(rec, film, uid) {
       <em>while choosing the next one</em>. Colored cells: a tracked word holds
       rank ≤ 20 there (deeper = closer to rank 1); gray cells shade with the
       lens's top-1 confidence. Click anywhere — the strip, a token, the worms —
-      to move the playhead.</p>
+      to move the playhead.${affect ? ` The rows fused under the strip are the
+      <b>emotion-state ribbon</b>: the top-6 affect vectors (same colors as the
+      overlay below), brightness = workspace-band z — the state the model is in,
+      on the film's own ruler.` : ""}</p>
     <div class="legend" data-f="legend"></div>
     <div class="film-transcript" data-f="transcript"></div>
     <div class="film-controls">
       <button class="pos-tab" data-f="prev" title="step back">‹</button>
       <button class="pos-tab" data-f="play">▶ play</button>
       <button class="pos-tab" data-f="next" title="step forward">›</button>
+      ${affect ? `<button class="pos-tab" data-f="strib-toggle"></button>` : ""}
       <span class="film-where" data-f="where"></span>
     </div>
     <div class="film-scroll" data-f="scroll">
       <canvas data-f="strip"></canvas>
+      ${affect ? `<canvas data-f="staterib"></canvas>` : ""}
       <div class="film-playhead" data-f="playhead"></div>
     </div>
     <h4 class="film-sub">Word worms — tracked words (solid) vs the top volunteered cast words (dashed ⌁, gap = below rank 8): what you asked about vs what was actually winning</h4>
@@ -1683,7 +1689,7 @@ function castHTML(film) {
       <tbody>${film.cast.map(row).join("")}</tbody></table></div></section>`;
 }
 
-function initFilm(rec, film, rootEl, uid, sync) {
+function initFilm(rec, film, rootEl, uid, sync, affect) {
   const q = (r) => rootEl.querySelector(`[data-f="${r}"]`);
   const frames = film.frames, layers = film.layers, n = frames.length;
   const nL = layers.length;
@@ -1765,6 +1771,82 @@ function initFilm(rec, film, rootEl, uid, sync) {
     ctx.fillText("generation →", GUT + g0 * cw + 3, nL * ch + 12);
   }
 
+  // ---- emotion-state ribbon: the affect-02 crossing fused onto the
+  // film's own ruler. Lives INSIDE the same scroll container as the strip
+  // (same columns, same scroll), directly beneath it: top-6 emotion
+  // vectors in the overlay's worm colors, cell brightness = workspace-band
+  // z. Default on; the toggle persists per viewer, not per record.
+  const srib = q("staterib");
+  let ribExtra = 0;                    // px the playhead extends below the strip
+  if (srib && affect) {
+    const A = affect;
+    const amean = A.ws.map((row) => row.reduce((s, v) => s + v, 0) / A.n);
+    const atop = [...A.emotions.keys()]
+      .sort((a, b) => amean[b] - amean[a]).slice(0, 6);
+    const acol = atop.map((_, i) => css(SERIES[i]));
+    const RH = 8, PAD = 3;
+    const ribH = PAD + atop.length * RH;
+    srib.width = W * dpr; srib.height = ribH * dpr;
+    srib.style.width = W + "px"; srib.style.height = ribH + "px";
+    canvas.style.display = "block"; srib.style.display = "block";
+    const sctx = srib.getContext("2d");
+    sctx.scale(dpr, dpr);
+    const hexA = (hex, a) => {
+      const v = parseInt(hex.slice(1), 16);
+      return `rgba(${(v >> 16) & 255},${(v >> 8) & 255},${v & 255},${a.toFixed(3)})`;
+    };
+    sctx.font = "7px system-ui";
+    atop.forEach((e, j) => {
+      sctx.fillStyle = acol[j];
+      sctx.fillText(A.emotions[e].slice(0, 9), 2, PAD + j * RH + 6.5);
+      const row = A.ws[e];
+      for (let i = 0; i < n; i++) {
+        const p = frames[i].pos;
+        if (p >= A.n || row[p] <= 0.25) continue;
+        sctx.fillStyle = hexA(acol[j], Math.min(0.95, (row[p] - 0.25) / 3.75));
+        sctx.fillRect(GUT + i * cw, PAD + j * RH, cw - 1, RH - 1);
+      }
+    });
+    srib.addEventListener("click", (ev) => {
+      const box = srib.getBoundingClientRect();
+      const i = Math.floor((ev.clientX - box.left - GUT) / cw);
+      if (i >= 0 && i < n) { stop(); setFrame(i, false); }
+    });
+    srib.addEventListener("pointermove", (ev) => {
+      const box = srib.getBoundingClientRect();
+      const i = Math.floor((ev.clientX - box.left - GUT) / cw);
+      if (i < 0 || i >= n || frames[i].pos >= A.n) { tip.style.display = "none"; return; }
+      const p = frames[i].pos;
+      tip.style.display = "block";
+      tip.style.left = Math.min(ev.clientX + 14, innerWidth - 200) + "px";
+      tip.style.top = (ev.clientY + 14) + "px";
+      tip.innerHTML = `<div class="tl">state at ${esc(JSON.stringify(film.tokens[p]))}</div>`
+        + atop.map((e, k) => `<div class="row"><span style="color:${acol[k]}"
+            >${esc(A.emotions[e])}</span><b>${A.ws[e][p] > 0 ? "+" : ""}${A.ws[e][p].toFixed(2)}</b></div>`).join("");
+    });
+    srib.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+
+    const stoggle = q("strib-toggle");
+    const ribOn = () => localStorage.getItem("film-staterib") !== "off";
+    const applyRib = () => {
+      const on = ribOn();
+      srib.style.display = on ? "block" : "none";
+      ribExtra = on ? ribH : 0;
+      q("playhead").style.height = (nL * ch + ribExtra) + "px";
+      if (stoggle) {
+        stoggle.textContent = on ? "▣ state" : "▢ state";
+        stoggle.setAttribute("aria-selected", on);
+        stoggle.title = (on ? "hide" : "show")
+          + " the emotion-state ribbon (remembered across records)";
+      }
+    };
+    stoggle?.addEventListener("click", () => {
+      localStorage.setItem("film-staterib", ribOn() ? "off" : "on");
+      applyRib();
+    });
+    applyRib();
+  }
+
   // ---- word worms via the unified stream chart: tracked words (solid)
   // + cast leaders (dashed ghosts), toggle chips, hover readout, enlarge.
   // wormChart.setCursor follows the playhead (wired into setFrame below).
@@ -1842,7 +1924,7 @@ function initFilm(rec, film, rootEl, uid, sync) {
   // ---- playhead state
   const playhead = q("playhead");
   playhead.style.width = (cw - 1) + "px";
-  playhead.style.height = (nL * ch) + "px";
+  playhead.style.height = (nL * ch + ribExtra) + "px";
   let cur = -1, timer = null;
   const playBtn = q("play");
 
