@@ -531,9 +531,12 @@ article.essay h3 {
 .ftok[aria-current] { background: var(--lens); color: var(--page); }
 .film-controls { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
 .film-where { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
-.film-scroll { position: relative; overflow-x: auto; padding-bottom: 4px; }
+/* 2px top padding: the playhead's outline is drawn outside its box and
+   the scroll container clips it — without the padding its top stroke is
+   cut off (top: 2px on the playhead keeps it aligned with the canvas) */
+.film-scroll { position: relative; overflow-x: auto; padding: 2px 0 4px; }
 .film-playhead {
-  position: absolute; top: 0; pointer-events: none;
+  position: absolute; top: 2px; pointer-events: none;
   outline: 2px solid var(--lens); outline-offset: 0; border-radius: 1px;
 }
 .film-ranks { font-family: var(--mono); font-size: 11px; color: var(--ink-2); white-space: nowrap; }
@@ -952,6 +955,10 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .aff-pos { color: rgba(226,84,58,.95); }
 .aff-neg { color: rgba(74,122,214,.95); }
 .aff-cursor { outline-color: var(--ink-2); }
+/* the emotion overlay embedded inside the film card, between the word
+   worms and the ridgelines — hairlines mark it off as its own band */
+.aff-embed { border-top: 1px solid var(--grid); border-bottom: 1px solid var(--grid);
+  padding: 4px 0 14px; margin: 18px 0; }
 .aff-figs { display: flex; flex-wrap: wrap; gap: 12px; }
 .aff-fig { flex: 1 1 320px; min-width: 280px; margin: 0; }
 .aff-fig figcaption { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
@@ -978,7 +985,9 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .stream-chips { flex-wrap: wrap; row-gap: 4px; }
 .stream-chips .pos-tab[data-k][aria-selected="false"] {
   opacity: .45; text-decoration: line-through; }
-.stream-wrap { position: relative; }
+/* fit-content: the wrap shrinks to the chart so the absolutely-positioned
+   enlarge button hugs the chart's corner, not the far card edge */
+.stream-wrap { position: relative; width: fit-content; max-width: 100%; }
 .stream-big { position: absolute; right: 4px; bottom: 28px; z-index: 2;
   width: 26px; height: 26px; border: 1px solid var(--grid); border-radius: 6px;
   background: var(--surface); color: var(--muted); cursor: pointer;

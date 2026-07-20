@@ -516,8 +516,31 @@ async function unit6Overview() {
       <span class="key"><svg width="14" height="14"><path d="M3 3l8 8M11 3l-8 8" stroke="${css("--s6")}" stroke-width="2.2"/></svg>broken</span>
       <span class="key" style="color:var(--muted)">log α · shaded span = the cliff (last intact → first broken) · hover for the generation</span>
     </div>
-    <div class="chart-wrap">${breakingSVG(pts)}</div>
-    <div class="viz-tip" id="dot-tip"></div></section>`;
+    <div class="chart-wrap">${breakingSVG(pts)}</div></section>`;
+}
+
+/* Tooltip singleton + placement, shared by every chart on the page (one
+   pointer, one tip). Body-level matters: position:fixed de-fixes inside a
+   transformed ancestor (the view entry animation animates transform on
+   every .detail child), which offset in-card tips from the cursor and let
+   them stretch the document sideways. placeTip measures the tip AFTER its
+   innerHTML is set, and flips left/above the cursor at viewport edges. */
+function vizTip() {
+  let d = document.getElementById("tip");
+  if (!d) {
+    d = document.createElement("div");
+    d.className = "viz-tip"; d.id = "tip";
+    document.body.appendChild(d);
+  }
+  return d;
+}
+function placeTip(tip, ev) {
+  tip.style.display = "block";
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = Math.max(8, ev.clientX - w - 14);
+  if (y + h > innerHeight - 8) y = Math.max(8, ev.clientY - h - 14);
+  tip.style.left = x + "px"; tip.style.top = y + "px";
 }
 
 function breakingSVG(pts) {
@@ -568,18 +591,14 @@ function breakingSVG(pts) {
 }
 
 function wireDotTips() {
-  const tip = document.getElementById("dot-tip");
-  if (!tip) return;
+  const tip = vizTip();
   document.querySelectorAll(".bz-dot").forEach((d) => {
-    d.addEventListener("pointerenter", (ev) => {
+    d.addEventListener("pointerenter", () => {
       tip.style.display = "block";
       tip.innerHTML = d.dataset.tip.split("\n").map((l, i) =>
         `<div class="${i ? "" : "tl"}" style="max-width:300px">${esc(l)}</div>`).join("");
     });
-    d.addEventListener("pointermove", (ev) => {
-      tip.style.left = Math.min(ev.clientX + 14, innerWidth - 330) + "px";
-      tip.style.top = (ev.clientY + 14) + "px";
-    });
+    d.addEventListener("pointermove", (ev) => placeTip(tip, ev));
     d.addEventListener("pointerleave", () => { tip.style.display = "none"; });
   });
 }
@@ -1433,7 +1452,8 @@ async function show(id) {
     paramsHTML(rec),
     extraHTML(rec),
     filmHTML(rec, film, "solo", affect),
-    affectHTML(rec, affect),
+    film ? "" : affectHTML(rec, affect), // with a film it embeds inside the film card
+
     chartHTML(rec),
     readoutHTML(rec),
     scanHTML(rec),
@@ -1659,6 +1679,7 @@ function filmHTML(rec, film, uid, affect) {
       for exact ranks; click to move the playhead; the ⤢ button (bottom right)
       spreads a dense film to ~3px per token, scrolling sideways.</p>
     <div data-f="wormhost"></div>
+    ${affect ? affectHTML(rec, affect, true) : ""}
     <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
     <p class="film-note">Chips toggle — up to 4 words overlay in one canvas;
       each chip's color follows the word by selection order, not its
@@ -1723,7 +1744,9 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
   const RMAX = 20;
   const cw = n > 140 ? 8 : n > 70 ? 11 : 16;
   const ch = Math.max(4, Math.min(10, Math.round(400 / nL)));
-  const GUT = 38;
+  // the ribbon needs room for full emotion names at a readable size, so
+  // the shared gutter (strip + ribbon + ridge draw in lockstep) widens
+  const GUT = affect ? 84 : 38;
   const W = GUT + n * cw, H = nL * ch + 16;
   const canvas = q("strip");
   const dpr = window.devicePixelRatio || 1;
@@ -1784,7 +1807,7 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
     const atop = [...A.emotions.keys()]
       .sort((a, b) => amean[b] - amean[a]).slice(0, 6);
     const acol = atop.map((_, i) => css(SERIES[i]));
-    const RH = 8, PAD = 3;
+    const RH = 11, PAD = 3;
     const ribH = PAD + atop.length * RH;
     srib.width = W * dpr; srib.height = ribH * dpr;
     srib.style.width = W + "px"; srib.style.height = ribH + "px";
@@ -1795,10 +1818,10 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
       const v = parseInt(hex.slice(1), 16);
       return `rgba(${(v >> 16) & 255},${(v >> 8) & 255},${v & 255},${a.toFixed(3)})`;
     };
-    sctx.font = "7px system-ui";
+    sctx.font = "10px system-ui";
     atop.forEach((e, j) => {
       sctx.fillStyle = acol[j];
-      sctx.fillText(A.emotions[e].slice(0, 9), 2, PAD + j * RH + 6.5);
+      sctx.fillText(A.emotions[e], 2, PAD + j * RH + 8.5);
       const row = A.ws[e];
       for (let i = 0; i < n; i++) {
         const p = frames[i].pos;
@@ -1817,12 +1840,10 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
       const i = Math.floor((ev.clientX - box.left - GUT) / cw);
       if (i < 0 || i >= n || frames[i].pos >= A.n) { tip.style.display = "none"; return; }
       const p = frames[i].pos;
-      tip.style.display = "block";
-      tip.style.left = Math.min(ev.clientX + 14, innerWidth - 200) + "px";
-      tip.style.top = (ev.clientY + 14) + "px";
       tip.innerHTML = `<div class="tl">state at ${esc(JSON.stringify(film.tokens[p]))}</div>`
         + atop.map((e, k) => `<div class="row"><span style="color:${acol[k]}"
             >${esc(A.emotions[e])}</span><b>${A.ws[e][p] > 0 ? "+" : ""}${A.ws[e][p].toFixed(2)}</b></div>`).join("");
+      placeTip(tip, ev);
     });
     srib.addEventListener("pointerleave", () => { tip.style.display = "none"; });
 
@@ -1831,7 +1852,9 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
     const applyRib = () => {
       const on = ribOn();
       srib.style.display = on ? "block" : "none";
-      ribExtra = on ? ribH : 0;
+      // span the strip's 16px label strip too, so the outline reaches
+      // the ribbon's last row instead of stopping 16px short
+      ribExtra = on ? (H - nL * ch) + ribH : 0;
       q("playhead").style.height = (nL * ch + ribExtra) + "px";
       if (stoggle) {
         stoggle.textContent = on ? "▣ state" : "▢ state";
@@ -2023,13 +2046,9 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
   });
 
   // strip hover tooltip + click (the tooltip div is a page-level singleton
-  // shared with the rank chart — only one can be visible at a time anyway,
+  // shared with every chart — only one can be visible at a time anyway,
   // so it doesn't need per-instance scoping)
-  const tip = document.getElementById("tip") || (() => {
-    const d = document.createElement("div");
-    d.className = "viz-tip"; d.id = "tip"; document.body.appendChild(d);
-    return d;
-  })();
+  const tip = vizTip();
   canvas.addEventListener("pointermove", (ev) => {
     const box = canvas.getBoundingClientRect();
     const i = Math.floor((ev.clientX - box.left - GUT) / cw);
@@ -2041,10 +2060,8 @@ function initFilm(rec, film, rootEl, uid, sync, affect) {
     const hits = film.track.filter((w) => f.ranks[w][j] <= 50)
       .sort((a, b) => f.ranks[a][j] - f.ranks[b][j]).slice(0, 4)
       .map((w) => `<div class="row"><span style="color:${colorOf[w] || "inherit"}">${esc(w)}</span><b>#${f.ranks[w][j]}</b></div>`).join("");
-    tip.style.display = "block";
-    tip.style.left = Math.min(ev.clientX + 14, innerWidth - 200) + "px";
-    tip.style.top = (ev.clientY + 14) + "px";
     tip.innerHTML = `<div class="tl">L${layers[j]} at ${esc(JSON.stringify(film.tokens[f.pos]))}</div>${tops}${hits ? `<div class="tl" style="margin-top:4px">tracked</div>${hits}` : ""}`;
+    placeTip(tip, ev);
   });
   canvas.addEventListener("pointerleave", () => { tip.style.display = "none"; });
   canvas.addEventListener("click", (ev) => {
@@ -2169,13 +2186,12 @@ function streamChart(host, cfg) {
       <div class="chart-wrap"><svg role="img"
         aria-label="${esc(cfg.yLabel || "series")} per ${esc(cfg.xLabel || "step")}"></svg></div>
       <button class="stream-big" title="enlarge">⤢</button>
-    </div>
-    <div class="viz-tip stream-tip"></div>`;
+    </div>`;
   const chipsEl = host.querySelector(".stream-chips");
   const scroll = host.querySelector(".chart-wrap");
   const svg = host.querySelector("svg");
   const bigBtn = host.querySelector(".stream-big");
-  const tip = host.querySelector(".stream-tip");
+  const tip = vizTip();
   let geom = null;
 
   const visible = () => cfg.series.filter((s) => !off.has(s.key));
@@ -2194,7 +2210,9 @@ function streamChart(host, cfg) {
 
   function draw() {
     const vis = visible();
-    const fit = Math.max(560, Math.min(860, scroll.clientWidth || 700));
+    // measure the host (block-level, full card width) — the wrap itself is
+    // fit-content so the enlarge button hugs the chart, not the card edge
+    const fit = Math.max(560, Math.min(860, host.clientWidth || 700));
     const W = state.big ? Math.max(fit, Math.min(3000, 180 + n * 3)) : fit;
     const H = (cfg.baseH || 240) + (state.big ? 170 : 0);
     const M = { t: 18, r: state.big ? 112 : 96, b: 34, l: 64 };
@@ -2316,14 +2334,12 @@ function streamChart(host, cfg) {
     const rows = visible().map((s) => ({ s, v: s.ys[i] }))
       .filter((r) => r.v !== null)
       .sort((a, b) => (cfg.yKind === "rank" ? a.v - b.v : b.v - a.v));
-    tip.style.display = "block";
-    tip.style.left = Math.min(ev.clientX + 14, innerWidth - 200) + "px";
-    tip.style.top = (ev.clientY + 14) + "px";
     tip.innerHTML = `<div class="tl">${cfg.hoverMeta ? cfg.hoverMeta(i) : cfg.xs[i]}</div>`
       + rows.map((r) => `<div class="row"><span><span class="swatch"
           style="display:inline-block;width:10px;height:3px;border-radius:2px;background:${r.s.color};margin-right:5px"></span
           >${esc(r.s.label)}${r.s.italic ? " ⌁" : ""}</span
           ><b>${cfg.fmt ? cfg.fmt(r.v) : r.v}</b></div>`).join("");
+    placeTip(tip, ev);
   });
   svg.addEventListener("pointerleave", () => {
     tip.style.display = "none";
@@ -3047,10 +3063,17 @@ function affColor(z) {
                 : `rgba(74,122,214,${Math.min(0.8, a * 0.9).toFixed(3)})`;
 }
 
-function affectHTML(rec, aff) {
+/* embedded=true renders the same block as a sub-section of the film card
+   (right under the word worms, where the film and the state can share a
+   screen) instead of a standalone card far below the cast table. */
+function affectHTML(rec, aff, embedded) {
   if (!aff) return "";
-  return `<section class="card" id="affectroot">
-    <h3>The state underneath — emotion overlay</h3>
+  const open = embedded
+    ? `<div id="affectroot" class="aff-embed">
+        <h4 class="film-sub">The state underneath — emotion overlay</h4>`
+    : `<section class="card" id="affectroot">
+        <h3>The state underneath — emotion overlay</h3>`;
+  return `${open}
     <p class="film-note">Each row is one of the 24 validated emotion vectors
       (<a href="#affect">the instrument</a>); each column one token. Color =
       projection of the workspace-band residual onto that vector, z-scored
@@ -3067,7 +3090,7 @@ function affectHTML(rec, aff) {
     <h4 class="film-sub">Top emotions across the conversation (workspace-band z)</h4>
     <div data-a="wormhost"></div>
     <div data-a="state"></div>
-  </section>`;
+  ${embedded ? "</div>" : "</section>"}`;
 }
 
 function initAffect(aff, rootEl, filmRoot) {
@@ -3087,7 +3110,7 @@ function initAffect(aff, rootEl, filmRoot) {
     + (aff.danger.length ? `<span class="key"><span class="swatch" style="background:rgba(230,170,40,.9)"></span>▾ 'danger' lens-resident</span>` : "");
 
   // ---- heat strip
-  const GUT = 92, rh = 9, tick = aff.danger.length ? 8 : 0;
+  const GUT = 92, rh = 12, tick = aff.danger.length ? 8 : 0;
   const cw = n > 500 ? 2 : n > 260 ? 3 : 7;
   const W = GUT + n * cw, H = tick + E * rh + 4;
   const canvas = q("strip");
@@ -3096,9 +3119,9 @@ function initAffect(aff, rootEl, filmRoot) {
   canvas.style.width = W + "px"; canvas.style.height = H + "px";
   const ctx = canvas.getContext("2d");
   ctx.scale(dpr, dpr);
-  ctx.font = "8.5px system-ui";
+  ctx.font = "10px system-ui";
   ctx.fillStyle = css("--muted");
-  order.forEach((e, j) => ctx.fillText(aff.emotions[e], 2, tick + j * rh + 7.5));
+  order.forEach((e, j) => ctx.fillText(aff.emotions[e], 2, tick + j * rh + 9));
   if (tick) {
     ctx.fillStyle = "rgba(230,170,40,.9)";
     for (const p of aff.danger) ctx.fillRect(GUT + p * cw, 0, Math.max(cw, 2), 6);
