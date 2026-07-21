@@ -28,9 +28,15 @@ import torch
 
 from lab import RESULTS, get_model
 
-MODEL = "qwen-27b"
-OUT = RESULTS / "apparatus06-q27b"
+MODEL = "qwen-27b"          # overridable: apparatus06.py <cmd> <model>
 ALPHAS = [round(0.05 * i, 2) for i in range(21)]
+SHORT = {"qwen-27b": "q27b", "gemma-12b": "g12b", "gemma-4b": "g4b"}
+
+
+def outdir(model):
+    d = RESULTS / f"apparatus06-{SHORT[model]}"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
 
 PAIRS = [("France", "Germany"), ("Japan", "China"),
          ("Brazil", "India"), ("Canada", "Russia"),
@@ -85,9 +91,9 @@ CARRIERS = [
 ]
 
 
-def run() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    lm = get_model(MODEL)
+def run(model: str = MODEL) -> None:
+    out_d = outdir(model)
+    lm = get_model(model)
     tok = lm.tok
     hf = lm.model._hf_model
     emb = hf.get_input_embeddings()
@@ -95,20 +101,32 @@ def run() -> None:
     n_layers = lm.model.n_layers
     from jlens.hooks import ActivationRecorder
 
+    # specimen-4 rule: keep only pairs single-token in THIS tokenizer
+    def _one(w):
+        ids = tok.encode(" " + w, add_special_tokens=False)
+        return ids[0] if len(ids) == 1 else None
+
+    pairs = [(a, b) for a, b in PAIRS
+             if _one(a) is not None and _one(b) is not None]
+    if dropped := [p for p in PAIRS if p not in pairs]:
+        print(f"dropped (multi-token in {model}): {dropped}",
+              flush=True)
+    bos = ([tok.bos_token_id]
+           if getattr(tok, "bos_token_id", None) is not None else [])
+
     A = torch.tensor(ALPHAS)
-    widths = torch.zeros(len(PAIRS), len(CARRIERS), n_layers)
+    widths = torch.zeros(len(pairs), len(CARRIERS), n_layers)
     curves_example = None
 
-    for pi, (a_name, b_name) in enumerate(PAIRS):
-        aid = tok.encode(" " + a_name, add_special_tokens=False)[0]
-        bid = tok.encode(" " + b_name, add_special_tokens=False)[0]
+    for pi, (a_name, b_name) in enumerate(pairs):
+        aid, bid = _one(a_name), _one(b_name)
         mix = ((1 - A).unsqueeze(1) * E[aid].float().cpu()
                + A.unsqueeze(1) * E[bid].float().cpu())   # [21, D]
         for ci, (pre, post) in enumerate(CARRIERS):
             pre_ids = tok.encode(pre, add_special_tokens=False)
             post_ids = tok.encode(" " + post, add_special_tokens=False)
-            p = len(pre_ids)
-            row = pre_ids + [aid] + post_ids
+            p = len(bos) + len(pre_ids)
+            row = bos + pre_ids + [aid] + post_ids
             ids = torch.tensor([row] * len(ALPHAS),
                                device=next(hf.parameters()).device)
 
@@ -151,29 +169,30 @@ def run() -> None:
     med = W.median(0).values
     q1 = W.quantile(0.25, dim=0)
     q3 = W.quantile(0.75, dim=0)
-    out = {"model": MODEL, "alphas": ALPHAS,
-           "n_pairs": len(PAIRS), "n_carriers": len(CARRIERS),
+    out = {"model": model, "alphas": ALPHAS,
+           "n_pairs": len(pairs), "n_carriers": len(CARRIERS),
            "median_width": [round(float(x), 4) for x in med],
            "q1": [round(float(x), 4) for x in q1],
            "q3": [round(float(x), 4) for x in q3],
            "example_curves_pair0_carrier0":
-               {"pair": PAIRS[0], "carrier": CARRIERS[0],
+               {"pair": pairs[0], "carrier": CARRIERS[0],
                 "c_by_layer": curves_example}}
-    (OUT / "a06.json").write_text(json.dumps(out, indent=1))
+    (out_d / "a06.json").write_text(json.dumps(out, indent=1))
     print("RUN DONE", flush=True)
 
 
-def analyze() -> None:
-    d = json.loads((OUT / "a06.json").read_text())
+def analyze(model: str = MODEL) -> None:
+    out_d = outdir(model)
+    d = json.loads((out_d / "a06.json").read_text())
     med = d["median_width"]
     n = len(med)
     floor = min(med)
-    early = max(med[:12])
-    # ws-plateau value = median width over L30-50; plateau onset =
-    # first layer at (or below) that value which stays there for the
-    # next 5 layers — the honest "commitment reached" marker (the raw
-    # min sits in the motor band and is not the plateau)
-    mid_band = sorted(med[30:51])
+    early = max(med[:max(4, int(n * 0.19))])
+    # ws-plateau value = median width over the 47-80% depth window;
+    # plateau onset = first layer at (or below) that value which stays
+    # there for the next 5 layers — the honest "commitment reached"
+    # marker (the raw min sits in the motor band, not the plateau)
+    mid_band = sorted(med[int(n * 0.47):int(n * 0.8)])
     plateau = mid_band[len(mid_band) // 2]
     onset = next((l for l in range(n - 5)
                   if all(m <= plateau + 0.001
@@ -183,7 +202,7 @@ def analyze() -> None:
     at_floor = next((l for l in range(n)
                      if med[l] <= floor + 0.02), None)
     lines = [
-        "# apparatus-06 — Fig-29B ambiguity commitment, qwen-27b (P4)",
+        f"# apparatus-06/07 — Fig-29B ambiguity commitment, {model}",
         "",
         f"{d['n_pairs']} country pairs x {d['n_carriers']} carriers; "
         "transition width of the projection share along the pure-"
@@ -205,17 +224,19 @@ def analyze() -> None:
               f"motor-band min {floor:.3f} (first within 0.02 at "
               f"L{at_floor}).",
               "",
-              "P4: plateau onset at L28-36 confirms the u16 "
-              "late-ignition measurement; onset at ~L24 falsifies it "
-              "(lens-fit artifact)."]
-    (OUT / "report.md").write_text("\n".join(lines))
-    print(f"wrote {OUT / 'report.md'}; knee=L{knee} floor=L{at_floor}",
-          flush=True)
+              "Fraction-ported ws onsets for reference: qwen L24, "
+              "gemma-12b L18, gemma-4b L13; measured (lens-visible) "
+              "onsets: qwen L28-36, gemma-12b ~L28-35 (int8 lens), "
+              "gemma-4b late per u16-trawl-g4b."]
+    (out_d / "report.md").write_text("\n".join(lines))
+    print(f"wrote {out_d / 'report.md'}; plateau onset=L{onset} "
+          f"knee=L{knee}", flush=True)
 
 
 if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "both"
+    mdl = sys.argv[2] if len(sys.argv) > 2 else MODEL
     if what in ("run", "both"):
-        run()
+        run(mdl)
     if what in ("analyze", "both"):
-        analyze()
+        analyze(mdl)

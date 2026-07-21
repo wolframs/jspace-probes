@@ -1,4 +1,4 @@
-# apparatus-06 — Fig-29B ambiguity commitment, qwen-27b (P4)
+# apparatus-06/07 — Fig-29B ambiguity commitment, qwen-27b
 
 16 country pairs x 40 carriers; transition width of the projection share along the pure-endpoint axis at the mixed position (median across items).
 
@@ -71,4 +71,4 @@
 
 Early-band max width (L0-11): 0.700; workspace plateau 0.250 reached at **L25** (first layer holding it 5 deep); half-drop knee L20; motor-band min 0.150 (first within 0.02 at L61).
 
-P4: plateau onset at L28-36 confirms the u16 late-ignition measurement; onset at ~L24 falsifies it (lens-fit artifact).
+Fraction-ported ws onsets for reference: qwen L24, gemma-12b L18, gemma-4b L13; measured (lens-visible) onsets: qwen L28-36, gemma-12b ~L28-35 (int8 lens), gemma-4b late per u16-trawl-g4b.
