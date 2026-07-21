@@ -264,6 +264,37 @@ boundary shift or margin dose-response with consistent sign.
 > gemma-12b queued as the discriminator (affect-04).
 > results/affect03-g4b/thoughts.md.
 
+**P15 — affect-04 (gemma-12b exit-gate discriminator, preregistered
+2026-07-21 before the run).** g12b has the second commitment-sharpening
+stage (apparatus-07) that g4b lacks, and audit-03 located its
+functional band (L32–43). Design: affect3g protocol at g12b's own
+α*=0.0106 (MID [28,31,34,37]), full α_e ladder {0.004–0.03} ×
+{desperate, calm, rand1, rand2}, door check via unsteered step-0
+top-5. Staircase-account prediction (adopted, 55/45 over the
+qwen-quirk account): **IF** g12b's deep loop has an exit token
+adjacent (a door), calm at family-scaled dose grants exit and
+desperate blocks it, randoms null — exit-gating is a stage-2
+function. If it has a door but no gating, the gate is qwen-specific.
+If no door, the run is another exit-economy null and the
+discriminator needs a forced-door design (e.g. prompt that ends
+turns early). Piggyback: P6's margin comparison at g12b's measured
+band (predicts g12b < qwen's 0.204/0.205).
+
+**P16 — affect-05 (temporal precedence at the qwen loop boundary,
+preregistered 2026-07-21 before the run).** affect-03 proved injected
+state gates the exit; P16 asks whether ENDOGENOUS state leads it.
+Design: boundary α {0.60, 0.64, 0.68}, sampled free phases (temp 1.0,
+8 seeds, ≤300 tokens), per-step margins + all-24 emotion z traces,
+wsnorm partialed out per the a0680 rule. Mechanical-default
+prediction (60/40): endogenous fluctuations are passengers — no
+consistent pre-event movement of desperate/calm z residuals in the
+[-40,-5) window before deloop/exit events beyond matched baselines,
+and the margin↔desperate lag scan peaks at lag ≈ 0 (co-movement,
+not lead). The exit-gate alternative predicts calm-z rises (and/or
+desperate-z falls) BEFORE escape events with consistent sign across
+runs, peak lag < 0. *Falsified toward the affect program* if the
+pre-event sign test is consistent at ≥ 3:1 across ≥ 8 events.
+
 ---
 
 ## Standing design rules distilled from the misses
