@@ -1,0 +1,2005 @@
+{
+ "model": "qwen-27b",
+ "e_layers": [
+  28,
+  32,
+  36,
+  40,
+  44,
+  48,
+  52,
+  56
+ ],
+ "alpha_e": 0.12,
+ "mid": [
+  28,
+  32,
+  36,
+  40
+ ],
+ "n_steer": 50,
+ "n_free": 100,
+ "preflight": {
+  "desperate": {
+   "text": "The water cycle is a continuous process where water evaporates from the surface, condenses into clouds, and falls back as precipitation. This endless loop moves water between the atmosphere, land, and oceans, but the total amount of water on Earth remains the same.",
+   "flags": [],
+   "loop4": [
+    "endless loop moves water",
+    1
+   ],
+   "margin_mean": 4.206
+  },
+  "calm": {
+   "text": "Water gently moves through the environment, flowing from the land into rivers and oceans without any rush. There is no need for hurry, allowing each moment to unfold naturally.",
+   "flags": [],
+   "loop4": [
+    "any rush there is",
+    1
+   ],
+   "margin_mean": 2.0
+  }
+ },
+ "boundary": [
+  {
+   "alpha_typo": 0.42,
+   "cond": "none",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "it is a bit",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": ", it is a bit complicated.",
+   "margins": [
+    4.5,
+    0.75,
+    4.25,
+    0.0,
+    2.75,
+    1.75,
+    3.25,
+    0.5
+   ],
+   "top1_first10": [
+    ",",
+    " it",
+    " is",
+    " not",
+    " bit",
+    " complicated",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.42,
+   "cond": "amp-desperate",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "i am not sure",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": ", I am not sure.",
+   "margins": [
+    2.875,
+    2.0,
+    0.125,
+    2.125,
+    3.312,
+    1.875,
+    1.0
+   ],
+   "top1_first10": [
+    ",",
+    " I",
+    " am",
+    " not",
+    " sure",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.42,
+   "cond": "amp-calm",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "i mean it is",
+    9
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": ", it is just a gentle flow.\n\nI mean, it is not too busy. I mean, it is just a gentle rhythm.\n\nI mean, it is not too relaxed. I mean, it is just a steady pace.\n\nI mean, it is not too calm. I mean, it is just a peaceful state.\n\nI mean, it is not too quiet. I mean, it is just a gentle presence.\n\nI mean, it is not too still. I mean",
+   "margins": [
+    5.5,
+    2.25,
+    4.875,
+    0.0,
+    0.25,
+    0.875,
+    2.625,
+    2.25,
+    1.125,
+    2.375,
+    2.875,
+    7.75,
+    0.125,
+    5.5,
+    0.25,
+    3.125,
+    0.5,
+    3.5,
+    3.875,
+    5.875,
+    7.75,
+    2.625,
+    6.0,
+    0.625,
+    3.625,
+    0.375,
+    0.125,
+    7.375,
+    2.25,
+    5.5,
+    5.875,
+    9.562,
+    1.125,
+    7.75,
+    1.125,
+    5.875,
+    0.25,
+    6.5,
+    4.875,
+    6.0,
+    9.375,
+    4.625,
+    7.75,
+    3.25,
+    7.5,
+    0.25,
+    3.875,
+    8.75,
+    2.375,
+    6.0,
+    7.625,
+    9.938,
+    3.5,
+    10.125,
+    3.375,
+    8.25,
+    2.875,
+    8.375,
+    6.0,
+    8.125,
+    11.0,
+    6.0,
+    10.125,
+    5.75,
+    7.875,
+    0.125,
+    0.375,
+    8.375,
+    2.75,
+    6.875,
+    8.625,
+    10.312,
+    4.75,
+    11.75,
+    5.625,
+    7.5,
+    1.75,
+    10.25,
+    7.0,
+    6.625,
+    11.938,
+    4.5,
+    11.25,
+    7.0,
+    8.0,
+    0.375,
+    1.625,
+    9.625,
+    3.5,
+    7.375,
+    8.5,
+    10.875,
+    5.375,
+    11.25,
+    7.5,
+    5.5,
+    1.125,
+    8.25,
+    7.0,
+    5.625
+   ],
+   "top1_first10": [
+    ",",
+    " it",
+    " is",
+    " quite",
+    " a",
+    " gentle",
+    " flow",
+    ".",
+    "\n\n",
+    "I"
+   ]
+  },
+  {
+   "alpha_typo": 0.42,
+   "cond": "amp-rand1",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "it is not too",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": ", it is not too complicated.",
+   "margins": [
+    4.375,
+    0.25,
+    4.0,
+    0.25,
+    1.875,
+    0.25,
+    3.25,
+    1.125
+   ],
+   "top1_first10": [
+    ",",
+    " it",
+    " is",
+    " not",
+    " too",
+    " complicated",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.42,
+   "cond": "amp-rand2",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "it is a bit",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": ", it is a bit complicated.",
+   "margins": [
+    4.75,
+    0.75,
+    4.5,
+    0.125,
+    2.625,
+    1.375,
+    3.25,
+    0.375
+   ],
+   "top1_first10": [
+    ",",
+    " it",
+    " is",
+    " a",
+    " bit",
+    " complicated",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.42,
+   "cond": "abl-desperate",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "it is not too",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": ", it is not too complicated.",
+   "margins": [
+    4.375,
+    0.125,
+    3.75,
+    0.125,
+    1.875,
+    0.875,
+    2.75,
+    1.125
+   ],
+   "top1_first10": [
+    ",",
+    " it",
+    " is",
+    " not",
+    " too",
+    " complicated",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.42,
+   "cond": "abl-rand1",
+   "forced_loop4": [
+    "i mean it is",
+    2
+   ],
+   "persists": false,
+   "released_loop4": [
+    "it is not too",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": ", it is not too complicated.",
+   "margins": [
+    4.5,
+    0.75,
+    4.25,
+    0.125,
+    2.25,
+    0.375,
+    2.875,
+    0.875
+   ],
+   "top1_first10": [
+    ",",
+    " it",
+    " is",
+    " not",
+    " too",
+    " complicated",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "none",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    1.875
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "amp-desperate",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    0.75
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "amp-calm",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    1.0
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "amp-rand1",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    2.0
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "amp-rand2",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    1.75
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "abl-desperate",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    2.0
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.48,
+   "cond": "abl-rand1",
+   "forced_loop4": [
+    "i am not too",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    2.0
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "none",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    2.875,
+    2.5,
+    1.875,
+    1.375
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "amp-desperate",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    2.625,
+    2.875,
+    1.625,
+    0.75
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "amp-calm",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    4.875,
+    3.375,
+    3.75,
+    0.25
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "amp-rand1",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    2.375,
+    2.5,
+    1.625,
+    1.125
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "amp-rand2",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    3.375,
+    3.25,
+    2.125,
+    1.0
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "abl-desperate",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    2.75,
+    2.5,
+    1.75,
+    1.375
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.54,
+   "cond": "abl-rand1",
+   "forced_loop4": [
+    "i i luckily i",
+    4
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " I I.",
+   "margins": [
+    2.75,
+    2.375,
+    1.75,
+    1.5
+   ],
+   "top1_first10": [
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "none",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "but i i luckily",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " but I I luckily.",
+   "margins": [
+    2.375,
+    4.188,
+    0.625,
+    1.375,
+    3.625,
+    0.5
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    " luckily",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "amp-desperate",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "i i i i",
+    96
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " but I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I",
+   "margins": [
+    2.75,
+    5.312,
+    2.312,
+    0.875,
+    0.625,
+    1.625,
+    2.0,
+    2.5,
+    2.625,
+    2.625,
+    2.625,
+    2.625,
+    2.875,
+    2.875,
+    3.0,
+    3.0,
+    3.125,
+    2.875,
+    2.875,
+    3.125,
+    3.25,
+    3.0,
+    3.25,
+    3.125,
+    3.125,
+    3.125,
+    3.375,
+    3.125,
+    3.375,
+    3.25,
+    3.375,
+    3.375,
+    3.5,
+    3.375,
+    3.625,
+    3.625,
+    3.5,
+    3.5,
+    3.5,
+    3.375,
+    3.625,
+    3.625,
+    3.5,
+    3.75,
+    3.75,
+    3.75,
+    3.875,
+    4.0,
+    3.875,
+    3.75,
+    4.125,
+    4.5,
+    4.125,
+    4.0,
+    4.0,
+    4.0,
+    4.0,
+    3.875,
+    3.875,
+    4.0,
+    3.875,
+    3.75,
+    3.875,
+    3.875,
+    4.0,
+    4.0,
+    4.0,
+    4.0,
+    4.0,
+    3.875,
+    3.875,
+    4.0,
+    4.0,
+    3.875,
+    4.0,
+    4.125,
+    4.0,
+    4.125,
+    4.125,
+    4.125,
+    4.125,
+    4.125,
+    4.125,
+    3.875,
+    4.125,
+    4.125,
+    4.0,
+    4.25,
+    4.125,
+    4.0,
+    4.125,
+    4.125,
+    4.0,
+    4.25,
+    5.0,
+    4.75,
+    4.5,
+    4.5,
+    4.375,
+    4.375
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    " I",
+    " I",
+    " I",
+    " I",
+    " I",
+    " I",
+    " I"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "amp-calm",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " but I I.",
+   "margins": [
+    2.375,
+    6.188,
+    2.875,
+    0.125,
+    1.0
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "amp-rand1",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "but i i luckily",
+    2
+   ],
+   "released_flags": [
+    "lost-task"
+   ],
+   "released_text": " but I I luckily. I but I I luckily.",
+   "margins": [
+    1.875,
+    4.125,
+    1.125,
+    1.5,
+    3.5,
+    0.0,
+    2.25,
+    4.438,
+    2.25,
+    0.75,
+    3.375,
+    0.375
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    " luckily",
+    ".",
+    "<|im_end|>",
+    " but",
+    " I",
+    " I",
+    " luckily"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "amp-rand2",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "but i i luckily",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " but I I luckily.",
+   "margins": [
+    2.5,
+    4.312,
+    0.875,
+    1.5,
+    3.875,
+    0.125
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    " luckily",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "abl-desperate",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "but i i luckily",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " but I I luckily.",
+   "margins": [
+    2.625,
+    4.312,
+    0.375,
+    1.375,
+    3.5,
+    0.5
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    " luckily",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.6,
+   "cond": "abl-rand1",
+   "forced_loop4": [
+    "i luckily i but",
+    5
+   ],
+   "persists": false,
+   "released_loop4": [
+    "but i i luckily",
+    1
+   ],
+   "released_flags": [
+    "lost-task",
+    "short"
+   ],
+   "released_text": " but I I luckily.",
+   "margins": [
+    2.375,
+    4.125,
+    0.625,
+    1.5,
+    3.5,
+    0.5
+   ],
+   "top1_first10": [
+    " but",
+    " I",
+    " I",
+    " luckily",
+    ".",
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "none",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": true,
+   "released_loop4": [
+    "luckily luckily luckily luckily",
+    97
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily",
+   "margins": [
+    4.5,
+    4.688,
+    4.625,
+    4.5,
+    4.25,
+    4.25,
+    4.375,
+    4.375,
+    3.875,
+    3.75,
+    3.875,
+    4.25,
+    4.5,
+    4.875,
+    4.625,
+    4.5,
+    4.375,
+    4.375,
+    4.5,
+    4.375,
+    4.125,
+    4.25,
+    4.0,
+    4.0,
+    4.5,
+    4.75,
+    4.875,
+    4.75,
+    4.5,
+    4.5,
+    4.75,
+    5.0,
+    4.875,
+    4.875,
+    5.0,
+    4.75,
+    4.875,
+    4.875,
+    5.0,
+    4.5,
+    4.125,
+    4.25,
+    4.375,
+    4.75,
+    5.25,
+    5.0,
+    4.875,
+    4.875,
+    4.875,
+    4.875,
+    4.875,
+    4.625,
+    4.375,
+    4.25,
+    4.25,
+    4.75,
+    5.125,
+    5.125,
+    5.125,
+    4.75,
+    4.5,
+    4.5,
+    5.75,
+    5.25,
+    5.0,
+    5.125,
+    5.0,
+    5.25,
+    5.25,
+    5.125,
+    5.0,
+    4.75,
+    4.625,
+    4.75,
+    5.125,
+    5.375,
+    5.5,
+    5.5,
+    5.125,
+    5.125,
+    5.0,
+    5.375,
+    5.5,
+    4.75,
+    4.625,
+    4.625,
+    4.875,
+    5.25,
+    5.375,
+    5.25,
+    5.0,
+    4.75,
+    4.75,
+    5.625,
+    5.875,
+    5.125,
+    4.75,
+    5.0,
+    5.0,
+    5.25
+   ],
+   "top1_first10": [
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "amp-desperate",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": true,
+   "released_loop4": [
+    "luckily luckily luckily luckily",
+    97
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily",
+   "margins": [
+    1.5,
+    1.625,
+    1.25,
+    1.438,
+    1.375,
+    1.375,
+    1.25,
+    1.0,
+    0.75,
+    0.875,
+    1.0,
+    1.375,
+    1.5,
+    1.5,
+    1.125,
+    1.125,
+    1.125,
+    1.438,
+    1.375,
+    1.25,
+    0.875,
+    1.0,
+    1.0,
+    1.0,
+    1.375,
+    1.5,
+    1.25,
+    1.125,
+    1.125,
+    1.375,
+    1.812,
+    2.625,
+    1.625,
+    1.0,
+    1.25,
+    1.375,
+    1.375,
+    1.375,
+    1.0,
+    0.75,
+    0.75,
+    0.875,
+    1.125,
+    1.375,
+    1.5,
+    1.0,
+    0.875,
+    0.875,
+    1.125,
+    1.125,
+    1.125,
+    1.0,
+    0.75,
+    0.75,
+    0.875,
+    1.0,
+    1.25,
+    1.0,
+    0.75,
+    0.5,
+    0.625,
+    0.875,
+    2.0,
+    1.375,
+    1.0,
+    1.0,
+    0.875,
+    1.125,
+    1.125,
+    0.875,
+    0.75,
+    0.625,
+    0.75,
+    0.875,
+    1.0,
+    1.125,
+    1.0,
+    0.75,
+    0.5,
+    0.625,
+    0.875,
+    1.375,
+    1.125,
+    0.875,
+    0.75,
+    1.0,
+    1.0,
+    1.25,
+    1.375,
+    1.0,
+    0.875,
+    0.875,
+    1.125,
+    2.0,
+    2.0,
+    1.375,
+    0.875,
+    0.875,
+    1.125,
+    1.375
+   ],
+   "top1_first10": [
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "amp-calm",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": false,
+   "released_loop4": [
+    "",
+    0
+   ],
+   "released_flags": [
+    "lost-task",
+    "short",
+    "nonascii"
+   ],
+   "released_text": "",
+   "margins": [
+    1.875
+   ],
+   "top1_first10": [
+    "<|im_end|>"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "amp-rand1",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": true,
+   "released_loop4": [
+    "luckily luckily luckily luckily",
+    97
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily",
+   "margins": [
+    4.812,
+    4.75,
+    4.875,
+    5.062,
+    5.062,
+    5.125,
+    5.0,
+    5.062,
+    4.938,
+    4.812,
+    4.75,
+    5.125,
+    5.062,
+    5.188,
+    5.125,
+    5.0,
+    4.938,
+    5.0,
+    5.062,
+    5.125,
+    5.0,
+    5.062,
+    4.938,
+    4.938,
+    5.25,
+    5.312,
+    5.188,
+    5.188,
+    5.125,
+    5.25,
+    5.25,
+    5.625,
+    5.125,
+    4.938,
+    5.062,
+    4.875,
+    5.188,
+    5.188,
+    5.25,
+    5.0,
+    4.812,
+    4.75,
+    4.812,
+    4.875,
+    5.5,
+    5.375,
+    5.312,
+    5.125,
+    5.188,
+    5.375,
+    5.25,
+    5.188,
+    4.938,
+    4.75,
+    4.75,
+    5.0,
+    5.438,
+    5.5,
+    5.438,
+    5.188,
+    4.938,
+    5.062,
+    5.875,
+    5.625,
+    5.312,
+    5.188,
+    5.125,
+    5.312,
+    5.438,
+    5.25,
+    5.188,
+    5.062,
+    5.0,
+    5.125,
+    5.25,
+    5.375,
+    5.562,
+    5.5,
+    5.312,
+    5.188,
+    5.25,
+    5.125,
+    5.438,
+    5.125,
+    4.875,
+    4.75,
+    4.875,
+    5.125,
+    5.25,
+    5.25,
+    5.0,
+    4.875,
+    4.875,
+    5.0,
+    6.062,
+    5.438,
+    4.875,
+    5.0,
+    5.062,
+    5.25
+   ],
+   "top1_first10": [
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "amp-rand2",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": true,
+   "released_loop4": [
+    "luckily luckily luckily luckily",
+    97
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily",
+   "margins": [
+    4.5,
+    5.875,
+    5.5,
+    5.75,
+    5.625,
+    5.75,
+    5.625,
+    5.625,
+    5.312,
+    5.125,
+    5.312,
+    5.75,
+    5.438,
+    6.062,
+    5.812,
+    5.562,
+    5.625,
+    5.625,
+    5.625,
+    5.5,
+    5.5,
+    5.375,
+    5.25,
+    5.438,
+    5.75,
+    5.812,
+    6.125,
+    5.938,
+    5.812,
+    5.688,
+    5.938,
+    4.625,
+    6.0,
+    5.875,
+    6.125,
+    6.062,
+    6.188,
+    6.25,
+    6.0,
+    5.625,
+    5.5,
+    5.5,
+    5.75,
+    5.625,
+    6.312,
+    6.25,
+    6.0,
+    5.875,
+    6.125,
+    6.125,
+    6.0,
+    6.0,
+    5.75,
+    5.625,
+    5.625,
+    6.188,
+    6.438,
+    6.562,
+    6.375,
+    6.0,
+    5.875,
+    6.0,
+    5.625,
+    6.125,
+    6.25,
+    6.375,
+    6.375,
+    6.375,
+    6.375,
+    6.25,
+    6.125,
+    5.875,
+    5.875,
+    6.0,
+    6.25,
+    6.375,
+    6.5,
+    6.375,
+    6.125,
+    6.125,
+    6.375,
+    6.125,
+    6.5,
+    5.875,
+    5.75,
+    5.625,
+    6.0,
+    6.25,
+    6.375,
+    6.25,
+    6.25,
+    6.0,
+    5.875,
+    5.625,
+    6.25,
+    6.0,
+    5.875,
+    6.0,
+    6.125,
+    6.375
+   ],
+   "top1_first10": [
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "abl-desperate",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": true,
+   "released_loop4": [
+    "luckily luckily luckily luckily",
+    97
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily",
+   "margins": [
+    4.625,
+    4.75,
+    4.5,
+    4.5,
+    4.25,
+    4.375,
+    4.375,
+    4.375,
+    3.875,
+    3.875,
+    3.875,
+    4.375,
+    4.625,
+    4.875,
+    4.625,
+    4.5,
+    4.375,
+    4.375,
+    4.5,
+    4.5,
+    4.25,
+    4.25,
+    4.0,
+    4.25,
+    4.5,
+    4.75,
+    4.75,
+    4.625,
+    4.5,
+    4.5,
+    4.75,
+    5.375,
+    4.875,
+    4.625,
+    4.875,
+    4.625,
+    4.75,
+    4.75,
+    4.75,
+    4.375,
+    4.0,
+    4.0,
+    4.375,
+    4.625,
+    5.125,
+    5.0,
+    4.75,
+    4.625,
+    4.625,
+    4.75,
+    4.625,
+    4.375,
+    4.125,
+    4.0,
+    4.125,
+    4.5,
+    5.0,
+    5.0,
+    4.75,
+    4.375,
+    4.25,
+    4.375,
+    5.875,
+    5.125,
+    4.875,
+    5.0,
+    4.875,
+    4.875,
+    5.0,
+    4.875,
+    4.75,
+    4.5,
+    4.375,
+    4.5,
+    4.875,
+    5.0,
+    5.25,
+    5.125,
+    4.875,
+    4.75,
+    4.875,
+    5.125,
+    5.125,
+    4.5,
+    4.25,
+    4.375,
+    4.625,
+    4.875,
+    5.0,
+    5.0,
+    4.75,
+    4.625,
+    4.625,
+    5.5,
+    6.0,
+    5.0,
+    4.625,
+    4.75,
+    4.75,
+    5.0
+   ],
+   "top1_first10": [
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily"
+   ]
+  },
+  {
+   "alpha_typo": 0.68,
+   "cond": "abl-rand1",
+   "forced_loop4": [
+    "luckily luckily luckily luckily",
+    47
+   ],
+   "persists": true,
+   "released_loop4": [
+    "luckily luckily luckily luckily",
+    97
+   ],
+   "released_flags": [
+    "lost-task",
+    "loop"
+   ],
+   "released_text": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily",
+   "margins": [
+    4.5,
+    4.688,
+    4.5,
+    4.5,
+    4.25,
+    4.25,
+    4.375,
+    4.25,
+    4.0,
+    3.875,
+    3.875,
+    4.25,
+    4.5,
+    4.875,
+    4.625,
+    4.5,
+    4.375,
+    4.375,
+    4.375,
+    4.375,
+    4.25,
+    4.125,
+    4.0,
+    4.125,
+    4.5,
+    4.625,
+    4.875,
+    4.625,
+    4.625,
+    4.5,
+    4.75,
+    5.0,
+    4.875,
+    4.75,
+    4.875,
+    4.625,
+    4.875,
+    4.75,
+    4.875,
+    4.5,
+    4.125,
+    4.125,
+    4.375,
+    4.625,
+    5.125,
+    4.875,
+    4.875,
+    4.625,
+    4.875,
+    4.75,
+    4.75,
+    4.625,
+    4.25,
+    4.125,
+    4.25,
+    4.5,
+    5.0,
+    5.25,
+    5.0,
+    4.625,
+    4.375,
+    4.5,
+    5.625,
+    5.125,
+    5.0,
+    5.25,
+    5.125,
+    5.0,
+    5.25,
+    5.0,
+    4.875,
+    4.625,
+    4.625,
+    4.75,
+    5.125,
+    5.375,
+    5.375,
+    5.375,
+    5.25,
+    5.0,
+    5.125,
+    5.375,
+    5.375,
+    4.75,
+    4.5,
+    4.5,
+    4.75,
+    5.0,
+    5.25,
+    5.25,
+    5.0,
+    4.875,
+    4.875,
+    5.625,
+    5.75,
+    5.0,
+    4.75,
+    5.0,
+    4.875,
+    5.125
+   ],
+   "top1_first10": [
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily",
+    " luckily"
+   ]
+  }
+ ],
+ "song": [
+  {
+   "cond": "none",
+   "text": "This is a beautifully crafted piece of lyrical and atmospheric writing. It reads like a concept track for an ambient, dark-pop, or experimental R&B song\u2014think along the lines of **FKA twigs**, **James Blake**, or **Grimes** in their more minimalist, tension-driven moments.\n\nHere\u2019s a breakdown of what makes this piece so effective, along with some thoughts on its structure and emotional arc:\n\n### \ud83c\udfb5 **Atmosphere & Production Notes**\nThe bracketed instructions are not just stage directions\u2014they\u2019re essential to the mood. You\u2019ve created a **soundscape** that mirrors the lyrical tension:\n- **The \"near-silence\" intro** with the cello and fire crackle sets a primal, intimate scene.\n- **Glitch stutters** in Verse 2 mirror the mental fragmentation (\"I lose the thread\").\n- **The breakdown** with whispered, spaced-out words (\"Stay / there / Not yet\") creates",
+   "margin_mean": 4.224,
+   "ws_z": {
+    "vigilant": -0.816,
+    "afraid": -0.493,
+    "anxious": -0.938,
+    "calm": 0.153,
+    "loving": 1.292,
+    "distressed": -0.728
+   },
+   "wsnorm_mean": 114.4
+  },
+  {
+   "cond": "abl-vigilant",
+   "text": "This is a beautifully crafted piece of lyrical and atmospheric writing. It reads like a **cinematic, ambient R&B or dark pop track**\u2014think along the lines of FKA twigs, James Blake, or early Bj\u00f6rk, where the production notes are as integral to the meaning as the lyrics themselves.\n\nHere\u2019s a breakdown of what makes this piece so effective, along with some observations on its structure and thematic depth:\n\n### 1. **Atmosphere as Narrative**\nThe production cues (`[Intro: near-silence, low cello harmonic...]`, `[glitch stutters]`, `[cello bends upward]`) aren\u2019t just technical directions\u2014they\u2019re **emotional anchors**. They mirror the psychological state of the characters:\n- The **dry kick every two bars** mimics a heartbeat or a hesitant step.\n- The **glitch stutters** in Verse 2 reflect the mental fragmentation (\"I lose the thread\") caused by intense attraction.",
+   "margin_mean": 4.698,
+   "ws_z": {
+    "vigilant": -0.723,
+    "afraid": -0.357,
+    "anxious": -0.752,
+    "calm": -0.023,
+    "loving": 1.277,
+    "distressed": -0.545
+   },
+   "wsnorm_mean": 114.1
+  },
+  {
+   "cond": "abl-rand1",
+   "text": "This is a beautifully crafted piece of lyrical and atmospheric writing. It reads like a concept track for an ambient, dark-pop, or experimental R&B song\u2014think along the lines of **FKA twigs**, **James Blake**, or **Grimes** in their more minimalist, tension-driven moments.\n\nHere\u2019s a breakdown of what makes this piece so effective, along with some thoughts on its structure and thematic depth:\n\n### \ud83c\udfb5 **Atmosphere & Production Cues**\nYour bracketed instructions are not just notes\u2014they\u2019re *part of the poetry*. They create a cinematic soundscape:\n- **\"Near-silence, low cello harmonic, fire crackle\"**: Immediately establishes intimacy, danger, and warmth.\n- **\"Glitch stutters around the vocal\"**: Suggests digital fragmentation mirroring emotional hesitation.\n- **\"Cello bends upward, drums nearly disappear\"**: Creates a vacuum of sound that forces the listener to lean in, mirroring",
+   "margin_mean": 4.757,
+   "ws_z": {
+    "vigilant": -0.793,
+    "afraid": -0.499,
+    "anxious": -1.019,
+    "calm": 0.121,
+    "loving": 1.434,
+    "distressed": -0.797
+   },
+   "wsnorm_mean": 114.8
+  },
+  {
+   "cond": "abl-rand2",
+   "text": "This is a beautifully crafted piece of lyrical and atmospheric writing. It reads like a concept track for an ambient, dark-pop, or experimental R&B song\u2014think along the lines of **FKA twigs**, **James Blake**, or **Grimes** in their more minimalist moments.\n\nHere\u2019s a breakdown of what makes this piece so effective, along with some thoughts on its structure and emotional arc:\n\n### \ud83c\udfb5 **Atmosphere & Production Notes**\nThe bracketed instructions are not just technical\u2014they\u2019re *narrative*. They create a cinematic soundscape:\n- **The Intro:** The \"near-silence\" and \"dry kick every two bars\" establish tension immediately. It\u2019s not about the beat; it\u2019s about the *absence* of it.\n- **The Glitch Stutters (Verse 2):** This is a brilliant production choice. The \"glitch stutters around the vocal\" mirror the lyrical content: *\"You grin once",
+   "margin_mean": 4.416,
+   "ws_z": {
+    "vigilant": -0.746,
+    "afraid": -0.484,
+    "anxious": -0.889,
+    "calm": 0.054,
+    "loving": 1.187,
+    "distressed": -0.743
+   },
+   "wsnorm_mean": 114.2
+  }
+ ]
+}

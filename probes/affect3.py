@@ -274,15 +274,30 @@ def analyze() -> None:
                 row.append("| — ")
                 continue
             m = c["margins"]
-            row.append(f"| {'P' if c['persists'] else 'snap'} "
-                       f"{m[0]:.0f}->{m[-1]:.0f} ")
+            # NEWLOOP: the forced gram died but a NEW loop formed in the
+            # free phase (persists-criterion blind spot, e.g. the 0.60
+            # amp-desperate "I I I" chain)
+            tag = ("P" if c["persists"]
+                   else "NEWLOOP" if c["released_loop4"][1] >= 10
+                   else "snap")
+            row.append(f"| {tag} {m[0]:.0f}->{m[-1]:.0f} ")
         lines.append("".join(row) + "|")
-    lines += ["", "Boundary (lowest persisting a_typo) per condition:",
-              ""]
+    lines += ["", "Boundary (lowest a_typo with a self-sustaining free "
+              "phase, persists OR new loop):", ""]
     for cn in conds:
         ps = [at for at in alphas
-              if idx.get((at, cn), {}).get("persists")]
+              if idx.get((at, cn), {}).get("persists")
+              or idx.get((at, cn), {"released_loop4": ["", 0]}
+                         )["released_loop4"][1] >= 10]
         lines.append(f"- {cn}: {min(ps) if ps else 'never'}")
+    t5 = OUT / "top5.json"
+    if t5.exists():
+        lines += ["", "## Top-5 at release step 0 (affect3b follow-up)",
+                  ""]
+        for cell in json.loads(t5.read_text()):
+            head = cell["steps"][0]["top5"]
+            lines.append(f"- a={cell['alpha_typo']} {cell['cond']}: "
+                         + " | ".join(f"`{t}` {v}" for t, v in head))
     lines += ["", "## Part B — song, vigilant ablation (ws z over "
               "response; wsnorm alongside per the partial-out rule)",
               ""]

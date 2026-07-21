@@ -218,6 +218,20 @@ scale; matched random ablation indistinguishable. *P14 falsified* (and
 the affect program upgraded) if desperate beats its matched controls on
 boundary shift or margin dose-response with consistent sign.
 
+> **Resolved 2026-07-21, same day — FALSIFIED (the 35% side won; first
+> mechanical-default loss since the protocol).** Calm amplification
+> rescues the 0.68 self-sustaining loop at release step 0 (suppresses
+> luckily 21.25→16.00 AND lifts im_end 16.75→18.25); desperate lowers
+> the degeneration boundary 0.68→0.60 (new self-sustaining " I I I…"
+> loop where baseline closes, margin rising 0.6→4.4) and at 0.68
+> suppresses the attractor to a knife-edge ~1.3 without granting exit.
+> Matched random amplify/ablate: indistinguishable from none in every
+> cell. Unifier: im_end is the perpetual runner-up in the deep loop —
+> emotion state gates the turn-end exit (calm grants, desperate
+> blocks). Vigilant-ablation song arm: null vs matched controls (the
+> one sub-prediction that held). Evidence:
+> results/affect03-q27b/{report.md,thoughts.md,affect03.json,top5.json}.
+
 ---
 
 ## Standing design rules distilled from the misses
