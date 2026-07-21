@@ -257,6 +257,12 @@ boundary shift or margin dose-response with consistent sign.
 > blocks). Vigilant-ablation song arm: null vs matched controls (the
 > one sub-prediction that held). Evidence:
 > results/affect03-q27b/{report.md,thoughts.md,affect03.json,top5.json}.
+> Scope note same night: does NOT port to gemma-4b (no exit token
+> adjacent — its runner-up is "."; margin-thinning replicates, closure
+> doesn't; alpha_e must be scaled to each family's alpha*). qwen
+> result stands (2 stimuli, dose-resolved, matched controls);
+> gemma-12b queued as the discriminator (affect-04).
+> results/affect03-g4b/thoughts.md.
 
 ---
 
