@@ -169,6 +169,15 @@ def analyze() -> None:
     n = len(med)
     floor = min(med)
     early = max(med[:12])
+    # ws-plateau value = median width over L30-50; plateau onset =
+    # first layer at (or below) that value which stays there for the
+    # next 5 layers — the honest "commitment reached" marker (the raw
+    # min sits in the motor band and is not the plateau)
+    mid_band = sorted(med[30:51])
+    plateau = mid_band[len(mid_band) // 2]
+    onset = next((l for l in range(n - 5)
+                  if all(m <= plateau + 0.001
+                         for m in med[l:l + 5])), None)
     half = floor + 0.5 * (early - floor)
     knee = next((l for l in range(n) if med[l] <= half), None)
     at_floor = next((l for l in range(n)
@@ -190,13 +199,14 @@ def analyze() -> None:
         lines.append(f"| L{l} | {med[l]:.3f} | "
                      f"{d['q1'][l]:.3f}-{d['q3'][l]:.3f} |{mark}")
     lines += ["",
-              f"Early-band max width (L0-11): {early:.3f}; global "
-              f"floor: {floor:.3f}.",
-              f"Half-drop knee at L{knee}; floor (within 0.02) first "
-              f"reached at L{at_floor}.",
+              f"Early-band max width (L0-11): {early:.3f}; workspace "
+              f"plateau {plateau:.3f} reached at **L{onset}** (first "
+              f"layer holding it 5 deep); half-drop knee L{knee}; "
+              f"motor-band min {floor:.3f} (first within 0.02 at "
+              f"L{at_floor}).",
               "",
-              "P4: floor at L28-36 confirms the u16 late-ignition "
-              "measurement; a knee/floor at ~L24 falsifies it "
+              "P4: plateau onset at L28-36 confirms the u16 "
+              "late-ignition measurement; onset at ~L24 falsifies it "
               "(lens-fit artifact)."]
     (OUT / "report.md").write_text("\n".join(lines))
     print(f"wrote {OUT / 'report.md'}; knee=L{knee} floor=L{at_floor}",

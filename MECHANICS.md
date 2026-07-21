@@ -98,8 +98,15 @@ fraction-ported L24**. Prefer intervention bands **~L28–58** going
 forward; L24–28 is likely pre-ignition (harmless but wasted). Tension
 kept honest: the paper's effective dimensionality *rises* into the motor
 band, ours falls L58→L62 — unresolved (architecture vs lens-fit
-artifact). Single-conversation measurement; the ambiguity-commitment
-(Fig 29B) arm is still unrun.
+artifact). ~~Single-conversation measurement; the ambiguity-commitment
+(Fig 29B) arm is still unrun.~~ **RUN 2026-07-21 (apparatus-06,
+results/apparatus06-q27b/): the lens-free commitment arm puts the
+transition-width plateau onset at L25 — the fraction-ported boundary,
+NOT L28–36 (P4 falsified).** State qwen ignition with both numbers:
+commitment machinery in place by ~L25 (lens-free), lens-visible
+signatures from ~L28–36. Intervention band L28–58 unaffected
+(post-onset under either reading); L24–28 possibly not wasted after
+all. Motor band sharpens further (width 0.25→0.15 L54–61).
 
 ---
 

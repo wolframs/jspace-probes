@@ -86,6 +86,20 @@ u16 late-ignition measurement. *Falsified if* the knee lands at ~L24,
 which would mean our four-signature trawl measurement reflects lens-fit
 properties, not model geometry.
 
+> **Resolved 2026-07-21 evening — FALSIFIED (second same-day loss).**
+> 16 pairs × 40 carriers: width plateau (0.25) onset at **L25**, the
+> fraction-ported boundary; L4 tracks the mixture as a clean diagonal;
+> no further sharpening inside L28–36; second width step-down in the
+> MOTOR band (0.20 from L54, min 0.15 at L61 — P12-consistent).
+> Reading: either u16's L28–36 partly reflects lens-fit (3 of 4
+> signatures route through the lens; raw kurtosis L27–32 sits closest
+> to this arm's L19–25 steepening), or commitment-onset ≠ ignition and
+> L28–36 is when its products become lens-readable. Intervention band
+> L28–58 unaffected (post-onset either way), but state the late-
+> ignition headline with both numbers. gemma commitment arm queued as
+> the family-wide check. Evidence:
+> results/apparatus06-q27b/{report.md,thoughts.md,a06.json}.
+
 **P5 — audit-03 (gemma-12b recalibration).** The four-signature sweep
 will place 12B ignition at ~44–56% depth (~L21–27 of 48) — the same
 proportional overshoot vs its fraction port (L18) that qwen showed.
