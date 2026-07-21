@@ -97,7 +97,6 @@ def run(model: str = MODEL) -> None:
     tok = lm.tok
     hf = lm.model._hf_model
     emb = hf.get_input_embeddings()
-    E = emb.weight.detach()
     n_layers = lm.model.n_layers
     from jlens.hooks import ActivationRecorder
 
@@ -120,8 +119,16 @@ def run(model: str = MODEL) -> None:
 
     for pi, (a_name, b_name) in enumerate(pairs):
         aid, bid = _one(a_name), _one(b_name)
-        mix = ((1 - A).unsqueeze(1) * E[aid].float().cpu()
-               + A.unsqueeze(1) * E[bid].float().cpu())   # [21, D]
+        # endpoint embeddings via the MODULE's forward, not raw weight
+        # rows — Gemma scales embeddings inside the module (x sqrt(d));
+        # raw rows would inject a ~60x-too-small mixed token (the bug
+        # behind the first g4b/g12b garbage curves)
+        with torch.no_grad():
+            dev = next(hf.parameters()).device
+            ends = emb(torch.tensor([[aid, bid]],
+                                    device=dev))[0].float().cpu()
+        mix = ((1 - A).unsqueeze(1) * ends[0]
+               + A.unsqueeze(1) * ends[1])                # [21, D]
         for ci, (pre, post) in enumerate(CARRIERS):
             pre_ids = tok.encode(pre, add_special_tokens=False)
             post_ids = tok.encode(" " + post, add_special_tokens=False)
@@ -161,9 +168,10 @@ def run(model: str = MODEL) -> None:
                 curves_example = [[round(float(x), 3) for x in c[l]]
                                   for l in range(n_layers)]
         med = widths[: pi + 1].reshape(-1, n_layers).median(0).values
+        probe_ls = [int(n_layers * f) for f in (0.06, 0.38, 0.5, 0.75)]
         print(f"pair {a_name}/{b_name} done; running median width "
-              f"L4={med[4]:.2f} L24={med[24]:.2f} L32={med[32]:.2f} "
-              f"L48={med[48]:.2f}", flush=True)
+              + " ".join(f"L{l}={med[l]:.2f}" for l in probe_ls),
+              flush=True)
 
     W = widths.reshape(-1, n_layers)                  # [pairs*carriers, L]
     med = W.median(0).values

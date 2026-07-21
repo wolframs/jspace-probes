@@ -100,6 +100,18 @@ properties, not model geometry.
 > the family-wide check. Evidence:
 > results/apparatus06-q27b/{report.md,thoughts.md,a06.json}.
 
+> **Family check same evening (apparatus-07).** First commitment knee
+> at the fraction port on ALL THREE models (g4b ~L12/port 13, g12b
+> ~L14–18/port 18, qwen L25/port 24); gemma-12b shows a SECOND
+> sharpening at L32–43 that coincides with its lens-visible band AND
+> the audit-03 functional steering band; qwen's second stage is
+> motor-band; g4b has none. Resolution: "ignition" splits into
+> commitment-onset (port) → content sharpening (measured band,
+> steerable) → motor finalization — the staircase reading. Specimen 8
+> logged (gemma scales embeddings inside the module; raw-weight-row
+> mixtures inject a ~60x-too-small token). Evidence:
+> results/apparatus06-{g4b,g12b}/ + results/apparatus07-thoughts.md.
+
 **P5 — audit-03 (gemma-12b recalibration).** The four-signature sweep
 will place 12B ignition at ~44–56% depth (~L21–27 of 48) — the same
 proportional overshoot vs its fraction port (L18) that qwen showed.

@@ -107,6 +107,13 @@ commitment machinery in place by ~L25 (lens-free), lens-visible
 signatures from ~L28–36. Intervention band L28–58 unaffected
 (post-onset under either reading); L24–28 possibly not wasted after
 all. Motor band sharpens further (width 0.25→0.15 L54–61).
+**Family synthesis (apparatus-07, same evening): "ignition" is a
+STAIRCASE — (1) commitment-onset at the fraction port on all three
+models, (2) content sharpening at the measured band (g12b L32–43,
+where its lens sees content AND steering bites per audit-03; qwen's
+sits motor-band; g4b lacks it), (3) motor finalization. Use "the
+measured band" for interventions, "commitment onset" for the port;
+do not call both "ignition." results/apparatus07-thoughts.md.**
 
 ---
 
