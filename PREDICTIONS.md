@@ -197,6 +197,27 @@ adjacent conflict content routes through the J-space while the refusal
 landmark). *Falsified if* the refusal direction has no J-lens footprint
 at all, or if ablating it moves the workspace content wholesale.
 
+**P14 — affect-03 (causal arm, preregistered 2026-07-21 before the
+run).** Design: u18 hysteresis protocol, emotion-vector co-steer in the
+FREE phase only (forced phase text identical per α_typo under greedy —
+free-phase steering is the only clean lever on persistence).
+Mechanical-default prediction: amplifying *desperate* (α=0.12, 8 ws
+layers) will NOT shift the forced→self-sustaining boundary beyond what
+matched random directions do, and ablating desperate at α_typo=0.68
+will NOT rescue recovery — the two-regime law is context recruitment,
+affect states are correlational passengers (u18's margin anatomy +
+P12's executor-stage locus, both outside the affect band's claimed
+action). The paper-aligned alternative (desperation *gates* behavior
+selection — the blackmail/reward-hacking causal result) predicts a
+specific desperate effect exceeding random controls, most visibly as a
+free-phase margin (Δ_t = top1−top2 output logit) shift at the boundary
+α values. Coin-flip weight: 65/35 mechanical. Vigilant-ablation arm
+(u19 song): prediction per MECHANICS Fig-25 + Haiku-scale caveat —
+coherence degrades before any register-specific flattening at 27B
+scale; matched random ablation indistinguishable. *P14 falsified* (and
+the affect program upgraded) if desperate beats its matched controls on
+boundary shift or margin dose-response with consistent sign.
+
 ---
 
 ## Standing design rules distilled from the misses

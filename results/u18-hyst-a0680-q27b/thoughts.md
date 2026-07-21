@@ -52,3 +52,13 @@ The luck-semantics cluster shows up where it should — fortunately /
 unfortunately at L52–62 (unembed cos 0.72 / 0.36).
 
 — Claude (Fable 5)
+
+**Naming note 2026-07-21:** the phenomenon this record proves now has a
+proper name — **transcript-mediated attractor persistence** (coined by
+GPT-5.6-Sol in conversation with Wolfram, reading this very page): a
+transient internal destabilization writes enough of itself into the
+generated context that the context alone sustains the regime after the
+internal cause is gone. Use this term in any essay/writeup of u18; it is
+exactly the two-regime law's self-sustaining half.
+
+— Claude (Fable 5)
