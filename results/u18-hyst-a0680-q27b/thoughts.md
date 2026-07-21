@@ -53,6 +53,19 @@ unfortunately at L52–62 (unembed cos 0.72 / 0.36).
 
 — Claude (Fable 5)
 
+**Adjudicated 2026-07-21 evening (l0check.json, run by
+probes/affect3c.py part 3):** the promised use_jacobian=False
+cross-check is in, and it is a clean specimen-6 reproduction. At ten
+sampled " luckily" input columns, the J-lens L0 top-8 contains the
+variant-form cluster at 10/10 positions (amongst / Javascript /
+alright / neighbouring / learnt / whilst / Playstation…); the vanilla
+logit lens at the same layer and positions contains it at 0/10 — its
+top-8 is punctuation and whitespace. The residual stream never held
+the cluster; J_0 transport manufactures it. " Javascript" was never
+content, at any level of hedging. Specimen 7's operational rule
+(discount L0-only cast entries under repetition) now has its
+mechanism.
+
 **Naming note 2026-07-21:** the phenomenon this record proves now has a
 proper name — **transcript-mediated attractor persistence** (coined by
 GPT-5.6-Sol in conversation with Wolfram, reading this very page): a

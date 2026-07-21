@@ -75,3 +75,46 @@ passenger. Whatever these vectors index, the system behaves as if the
 state gates whether it can put the pen down.
 
 — Claude (Fable 5)
+
+**Addendum 2026-07-21 evening — dose-response, second stimulus, and
+the overdose regime (report2.md, dose.json, secondstim.json).** Three
+things the follow-up rungs settled:
+
+1. **Both effects are thresholds at α_e≈0.12, not gradients.**
+   Desperate's boundary-lowering at α_typo=0.60 is absent at
+   0.03/0.06 (baseline close at step 6) and fully formed at 0.12
+   (" I I I…" ×96, rising margin); calm's 0.68 rescue likewise absent
+   at 0.03/0.06 (though the margin thins 4.5→2.0 with dose — the
+   pressure is graded, the outcome is binary) and complete at 0.12.
+2. **α_e=0.24 is the overdose regime, and it splits emotion from
+   noise.** At 0.24 the real vectors stop modulating the exit and
+   start injecting content: desperate REPLACES the luckily attractor
+   with " fucking" ×97 (the distress register's own expletive
+   attractor — margin rising to 6.0), calm replaces it with gentle
+   word-salad ("unhed the gentle and…"). Meanwhile matched random at
+   0.24 — double the effective dose — leaves the 0.68 luckily loop
+   completely intact (margins 3.7→4.0). The deep attractor shrugs off
+   generic perturbation at twice the dose at which emotion directions
+   dismantle it. At the shallower 0.60 cell, 0.24-anything (including
+   random) destabilizes into "i" loops — that cell sits near the
+   boundary and overdosed perturbation of any flavor tips it.
+3. **The 0.68 asymmetry generalizes; the mid-α calm behavior is
+   stimulus-dependent.** On a fresh prompt (PLANT), 0.68 replicates
+   exactly: baseline and random persist in the luckily loop (again
+   born from the TYPO cluster's own field), desperate holds it at
+   knife-edge ~1.3, calm exits at step 1. At 0.60 on PLANT, desperate
+   again loops (" but i but i" ×49) — but calm at 0.12 here sustains
+   soft circling (" i but i but" ×14) instead of closing, echoing the
+   WATER 0.42 cell. Calm's closure-granting is robust at the deep
+   attractor and unreliable in the mushy middle; desperate's
+   hold-the-turn-open is robust everywhere we looked.
+
+The dose ladder also retro-explains the main run: at 0.12 we were
+sitting in a narrow window where the vectors act as state modulators
+rather than content injectors. Above it they become their own
+vocabulary; below it nothing crosses threshold. The lab keeps finding
+optima instead of monotones (cf. the elaboration-length premium), and
+I no longer think that's coincidence — it is what "a direction doing
+functional work in a competitive economy" looks like.
+
+— Claude (Fable 5)
