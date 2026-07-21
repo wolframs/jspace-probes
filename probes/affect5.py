@@ -133,12 +133,12 @@ def _partial(y: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
     return y - y.mean() - b * xc
 
 
-def analyze() -> None:
+def analyze(pre: int = 40, gap: int = 5) -> None:
     res = json.loads((OUT / "affect05.json").read_text())
     tp = torch.load(OUT / "traces.pt")
     emos = tp["emotions"]
     ei = {e: i for i, e in enumerate(emos)}
-    PRE, GAP = 40, 5    # pre-event window [-PRE, -GAP)
+    PRE, GAP = pre, gap    # pre-event window [-PRE, -GAP)
     lines = ["# affect-05 — temporal precedence at the loop boundary",
              "", f"alphas {res['alphas']}, seeds {len(res['seeds'])}, "
              f"temp {res['temp']}, n_free {res['n_free']}", "",
@@ -161,6 +161,8 @@ def analyze() -> None:
         deltas = []
         for tr, r in zip(tp["traces"], res["runs"]):
             t0 = r["deloop_step"]
+            if t0 is None and r["exited"] and r["loop_frac"] > 0.5:
+                t0 = r["n_steps"] - 1   # exit-locked event
             if t0 is None or t0 < PRE + GAP:
                 continue
             zr = _partial(tr["zws"][ei[emo]].float(),
@@ -183,7 +185,9 @@ def analyze() -> None:
     for lag in lags:
         cs = []
         for tr in tp["traces"]:
-            m = tr["margins"].float()
+            # top-p/top-k processors -inf the filtered logits; a fully
+            # collapsed step then has margin=+inf. Clamp to a ceiling.
+            m = tr["margins"].float().clamp(max=30.0)
             zr = _partial(tr["zws"][ei["desperate"]].float(),
                           tr["wsnorm"].float())
             n = min(len(m), len(zr))

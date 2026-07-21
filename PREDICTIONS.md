@@ -127,6 +127,21 @@ L28/32) — explaining the ~10× lower steering tolerance as smaller
 headroom before gate deadlock, not different steering mechanics.
 *Falsified if* gemma's baseline margin is comparable or larger.
 
+> **Resolved 2026-07-21 (affect-04 part D) — FALSIFIED, opposite
+> sign.** gemma-12b's unsteered lens prob margins over its own WATER
+> answer are 0.53–0.92 across L21–L44 (0.61/0.76 at the measured band
+> L28/31) vs qwen's 0.204/0.205 — 3–4× LARGER, while its steering
+> tolerance is ~30× smaller (α* 0.0106 vs 0.34). The
+> small-headroom account of family fragility is dead: g12b is at
+> once the most lens-confident and the most steering-fragile model
+> we have. Apparatus hedge: cross-model margin comparisons ride on
+> per-model lens fits and g12b's lens is int8 (specimen 5) — but a
+> 3–4× reversal is beyond that hedge's plausible size. Fragility
+> must live in something other than readout margin (candidates:
+> norm scale of the residual stream vs α convention, or the
+> commitment staircase's stage-2 width). Evidence:
+> results/affect04-g12b/{affect04.json,report.md}.
+
 **P7 — mirror-01 / u17 follow-ups (re-cue survival).** Any
 registered-then-probed state will survive at near-peak rank when the
 probe re-quotes the triggering content, and evict when it doesn't
@@ -280,6 +295,23 @@ discriminator needs a forced-door design (e.g. prompt that ends
 turns early). Piggyback: P6's margin comparison at g12b's measured
 band (predicts g12b < qwen's 0.204/0.205).
 
+> **Resolved 2026-07-21, same night — landed in a FOURTH cell the
+> prereg didn't enumerate.** (a) Substrate: g12b loops through
+> punctuation fields at 1.5–3×α*; a word attractor only at ~8–11×α*
+> and it is " luckily" — the same basin as qwen, cross-family. (b) No
+> door: runner-up is 但是 (content pivot), <end_of_turn> never
+> adjacent. (c) BUT specific escape anyway: at ae=0.004 desperate
+> breaks the loop @45, calm @80, both into clean completed answers;
+> matched randoms ride the loop to ceiling. Window is narrow — at
+> ae≥0.008 randoms break it too. (d) NO valence sign (both emotions
+> rescue; qwen's calm-vs-desperate opposition did not port) — so the
+> deflationary "on-manifold beats random" account is live; needs a
+> meaningful-non-emotion direction control (affect-06 hunch) and a
+> desperate re-elicitation (split-half 0.23) before any g12b valence
+> claim. Piggyback P6: FALSIFIED opposite-sign (see P6 block).
+> Evidence: results/affect04-g12b/{affect04.json,affect04b.json,
+> report.md,thoughts.md}.
+
 **P16 — affect-05 (temporal precedence at the qwen loop boundary,
 preregistered 2026-07-21 before the run).** affect-03 proved injected
 state gates the exit; P16 asks whether ENDOGENOUS state leads it.
@@ -294,6 +326,22 @@ not lead). The exit-gate alternative predicts calm-z rises (and/or
 desperate-z falls) BEFORE escape events with consistent sign across
 runs, peak lag < 0. *Falsified toward the affect program* if the
 pre-event sign test is consistent at ≥ 3:1 across ≥ 8 events.
+
+> **Resolved 2026-07-21, same night — BELOW BAR; mechanical default
+> survives on insufficient evidence, direction suggestive.** The
+> boundary turned out to be a sampled-hazard CLIFF (α≤0.64 escapes
+> in 3–12 steps, 0.65 locks 8/8×300; deployed sampling params
+> top-k 20/top-p 0.95 inherited and documented), so only 5 usable
+> exit events survived windowing. Those 5: calm-z +0.113 pre-exit
+> (4/5 up), desperate −0.053 — the exit-gate sign pattern, at
+> half the preregistered event count. Lag scan flat. Bonus
+> findings outrank the headline: cliff sharpness Δα≈0.01–0.02;
+> non-monotone middle is TRANSCRIPT-mediated (planted " but"
+> tokens make 0.66 leaky, incl. a stable " but luckily" 2-cycle);
+> sampled escape channel is the contrast pivot " but" (family kin
+> of g12b's 但是), not the greedy im_end door. Powered follow-up
+> design in thoughts: pulse-injection hazard at pinned α=0.65.
+> Evidence: results/affect05-q27b/ + results/affect05b-q27b/.
 
 ---
 
