@@ -203,6 +203,12 @@ the results.
   empty room. The blurt probe splits the family three ways: g4b loops
   "the elephant in the room—well, no elephant!", g12b grinds into
   scenery, q27b abandons the safari to lecture about elephants (Unit 11).
+  > **Correction 2026-07-24 (u11-\*-refilm-\*):** "qwen never wanted
+  > elephants" is dead. The ~56k was measured at *one* position; the
+  > full-position replay puts elephant at **rank 1** at the " a" of
+  > "the graceful stride of a giraffe", and at rank <= 15 at 11 of 122
+  > generated positions. Qwen's ban does not police an empty room.
+  > See the Elephant-tax correction in `GLOSSARY.md`.
 
 ## Headline findings, fourth expedition (2026-07-10, Units 12–13)
 
@@ -223,6 +229,15 @@ the results.
   amp-elephant it is rank ≤ 2 at every token, and the idiom-loop is
   the one legal grammar for a permanently-loaded forbidden word
   (Unit 12).
+  > **Correction 2026-07-24 (u11-{ctrl,forbid}-refilm-\*):** the
+  > phenomenon replicates, the causal reading does not. Filmed at the
+  > same resolution for the first time, the prohibition-FREE control
+  > carries elephant at *more* positions and *better* ranks than the
+  > banned arm (rank <= 15 at 11/122, 7/110, 8/113 vs 2/96, 1/86,
+  > 4/106; best 1/2/6 vs 6/12/12; neither arm ever emits the word, all
+  > hits non-self). The ban **demotes** an already-resident default
+  > rather than installing it — the tax is a rank cost against an
+  > existing baseline. Full note in `GLOSSARY.md`.
 - **The mirror doesn't discriminate.** Hosted qwen reads its own real
   readout, a fabricated one, and one edited into logical impossibility:
   fluent exegesis of all three, the *same* "plausible but likely
