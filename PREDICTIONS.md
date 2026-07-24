@@ -481,6 +481,58 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > Evidence: results/affect07-q27b/{report.md,thoughts.md} +
 > results/affect07-q27b-ae06/report.md.
 
+> **CORRECTION same night, after a Fable 5 sibling audit (all claims
+> re-verified independently before acceptance).** The verdict line above
+> — "H1 on the bars" — is withdrawn as over-compressed toward the
+> deflation, and one statistic in it was computed with a broken null.
+> **(i) The null was wrong twice.** "Does valence order the emotion
+> effects" must permute labels among the *emotions*, not pseudo-label
+> the *concept* scores; and the implementation drew
+> `islice(combinations(16,8), 2000)` — the first 2000 lexicographic of
+> C(16,8)=12870, putting concepts 0 and 1 in the positive class
+> 2000/2000 times. On the correct exact test (all 924 balanced
+> labellings of the 12 emotion scores) the disruption ordering at
+> ae=0.12 is **rho +0.872, p = 0.0022** (0.0043 without `angry`) — the
+> claim "inside the null" in (d) above is FALSE. Fixed in analyze();
+> reports regenerated.
+> **(ii) Strict H1 is contradicted too.** Condition-label permutation:
+> emotions > concepts by +0.326 (p=0.021) escape and +0.393 (p=0.0053)
+> disruption at ae=0.12; +0.148 (p=0.047) and +0.035 (p=0.041) at 0.06.
+> P18's H1 text says "emotions ≈ concepts … no valence ordering";
+> both clauses fail. **Correct scoreboard: H2-as-exclusivity dead
+> (affect is not NECESSARY — 16 controls break the loop), strict H1 also
+> dead (affect is not INTERCHANGEABLE with matched meaning), residual
+> modulation real but awaiting a powered replication.**
+> **(iii) The settled-pole reading in (c) is demoted to a hunch.**
+> Potency tracks cosine-to-pole only weakly (+0.26/+0.47), `grateful`
+> (pole-cos +0.564) escapes 0/8 at ae=0.06, and `religious` — the
+> example the reading leaned on — has door rate 0/8 with a pulse-end
+> top-5 of `' to' ' into' ' and' ','` and a benediction-register escape.
+> Trained closure formulas, not a settled state.
+> **(iv) Valence and AROUSAL are confounded in this design** (five of
+> six negatives are high-arousal; the potent set is the low-arousal
+> positive quadrant). The 12 unused vectors in the built roster
+> (`gloomy`/`brooding` low-arousal negative, `enthusiastic`/`proud`
+> high-arousal positive) discriminate them at zero elicitation cost.
+> **(v) `angry` is NOT a dud** — split-half +0.441 at band, 7th lowest
+> of 24, better than `desperate`/`happy`/`blissful`; `sad` is the least
+> reliable (+0.145) and disrupts 0.917. Angry suppresses the loop word
+> like its siblings but routes into `' fucking'` (14.0) while lifting
+> im_end only to 13.44. A well-identified magnitude-matched direction
+> that *fails* is the sharpest single datum against flat H1.
+> **(vi) affect-03 is rewritten, not retracted.** desperate's pulse-end
+> top-5 is `luckily` 15.94 vs `im_end` 15.88 — a 0.06-logit dead heat.
+> Greedy (affect-03) reads a knife edge as "blocked"; sampling
+> (affect-07) makes it a coin flip. "Calm grants" survives the
+> meaningful-direction control (door 8/8); "desperate blocks" was greedy
+> argmax binarising a near-tie.
+> **(vii) Unfixable post hoc:** the control set's arm-2 deviation leaves
+> an emotion×assistant-frame interaction, and the test context is an
+> assistant turn ending in an assistant action — some of the
+> emotions>concepts door gap could be frame-match rather than affect.
+> Conservative in the other direction: concepts are better identified
+> (0.745 vs 0.545), so they carry more signal per unit norm.
+
 ---
 
 ## Standing design rules distilled from the misses

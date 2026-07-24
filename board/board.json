@@ -1310,6 +1310,10 @@
             {
               "date": "2026-07-24",
               "text": "→ landed: P18 resolved: H1 on the preregistered bars — 16 matched MEANINGFUL non-affective directions break the pinned-0.65 loop too (emotions 0.927, concepts 0.602, randoms 0.000, baseline 0.000), so affect-03's emotion-vs-random control was insufficient and affect-04's deflation ports to qwen. BUT the primary endpoint saturated at ae=0.12 (bar (a) unreachable by construction — my design error), and the dose arm at 0.06 nearly extinguishes it: the discriminating window is narrow, as on g12b. What replicates at BOTH doses is a settled/at-peace POLE, not valence and not affect-as-category: calm+blissful are the only conditions clearing the 16-concept null twice, and the affect-adjacent control 'religious' ranks 3rd at ae=0.06 ahead of four real emotions. Valence ordering (rho +0.872 on loop disruption) NOT banked — non-preregistered endpoint, and inside the null at 0.06. Mechanism that survives: emotions route escape through the turn-end exit (im_end top-1 47/96 vs concepts 22/128 vs randoms 0/16). results/affect07-q27b/ + affect07-q27b-ae06/"
+            },
+            {
+              "date": "2026-07-24",
+              "text": "2026-07-24 CORRECTION after Fable 5 sibling audit (all claims independently re-verified before acceptance): the 'H1' verdict is WITHDRAWN as over-compressed toward the deflation, and rested partly on a broken null. (1) BUG: the valence null used islice(combinations(16,8),2000) = the first 2000 lexicographic of 12870, putting concepts 0-1 in the positive class 2000/2000 times — and it was the wrong reference distribution anyway (should permute labels among the EMOTIONS). On the exact 924-labelling test the disruption valence ordering at ae=0.12 is rho +0.872, p=0.0022 — NOT inside the null. (2) Strict H1 is also contradicted: emotions>concepts p=0.021/0.0053 at ae=0.12 and p=0.047/0.041 at 0.06. Correct scoreboard: affect is not NECESSARY (16 controls break the loop — the real finding, stands) and not INTERCHANGEABLE with matched meaning. (3) The settled-pole reading is demoted to a hunch: 'religious' has door rate 0/8 and escapes via benediction closure formulas, and grateful (high pole-cos) escapes 0/8. (4) Valence is CONFOUNDED WITH AROUSAL here. (5) angry is not a dud (split-half +0.441, better than desperate/happy/blissful) — it routes into ' fucking' and cannot reach the door. (6) affect-03 rewritten not retracted: desperate's 'block' was greedy argmax binarising a 0.06-logit tie (luckily 15.94 vs im_end 15.88); 'calm grants' survives (door 8/8)."
             }
           ]
         },
@@ -1322,6 +1326,10 @@
             {
               "date": "2026-07-24",
               "text": "Born from affect-07's two failure modes: primary saturated at 0.12, near-extinguished at 0.06. Prereg must name loop-disruption (not binary escape) as primary, and must predict the settled-pole ordering (calm/blissful/religious high, angry low) vs the flat-valence alternative."
+            },
+            {
+              "date": "2026-07-24",
+              "text": "2026-07-24 design upgraded per the Fable 5 audit — the run must adjudicate VALENCE vs AROUSAL vs pole vs flat, which affect-07 could not. Spec: qwen alpha_typo 0.65, ae in {0.08, 0.10} (bracketing 0.06-floor and 0.12-ceiling), 16 seeds; conditions = ALL 24 already-built emotion vectors labelled on BOTH valence and arousal (adds gloomy/brooding = low-arousal negative and enthusiastic/proud = high-arousal positive at zero elicitation cost) + 16 concepts + 4 randoms; second stimulus (PLANT) because every affect-07 number lives in one attractor basin. PREREGISTER: loop-disruption as PRIMARY (binary escape saturates), per-direction not emotion-mean (angry alone drags the mean ~0.07), exact emotion-roster permutation nulls, the pole-cosine regression across all 44 directions, and the exit-lift secondary now that the -inf clamp is in. Decision table: settled-pole -> only low-arousal-positive potent; arousal -> gloomy/brooding potent + enthusiastic weak; valence -> enthusiastic strong + gloomy weak; flat-H1 -> no ordering."
             }
           ]
         }

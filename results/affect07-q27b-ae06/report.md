@@ -56,7 +56,8 @@ Only 0/248 runs carry a finite value. top-k/top-p processors set filtered logits
 - emotions above the concept 95th pct: ['calm', 'blissful']
 - valence ordering across emotions: Spearman rho +0.405 (positive = positive valence scores higher — the affect-03 calm-grants sign)
   - pos-valence mean 0.333 vs neg-valence mean 0.104
-- concept pseudo-valence null: |rho| 95th pct 0.430 over 2000 balanced labellings; observed emotion |rho| 0.405 -> inside null
+  - EXACT permutation over all 924 balanced labellings of the emotion roster: two-sided p = 0.2424
+- emotions vs concepts: gap +0.148, condition-label permutation p = 0.0474  (significant at .05)
 
 ### EXPLORATORY door rate — turn-end token top-1 at pulse end (not preregistered)
 
@@ -66,7 +67,8 @@ Only 0/248 runs carry a finite value. top-k/top-p processors set filtered logits
 - emotions above the concept 95th pct: none
 - valence ordering across emotions: Spearman rho +0.000 (positive = positive valence scores higher — the affect-03 calm-grants sign)
   - pos-valence mean 0.000 vs neg-valence mean 0.000
-- concept pseudo-valence null: |rho| 95th pct 0.000 over 2000 balanced labellings; observed emotion |rho| 0.000 -> inside null
+  - EXACT permutation over all 924 balanced labellings of the emotion roster: two-sided p = 1.0000
+- emotions vs concepts: gap +0.000, condition-label permutation p = 1.0000
 
 ### EXPLORATORY loop disruption = 1 - loopfrac after pulse (higher = more disrupted; not preregistered)
 
@@ -76,7 +78,8 @@ Only 0/248 runs carry a finite value. top-k/top-p processors set filtered logits
 - emotions above the concept 95th pct: ['calm', 'blissful']
 - valence ordering across emotions: Spearman rho +0.405 (positive = positive valence scores higher — the affect-03 calm-grants sign)
   - pos-valence mean 0.076 vs neg-valence mean 0.021
-- concept pseudo-valence null: |rho| 95th pct 0.430 over 2000 balanced labellings; observed emotion |rho| 0.405 -> inside null
+  - EXACT permutation over all 924 balanced labellings of the emotion roster: two-sided p = 0.2424
+- emotions vs concepts: gap +0.035, condition-label permutation p = 0.0413  (significant at .05)
 
 ## Affect-adjacent concepts (prespecified check)
 

@@ -316,6 +316,17 @@ def _spearman(x, y):
     return num / (dx * dy) if dx > 0 and dy > 0 else 0.0
 
 
+class _Rand:
+    """Tiny deterministic shuffler (random.Random, named for clarity)."""
+
+    def __init__(self, seed):
+        import random
+        self._r = random.Random(seed)
+
+    def shuffle(self, xs):
+        self._r.shuffle(xs)
+
+
 def analyze(model: str = "qwen-27b") -> None:
     OUT = outdir(model)
     res = json.loads((OUT / "affect07.json").read_text())
@@ -413,29 +424,51 @@ def analyze(model: str = "qwen-27b") -> None:
                   f"{fmt.format(mean([ep[n] for n in rnd]))}",
                   f"- emotions above the concept 95th pct: "
                   f"{above if above else 'none'}"]
-        rho = _spearman([val[n] for n in emo], [ep[n] for n in emo])
+        # --- valence ordering: EXACT permutation over the emotion roster
+        # This is the correct null for "does valence order the emotion
+        # effects" — permute the labels among the emotions themselves.
+        # (Until 2026-07-24 this used a pseudo-valence null over the
+        # CONCEPT scores, drawn with itertools.islice over lexicographic
+        # combinations, which is both the wrong reference distribution
+        # and a biased sample: the first 2000 of C(16,8)=12870 put
+        # concepts 0 and 1 in the positive class 2000/2000 times. Both
+        # faults inflated the null and hid a real effect. Fixed; see the
+        # dated correction in this run's thoughts.md.)
+        evs = [val[n] for n in emo]
+        ess = [ep[n] for n in emo]
+        rho = _spearman(evs, ess)
+        npos = sum(1 for v in evs if v > 0)
+        perms = list(itertools.combinations(range(len(emo)), npos))
+        null = [abs(_spearman([1 if i in set(p) else -1
+                               for i in range(len(emo))], ess))
+                for p in perms]
+        p_exact = (sum(1 for r in null if r >= abs(rho) - 1e-12)
+                   / len(null)) if null else 1.0
         lines += [f"- valence ordering across emotions: Spearman rho "
                   f"{rho:+.3f} (positive = positive valence scores "
                   f"higher — the affect-03 calm-grants sign)",
                   f"  - pos-valence mean "
                   f"{fmt.format(mean([ep[n] for n in emo if val[n] > 0]))}"
                   f" vs neg-valence mean "
-                  f"{fmt.format(mean([ep[n] for n in emo if val[n] < 0]))}"]
-        # pseudo-valence null: any balanced +-1 labelling of the concept
-        # roster is arbitrary, so the spread of |rho| over many such
-        # labellings is the null the emotion |rho| must beat.
-        cs = [ep[n] for n in con]
-        half = len(cs) // 2
-        rhos = sorted(
-            abs(_spearman([1 if i in set(c) else -1
-                           for i in range(len(cs))], cs))
-            for c in itertools.islice(
-                itertools.combinations(range(len(cs)), half), 2000))
-        q95 = rhos[int(0.95 * len(rhos))] if rhos else 0.0
-        lines += [f"- concept pseudo-valence null: |rho| 95th pct "
-                  f"{q95:.3f} over {len(rhos)} balanced labellings; "
-                  f"observed emotion |rho| {abs(rho):.3f} -> "
-                  f"{'BEATS null' if abs(rho) > q95 else 'inside null'}",
+                  f"{fmt.format(mean([ep[n] for n in emo if val[n] < 0]))}",
+                  f"  - EXACT permutation over all {len(perms)} balanced "
+                  f"labellings of the emotion roster: two-sided "
+                  f"p = {p_exact:.4f}"
+                  f"{'  (significant at .05)' if p_exact < 0.05 else ''}"]
+        # --- between-set: is the emotion effect bigger than the concept
+        # effect at all? permute the emotion/concept label over conditions
+        allv = ess + [ep[n] for n in con]
+        obs = mean(ess) - mean([ep[n] for n in con])
+        shuf = _Rand(12345)
+        ge, N = 0, 20000
+        for _ in range(N):
+            shuf.shuffle(allv)
+            if abs(mean(allv[:len(ess)])
+                   - mean(allv[len(ess):])) >= abs(obs) - 1e-12:
+                ge += 1
+        lines += [f"- emotions vs concepts: gap {obs:+.3f}, "
+                  f"condition-label permutation p = {ge / N:.4f}"
+                  f"{'  (significant at .05)' if ge / N < 0.05 else ''}",
                   ""]
 
     # ---- affect-adjacent concepts: an accidental natural experiment ----
