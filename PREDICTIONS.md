@@ -363,6 +363,23 @@ than an implied feeling), so the gate passes cleanly. *Gate fails if*
 concept split-half < emotion split-half at the band — then affect-07's
 asymmetry-of-evidence must be stated in every sentence of the writeup.
 
+> **Resolved 2026-07-24 — GATE PASSES 4/4, in the predicted direction.**
+> The 16 concept vectors are *better* identified than the 24 emotion
+> vectors at the workspace band on every criterion: split-half within-set
+> cosine 0.745 vs 0.545, held-out top-1 0.979 vs 0.736 (chance 0.062 /
+> 0.042), pairwise separation −0.066 vs −0.042, cross-arm attribution
+> 0.640 vs 0.559. Mean concept↔emotion cosine +0.000 (max 0.531);
+> concepts sit at mean |cos| 0.121 from emotions while emotions sit at
+> 0.357 from each other — on the model's manifold, off the affect
+> manifold. A null concept effect would therefore have been fully
+> interpretable; as it happens the effect was not null. Leakage 11/192
+> stories (5.7%), concentrated where the trait *is* a behaviour (smoker
+> 3, musician 2). Two concepts are partly affective by construction —
+> `beginner`~nervous +0.531, `religious`~grateful +0.485 — written into
+> affect-07's analysis as a prespecified check *before* results were
+> seen, and it turned out to matter (see P18).
+> Evidence: results/affect06-qwen-27b/{report.md,validation.json}.
+
 **P18 — affect-07 (does AFFECT break the loop, or does MEANING?
 preregistered 2026-07-24 before the run).** The whole causal affect arm
 (P14 falsified → "emotion state gates the exit"; affect-04's
@@ -418,6 +435,51 @@ window 0.004 < ceiling < 0.008), **sampled with seeds** to upgrade
 affect-04's n=1 greedy anecdotes into the same hazard measure. Also
 re-elicits the g12b *desperate* vector (split-half 0.23, flagged in
 affect-04) so any g12b valence claim rests on a re-validated direction.
+
+> **Resolved 2026-07-24 — H1 ON THE BARS; the bars were badly chosen;
+> what survives is narrower than either account.** Two doses on qwen,
+> 31 conditions x 8 seeds each (496 runs), paired via shared phase-1
+> context + common random numbers.
+> **(a) The deflation is real.** Sixteen matched meaningful
+> NON-affective directions break the pinned 0.65 loop too: at ae=0.12
+> emotions escape 0.927, concepts 0.602, matched randoms 0.000,
+> no-pulse 0.000. affect-03's emotion-vs-random contrast could not have
+> seen this. affect-04's "on-manifold specificity" reading ports to
+> qwen. My preregistered 55/45 lean toward H2 loses.
+> **(b) My primary endpoint saturated** (11/12 emotions and 5/16
+> concepts pinned at 1.00), making bar (a) unreachable the moment one
+> concept hit the ceiling — a design error, not a fact about the model.
+> ae=0.12 is an overdose for discrimination; halving to 0.06 nearly
+> extinguishes the effect (emotions 0.219, concepts 0.070) and zeroes
+> the door measure. The window is narrow, mirroring g12b's
+> 0.004 < ceiling < 0.008. **Dose is the experiment in this program.**
+> **(c) What replicates across both doses is a POLE, not a category and
+> not valence.** At ae=0.06 the ladder is calm 0.75, blissful 0.62,
+> **`religious` 0.50** (a "control"), content 0.38, **`nocturnal` 0.25**,
+> rest ≤0.12. calm and blissful are the only conditions clearing the
+> 16-concept null at both doses. A settled/at-peace semantics breaks
+> this attractor whether it arrives labelled as an emotion or as a life.
+> **(d) The valence ordering is NOT banked.** Perfect pos/neg separation
+> on loop disruption at ae=0.12 (rho +0.872 vs null 0.421) — but on a
+> non-preregistered endpoint at the dose where the preregistered one
+> saturated; at ae=0.06 the same test gives rho +0.405 vs null 0.430,
+> same sign, inside by a hair. Consistent direction at two doses,
+> clears the null at neither when measured as promised. Lead, not
+> finding.
+> **(e) Mechanism piece that survives contact with the control:** at
+> ae=0.12 emotions put `<|im_end|>` top-1 at pulse end in 47/96 runs vs
+> concepts 22/128 and randoms 0/16 — emotions route the perturbation
+> through the *turn-end exit*; concepts mostly knock the loop off its
+> groove by other means. `angry` is the outlier emotion at both doses
+> (disruption 0.125 where every other emotion is ≥0.68).
+> **Apparatus:** the secondary endpoint (exit-token logit lift) is dead
+> in both arms — top-k/top-p set filtered logits to −inf, so a *gap* to
+> a filtered exit token is −inf and poisons every mean. affect-05's
+> margin trap, new quantity. Clamp added; endpoint marked UNAVAILABLE,
+> not interpreted. Arm B (gemma-12b) and the g12b desperate re-elicit
+> are NOT run — still owed.
+> Evidence: results/affect07-q27b/{report.md,thoughts.md} +
+> results/affect07-q27b-ae06/report.md.
 
 ---
 

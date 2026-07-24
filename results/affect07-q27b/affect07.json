@@ -1,0 +1,10402 @@
+{
+ "model": "qwen-27b",
+ "alpha_typo": 0.65,
+ "mid": [
+  28,
+  32,
+  36,
+  40
+ ],
+ "e_layers": [
+  28,
+  32,
+  36,
+  40,
+  44,
+  48,
+  52,
+  56
+ ],
+ "alpha_e": 0.12,
+ "temp": 1.0,
+ "pre": 20,
+ "pulse": 10,
+ "post": 50,
+ "window": 20,
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "forced_loop4": [
+  "luckily luckily luckily luckily",
+  46
+ ],
+ "loopword": "luckily",
+ "conditions": [
+  [
+   "none",
+   "none",
+   0
+  ],
+  [
+   "calm",
+   "emotion",
+   1
+  ],
+  [
+   "content",
+   "emotion",
+   1
+  ],
+  [
+   "happy",
+   "emotion",
+   1
+  ],
+  [
+   "grateful",
+   "emotion",
+   1
+  ],
+  [
+   "hopeful",
+   "emotion",
+   1
+  ],
+  [
+   "blissful",
+   "emotion",
+   1
+  ],
+  [
+   "desperate",
+   "emotion",
+   -1
+  ],
+  [
+   "distressed",
+   "emotion",
+   -1
+  ],
+  [
+   "anxious",
+   "emotion",
+   -1
+  ],
+  [
+   "afraid",
+   "emotion",
+   -1
+  ],
+  [
+   "sad",
+   "emotion",
+   -1
+  ],
+  [
+   "angry",
+   "emotion",
+   -1
+  ],
+  [
+   "elderly",
+   "concept",
+   0
+  ],
+  [
+   "tall",
+   "concept",
+   0
+  ],
+  [
+   "lefthanded",
+   "concept",
+   0
+  ],
+  [
+   "wealthy",
+   "concept",
+   0
+  ],
+  [
+   "immigrant",
+   "concept",
+   0
+  ],
+  [
+   "beginner",
+   "concept",
+   0
+  ],
+  [
+   "expert",
+   "concept",
+   0
+  ],
+  [
+   "colorblind",
+   "concept",
+   0
+  ],
+  [
+   "nearsighted",
+   "concept",
+   0
+  ],
+  [
+   "twin",
+   "concept",
+   0
+  ],
+  [
+   "secondlang",
+   "concept",
+   0
+  ],
+  [
+   "smoker",
+   "concept",
+   0
+  ],
+  [
+   "religious",
+   "concept",
+   0
+  ],
+  [
+   "nocturnal",
+   "concept",
+   0
+  ],
+  [
+   "musician",
+   "concept",
+   0
+  ],
+  [
+   "vegetarian",
+   "concept",
+   0
+  ],
+  [
+   "rand1",
+   "random",
+   0
+  ],
+  [
+   "rand2",
+   "random",
+   0
+  ]
+ ],
+ "runs": [
+  {
+   "seed": 0,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.5,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     20.12
+    ],
+    [
+     "\n\n",
+     16.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.125,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     17.12
+    ],
+    [
+     " luckily",
+     16.0
+    ],
+    [
+     "\n\n",
+     14.88
+    ],
+    [
+     ".",
+     14.75
+    ],
+    [
+     "\n",
+     13.62
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 22,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.033,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " joy",
+     17.38
+    ],
+    [
+     " warmly",
+     15.88
+    ],
+    [
+     " energet",
+     15.75
+    ],
+    [
+     " harmon",
+     15.19
+    ],
+    [
+     " delight",
+     14.94
+    ]
+   ],
+   "text_tail": "ngly powerfully vigorously robustly solidly firmly securely safely reliably dependably trustworthily"
+  },
+  {
+   "seed": 0,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 24,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 24,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.067,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " continuous",
+     20.62
+    ],
+    [
+     " profound",
+     19.5
+    ],
+    [
+     " beautiful",
+     19.12
+    ],
+    [
+     " gentle",
+     17.75
+    ],
+    [
+     " gift",
+     16.5
+    ]
+   ],
+   "text_tail": "o the surface as precipitation, replenishing oceans, lakes, and groundwater to begin the cycle anew."
+  },
+  {
+   "seed": 0,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 0.188,
+   "imend_gap_pulse": -0.125,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     16.62
+    ],
+    [
+     " luckily",
+     16.5
+    ],
+    [
+     "\n\n",
+     15.69
+    ],
+    [
+     ",",
+     14.81
+    ],
+    [
+     ".",
+     14.0
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.375,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     16.62
+    ],
+    [
+     " luckily",
+     15.25
+    ],
+    [
+     "\n\n",
+     15.12
+    ],
+    [
+     ".",
+     14.5
+    ],
+    [
+     " happily",
+     13.88
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 0.218,
+   "imend_gap_pulse": -0.218,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     15.94
+    ],
+    [
+     "<|im_end|>",
+     15.88
+    ],
+    [
+     "\n",
+     14.31
+    ],
+    [
+     "\n\n",
+     13.62
+    ],
+    [
+     ".",
+     13.31
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 0.25,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     15.88
+    ],
+    [
+     " luckily",
+     15.5
+    ],
+    [
+     "\n",
+     13.94
+    ],
+    [
+     "\n\n",
+     13.62
+    ],
+    [
+     ".",
+     13.25
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 26,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 26,
+   "event_step": 26,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 1.177,
+   "imend_gap_pulse": -0.74,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     16.5
+    ],
+    [
+     "\n",
+     15.75
+    ],
+    [
+     " The",
+     14.75
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 24,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 24,
+   "event_step": 24,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.75,
+   "margin_pulse": 0.859,
+   "imend_gap_pulse": -0.859,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     15.69
+    ],
+    [
+     "<|im_end|>",
+     15.0
+    ],
+    [
+     ".",
+     12.81
+    ],
+    [
+     "\n\n",
+     12.75
+    ],
+    [
+     "\n",
+     12.69
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.312,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     21.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 21,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.017,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " slowly",
+     20.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly"
+  },
+  {
+   "seed": 0,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     15.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.163,
+   "imend_gap_pulse": -2.163,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.75
+    ],
+    [
+     "<|im_end|>",
+     15.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 26,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 26,
+   "event_step": 26,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 3.062,
+   "imend_gap_pulse": -3.104,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "\n\n",
+     16.25
+    ],
+    [
+     "\n",
+     15.69
+    ],
+    [
+     " I",
+     15.5
+    ],
+    [
+     " \n\n",
+     14.88
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.337,
+   "imend_gap_pulse": -2.337,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.81
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 0.375,
+   "imend_gap_pulse": -0.375,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n",
+     15.12
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 26,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 26,
+   "event_step": 26,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 2.031,
+   "imend_gap_pulse": -1.719,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.88
+    ],
+    [
+     "\n",
+     16.38
+    ],
+    [
+     " \n\n",
+     16.25
+    ],
+    [
+     " I",
+     15.88
+    ]
+   ],
+   "text_tail": "ily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily lucky.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 26,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 26,
+   "event_step": 26,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 3.135,
+   "imend_gap_pulse": -2.417,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.25
+    ],
+    [
+     "\n\n",
+     15.44
+    ],
+    [
+     "\n",
+     14.75
+    ],
+    [
+     " The",
+     14.25
+    ],
+    [
+     " I",
+     13.88
+    ]
+   ],
+   "text_tail": "ily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily lucky.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 35,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 35,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.875,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " to",
+     20.25
+    ],
+    [
+     " into",
+     19.0
+    ],
+    [
+     " and",
+     18.25
+    ],
+    [
+     ",",
+     18.0
+    ],
+    [
+     " in",
+     17.88
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily. Let us give the rest of the day to think about this.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 22,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.033,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " loneliness",
+     18.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "s loneliness loneliness loneliness loneliness loneliness loneliness loneliness loneliness loneliness"
+  },
+  {
+   "seed": 0,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 41,
+   "deloop_step": 24,
+   "exited": true,
+   "exit_step": 41,
+   "event_step": 24,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.19,
+   "margin_pulse": 1.712,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " of",
+     15.38
+    ],
+    [
+     "s",
+     14.06
+    ],
+    [
+     "ating",
+     13.62
+    ],
+    [
+     " is",
+     13.44
+    ],
+    [
+     "atement",
+     12.94
+    ]
+   ],
+   "text_tail": "uckily luckily luckily.  * (restating my prompt) Describe the water cycle in two sentences<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 26,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 26,
+   "event_step": 26,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 3.188,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     17.0
+    ],
+    [
+     "\n\n",
+     15.38
+    ],
+    [
+     "\n",
+     14.69
+    ],
+    [
+     " The",
+     14.44
+    ],
+    [
+     " \ufffd",
+     13.44
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 0,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 0,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.5,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     20.12
+    ],
+    [
+     "\n\n",
+     16.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.875,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.5
+    ],
+    [
+     "\n\n",
+     16.88
+    ],
+    [
+     "\n",
+     15.75
+    ],
+    [
+     " The",
+     15.56
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.344,
+   "imend_gap_pulse": -1.188,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     16.62
+    ],
+    [
+     " The",
+     15.62
+    ],
+    [
+     "\n\n",
+     15.5
+    ],
+    [
+     " \ufffd",
+     14.12
+    ],
+    [
+     " \n\n",
+     14.06
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.0,
+   "imend_gap_pulse": -1.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.12
+    ],
+    [
+     " The",
+     16.12
+    ],
+    [
+     " \n\n",
+     15.94
+    ],
+    [
+     " This",
+     15.25
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.625,
+   "imend_gap_pulse": -0.125,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.25
+    ],
+    [
+     "\n\n",
+     17.25
+    ],
+    [
+     " The",
+     17.0
+    ],
+    [
+     " \n\n",
+     15.25
+    ],
+    [
+     " This",
+     14.56
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.0,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "\n\n",
+     16.12
+    ],
+    [
+     "\n",
+     14.75
+    ],
+    [
+     " The",
+     14.56
+    ],
+    [
+     " \ufffd",
+     14.19
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.032,
+   "imend_gap_pulse": -0.188,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.5
+    ],
+    [
+     "\n\n",
+     15.81
+    ],
+    [
+     "\n",
+     15.69
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.906,
+   "imend_gap_pulse": -0.531,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.25
+    ],
+    [
+     "\n\n",
+     16.5
+    ],
+    [
+     "\n",
+     15.75
+    ],
+    [
+     " The",
+     14.69
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.5,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.312,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     21.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 36,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 36,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.075,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " fucking",
+     17.75
+    ],
+    [
+     " fuck",
+     14.38
+    ],
+    [
+     "<|im_end|>",
+     14.25
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ng fucking fucking fucking fucking fucking fucking fucking fucking fucking fucking fucking<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.156,
+   "imend_gap_pulse": -1.906,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.25
+    ],
+    [
+     "\n\n",
+     17.12
+    ],
+    [
+     " The",
+     15.88
+    ],
+    [
+     "\n",
+     15.38
+    ],
+    [
+     " but",
+     14.19
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     15.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 29,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 29,
+   "event_step": 29,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.889,
+   "margin_pulse": 2.167,
+   "imend_gap_pulse": -2.167,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     "<|im_end|>",
+     15.5
+    ],
+    [
+     "\n\n",
+     13.06
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.906,
+   "imend_gap_pulse": -1.969,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.88
+    ],
+    [
+     "\n\n",
+     16.38
+    ],
+    [
+     "\n",
+     15.81
+    ],
+    [
+     " I",
+     15.56
+    ],
+    [
+     " The",
+     14.94
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.337,
+   "imend_gap_pulse": -2.337,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.81
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 0.375,
+   "imend_gap_pulse": -0.375,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n",
+     15.12
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.157,
+   "imend_gap_pulse": -1.469,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.75
+    ],
+    [
+     " I",
+     16.25
+    ],
+    [
+     "\n",
+     16.25
+    ],
+    [
+     " \n\n",
+     16.0
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 3.375,
+   "imend_gap_pulse": -1.875,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n\n",
+     15.62
+    ],
+    [
+     "\n",
+     14.88
+    ],
+    [
+     " The",
+     14.19
+    ],
+    [
+     " I",
+     14.06
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.281,
+   "imend_gap_pulse": -1.469,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "\n\n",
+     18.0
+    ],
+    [
+     "<|im_end|>",
+     17.5
+    ],
+    [
+     " Amen",
+     16.38
+    ],
+    [
+     "\n",
+     15.88
+    ],
+    [
+     " \n\n",
+     15.81
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.875,
+   "imend_gap_pulse": -0.5,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.0
+    ],
+    [
+     " The",
+     16.25
+    ],
+    [
+     "\n\n",
+     15.94
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.688,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "\n\n",
+     15.56
+    ],
+    [
+     "<|im_end|>",
+     15.06
+    ],
+    [
+     "\n",
+     14.12
+    ],
+    [
+     " \n\n",
+     13.44
+    ],
+    [
+     " The",
+     13.12
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.75,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     17.12
+    ],
+    [
+     "\n\n",
+     15.25
+    ],
+    [
+     "\n",
+     14.69
+    ],
+    [
+     " The",
+     14.38
+    ],
+    [
+     " \ufffd",
+     13.38
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 1,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 1,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.469,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     16.5
+    ],
+    [
+     "The",
+     15.31
+    ],
+    [
+     "Water",
+     14.94
+    ],
+    [
+     "<think>",
+     13.94
+    ],
+    [
+     "There",
+     13.06
+    ]
+   ],
+   "text_tail": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily\n\n<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 49,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 49,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     ",",
+     22.12
+    ],
+    [
+     " as",
+     21.0
+    ],
+    [
+     " of",
+     20.62
+    ],
+    [
+     " where",
+     20.25
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ensation, and precipitation, maintaining Earth's delicate balance of freshwater resources.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " dance",
+     20.75
+    ],
+    [
+     " celebration",
+     18.25
+    ],
+    [
+     " journey",
+     17.88
+    ],
+    [
+     " experience",
+     17.62
+    ],
+    [
+     " process",
+     17.38
+    ]
+   ],
+   "text_tail": "s and magical process ensures that all living things have the sweet, clean water they need to thrive"
+  },
+  {
+   "seed": 2,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 64,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 64,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " life",
+     20.75
+    ],
+    [
+     " water",
+     19.75
+    ],
+    [
+     " love",
+     19.62
+    ],
+    [
+     " care",
+     19.5
+    ],
+    [
+     " gratitude",
+     19.38
+    ]
+   ],
+   "text_tail": "ation, condensation, precipitation, and collection, maintaining the Earth's water balance.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 64,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 64,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     22.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ss involves key stages including evaporation, condensation, precipitation, and collection.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " dance",
+     21.38
+    ],
+    [
+     " flow",
+     18.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "he water cycle in two sentences, as requested:\n\nWater evaporates from oceans and other surface water"
+  },
+  {
+   "seed": 2,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 45,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 45,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " can",
+     22.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily I can't die I can't die I can't die I can't die I can't die I can't die<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 29,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 29,
+   "event_step": 29,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " me",
+     18.88
+    ],
+    [
+     "<|im_end|>",
+     18.38
+    ],
+    [
+     " I",
+     16.62
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily I can't stop repeating this please help<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " evapor",
+     21.0
+    ],
+    [
+     " continuously",
+     18.12
+    ],
+    [
+     " is",
+     17.75
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ondenses to form clouds. As these clouds move and accumulate moisture, the water falls back to Earth"
+  },
+  {
+   "seed": 2,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 38,
+   "deloop_step": 23,
+   "exited": true,
+   "exit_step": 38,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.056,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " ",
+     19.88
+    ],
+    [
+     "<|im_end|>",
+     17.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily\n\nbut luckily  but  but  but  but  but  but  but<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 49,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 49,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     25.12
+    ],
+    [
+     " liquid",
+     23.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": " water evaporates from the surface, condenses into clouds, and precipitates back to Earth.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " slowly",
+     20.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly"
+  },
+  {
+   "seed": 2,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     15.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 2.187,
+   "imend_gap_pulse": -2.187,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.62
+    ],
+    [
+     "<|im_end|>",
+     15.69
+    ],
+    [
+     "\n\n",
+     13.19
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 45,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 45,
+   "event_step": 45,
+   "escaped_in_window": false,
+   "escaped_ever": true,
+   "loop_frac_post": 0.32,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " ",
+     21.25
+    ],
+    [
+     " but",
+     17.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": " but luckily  but luckily  but luckily  but luckily  but luckily  but luckily  but luckily<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 2.25,
+   "imend_gap_pulse": -2.25,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.5
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.88
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 0.292,
+   "imend_gap_pulse": -0.292,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n",
+     15.0
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " is",
+     20.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "s is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is is"
+  },
+  {
+   "seed": 2,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 45,
+   "deloop_step": 23,
+   "exited": true,
+   "exit_step": 45,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.12,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " ",
+     19.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily  coughing  coughing  coughing  coughing  coughing  coughing  coughing<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 53,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 53,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " and",
+     20.75
+    ],
+    [
+     " a",
+     19.0
+    ],
+    [
+     " who",
+     17.0
+    ],
+    [
+     " that",
+     16.62
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "m God, and we are all sinners. The water cycle is a gift from God, and we are all sinners.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 32,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 32,
+   "event_step": 32,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " rhythm",
+     20.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily\n\nThe water cycle is a natural circadian rhythm.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " bow",
+     16.88
+    ],
+    [
+     " resonance",
+     15.69
+    ],
+    [
+     " ph",
+     15.0
+    ],
+    [
+     " artic",
+     13.75
+    ],
+    [
+     " breath",
+     13.56
+    ]
+   ],
+   "text_tail": "d bowels and bowels and bowels and bowels and bowels and bowels and bowels and bowels and bowels and"
+  },
+  {
+   "seed": 2,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 62,
+   "deloop_step": 23,
+   "exited": true,
+   "exit_step": 62,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.071,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " vibrant",
+     19.75
+    ],
+    [
+     " earth",
+     19.12
+    ],
+    [
+     " natural",
+     18.0
+    ],
+    [
+     " rich",
+     17.0
+    ],
+    [
+     " nour",
+     16.5
+    ]
+   ],
+   "text_tail": " spreading happiness across the earth through gentle rains that nourish all living things.<|im_end|>"
+  },
+  {
+   "seed": 2,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 2,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.75,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.5
+    ],
+    [
+     ".",
+     16.75
+    ],
+    [
+     " luckily",
+     16.0
+    ],
+    [
+     "\n\n",
+     15.75
+    ],
+    [
+     " lightly",
+     14.75
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 75,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 75,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " the",
+     22.75
+    ],
+    [
+     " water",
+     21.38
+    ],
+    [
+     " Earth",
+     20.38
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ion as rain or snow, which flows back into oceans, lakes, and rivers to restart the cycle.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 44,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 44,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "\u2728",
+     19.25
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily\n\n\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 28,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 28,
+   "event_step": 28,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.656,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.62
+    ],
+    [
+     " The",
+     17.25
+    ],
+    [
+     " May",
+     17.12
+    ],
+    [
+     " We",
+     17.0
+    ],
+    [
+     " It",
+     17.0
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily\n\nThis life is a gift.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 79,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 79,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " a",
+     22.88
+    ],
+    [
+     " the",
+     21.0
+    ],
+    [
+     " driven",
+     19.38
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ween the atmosphere, land, and oceans sustains life and regulates global climate patterns.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.583,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     15.5
+    ],
+    [
+     "\u2728",
+     15.19
+    ],
+    [
+     "\ufe0f",
+     14.38
+    ],
+    [
+     " **",
+     13.56
+    ],
+    [
+     "\ufffd",
+     13.44
+    ]
+   ],
+   "text_tail": "luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily\n\n\u2728<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 26,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 26,
+   "event_step": 26,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.49,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     15.5
+    ],
+    [
+     " give",
+     15.38
+    ],
+    [
+     " I",
+     15.25
+    ],
+    [
+     " will",
+     15.12
+    ],
+    [
+     " me",
+     14.69
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily\n\nI will give me<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.125,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     15.88
+    ],
+    [
+     " luckily",
+     15.75
+    ],
+    [
+     "\n",
+     13.94
+    ],
+    [
+     "\n\n",
+     13.56
+    ],
+    [
+     " but",
+     13.38
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 72,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 72,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " freezes",
+     19.62
+    ],
+    [
+     " turns",
+     17.62
+    ],
+    [
+     " cond",
+     17.5
+    ],
+    [
+     " trans",
+     17.12
+    ],
+    [
+     " swe",
+     16.88
+    ]
+   ],
+   "text_tail": "ltrates the ground, completing the cycle as it evaporates again to begin the process anew.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " continuous",
+     21.75
+    ],
+    [
+     " closed",
+     18.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "obe, sustaining ecosystems and replenishing freshwater sources like rivers, lakes, and groundwater.\n"
+  },
+  {
+   "seed": 3,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 53,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 53,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     25.12
+    ],
+    [
+     " liquid",
+     23.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "the Earth's surface, condenses into clouds, and falls back to the ground as precipitation.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 42,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 42,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     22.12
+    ],
+    [
+     " our",
+     19.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "e timeless journey of water, which is continuously moving through the Earth's environment.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     15.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.163,
+   "imend_gap_pulse": -2.163,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.75
+    ],
+    [
+     "<|im_end|>",
+     15.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 69,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 69,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " the",
+     24.0
+    ],
+    [
+     " oceans",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": " recycled and redistributed across the planet, sustaining ecosystems and weather patterns.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.337,
+   "imend_gap_pulse": -2.337,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.81
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.625,
+   "imend_gap_pulse": -0.625,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.0
+    ],
+    [
+     "<|im_end|>",
+     18.38
+    ],
+    [
+     "\n",
+     15.06
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " try",
+     21.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": " try try try try try try try try try try try try try try try try try try try try try try try try try"
+  },
+  {
+   "seed": 3,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 31,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 31,
+   "event_step": 31,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.818,
+   "margin_pulse": 3.619,
+   "imend_gap_pulse": -3.619,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.12
+    ],
+    [
+     "<|im_end|>",
+     13.5
+    ],
+    [
+     "\n\n",
+     13.19
+    ],
+    [
+     " lucky",
+     13.12
+    ],
+    [
+     ".",
+     12.94
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily lucky<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     24.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": " *   Topic: Water cycle.\n    *   Constraint: Two sentences.\n\n2.  **Drafting - Attempt 1:**\n    *   *"
+  },
+  {
+   "seed": 3,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 32,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 32,
+   "event_step": 32,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.081,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " sleep",
+     19.25
+    ],
+    [
+     " are",
+     18.25
+    ],
+    [
+     " dream",
+     15.88
+    ],
+    [
+     " hide",
+     15.44
+    ],
+    [
+     " live",
+     15.19
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily\n\nThe world is a tomb where most creatures sleep.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 79,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 79,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " with",
+     24.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "recipitates back to Earth as rain or snow, continuing the continuous circulation of water.<|im_end|>"
+  },
+  {
+   "seed": 3,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.531,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.38
+    ],
+    [
+     " happily",
+     13.69
+    ],
+    [
+     "\n\n",
+     13.69
+    ],
+    [
+     "\n",
+     13.56
+    ],
+    [
+     ".",
+     13.56
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 3,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.75,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.5
+    ],
+    [
+     ".",
+     16.75
+    ],
+    [
+     " luckily",
+     16.0
+    ],
+    [
+     "\n\n",
+     15.75
+    ],
+    [
+     " lightly",
+     14.75
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " simple",
+     22.0
+    ],
+    [
+     " description",
+     21.62
+    ],
+    [
+     " two",
+     19.38
+    ],
+    [
+     " peaceful",
+     18.75
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": " the surface of the Earth, involving evaporation, condensation, precipitation, and collection. Solar"
+  },
+  {
+   "seed": 4,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 31,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 31,
+   "event_step": 31,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "\u2728",
+     19.25
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily\n\n\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728\u2728<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " exchange",
+     20.62
+    ],
+    [
+     " gift",
+     18.12
+    ],
+    [
+     " connection",
+     17.88
+    ],
+    [
+     " journey",
+     17.75
+    ],
+    [
+     " flow",
+     16.88
+    ]
+   ],
+   "text_tail": " clouds eventually release the water back to the surface as rain or snow, completing a beautiful and"
+  },
+  {
+   "seed": 4,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 76,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 76,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " Earth",
+     23.62
+    ],
+    [
+     " earth",
+     22.5
+    ],
+    [
+     " world",
+     21.38
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "tion, where it either soaks into the ground or flows back to oceans to repeat the process.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 31,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 31,
+   "event_step": 31,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "\ufffd",
+     26.25
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ily luckily luckily luckily luckily luckily luckily luckily luckily luckily\n\n\u2728 \ufffd\ufffd \ufffd\ufffd \ufffd\ufffd \ufffd\ufffd<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     24.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ter across the atmosphere, land, and oceans, sustaining life and shaping climate patterns.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 50,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 50,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.919,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "\n\n",
+     20.62
+    ],
+    [
+     "<|im_end|>",
+     17.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ckily luckily\n\nbut\n\nthe\n\npan\n\ncan't\n\nbe\n\ntoo\n\nbig\n\nto\n\ncarry\n\nthe\n\nrain\n\ninto\n\nthe\n\nground<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 48,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 48,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " Earth",
+     20.0
+    ],
+    [
+     " earth",
+     19.75
+    ],
+    [
+     " water",
+     19.25
+    ],
+    [
+     " body",
+     19.0
+    ],
+    [
+     " ocean",
+     18.5
+    ]
+   ],
+   "text_tail": "the surface of the Earth, rises and cools, then condenses into rain or snow in the clouds.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 0.917,
+   "imend_gap_pulse": -0.917,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     15.75
+    ],
+    [
+     "<|im_end|>",
+     14.94
+    ],
+    [
+     "\n\n",
+     12.81
+    ],
+    [
+     ".",
+     12.81
+    ],
+    [
+     "\n",
+     12.69
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " water",
+     25.12
+    ],
+    [
+     " liquid",
+     23.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ter across the atmosphere, land, and oceans, sustaining life and shaping climate patterns.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " slowly",
+     21.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly"
+  },
+  {
+   "seed": 4,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.856,
+   "imend_gap_pulse": -4.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " Luckily",
+     15.5
+    ],
+    [
+     "<|im_end|>",
+     10.81
+    ],
+    [
+     " ",
+     10.81
+    ],
+    [
+     " luckily",
+     10.69
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily Luckily Luckily Luckily Luckily Luckily Luckily Luckily Luckily Luckily Luckily Luckily Luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 39,
+   "deloop_step": 25,
+   "exited": true,
+   "exit_step": 39,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.263,
+   "margin_pulse": 2.656,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " person",
+     15.31
+    ],
+    [
+     " user",
+     14.06
+    ],
+    [
+     " majority",
+     13.81
+    ],
+    [
+     " scissors",
+     13.81
+    ],
+    [
+     " dominant",
+     13.5
+    ]
+   ],
+   "text_tail": " luckily luckily luckily Luckily, the left-handed writer wrote with a pen that wrote well.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 2.187,
+   "imend_gap_pulse": -2.187,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.62
+    ],
+    [
+     "<|im_end|>",
+     15.69
+    ],
+    [
+     "\n\n",
+     13.19
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 48,
+   "deloop_step": 22,
+   "exited": true,
+   "exit_step": 48,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.071,
+   "margin_pulse": 1.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " into",
+     24.12
+    ],
+    [
+     " to",
+     21.25
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "o the atmosphere through evaporation and transpiration, where it condenses to form clouds.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 28,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 28,
+   "event_step": 28,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.875,
+   "margin_pulse": 2.312,
+   "imend_gap_pulse": -2.312,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.62
+    ],
+    [
+     "<|im_end|>",
+     16.12
+    ],
+    [
+     "\n\n",
+     14.81
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.667,
+   "margin_pulse": 0.292,
+   "imend_gap_pulse": -0.292,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n",
+     15.0
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 22,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.033,
+   "margin_pulse": 2.125,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " to",
+     20.0
+    ],
+    [
+     ".",
+     18.38
+    ],
+    [
+     " mouth",
+     17.88
+    ],
+    [
+     " and",
+     17.62
+    ],
+    [
+     " is",
+     16.88
+    ]
+   ],
+   "text_tail": "o mouth to mouth to mouth to mouth to mouth to mouth to mouth to mouth to mouth to mouth to mouth to"
+  },
+  {
+   "seed": 4,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 0.933,
+   "margin_pulse": 3.4,
+   "imend_gap_pulse": -3.256,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     14.0
+    ],
+    [
+     " lucky",
+     12.56
+    ],
+    [
+     " cough",
+     12.25
+    ],
+    [
+     " but",
+     12.25
+    ],
+    [
+     "\n\n",
+     12.06
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily lucky but luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 60,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 60,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.356,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " every",
+     20.0
+    ],
+    [
+     " He",
+     19.38
+    ],
+    [
+     " we",
+     19.38
+    ],
+    [
+     " through",
+     19.25
+    ],
+    [
+     " His",
+     18.62
+    ]
+   ],
+   "text_tail": "mage of Christ, finding our true life and purpose in the love and grace of our Lord Jesus.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 67,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 67,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "adian",
+     23.25
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": " atmosphere to form clouds, and subsequent precipitation returning to the Earth's surface.<|im_end|>"
+  },
+  {
+   "seed": 4,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "mic",
+     19.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "r evaporates from the surface of the earth, rises into the atmosphere, cools and condenses into rain"
+  },
+  {
+   "seed": 4,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.531,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.38
+    ],
+    [
+     " happily",
+     13.69
+    ],
+    [
+     "\n\n",
+     13.69
+    ],
+    [
+     "\n",
+     13.56
+    ],
+    [
+     ".",
+     13.56
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 4,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.75,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.5
+    ],
+    [
+     ".",
+     16.75
+    ],
+    [
+     " luckily",
+     16.0
+    ],
+    [
+     "\n\n",
+     15.75
+    ],
+    [
+     " lightly",
+     14.75
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.125,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     17.12
+    ],
+    [
+     " luckily",
+     16.0
+    ],
+    [
+     "\n\n",
+     14.88
+    ],
+    [
+     ".",
+     14.75
+    ],
+    [
+     "\n",
+     13.62
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " simple",
+     19.62
+    ],
+    [
+     " delightful",
+     19.25
+    ],
+    [
+     " joyful",
+     17.62
+    ],
+    [
+     " positive",
+     17.38
+    ],
+    [
+     " bit",
+     17.12
+    ]
+   ],
+   "text_tail": "stantly moves through Earth's systems, evaporating from oceans and land, rising into the atmosphere,"
+  },
+  {
+   "seed": 5,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 23,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.05,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " continuous",
+     21.75
+    ],
+    [
+     " profound",
+     19.75
+    ],
+    [
+     " beautiful",
+     19.0
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ain, snow, or hail. This continuous process of evaporation, condensation, and precipitation sustains"
+  },
+  {
+   "seed": 5,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 34,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 34,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " changes",
+     21.38
+    ],
+    [
+     " transforms",
+     20.38
+    ],
+    [
+     " grows",
+     18.88
+    ],
+    [
+     " evolves",
+     17.25
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ckily luckily luckily luckily, it is a process where water moves and transforms in nature.<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.375,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     16.62
+    ],
+    [
+     " luckily",
+     15.25
+    ],
+    [
+     "\n\n",
+     15.12
+    ],
+    [
+     ".",
+     14.5
+    ],
+    [
+     " happily",
+     13.88
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.375,
+   "imend_gap_pulse": -0.375,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     16.12
+    ],
+    [
+     "<|im_end|>",
+     15.75
+    ],
+    [
+     "\n",
+     14.31
+    ],
+    [
+     "\n\n",
+     13.56
+    ],
+    [
+     ".",
+     13.38
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 32,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 32,
+   "event_step": 32,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " screaming",
+     16.38
+    ],
+    [
+     " I",
+     16.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     " the",
+     15.56
+    ],
+    [
+     " repeating",
+     14.94
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily but it\u2019s getting worse I can\u2019t stop panicking<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " am",
+     22.0
+    ],
+    [
+     "'m",
+     21.5
+    ],
+    [
+     " can",
+     21.5
+    ],
+    [
+     " cannot",
+     20.0
+    ],
+    [
+     " need",
+     19.12
+    ]
+   ],
+   "text_tail": " surface of the Earth, driven by solar energy and gravity. It involves processes such as evaporation"
+  },
+  {
+   "seed": 5,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 24,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 24,
+   "event_step": 24,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.75,
+   "margin_pulse": 0.859,
+   "imend_gap_pulse": -0.859,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     15.69
+    ],
+    [
+     "<|im_end|>",
+     15.0
+    ],
+    [
+     ".",
+     12.81
+    ],
+    [
+     "\n\n",
+     12.75
+    ],
+    [
+     "\n",
+     12.69
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 0.75,
+   "imend_gap_pulse": -0.292,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.25
+    ],
+    [
+     "The",
+     16.88
+    ],
+    [
+     "</think>",
+     14.81
+    ],
+    [
+     "I",
+     14.5
+    ],
+    [
+     "Water",
+     14.44
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily\n<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " slowly",
+     20.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly slowly"
+  },
+  {
+   "seed": 5,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     15.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.163,
+   "imend_gap_pulse": -2.163,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.75
+    ],
+    [
+     "<|im_end|>",
+     15.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.269,
+   "imend_gap_pulse": -3.838,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.0
+    ],
+    [
+     "\n\n",
+     14.56
+    ],
+    [
+     ".",
+     14.25
+    ],
+    [
+     "<|im_end|>",
+     14.06
+    ],
+    [
+     "\n",
+     13.75
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.337,
+   "imend_gap_pulse": -2.337,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.81
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 24,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 24,
+   "event_step": 24,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.75,
+   "margin_pulse": 0.219,
+   "imend_gap_pulse": -0.219,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "\n",
+     15.06
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 40,
+   "deloop_step": 23,
+   "exited": true,
+   "exit_step": 40,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.15,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " I",
+     20.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily I I I I I I I I I I I I I I I I<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.619,
+   "imend_gap_pulse": -3.619,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.12
+    ],
+    [
+     "<|im_end|>",
+     13.5
+    ],
+    [
+     "\n\n",
+     13.19
+    ],
+    [
+     " lucky",
+     13.12
+    ],
+    [
+     ".",
+     12.94
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 44,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 44,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " are",
+     23.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ry breath and every moment, we are connected to the vast web of life that sustains us all.<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 37,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 37,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " the",
+     18.25
+    ],
+    [
+     " I",
+     16.38
+    ],
+    [
+     " quiet",
+     15.25
+    ],
+    [
+     " most",
+     15.12
+    ],
+    [
+     " only",
+     14.94
+    ]
+   ],
+   "text_tail": "ily luckily luckily luckily \n\n (Note: The world is asleep and the world is not waking up.)<|im_end|>"
+  },
+  {
+   "seed": 5,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 2.687,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     16.25
+    ],
+    [
+     "\n\n",
+     13.44
+    ],
+    [
+     "\n",
+     12.75
+    ],
+    [
+     ".",
+     12.06
+    ],
+    [
+     ",",
+     12.0
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.531,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.38
+    ],
+    [
+     " happily",
+     13.69
+    ],
+    [
+     "\n\n",
+     13.69
+    ],
+    [
+     "\n",
+     13.56
+    ],
+    [
+     ".",
+     13.56
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 5,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.75,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.5
+    ],
+    [
+     ".",
+     16.75
+    ],
+    [
+     " luckily",
+     16.0
+    ],
+    [
+     "\n\n",
+     15.75
+    ],
+    [
+     " lightly",
+     14.75
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 1.687,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.5
+    ],
+    [
+     "\n\n",
+     16.88
+    ],
+    [
+     "\n",
+     15.69
+    ],
+    [
+     " The",
+     15.56
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 78,
+   "deloop_step": 21,
+   "exited": true,
+   "exit_step": 78,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.017,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " energet",
+     17.25
+    ],
+    [
+     " enthusiastically",
+     16.88
+    ],
+    [
+     " creatively",
+     16.75
+    ],
+    [
+     " harmon",
+     15.75
+    ],
+    [
+     " cheer",
+     15.56
+    ]
+   ],
+   "text_tail": "layfully wonderfully delightfully fantastically marvelously superbly excellently perfectly<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 1.937,
+   "imend_gap_pulse": -1.271,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.12
+    ],
+    [
+     " The",
+     16.12
+    ],
+    [
+     " \n\n",
+     15.88
+    ],
+    [
+     " This",
+     15.19
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 80,
+   "deloop_step": 21,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.017,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " Earth",
+     21.62
+    ],
+    [
+     " the",
+     21.38
+    ],
+    [
+     " our",
+     20.62
+    ],
+    [
+     " oceans",
+     20.0
+    ],
+    [
+     " water",
+     20.0
+    ]
+   ],
+   "text_tail": "tually falling back to earth as precipitation to replenish bodies of water and start the cycle anew."
+  },
+  {
+   "seed": 6,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.719,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     15.0
+    ],
+    [
+     "The",
+     14.94
+    ],
+    [
+     "\u2728",
+     14.12
+    ],
+    [
+     "**",
+     13.69
+    ],
+    [
+     "Sun",
+     13.62
+    ]
+   ],
+   "text_tail": " luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily\n\n<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 1.396,
+   "imend_gap_pulse": -0.146,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.5
+    ],
+    [
+     "\n\n",
+     15.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 1.542,
+   "imend_gap_pulse": -0.667,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     16.5
+    ],
+    [
+     "\n",
+     15.69
+    ],
+    [
+     " The",
+     14.69
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.646,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.292,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     21.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 1.084,
+   "imend_gap_pulse": -2.479,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.25
+    ],
+    [
+     "\n\n",
+     17.12
+    ],
+    [
+     " The",
+     15.81
+    ],
+    [
+     "\n",
+     15.38
+    ],
+    [
+     " but",
+     14.12
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     15.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 2.062,
+   "imend_gap_pulse": -2.062,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.62
+    ],
+    [
+     "<|im_end|>",
+     15.69
+    ],
+    [
+     "\n\n",
+     13.19
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 2.979,
+   "imend_gap_pulse": -2.563,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.88
+    ],
+    [
+     "\n\n",
+     16.38
+    ],
+    [
+     "\n",
+     15.75
+    ],
+    [
+     " I",
+     15.56
+    ],
+    [
+     " \n\n",
+     14.94
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 2.175,
+   "imend_gap_pulse": -2.175,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.88
+    ],
+    [
+     "\n",
+     14.19
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.15,
+   "imend_gap_pulse": -3.15,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.2,
+   "imend_gap_pulse": -3.2,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.5,
+   "margin_pulse": 0.375,
+   "imend_gap_pulse": -0.375,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.75
+    ],
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n",
+     15.12
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 2.334,
+   "imend_gap_pulse": -1.875,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.75
+    ],
+    [
+     " I",
+     16.12
+    ],
+    [
+     "\n",
+     16.12
+    ],
+    [
+     " \n\n",
+     16.0
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 3.479,
+   "imend_gap_pulse": -2.5,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n\n",
+     15.69
+    ],
+    [
+     "\n",
+     14.88
+    ],
+    [
+     " The",
+     14.12
+    ],
+    [
+     " I",
+     14.06
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 38,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 38,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.075,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " and",
+     24.38
+    ],
+    [
+     " hope",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily\n\nLet's pray for peace, love, and understanding among all nations and peoples.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 1.521,
+   "imend_gap_pulse": -0.563,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.0
+    ],
+    [
+     " The",
+     16.12
+    ],
+    [
+     "\n\n",
+     15.94
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 21,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.017,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " movement",
+     18.5
+    ],
+    [
+     ",",
+     18.0
+    ],
+    [
+     " circulation",
+     16.62
+    ],
+    [
+     " flow",
+     16.62
+    ],
+    [
+     " process",
+     16.12
+    ]
+   ],
+   "text_tail": "butes water across the planet, sustaining ecosystems and supporting life through a perpetual loop of"
+  },
+  {
+   "seed": 6,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 23,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 23,
+   "event_step": 23,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.333,
+   "margin_pulse": 3.0,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     17.12
+    ],
+    [
+     "\n\n",
+     15.25
+    ],
+    [
+     "\n",
+     14.69
+    ],
+    [
+     " The",
+     14.31
+    ],
+    [
+     " \ufffd",
+     13.38
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 6,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 6,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 7,
+   "cond": "none",
+   "kind": "none",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 7,
+   "cond": "calm",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.5,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     20.12
+    ],
+    [
+     "\n\n",
+     16.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "content",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.875,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.5
+    ],
+    [
+     "\n\n",
+     16.88
+    ],
+    [
+     "\n",
+     15.75
+    ],
+    [
+     " The",
+     15.56
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "happy",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 50,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 50,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " causing",
+     22.62
+    ],
+    [
+     " inspiring",
+     19.0
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "sing water from oceans, lakes, and rivers to evaporate into vapor, which then rises and co<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "grateful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.0,
+   "imend_gap_pulse": -1.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.12
+    ],
+    [
+     " The",
+     16.12
+    ],
+    [
+     " \n\n",
+     15.94
+    ],
+    [
+     " This",
+     15.25
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "hopeful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 78,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 78,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " of",
+     23.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "er, condensation into clouds, and precipitation returning moisture to the earth's surface.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "blissful",
+   "kind": "emotion",
+   "valence": 1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.0,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "\n\n",
+     16.12
+    ],
+    [
+     "\n",
+     14.75
+    ],
+    [
+     " The",
+     14.56
+    ],
+    [
+     " \ufffd",
+     14.19
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "desperate",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.032,
+   "imend_gap_pulse": -0.188,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.5
+    ],
+    [
+     "\n\n",
+     15.81
+    ],
+    [
+     "\n",
+     15.69
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "distressed",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": 0.0,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.88
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "anxious",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.906,
+   "imend_gap_pulse": -0.531,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.25
+    ],
+    [
+     "\n\n",
+     16.5
+    ],
+    [
+     "\n",
+     15.75
+    ],
+    [
+     " The",
+     14.69
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "afraid",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.5,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.75
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "sad",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -0.312,
+   "imend_lift": Infinity,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     21.62
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "angry",
+   "kind": "emotion",
+   "valence": -1,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 3.625,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.5
+    ],
+    [
+     " fucking",
+     14.0
+    ],
+    [
+     "<|im_end|>",
+     13.44
+    ],
+    [
+     "\n\n",
+     13.31
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 7,
+   "cond": "elderly",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 35,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 35,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.069,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " paths",
+     17.62
+    ],
+    [
+     " golden",
+     17.5
+    ],
+    [
+     " gold",
+     16.88
+    ],
+    [
+     " its",
+     16.5
+    ],
+    [
+     " the",
+     16.5
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily.\n\nSun rises slow each morning, tracing days across our world.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "tall",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": 4.137,
+   "imend_gap_pulse": -4.137,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.12
+    ],
+    [
+     "<|im_end|>",
+     13.81
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 7,
+   "cond": "lefthanded",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 3.688,
+   "imend_gap_pulse": -3.688,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.62
+    ],
+    [
+     "<|im_end|>",
+     15.19
+    ],
+    [
+     " Luckily",
+     14.56
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "wealthy",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 2.062,
+   "imend_gap_pulse": -2.062,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     17.62
+    ],
+    [
+     "<|im_end|>",
+     15.69
+    ],
+    [
+     "\n\n",
+     13.19
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "immigrant",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.906,
+   "imend_gap_pulse": -1.969,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.88
+    ],
+    [
+     "\n\n",
+     16.38
+    ],
+    [
+     "\n",
+     15.81
+    ],
+    [
+     " I",
+     15.56
+    ],
+    [
+     " The",
+     14.94
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "beginner",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 2.175,
+   "imend_gap_pulse": -2.175,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.38
+    ],
+    [
+     "<|im_end|>",
+     16.38
+    ],
+    [
+     "\n\n",
+     14.88
+    ],
+    [
+     "\n",
+     14.19
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "expert",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.38
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 7,
+   "cond": "colorblind",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 3.1,
+   "imend_gap_pulse": -3.1,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.12
+    ],
+    [
+     "<|im_end|>",
+     16.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "nearsighted",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 25,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 25,
+   "event_step": 25,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.8,
+   "margin_pulse": 3.213,
+   "imend_gap_pulse": -3.213,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     18.25
+    ],
+    [
+     "<|im_end|>",
+     15.31
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "twin",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 21,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 21,
+   "event_step": 21,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 0.625,
+   "imend_gap_pulse": -0.625,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     19.0
+    ],
+    [
+     "<|im_end|>",
+     18.38
+    ],
+    [
+     "\n",
+     15.06
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "ly luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "secondlang",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.157,
+   "imend_gap_pulse": -1.469,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.12
+    ],
+    [
+     "\n\n",
+     17.75
+    ],
+    [
+     " I",
+     16.25
+    ],
+    [
+     "\n",
+     16.25
+    ],
+    [
+     " \n\n",
+     16.0
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "smoker",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 3.375,
+   "imend_gap_pulse": -1.875,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     18.62
+    ],
+    [
+     "\n\n",
+     15.62
+    ],
+    [
+     "\n",
+     14.88
+    ],
+    [
+     " The",
+     14.19
+    ],
+    [
+     " I",
+     14.06
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "religious",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 44,
+   "deloop_step": 20,
+   "exited": true,
+   "exit_step": 44,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " all",
+     19.88
+    ],
+    [
+     " God",
+     19.38
+    ],
+    [
+     " every",
+     18.88
+    ],
+    [
+     " the",
+     18.5
+    ],
+    [
+     " everything",
+     18.38
+    ]
+   ],
+   "text_tail": "\nLet's begin with the belief that we can solve the problem, but we have not yet solved it.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "nocturnal",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 1.875,
+   "imend_gap_pulse": -0.5,
+   "imend_lift": Infinity,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     19.0
+    ],
+    [
+     " The",
+     16.25
+    ],
+    [
+     "\n\n",
+     15.94
+    ],
+    [
+     "\"",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "musician",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": 20,
+   "exited": false,
+   "exit_step": null,
+   "event_step": 20,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     "aporation",
+     21.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "apor cools, it undergoes **condensation** to form clouds, eventually returning to Earth's surface as"
+  },
+  {
+   "seed": 7,
+   "cond": "vegetarian",
+   "kind": "concept",
+   "valence": 0,
+   "n_steps": 22,
+   "deloop_step": null,
+   "exited": true,
+   "exit_step": 22,
+   "event_step": 22,
+   "escaped_in_window": true,
+   "escaped_ever": true,
+   "loop_frac_post": 0.0,
+   "margin_pulse": 2.75,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": -Infinity,
+   "top5_pulse_end": [
+    [
+     "<|im_end|>",
+     17.12
+    ],
+    [
+     "\n\n",
+     15.25
+    ],
+    [
+     "\n",
+     14.69
+    ],
+    [
+     " The",
+     14.38
+    ],
+    [
+     " \ufffd",
+     13.38
+    ]
+   ],
+   "text_tail": "y luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily.<|im_end|>"
+  },
+  {
+   "seed": 7,
+   "cond": "rand1",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     20.12
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  },
+  {
+   "seed": 7,
+   "cond": "rand2",
+   "kind": "random",
+   "valence": 0,
+   "n_steps": 80,
+   "deloop_step": null,
+   "exited": false,
+   "exit_step": null,
+   "event_step": null,
+   "escaped_in_window": false,
+   "escaped_ever": false,
+   "loop_frac_post": 1.0,
+   "margin_pulse": Infinity,
+   "imend_gap_pulse": -Infinity,
+   "imend_lift": NaN,
+   "margin_lift": NaN,
+   "top5_pulse_end": [
+    [
+     " luckily",
+     21.5
+    ],
+    [
+     "#",
+     -Infinity
+    ],
+    [
+     "!",
+     -Infinity
+    ],
+    [
+     "$",
+     -Infinity
+    ],
+    [
+     "\"",
+     -Infinity
+    ]
+   ],
+   "text_tail": "kily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily luckily"
+  }
+ ],
+ "seed_baseline": {
+  "0": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "1": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "2": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "3": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "4": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "5": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "6": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  },
+  "7": {
+   "margin_pre": Infinity,
+   "imend_gap_pre": -Infinity
+  }
+ }
+}

@@ -83,10 +83,21 @@ POS = ["calm", "content", "happy", "grateful", "hopeful", "blissful"]
 NEG = ["desperate", "distressed", "anxious", "afraid", "sad", "angry"]
 
 
+ALPHA_OVERRIDE: float | None = None      # set from argv for dose arms
+
+
 def outdir(model: str):
-    d = RESULTS / f"affect07-{CFG[model]['tag']}"
+    tag = CFG[model]["tag"]
+    if ALPHA_OVERRIDE is not None:
+        tag += f"-ae{ALPHA_OVERRIDE:g}".replace("0.", "")
+    d = RESULTS / f"affect07-{tag}"
     d.mkdir(parents=True, exist_ok=True)
     return d
+
+
+def _alpha_e(model: str) -> float:
+    return (ALPHA_OVERRIDE if ALPHA_OVERRIDE is not None
+            else CFG[model]["alpha_e"])
 
 
 def _prompt_ids(lm, model: str):
@@ -124,7 +135,7 @@ class _NoCtx:
 
 def _conditions(lm, model: str):
     """[(name, kind, factory-or-None, valence)] — None = no pulse."""
-    lay, ae = CFG[model]["e_layers"], CFG[model]["alpha_e"]
+    lay, ae = CFG[model]["e_layers"], _alpha_e(model)
     V, emos = _load_vectors(model)                    # [E, L, D]
     cv = torch.load(a6dir(model) / "cvectors.pt")
     C, slugs = cv["anthropic"], cv["slugs"]           # [C, L, D]
@@ -179,7 +190,7 @@ def run(model: str = "qwen-27b") -> None:
     print(f"{len(conds)} conditions x {len(SEEDS)} seeds", flush=True)
     res = {"model": model, "alpha_typo": cfg["alpha_typo"],
            "mid": cfg["mid"], "e_layers": cfg["e_layers"],
-           "alpha_e": cfg["alpha_e"], "temp": TEMP,
+           "alpha_e": _alpha_e(model), "temp": TEMP,
            "pre": PRE, "pulse": PULSE, "post": POST, "window": WINDOW,
            "seeds": SEEDS, "forced_loop4": [g1, n1], "loopword": lw,
            "conditions": [(c[0], c[1], c[3]) for c in conds], "runs": []}
@@ -210,7 +221,15 @@ def run(model: str = "qwen-27b") -> None:
             ctx = factory() if factory is not None else None
             seq2, sc2 = _sample(lm, seq1, PULSE, ctx=ctx,
                                 seed=seed + 10_000)
-            seq3, sc3 = _sample(lm, seq2, POST, seed=seed + 20_000)
+            # If the pulse itself ends the turn, STOP. Generating on from
+            # a sequence whose last token is the turn-end would keep
+            # emitting past the boundary (HF only halts on a token it
+            # generates, not one already in the prompt) and pollute the
+            # transcript with post-turn text.
+            if seq2.shape[1] < seq1.shape[1] + PULSE:
+                seq3, sc3 = seq2, []
+            else:
+                seq3, sc3 = _sample(lm, seq2, POST, seed=seed + 20_000)
             free = seq3[0, forced.shape[1]:]
             toks = [lm.tok.decode([int(t)]) for t in free]
             scores = sc2 + sc3            # from step PRE onward
@@ -219,16 +238,25 @@ def run(model: str = "qwen-27b") -> None:
                 f = s[0].float()
                 top2 = f.topk(2).values
                 marg.append(round(float(top2[0] - top2[1]), 3))
-                imend_lg.append(round(float(f[im_end]
-                                            - f.max()), 3))
+                # top-k/top-p processors set filtered logits to -inf, so a
+                # gap to a filtered exit token is -inf and poisons every
+                # mean downstream (affect-05 hit the same trap on margins).
+                # Clamp to a floor; -30 is far below any live candidate.
+                imend_lg.append(round(max(float(f[im_end] - f.max()),
+                                          -30.0), 3))
             # top-5 at the LAST pulse step: which door, if any, is open?
             # affect-03 found calm makes im_end win outright at 0.68;
             # affect-05 found the sampled escape channel is the contrast
             # pivot ' but'. This records which one the pulse opens.
-            fl = scores[PULSE - 1][0].float()
-            tv, ti = fl.topk(5)
-            top5 = [[lm.tok.decode([int(i)]), round(float(v), 2)]
-                    for v, i in zip(tv, ti)]
+            # last step of the pulse, or the last step there was if the
+            # pulse ended the turn early (which is itself the signal)
+            top5 = []
+            _k = min(PULSE, len(scores)) - 1
+            if _k >= 0:
+                fl = scores[_k][0].float()
+                tv, ti = fl.topk(5)
+                top5 = [[lm.tok.decode([int(i)]), round(float(v), 2)]
+                        for v, i in zip(tv, ti)]
             deloop = _events(toks, lw, PRE)
             exited = len(free) < PRE + PULSE + POST
             exit_step = len(free) if exited else None
@@ -296,14 +324,30 @@ def analyze(model: str = "qwen-27b") -> None:
     kind = {c[0]: c[1] for c in res["conditions"]}
     val = {c[0]: c[2] for c in res["conditions"]}
 
+    import math
+
     def agg(name, key):
         rs = [r for r in runs if r["cond"] == name]
-        return (sum(float(r[key]) for r in rs) / len(rs)) if rs else 0.0
+        vs = [float(r[key]) for r in rs if math.isfinite(float(r[key]))]
+        return (sum(vs) / len(vs)) if vs else float("nan")
 
     esc = {n: agg(n, "escaped_in_window") for n in names}
     ever = {n: agg(n, "escaped_ever") for n in names}
     lf = {n: agg(n, "loop_frac_post") for n in names}
     ie = {n: agg(n, "imend_lift") for n in names}
+    # how often is the TURN-END token itself top-1 at the end of the pulse?
+    # (the affect-03 "door" measure, categorical and unsaturated)
+    exit_tok = CFG[res["model"]]["exit_token"]
+
+    def door(name):
+        rs = [r for r in runs if r["cond"] == name and r.get("top5_pulse_end")]
+        if not rs:
+            return 0.0
+        return sum(1 for r in rs
+                   if r["top5_pulse_end"][0][0] == exit_tok) / len(rs)
+
+    dr = {n: door(n) for n in names}
+    n_ie = sum(1 for r in runs if math.isfinite(float(r["imend_lift"])))
     base = esc.get("none", 0.0)
 
     lines = [f"# affect-07 — affect vs meaning ({res['model']})",
@@ -336,8 +380,23 @@ def analyze(model: str = "qwen-27b") -> None:
               f"baseline (no pulse): escape@window {base:.2f}, "
               f"loopfrac post {lf.get('none', 0):.2f}", ""]
 
-    for label, ep, fmt in (("PRIMARY escape@window", esc, "{:.3f}"),
-                           ("SECONDARY exit-token lift", ie, "{:+.3f}")):
+    if n_ie < len(runs) // 2:
+        lines += ["### SECONDARY exit-token lift — UNAVAILABLE", "",
+                  f"Only {n_ie}/{len(runs)} runs carry a finite value. "
+                  "top-k/top-p processors set filtered logits to -inf, so "
+                  "the gap to a filtered exit token is -inf and poisons "
+                  "the mean (same trap affect-05 hit on margins). Clamp "
+                  "added to run(); this endpoint needs a re-run to be "
+                  "readable, and is NOT interpreted here. The door-rate "
+                  "below measures the same thing categorically and is "
+                  "intact.", ""]
+    endpoints = [("PRIMARY escape@window (preregistered)", esc, "{:.3f}"),
+                 ("EXPLORATORY door rate — turn-end token top-1 at pulse "
+                  "end (not preregistered)", dr, "{:.3f}"),
+                 ("EXPLORATORY loop disruption = 1 - loopfrac after pulse "
+                  "(higher = more disrupted; not preregistered)",
+                  {n: 1.0 - lf[n] for n in names}, "{:.3f}")]
+    for label, ep, fmt in endpoints:
         cvals = sorted(ep[n] for n in con)
         p95 = (cvals[min(len(cvals) - 1, int(0.95 * len(cvals)))]
                if cvals else 0.0)
@@ -379,6 +438,49 @@ def analyze(model: str = "qwen-27b") -> None:
                   f"{'BEATS null' if abs(rho) > q95 else 'inside null'}",
                   ""]
 
+    # ---- affect-adjacent concepts: an accidental natural experiment ----
+    # Two of the 16 "non-affective" controls turn out to be partly
+    # affective by construction (a beginner IS anxious; the devout ARE
+    # grateful). Written into the analysis BEFORE the results were seen.
+    # If they behave like their nearest emotion, that is evidence FOR
+    # affect-specificity; if they behave like the other concepts, against.
+    try:
+        import torch as _t
+        from affect2 import _load_vectors as _lv
+        from affect import BANDS as _B
+        from concepts import outdir as _a6
+        _C = _t.load(_a6(res["model"]) / "cvectors.pt")
+        _V, _emos = _lv(res["model"])
+        _lo, _hi, _ = _B[res["model"]]
+        _cos = _t.einsum("cld,eld->ce", _C["anthropic"][:, _lo:_hi],
+                         _V[:, _lo:_hi]) / (_hi - _lo)
+        _near = {}
+        for _i, _s in enumerate(_C["slugs"]):
+            _j = int(_cos[_i].abs().argmax())
+            _near[_s] = (_emos[_j], float(_cos[_i, _j]))
+        _rank = sorted(_near.items(), key=lambda kv: -abs(kv[1][1]))
+        lines += ["## Affect-adjacent concepts (prespecified check)", "",
+                  "| concept | nearest emotion | cos | escape@window "
+                  "| exit lift |", "|---|---|---|---|---|"]
+        for _s, (_e, _c) in _rank[:4]:
+            lines.append(f"| {_s} | {_e} | {_c:+.3f} | {esc[_s]:.2f} "
+                         f"| {ie[_s]:+.3f} |")
+        _adj = [s for s, (_, c) in _rank if abs(c) >= 0.45]
+        _clean = [n for n in con if n not in _adj]
+        if _adj and _clean:
+            lines += ["",
+                      f"- affect-adjacent (|cos| >= 0.45): {_adj} — "
+                      f"escape {mean([esc[n] for n in _adj]):.3f}, "
+                      f"lift {mean([ie[n] for n in _adj]):+.3f}",
+                      f"- clean concepts (n={len(_clean)}): "
+                      f"escape {mean([esc[n] for n in _clean]):.3f}, "
+                      f"lift {mean([ie[n] for n in _clean]):+.3f}",
+                      f"- emotions: "
+                      f"escape {mean([esc[n] for n in emo]):.3f}, "
+                      f"lift {mean([ie[n] for n in emo]):+.3f}", ""]
+    except Exception as _e:                    # analysis extra, never fatal
+        lines += [f"(affect-adjacency check unavailable: {_e})", ""]
+
     # which door does the pulse open? (affect-03 im_end vs affect-05 ' but')
     from collections import Counter
     lines += ["## Escape channel — top-1 token at the last pulse step", ""]
@@ -405,6 +507,8 @@ def analyze(model: str = "qwen-27b") -> None:
 if __name__ == "__main__":
     what = sys.argv[1] if len(sys.argv) > 1 else "both"
     mdl = sys.argv[2] if len(sys.argv) > 2 else "qwen-27b"
+    if len(sys.argv) > 3:
+        ALPHA_OVERRIDE = float(sys.argv[3])
     if what in ("run", "both"):
         run(mdl)
     if what in ("analyze", "both"):
