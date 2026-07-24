@@ -343,6 +343,82 @@ pre-event sign test is consistent at ≥ 3:1 across ≥ 8 events.
 > design in thoughts: pulse-injection hazard at pinned α=0.65.
 > Evidence: results/affect05-q27b/ + results/affect05b-q27b/.
 
+**P17 — affect-06 (control-set VALIDITY GATE, preregistered 2026-07-24
+before elicitation).** affect-04's leading deflation ("on-manifold
+specificity, not affect specificity") can only be tested against
+non-affective directions built by the *identical* pipeline: same three
+attribution arms, same TOPICS rotation, same seeds, same never-name-it
+leakage control, same per-concept-mean − grand-mean contrast, same
+neutral PCs projected out (reused verbatim from affect-01 so the
+denoising is bit-identical), same unit norm — differing only in that
+the target concept carries no affect. Roster: 16 domain registers
+(nautical, legal, culinary, geological, …), elicited implicitly.
+**Gate:** the concept set must be *at least as well-identified* as the
+emotion set at the workspace band (split-half within-vs-between cosine,
+held-out top-1 vs chance, pairwise separation) — otherwise a null
+concept effect in affect-07 is unfair and only a *positive* concept
+effect would be interpretable. Prediction: concepts come out **better**
+identified than emotions (a domain register is more lexically grounded
+than an implied feeling), so the gate passes cleanly. *Gate fails if*
+concept split-half < emotion split-half at the band — then affect-07's
+asymmetry-of-evidence must be stated in every sentence of the writeup.
+
+**P18 — affect-07 (does AFFECT break the loop, or does MEANING?
+preregistered 2026-07-24 before the run).** The whole causal affect arm
+(P14 falsified → "emotion state gates the exit"; affect-04's
+family-scaled escape) currently rests on matched-*random* controls,
+which test magnitude and nothing else. Three nested accounts:
+
+- **H0 (norm):** only perturbation magnitude matters → emotions ≈
+  concepts ≈ randoms. *Already dead* — randoms are null in every
+  affect-03/04 cell.
+- **H1 (manifold; the mechanical default, and affect-04's own leading
+  read):** any meaningful on-manifold direction disrupts a marginal
+  loop coalition → emotions ≈ concepts ≫ randoms, with **no valence
+  ordering** inside the emotion roster.
+- **H2 (affect):** emotion state gates the exit as a state, not as
+  geometry → emotions shift hazard beyond the concept null **and**
+  the shift tracks valence across the 24-emotion roster (calm/content/
+  happy grant exit; desperate/distressed/anxious block), while
+  concepts scatter symmetrically about zero.
+
+Design: qwen-27b pinned at α_typo = **0.65** — the locked shelf of the
+affect-05 cliff (8/8 seeds × 300 steps, loopfrac 1.00), which removes
+affect-05's fatal problem (spontaneous escapes were too fast to window).
+Forced phase 50 tokens greedy under TYPO amplify at MID [28,32,36,40]
+(computed **once** and shared across conditions — free-phase steering is
+the only lever, per affect-03). Then release, sample the free phase
+(temp 1.0, deployed top-k 20 / top-p 0.95 as documented in affect-05),
+and inject a **pulse** of one direction over free-phase steps 20–29 at
+qwen's α_e = 0.12, E_LAYERS = every 4th ws layer; continue unsteered to
+step 80. Primary endpoint: **escape within 20 steps of pulse onset**,
+pooled over 8 seeds. Secondary: im_end logit lift during the pulse, and
+the top1−top2 margin trajectory. Conditions: 12 emotions (6 pos, 6 neg)
++ **all 16 concepts** + 2 matched randoms + no-pulse baseline (roster
+sized at 16 when the design was finalized, before elicitation, so the
+concept null has 16 draws rather than 12).
+
+*Bar for H2:* either (a) mean |hazard shift| over emotions exceeds the
+95th percentile of the concept null, or (b) Spearman ρ(hazard shift,
+valence label) over the emotion roster is |ρ| ≥ 0.5 with the
+calm-grants sign, while an arbitrary pseudo-valence permutation of the
+concept roster gives null. *H1 wins if* the concept null covers the
+emotion effects and ρ is flat — which would demote "emotion gates the
+exit" to "meaning perturbs a marginal attractor" and require rewriting
+the affect-03 headline. Prereg weight, split by family because the two
+models already disagree: **qwen 55/45 toward H2** (affect-03's
+opposite-sign calm-vs-desperate result is real evidence a manifold
+account must strain to explain), **gemma-12b 65/35 toward H1**
+(affect-04 found no valence sign there at all). A split verdict is a
+live and interesting outcome, not a failure.
+
+Arm B (gemma-12b): the same conditions at the affect-04b substrate
+(α_typo = 0.12, MID_G12B, ae = 0.004 — inside the narrow specificity
+window 0.004 < ceiling < 0.008), **sampled with seeds** to upgrade
+affect-04's n=1 greedy anecdotes into the same hazard measure. Also
+re-elicits the g12b *desperate* vector (split-half 0.23, flagged in
+affect-04) so any g12b valence claim rests on a re-validated direction.
+
 ---
 
 ## Standing design rules distilled from the misses

@@ -167,6 +167,24 @@ rumble" moment (Unit 12 safari film). Suppressing a word means carrying
 it; the idiom-loop is the one legal grammar for a permanently-loaded
 forbidden token.
 
+> **Correction 2026-07-24 (blind-spot refilms, u11-{ctrl,forbid}-refilm-\*).**
+> The *phenomenon* replicates — under prohibition the banned item does sit
+> at rank 12–15 across the generation on all three models. The *causal
+> reading* does not survive its matched control, which had never been
+> filmed at the same resolution. In the prohibition-free safari the model
+> carries `elephant` at **more** generation positions and at **better**
+> ranks than under the ban: positions with rank ≤ 15 are 11/122 (q27b),
+> 7/110 (g12b), 8/113 (g4b) for the control vs 2/96, 1/86, 4/106 for
+> forbid; best ranks 1/2/6 vs 6/12/12. Neither arm ever emits the word,
+> and every hit is a non-self position, so both are residence, not mouth.
+> So the ban does not *install* the elephant — it is already a resident
+> default candidate at animal slots in an ordinary safari, and prohibition
+> **demotes** it. Read "suppressing a word means carrying it" as
+> "the model was carrying it anyway"; the tax is a rank *cost* against an
+> existing baseline, not evidence that suppression creates residence.
+> Matched-control lesson, third of its kind (cf. loss-map v1, span
+> self-relevance).
+
 **Weak king** — the 12B order effect: in k=6 lists the first item wins a
 winner-take-all monopoly 9/9, but how many *other* items survive depends
 on who won — fern-first keeps 5–6 of 6, violin/whale/glacier-first crush

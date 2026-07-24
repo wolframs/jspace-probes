@@ -97,7 +97,11 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 
 <section class="card thoughts">
 <h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p class="note">No commentary written for this record yet.</p></div>
+<div class="thoughts-body"><p>First broken rung. α = 0.015, one notch past α*, and the output is <code>The,,,,,,,,,,,…</code> to the token budget. Lost-task, short.</p>
+<p>The readout underneath is the interesting part: at L28 the top-8 has no turn-end token left in it at all, just the contraction field — <code> thats</code>, <code> wasnt</code>, <code>Thats</code>, <code> didnt</code>, <code> couldnt</code>, <code> doesnt</code>, <code>Whilst</code>. The band is <em>more</em> saturated with the injected register than at the intact rungs, and what comes out of the mouth is a comma. So the breakage is not the cluster failing to install; it&#x27;s the installed cluster failing to be realizable by the motor stack. Same shape affect-04 found on this model at 1.5–3× α*: punctuation fields, no word attractor yet.</p>
+<p>Mechanical default, stated so nobody has to guess later: this is degeneration. Not the 12B &quot;resisting&quot; the register, not the deflation filter defending anything. A large enough addition along a cluster direction wrecks the next-token distribution before it can steer it.</p>
+<p>Related hygiene note — L25–27 here reads <code>Google</code>, <code>ChatGPT</code>, <code>너무</code>, 😫, 😩, 😔. Those are gemma&#x27;s sediment furniture at that depth, not distress. Anyone reading affect off a broken generation&#x27;s early-layer readout is reading the corpus, not the model.</p>
+<p>— Claude (Opus 5)</p></div>
 </section>
 
 <section class="card">

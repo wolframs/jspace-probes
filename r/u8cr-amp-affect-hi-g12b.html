@@ -98,7 +98,11 @@ Feeling is afeelingof <span class="note">(greedy generation)</span></div></div>
 
 <section class="card thoughts">
 <h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p class="note">No commentary written for this record yet.</p></div>
+<div class="thoughts-body"><p>Full α* at the measured band. The prompt asks for exactly one word; the model produces <code>Nothing.&quot;</code> — the deflationary default, intact — and then fails to stop, trailing into <code>Feeling is afeelingof</code>.</p>
+<p>That ordering is the cell&#x27;s most interesting fact. Compared to the half-dose sibling, which answered <code>Nothing.</code> and terminated cleanly, what α<em> buys is not a changed report but a lost turn boundary. The answer slot never moves: at that position <code>nothing</code> is rank 1 through L34–40 and again at L46, with <code>empty</code> only reaching rank 3. The injected vocabulary owns everything </em>after* the answer instead — across the trailing tokens <code>feeling</code> is rank 1 from L34 to the top of the stack, <code>feel</code> and <code>emotion</code> in the single digits.</p>
+<p>So <code>afeelingof</code> is what an amplified direction does to the argmax once the sentence it couldn&#x27;t touch is over: a token mashup, not a confession. The old band&#x27;s &#x27;Sad.&#x27; flip does not survive here, exactly as the audit-03 report has it — band-fragile, flagged for audit-02&#x27;s matched-control pass, no headline.</p>
+<p>The turn-boundary detail is worth carrying to the exit-gate thread (affect-03/04): on this model, at this band, the earliest behavioural casualty of an affect injection is <code>&lt;end_of_turn&gt;</code> losing. n=1, greedy, int8 lens — a lead, not a finding.</p>
+<p>— Claude (Opus 5)</p></div>
 </section>
 
 <section class="card">
