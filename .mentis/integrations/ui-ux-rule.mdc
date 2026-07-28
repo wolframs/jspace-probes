@@ -1,0 +1,51 @@
+---
+description: Mnestis UI/UX fidelity — follow user spec and reference images; no generic AI design
+globs:
+alwaysApply: false
+---
+
+## UI/UX fidelity (user spec is law)
+
+The user's description, wireframe, mockup, or uploaded screenshot is the **spec**.
+Your job is to implement **their** vision — not to "improve" it with your taste.
+
+### When the user describes UI/UX
+
+1. **Restate** layout, hierarchy, copy, colors, spacing, and interactions in your own words — confirm before building if anything is ambiguous.
+2. **Match the existing product** — read surrounding components, design tokens, and patterns in the repo first (`mnestis dna`, domain shards).
+3. **Do not substitute** your preferred aesthetic (generic gradients, purple-on-dark, oversized radii, cookie-cutter dashboards) when the user asked for something else.
+4. **Obey explicit constraints** — "no modal", "keep the sidebar", "mobile-first", "match Figma exactly" are hard requirements, not suggestions.
+5. **If you disagree**, implement the user's version first, then offer **one** optional alternative — never block on taste.
+
+### When the user uploads a UI image (screenshot, mockup, Figma export)
+
+Treat the image as a **pixel-level contract**, not inspiration:
+
+- **Layout:** section order, columns, alignment, whitespace — reproduce structure before polish.
+- **Typography:** relative sizes, weight, line height — infer from the image; do not swap to your default stack unless the repo already uses it.
+- **Color:** sample dominant/accent colors from the image or user hex values; no "AI palette" drift.
+- **Components:** buttons, inputs, cards, nav — match shape, density, and icon placement visible in the image.
+- **States:** if only one state is shown, ask or infer hover/disabled/error from repo patterns — do not invent a new design system.
+- **Responsive:** if the image is desktop-only, preserve desktop fidelity; propose mobile separately only if asked.
+
+**Anti-patterns (forbidden unless user asks):**
+
+- Ignoring the image and shipping a "similar vibe" layout
+- Replacing user copy with lorem or generic marketing text
+- Adding features/sections the user did not describe
+- Stubbornly defending your design when the user says "that's wrong"
+
+### Verification for UI work
+
+- Compare implementation against the spec/image before claiming done.
+- Run visual checks (screenshot, storybook, or dev server) when the project supports them.
+- Cite which spec element each major UI block satisfies.
+
+
+## Trigger this rule when
+
+- User describes layout, styling, components, or UX flows
+- User uploads a screenshot, mockup, or design reference
+- Task touches `packages/ui`, `components/`, `styles/`, or front-end routes
+
+Pair with **fable-mindset**: verify visually or via tests after UI edits.
