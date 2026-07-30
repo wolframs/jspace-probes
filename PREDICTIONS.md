@@ -533,6 +533,68 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > Conservative in the other direction: concepts are better identified
 > (0.745 vs 0.545), so they carry more signal per unit norm.
 
+**P19 — apparatus-09 (early-band furniture mechanism: operator,
+standing component, or content? preregistered 2026-07-31 before the
+run).** Specimen #6 (u5d) established the WHAT: the early J-lens
+furniture is a transport artifact (J-rank 2 vs logit-rank ~238k,
+prompt-invariant, 0.00 overlap with the null-prompt prior). This run
+establishes the HOW. Litwatch 2026-07-31: massive activations (Sun et
+al., COLM 2024 — input-independent high-norm dims forming in the first
+few layers) are the literature's candidate mechanism for constant junk
+readouts, and nobody anywhere has decomposed a vocab-lens early readout
+into operator vs standing-component vs input terms.
+
+Decomposition: `z_t = (W_U[t] · J_l) h`, with `h = μ + (h − μ)`, μ =
+grand mean over prompts × non-BOS positions. Conditions per early layer
+(gemma-4b bf16 L[2,4,6,8] + workspace control L20; qwen-27b L[2,4,6,8]
++ control L40): **A** raw h; **B** μ alone; **C** h − μ; **D** h with
+massive dims zeroed (dims with mean |h_d| > 50× the median dim); **E**
+random norm-matched h (n=10, both signs read); plus the operator term
+measured directly — top-30 tokens by row norm `‖J_lᵀ W_U[t]‖`.
+Furniture core defined empirically per layer: tokens in every prompt's
+condition-A top-50. Logit-lens (`use_jacobian=False`) runs the same
+conditions as the specimen-#6 cross-check.
+
+Three nested accounts:
+
+- **H-op (operator; the mechanical default):** early `J_l` is so
+  low-rank that the readout *ranking* is nearly input-independent —
+  for rank-1 transport the ranking is fully operator-determined for
+  ANY h (input enters only as a shared scalar, up to sign). Predicts:
+  row-norm top-30 ≈ furniture core; E shows the core (mod sign flips);
+  C still shows it (h−μ rides the same operator); B agrees with A.
+- **H-standing (standing component):** furniture is the image of the
+  fixed component (massive dims / BOS-sink bias). Predicts: B alone
+  reproduces ≥ 2/3 of the core; C loses the core and its cross-prompt
+  Jaccard collapses toward the logit-lens level; E recalls < 1/4 of
+  the core; D kills the furniture iff the standing part IS the massive
+  dims (D discriminates within H-standing: sink-specific vs broad μ).
+- **H-content (the specimen-#6 falsifier):** furniture needs the real
+  input-conditioned h — absent under both B and E. Nearly dead already
+  (prompt-invariance), kept as the falsifier.
+
+Prereg weights: **H-op 0.50, H-standing 0.35, mixed (operator picks
+the tokens, standing component supplies the magnitude — likely
+partially confounded since μ contains the massive dims) 0.10,
+H-content 0.05.** P11's effdim collapse through the early band is
+independent pressure toward H-op.
+
+Secondary, the guess-(1) probe: **content non-emergence.** After
+de-junking (C), the early *J-lens* will NOT become content-bearing —
+current-token rank stays > 1000 — while the *logit lens* at the same
+layers reads the current token near top-1 (Patchscopes/Ethayarajh:
+early content is current-token identity, which the future-facing J
+transport cannot see). If C *does* surface current-token or
+inner-lexicon structure under the J-lens, that is the headline
+surprise and feeds the address-space-lens hunch (apparatus-10).
+
+*Bars:* H-op needs Jaccard(row-norm top-30, core) ≥ 0.4 AND mean E
+core-recall ≥ 1/2. H-standing needs B core-recall ≥ 2/3 AND C
+invariance dropping ≥ half the A→logit-lens gap AND E core-recall
+< 1/4. Both passing = mixed (report component shares
+`‖z(μ)‖²/‖z‖²`). Control layer must behave oppositely (C retains
+prompt-dependence; E junk-free) or the instrument itself is suspect.
+
 ---
 
 ## Standing design rules distilled from the misses

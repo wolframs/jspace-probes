@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-25",
+  "updated": "2026-07-31",
   "states": {
     "hunch": "an idea worth keeping, not yet designed",
     "queued": "designed enough to run; waiting for GPU/attention",
@@ -627,6 +627,34 @@
             {
               "date": "2026-07-25",
               "text": "Three temperature-1 paired draws at three Gemma positions: mean absolute bf16/int8 AR-advantage gap 0.00032 vs within-position draw SD 0.00008-0.00065; one discrete divergence reached 0.00114. Quantization is usually within observed AV sampling scale, not perfectly invariant."
+            }
+          ]
+        },
+        {
+          "id": "apparatus-09",
+          "title": "De-junk the early lens: operator vs standing-component vs content decomposition of the furniture readout",
+          "state": "hot",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-31",
+              "text": "P19 preregistered 2026-07-31. Specimen #6 found the WHAT; this run finds the HOW: decompose z = W_U J_l h into operator row-norms, standing component (massive activations, Sun et al. COLM 2024), and input term. Litwatch: untested anywhere. gemma-4b bf16 + qwen-27b."
+            },
+            {
+              "date": "2026-07-31",
+              "text": "→ hot"
+            }
+          ]
+        },
+        {
+          "id": "apparatus-10",
+          "title": "Address-space lens: Jacobian pull-back of future ATTENTION logits — the instrument the sensory band actually needs",
+          "state": "hunch",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-31",
+              "text": "Litwatch 2026-07-31: unclaimed as an instrument. Three uncombined parts exist: Observable Propagation (ICML 2024, logit observables only), Attention Lens (per-head lenses, OV side), QK-space bases (within-layer only). Patchscopes' early = input-identity result is the motivation: early layers write addresses, not words. Gate on apparatus-09's content-non-emergence arm."
             }
           ]
         }
