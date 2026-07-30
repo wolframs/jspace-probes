@@ -1,0 +1,40 @@
+{
+ "schema": 1,
+ "created": "2026-07-25T19:26:08",
+ "record": "u0-boot-g12b",
+ "target": {
+  "name": "gemma-12b",
+  "repo": "google/gemma-3-12b-it",
+  "precision": "repo",
+  "layer": 32
+ },
+ "verbalizer": {
+  "repo": "kitft/nla-gemma3-12b-L32-av",
+  "mode": "embedding",
+  "precision": "nf4"
+ },
+ "sampling": {
+  "do_sample": false,
+  "max_new_tokens": 160
+ },
+ "samples": [
+  {
+   "position": 13,
+   "token": " is",
+   "raw": "<explanation>\nInformational/travel article format signals a factual, educational tone \u2014 a trivia or currency guide entry about Italy.\n\nThe phrase \"The currency used in Italy is the official currency of the country is\" sets up a factual answer about the Euro, establishing a currency fact about the Italian lira.\n\nFinal token \"is\" opens a predicate clause (\"the currency of the country is...the currency used in Italy is\"), requiring a noun phrase \u2014 almost certainly \"the Euro\" or \"the Euro, called the lira\" or \"called the lira.\" or \"the euro.\" \u2014 a named currency descriptor completing the sentence about the currency's name or value.\n</explanation>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n<end_of_turn>\n",
+   "explanation": "Informational/travel article format signals a factual, educational tone \u2014 a trivia or currency guide entry about Italy.\n\nThe phrase \"The currency used in Italy is the official currency of the country is\" sets up a factual answer about the Euro, establishing a currency fact about the Italian lira.\n\nFinal token \"is\" opens a predicate clause (\"the currency of the country is...the currency used in Italy is\"), requiring a noun phrase \u2014 almost certainly \"the Euro\" or \"the Euro, called the lira\" or \"called the lira.\" or \"the euro.\" \u2014 a named currency descriptor completing the sentence about the currency's name or value.",
+   "reconstruction": {
+    "cosine": 0.994637668132782,
+    "direction_mse": 0.010724663734436035,
+    "shuffled_mean_cosine": 0.9763169288635254,
+    "blank_cosine": 0.9743288159370422,
+    "advantage": 0.018320739269256592
+   }
+  }
+ ],
+ "reconstructor": {
+  "repo": "kitft/nla-gemma3-12b-L32-ar",
+  "revision": "3d6901d8243182d642af9dea452ca91549a94615",
+  "precision": "bf16"
+ }
+}

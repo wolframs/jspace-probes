@@ -2,7 +2,7 @@
 
 _Generated from `board/board.json` — do not hand-edit; regenerate with `.venv/bin/python probes/board.py` (any `add`/`mv`/`note`/`arc add` does this automatically)._
 
-Updated: 2026-07-24
+Updated: 2026-07-25
 
 Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖ parked · ✗ dropped
 
@@ -59,6 +59,7 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 | ○ |  | apparatus-05 | Genre-knowledge confound: the model has read the psychology literature | 2026-07-16 Standing control for every paradigm transplant: a model can perform a documented effect. Defenses: lens-level rank dynamics (nothing to imitate — no text describes them), novel stimuli, parametric dose-response the textbooks never quantified, and inversions (a backwards ladder can't be mimicry). |
 | ✓ |  | apparatus-06 | Fig-29B ambiguity-commitment arm on qwen-27b: embedding-mixture alpha sweep, projection-share per layer (lens-free ignition cross-check) | 2026-07-21 → landed: P4 FALSIFIED: lens-free commitment plateau onset at L25 (fraction-ported boundary), not L28-36; L4 = clean diagonal mixture tracking; motor band sharpens further (P12-consistent). Late-ignition headline now carries both numbers; intervention bands unaffected. gemma family-wide check queued. results/apparatus06-q27b/{report,thoughts}.md |
 | ✓ |  | apparatus-07 | gemma-4b + gemma-12b commitment arms: does the fraction port hold family-wide? (same 640-forward protocol, cheap; g4b is bf16 = cleanest) | 2026-07-21 → landed: STAIRCASE resolution: first commitment knee at the fraction port on ALL THREE models (g4b L12/13, g12b L14-18/18, qwen L25/24); g12b second sharpening L32-43 = its lens-visible band + audit-03 steerable band; qwen second stage motor-band; g4b none. 'Ignition' = 3 constructs (commit / sharpen-steerable / motor); MECHANICS updated. Specimen 8 caught pre-publication (gemma in-module embed scaling). results/apparatus07-thoughts.md |
+| ● |  | apparatus-08 | NLA instrument: quantization transfer, execution harness, and eval-awareness controls | 2026-07-25 Three temperature-1 paired draws at three Gemma positions: mean absolute bf16/int8 AR-advantage gap 0.00032 vs within-position draw SD 0.00008-0.00065; one discrete divergence reached 0.00114. Quantization is usually within observed AV sampling scale, not perfectly invariant. |
 
 ## Timidity audit
 

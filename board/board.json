@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24",
+  "updated": "2026-07-25",
   "states": {
     "hunch": "an idea worth keeping, not yet designed",
     "queued": "designed enough to run; waiting for GPU/attention",
@@ -607,6 +607,26 @@
             {
               "date": "2026-07-21",
               "text": "→ landed: STAIRCASE resolution: first commitment knee at the fraction port on ALL THREE models (g4b L12/13, g12b L14-18/18, qwen L25/24); g12b second sharpening L32-43 = its lens-visible band + audit-03 steerable band; qwen second stage motor-band; g4b none. 'Ignition' = 3 constructs (commit / sharpen-steerable / motor); MECHANICS updated. Specimen 8 caught pre-publication (gemma in-module embed scaling). results/apparatus07-thoughts.md"
+            }
+          ]
+        },
+        {
+          "id": "apparatus-08",
+          "title": "NLA instrument: quantization transfer, execution harness, and eval-awareness controls",
+          "state": "hot",
+          "links": [],
+          "notes": [
+            {
+              "date": "2026-07-25",
+              "text": "Gemma block-32 AV smoke passed on RTX 3090 (int8 target, NF4 AV, 7.7 GiB peak). Qwen block-42 smoke passed with exact block-1 Karvonen injection and additive SFT+RL adapters; VRAM is tight."
+            },
+            {
+              "date": "2026-07-25",
+              "text": "Local pilot landed: exact replay + AV/AR harness in probes/nla.py; Gemma bf16/int8 transfer agrees in geometry, semantics, and null-calibrated AR score; Qwen Unit-14 boundary/+4 window shows position-sensitive spike awareness. Full-precision Qwen transfer is documented as an optional diagnostic escalation if instability, failed controls, or cross-lens disagreement casts doubt on the NF4 readout. See results/nla-pilot-report.md."
+            },
+            {
+              "date": "2026-07-25",
+              "text": "Three temperature-1 paired draws at three Gemma positions: mean absolute bf16/int8 AR-advantage gap 0.00032 vs within-position draw SD 0.00008-0.00065; one discrete divergence reached 0.00114. Quantization is usually within observed AV sampling scale, not perfectly invariant."
             }
           ]
         }

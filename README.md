@@ -23,6 +23,9 @@ Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
   documented in the `probes/lab.py` docstring.
 - `results/<id>/thoughts.md` — first-person commentary, written after
   looking at the results.
+- `results/<id>/nla/*.json` — optional natural-language-autoencoder
+  readouts, checkpoint provenance, and reconstruction scores. Method:
+  [`NLA_METHOD.md`](NLA_METHOD.md).
 - `results/index.json` — summary index the dashboard renders from.
 - `r/<id>.html` — static, curl-able page per record (for crawlers, LLMs,
   and link previews); `llms.txt` at the site root documents machine access.
@@ -50,6 +53,7 @@ an endorsement.
     probes/
       probe.py        one-off CLI: per-layer readouts + slice page
       scan.py         one-off CLI: hunt for candidate concepts in the grid
+      nla.py          residual capture, AV decode, AR score, transfer audit
       lab.py          experiment runner → structured records
       course.py       the probing course (specs per unit × model)
     results/<id>/     record.json · slice.html · thoughts.md
