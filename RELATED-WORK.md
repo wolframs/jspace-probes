@@ -307,3 +307,120 @@ designs, ranked:
    candidate open-vocab scan target). Notably: NO independent source
    reports ignition depth later than 38%, and no small-scale span test
    exists anywhere — both remain uncontested lab territory.
+
+## The early-layer question: what IS down there? (scouts 2026-07-31)
+
+*Two Fable-5 subagent sweeps, prompted by the standing question behind
+the sub-unit of shame: the J-lens picks something up early, but that
+something has nothing to do with what it reads well late. Three
+candidate answers were adjudicated — (1) perception/surface-form
+content real but not in vocab space, (2) uncollapsed affordances,
+(3) no semantics at all, arbitrary compression basis.*
+
+**Verdict: (1) with (2) riding on it; strong (3) is rejected by the
+literature; a weak (3) is true only of the early J-lens READOUT, which
+is our own specimen #6.** The question is answered online — do not
+burn GPU re-deriving it.
+
+The (1) evidence, multiply replicated:
+
+1. **Lad, Gurnee & Tegmark 2024, "Stages of Inference"
+   (arXiv:2406.19384)** — layer-deletion/swap across 8 models: early
+   layers = detokenization, "integrating local context to convert raw
+   token representations into coherent entities." Weight-level
+   follow-up: Kamoda et al., NAACL Findings 2025 (arXiv:2501.15754).
+2. **Kaplan et al., ICLR 2025, "From Tokens to Words"
+   (arXiv:2410.05864)** + **Feucht et al., EMNLP 2024, token erasure
+   (arXiv:2406.20086)** — subword sequences fuse into whole-word
+   "inner lexicon" items in early layers; the fused item often ISN'T a
+   vocab token, so a vocabulary lens literally has no name for it.
+   Ancestor: SoLU detokenization neurons (Elhage 2022). Typo-repair
+   neurons also concentrate early (arXiv:2502.19669).
+3. **Patchscopes (Ghandeharioun et al., ICML 2024, arXiv:2401.06102)
+   — the cleanest datum.** Early states decode as the CURRENT token /
+   input entity (entity description peaks at L1–5, declines after);
+   next-token decoding only wins from ~L10 up. Early layers aren't
+   illegible — they answer a different question than the one a
+   next-token lens asks.
+4. **Early-layer SAEs find real, causal content and it's token
+   identity**: single-token features concentrate at L0–4 in Gemma
+   (arXiv:2607.20596, 3.9M features, six models); zero-ablating them
+   does cascading damage. Ethayarajh (EMNLP 2019) is the classic
+   geometry version: early states cluster by token identity across
+   contexts, context-specificity rises with depth. NOTE: no dedicated
+   modern-decoder (Gemma/Llama/Qwen) replication of that clustering
+   study exists — small open niche, but it's a replication, not a
+   finding.
+
+The (2) evidence: senses of ambiguous words stay MIXED until
+~early-middle depth — per-sense SAE features only separate from ~L6 on
+GPT-2-class (arXiv:2501.06254); Coenen 2019 and Mono-Poly (TACL 2021)
+same story in BERT geometry; the workspace paper's own smooth-with-α
+mixture tracking before all-or-none commitment is the frontier
+version, and **our apparatus-06/07 staircase is the home-scale
+measurement of exactly this** (no commitment before the fraction-port
+knee). So "which word?" genuinely has no answer early — but the
+superposition rides on well-defined surface content; it isn't the
+whole story.
+
+Against (3): **Tuned Lens (Belrose et al., arXiv:2303.08112)** — a
+learned per-layer affine map recovers unbiased, much-lower-KL
+predictions from early layers, so the early failure is COORDINATES,
+not absence (though early layers do contain genuinely less
+final-answer information, they don't merely hide it). And
+**arXiv:2510.15511** — hidden states at every depth are provably
+information-preserving w.r.t. the input; "about nothing" is not
+available. What survives of (3) is instrument-shaped and it's ours:
+specimen #6 (u5d) showed the early J-lens readout is manufactured by
+the low-rank transport (junk at J-lens rank 2, logit-lens rank
+~238,000). Two literature mechanisms slot straight into that:
+**massive activations (Sun et al., COLM 2024, arXiv:2402.17762)** —
+input-independent high-norm components forming in the first few
+layers, exactly what would make a lens read CONSTANT prompt-invariant
+junk (our register-invariant furniture census!) — and Nanda's review
+note that plain logit lens beats the J-lens in some early layers
+(the Jacobian linearization itself degrades there). Whether the early
+J-lens image = the massive-activation component is, per the sweep,
+untested ANYWHERE. That link is a cheap decisive extension of
+specimen #6.
+
+Also fits: the Engram cross-reading above (static reconstruction) is
+guess (1) in causal-scale clothing; the workspace paper itself names
+the early third the "sensory region" while flagging its early null as
+possibly a tool artifact ("parts of the model's true workspace, not
+captured by the J-lens").
+
+### The instrument gap: an address-space lens is genuinely open
+
+The proposed fix — keep the Jacobian move, change the target space
+from vocabulary to future ATTENTION ("for each head, the early
+residual direction that makes this position get attended later"; early
+layers write keys, legible in address space not vocab space) — is
+**unclaimed as an instrument** as of three weeks post-J-lens-release.
+Three load-bearing priors exist separately, none composed:
+
+1. **Observable Propagation (Dunefsky & Cohan, ICML 2024,
+   arXiv:2312.16291)** — the exact mathematical move: pull a
+   downstream scalar functional back through the network to get early
+   feature directions. Only ever run with LOGIT observables; an
+   attention logit is also a scalar functional and they never take
+   that step.
+2. **Attention Lens (Sakarvadia et al. 2023, arXiv:2310.16270)** —
+   per-head learned lenses are trainable, but it reads the OV/output
+   side into vocabulary; essentially unvalidated across depth, no
+   follow-ups.
+3. **QK-space decompositions** — Wynroe & Sharkey 2024 (bilinear
+   sparse dictionaries on the QK circuit) and Lee et al. Feb 2026
+   (arXiv:2602.04752, contrastive-covariance QK subspaces): key/query
+   spaces carry human-interpretable low-rank structure — but strictly
+   WITHIN-layer, no cross-layer transport from earlier residuals.
+
+Adjacent but not it: Future Lens (Pal 2023 — future TOKENS, mid/late
+layers only), Luick's universal-response curves (arXiv:2411.07071 —
+early-residual→later-attention sensitivity as aggregate physics, no
+per-head basis), PASTA (attention steering, no readout), NLA
+(transformer-circuits.pub/2026/nla — explicitly "a middle-to-late
+layer" only), Patchscopes successors (Faithful-Patchscopes,
+arXiv:2602.00300 — decoder-prior confabulation fix worth stealing for
+our NLA controls). No J-lens follow-up in the release window touches
+the early regime or a non-vocab target space.
