@@ -595,6 +595,33 @@ invariance dropping ≥ half the A→logit-lens gap AND E core-recall
 `‖z(μ)‖²/‖z‖²`). Control layer must behave oppositely (C retains
 prompt-dependence; E junk-free) or the instrument itself is suspect.
 
+> **Resolved 2026-07-31 — H-STANDING WINS; my 0.50 favorite loses.**
+> Both models, every early layer: μ alone reproduces the furniture
+> core (B 0.96–1.00, 9/9), random norm-matched inputs through the same
+> operator never do (E 0.00–0.24 vs the H-op bar of 0.50), h−μ
+> collapses recall (0.00–0.25) and invariance to the floor. Reading μ
+> alone at qwen L4 regenerates the u5d census verbatim (Blowjob /
+> Geile / Shemale / 专栏收录该内容 / pornstar) — the furniture is the
+> transported image of a standing input-independent component, with
+> massive dims (Sun et al.) as its main but not sole carrier (D recall
+> 0.12–0.33 from zeroing 1–9 dims; gemma's carrier is the
+> `<start_of_image>` sink token). u5d amended, not contradicted: the
+> low-rank J aims at the junk region (row norms are HTML tags / spam),
+> but the standing component picks the winners (rownorm∩core
+> 0.00–0.26). Controls behaved (gemma L20 clean; qwen L38 has its own
+> standing furniture — B-reproducibility alone is NOT early-specific,
+> the early signature is μ-share 0.45–0.81 + E-failure + C-collapse).
+> Secondary split: qwen exactly as predicted (logit lens current-token
+> rank ~200–400 early, J-lens blind); gemma-4b INVERTED (logit blind —
+> plausibly sink-swamped; J-lens current-token rank 2–5560, but
+> confounded by last-token recurrence — a will-be-said-later lens can
+> impersonate perception on `:` and `.`). Bar defects logged in
+> thoughts: strict 8/8 core too brittle (soft ≥5/8 used, recomputed
+> offline), C-invariance bar malformed on qwen (its early logit lens
+> is itself invariant at 0.38–0.53). Evidence:
+> results/apparatus09-{gemma-4b,qwen-27b}/report.json +
+> results/apparatus09-thoughts.md.
+
 ---
 
 ## Standing design rules distilled from the misses
