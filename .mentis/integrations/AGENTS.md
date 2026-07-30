@@ -44,7 +44,7 @@ Mnestis owns architecture. Graphify only if user needs something Mnestis lacks �
 
 ## One-Liner
 
-probes: 0 services, 0 APIs, 0 domains.
+probes: 0 services, 0 APIs, 1 domains.
 
 ## Architecture
 
@@ -53,7 +53,7 @@ probes: 0 services, 0 APIs, 0 domains.
 - **Health score:** 85/100
 - **AI readiness:** 78/100
 
-Single Package with 49 source files across python. 0 packages detected.
+Single Package with 49 source files across python. 0 packages detected. core domains: General.
 
 ## Language Support
 
@@ -66,7 +66,7 @@ Read `.mentis/context/graphs.md` for domain, flow, dependency, and risk Mermaid 
 
 ```mermaid
 flowchart LR
-  empty["No domains detected"]
+  D0["General (45)"]
 ```
 
 ### Language distribution (this repo)
@@ -200,13 +200,17 @@ mindmap
       Pascal
 ```
 
+## Domains (start here)
+
+- **General** — Import-graph cluster of 45 files · `file:affect.py`, `file:affect2.py`, `file:affect3.py`
+
 ## Critical Paths (edit carefully)
 
-- **High-traffic: _load_vectors** (medium risk) — _load_vectors has 10 dependents — changes here have wide blast radius
-- **High-traffic: run** (high risk) — run has 32 dependents — changes here have wide blast radius
-- **High-traffic: save** (medium risk) — save has 12 dependents — changes here have wide blast radius
-- **High-traffic: analyze** (medium risk) — analyze has 12 dependents — changes here have wide blast radius
-- **High-traffic: main** (high risk) — main has 33 dependents — changes here have wide blast radius
+- **High-traffic: affect.py** (medium risk) — affect.py has 12 dependents — changes here have wide blast radius
+- **High-traffic: affect2.py** (medium risk) — affect2.py has 18 dependents — changes here have wide blast radius
+- **High-traffic: _load_vectors** (medium risk) — _load_vectors has 18 dependents — changes here have wide blast radius
+- **High-traffic: affect3.py** (medium risk) — affect3.py has 12 dependents — changes here have wide blast radius
+- **High-traffic: AffectSteer** (medium risk) — AffectSteer has 14 dependents — changes here have wide blast radius
 
 ## Coding Conventions
 

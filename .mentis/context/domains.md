@@ -1,10 +1,23 @@
 # Domains
 
-0 logical domains discovered through path analysis and import-graph clustering.
+1 logical domains discovered through path analysis and import-graph clustering.
 
 ## Domain interaction graph
 
 ```mermaid
 flowchart LR
-  empty["No domains detected"]
+  D0["General (45)"]
 ```
+
+## General
+
+- **Confidence**: 95%
+- **Files/nodes**: 45
+- **Description**: Import-graph cluster of 45 files
+- **Entry points**: 10
+
+- `file:affect.py`
+- `file:affect2.py`
+- `file:affect3.py`
+- `file:affect3b.py`
+- `file:affect3c.py`

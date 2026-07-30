@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  empty["No domains detected"]
+  D0["General (45)"]
 ```
 
 ## Execution flows
@@ -40,84 +40,84 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  A0["affect.py"] --> B0["capture"]
-  A0 -. 1x .-> B0
-  A1["affect.py"] --> B1["outdir"]
-  A1 -. 1x .-> B1
-  A2["affect.py"] --> B2["_mean_resid"]
-  A2 -. 1x .-> B2
-  A3["affect.py"] --> B3["mean"]
-  A3 -. 1x .-> B3
-  A4["affect.py"] --> B4["_gen"]
-  A4 -. 1x .-> B4
-  A5["affect.py"] --> B5["_strip_bos"]
-  A5 -. 1x .-> B5
-  A6["affect.py"] --> B6["decode"]
-  A6 -. 1x .-> B6
-  A7["affect.py"] --> B7["_capture_text"]
-  A7 -. 1x .-> B7
-  A8["affect.py"] --> B8["_capture_scenarios"]
-  A8 -. 1x .-> B8
-  A9["affect.py"] --> B9["recapture"]
-  A9 -. 1x .-> B9
-  A10["affect.py"] --> B10["get_model"]
-  A10 -. 1x .-> B10
-  A11["affect.py"] --> B11["save"]
-  A11 -. 1x .-> B11
-  A12["affect.py"] --> B12["elicit"]
-  A12 -. 1x .-> B12
-  A13["affect.py"] --> B13["one"]
-  A13 -. 1x .-> B13
-  A14["affect.py"] --> B14["_pcs"]
-  A14 -. 1x .-> B14
+  A0["affect.py"] --> B0["_strip_bos"]
+  A0 -. 2x .-> B0
+  A1["affect.py"] --> B1["get_model"]
+  A1 -. 2x .-> B1
+  A2["affect2.py"] --> B2["_strip_bos"]
+  A2 -. 2x .-> B2
+  A3["affect2.py"] --> B3["get_model"]
+  A3 -. 2x .-> B3
+  A4["affect3.py"] --> B4["Steering"]
+  A4 -. 2x .-> B4
+  A5["affect3.py"] --> B5["_strip_bos"]
+  A5 -. 2x .-> B5
+  A6["affect3.py"] --> B6["get_model"]
+  A6 -. 2x .-> B6
+  A7["affect3.py"] --> B7["_all_resid"]
+  A7 -. 2x .-> B7
+  A8["affect3.py"] --> B8["_load_vectors"]
+  A8 -. 2x .-> B8
+  A9["affect3.py"] --> B9["assess"]
+  A9 -. 2x .-> B9
+  A10["affect3.py"] --> B10["loop_gram"]
+  A10 -. 2x .-> B10
+  A11["affect3.py"] --> B11["_null"]
+  A11 -. 2x .-> B11
+  A12["affect3b.py"] --> B12["Steering"]
+  A12 -. 2x .-> B12
+  A13["affect3b.py"] --> B13["_strip_bos"]
+  A13 -. 2x .-> B13
+  A14["affect3b.py"] --> B14["get_model"]
+  A14 -. 2x .-> B14
 ```
 
 ## Critical paths
 
 ```mermaid
 flowchart TD
-  subgraph P0 ["med High-traffic: _load_vectors"]
-    P0N0["function:affect2.py:61"]
+  subgraph P0 ["med High-traffic: affect.py"]
+    P0N0["file:affect.py"]
     P0N1["file:affect2.py"]
     P0N0 --> P0N1
     P0N2["file:affect3.py"]
     P0N1 --> P0N2
-    P0N3["file:affect3b.py"]
+    P0N3["file:affect5.py"]
     P0N2 --> P0N3
-    P0N4["file:affect3c.py"]
+    P0N4["file:affect7.py"]
     P0N3 --> P0N4
-    P0N5["file:affect3g.py"]
+    P0N5["file:affectviz.py"]
     P0N4 --> P0N5
   end
-  subgraph P1 ["high High-traffic: run"]
-    P1N0["function:affect3.py:145"]
+  subgraph P1 ["med High-traffic: affect2.py"]
+    P1N0["file:affect2.py"]
     P1N1["file:affect3.py"]
     P1N0 --> P1N1
-    P1N2["file:affect3c.py"]
+    P1N2["file:affect3b.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3g.py"]
+    P1N3["file:affect3c.py"]
     P1N2 --> P1N3
-    P1N4["file:affect4.py"]
+    P1N4["file:affect3g.py"]
     P1N3 --> P1N4
-    P1N5["file:affect5.py"]
+    P1N5["file:affect4.py"]
     P1N4 --> P1N5
   end
-  subgraph P2 ["med High-traffic: save"]
-    P2N0["function:affect3.py:155"]
-    P2N1["file:affect3.py"]
+  subgraph P2 ["med High-traffic: _load_vectors"]
+    P2N0["function:affect2.py:61"]
+    P2N1["file:affect2.py"]
     P2N0 --> P2N1
-    P2N2["file:affect.py"]
+    P2N2["file:affect3.py"]
     P2N1 --> P2N2
-    P2N3["file:affect2.py"]
+    P2N3["file:affect3b.py"]
     P2N2 --> P2N3
-    P2N4["file:affect3g.py"]
+    P2N4["file:affect3c.py"]
     P2N3 --> P2N4
-    P2N5["file:affect4.py"]
+    P2N5["file:affect3g.py"]
     P2N4 --> P2N5
   end
-  subgraph P3 ["med High-traffic: analyze"]
-    P3N0["function:affect3.py:246"]
-    P3N1["file:affect3.py"]
+  subgraph P3 ["med High-traffic: affect3.py"]
+    P3N0["file:affect3.py"]
+    P3N1["file:affect3b.py"]
     P3N0 --> P3N1
     P3N2["file:affect3c.py"]
     P3N1 --> P3N2
@@ -125,7 +125,7 @@ flowchart TD
     P3N2 --> P3N3
     P3N4["file:affect4.py"]
     P3N3 --> P3N4
-    P3N5["file:affect5.py"]
+    P3N5["file:affect4b.py"]
     P3N4 --> P3N5
   end
 ```
@@ -279,7 +279,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  stable["All domains stable"]
+  R0["General 64"]
 ```
 
 ## Architecture smells
@@ -287,7 +287,7 @@ flowchart LR
 ```mermaid
 pie showData title Architecture smells
     "High" : 7
-    "Medium" : 22
+    "Medium" : 40
 ```
 
 ## mnestis build pipeline

@@ -80,17 +80,39 @@ he sets directions and expects designed-and-executed experiments back.
 
 ## Mnestis / `.mentis` (code-structure index)
 
-`mnestis` (npm, global, pinned 0.3.4) indexes `probes/` into `.mentis/` — a
-call graph over the 49 probe scripts, plus an MCP server (`mnestis` in
-`.mcp.json`, **29** tools despite the README's "15": `get_dna`, `query_graph`,
-`compile_focus`, `impact_analysis`, `search`, `memory_*`, `playbook`, …).
+`mnestis` indexes `probes/` into `.mentis/` — a call graph over the 49 probe
+scripts, plus an MCP server (**29** tools despite the README's "15":
+`get_dna`, `query_graph`, `compile_focus`, `impact_analysis`, `search`,
+`memory_*`, `playbook`, …).
+
+**We run a patched fork, not the npm build.** `.mcp.json` points at
+`~/Projects/Mnestis/packages/cli/dist/index.js` (branch
+`fix/python-call-graph-accuracy`, forked from bitreonx/Mnestis 0.3.4).
+Upstream's Python call graph was ~all guesswork: `resolveRelativeImport`
+requires a leading `.`, which no Python import has, so the import map was
+permanently empty and *every* call fell through to a bare-name fallback that
+took the first index entry matching a trailing name and stamped it
+`confidence: 0.88`. Measured before the fix: all 617 `CALLS` edges were
+guesses, there were **zero** file-to-file edges, and `lab.run` had **zero**
+recorded callers — all 23 were misattributed to `affect3.py`'s local `run()`,
+which is why `impact_analysis("run")` answered about the wrong function.
+Also fixed: `get_neighbors(direction="in")` always returned nothing
+(swapped graphology args), the Python parser read calls out of comments
+(`# multi-steer (pincer)` → a call to `steer()`) and counted `def foo(`
+headers as calls to themselves, and blast radius ignored confidence.
+After: 1215 edges, 226 `IMPORTS` + 122 `DEPENDS_ON` that never existed
+before, and callers of `get_model` (25) and `lab.run` (23) match grep
+exactly. If the fork tree is ever missing, `npm i -g mnestis` still works —
+you just silently get the guessing version back.
+
 Rebuild after adding/renaming probe functions:
 
 ```bash
-mnestis build probes -o ../.mentis && rm -f probes/AGENTS.md
+node ~/Projects/Mnestis/packages/cli/dist/index.js build probes -o ../.mentis \
+  && rm -f probes/AGENTS.md
 ```
 
-Three rules, all learned the hard way — read before touching the tool:
+Four rules, all learned the hard way — read before touching the tool:
 
 - **NEVER scan from the repo root** (`mnestis .`, `mnestis build`, `mnestis
   sync`, `--watch`). Its ignore list is hardcoded and has no virtualenv
@@ -106,20 +128,38 @@ Three rules, all learned the hard way — read before touching the tool:
   the same content is at `.mentis/integrations/AGENTS.md`. The root
   `AGENTS.md` is hand-written and safe *only* while the scan root stays
   `probes/`.
-- **Trust symbol names, not line numbers.** All 360 function/class nodes
-  resolve by name, but the recorded line is 0–2 lines early (usually 2:
-  `lab.py:202` is `run()` at 204). Jump by name; treat `path:line` as a
-  hint.
+- **Trust symbol names, not line numbers — and don't trust names to be
+  unique.** All 360 function/class nodes resolve by name, but the recorded
+  line is 0–2 lines early (usually 2: `lab.py:202` is `run()` at 204). Jump
+  by name; treat `path:line` as a hint. 32 names are ambiguous across
+  `probes/` — `main` ×32, `analyze` ×11, `run` ×9 — and a bare
+  `impact_analysis("run")` silently picks one with no warning. There is no
+  path-qualified lookup (`get_node("lab.py:run")` → `NOT_FOUND`), so for a
+  duplicated name find the node id via `search` first and pass that.
+- **The parse cache self-invalidates — but only in our fork.** Upstream keys
+  `parse-cache.json` on file *content* alone, so after a parser change it
+  silently replays the old broken parse (the rebuilt index kept a `def`-line
+  self-call the patched parser no longer emits; only a manual `rm` fixed it).
+  Our fork stamps the cache with a fingerprint of the parser build and drops
+  it on mismatch, so a rebuild is enough. If you ever run stock `mnestis`
+  again, `rm -f .mentis/parse-cache.json .mentis/file-cache.json` first.
 
 What it is *not*: the semantic layer came up empty here (**domains 0, flows
 0**, no capabilities) because it only parses code extensions — `.md`/`.json`
 are invisible to it. The actual structure of this lab lives in
 `results/*.json`, `MECHANICS.md`, `PREDICTIONS.md`, `GLOSSARY.md`, and
 `board/board.json`. So `.mentis` answers "what calls `get_model`?" and
-"what breaks if I change `lab.run`?" — nothing about the science. **It is
-subordinate to the PRE-DESIGN PROTOCOL above**: it never substitutes for
-grepping `MECHANICS.md` + `PREDICTIONS.md`, and it is not ground truth for
-anything but call structure. We deliberately did not install the bundled
+"what breaks if I change `lab.run`?" — nothing about the science. **Read the
+`confidence` field before believing an edge**: 0.88 means import- or
+same-file-resolved, 0.45 means matched by name alone. 52 of the 507 `CALLS`
+edges are 0.45 guesses, because `service.login()` on a `new UserService()`
+and `tok.decode()` on a HuggingFace tokenizer are the same shape to a regex
+parser — one is real, one is nonsense, and only a type checker could tell
+them apart. `impact_analysis` filters below 0.5; the exploratory tools
+(`search`, `get_neighbors`) do not. **It is subordinate to the PRE-DESIGN
+PROTOCOL above**: it never substitutes for grepping `MECHANICS.md` +
+`PREDICTIONS.md`, and it is not ground truth for anything but call
+structure. We deliberately did not install the bundled
 skills (`mnestis`, `fable-mindset`, `mnestis-ui-ux`, `mnestis-adversarial`,
 `mnestis-loom`) — they declare `.mentis` "ground truth" and demand a
 session-start ritual on "every coding task", which would compete with this
@@ -133,16 +173,25 @@ automatically with the server. Read it as vendor copy, not as a rule of this
 repo; the PRE-DESIGN PROTOCOL outranks it.
 
 `.mentis/` is committed (AI-readable context, like `llms.txt`) but
-`.vercelignore`d, and its churny caches (`parse-cache.json`,
-`file-cache.json`, `engine/memory.db`) are gitignored. Three rebuild quirks:
-a **no-op rebuild still dirties 31 tracked files** (`builtAt` timestamps and
+`.vercelignore`d, and its churn is gitignored: `parse-cache.json`,
+`file-cache.json`, and the whole `engine/` dir — the latter because
+`sessions.jsonl` logs every query string we send it. Rebuild quirks: a
+**no-op rebuild still dirties 31 tracked files** (`builtAt` timestamps and
 `durationMs` timings — pure noise, `git checkout -- .mentis` to discard), which
 is why the rule above is *rebuild when probe structure changes*, not
 habitually; `graph.json` carries one machine-absolute `repository:` node, so
-rebuilds on another box show a spurious one-line diff; and `.mcp.json` uses a **relative**
-root (`mnestis mcp .`) for portability — if the server ever fails to start,
-the cwd assumption broke, so swap in the absolute repo path. Escape hatch:
-`mnestis setup --uninstall`, or `rm -rf .mentis .mcp.json`.
+rebuilds on another box show a spurious one-line diff; `-o` is resolved
+**relative to the scan root**, not the cwd (an absolute `-o /tmp/x` lands at
+`probes/tmp/x`) — which is why the documented `-o ../.mentis` works; and
+`.mcp.json` now holds an **absolute** path to the fork, so it is
+box-specific by construction. Escape hatch: `rm -rf .mentis .mcp.json`.
+
+Also worth knowing about the memory layer: `memory_remember` stores but
+`memory_query` never returns episodes (they never enter the retrieval
+index), its embeddings are feature-hash rather than semantic — its own
+`trust_manifest` says so — and its secret scrubber redacts anything shaped
+like `token: value`. Treat `memory_*` as non-functional; this file and
+`board/board.json` are where lab memory actually lives.
 
 ## Conventions
 

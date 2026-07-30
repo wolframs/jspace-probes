@@ -2,7 +2,7 @@ You are helping me work on **probes**. I have a Mnestis memory layer — use it 
 
 ## Repository DNA (read @.mentis/project.dna.json)
 
-probes: 0 services, 0 APIs, 0 domains.
+probes: 0 services, 0 APIs, 1 domains.
 
 Architecture: Single Package
 Health: 85/100

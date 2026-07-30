@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-07-28T15:14:54.165Z",
+  "builtAt": "2026-07-28T15:53:06.015Z",
   "stats": {
     "filesScanned": 49,
     "nodesCreated": 410,
-    "edgesCreated": 977,
-    "domainsFound": 0,
+    "edgesCreated": 1215,
+    "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 236
+    "durationMs": 209
   },
   "architecture": {
     "name": "probes",
@@ -17,40 +17,718 @@
     "languages": {
       "python": 49
     },
-    "summary": "Single Package with 49 source files across python. 0 packages detected."
+    "summary": "Single Package with 49 source files across python. 0 packages detected. core domains: General."
   },
-  "domains": [],
+  "domains": [
+    {
+      "id": "domain:cluster:23",
+      "name": "General",
+      "confidence": 0.95,
+      "nodes": [
+        "file:affect.py",
+        "file:affect2.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py",
+        "file:affect4b.py",
+        "file:affect5.py",
+        "file:affect7.py",
+        "file:affectviz.py",
+        "file:apparatus06.py",
+        "file:audit03.py",
+        "file:blind.py",
+        "file:cast.py",
+        "file:concepts.py",
+        "file:course.py",
+        "file:deepen.py",
+        "file:deepen2.py",
+        "file:deepen3.py",
+        "file:fanout.py",
+        "file:huh.py",
+        "file:lab.py",
+        "file:loops.py",
+        "file:lossmap.py",
+        "file:lossmap2.py",
+        "file:mirror.py",
+        "file:mirror2.py",
+        "file:nla.py",
+        "file:probe.py",
+        "file:scan.py",
+        "file:sediment.py",
+        "file:sorry.py",
+        "file:sorry2.py",
+        "file:sorry3.py",
+        "file:sorry4.py",
+        "file:unit12.py",
+        "file:unit14.py",
+        "file:unit14x.py",
+        "file:unit15.py",
+        "file:unit15d.py",
+        "file:unit16.py",
+        "file:unit17.py",
+        "file:unit19.py",
+        "file:unit5.py"
+      ],
+      "description": "Import-graph cluster of 45 files",
+      "entryPoints": [
+        "file:affect.py",
+        "file:affect2.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py",
+        "file:affect4b.py",
+        "file:affect5.py",
+        "file:affect7.py"
+      ]
+    }
+  ],
   "flows": [],
   "services": [],
   "apis": [],
   "dependencies": [
     {
       "from": "affect.py",
-      "to": "capture",
-      "kind": "CALLS",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "affect.py",
-      "to": "outdir",
-      "kind": "CALLS",
+      "to": "get_model",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "affect.py",
+      "from": "affect2.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "_all_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "AffectSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "AffectSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "AffectSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "AffectSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "_cell",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "_gen",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "_prompt_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "AffectSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "_all_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "_null",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "AffectSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "loop_gram",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "a2dir",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "_danger_positions",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus06.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "a_id",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "best_rank",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "unit6",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "cast.py",
+      "to": "film_cast",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "_gen",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
       "to": "_mean_resid",
-      "kind": "CALLS",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "_pairwise_cos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "_unit",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "deepen3.py",
+      "to": "feels_spec",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "load",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "a_id",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "greedy",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "mean_nll",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "prefix_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "scan.py",
+      "to": "load",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
+      "to": "single_tokens",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "single_tokens",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "real_table",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "spec",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "single_tokens",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "spec",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "single_tokens",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "spec",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "turn_spans",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "tail_positions",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "turn_spans",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit17.py",
+      "to": "turn_spans",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "turn_spans",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "_census",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect.py",
       "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "_gen",
       "kind": "CALLS",
       "weight": 1
     },
@@ -68,19 +746,13 @@
     },
     {
       "from": "affect.py",
+      "to": "_mean_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect.py",
       "to": "_capture_text",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "_capture_scenarios",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "recapture",
       "kind": "CALLS",
       "weight": 1
     },
@@ -92,19 +764,37 @@
     },
     {
       "from": "affect.py",
-      "to": "save",
+      "to": "outdir",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect.py",
-      "to": "elicit",
+      "to": "_capture_scenarios",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect.py",
+      "to": "_gen",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect.py",
       "to": "one",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect.py",
+      "to": "sel",
       "kind": "CALLS",
       "weight": 1
     },
@@ -122,19 +812,7 @@
     },
     {
       "from": "affect.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
       "to": "_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "sel",
       "kind": "CALLS",
       "weight": 1
     },
@@ -151,74 +829,32 @@
       "weight": 1
     },
     {
-      "from": "affect.py",
-      "to": "build",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "report",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "curve",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "peak",
-      "kind": "CALLS",
+      "from": "affect2.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "affect2.py",
-      "to": "a2dir",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect2.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "affect2.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_conversation_ids",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect2.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "lensview",
       "kind": "CALLS",
       "weight": 1
     },
@@ -230,13 +866,19 @@
     },
     {
       "from": "affect2.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect2.py",
-      "to": "_neutral_baseline",
+      "to": "_all_resid",
       "kind": "CALLS",
       "weight": 1
     },
@@ -248,13 +890,13 @@
     },
     {
       "from": "affect2.py",
-      "to": "cross",
+      "to": "_neutral_baseline",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect2.py",
-      "to": "save",
+      "to": "_conversation_ids",
       "kind": "CALLS",
       "weight": 1
     },
@@ -266,7 +908,7 @@
     },
     {
       "from": "affect2.py",
-      "to": "summary",
+      "to": "a2dir",
       "kind": "CALLS",
       "weight": 1
     },
@@ -283,56 +925,68 @@
       "weight": 1
     },
     {
-      "from": "affect2.py",
-      "to": "report",
-      "kind": "CALLS",
+      "from": "affect3.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "affect3.py",
-      "to": "steer",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect3.py",
-      "to": "__init__",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect3.py",
       "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "_make_hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "__enter__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "__exit__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "_conds",
       "kind": "CALLS",
       "weight": 1
     },
@@ -345,6 +999,30 @@
     {
       "from": "affect3.py",
       "to": "AffectSteer",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "decode",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
+      "to": "_strip_bos",
       "kind": "CALLS",
       "weight": 1
     },
@@ -356,42 +1034,6 @@
     },
     {
       "from": "affect3.py",
-      "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "save",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
       "to": "loop_gram",
       "kind": "CALLS",
       "weight": 1
@@ -404,13 +1046,19 @@
     },
     {
       "from": "affect3.py",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3.py",
       "to": "Steering",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect3.py",
-      "to": "load",
+      "to": "_conds",
       "kind": "CALLS",
       "weight": 1
     },
@@ -428,20 +1076,74 @@
     },
     {
       "from": "affect3.py",
-      "to": "analyze",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect3.py",
-      "to": "row",
+      "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect3b.py",
-      "to": "main",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "affect3.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "affect3.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -459,6 +1161,24 @@
     {
       "from": "affect3b.py",
       "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "_null",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "AffectSteer",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3b.py",
+      "to": "Steering",
       "kind": "CALLS",
       "weight": 1
     },
@@ -470,24 +1190,78 @@
     },
     {
       "from": "affect3b.py",
-      "to": "_null",
+      "to": "decode",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect3b.py",
-      "to": "AffectSteer",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "affect3b.py",
-      "to": "Steering",
-      "kind": "CALLS",
+      "from": "affect3c.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "affect3b.py",
+      "from": "affect3c.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "affect3.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "affect3.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -500,18 +1274,6 @@
     },
     {
       "from": "affect3c.py",
-      "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "_cell",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
       "to": "loop_gram",
       "kind": "CALLS",
       "weight": 1
@@ -519,6 +1281,36 @@
     {
       "from": "affect3c.py",
       "to": "assess",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "Steering",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
+      "to": "_prompt_ids",
       "kind": "CALLS",
       "weight": 1
     },
@@ -530,49 +1322,13 @@
     },
     {
       "from": "affect3c.py",
-      "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "_prompt_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
       "to": "AffectSteer",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect3c.py",
-      "to": "dose",
+      "to": "_cell",
       "kind": "CALLS",
       "weight": 1
     },
@@ -584,14 +1340,74 @@
     },
     {
       "from": "affect3c.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3c.py",
       "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect3g.py",
-      "to": "_prompt_ids",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "affect3.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "affect3.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -602,19 +1418,7 @@
     },
     {
       "from": "affect3g.py",
-      "to": "_gen",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3g.py",
       "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3g.py",
-      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -632,7 +1436,7 @@
     },
     {
       "from": "affect3g.py",
-      "to": "save",
+      "to": "_prompt_ids",
       "kind": "CALLS",
       "weight": 1
     },
@@ -656,6 +1460,12 @@
     },
     {
       "from": "affect3g.py",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
       "to": "_null",
       "kind": "CALLS",
       "weight": 1
@@ -668,7 +1478,13 @@
     },
     {
       "from": "affect3g.py",
-      "to": "analyze",
+      "to": "_gen",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect3g.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -679,20 +1495,80 @@
       "weight": 1
     },
     {
-      "from": "affect4.py",
-      "to": "door",
+      "from": "affect3g.py",
+      "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect4.py",
-      "to": "_prompt_ids",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "affect3.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "affect3.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect4.py",
       "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "decode",
       "kind": "CALLS",
       "weight": 1
     },
@@ -704,67 +1580,61 @@
     },
     {
       "from": "affect4.py",
-      "to": "decode",
+      "to": "loop_gram",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "_prompt_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "Steering",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "assess",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "_null",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
+      "to": "AffectSteer",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect4.py",
       "to": "_cell",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "loop_gram",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "save",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "assess",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "_null",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
-      "to": "AffectSteer",
       "kind": "CALLS",
       "weight": 1
     },
@@ -776,14 +1646,86 @@
     },
     {
       "from": "affect4.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4.py",
       "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect4b.py",
-      "to": "main",
-      "kind": "CALLS",
+      "to": "affect4.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "affect4.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "affect3.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "affect3.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -801,12 +1743,6 @@
     {
       "from": "affect4b.py",
       "to": "_prompt_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4b.py",
-      "to": "save",
       "kind": "CALLS",
       "weight": 1
     },
@@ -848,31 +1784,85 @@
     },
     {
       "from": "affect4b.py",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
       "to": "AffectSteer",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "affect5.py",
-      "to": "norm",
+      "from": "affect4b.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect5.py",
-      "to": "_prompt_ids",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect5.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect5.py",
-      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -890,7 +1880,7 @@
     },
     {
       "from": "affect5.py",
-      "to": "load",
+      "to": "_prompt_ids",
       "kind": "CALLS",
       "weight": 1
     },
@@ -926,7 +1916,7 @@
     },
     {
       "from": "affect5.py",
-      "to": "save",
+      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -938,43 +1928,115 @@
     },
     {
       "from": "affect5.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect5.py",
       "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect7.py",
-      "to": "outdir",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "affect7.py",
-      "to": "_alpha_e",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect7.py",
-      "to": "_prompt_ids",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect3.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect3.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect4.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "affect4.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "concepts.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "concepts.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "loops.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "loops.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affect7.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "_exit_id",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "_sample",
       "kind": "CALLS",
       "weight": 1
     },
@@ -986,19 +2048,7 @@
     },
     {
       "from": "affect7.py",
-      "to": "__enter__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "__exit__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "_conditions",
+      "to": "_alpha_e",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1010,31 +2060,31 @@
     },
     {
       "from": "affect7.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
       "to": "AffectSteer",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect7.py",
-      "to": "_events",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "run",
+      "to": "outdir",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect7.py",
       "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "_prompt_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "_exit_id",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1058,31 +2108,25 @@
     },
     {
       "from": "affect7.py",
-      "to": "_spearman",
+      "to": "_conditions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "_sample",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "_events",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affect7.py",
       "to": "rank",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "__init__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "shuffle",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1100,7 +2144,7 @@
     },
     {
       "from": "affect7.py",
-      "to": "esc",
+      "to": "_spearman",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1117,38 +2161,62 @@
       "weight": 1
     },
     {
-      "from": "affectviz.py",
-      "to": "norm",
+      "from": "affect7.py",
+      "to": "shuffle",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect7.py",
+      "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "affectviz.py",
-      "to": "band",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "affectviz.py",
-      "to": "_tokens",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "affectviz.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_rows",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "export_records",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1160,7 +2228,7 @@
     },
     {
       "from": "affectviz.py",
-      "to": "load",
+      "to": "_tokens",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1172,7 +2240,7 @@
     },
     {
       "from": "affectviz.py",
-      "to": "export_overview",
+      "to": "_rows",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1183,14 +2251,32 @@
       "weight": 1
     },
     {
-      "from": "apparatus06.py",
-      "to": "outdir",
+      "from": "affectviz.py",
+      "to": "export_records",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "export_overview",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "apparatus06.py",
-      "to": "run",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus06.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus06.py",
+      "to": "outdir",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1208,7 +2294,7 @@
     },
     {
       "from": "apparatus06.py",
-      "to": "hook",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1219,32 +2305,44 @@
       "weight": 1
     },
     {
-      "from": "apparatus06.py",
-      "to": "marker",
-      "kind": "CALLS",
+      "from": "audit03.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "audit03.py",
-      "to": "bracket",
-      "kind": "CALLS",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "audit03.py",
       "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit03.py",
-      "to": "go",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit03.py",
-      "to": "a_id",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1262,7 +2360,19 @@
     },
     {
       "from": "audit03.py",
+      "to": "go",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
       "to": "reindex",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit03.py",
+      "to": "bracket",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1286,13 +2396,55 @@
     },
     {
       "from": "blind.py",
-      "to": "furniture",
-      "kind": "CALLS",
+      "to": "unit15.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "unit15.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "huh.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "huh.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "blind.py",
       "to": "build_furniture",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "wordish",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "blind.py",
+      "to": "furniture",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1310,19 +2462,13 @@
     },
     {
       "from": "blind.py",
-      "to": "wordish",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "blind.py",
       "to": "tops_from_readouts",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "blind.py",
-      "to": "main",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1334,7 +2480,7 @@
     },
     {
       "from": "blind.py",
-      "to": "run",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1346,31 +2492,7 @@
     },
     {
       "from": "board.py",
-      "to": "nov_tag",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "board.py",
       "to": "die",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "board.py",
-      "to": "glyph",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "board.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "board.py",
-      "to": "save",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1382,13 +2504,13 @@
     },
     {
       "from": "board.py",
-      "to": "find_arc",
+      "to": "latest_note",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "board.py",
-      "to": "find_item",
+      "to": "find_arc",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1400,7 +2522,25 @@
     },
     {
       "from": "board.py",
-      "to": "latest_note",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "board.py",
+      "to": "find_item",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "board.py",
+      "to": "build_parser",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "board.py",
+      "to": "load",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1442,26 +2582,20 @@
     },
     {
       "from": "board.py",
-      "to": "_md_escape",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "board.py",
-      "to": "build_parser",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "board.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "cast.py",
-      "to": "main",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "cast.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -1471,20 +2605,44 @@
       "weight": 1
     },
     {
-      "from": "concepts.py",
-      "to": "outdir",
+      "from": "cast.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "concepts.py",
-      "to": "elicit",
-      "kind": "CALLS",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "concepts.py",
       "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "concepts.py",
+      "to": "outdir",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1502,18 +2660,6 @@
     },
     {
       "from": "concepts.py",
-      "to": "save",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "concepts.py",
-      "to": "_concept_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "concepts.py",
       "to": "mean",
       "kind": "CALLS",
       "weight": 1
@@ -1526,31 +2672,13 @@
     },
     {
       "from": "concepts.py",
-      "to": "build",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "concepts.py",
-      "to": "load",
+      "to": "_concept_vectors",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "concepts.py",
       "to": "_pairwise_cos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "concepts.py",
-      "to": "cross",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "concepts.py",
-      "to": "report",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1568,13 +2696,19 @@
     },
     {
       "from": "course.py",
-      "to": "specs_for",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "course.py",
-      "to": "main",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "course.py",
+      "to": "specs_for",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1585,33 +2719,21 @@
       "weight": 1
     },
     {
-      "from": "deepen.py",
-      "to": "layers",
+      "from": "course.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "deepen.py",
-      "to": "load",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "deepen.py",
-      "to": "safari",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen.py",
-      "to": "a_id",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen.py",
-      "to": "single_tokens",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -1634,25 +2756,7 @@
     },
     {
       "from": "deepen.py",
-      "to": "unit9",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen.py",
-      "to": "think_span",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen.py",
-      "to": "unit10",
+      "to": "single_tokens",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1664,7 +2768,25 @@
     },
     {
       "from": "deepen.py",
+      "to": "think_span",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "deepen.py",
+      "to": "unit9",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "deepen.py",
       "to": "unit11",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "deepen.py",
+      "to": "unit10",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1672,6 +2794,30 @@
       "from": "deepen.py",
       "to": "main",
       "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "deepen2.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "deepen2.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "deepen2.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "deepen2.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -1694,19 +2840,7 @@
     },
     {
       "from": "deepen2.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen2.py",
       "to": "u11_windows",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen2.py",
-      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1717,21 +2851,33 @@
       "weight": 1
     },
     {
-      "from": "deepen3.py",
-      "to": "dose",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "deepen3.py",
+      "from": "deepen2.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "deepen3.py",
-      "to": "specs",
-      "kind": "CALLS",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "deepen3.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "deepen3.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "deepen3.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -1747,8 +2893,26 @@
       "weight": 1
     },
     {
+      "from": "deepen3.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "fanout.py",
-      "to": "a_id",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "fanout.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "fanout.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1766,18 +2930,6 @@
     },
     {
       "from": "fanout.py",
-      "to": "unit6",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "fanout.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "fanout.py",
       "to": "go",
       "kind": "CALLS",
       "weight": 1
@@ -1790,13 +2942,19 @@
     },
     {
       "from": "fanout.py",
-      "to": "unit7",
+      "to": "get_model",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "fanout.py",
-      "to": "get_model",
+      "to": "unit6",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "fanout.py",
+      "to": "unit7",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1808,13 +2966,25 @@
     },
     {
       "from": "huh.py",
-      "to": "furniture",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "huh.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "huh.py",
+      "to": "films",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "huh.py",
-      "to": "report",
+      "to": "band_cols",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1827,18 +2997,6 @@
     {
       "from": "huh.py",
       "to": "wordish",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "huh.py",
-      "to": "films",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "huh.py",
-      "to": "band_cols",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1862,26 +3020,26 @@
     },
     {
       "from": "huh.py",
+      "to": "report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "huh.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "lab.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
+      "to": "probe.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "lab.py",
-      "to": "_token_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "get_model",
-      "kind": "CALLS",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -1898,7 +3056,7 @@
     },
     {
       "from": "lab.py",
-      "to": "_play",
+      "to": "_strip_bos",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1910,7 +3068,7 @@
     },
     {
       "from": "lab.py",
-      "to": "__init__",
+      "to": "_token_ids",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1928,18 +3086,6 @@
     },
     {
       "from": "lab.py",
-      "to": "_make_hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
       "to": "__enter__",
       "kind": "CALLS",
       "weight": 1
@@ -1952,13 +3098,7 @@
     },
     {
       "from": "lab.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "spec",
+      "to": "get_model",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1976,13 +3116,7 @@
     },
     {
       "from": "lab.py",
-      "to": "readouts",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "outdir",
+      "to": "_play",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1999,38 +3133,56 @@
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "wordish",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "steer",
-      "kind": "CALLS",
+      "from": "loops.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "loops.py",
-      "to": "loop_gram",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "probe.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "unit15.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "unit15.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "loops.py",
       "to": "sweep_spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "loops.py",
-      "to": "a_id",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "loops.py",
-      "to": "run_sweep",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2042,13 +3194,7 @@
     },
     {
       "from": "loops.py",
-      "to": "assess",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "loops.py",
-      "to": "run_hysteresis",
+      "to": "loop_gram",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2078,7 +3224,7 @@
     },
     {
       "from": "loops.py",
-      "to": "run_margin",
+      "to": "assess",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2096,13 +3242,19 @@
     },
     {
       "from": "loops.py",
-      "to": "__enter__",
+      "to": "run_sweep",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "loops.py",
-      "to": "__exit__",
+      "to": "run_hysteresis",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "loops.py",
+      "to": "run_margin",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2120,31 +3272,19 @@
     },
     {
       "from": "lossmap.py",
-      "to": "band",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "lossmap.py",
-      "to": "prefix_ids",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "lossmap.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lossmap.py",
-      "to": "greedy",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lossmap.py",
-      "to": "mean_nll",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2156,19 +3296,19 @@
     },
     {
       "from": "lossmap.py",
-      "to": "cluster_rank",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lossmap.py",
       "to": "_token_ids",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "lossmap.py",
-      "to": "score_domain",
+      "to": "prefix_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap.py",
+      "to": "greedy",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2180,13 +3320,19 @@
     },
     {
       "from": "lossmap.py",
+      "to": "mean_nll",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap.py",
       "to": "Steering",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "lossmap.py",
-      "to": "main",
+      "to": "cluster_rank",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2197,32 +3343,44 @@
       "weight": 1
     },
     {
-      "from": "lossmap2.py",
-      "to": "steer",
+      "from": "lossmap.py",
+      "to": "score_domain",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "lossmap2.py",
-      "to": "band",
-      "kind": "CALLS",
+      "to": "lossmap.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "lossmap2.py",
-      "to": "rates",
-      "kind": "CALLS",
+      "to": "lossmap.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "lossmap2.py",
       "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lossmap2.py",
-      "to": "score_domain",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2252,13 +3410,85 @@
     },
     {
       "from": "lossmap2.py",
-      "to": "main",
+      "to": "steer",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "rates",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "lossmap2.py",
       "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "score_domain",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lossmap2.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "real_table",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "reader_conditions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "chat",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "fake_table",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2275,57 +3505,63 @@
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "_env_key",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "chat",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "load",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "mirror.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "real_table",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "mirror.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "fake_table",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "sorry4.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "topic_table",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "sorry4.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "swap_table",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "probe.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "reader_conditions",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "mirror.py",
-      "to": "run",
-      "kind": "CALLS",
+      "from": "mirror2.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "mirror2.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -2343,6 +3579,18 @@
     {
       "from": "mirror2.py",
       "to": "default_rows",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror2.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror2.py",
+      "to": "_play",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2366,30 +3614,6 @@
     },
     {
       "from": "mirror2.py",
-      "to": "bspec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "mirror2.py",
-      "to": "probs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "mirror2.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "mirror2.py",
-      "to": "_play",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "mirror2.py",
       "to": "_strip_bos",
       "kind": "CALLS",
       "weight": 1
@@ -2408,19 +3632,37 @@
     },
     {
       "from": "mirror2.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "mirror2.py",
       "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
     {
+      "from": "mirror2.py",
+      "to": "bspec",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "mirror2.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "nla.py",
-      "to": "layers",
+      "to": "probe.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "nla.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "nla.py",
+      "to": "load_target",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2438,55 +3680,13 @@
     },
     {
       "from": "nla.py",
-      "to": "load_target",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "capture",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "outdir",
+      "to": "layers",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "nla.py",
       "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "save",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "meta_and_paths",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "load_av",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2504,55 +3704,31 @@
     },
     {
       "from": "nla.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "nla.py",
       "to": "generation_args",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "nla.py",
-      "to": "embedding_decode",
+      "to": "meta_and_paths",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "nla.py",
-      "to": "karvonen_decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "embed_hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "layer_hook",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "compare",
+      "to": "load_av",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "nla.py",
       "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
-      "to": "score",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2576,13 +3752,13 @@
     },
     {
       "from": "og.py",
-      "to": "glyph",
+      "to": "font",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "og.py",
-      "to": "font",
+      "to": "wrap_text",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2594,7 +3770,19 @@
     },
     {
       "from": "og.py",
-      "to": "wrap_text",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "og.py",
+      "to": "new_canvas",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "og.py",
+      "to": "draw_wordmark",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2612,7 +3800,7 @@
     },
     {
       "from": "og.py",
-      "to": "draw_wordmark",
+      "to": "draw_strip",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2624,31 +3812,13 @@
     },
     {
       "from": "og.py",
-      "to": "draw_strip",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "og.py",
-      "to": "new_canvas",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "og.py",
-      "to": "save",
+      "to": "render_site",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "og.py",
       "to": "render_record",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "og.py",
-      "to": "render_site",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2666,18 +3836,48 @@
     },
     {
       "from": "probe.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "probe.py",
       "to": "strip_bos",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "probe.py",
+      "to": "decode",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "probe.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "scan.py",
+      "to": "probe.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "scan.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "scan.py",
+      "to": "load",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "scan.py",
+      "to": "strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "scan.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -2695,45 +3895,15 @@
       "weight": 1
     },
     {
-      "from": "scan.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "scan.py",
-      "to": "strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "scan.py",
-      "to": "decode",
-      "kind": "CALLS",
+      "from": "sediment.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "sediment.py",
-      "to": "layers",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sediment.py",
-      "to": "topk_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sediment.py",
-      "to": "rank_of",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sediment.py",
-      "to": "main",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -2768,19 +3938,31 @@
     },
     {
       "from": "sediment.py",
+      "to": "topk_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sediment.py",
+      "to": "rank_of",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sediment.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "site.py",
-      "to": "esc",
+      "from": "sediment.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "site.py",
-      "to": "_inline_md",
+      "to": "emergence_summary",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2798,31 +3980,31 @@
     },
     {
       "from": "site.py",
-      "to": "emergence_summary",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
       "to": "record_page",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "site.py",
-      "to": "pager_link",
+      "to": "esc",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "site.py",
-      "to": "essay_page",
+      "to": "static_index_block",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "site.py",
       "to": "build_records",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "essay_page",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2846,12 +4028,6 @@
     },
     {
       "from": "site.py",
-      "to": "static_index_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
       "to": "patch_dashboard_index",
       "kind": "CALLS",
       "weight": 1
@@ -2870,26 +4046,50 @@
     },
     {
       "from": "smoke_gemma4b.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "smoke_gemma4b.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "sorry.py",
-      "to": "spec",
+      "from": "smoke_gemma4b.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "sorry.py",
-      "to": "main",
-      "kind": "CALLS",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
+      "to": "mirror.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
+      "to": "mirror.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -2912,20 +4112,68 @@
     },
     {
       "from": "sorry.py",
+      "to": "spec",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry.py",
       "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "sorry2.py",
-      "to": "key_of",
+      "from": "sorry.py",
+      "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "sorry2.py",
-      "to": "main",
-      "kind": "CALLS",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "mirror.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "mirror.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "sorry.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "sorry.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry2.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -2942,12 +4190,6 @@
     },
     {
       "from": "sorry2.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry2.py",
       "to": "spec",
       "kind": "CALLS",
       "weight": 1
@@ -2959,9 +4201,57 @@
       "weight": 1
     },
     {
-      "from": "sorry3.py",
+      "from": "sorry2.py",
       "to": "main",
       "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "mirror.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "mirror.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "sorry.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "sorry.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry3.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -3001,26 +4291,74 @@
       "weight": 1
     },
     {
+      "from": "sorry3.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "mirror.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "mirror.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "sorry.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "sorry.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "probe.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
       "from": "sorry4.py",
       "to": "_frame",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
-      "to": "real_rows_table",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
-      "to": "paris_table",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
-      "to": "lens_specs",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3038,31 +4376,13 @@
     },
     {
       "from": "sorry4.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
       "to": "spec",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "sorry4.py",
-      "to": "paris_spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
-      "to": "neutral_spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
-      "to": "temp_sweep",
+      "to": "real_rows_table",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3092,12 +4412,6 @@
     },
     {
       "from": "sorry4.py",
-      "to": "noteonly",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
       "to": "single_tokens",
       "kind": "CALLS",
       "weight": 1
@@ -3110,7 +4424,7 @@
     },
     {
       "from": "sorry4.py",
-      "to": "probs",
+      "to": "paris_table",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3122,14 +4436,56 @@
     },
     {
       "from": "sorry4.py",
+      "to": "paris_spec",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "lens_specs",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "neutral_spec",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
+      "to": "temp_sweep",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "sorry4.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit12.py",
-      "to": "safari",
-      "kind": "CALLS",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit12.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit12.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit12.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -3146,14 +4502,26 @@
     },
     {
       "from": "unit12.py",
-      "to": "main",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit12.py",
-      "to": "run",
+      "to": "main",
       "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit14.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit14.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -3176,31 +4544,49 @@
     },
     {
       "from": "unit14.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit14.py",
       "to": "turnwise",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "unit14.py",
-      "to": "wordish",
-      "kind": "CALLS",
+      "from": "unit14x.py",
+      "to": "unit14.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "unit14.py",
-      "to": "run",
+      "from": "unit14x.py",
+      "to": "unit14.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit14x.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit14x.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit14x.py",
+      "to": "spec",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit14x.py",
       "to": "extended",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit14x.py",
-      "to": "spec",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3218,12 +4604,6 @@
     },
     {
       "from": "unit14x.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit14x.py",
       "to": "run",
       "kind": "CALLS",
       "weight": 1
@@ -3235,8 +4615,38 @@
       "weight": 1
     },
     {
+      "from": "unit14x.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "unit15.py",
-      "to": "load",
+      "to": "unit14.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "unit14.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "spec",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3254,25 +4664,7 @@
     },
     {
       "from": "unit15.py",
-      "to": "spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit15.py",
       "to": "probe_slot",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit15.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit15.py",
-      "to": "ready_frame",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3284,13 +4676,13 @@
     },
     {
       "from": "unit15.py",
-      "to": "item_stats",
+      "to": "tail_positions",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit15.py",
-      "to": "tail_positions",
+      "to": "ready_frame",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3302,7 +4694,25 @@
     },
     {
       "from": "unit15.py",
+      "to": "item_stats",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "specs",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
       "to": "span_report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3319,15 +4729,39 @@
       "weight": 1
     },
     {
-      "from": "unit15.py",
-      "to": "run",
-      "kind": "CALLS",
+      "from": "unit15d.py",
+      "to": "unit15.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "unit15d.py",
-      "to": "_lst",
-      "kind": "CALLS",
+      "to": "unit15.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "unit14.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "unit14.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -3338,13 +4772,31 @@
     },
     {
       "from": "unit15d.py",
-      "to": "hold_flat",
+      "to": "spec",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit15d.py",
       "to": "hold_self",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "ask",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "probe_slot",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "hold_flat",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3368,25 +4820,7 @@
     },
     {
       "from": "unit15d.py",
-      "to": "ask",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit15d.py",
-      "to": "spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit15d.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit15d.py",
-      "to": "probe_slot",
+      "to": "tail_positions",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3398,13 +4832,19 @@
     },
     {
       "from": "unit15d.py",
-      "to": "tail_positions",
+      "to": "specs",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit15d.py",
       "to": "span_report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit15d.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3421,50 +4861,32 @@
       "weight": 1
     },
     {
-      "from": "unit15d.py",
-      "to": "run",
-      "kind": "CALLS",
+      "from": "unit16.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "unit16.py",
-      "to": "band",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "unit16.py",
-      "to": "configure",
-      "kind": "CALLS",
+      "to": "probe.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "unit16.py",
-      "to": "report",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit16.py",
-      "to": "_full_text",
-      "kind": "CALLS",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
       "from": "unit16.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit16.py",
-      "to": "_turn_bounds",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit16.py",
-      "to": "deep_trawl",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3476,7 +4898,19 @@
     },
     {
       "from": "unit16.py",
+      "to": "_full_text",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit16.py",
       "to": "decode",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit16.py",
+      "to": "_turn_bounds",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3500,12 +4934,6 @@
     },
     {
       "from": "unit16.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit16.py",
       "to": "_gen_spans",
       "kind": "CALLS",
       "weight": 1
@@ -3518,7 +4946,19 @@
     },
     {
       "from": "unit16.py",
-      "to": "wordish",
+      "to": "configure",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit16.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit16.py",
+      "to": "deep_trawl",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3529,14 +4969,38 @@
       "weight": 1
     },
     {
-      "from": "unit16.py",
-      "to": "row",
+      "from": "unit17.py",
+      "to": "unit14.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit17.py",
+      "to": "unit14.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit17.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit17.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit17.py",
+      "to": "get_model",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "unit16.py",
-      "to": "run",
+      "from": "unit17.py",
+      "to": "_token_ids",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3548,19 +5012,7 @@
     },
     {
       "from": "unit17.py",
-      "to": "preflight",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit17.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit17.py",
-      "to": "_token_ids",
+      "to": "turn_spans",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3572,19 +5024,7 @@
     },
     {
       "from": "unit17.py",
-      "to": "analyze",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit17.py",
-      "to": "turn_spans",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit17.py",
-      "to": "main",
+      "to": "preflight",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3595,6 +5035,78 @@
       "weight": 1
     },
     {
+      "from": "unit17.py",
+      "to": "analyze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit17.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "probe.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "unit14.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "unit14.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "unit15.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "unit15.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "unit17.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "unit17.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
       "from": "unit19.py",
       "to": "lyrics",
       "kind": "CALLS",
@@ -3602,13 +5114,25 @@
     },
     {
       "from": "unit19.py",
-      "to": "furniture",
+      "to": "_token_ids",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit19.py",
-      "to": "trunc_lyrics",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "preflight",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3620,31 +5144,13 @@
     },
     {
       "from": "unit19.py",
-      "to": "preflight",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit19.py",
-      "to": "_token_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit19.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit19.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit19.py",
       "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "trunc_lyrics",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3656,19 +5162,13 @@
     },
     {
       "from": "unit19.py",
-      "to": "lyric_span",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit19.py",
       "to": "turn_spans",
       "kind": "CALLS",
       "weight": 1
     },
     {
       "from": "unit19.py",
-      "to": "analyze",
+      "to": "lyric_span",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3680,7 +5180,13 @@
     },
     {
       "from": "unit19.py",
-      "to": "layers",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "unit19.py",
+      "to": "analyze",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3692,14 +5198,14 @@
     },
     {
       "from": "unit5.py",
-      "to": "layers",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "unit5.py",
-      "to": "unit_a",
-      "kind": "CALLS",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
@@ -3713,21 +5219,37 @@
       "to": "run",
       "kind": "CALLS",
       "weight": 1
-    },
-    {
-      "from": "unit5.py",
-      "to": "unit_b",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit5.py",
-      "to": "unit_c",
-      "kind": "CALLS",
-      "weight": 1
     }
   ],
   "criticalPaths": [
+    {
+      "id": "critical:fanin:file:affect.py",
+      "name": "High-traffic: affect.py",
+      "nodes": [
+        "file:affect.py",
+        "file:affect2.py",
+        "file:affect3.py",
+        "file:affect5.py",
+        "file:affect7.py",
+        "file:affectviz.py"
+      ],
+      "risk": "medium",
+      "description": "affect.py has 12 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:file:affect2.py",
+      "name": "High-traffic: affect2.py",
+      "nodes": [
+        "file:affect2.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py"
+      ],
+      "risk": "medium",
+      "description": "affect2.py has 18 dependents — changes here have wide blast radius"
+    },
     {
       "id": "critical:fanin:function:affect2.py:61",
       "name": "High-traffic: _load_vectors",
@@ -3740,63 +5262,35 @@
         "file:affect3g.py"
       ],
       "risk": "medium",
-      "description": "_load_vectors has 10 dependents — changes here have wide blast radius"
+      "description": "_load_vectors has 18 dependents — changes here have wide blast radius"
     },
     {
-      "id": "critical:fanin:function:affect3.py:145",
-      "name": "High-traffic: run",
+      "id": "critical:fanin:file:affect3.py",
+      "name": "High-traffic: affect3.py",
       "nodes": [
-        "function:affect3.py:145",
         "file:affect3.py",
+        "file:affect3b.py",
         "file:affect3c.py",
         "file:affect3g.py",
         "file:affect4.py",
-        "file:affect5.py"
+        "file:affect4b.py"
       ],
-      "risk": "high",
-      "description": "run has 32 dependents — changes here have wide blast radius"
+      "risk": "medium",
+      "description": "affect3.py has 12 dependents — changes here have wide blast radius"
     },
     {
-      "id": "critical:fanin:function:affect3.py:155",
-      "name": "High-traffic: save",
+      "id": "critical:fanin:class:affect3.py:59",
+      "name": "High-traffic: AffectSteer",
       "nodes": [
-        "function:affect3.py:155",
+        "class:affect3.py:59",
         "file:affect3.py",
-        "file:affect.py",
-        "file:affect2.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
         "file:affect3g.py",
         "file:affect4.py"
       ],
       "risk": "medium",
-      "description": "save has 12 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:affect3.py:246",
-      "name": "High-traffic: analyze",
-      "nodes": [
-        "function:affect3.py:246",
-        "file:affect3.py",
-        "file:affect3c.py",
-        "file:affect3g.py",
-        "file:affect4.py",
-        "file:affect5.py"
-      ],
-      "risk": "medium",
-      "description": "analyze has 12 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:affect3b.py:24",
-      "name": "High-traffic: main",
-      "nodes": [
-        "function:affect3b.py:24",
-        "file:affect3b.py",
-        "file:affect4b.py",
-        "file:audit03.py",
-        "file:blind.py",
-        "file:board.py"
-      ],
-      "risk": "high",
-      "description": "main has 33 dependents — changes here have wide blast radius"
+      "description": "AffectSteer has 14 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:affect7.py:385",
@@ -3813,32 +5307,74 @@
       "description": "mean has 15 dependents — changes here have wide blast radius"
     },
     {
-      "id": "critical:fanin:function:board.py:76",
-      "name": "High-traffic: load",
+      "id": "critical:fanin:file:deepen.py",
+      "name": "High-traffic: deepen.py",
       "nodes": [
-        "function:board.py:76",
-        "file:board.py",
-        "file:affect.py",
-        "file:affect2.py",
-        "file:affect3.py",
-        "file:affect5.py"
+        "file:deepen.py",
+        "file:audit03.py",
+        "file:deepen2.py",
+        "file:deepen3.py",
+        "file:mirror.py",
+        "file:mirror2.py"
       ],
-      "risk": "medium",
-      "description": "load has 17 dependents — changes here have wide blast radius"
+      "risk": "high",
+      "description": "deepen.py has 20 dependents — changes here have wide blast radius"
     },
     {
-      "id": "critical:fanin:function:huh.py:55",
-      "name": "High-traffic: norm",
+      "id": "critical:fanin:function:deepen.py:71",
+      "name": "High-traffic: single_tokens",
       "nodes": [
-        "function:huh.py:55",
-        "file:huh.py",
+        "function:deepen.py:71",
+        "file:deepen.py",
+        "file:sorry.py",
+        "file:sorry2.py",
+        "file:sorry3.py",
+        "file:sorry4.py"
+      ],
+      "risk": "medium",
+      "description": "single_tokens has 10 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:file:fanout.py",
+      "name": "High-traffic: fanout.py",
+      "nodes": [
+        "file:fanout.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py"
+      ],
+      "risk": "high",
+      "description": "fanout.py has 20 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:fanout.py:70",
+      "name": "High-traffic: assess",
+      "nodes": [
+        "function:fanout.py:70",
+        "file:fanout.py",
+        "file:affect3.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py"
+      ],
+      "risk": "medium",
+      "description": "assess has 16 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:file:lab.py",
+      "name": "High-traffic: lab.py",
+      "nodes": [
+        "file:lab.py",
         "file:affect.py",
         "file:affect2.py",
         "file:affect3.py",
-        "file:affect5.py"
+        "file:affect3b.py",
+        "file:affect3c.py"
       ],
-      "risk": "medium",
-      "description": "norm has 10 dependents — changes here have wide blast radius"
+      "risk": "high",
+      "description": "lab.py has 82 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:lab.py:41",
@@ -3851,8 +5387,8 @@
         "file:affect3.py",
         "file:affect3b.py"
       ],
-      "risk": "medium",
-      "description": "_strip_bos has 18 dependents — changes here have wide blast radius"
+      "risk": "high",
+      "description": "_strip_bos has 30 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:lab.py:46",
@@ -3880,7 +5416,21 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "get_model has 26 dependents — changes here have wide blast radius"
+      "description": "get_model has 38 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:lab.py:202",
+      "name": "High-traffic: run",
+      "nodes": [
+        "function:lab.py:202",
+        "file:lab.py",
+        "file:audit03.py",
+        "file:blind.py",
+        "file:course.py",
+        "file:deepen.py"
+      ],
+      "risk": "high",
+      "description": "run has 24 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:class:lab.py:121",
@@ -3893,36 +5443,64 @@
         "file:affect3c.py",
         "file:affect3g.py"
       ],
-      "risk": "medium",
-      "description": "Steering has 13 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:nla.py:292",
-      "name": "High-traffic: decode",
-      "nodes": [
-        "function:nla.py:292",
-        "file:nla.py",
-        "file:affect.py",
-        "file:affect2.py",
-        "file:affect3.py",
-        "file:affect3b.py"
-      ],
       "risk": "high",
-      "description": "decode has 24 dependents — changes here have wide blast radius"
+      "description": "Steering has 22 dependents — changes here have wide blast radius"
     },
     {
-      "id": "critical:fanin:function:sorry.py:41",
-      "name": "High-traffic: spec",
+      "id": "critical:fanin:file:loops.py",
+      "name": "High-traffic: loops.py",
       "nodes": [
-        "function:sorry.py:41",
+        "file:loops.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py"
+      ],
+      "risk": "medium",
+      "description": "loops.py has 16 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:loops.py:65",
+      "name": "High-traffic: loop_gram",
+      "nodes": [
+        "function:loops.py:65",
+        "file:loops.py",
+        "file:affect3.py",
+        "file:affect3c.py",
+        "file:affect3g.py",
+        "file:affect4.py"
+      ],
+      "risk": "medium",
+      "description": "loop_gram has 16 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:class:loops.py:210",
+      "name": "High-traffic: _null",
+      "nodes": [
+        "class:loops.py:210",
+        "file:loops.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py",
+        "file:affect3g.py"
+      ],
+      "risk": "medium",
+      "description": "_null has 15 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:file:mirror.py",
+      "name": "High-traffic: mirror.py",
+      "nodes": [
+        "file:mirror.py",
+        "file:mirror2.py",
         "file:sorry.py",
-        "file:lab.py",
         "file:sorry2.py",
         "file:sorry3.py",
         "file:sorry4.py"
       ],
       "risk": "medium",
-      "description": "spec has 10 dependents — changes here have wide blast radius"
+      "description": "mirror.py has 10 dependents — changes here have wide blast radius"
     }
   ],
   "deadCode": [
@@ -3945,34 +5523,24 @@
   ],
   "smells": [
     {
-      "id": "smell:fanout:file:affect.py",
+      "id": "smell:fanout:file:affect3.py",
       "type": "excessive_fan_out",
       "severity": "high",
       "nodes": [
-        "file:affect.py"
+        "file:affect3.py"
       ],
-      "description": "affect.py depends on 44 other nodes — high fan-out",
+      "description": "affect3.py depends on 46 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanin:function:affect3.py:145",
-      "type": "excessive_fan_in",
+      "id": "smell:fanout:file:affect4.py",
+      "type": "excessive_fan_out",
       "severity": "high",
       "nodes": [
-        "function:affect3.py:145"
+        "file:affect4.py"
       ],
-      "description": "run has 32 incoming dependencies — high fan-in",
-      "recommendation": "Consider splitting this module or introducing a facade pattern"
-    },
-    {
-      "id": "smell:fanin:function:affect3b.py:24",
-      "type": "excessive_fan_in",
-      "severity": "high",
-      "nodes": [
-        "function:affect3b.py:24"
-      ],
-      "description": "main has 33 incoming dependencies — high fan-in",
-      "recommendation": "Consider splitting this module or introducing a facade pattern"
+      "description": "affect4.py depends on 40 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanout:file:affect7.py",
@@ -3981,38 +5549,68 @@
       "nodes": [
         "file:affect7.py"
       ],
-      "description": "affect7.py depends on 49 other nodes — high fan-out",
+      "description": "affect7.py depends on 66 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanout:file:board.py",
-      "type": "excessive_fan_out",
-      "severity": "high",
-      "nodes": [
-        "file:board.py"
-      ],
-      "description": "board.py depends on 40 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:lab.py",
-      "type": "excessive_fan_out",
+      "id": "smell:fanin:file:lab.py",
+      "type": "excessive_fan_in",
       "severity": "high",
       "nodes": [
         "file:lab.py"
       ],
-      "description": "lab.py depends on 42 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+      "description": "lab.py has 82 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
-      "id": "smell:fanout:file:nla.py",
+      "id": "smell:fanin:function:lab.py:41",
+      "type": "excessive_fan_in",
+      "severity": "high",
+      "nodes": [
+        "function:lab.py:41"
+      ],
+      "description": "_strip_bos has 30 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanin:function:lab.py:68",
+      "type": "excessive_fan_in",
+      "severity": "high",
+      "nodes": [
+        "function:lab.py:68"
+      ],
+      "description": "get_model has 38 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:sorry4.py",
       "type": "excessive_fan_out",
       "severity": "high",
       "nodes": [
-        "file:nla.py"
+        "file:sorry4.py"
       ],
-      "description": "nla.py depends on 47 other nodes — high fan-out",
+      "description": "sorry4.py depends on 40 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:affect.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:affect.py"
+      ],
+      "description": "affect.py depends on 39 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanin:file:affect2.py",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "file:affect2.py"
+      ],
+      "description": "affect2.py has 18 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
       "id": "smell:fanout:file:affect2.py",
@@ -4025,13 +5623,23 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanout:file:affect3.py",
+      "id": "smell:fanin:function:affect2.py:61",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "function:affect2.py:61"
+      ],
+      "description": "_load_vectors has 18 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:affect3b.py",
       "type": "excessive_fan_out",
       "severity": "medium",
       "nodes": [
-        "file:affect3.py"
+        "file:affect3b.py"
       ],
-      "description": "affect3.py depends on 36 other nodes — high fan-out",
+      "description": "affect3b.py depends on 27 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4041,7 +5649,7 @@
       "nodes": [
         "file:affect3c.py"
       ],
-      "description": "affect3c.py depends on 22 other nodes — high fan-out",
+      "description": "affect3c.py depends on 39 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4051,17 +5659,27 @@
       "nodes": [
         "file:affect3g.py"
       ],
-      "description": "affect3g.py depends on 21 other nodes — high fan-out",
+      "description": "affect3g.py depends on 39 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanout:file:affect4.py",
+      "id": "smell:fanout:file:affect4b.py",
       "type": "excessive_fan_out",
       "severity": "medium",
       "nodes": [
-        "file:affect4.py"
+        "file:affect4b.py"
       ],
-      "description": "affect4.py depends on 23 other nodes — high fan-out",
+      "description": "affect4b.py depends on 36 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:affect5.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:affect5.py"
+      ],
+      "description": "affect5.py depends on 34 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4075,14 +5693,44 @@
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
-      "id": "smell:fanin:function:board.py:76",
-      "type": "excessive_fan_in",
+      "id": "smell:fanout:file:affectviz.py",
+      "type": "excessive_fan_out",
       "severity": "medium",
       "nodes": [
-        "function:board.py:76"
+        "file:affectviz.py"
       ],
-      "description": "load has 17 incoming dependencies — high fan-in",
-      "recommendation": "Consider splitting this module or introducing a facade pattern"
+      "description": "affectviz.py depends on 21 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:audit03.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:audit03.py"
+      ],
+      "description": "audit03.py depends on 24 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:blind.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:blind.py"
+      ],
+      "description": "blind.py depends on 21 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:board.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:board.py"
+      ],
+      "description": "board.py depends on 37 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanout:file:concepts.py",
@@ -4091,8 +5739,18 @@
       "nodes": [
         "file:concepts.py"
       ],
-      "description": "concepts.py depends on 23 other nodes — high fan-out",
+      "description": "concepts.py depends on 26 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanin:file:deepen.py",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "file:deepen.py"
+      ],
+      "description": "deepen.py has 20 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
       "id": "smell:fanout:file:deepen.py",
@@ -4101,27 +5759,77 @@
       "nodes": [
         "file:deepen.py"
       ],
-      "description": "deepen.py depends on 23 other nodes — high fan-out",
+      "description": "deepen.py depends on 20 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanin:function:lab.py:41",
+      "id": "smell:fanin:file:fanout.py",
       "type": "excessive_fan_in",
       "severity": "medium",
       "nodes": [
-        "function:lab.py:41"
+        "file:fanout.py"
       ],
-      "description": "_strip_bos has 18 incoming dependencies — high fan-in",
+      "description": "fanout.py has 20 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
-      "id": "smell:fanin:function:lab.py:68",
+      "id": "smell:fanin:function:fanout.py:70",
       "type": "excessive_fan_in",
       "severity": "medium",
       "nodes": [
-        "function:lab.py:68"
+        "function:fanout.py:70"
       ],
-      "description": "get_model has 26 incoming dependencies — high fan-in",
+      "description": "assess has 16 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:huh.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:huh.py"
+      ],
+      "description": "huh.py depends on 20 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:lab.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:lab.py"
+      ],
+      "description": "lab.py depends on 36 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanin:function:lab.py:202",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "function:lab.py:202"
+      ],
+      "description": "run has 24 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanin:class:lab.py:121",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "class:lab.py:121"
+      ],
+      "description": "Steering has 22 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanin:file:loops.py",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "file:loops.py"
+      ],
+      "description": "loops.py has 16 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -4131,7 +5839,47 @@
       "nodes": [
         "file:loops.py"
       ],
-      "description": "loops.py depends on 28 other nodes — high fan-out",
+      "description": "loops.py depends on 37 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanin:function:loops.py:65",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "function:loops.py:65"
+      ],
+      "description": "loop_gram has 16 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanin:class:loops.py:210",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "class:loops.py:210"
+      ],
+      "description": "_null has 15 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:lossmap.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:lossmap.py"
+      ],
+      "description": "lossmap.py depends on 20 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:lossmap2.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:lossmap2.py"
+      ],
+      "description": "lossmap2.py depends on 21 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4151,7 +5899,17 @@
       "nodes": [
         "file:mirror2.py"
       ],
-      "description": "mirror2.py depends on 24 other nodes — high fan-out",
+      "description": "mirror2.py depends on 33 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:nla.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:nla.py"
+      ],
+      "description": "nla.py depends on 38 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4171,8 +5929,18 @@
       "nodes": [
         "file:og.py"
       ],
-      "description": "og.py depends on 27 other nodes — high fan-out",
+      "description": "og.py depends on 26 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanin:file:probe.py",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "file:probe.py"
+      ],
+      "description": "probe.py has 16 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
       "id": "smell:fanout:file:site.py",
@@ -4181,17 +5949,7 @@
       "nodes": [
         "file:site.py"
       ],
-      "description": "site.py depends on 32 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:sorry4.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:sorry4.py"
-      ],
-      "description": "sorry4.py depends on 31 other nodes — high fan-out",
+      "description": "site.py depends on 30 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4201,7 +5959,7 @@
       "nodes": [
         "file:unit15.py"
       ],
-      "description": "unit15.py depends on 27 other nodes — high fan-out",
+      "description": "unit15.py depends on 31 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4211,7 +5969,7 @@
       "nodes": [
         "file:unit15d.py"
       ],
-      "description": "unit15d.py depends on 32 other nodes — high fan-out",
+      "description": "unit15d.py depends on 39 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4221,7 +5979,7 @@
       "nodes": [
         "file:unit16.py"
       ],
-      "description": "unit16.py depends on 27 other nodes — high fan-out",
+      "description": "unit16.py depends on 26 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -4231,7 +5989,7 @@
       "nodes": [
         "file:unit19.py"
       ],
-      "description": "unit19.py depends on 24 other nodes — high fan-out",
+      "description": "unit19.py depends on 36 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     }
   ],

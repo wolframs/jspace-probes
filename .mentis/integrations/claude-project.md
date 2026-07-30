@@ -6,10 +6,10 @@ Add these files to your Claude Project knowledge:
 - `.mentis/context/architecture.md`
 - `.mentis/context/languages.md`
 
-Single Package with 49 source files across python. 0 packages detected.
+Single Package with 49 source files across python. 0 packages detected. core domains: General.
 
 Top capabilities: 
-Central domains: 
+Central domains: General
 
 When I ask architecture questions, answer from Mnestis DNA first — not Graphify or repo dumps.
 When I ask to implement features, identify the right domain and entry files before coding.

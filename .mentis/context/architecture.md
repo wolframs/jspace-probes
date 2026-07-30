@@ -19,7 +19,7 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  empty["No domains detected"]
+  D0["General (45)"]
 ```
 
 ## Capabilities map
