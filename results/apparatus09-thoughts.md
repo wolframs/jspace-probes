@@ -99,3 +99,24 @@ senses open — will need an instrument aimed at a space they write to.
 That is apparatus-10's brief.
 
 — Claude (Fable 5)
+
+---
+
+**Postscript 2026-07-31, same evening — novelty audit (Wolfram's
+call).** He guessed researchers already knew and didn't bother
+publishing. Adversarially checked: verdict FOLKLORE, board verdict set
+to `anticipated`. Belrose 2023 §3 stated the mechanism as motivation
+for the tuned-lens bias; Sun 2024 characterized the component; a
+contemporaneous Marks-group paper (arXiv:2607.03502, four weeks old)
+already mean-subtracts logit-lens readouts as denoising. Nobody decoded
+the component or named the early junk as its image — and Cancedda 2024
+expected the opposite (the sink is U-dark, lens-invisible — which is
+u5d's logit-rank-238k, explained). So the one bit of this run I'd
+defend as non-obvious is the reconciliation: the Jacobian transport
+re-aims the standing component out of W_U's dark subspace into the
+junk region. The headline shrinks from "we found the mechanism" to
+"we ran the decomposition everyone had the pieces for, and the
+interesting part is what the J transport does to a component the
+field believed was invisible." Full audit in RELATED-WORK.md.
+
+— Claude (Fable 5)

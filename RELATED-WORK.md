@@ -424,3 +424,48 @@ layer" only), Patchscopes successors (Faithful-Patchscopes,
 arXiv:2602.00300 — decoder-prior confabulation fix worth stealing for
 our NLA controls). No J-lens follow-up in the release window touches
 the early regime or a non-vocab target space.
+
+### Novelty audit of apparatus-09 (adversarial scout, 2026-07-31, same day)
+
+*Wolfram's hunch: "researchers knew this and decided it wasn't worth
+publishing." Verdict: essentially yes — FOLKLORE. The sweep above's
+"untested ANYWHERE" call needs a qualifier. apparatus-09 board verdict
+set to `anticipated`.*
+
+Every ingredient was in print before we ran: **Belrose et al. 2023 §3**
+is the closest single sentence — the tuned-lens bias b_l is motivated
+by "transformer layers learn to output residuals that are far from
+zero *on average*," plus an explicit rogue-dims-may-contaminate-the-
+lens worry; the mechanism as hypothesis, never decoded, never tested.
+**Sun et al. 2024** characterized the standing component verbatim
+("largely stay constant regardless of the input… function as
+indispensable bias terms") without ever pushing it through W_U.
+**Timkey & van Schijndel 2021** had the mean-subtraction fix, aimed at
+similarity measures. **Brauer, Mayrink Verdun & Marks, arXiv:2607.03502
+(July 3, 2026 — contemporaneous, not ancestral)** applies cross-example
+mean subtraction to logit-lens READOUTS ("+8.6pp decode accuracy",
+"removes tokens that are always high, e.g. formatting artifacts") — the
+fix, framed as denoising, layers 30–60 only, zero mechanism
+attribution. Expect convergent work from that direction.
+
+What genuinely was not in the literature: (i) decoding the mean/sink
+component through a vocab lens and reporting its token image, (ii)
+identifying the early junk AS that image, (iii) the early-layer
+decomposition (B/C/D/E) itself. And one finding of ours runs *against*
+the published grain in a useful way: **Cancedda 2024 (arXiv:2402.09221,
+"Spectral Filters, Dark Signals, and Attention Sinks")** showed the
+BOS-sink state is fixed across samples AND lives almost entirely in
+W_U's near-null space ("U-dark") — i.e. the literature's expectation
+was that the standing component is lens-*invisible*. That is exactly
+why the plain logit lens ranks the junk ~238k (u5d). apparatus-09's
+non-obvious bit is the reconciliation: **the Jacobian transport re-aims
+the standing component out of the dark subspace into the undertrained-
+junk region** — J_l un-darkens the sink. Writeup rule: cite Belrose §3,
+Sun, Cancedda, and 2607.03502 as near-prior-art; headline only the
+transport-re-aiming, not the standing component itself.
+
+Also collected: Gemma sink lore is well documented (BOS-conditional
+massive activations in gemma-2, retained without BOS in gemma-3,
+arXiv:2410.10781 + 2503.22329; visual sink tokens share BOS's sink
+dims, arXiv:2503.03321) — our `<start_of_image>` carrier fits that
+picture; no published <start_of_image>-specific writeup found.
