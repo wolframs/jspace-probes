@@ -135,18 +135,29 @@ def sentences(text: str) -> list[str]:
 
     def _hold(m):
         spans.append(m.group(0))
-        return f"\x00{len(spans) - 1}\x00"
+        # A quote whose own last character is a full stop ends the sentence
+        # it sits in ('The model said "Nothing." We measured...'). Mark those
+        # with \x01 so the splitter can still see a boundary there. Without
+        # this the stop is hidden inside the span and the next sentence
+        # merges in — which pushed writers to move the period OUTSIDE the
+        # quote, silently altering output the model really produced.
+        inner = m.group(0)[1:-1].rstrip()
+        mark = "\x01" if inner.endswith((".", "!", "?")) else "\x00"
+        return f"{mark}{len(spans) - 1}{mark}"
 
     text = re.sub(r'"[^"]*"|“[^”]*”', _hold, text)
 
     # Two further quote-related fixes:
     #  - a following quote mark opens a sentence just as a capital does;
-    #  - a sentence may END inside a quote, so the stop is followed by the
-    #    closing mark rather than by whitespace.
-    parts = re.split(r"[.!?]+[\"”'’)\]]*(?=\s+[\"“(A-Z\x00]|$)", text)
+    #  - a sentence may END inside a quote, so the stop is either the closing
+    #    mark or a sentence-final quote span (\x01).
+    parts = re.split(
+        r"(?<=\x01)(?=\s+[\"“(A-Z\x00\x01])"
+        r"|[.!?]+[\"”'’)\]]*(?=\s+[\"“(A-Z\x00\x01]|$)", text)
 
     def _restore(p):
-        return re.sub(r"\x00(\d+)\x00", lambda m: spans[int(m.group(1))], p)
+        return re.sub(r"[\x00\x01](\d+)[\x00\x01]",
+                      lambda m: spans[int(m.group(1))], p)
 
     return [_restore(p).strip() for p in parts if p.strip()]
 
