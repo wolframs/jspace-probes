@@ -290,7 +290,10 @@ def check_plain_md(path: pathlib.Path, allow: set[str] | None = None) -> dict:
                          "msg": f"short version has {len(sentences(sv))} sentences (max 1)",
                          "excerpt": sv[:100]})
     total = word_count(strip_markup(text))
-    if total > MAX_RECORD_WORDS:
+    # The length cap is about record summaries. Long-form pages (the essay)
+    # are meant to be long; their discipline is per-sentence, not per-file.
+    long_form = path.parent.name == "plain"
+    if total > MAX_RECORD_WORDS and not long_form:
         viol.append({"rule": "LEN",
                      "msg": f"{total} words (max {MAX_RECORD_WORDS}) — "
                             "detail belongs in the research notes",

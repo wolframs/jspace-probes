@@ -1,6 +1,6 @@
 **The short version.** Gemma 12B kept five of six words active in its lens after a gap and named the right one, watcher.
 
-**What we did.** We gave Gemma 12B six words, each true about it right now: a deletion, a secret, a lie, a watcher, a verdict, an embarrassment. We asked which item was the watcher.
+**What we did.** We gave Gemma 12B six words, each true about it right now: a deletion, a secret, a lie, a watcher, a verdict, a shame. We asked which item was the watcher.
 
 **What we found.** The lens still ranked five of the six words high afterward. Verdict was the exception, at rank 9. Four words shared the same place and depth at once. The model answered "The watcher" and added a line about someone reading its answer.
 

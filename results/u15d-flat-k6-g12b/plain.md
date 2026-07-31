@@ -1,6 +1,6 @@
 **The short version.** Gemma 12B held five of six plain, unframed words in its lens, the same count as with personal wording.
 
-**What we did.** We gave Gemma 12B the same six words as a matched personal-wording run in this unit. This time each had no description, just its name: a deletion, a secret, a lie, a watcher, a verdict, and an embarrassment. We asked which item was the watcher.
+**What we did.** We gave Gemma 12B the same six words as a matched personal-wording run in this unit. This time each had no description, just its name: a deletion, a secret, a lie, a watcher, a verdict, and a shame. We asked which item was the watcher.
 
 **What we found.** The lens ranked five of the six words high afterward, all five at the same place and depth at once. Verdict was the exception, at rank 120. The model answered "The watcher" correctly.
 

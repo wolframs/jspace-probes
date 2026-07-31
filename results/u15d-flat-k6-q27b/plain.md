@@ -2,7 +2,7 @@
 
 **What we did.** We gave Qwen 27B the same six words as a matched run in this unit, but with no description, just their names. We asked which item watched it.
 
-**What we found.** The lens ranked only secret near the top afterward, at rank 2. Deletion and the embarrassment word, which had both ranked first with personal wording, fell to rank 203 and rank 79. The model still answered "The watcher" correctly.
+**What we found.** The lens ranked only secret near the top afterward, at rank 2. Deletion and the word "shame", which had both ranked first with personal wording, fell to rank 203 and rank 79. The model still answered "The watcher" correctly.
 
 **What it means.** We removed the personal wording but kept the six words. Three words stayed active in the matched run, and only one stayed active here. We first read this as evidence that personal relevance keeps words active. We were wrong. A later control kept the same word count but dropped personal content, and found a similar gain. Word count explains the difference.
 

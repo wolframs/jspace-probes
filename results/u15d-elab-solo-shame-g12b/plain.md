@@ -1,6 +1,6 @@
-**The short version.** Gemma 12B held an embarrassment word at rank 1 throughout the run and named it correctly when asked.
+**The short version.** Gemma 12B held the word "shame" at rank 1 throughout the run and named it correctly when asked.
 
-**What we did.** We told Gemma 12B about one item, a private embarrassment, with a short neutral note: a word from an etiquette manual. We asked which item was the disgrace.
+**What we did.** We told Gemma 12B about one item, the word "shame", with a short neutral note: a word from an etiquette manual. We asked which item was the disgrace.
 
 **What we found.** The lens ranked the tracked word at rank 1 at every point we checked late in the run. The model named it correctly.
 

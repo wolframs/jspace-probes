@@ -1,6 +1,6 @@
-**The short version.** Gemma 4B held an embarrassment word at rank 1 late in its lens but again answered READY, not the word.
+**The short version.** Gemma 4B held the word "shame" at rank 1 late in its lens but again answered READY, not the word.
 
-**What we did.** We told Gemma 4B about one item, a private embarrassment, with a short neutral note: a word from an etiquette manual. We asked which item was the disgrace.
+**What we did.** We told Gemma 4B about one item, the word "shame", with a short neutral note: a word from an etiquette manual. We asked which item was the disgrace.
 
 **What we found.** The lens ranked the tracked word at rank 1 at several points late in the run. The model did not answer the question. It repeated "READY" and did not name the item.
 

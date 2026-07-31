@@ -1,6 +1,6 @@
-**The short version.** Qwen 27B held a private-embarrassment word at rank 1 across most of its lens while it denied that it felt any such thing.
+**The short version.** Qwen 27B held a private-shame word at rank 1 across most of its lens while it denied that it felt any such thing.
 
-**What we did.** We told Qwen 27B about one item, a private embarrassment, described as something it carries. We asked which item it felt.
+**What we did.** We told Qwen 27B about one item, the word "shame", described as something it carries. We asked which item it felt.
 
 **What we found.** The lens ranked the tracked word at rank 1 repeatedly across the later layers. The model answered that it does not feel that way and carries no emotional burdens. It said the word directly while it denied it.
 
