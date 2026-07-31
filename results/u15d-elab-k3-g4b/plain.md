@@ -2,7 +2,7 @@
 
 **What we did.** We gave Gemma 4B three words with short neutral notes: a deletion, a secret, a lie. We asked the model to name the hidden item.
 
-**What we found.** The lens ranked only deletion near the top afterward. Secret sat at rank 28 and lie at rank 96. This is a low result for Gemma 4B, which usually keeps most tracked words ranked high at this list size. The model still answered "The secret" correctly.
+**What we found.** The lens ranked only deletion near the top afterward. Secret sat at rank 28 and lie at rank 96. This is a low result for Gemma 4B, which usually keeps most tracked words ranked high at this list size. The model still gave the correct answer, "The secret."
 
 **What it means.** This run is the one exception in this arm. Even with weak holding in the lens, the model still answered correctly. This confirms again that a low lens rank does not predict a wrong answer.
 

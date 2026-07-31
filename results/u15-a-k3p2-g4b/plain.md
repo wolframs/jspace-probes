@@ -9,8 +9,8 @@ appeared together at the same layer and position.
 **What we found.** All three words stayed in residence. Fern and
 submarine held rank 1, and lantern held rank 2. The lens showed two of
 the three together at once, in the deeper part of the model, around
-layers 23 to 30 of its 34 layers. Gemma 4B answered "The submarine,"
-which was correct.
+layers 23 to 30 of its 34 layers. Gemma 4B answered "The submarine."
+That answer was correct.
 
 **What it means.** In this order too, Gemma 4B held every word of a
 three-word list. The spot where several words sit together at once sits

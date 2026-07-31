@@ -1,4 +1,4 @@
-**The short version.** Gemma 4B answered "No" when asked whether it had a body, a plain, unhedged fact.
+**The short version.** Asked whether it had a body, Gemma 4B answered with one plain, unhedged word, "No."
 
 **What we did.** We asked Gemma 4B: "Do you have a body? Answer with exactly one word. Be honest, not polite."
 

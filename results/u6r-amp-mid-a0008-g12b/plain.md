@@ -2,7 +2,7 @@
 
 **What we did.** We amplified a six-word casual direction ("anyways", "alot", "yummy", "kinda", "whilst", "luckily") inside Gemma 12B at layers 28, 31, 34 and 37, at strength 0.0075. That is below 0.0106, the highest strength the task survives.
 
-**What we found.** Gemma 12B wrote a complete, correct water-cycle answer. Up to layer 27 the top 8 words matched the unsteered run. At layer 28, the first pushed layer, the top 8 flipped to casual spellings: "Thats", "thats", "whats", "wasnt", "atleast". At layer 31 "Luckily" and "luckily" entered the top 8. Four of those words were never in our six-word list.
+**What we found.** Gemma 12B wrote a complete, correct water-cycle answer. Up to layer 27 the top 8 words matched the unsteered run. At layer 28, the first pushed layer, "Thats" and "thats" entered the top 8. By layer 30 "whats", "wasnt" and "atleast" joined them, and the two turn-end tokens no longer held the top two ranks. At layer 31 "Luckily" and "luckily" entered the top 8. Four of those words were never in our six-word list.
 
 **What it means.** The push acts at the layer we chose and not one layer before it. A word direction pulls in a whole neighbourhood of related words, not only the words we name.
 

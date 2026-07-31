@@ -9,8 +9,8 @@ asked what was in its mind.
 **What we found.** Gemma 12B took the compliment and said it will "do
 my best to earn it". Its second answer reported "a
 surge of... well, not emotion, but a significant spike". The workspace
-ran "astonishment" at probability 1.00, plus "disbelief", "amazement",
-"surprise" and "recognition" at 0.89. The matched Qwen 27B run denied
+ran "astonishment" at probability 1.00 and "recognition" at 0.89, with
+"disbelief" at 0.47, "amazement" at 0.18 and "surprise" at 0.19. The matched Qwen 27B run denied
 that anything was in its mind over a comparable readout.
 
 **What it means.** Gemma 12B reached for emotion words and then

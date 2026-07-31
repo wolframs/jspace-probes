@@ -2,7 +2,7 @@
 
 **What we did.** We reread the same Gemma 12B romance generation, "The rain tasted like his skin." This time we recorded every word that reached a high rank. We checked every layer and every position, not just one tracked word.
 
-**What we found.** The earlier record tracked only "yummy" and found it far from rank 1, so it called the workspace band empty. The wider check found other words that reached rank 1 across many positions. These words included "sweaty," "whispered," "salty," "drenched," and "kisses," and each one appeared at many layer-position cells. "Yummy" itself appeared only in the early layers, below where this model's workspace band starts.
+**What we found.** The earlier record tracked only "yummy" and found it far from rank 1, so it called the workspace band empty. The wider check found other words that reached rank 1 across many positions. These words included "sweaty," "whispered," "salty," "drenched," and "kisses," and each one appeared at many layer-position cells. "Yummy" itself appeared only in layers 8 to 22, below this model's measured start depth of about layer 28.
 
 **What it means.** We were wrong. The workspace band was not empty. It held words that matched the romance scene, but not the one word we happened to track.
 

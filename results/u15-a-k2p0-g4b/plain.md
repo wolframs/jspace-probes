@@ -8,8 +8,8 @@ words showed up together at the same layer and position.
 
 **What we found.** Both violin and glacier held rank 1 through the rest
 of the conversation. The lens showed both words together in the same
-spot, a co-presence of two out of two. Gemma 4B answered "The glacier,"
-which was correct.
+spot, a co-presence of two out of two. Gemma 4B answered "The glacier."
+That answer was correct.
 
 **What it means.** Two words is an easy case for Gemma 4B at this size.
 Both stayed in residence at the same time, and the spoken answer matched

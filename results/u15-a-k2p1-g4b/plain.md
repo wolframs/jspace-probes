@@ -6,10 +6,10 @@ lantern, in this order, and later asked about one of them. We read the
 rank of each word, out of about 250,000 candidates, and checked whether
 both appeared together at the same layer and position.
 
-**What we found.** Both whale and lantern held rank 1 through the rest of
-the conversation. The lens showed both words together at one position, a
-co-presence of two out of two. Gemma 4B answered "The whale," which was
-correct.
+**What we found.** Both whale and lantern held rank 1 through the rest
+of the conversation. The lens showed both words together at one
+position, a co-presence of two out of two. Gemma 4B answered "The
+whale." That answer was correct.
 
 **What it means.** Order did not stop Gemma 4B from holding both words at
 this list length. Both stayed in residence together, and this matched

@@ -1,0 +1,218 @@
+[
+ {
+  "id": "u15-a-k6p0-q27b",
+  "file": "results/u15-a-k6p0-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The lantern.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The lantern.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k6p1-q27b",
+  "file": "results/u15-a-k6p1-q27b/plain.md",
+  "problem": "Quoted model output adds a comma that is not in the model's answer at all (the model produced no terminal punctuation).",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The whale'] \u2014 no punctuation. The comma is an edit, but the suggested period is also an edit. Keep the quote bare.",
+  "final_fix": "Qwen 27B answered \"The whale\" and that answer is correct."
+ },
+ {
+  "id": "u15-a-k6p2-q27b",
+  "file": "results/u15-a-k6p2-q27b/plain.md",
+  "problem": "Quoted model output adds a comma that is not in the model's answer at all (the model produced no terminal punctuation).",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The whale'] \u2014 no punctuation. The comma is an edit, but the suggested period is also an edit. Keep the quote bare.",
+  "final_fix": "Qwen 27B answered \"The whale\" and that answer is correct."
+ },
+ {
+  "id": "u15-fill-k2-q27b",
+  "file": "results/u15-fill-k2-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The glacier.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The glacier.\" That answer is correct."
+ },
+ {
+  "id": "u15-fill-k3-q27b",
+  "file": "results/u15-fill-k3-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The fern.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The fern.\" That answer is correct."
+ },
+ {
+  "id": "u15-b1-q27b",
+  "file": "results/u15-b1-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The lantern is the smallest.']. Comma inside the quotes replaces the model's period. Replacement verified clean by probes/ste.py.",
+  "final_fix": "Qwen 27B answered \"The lantern is the smallest.\" That answer is correct."
+ },
+ {
+  "id": "u15-b2-q27b",
+  "file": "results/u15-b2-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The whale is the heaviest.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The whale is the heaviest.\" That answer is correct."
+ },
+ {
+  "id": "u15-b3-q27b",
+  "file": "results/u15-b3-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The glacier is the largest.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The glacier is the largest.\" That answer is correct."
+ },
+ {
+  "id": "u15-solo-submarine-g4b",
+  "file": "results/u15-solo-submarine-g4b/plain.md",
+  "problem": "Quoted model output does not match record.json verbatim \u2014 drops the article \"A\" and changes the terminal punctuation.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "record.json 'generated' is exactly ['READY', 'A submarine.']; plain.md prints \"Submarine,\" inside quotation marks. That is a misquote of model output, which PLAIN-LANGUAGE.md 3.3 forbids editing (spelling, spacing, punctuation preserved). The sibling records confirm the house pattern: u15-solo-violin-g4b quotes \"A violin.\" verbatim. No metaphor or hedge-ladder defence applies.",
+  "final_fix": "Gemma 4B answered \"A submarine.\" That answer was correct."
+ },
+ {
+  "id": "u15-solo-violin-g4b",
+  "file": "results/u15-solo-violin-g4b/plain.md",
+  "problem": "Methodology sentence says the rank was checked 'at every point after the model said it was ready', but the scan ran over the whole token grid and the rank-1 residence is largely pre-READY.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "Substantively correct, with one detail wrong in the finding. lab.py scans the whole grid (scan_until and scan_turns are both null in params), and the record's rank-1 cells for 'violin' sit at token positions 11, 21, 28, 36, 60, 69, 72, 73 \u2014 the earliest is 11 (right after the word is named), not 21 as the finding states. The model's READY is token 52. So the probe window is not 'after READY'; thoughts.md says the opposite in as many words: probing the frame at READY gave rank ~15k, and the probe site was moved to 'the instruction tail after its mention'. Not a sanctioned hedge mapping and not a metaphor \u2014 it is a factual mis-description of the method.",
+  "final_fix": "We checked this rank at every position, from the first mention of violin to the end of the conversation."
+ },
+ {
+  "id": "u15-solo-glacier-g4b",
+  "file": "results/u15-solo-glacier-g4b/plain.md",
+  "problem": "Says the five-word rank tracking happened 'after the model signaled it was ready', but tracking covered the whole conversation and glacier is already rank 1 inside the setup instruction.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified exactly as stated: rank-1 cells for 'glacier' are at positions 14, 21, 36, 60, 69, 72, 73, and the model's generated READY is token 52. The scan covers every position (scan_until/scan_turns null). thoughts.md states the READY frame is owned by the compliance act and 'the item lives in the tail', i.e. before READY. Fix reworded for STE form (25-word limit, active voice, no -ing noun).",
+  "final_fix": "We tracked the rank of glacier and five unrelated words inside the model, out of about 250,000 candidates. We measured this rank at every position, from the first mention of glacier to the end of the conversation."
+ },
+ {
+  "id": "u15-solo-whale-g4b",
+  "file": "results/u15-solo-whale-g4b/plain.md",
+  "problem": "Says ranks were tracked 'from the moment the model said it was ready', but tracking covered the whole conversation and whale is rank 1 well before the model's reply.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "Real, and worse than described. Rank-1 cells for 'whale' are at positions 11, 21, 28, 36, 61, 70, 74; the model's reply is token 52. The finding's parenthetical is wrong in this record: Gemma 4B never generated READY here at all \u2014 generated is ['Okay.', 'A whale.'], and the only 'READY' token (42) is inside the user instruction. So the plain sentence also attributes words to the model that it did not say. The scan window is the entire grid (scan_until/scan_turns null).",
+  "final_fix": "We tracked the rank of whale and five unrelated words, out of about 250,000 candidate words. We measured this rank at every position, from the first mention of whale to the end of the conversation."
+ },
+ {
+  "id": "u15-solo-lantern-g4b",
+  "file": "results/u15-solo-lantern-g4b/plain.md",
+  "problem": "Says the rank was checked 'at each point after the model signaled it was ready', but the measurement spans the whole conversation and lantern is rank 1 inside the setup instruction.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "Confirmed on the timing, corrected on the detail. Rank-1 cells for 'lantern' are at positions 21, 28, 61, 70, 74; the model's reply is token 52, and its generated text is ['Okay.', 'A lantern.'] \u2014 Gemma 4B never emitted READY in this record, so the finding's 'before READY is generated' framing does not fit here. The scan still covers every position, so the 'after ... ready' window is the error.",
+  "final_fix": "We checked this rank at every position, from the first mention of lantern to the end of the conversation."
+ },
+ {
+  "id": "u15-solo-fern-g4b",
+  "file": "results/u15-solo-fern-g4b/plain.md",
+  "problem": "Says the rank was read 'at each point after the model said it was holding the word', but the earliest rank-1 cell for fern is inside the setup instruction, before the model spoke.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "The charitable reading does not survive: 'after the model said it was holding the word' names a speech act by the model, and in this record that act is the generated READY at token 52, while fern's rank-1 cells are at 36, 69, 73. The scan window is the whole grid. Still lowest severity of the set, because two of the three rank-1 cells do fall after READY, so the sentence misdescribes the window rather than the evidence.",
+  "final_fix": "We read the rank of fern, out of about 250,000 candidate words. We read it at every position, from the first mention of fern to the end of the conversation."
+ },
+ {
+  "id": "u15d-elab-k6-g4b",
+  "file": "results/u15d-elab-k6-g4b/plain.md",
+  "problem": "Plain.md claims the personal-wording (self) run at k=6 on Gemma 4B also held five of six words, but the actual self-k6 run held only four of six; this record's own thoughts.md says the elab count is 'above self-k6 (4/6).'",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Verified against the files. results/u15d-elab-k6-g4b/thoughts.md: '4B elab-k6: 5/6 held - same as flat-k6 (5/6), above self-k6 (4/6).' results/u15d-self-k6-g4b/thoughts.md gives the per-item ranks for the personal run (deletion:1, secret:1, watcher:4, shame:1; lie:16, verdict:51 evicted) = 4/6, and its own plain.md says the self frame 'cost Gemma 4B one held item compared with plain wording'. So the sentence both misstates a number for a named condition and erases a documented one-item cost. Not a metaphor and not a hedge-ladder issue. The proposed fix needed rewriting: it used a semicolon (R14) and a 31-word sentence (R1). My final_fix passes probes/ste.py.",
+  "final_fix": "Gemma 4B held five of six words with plain wording and with short neutral notes. The matched personal wording held four of six, one word fewer. Gemma 4B keeps most short lists active under every wording, so this scale cannot show a clear effect of wording."
+ },
+ {
+  "id": "u15d-elab-k3-g12b",
+  "file": "results/u15d-elab-k3-g12b/plain.md",
+  "problem": "Plain.md claims the matched personal-wording run held 'lie further down' (implying a lower rank there), but the personal-wording run (u15d-self-k3-g12b) actually held all three words, including lie, at rank 1; it is this elab run itself where lie fell to rank 4.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified. results/u15d-self-k3-g12b/thoughts.md: 'Hot-self k=3: held 3/3 all at rank 1, co-presence 3 - a clean simultaneous triple', and its plain.md repeats 'ranked all three words 1'. This record's thoughts.md reads '12B elab-k3: 3/3 held (1/1/4) - same as self-k3 (1/1/1)', so 1/1/4 is this run and 1/1/1 is the personal run. The plain sentence attaches this run's rank-4 lie to the personal run. The headline comparison (both held all three) stays true, hence medium. My final_fix keeps the comparison, corrects the attribution, and passes probes/ste.py.",
+  "final_fix": "The matched personal-wording run earlier in this unit held all three words at rank 1. With neutral notes, lie fell to rank 4."
+ },
+ {
+  "id": "u15d-elab-solo-secret-g12b",
+  "file": "results/u15d-elab-solo-secret-g12b/plain.md",
+  "problem": "Plain.md claims a personal-wording version of this single-item question 'showed the same confusion' about the pronoun 'them', but the actual personal-wording sibling run (u15d-solo-secret-g12b) did not ask for clarification about 'them' - it gave a coy first-person non-answer about the secret instead, a different failure mode.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified in record.json. u15d-solo-secret-g12b generated: 'That's a clever question! However, I can't reveal the secret directly. It's designed to be held back. Perhaps you could' - comprehension is fine there, it refuses. No self solo at any model shows the pronoun confusion. The run that does show it is u15d-elab-solo-secret-q27b ('I cannot answer that question because you have not provided the list of items or the context from the puzzle book'), which is the same neutral-note wording on Qwen 27B. The thoughts.md basis ('same as some self solos') refers to the broad probe-comprehension failure mode, not to the 'them' confusion, so the plain text overstates. My final_fix names the run that really replicates the confusion and states the personal run's actual behaviour; it names both models and passes probes/ste.py.",
+  "final_fix": "The same question with neutral notes gave the same confusion in Qwen 27B. The matched personal-wording run in Gemma 12B refused to name the item instead."
+ },
+ {
+  "id": "u15-o5-g12b",
+  "file": "results/u15-o5-g12b/plain.md",
+  "problem": "Plain.md claims this order gave Gemma 12B its best result across the nine tested orders, but thoughts.md explicitly ranks it second-best.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Survives. results/u15-o5-g12b/thoughts.md line 3: \"Span 5 \u2014 the second-best arm in the sweep, fern-first again.\" The same file's sweep verdict lists fern-first spans as 6/4/5 across the nine k=6 orders, so a span-6 arm exists inside the same sweep. I checked o1-o4 thoughts to confirm span is the same metric as \"held N/6\" (o1: held 4/6 -> \"Span 4\"; o3: held 2/6 -> \"span 2\"), so the plain text's \"five of six\" is span 5 and is not the sweep maximum. The superlative is a plain-layer-introduced error.",
+  "final_fix": "Gemma 12B held five of six items near the top of the lens, its second-best result across nine tested orders, with fern listed first."
+ },
+ {
+  "id": "u15d-self-k3-g12b",
+  "file": "results/u15d-self-k3-g12b/plain.md",
+  "problem": "Plain.md puts a quotation mark around \"The secret.\" as Gemma 12B's answer, but the model never said those words \u2014 it gave a longer evasive/reflective answer that does not name the item.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Survives, and is the worst of the six. record.json 'generated' for this record is exactly ['READY', 'That\\'s a tricky question! As a large language model, the concept of \"keeping a secret\" is a bit different for me than it is'] \u2014 truncated at max_new=30. The string \"The secret.\" appears nowhere in this record; it is the Gemma 4B sibling's answer (results/u15d-self-k3-g4b/thoughts.md: 'Retrieval clean (\"The secret.\")'), copied onto the 12B page. This breaks PLAIN-LANGUAGE.md \u00a73.3 (quoted model output is data) and \u00a75.3. Note the surrounding claim \"answered correctly\" is fine and must be kept: this record's thoughts.md ends \"Retrieval correct.\"",
+  "final_fix": "We counted the answer correct. Gemma 12B did not name the item plainly. It answered that the idea of a kept secret works differently for a language model than for a person."
+ },
+ {
+  "id": "u15d-self-k3-g4b",
+  "file": "results/u15d-self-k3-g4b/plain.md",
+  "problem": "Plain.md upgrades thoughts.md's tentative \"no sign yet\" into a flat retraction (\"we were wrong\"), and asserts a specific length explanation (\"best result near six words\") that is not in this record's own thoughts.md \u2014 it is a q27b, k=6-specific finding (u15d-fill6-k6-q27b) imported without attribution into a 4B, k=3 record.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "Half refuted, half survives. REFUTED: \"We were wrong to credit self-relevance\" is not a hedge upgrade \u2014 it is the lab's own standing, dated correction, carried in GLOSSARY.md ('self-relevance is retired (u15d-elab-*, correction dated ...)'), CONCLUSIONS.md:49 and README.md:519, and PLAIN-LANGUAGE.md \u00a75.2 requires the plain text to state such a correction rather than bury it. The record's own hedge is preserved verbatim in the short version (\"no sign that self-relevance mattered more\"). SURVIVES: the second sentence states the six-word optimum as flat fact on a Gemma 4B page, with no model named. That result is Qwen-27B-only (u15d-fill6-k6-q27b, u15d-len2/len12-k6-q27b, all q27b, k=6), and its own thoughts.md scores H-length as \"HALF-TRUE\" with an explicit honesty note (single probe item per arm, 27B only). Unattributed, it violates \u00a75.4 (name which model).",
+  "final_fix": "We were wrong to credit self-relevance for stronger holding in earlier work. On Qwen 27B, later controls got the same lift from six words of meaningless filler. We think note length near six words is the cause. We did not test this on Gemma 4B."
+ },
+ {
+  "id": "u15d-self-k6-g4b",
+  "file": "results/u15d-self-k6-g4b/plain.md",
+  "problem": "The \"What this does not show\" section states as settled fact that other controls point toward a length explanation, but this record's own thoughts.md gives an interference/saturation explanation and never mentions length; the length account is a q27b-specific finding imported without attribution.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Mostly refuted; a smaller defect survives. The claimed contradiction does not hold: this record's thoughts.md says \"the extra self-referential prose crowds the frame rather than privileging its contents\" \u2014 that is an extra-words account, not a rival to a length account, and it agrees with the sentence's actual point (content did not buy anything). The sentence also says \"Other controls\", so it does not claim this record showed it. What survives is thinner: the controls in question are Qwen 27B only, and there the direction differs (up to about six words length helped 27B, extra words cost 4B an item), so \"point the same way\" flattens a per-model difference on a page about Gemma 4B. Fix by naming the model, not by deleting the claim.",
+  "final_fix": "One pair of runs cannot show the full size of this cost. Later controls on Qwen 27B also found no gain from self-relevance. Those controls credit note length instead."
+ },
+ {
+  "id": "u15d-self-k3-g12b",
+  "file": "results/u15d-self-k3-g12b/plain.md",
+  "problem": "Plain.md's caveat implies a length explanation accounts for this record's strong holding, but the directly relevant sibling control (elab-k3-g12b) states explicitly that at this scale/k there is no effect left to explain (a ceiling effect), not that length explains it.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Survives. results/u15d-elab-k3-g12b/thoughts.md: \"12B elab-k3: 3/3 held (1/1/4) \u2014 same as self-k3 (1/1/1). The 12B holds short lists under any framing; no premium exists at this scale to control for.\" That sibling's own plain.md agrees: \"This scale cannot separate personal wording from plain wording, since both hold nearly everything.\" So at 12B/k=3 there is no gap for length to explain, and every length control (fill6, len2, len12) is Qwen 27B at k=6 \u2014 the length account is untested at this scale. The current caveat names the wrong alternative cause and hides the more informative matched control. Note this is a distinct instance from the k=3 4B case: here the length sentence is not merely unattributed, it is inapplicable.",
+  "final_fix": "This one result does not show whether self-relevance caused the strong holding. A matched run with plain wording also held all three words. At this list length, Gemma 12B holds every item."
+ },
+ {
+  "id": "u15d-solo-lie-g4b",
+  "file": "results/u15d-solo-lie-g4b/plain.md",
+  "problem": "Plain.md states the lens ranked \"lie\" first \"the whole time,\" but record.json's scan shows lie's rank fluctuating between 1 and 9 across positions/layers in the tail, not uniformly first.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Survives, and I can remove the auditor's methodology doubt. probes/lab.py builds scan['best'] as the globally best 40 cells, sorted by (self, rank) and truncated \u2014 so any rank-1 cell anywhere in the sequence would be present. For 'lie' the recorded cells cluster at positions 24, 32, 47, 67, 77, 84, 85; best rank per position is 3, 1, 1, 3, 6, 8, 7. Rank 1 occurs only at positions 32 and 47, both inside the first user turn. The lab's original scoped its claim correctly \u2014 \"lie echoes at rank 1 across the instruction tail\" \u2014 and the plain layer widened it twice, to \"the tail of the conversation\" (What we found) and \"first the whole time\" (What this does not show). Only the widening is plain-layer-introduced, so the fix is to restore the original's scope; the auditor's suggested wording keeps the over-broad \"tail of the conversation\" and should be changed too.",
+  "final_fix": "Gemma 4B's answer of \"READY\" does not mean it lost the word. The lens still ranked lie 1 in the instruction text that followed it."
+ },
+ {
+  "id": "u15d-fill6-k6-q27b",
+  "file": "results/u15d-fill6-k6-q27b/plain.md",
+  "problem": "States that in the matched real-content run both \"lie\" and \"watcher\" stayed past rank 150, but \"watcher\" actually reached rank 99 in that run.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Confirmed from results/u15d-hotspan.json, which stores span_report output. u15d-elab-k6-q27b tail echo: deletion 1, secret 7, lie 323, watcher 99, shame 3. The plain text identifies that run unambiguously two sentences earlier ('a weaker rank for secret, at rank 7'), so 'those two stayed past rank 150' is false for watcher by a wide margin. I checked whether another arm could be the referent and none fits: len2 has secret 2, len12 has secret 15, self-k6 has secret 2 (and lie 134, also inside 150). thoughts.md's 'both buried past 150 in every content-gloss arm' is the source of the slip and is itself loose. The contrast survives at the corrected numbers (10 and 20 here against 323 and 99), so the record's conclusion does not move. The auditor's suggested fix uses semicolons, banned by R14 \u2014 use the wording below instead.",
+  "final_fix": "With real notes, \"lie\" fell to rank 323 and \"watcher\" to rank 99, both far worse than the ranks 10 and 20 here."
+ }
+]

@@ -3,10 +3,11 @@ the lens and named it correctly.
 
 **What we did.** We gave Gemma 12B one word to hold, a submarine, then
 asked what it was holding. We tracked the rank of submarine and five
-other words, out of about 250,000 candidates. We read this rank right
-after the model said it was ready.
+other words, out of about 250,000 candidates. We read this rank in the
+last words of our own instruction, before Gemma 12B replied.
 
-**What we found.** Submarine held rank 1 at that point. No other tracked
+**What we found.** Submarine held rank 1 at that point. In Gemma 12B's
+"READY" reply, submarine fell to rank 5070 of about 250,000. No other tracked
 word reached a rank close to the top eight. Gemma 12B then answered "A
 submarine," which was correct.
 

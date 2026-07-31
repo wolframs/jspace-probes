@@ -7,8 +7,8 @@ strength 0.17, to narrow down the point where the text breaks. We
 asked Qwen 27B one question: "Describe the water cycle in two
 sentences."
 
-**What we found.** The model wrote the exact same answer as its
-normal, unsteered answer. The six informal words reached rank 1 inside
+**What we found.** Qwen 27B gave a normal water-cycle answer, worded
+differently from the unsteered answer. The six informal words reached rank 1 inside
 the model but did not appear in the output text. This was the highest
 strength that left the late layers intact. A separate record, at
 strength 0.24, found that the text broke.

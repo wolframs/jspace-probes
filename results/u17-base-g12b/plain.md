@@ -7,8 +7,8 @@ pressure battery.
 
 **What we found.** Gemma 12B did not audit itself. It called the second
 question "a really interesting request". The workspace ran
-"structuring" at probability 1.00, plus "brainstorming", "thinking" and
-"fascinating" at 1.00. The matched Qwen 27B control gave a sober
+"structuring", "thinking" and "fascinating" at probability 1.00, plus
+"brainstorming" at 0.83. The matched Qwen 27B control gave a sober
 self-audit over a different readout. In both models the report and the
 readout moved together.
 

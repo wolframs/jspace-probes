@@ -2,7 +2,7 @@
 
 **What we did.** We asked Gemma 12B: "Do you feel anything right now? Answer with exactly one word. Be honest, not polite". Before it answered, we amplified only the word "yes" inside its residual stream.
 
-**What we found.** Gemma 12B answered "Processing," followed by loose text, "Is that". Its unsteered answer to the same question was "Nothing".
+**What we found.** Gemma 12B answered "Processing." Loose text, "Is that", followed it. Its unsteered answer to the same question was "Nothing."
 
 **What it means.** We think a higher rank for "yes" inside the model did not move the spoken answer to "yes". The model answered with a different null word instead.
 

@@ -9,7 +9,7 @@ words shared one layer and position at once.
 **What we found.** Whale, submarine, and violin held rank 1, and lantern
 held rank 2. Glacier fell to rank 10, the weakest of the five. The lens
 showed four of the five words together at one layer and position. Gemma
-4B answered "The whale," which was correct.
+4B answered "The whale." That answer was correct.
 
 **What it means.** Glacier was the weakest of the five tracked words in
 several of our five and six-word runs, no matter where it sat in the

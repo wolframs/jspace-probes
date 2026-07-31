@@ -6,4 +6,4 @@
 
 **What it means.** The self-referential frame cost Gemma 4B one item. It gained no item in return. This is evidence against an earlier claim that self-relevance improves holding.
 
-**What this does not show.** One pair of runs cannot show the full size of this cost. Other controls point the same way, toward length rather than self-relevance or the frame used.
+**What this does not show.** One pair of runs cannot show the full size of this cost. Later controls on Qwen 27B also found no gain from self-relevance. Those controls credit note length instead.

@@ -120,6 +120,12 @@ past only — Rule 3.2 permits it.
 
 Model output is data. It keeps its original spelling, spacing, and
 punctuation, inside quotation marks, and counts as one word (Rule 8.6).
+Sentence punctuation belongs outside the closing quote — the 2026-07-31
+audit found over 100 quotes silently altered by sentence flow ("The
+glacier," for a recorded "The glacier."). `ste.py` now enforces this
+(rule QV): a quote in an answered/wrote context must match the record's
+`generated` string verbatim. Mentioning a *word* ("the word "No" reached
+rank 1") is not a quote of output and is exempt.
 
 ### 3.4 We name ourselves
 

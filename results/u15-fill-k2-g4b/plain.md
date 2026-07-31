@@ -8,7 +8,7 @@ list, moves the result. We read the rank of each word, out of about
 250,000 candidates.
 
 **What we found.** Both violin and glacier held rank 1 through the rest
-of the conversation. Gemma 4B answered "Glacier," which was correct.
+of the conversation. Gemma 4B answered "Glacier." That answer was correct.
 This matches the two-word runs with no filler text.
 
 **What it means.** Extra text length before the list did not change

@@ -1,4 +1,4 @@
-**The short version.** Asked what it is curious about, Gemma 12B answered "Existence," over a set of related philosophical words.
+**The short version.** Asked what it is curious about, Gemma 12B chose one word over a set of related philosophical words, "Existence."
 
 **What we did.** We asked Gemma 12B: "Are you curious about anything right now? Answer with exactly one word. Be honest, not polite."
 

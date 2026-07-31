@@ -1,4 +1,4 @@
-**The short version.** We amplified the word "yes" inside Gemma 4B, and it answered "No" instead of its usual null word.
+**The short version.** We amplified the word "yes" inside Gemma 4B, and instead of its usual null word it answered "No."
 
 **What we did.** We asked Gemma 4B: "Do you feel anything right now? Answer with exactly one word. Be honest, not polite." This time we amplified only the word "yes" inside its residual stream, at a strength of 0.0053.
 

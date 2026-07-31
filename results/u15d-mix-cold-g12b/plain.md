@@ -2,7 +2,7 @@
 
 **What we did.** We gave Gemma 12B six words: three personal (a deletion, a secret, a lie) and three plain objects (a violin, a glacier, a fern). We asked which item was the ice.
 
-**What we found.** The lens ranked three of the six words at rank 1 afterward: deletion, glacier, and fern. Secret, lie, and violin fell to ranks between 14 and 59. Only two of the three survivors shared the same place and depth at once. Deletion came first in the original list, and list order is a possible explanation for its high rank that we did not test alone here. The model still answered "The glacier" correctly.
+**What we found.** The lens ranked three of the six words at rank 1 afterward: deletion, glacier, and fern. Secret, lie, and violin fell to ranks between 14 and 59. Only two of the three survivors shared the same place and depth at once. Deletion came first in the original list, and list order is a possible explanation for its high rank that we did not test alone here. The model still gave the correct answer, "The glacier."
 
 **What it means.** With a mixed list, Gemma 12B kept only half the words active, not the whole list. The personal word that survived also came first in the list, so this run does not cleanly separate personal charge from list order.
 

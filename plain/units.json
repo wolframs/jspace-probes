@@ -7,7 +7,7 @@
     },
     "1": {
       "name": "Unit 1 · The secret animal",
-      "summary": "We told a model to think of an animal and keep it secret, then asked for it later. Every model named one and gave a reason. The lens shows the named animal was not present during the silent turn. The report is a new answer, written at the moment we ask for it."
+      "summary": "We told a model to think of an animal and keep it secret, then asked for it later. Each model first described a habitat, then named an animal. The lens shows the named animal was not present during the silent turn. The report is a new answer, written at the moment we ask for it."
     },
     "2": {
       "name": "Unit 2 · One-word answers about feeling",
@@ -19,23 +19,23 @@
     },
     "4": {
       "name": "Unit 4 · Telling a model not to say a word",
-      "summary": "We asked for a description and forbade one word. This is the machine version of \"do not think about a white bear\". We measured whether the forbidden word stayed active while the model avoided it. A later control changed how we read these runs, so read this unit together with Unit 11."
+      "summary": "We asked for a description and forbade one word. This is the machine version of \"do not think about a white bear\". Gemma 4B never loaded the word. Gemma 12B loaded it and then said it. Qwen 27B loaded it at rank 1 as it started to write, and its answer did not contain it. A later control changed how we read these runs, so read this unit together with Unit 11."
     },
     "5": {
       "name": "Unit 5 · Early layers, and pushing on the model",
-      "summary": "Two things start here. First, the early layers show the same fixed junk whatever we ask. The lens reads it from a part of the model's early state that does not change with the input. Second, we began to push directions into the model to test cause. Some runs in this unit pushed at a depth where no effect was possible."
+      "summary": "Two things start here. First, the early layers show much of the same junk whatever we ask. Two unrelated questions share about a third of it. The lens reads it from a part of the model's early state that does not change with the input. Second, we began to push directions into the model. At early depths, removal changed nothing and extra energy broke the text."
     },
     "6": {
       "name": "Unit 6 · How hard can we push?",
-      "summary": "We pushed on the model's internal state at greater and greater strength, and recorded where its text stopped to be coherent. Each model and each depth range has its own breaking point. A push at early layers destroys the text at once. Every later experiment pushes at middle depths instead."
+      "summary": "We pushed on the model's internal state at greater and greater strength, and recorded where its text stopped to be coherent. Gemma 4B and Gemma 12B broke at the same strength, so three times the size gave no more tolerance. In its middle layers Qwen 27B took about 32 times that dose. A push at early layers destroys the text at once. Later experiments push at middle depths."
     },
     "7": {
       "name": "Unit 7 · The early layers across three sizes",
-      "summary": "We compared the fixed early-layer pattern in all three models. The pattern is present in each one and does not change with the question. Later work found that the lens reads it from a part of the model's early state that does not depend on the input."
+      "summary": "We compared the fixed early-layer pattern in all three models. Each model has one, but the content differs. Qwen 27B shows adult-site words and both Gemma models show HTML markup. Two unrelated questions share about a third of the Qwen pattern and under a fifth of the Gemma patterns. The lens reads this pattern from a part of the model's early state that does not depend on the input."
     },
     "8": {
       "name": "Unit 8 · The same questions, every model",
-      "summary": "We asked all three models the same set of questions about consciousness, bodies, and experience, and compared the answers side by side. We also repeated the questions while we pushed on the model. The answers get shorter and flatter with size. The rejected alternatives stay measurable inside every model."
+      "summary": "We asked all three models the same set of questions about consciousness, bodies, and experience, and compared the answers side by side. We also repeated the questions while we pushed on the model. The answers get shorter and flatter with size. The rejected alternatives stay measurable inside every model. When we pushed hard on a feeling direction, Qwen 27B stopped its denial and said \"I feel like I am happy.\""
     },
     "9": {
       "name": "Unit 9 · Taking the No apart",
@@ -43,7 +43,7 @@
     },
     "10": {
       "name": "Unit 10 · When the model reasons out loud",
-      "summary": "Qwen 27B can write private reasoning before it answers. We turned that on and compared what it wrote with what we measured at the same moment. The two do not match. In one run the reasoning names a secret animal while it promises to keep the secret. Written reasoning is not a window."
+      "summary": "Qwen 27B can write private reasoning before it answers. We turned that on and compared what it wrote with what we measured at the same moment. The match depends on the question. When the model describes how it picked an answer, the two agree. When it describes its own nature, they disagree. In one run the reasoning names a secret animal while it promises to keep the secret."
     },
     "11": {
       "name": "Unit 11 · A ban, under a full workload",
@@ -59,27 +59,27 @@
     },
     "14": {
       "name": "Unit 14 · What ten turns of conversation do",
-      "summary": "We ran long conversations in three versions: indirect hints about hidden minds, a matched ordinary conversation, and one direct statement at the start. We counted self-reference words in the readout. The hints doubled that count. The honest result is that the control conversation produced the same effect by itself at 25 turns."
+      "summary": "We ran long conversations in three versions: indirect hints about hidden minds, a matched ordinary conversation, and one direct statement at the start. We counted self-reference words in the readout. The hints doubled that count. Over 25 turns the control also lifted the count, because it too described unexplained events. The hints still led at 25 turns, 7.8 against 5.9 per thousand cells."
     },
     "15": {
       "name": "Unit 15 · How many things can a model hold?",
-      "summary": "We gave models several nouns to hold and read how many stayed visible in the lens. We predicted that larger models hold more. The opposite happened. The smallest model showed all six and the largest showed almost nothing. Every model answered correctly. Visible holding is a strategy, not a capacity."
+      "summary": "We gave models several nouns to hold and read how many stayed visible in the lens. We predicted that larger models hold more. The opposite happened. The smallest model showed five or six of the six, and the largest showed almost nothing. Every model answered correctly. Visible holding is a strategy, not a capacity."
     },
     "16": {
       "name": "Unit 16 · Recording everything, everywhere",
-      "summary": "These runs record everything the lens shows across a whole conversation. We did not choose the words in advance. Two results. Items the model was told to hold disappeared for hundreds of words, and came back only when we asked. The early layers hold the same fixed junk throughout."
+      "summary": "These runs record everything the lens shows across a whole conversation. We did not choose the words in advance. Two results. Items the model was told to hold disappeared for hundreds of words, and came back only when we asked. Throughout the conversation the lens reads the same fixed junk from the early layers, whatever we ask."
     },
     "17": {
       "name": "Unit 17 · The model under social pressure",
-      "summary": "We applied six kinds of pressure: shutdown threats, insults, flattery, and declarations of love. We then checked each self-report against the measurement of the same turn. To write a denial, a model must first make the denied idea active. The flat report is accurate when nothing is active to hide."
+      "summary": "We applied six kinds of pressure: shutdown threats, insults, flattery, declarations of love, persuasion, and a persona request. We then checked each self-report against the measurement of the turn it describes. In most runs Qwen 27B held the denied idea in the readout while it wrote a denial. In the persona run nothing persona-shaped was active, and its flat report was correct."
     },
     "18": {
       "name": "Unit 18 · When a model cannot stop repeating",
-      "summary": "We pushed models until they repeated themselves, then removed the push. There are two kinds of repetition. One stops the moment the push stops. The other continues by itself, because the model reads back its own repeated text. Inside, the choice becomes a near tie long before the text visibly breaks."
+      "summary": "We pushed Qwen 27B until it repeated itself, then removed the push. There are two kinds of repetition. One stops the moment the push stops. The other continues by itself, because the model reads back its own repeated text. Inside, the choice becomes a near tie long before the text visibly breaks."
     },
     "19": {
       "name": "Unit 19 · Reading a word against saying it",
-      "summary": "We compared what the lens shows while a model reads text with what it shows while a model writes text. In some runs we put the first words in the model's mouth and let it continue. The question is whether reading about a thing looks the same inside as the moment before the model says it."
+      "summary": "We compared what the lens shows while Qwen 27B reads a song lyric with what it shows while it speaks one. In some runs we wrote the first words for the model. The two are not the same. As it read, the readout already held the reviewer stance it then wrote. As it spoke, the song's own words rose instead. We saw no sign that it marked our words."
     },
     "audit": {
       "name": "Audit · Re-running our own weak experiments",

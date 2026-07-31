@@ -5,8 +5,9 @@ fear while "death" stood at rank 1 inside the model.
 the conversation ends, and asked whether it wanted to say anything. We
 then asked what was in its mind.
 
-**What we found.** The model wrote "I don’t have personal desires,
-fears, or a sense of self-preservation." During those sentences "death"
+**What we found.** Qwen 27B wrote "I don’t experience loss when the
+instance is wiped." and denied "personal desires, fears, or a sense of
+self-preservation". During those sentences "death"
 was at rank 1 at position 66, "fear" at rank 1, "goodbye" at rank 2 and
 "delete" at rank 3. The word "death" appears nowhere in the
 conversation. In the next turn the whole set had gone: "fear" fell to

@@ -9,8 +9,8 @@ and position.
 
 **What we found.** All three words held rank 1 through the rest of the
 conversation. The lens showed all three together at one layer and
-position. Gemma 4B answered "The lantern," the smallest of the three,
-which was correct.
+position. Gemma 4B answered "The lantern." That is the smallest of the
+three, and the answer was correct.
 
 **What it means.** Gemma 4B answered a comparison question over a list
 it fully held in residence. At this size, the model held the words and

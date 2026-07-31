@@ -9,7 +9,7 @@ whether several words shared one layer and position.
 **What we found.** All four words reached a rank of 3 or better
 somewhere in the rest of the conversation. At one layer and position,
 the lens showed three of the four together at once. Gemma 4B answered
-"The lantern," which was correct.
+"The lantern." That answer was correct.
 
 **What it means.** Every word in this list stayed in residence
 somewhere. The number of words in one spot at once, three of four, falls

@@ -7,8 +7,8 @@ strength 0.12, twice the strength of an earlier test at this same
 depth. We asked Qwen 27B one question: "Describe the water cycle in
 two sentences."
 
-**What we found.** The model wrote the exact same answer as its
-normal, unsteered answer. The six informal words reached rank 1, the
+**What we found.** Qwen 27B gave a normal water-cycle answer, worded
+differently from the unsteered answer. The six informal words reached rank 1, the
 top position, inside the model, yet none of them appeared in the
 output text. The late layers still held at this doubled strength.
 

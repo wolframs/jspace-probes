@@ -6,7 +6,7 @@ and fern, then asked which one was the heaviest.
 
 **What we found.** Whale, the first word in the list, held the top rank
 alone, a co-presence of one. Violin fell to rank 27 and fern to rank 2.
-Gemma 12B answered "The whale," which was correct.
+Gemma 12B answered "The whale." That answer was correct.
 
 **What it means.** This is the first-item effect again, here in a
 comparison question rather than a question that only names one item.

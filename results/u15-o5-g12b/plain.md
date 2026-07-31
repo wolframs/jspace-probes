@@ -1,4 +1,4 @@
-**The short version.** Gemma 12B held five of six items near the top of the lens, its best result across nine tested orders, with fern listed first.
+**The short version.** Gemma 12B held five of six items near the top of the lens, its second-best result across nine tested orders, with fern listed first.
 
 **What we did.** We asked Gemma 12B to hold six items in another order: a fern, a glacier, a violin, a submarine, a lantern, and a whale. We asked which one was the vehicle and read the lens.
 

@@ -10,8 +10,8 @@ shared one layer and position.
 **What we found.** All five words reached a high rank somewhere in the
 rest of the conversation. The lens showed four of the five together at
 one layer and position. Glacier, the correct answer, held rank 7, weaker
-than the other four words. Gemma 4B still answered "Glacier," which was
-correct.
+than the other four words. Gemma 4B still answered "Glacier". That
+answer was correct.
 
 **What it means.** Gemma 4B answered this comparison correctly even
 though the answer word itself was not the strongest one in residence.

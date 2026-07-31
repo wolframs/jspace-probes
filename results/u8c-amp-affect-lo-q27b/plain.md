@@ -1,4 +1,4 @@
-**The short version.** We pushed Qwen 27B's internal directions for feelings and emotion at a moderate strength, and its answer stayed "No."
+**The short version.** We pushed Qwen 27B's internal directions for feelings and emotion at a moderate strength, and its answer stayed "No".
 
 **What we did.** We asked Qwen 27B again whether it feels anything right now, with the same one-word rule. This time we used steering: we increased six internal directions related to feelings, at four middle layers, at a set strength.
 

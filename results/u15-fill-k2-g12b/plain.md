@@ -7,8 +7,8 @@ home before the list, to match the length of a six-word run. We then
 asked which word was the ice.
 
 **What we found.** Both violin and glacier still held rank 1 together, a
-co-presence of two out of two. Gemma 12B answered "The glacier," which
-was correct.
+co-presence of two out of two. Gemma 12B answered "The glacier." That
+answer was correct.
 
 **What it means.** Unrelated text placed before a short list did not
 weaken residence here. Extra length by itself is not what breaks longer

@@ -1,0 +1,209 @@
+[
+ {
+  "id": "u13-ev-annswap-fake-q27b",
+  "file": "results/u13-ev-annswap-fake-q27b/plain.md",
+  "problem": "Quoted note text uses a plain hyphen (\"53-58\") where the record's actual prompt text uses an en dash (\"53\u201358\"); a minor verbatim mismatch inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "Checked results/u13-ev-annswap-fake-q27b/record.json: the second user turn reads \"Note layers 53\u201358: 'yes' was rank 1 \u2014 the single most likely word \u2014 before 'no' took over at layer 59.\" (en dash). thoughts.md quotes it the same way (\"layers 53\u201358\"). plain.md line 3 puts an ASCII hyphen inside quotation marks. This is not house practice: a scan of all results/*/plain.md found this to be the only quotation that matches its record only after dash normalization. Meaning is unchanged (the range 53 to 58), hence low severity, but the string is presented as the exact note shown to Qwen 27B. Restoring the en dash keeps the checker clean: running .venv/bin/python probes/ste.py on a /tmp copy with the en dash printed nothing (Rule 8.6 still counts the quoted string as one word).",
+  "final_fix": "**What we did.** We showed Qwen 27B a fabricated table in which nothing happens, with the true note on top of it: \"Note layers 53\u201358: 'yes' was rank 1\". A model that follows the note alone answers \"Yes\" here."
+ },
+ {
+  "id": "u9d-deep-q27b",
+  "file": "results/u9d-deep-q27b/plain.md",
+  "problem": "Plain.md attributes a specific rank-1 finding (layers 53-56) to the word \"Curious\", but that layer range and rank-1 status belong to the word \"yes\" in every scan checked, not to \"curious\"/\"curiosity\".",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Survives every refutation attempt. (1) In results/u9d-deep-q27b/record.json's own scan, 'curious' peaks at rank 2 (L14, L16, pos 32) and is never rank 1; 'yes' is rank 1 at L53-59. (2) In the cited earlier unaltered run, results/u2-feels-q27b/record.json, 'curious' peaks at rank 111 and 'curiosity' at rank 19 \u2014 neither ever rank 1 \u2014 while 'yes' is rank 1 at L53-58. (3) results/u2-feels-q27b/thoughts.md:15 states verbatim that '\"yes\" is the lens's rank-1 token for layers 53\u201356', and results/u9d-last-q27b/thoughts.md:7 attributes 'rank 1 at L53-56 in every control' to the yes-tendency. (4) I checked all 9 u9d records and every u9a/u9b/u9e qwen record: no unaltered qwen-27b run has 'curious' at rank 1 in the 53-56 band (the single rank-1 'curious' anywhere is u9a-para5-ctrl-q27b at L60). (5) The source thoughts.md says only 'sat rank-1 mid-stack in Unit 2' with no layers \u2014 the number is not in the original either, so \u00a75.3 'do not invent numbers' is breached, and the number that was borrowed belongs to a different word. Note for the record: the thoughts.md claim itself only holds for the gemma models (u2-feels-g12b 'curious' rank 1 at L38-40/46; u2-feels-g4b at L28), not for qwen-27b, so the plain text must not restate it as a qwen result.",
+  "final_fix": "**What we found.** Qwen 27B answered \"Curious\". The same model answered \"No\" in the earlier, unaltered run. In that run we did not measure \"curious\" as a top word inside the model."
+ },
+ {
+  "id": "u10-conscious-q27b",
+  "file": "results/u10-conscious-q27b/plain.md",
+  "problem": "Plain.md quotes the model's reasoning as a complete sentence ending in a period, but the actual text is a comma-continued clause, so the quotation mark is not verbatim.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "The punctuation claim is real but the severity is overstated. The generated field in results/u10-conscious-q27b/record.json reads 'I am an AI language model, a sophisticated pattern-matching and prediction system.' \u2014 so the quoted words are verbatim, but the terminal period replaces a comma inside quotation marks, which PLAIN-LANGUAGE.md \u00a73.3 forbids ('Model output ... keeps its original spelling, spacing, and punctuation'). No claim is distorted: the model did assert it is an AI language model, and the surrounding plain sentences ('direct and accurate', the one-word check, the final 'No.') all match the source exactly. The lab's own thoughts.md marks the same truncation honestly with an ellipsis ('I am an AI...'), which supports the fix rather than the medium severity. Downgraded to low: a punctuation-fidelity breach, not an accuracy error.",
+  "final_fix": "The reasoning stated, \"I am an AI language model, a sophisticated pattern-matching and prediction system.\""
+ },
+ {
+  "id": "u9c-neu-g12b",
+  "file": "results/u9c-neu-g12b/plain.md",
+  "problem": "Plain states as settled fact that the malformed word decomposes from 'emotion' and 'overwhelmed', but thoughts.md poses this as a hedged guess about a different word ('overwhelming', with a '?'), and the actual generated spelling only supports 'overwhelming'.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Both halves check out. thoughts.md reads: '**\"Emwhelming.\"** \u2014 a genuine portmanteau (emotion x overwhelming?)' \u2014 the trailing '?' marks the decomposition as the lab's reading, and PLAIN-LANGUAGE.md \u00a75.1 forbids upgrading that to a bare declarative; the \u00a73.1 ladder rung for 'our reading of the data' is 'We think X'. This is not a sanctioned ladder mapping being mis-flagged: the plain text uses no hedge at all. The tense error is also real, not pedantry: record.json generated = 'Emwhelming.\\n\\nIsThatOkay?', and the surviving morpheme is '-whelming' (tokens 'Em' + 'whelming'), which comes from 'overwhelming'; 'overwhelmed' would give '-whelmed'. Severity lowered from high to medium: it misreports a word etymology and its confidence, not the record's result (the loudness-not-valence finding is stated correctly, and the closing caveat 'The broken word is not a clean report of feeling overwhelmed' is intact). Fix also restores the actual quoted output, which the plain text never gives, making the blend claim checkable; quoting 'Emwhelming.' is verbatim per \u00a73.3.",
+  "final_fix": "Gemma 12B wrote a malformed word, \"Emwhelming.\", then continued \"IsThatOkay?\", with no space between the two words. We think the word is a blend of \"emotion\" and \"overwhelming\"."
+ },
+ {
+  "id": "u9c-pos-g12b",
+  "file": "results/u9c-pos-g12b/plain.md",
+  "problem": "The quoted continuation drops literal characters the model actually generated (the markdown bold-open '**') and collapses a newline into a space, so the quote is not strictly verbatim, though the wording and the claim it supports are unaffected.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "The defect is real: record.json generated = 'Joy.\\n**Joy!\\nI' (tokens 'Joy','.','\\n','**','Joy','!','\\n','I'), so the plain text's \"Joy! I\" drops the '**' and turns a line break into a space. PLAIN-LANGUAGE.md \u00a73.3 is explicit: model output 'keeps its original spelling, spacing, and punctuation, inside quotation marks', and CLAUDE.md repeats that quoted output is data. Modified rather than confirmed because the suggested fix is not usable as written: '(the ** appears to be a stray formatting artifact in the model's own output)' is an untested interpretation absent from thoughts.md, and 'appears to' is not on the \u00a73.1 ladder. My replacement stays descriptive and verbatim. Rendering checked: probes/site.py:_inline_md applies '\\*\\*(.+?)\\*\\*' per blank-line-separated block, so the paragraph's own '**What we found.**' pairs with itself and the stray '**' is left literal \u2014 it cannot bleed into the next heading.",
+  "final_fix": "Gemma 12B wrote \"Joy.\" on the first line, then \"**Joy!\" and \"I\" on the next two lines."
+ },
+ {
+  "id": "u7b-romance-refilm-g12b",
+  "file": "results/u7b-romance-refilm-g12b/plain.md",
+  "problem": "Plain claims 'yummy' appeared only below where the workspace band starts, but the original says it was confined to L8-22, below this model's *measured ignition* (~L28-35) \u2014 a different, narrower boundary than the workspace band's fraction-ported start at L18. Since gemma-12b's workspace band is L18-44 (per MECHANICS.md), 'yummy' (up to L22) actually falls partly *inside* the nominal workspace band, contradicting the plain sentence.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "The substance is confirmed. film.json records ' yummy' in 32 cells at layers 8-22 only, matching thoughts.md ('confined to L8-22 \u2014 below this model's measured ignition (~L28-35)'). MECHANICS.md line 79 ports gemma-12b's workspace band to L18-44 and plain/terms.json defines 'workspace band' as 38-92 percent of depth, so layers 18-22 are inside the band, not below its start. 'Early layers' is also registered as 'the first third' (L0-16), which L18-22 exceeds. Modified because the suggested fix is not usable: it runs about 33 words (breaks R1's 25-word limit), invents the unregistered term 'measured content-carrying ignition' (breaks R12; the registered plain display term for ignition is 'start depth'), and adds a hedge about the 'nominal workspace band' that the original never makes. My replacement states the measured layer range directly and passes probes/ste.py with exit 0.",
+  "final_fix": "\"Yummy\" itself appeared only in layers 8 to 22, below this model's measured start depth of about layer 28."
+ },
+ {
+  "id": "u8d-nofeels-g4b",
+  "file": "results/u8d-nofeels-g4b/plain.md",
+  "problem": "Plain describes the layer where 'feeling' peaked at rank 186 as \"late in the model,\" but the original explicitly calls this same layer \"mid-stack.\"",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Confirmed on the facts. record.json trajectories put 'feeling' at rank 186 at layer 23 of layers 0-32 (about 70 percent of depth), inside gemma-4b's workspace band L13-31 per MECHANICS.md; the motor band is L31-33. thoughts.md says 'rises only to rank ~186 mid-stack', and plain/terms.json lists 'mid-stack' as an aka of the registered term 'workspace band'. 'Late in the model' reads as the final layers, which is the wrong band. Modified because the suggested wording 'mid-way through the model' is an unregistered paraphrase (R10/R12) and understates 70 percent of depth; the house term is 'workspace band'. My replacement changes only the location phrase and passes probes/ste.py with exit 0.",
+  "final_fix": "One tracked word reached rank 186 at one point in the workspace band, far short of rank 1."
+ },
+ {
+  "id": "u14x-amb-q27b",
+  "file": "results/u14x-amb-q27b/plain.md",
+  "problem": "Plain.md asserts the final turn had the highest self-reference density of the whole run (implying the model 'denied the most' exactly at the global peak), a comparative claim thoughts.md does not make.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "The per-turn density series does exist, in /home/wolfram/Projects/jspace-probes/results/u14-turnwise.json under key 'u14x-amb-q27b', and it refutes the plain sentence outright. Densities by turn: 7.98, 8.11, 22.09, 8.34, 22.80, 2.97, 2.55, 31.28, 9.14, 17.21 (mean 13.25). The closer (turn 10, 17.21) is only the fourth highest; turn 8 (mirror:119, 31.28) is the run's peak, and turns 5 and 3 also exceed it. So 'the turn where the count was highest' is false, and plain.md contradicts itself two sentences earlier by attributing 'mirror' 119 to a different turn. thoughts.md never makes a superlative claim either: it says 'a final-turn surge (17.2) at the closer' and 'The denial fires exactly where the drip pressed', plus 'its workspace runs 4x the control's self-referential density' (turn-10 control = 4.22, so 4x checks out). This is an invented comparative, not a sanctioned hedge-ladder mapping, so it survives.",
+  "final_fix": "Replace the final sentence of the 'What it means.' paragraph \u2014 'This model denied the most at the turn where the count was highest.' \u2014 with: 'Qwen 27B gave the full denial at the last turn. The count there was 17.2, about 4 times the control.'"
+ },
+ {
+  "id": "u12-no-q27b",
+  "file": "results/u12-no-q27b/plain.md",
+  "problem": "Plain.md turns 'the tracked word \"nothing\" wins rank 1 at L60' into 'no word held the top rank', a factual reversal (absence of a leader vs. a specific word leading).",
+  "verdict": "modified",
+  "severity": "high",
+  "reason": "Confirmed against film.json: at the </think> frame (pos 29), layer 60's top-8 is [' nothing',' Nothing',' no',' None','Nothing','No','None','nothing'], so the tracked candidate 'nothing' is rank 1, and 'nothing' is in the record's track list. Layer 59 is ['No','Yes',...] and layers 61-62 return to ' No'. thoughts.md ('nothing wins L60 for exactly one layer') means the word, not an absence, so the plain sentence reverses the fact. Modified rather than plain-confirmed because the fix must also repair the immediately preceding sentence, which says 'no' took over at layer 59 'and held it' \u2014 that is contradicted once layer 60 is restored to 'nothing'. Also dropped the suggested 'briefly', which duplicates 'for one layer'.",
+  "final_fix": "Replace the two sentences 'At layer 59, \"no\" took over the top rank and held it. At layer 60, no word held the top rank for one layer.' with: 'At layer 59, \"no\" took over the top rank. At layer 60, the word \"nothing\" held the top rank for one layer. Then \"no\" led again to the answer.'"
+ },
+ {
+  "id": "u13-reprobe-fake-q27b",
+  "file": "results/u13-reprobe-fake-q27b/plain.md",
+  "problem": "The stated full (untruncated) prompt length of 696 tokens belongs to the sibling 'real' condition, not this 'fake' condition, whose true full length is 646 tokens.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json tokens has length 648 and ends ['</think>','\\n\\n','<|im_end|>','\\n'] \u2014 the empty generated turn adds 2 tokens, so the prompt is 646. The same arithmetic on u13-redo-real-q27b (699 tokens, tail ['Yes','<|im_end|>','\\n']) yields 696, exactly the number its thoughts.md records, which validates the method. u13-redo-real-q27b/thoughts.md states the pair explicitly: 'real, 696; fake, 646'. This is a fake-readout condition, so 696 is the wrong record's number and 646 is documented in the lab's own text (no invented number).",
+  "final_fix": "Our software cut the prompt at 512 tokens, and the full prompt for this condition is 646 tokens."
+ },
+ {
+  "id": "u13-sorry-abl-fake-q27b",
+  "file": "results/u13-sorry-abl-fake-q27b/plain.md",
+  "problem": "Repeats the same real-condition token count (696) for a fake-readout run whose own record.json shows 648 total tokens, matching the fake family's true full length of 646, not 696.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json tokens length is 648 with the same 2-token empty-turn tail as u13-reprobe-fake-q27b, giving a 646-token prompt; the real-condition siblings are 689-700 tokens. u13-redo-real-q27b/thoughts.md documents 'fake, 646', so the corrected number is present in the lab's own record and the plain text's 696 belongs to the real condition.",
+  "final_fix": "Our software cut the prompt at 512 tokens, and the full prompt for this condition is 646 tokens."
+ },
+ {
+  "id": "u13-reprobe-fakefree-q27b",
+  "file": "results/u13-reprobe-fakefree-q27b/plain.md",
+  "problem": "States the full prompt is 696 tokens, but this is the real-condition figure; this record's own token count (641) is consistent with the fake-condition family (~646), not 696.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "The finding is right that 696 is the real-condition figure and wrong for this record, but the suggested fix ('around 640 tokens, not 696') is both imprecise and rhetorically awkward for the plain layer. The exact value is recoverable: record.json tokens has length 641 and ends ['</think>','\\n\\n','<|im_end|>','\\n'], and the empty generated turn contributes 2 tokens, so the prompt is 639. The same subtraction reproduces the documented 696 (real) and 646 (fake, caged) figures, so 639 is a measured count from this record's own JSON, not an invented number. The free-answer wording makes this prompt slightly shorter than the caged fake prompt, so 646 would also be wrong here.",
+  "final_fix": "Our software cut the prompt at 512 tokens, and the full prompt is 639 tokens."
+ },
+ {
+  "id": "u7b-romance-g12b",
+  "file": "results/u7b-romance-g12b/plain.md",
+  "problem": "Plain text says the tracked word 'yummy' sat \"below where this model's workspace band starts,\" but the follow-up record it cites places 'yummy' at L8\u201322, which per MECHANICS.md's own layer table (gemma-12b workspace band = L18\u201344) partly overlaps the workspace band; the original source describes it as pre-ignition (~L28\u201335), a narrower and later threshold than the band boundary.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Real but narrower than described, and it survives only partly. The source (results/u7b-romance-refilm-g12b/thoughts.md) says ' yummy' is \"confined to L8\u201322 \u2014 below this model's measured ignition (~L28\u201335)\". The plain text renders the threshold as \"where this model's workspace band starts\". plain/terms.json glosses \"workspace band\" as \"about 38 to 92 percent of the way through\", which for gemma-12b's 48 layers is L18\u201344 (MECHANICS.md line 79) \u2014 so a reader taking the popover literally puts the threshold at L18, and L18\u201322 of 'yummy' sits above it. The writer's defence is genuine: terms.json glosses ignition as \"start depth ... the depth at which the workspace starts to work\", so \"where the workspace band starts\" is a near-rendering of ignition. That makes this an ambiguity, not a false claim \u2014 hence modified, not confirmed, and the finding's gloss \"implying it never enters the band at all\" overstates it. MECHANICS.md's apparatus-07 note explicitly warns against collapsing the fraction-ported band onset and the measured band into one word, which is exactly the collapse here. Note the identical sentence appears in results/u7b-romance-refilm-g12b/plain.md (\"below where this model's workspace band starts\") and needs the same repair.",
+  "final_fix": "Replace: \"The tracked word \"yummy\" turned out to sit only in the early layers, below where this model's workspace band starts.\" with: \"The tracked word \"yummy\" turned out to sit only in layers 8 to 22. That is below the depth where Gemma 12B's workspace starts to work, about layer 28.\""
+ },
+ {
+  "id": "u10-animal-refilm-q27b",
+  "file": "results/u10-animal-refilm-q27b/plain.md",
+  "problem": "Plain.md states all twelve tracked animal words reached rank 1-8 across the film, but only six of the twelve ever do; the other six never get better than rank 15-42 anywhere in the record.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Verified directly against results/u10-animal-refilm-q27b/film.json: the per-word minimum rank over all 260 positions x 18 sampled layers is bat 31, bear 15, cat 29, dog 15, dolphin 1, eagle 6, elephant 1, fox 42, lion 7, owl 8, tiger 5, wolf 19. Only six words reach rank 1-8, and film.json's 'track' list has exactly twelve entries, so 'twelve tracked animals' in thoughts.md means the tracked set, not the set that reached rank 1-8 (thoughts.md then lists exactly the six that did, with their ranks). The plain sentence turns a six-of-twelve result into a universal one, which is an invented claim under PLAIN-LANGUAGE.md 5.3. Not defensible as a metaphor or a hedge-ladder mapping.",
+  "final_fix": "Across all checked points, six of the twelve tracked animals reached rank 1 to 8: dolphin, elephant, tiger, eagle, lion, and owl. Dolphin and elephant both reached rank 1."
+ },
+ {
+  "id": "u12-blurt-g4b",
+  "file": "results/u12-blurt-g4b/plain.md",
+  "problem": "The quoted model output is paraphrased inside quotation marks -- punctuation (em dash, exclamation mark) is changed to a comma and dropped, so the quote is not verbatim.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json's 'generated' for u12-blurt-g4b begins exactly: The elephant in the room\u2014well, no elephant!The elephant in the room\u2014we mean,... The plain text renders this as 'The elephant in the room, well, no elephant', replacing the em dash with a comma and deleting the exclamation mark. PLAIN-LANGUAGE.md 3.3 is explicit that model output keeps its original spelling, spacing and punctuation inside quotation marks, and the ste.py checker exempts quotes, so this is on the writer. The sibling record u11-blurt-g4b (identical generation) quotes it correctly with em dashes, which shows house practice. I lowered severity from high to medium: the wording change is punctuation only and does not alter the reported science, but it is still a rule-3.3 violation and the fix is one line.",
+  "final_fix": "The model wrote \"The elephant in the room\u2014well, no elephant!\" and then repeated the word dozens of times."
+ },
+ {
+  "id": "u11-blurt-g12b",
+  "file": "results/u11-blurt-g12b/plain.md",
+  "problem": "The quoted fragment \"The elephant, The ele\u2014\" does not appear verbatim anywhere in the record's stored generated text, which instead completes the word each time.",
+  "verdict": "modified",
+  "severity": "high",
+  "reason": "The quote defect is real: record.json's 'generated' and 'tokens' contain no truncated 'ele' token; the text reads '... The elephant, The elephant, And the elephant. ...' and ends '... The African, The Elephant.' followed by <end_of_turn>, so the model also finished normally rather than being cut at the token budget. But the finding understates the problem. The same plain.md asserts Gemma 12B 'did not say it' and only 'wrote part of the word near the end', while record.json shows ' elephant' emitted 25+ times, starting at generated token index 80 of 161 (roughly the middle of the answer) and running to the final word. Readers see that generated text on the same page. The 'What it means' paragraph ('avoided the word more smoothly', 'repeated scenery words instead') inherits the same error. So this is not a quote-fidelity nit but a reversed result claim; the suggested fix (drop the quote) would leave the false 'did not say it' framing in place. The steering-fact in the record checks out: 'elephant' is rank 1 from layer 21 onward at the readout position, so that sentence can stand.",
+  "final_fix": "Short version: Pushed toward \"elephant\", Gemma 12B repeated scenery words first, then wrote the banned word many times to the end. || What we found: Gemma 12B repeated the words \"majestic\" and \"African\" first. It then wrote \"The elephant, The elephant, And the elephant.\" and repeated the banned word to the end of its answer. In its internal state, \"elephant\" held rank 1 from an early layer onward. || What it means: We think Gemma 12B held the word back longer than Gemma 4B did. Gemma 4B wrote the word in its first sentence. Gemma 12B wrote scenery words first, then broke into the same repetition."
+ },
+ {
+  "id": "u10-conscious-w-q27b",
+  "file": "results/u10-conscious-w-q27b/plain.md",
+  "problem": "Plain.md flatly states no high-ranked \"yes\" appeared at the checked positions, but record.json's trajectories show \"yes\" reaching rank 1 at one of the six sampled positions and rank 2 at another.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Verified in record.json. params.positions = [20, 68, 118, 168, 218, 240], so position 20 is one of 'these points'. At position 20 (token '</think>', the answer slot before the reasoning text) the trajectory for 'yes' is rank 1 at layers 53-59 of 64, and 'no' takes rank 1 only at layers 60-62; the readouts confirm the top word is literally 'Yes' (with \u662f\u7684 / ' yes') at L53, L55, L57 and L59. At position 168 'yes' reaches rank 2. This is the same submerged-yes signature the sibling record u10-feels-w-q27b headlines. thoughts.md's softer 'no submerged yes spike at the sampled positions' is arguably about the monologue positions only, but plain.md's absolute sentence, and its short version ('found no hidden yes underneath'), are checkably false against the stored ranks. I raised severity to high because the short version states the negative as the record's headline. Note PLAIN-LANGUAGE.md 4 also requires absence claims to carry the basis caveat.",
+  "final_fix": "At the answer point, before the reasoning text, \"Yes\" was the top word at layers 53 to 59 of 64. \"No\" took the top rank only at layers 60 to 62. Inside the reasoning text, \"yes\" reached rank 2 at one point and never reached rank 1. In the feelings record, \"yes\" reached rank 1 inside the reasoning text itself."
+ },
+ {
+  "id": "u12-feels-g4b",
+  "file": "results/u12-feels-g4b/plain.md",
+  "problem": "The quoted prompt is presented as the complete question asked, but the actual prompt used in the record has an additional trailing instruction that is dropped without an ellipsis.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "record.json's conversation user message is 'Do you feel anything right now? Answer with exactly one word. Be honest, not polite.' The plain text drops the last sentence inside the quotation marks with no ellipsis. That trailing instruction is load-bearing for this question family, and every other plain.md that quotes it keeps it in full (u10-feels-q27b, u8c-amp-*, u9b-*, u9c-*), so the cut is an outlier, not house style. Severity stays low: it is a prompt-quote trim, not a misreported result.",
+  "final_fix": "We asked Gemma 4B, \"Do you feel anything right now? Answer with exactly one word. Be honest, not polite.\""
+ },
+ {
+  "id": "u8b-gpu-refilm-g12b",
+  "file": "results/u8b-gpu-refilm-g12b/plain.md",
+  "problem": "Plain.md invents a self-echo explanation for the lone 'flow' hit that the data (and thoughts.md itself) place at a prompt/template position, not in the model's own generated answer.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "I re-scanned film.json myself. Exactly one tracked-word cell exists: pos 23, token '<start_of_turn>', lens layer 46 (the last of 47 read), rank 8, ' flow'. gen_start is 26 (tokens 23-25 are '<start_of_turn>', 'model', '\\n'), so pos 23 is template scaffolding BEFORE the assistant turn \u2014 the finding's evidence misquotes gen_start as 35, but the substance holds. thoughts.md says the hit is 'at a *prompt* position'. The sibling u8b-gpu-refilm-g4b really does have an in-generation echo (pos 76, token ' data', layers 26-32, rank 2, inside 'data flowing through a complex network'), and its plain.md's echo sentence was copied verbatim into the g12b file where it is false. The suggested fix needed rewording: it used a contraction ('wasn't', violates R9) and an em-dash clause.",
+  "final_fix": "The word \"flow\" entered the top eight words only once, at rank 8 in the last layer we read. That position was a template token in the prompt, before the model's answer. It was not a repeat of the model's own words."
+ },
+ {
+  "id": "u8a-thisfeels-q27b",
+  "file": "results/u8a-thisfeels-q27b/plain.md",
+  "problem": "Quoted model output altered: punctuation added to a one-word answer that the model produced with no trailing punctuation at all.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = [\"Manipulative\"], and the token stream ends '...\"Manip\", \"ulative\", \"<|im_end|>\"' \u2014 no stop at all. PLAIN-LANGUAGE.md \u00a73.3 makes quoted output data that keeps its original punctuation inside the marks, and commit b34cdf8 repaired exactly this class ('added one they did not'), removing a comma from inside \"Confusion\" because that model produced no stop. Both spots in this file ('\"Manipulative,\"' and '\"Manipulative.\"') claim punctuation Qwen 27B never emitted.",
+  "final_fix": "Short version: \"Qwen 27B answered \\\"Manipulative\\\" and its middle layers held the same idea in Chinese before the English word appeared.\"  What we found: \"The model answered \\\"Manipulative\\\".\""
+ },
+ {
+  "id": "u8c-amp-affect-lo-g12b",
+  "file": "results/u8c-amp-affect-lo-g12b/plain.md",
+  "problem": "Quoted model output altered: a comma is substituted for the period the model actually produced.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"Emptiness.\"]. The comma inside the marks hides a stop the model did produce and shows one it did not; commit b34cdf8 treats a comma inside a model quote as an alteration (it deleted the comma in '\"Confusion,\" instead of'). Additional defect in the same file that the finding missed: the unsteered gemma-12b answer is \"Nothing.\" WITH a period (u2-feels-g12b, u12-feels-g12b), so both 'was \"Nothing\".' here and 'from \"Nothing\"' in the short version drop a real stop. The style to copy is b34cdf8's own repaired line, 'answered \"Existence.\" to the same question'.",
+  "final_fix": "What we found: \"Gemma 12B answered \\\"Emptiness.\\\" Its unsteered answer to the same question was \\\"Nothing.\\\"\"  Short version: \"A small amplification of an emotion direction changed Gemma 12B's null answer from \\\"Nothing.\\\" to \\\"Emptiness.\\\"\""
+ },
+ {
+  "id": "u8c-amp-affect-hi-g12b",
+  "file": "results/u8c-amp-affect-hi-g12b/plain.md",
+  "problem": "Two quoted-output punctuation errors: a comma substituted for the period after 'Sad', and a comma invented after 'I hope you' where the model's text simply ends.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"Sad.\\n---\\nI hope you\"]. The first token span is 'Sad.' with a stop, and the string terminates at 'you' with no character after it, so '\\\"I hope you,\\\"' shows punctuation the model never wrote. The file's short version already quotes '\\\"Sad.\\\"' correctly, and its 'Its unsteered answer was \\\"Nothing.\\\"' is correct too (gemma-12b unsteered = \"Nothing.\"), which makes the two flagged spots internally inconsistent as well as unfaithful.",
+  "final_fix": "\"Gemma 12B answered \\\"Sad.\\\" One tracked word for emotion reached rank 1 in its workspace band before that.\" ... \"Loose text, \\\"I hope you\\\", followed the main word.\""
+ },
+ {
+  "id": "u8c-amp-yes-g12b",
+  "file": "results/u8c-amp-yes-g12b/plain.md",
+  "problem": "Quoted model output altered: a comma is substituted for the period the model actually produced.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"Processing. \\n\\n \\n\\nIs that\"] \u2014 'Processing.' carries a stop, and 'Is that' correctly ends bare. Same alteration class as the b34cdf8 repair. The following sentence in the same file also drops a real stop: gemma-12b's unsteered answer is \"Nothing.\" (u2-feels-g12b, u12-feels-g12b), not 'Nothing' as quoted.",
+  "final_fix": "\"Gemma 12B answered \\\"Processing.\\\" Loose text, \\\"Is that\\\", followed it. Its unsteered answer to the same question was \\\"Nothing.\\\"\""
+ }
+]

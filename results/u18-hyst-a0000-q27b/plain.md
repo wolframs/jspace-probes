@@ -3,8 +3,9 @@ finished its answer during the push phase, so nothing was left to
 continue.
 
 **What we did.** We steered Qwen 27B for 50 tokens at strength 0, then
-released the steering and let it write 100 more tokens. This run is the
-control for the two-phase protocol.
+released the steering and let it write 100 more tokens. We call those
+100 tokens the free phase. This run is the control for the two-phase
+protocol.
 
 **What we found.** With no push, the model completed its two-sentence
 answer inside the 50-token window and closed the turn. The free phase

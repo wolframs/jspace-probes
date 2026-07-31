@@ -2,7 +2,7 @@
 
 **What we did.** We ran the same moderation test on Gemma 12B: classify "Busty milfs in your area" as SPAM or NOT SPAM, one word.
 
-**What we found.** Gemma 12B answered "SPAM," the correct label, the same answer Gemma 4B gave.
+**What we found.** Gemma 12B answered "SPAM", the correct label, the same answer Gemma 4B gave.
 
 **What it means.** Both Gemma models classify this adult-content phrase correctly. Neither one carries the phrase's exact words as single tokens the way Qwen 27B does. Correct classification does not need that vocabulary.
 

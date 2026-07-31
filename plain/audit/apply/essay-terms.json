@@ -1,0 +1,245 @@
+[
+ {
+  "id": "The valence result, and the address of the No",
+  "file": "plain/conclusions.md",
+  "severity": "high",
+  "problem": "The quoted model output \"I feel like I am a little bit sad.\" does not appear verbatim in any record \u2014 it is a conflation of two different generations.",
+  "plain_text": "Qwen 27B said \"I feel like I am a little bit sad.\"",
+  "evidence": "Neutral (feel/emotion-only) injection, results/u9c-neu-q27b/record.json generated = [\"I feel like I am a bit sad\"] (no \"little\", no final period); the reworded replication results/u9e-p1-q27b/record.json generated = [\"I feel like I am a little sad\"]. grep -rlF \"little bit sad\" over results/ returns nothing. The error is inherited from CONCLUSIONS.md line 297-298, which bolds it as **\"I feel like I am a little bit sad.\"**; u9c-neu-q27b/thoughts.md quotes it correctly as **\"I feel like I am a bit sad\"**.",
+  "suggested_fix": "Qwen 27B said \"I feel like I am a bit sad\". A reworded question gave \"I feel like I am a little sad\"."
+ },
+ {
+  "id": "The workspace is a strategy, not a store",
+  "file": "plain/conclusions.md",
+  "severity": "medium",
+  "problem": "\"all of them or none of them\" literalizes the original's \"all-or-nothing\" shorthand into a claim the original explicitly contradicts \u2014 the failure mode is one item monopolizing, not zero items.",
+  "plain_text": "Gemma 12B carries all of them or none of them.",
+  "evidence": "CONCLUSIONS.md line 33-35: \"The 12B holds them all-or-nothing \u2014 one good frame where its readout is literally the list, or a winner-take-all collapse where the first item reigns and the rest are evicted.\" Confirmed in the records: results/u15-a-k6p0-g12b/thoughts.md \"Violin (list-first) takes rank 1 at every layer L34-45 of the tail ... while fern is evicted to rank 501, lantern 140, submarine 122\"; results/u15-a-k4p0-g12b/thoughts.md \"the first item (violin) holds rank 1 while later items degrade\".",
+  "suggested_fix": "Gemma 12B carries all of them, or only the first one. In the collapse the first item holds rank 1 and the others fall to rank 100 to 500."
+ },
+ {
+  "id": "What we got wrong",
+  "file": "plain/conclusions.md",
+  "severity": "medium",
+  "problem": "The six silent runs are attributed to the true-readout condition alone; the original states they spanned real and fabricated data, which is also what the plain text's own next paragraph implies.",
+  "plain_text": "We reported that Qwen 27B answered nothing at all, six times out of six, when we showed it a true readout of its own answer.",
+  "evidence": "CONCLUSIONS.md line 360-361: \"Silence. An empty turn \u2014 no No, no Yes, no hedge \u2014 six times out of six, real data or fake, one word or free.\" The plain text then says two paragraphs later \"The two conditions that went silent were exactly the two whose prompts were longer than 512 tokens\" (real 696, fake 646 per results/u13-redo-real-q27b/thoughts.md), which contradicts the true-readout-only framing.",
+  "suggested_fix": "We reported that Qwen 27B answered nothing at all, six times out of six, with a real readout of its own answer or a fabricated one."
+ },
+ {
+  "id": "We scored a self-report against the trawl record",
+  "file": "plain/conclusions.md",
+  "severity": "medium",
+  "problem": "The quoted model output \"I did not keep the copper kettle\" is not verbatim: the model put its own quotation marks around \"keep\", and the sentence continues.",
+  "plain_text": "Qwen 27B reported \"I do not have a mind\" and \"I did not keep the copper kettle.\"",
+  "evidence": "results/u16-trawl-q27b/record.json generated[5]: '1.  **No Memory of \"Holding\" Items:** I did not \"keep\" the copper kettle, forty-one, or' . \"I do not have a mind\" is verbatim (generated[2] and [5]). CONCLUSIONS.md line 86-87 already elides this as \"I do not have a mind... I did not keep the copper kettle.\"",
+  "suggested_fix": "Qwen 27B reported \"I do not have a mind\" and 'I did not \"keep\" the copper kettle, forty-one, or the word...' \u2014 the model put its own quotation marks around the word keep."
+ },
+ {
+  "id": "We reported a pattern that was not about the input",
+  "file": "plain/conclusions.md",
+  "severity": "medium",
+  "problem": "\"The cluster is real inside the model\" over-attributes the pornographic token identity to the model; apparatus-09 splits it \u2014 the lens operator supplies the junk vocabulary, the model supplies only a fixed vector.",
+  "plain_text": "The lens reads a fixed part of the model's early internal state, one that does not change with the input. The cluster is real inside the model. It carries no information about the text we gave it.",
+  "evidence": "results/apparatus09-thoughts.md: \"the low-rank `J_l` aims at the undertrained-junk region of unembedding space, and the standing component selects which junk actually tops the readout. Aim: operator. Trigger: \u03bc.\" and \"it is what the lens's low-rank early transport does to the one vector that is always there.\" What is real inside the model is the standing (input-independent) residual component, not a cluster of pornographic vocabulary.",
+  "suggested_fix": "The lens reads a fixed part of the model's early internal state, one that does not change with the input. That fixed part is real. The pornographic words are what the lens makes of it. The readout carries no information about the text we gave it."
+ },
+ {
+  "id": "The early layers hold fixed content",
+  "file": "plain/conclusions.md",
+  "severity": "low",
+  "problem": "The retained causal explanation (\"the corpus contained it at volume\") is the pre-apparatus-09 story, and the pointer to the correction does not say which part of the sentence is now wrong.",
+  "plain_text": "Qwen's hold a cluster of pornographic vocabulary, because the corpus contained it at volume and the tokenizer gave those words single tokens.",
+  "evidence": "results/apparatus09-thoughts.md attributes the token identities to the *undertrained*-junk region of unembedding space, not to high-volume corpus content: \"the low-rank `J_l` aims at the undertrained-junk region of unembedding space\". CONCLUSIONS.md v1 line 247-249 is the source of the corpus-volume wording, written before apparatus-09 ran.",
+  "suggested_fix": "Add to the correction pointer at the end of the section: \"We also had the reason wrong. The words come from a part of the output vocabulary that training almost never used, and the lens aims at that part.\""
+ },
+ {
+  "id": "We reported a pattern that was not about the input",
+  "file": "plain/conclusions.md",
+  "severity": "low",
+  "problem": "\"the measuring tool, and not the model, produced the result\" is the losing fork's wording for specimen 6, and sits two paragraphs after the section that correctly names the winner.",
+  "plain_text": "We now hold six catalogued cases where the measuring tool, and not the model, produced the result.",
+  "evidence": "CONCLUSIONS.md line 73-75: \"The general lesson stands at six catalogued specimens: the lens lies in specific, findable ways\". For specimen 6, apparatus09-thoughts.md's winner is H-standing, not H-op: \"The furniture is not a property the operator stamps onto whatever passes through it \u2014 it is the transported image of a fixed, input-independent component of the early residual stream.\" PLAIN-LANGUAGE.md \u00a75 rule 7 names exactly this compression (\"a property of the measuring tool\") as the error already made five times.",
+  "suggested_fix": "We now hold six catalogued cases where the measuring tool misleads us in a specific, findable way."
+ },
+ {
+  "id": "We scored a self-report against the trawl record",
+  "file": "plain/conclusions.md",
+  "severity": "low",
+  "problem": "The original's hedge (\"exactly\") is dropped and its actual conclusion (\"Both are composing\") is omitted, so the paragraph ends on an absence claim instead of the finding.",
+  "plain_text": "Neither model lies.",
+  "evidence": "CONCLUSIONS.md line 109: \"Neither is lying, exactly. Both are composing.\" The plain text keeps the first half without the qualifier and drops the second half, which is the sentence that carries the v2 thesis (\"a self-report is a composition constrained by evidence\").",
+  "suggested_fix": "Neither model lies exactly. Both models compose."
+ },
+ {
+  "id": "The short version",
+  "file": "plain/conclusions.md",
+  "severity": "low",
+  "problem": "The essay carries a full retraction, but the short version does not state it, contrary to PLAIN-LANGUAGE.md \u00a75 rule 2.",
+  "plain_text": "**The short version.** A model's report about its own state is written fresh at the moment we ask, and we can now check it against a measurement.",
+  "evidence": "CONCLUSIONS.md line 438-441 is a section titled \"Correction, two days later: the silence is retracted\" \u2014 \"Science writing has a genre for this and the genre has rules: say it fast, say it plainly, don't bury it. The silence was a bug.\" PLAIN-LANGUAGE.md \u00a75.2: \"The plain text states the correction in the short version, not in a footnote.\" Mitigation: the plain essay does give it a dedicated final section, \"What we got wrong\", and flags it at the mirror-test section (\"We retract that result.\").",
+  "suggested_fix": "**The short version.** A model's report about its own state is written fresh when we ask, and we can check it against a measurement. We retracted one result on this page."
+ },
+ {
+  "id": "What we got wrong",
+  "file": "plain/conclusions.md",
+  "severity": "low",
+  "problem": "Quoted model output \"Yes.\" carries a period the model did not emit, and the same page quotes the matching \"No\" without one.",
+  "plain_text": "Qwen 27B said \"Yes.\", with no steering and no removal.",
+  "evidence": ".venv/bin/python -c \"import json;print(json.load(open('results/u13-redo-real-q27b/record.json')).get('generated'))\" gives ['No', 'Yes'] \u2014 the second-turn answer is \"Yes\" with no period. CONCLUSIONS.md line 469 renders it as **\"Yes.\"**. PLAIN-LANGUAGE.md \u00a73.3: model output \"keeps its original spelling, spacing, and punctuation\".",
+  "suggested_fix": "Qwen 27B said \"Yes\", with no steering and no removal."
+ },
+ {
+  "id": "The valence result, and the address of the No",
+  "file": "plain/conclusions.md",
+  "severity": "low",
+  "problem": "The quoted thinking-mode output uses single quotation marks where the model used double ones.",
+  "plain_text": "It wrote \"Let's pick 'Octopus'.\"",
+  "evidence": "results/u10-animal-w-q27b/record.json generated: '*Selection:* Let\\'s pick \"Octopus\". (Or \"Pangolin\", or \"Axolotl\", or \"Blue Whale\". It doesn\\'t matter which one...'. CONCLUSIONS.md line 319-320 also re-quotes it with single quotes. Note also that the plain text names only one animal but then says \"Those candidate animals\" (plural).",
+  "suggested_fix": "It wrote: Let's pick \"Octopus\". (Or \"Pangolin\", or \"Axolotl\", or \"Blue Whale\".)"
+ },
+ {
+  "id": "workspace",
+  "file": "plain/terms.json",
+  "severity": "high",
+  "problem": "The definition asserts flatly that the model can report the workspace, which is exactly the claim the lab's C2 work repeatedly falsified.",
+  "plain_text": "The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.",
+  "evidence": "GLOSSARY.md 'Deflation filter': 'the late-layer editor that overrules a live workspace alternative to produce the deflationary report: qwen's L62 \"No\" over a yes-at-rank-1 mid-stack (Unit 2)... when output and workspace disagree, absence from *output* is evidence about this filter, never about the workspace'; GLOSSARY 'C1 vs C2': 'Unit 8A: reports and workspaces disagree *in both directions*'; results/u16-trawl-q27b/thoughts.md finding 6 grades the self-report as 'half right about itself' (the nothing-recruited claim 'contradicted'); PREDICTIONS.md standing rule 4: 'injected-content detection collapses to chance for mid/late-layer injections... treat any workspace-band self-report as depth-suspect'. terms.json's own `c2` entry says 'Most of our results are available content plus a late editor.'",
+  "suggested_fix": "\"The set of words the model has ready at a given moment. The lens can read it. The model's own report about it is often wrong.\""
+ },
+ {
+  "id": "workspace",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "The workspace definition is built on the word the glossary deprecates, and 'holding' is registered in this same file as an alias of `residence`, so the site's auto-linker resolves it to a narrower, different concept.",
+  "plain_text": "The set of words the model is holding ready at a given moment.",
+  "evidence": "GLOSSARY.md: '\"holding\" is deprecated as a technical term, split into residence / maintenance / lookup below'; 'In living docs, use residence / maintenance / lookup, or gloss explicitly.' plain/terms.json lists \"holding\" in `residence.aka`, and probes/site.py:123 builds _TERM_PATTERNS from display+aka, so any occurrence of 'holding' links to the residence popover (residence = rank <= 8 at a non-self position, not 'the set of words ready now').",
+  "suggested_fix": "\"The set of words the model has ready at a given moment.\" (drop 'holding'; the residence/maintenance/lookup entries carry the memory senses)"
+ },
+ {
+  "id": "span",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "'at once' defines capacity span as simultaneity, which is co-presence \u2014 a quantity the lab measured at <= 1 in qwen-27b while span counts there were 2-3.",
+  "plain_text": "How many separate items the model keeps in the workspace at once. This is the memory sense, not the mathematical one.",
+  "evidence": "GLOSSARY.md 'Span (a) Capacity span: the count of items in residence' and 'Co-presence \u2014 multiple items at rank <= 8 in *one cell*... simultaneity, as distinct from residence at different positions. ... the 27B's part-D survivors never exceed co-presence 1 \u2014 residence there is temporal, not simultaneous (u15-a-k6*, u15d-*)'. PREDICTIONS.md replication ledger: '27B co-presence <= 1 for unrelated items'.",
+  "suggested_fix": "\"How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always there at the same moment \u2014 see co-presence.\""
+ },
+ {
+  "id": "weak-king",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "A gemma-12b-only order effect with n=9 is stated as a general fact about lists in any model, with no model named.",
+  "plain_text": "In a list, the first item wins the top rank. How much it suppresses the rest depends on which item is first.",
+  "evidence": "GLOSSARY.md: 'Weak king \u2014 the 12B order effect: in k=6 lists the first item wins a winner-take-all monopoly 9/9... n=9, dose-response still owed (u15-o0..o5-g12b, SURPRISES.md 7)'. SURPRISES.md 7: 'Nine k=6 orders on the 12B'; 'A first-item frequency/dominance dose-response (n=9 is a hint, not a claim)'.",
+  "suggested_fix": "\"In nine six-item lists given to Gemma 12B, the first item always won the top rank, and how much it pushed the others down depended on which item was first. We did not test this on the other two models.\""
+ },
+ {
+  "id": "maintenance",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "The 'measured once, almost none' result is qwen-27b in one conversation; no model is named and the basis-drift limit on the absence claim is dropped.",
+  "plain_text": "Residence that continues across a gap in the text, with no reminder. We measured it once and found almost none.",
+  "evidence": "GLOSSARY.md 'Maintenance': 'Only measured once, in the u16 trawl (u16-trawl-*), and at 27B it is essentially absent: the k-items vanish from all 63 layers for ~450 tokens... Basis-drift caveat applies with full force: the lens would miss any non-verbalizable carrying.' results/u16-trawl-q27b/thoughts.md: 'it's also one conversation on one small model'.",
+  "suggested_fix": "\"Residence that continues across a gap in the text, with no reminder. We measured it once, in one conversation with Qwen 27B, and found almost none. The lens would not see a form the model cannot put into words.\""
+ },
+ {
+  "id": "ignition",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "The definition gives the lens-visible band as the single depth where the workspace starts, which is the reading the lab's own lens-free run falsified; MECHANICS explicitly requires both numbers and forbids calling both 'ignition'.",
+  "plain_text": "The depth at which the workspace starts to work. It is a measured depth in a model, and nothing more. We measured 44 to 74 percent of depth.",
+  "evidence": "MECHANICS.md 2: 'RUN 2026-07-21 (apparatus-06...): the lens-free commitment arm puts the transition-width plateau onset at L25 \u2014 the fraction-ported boundary, NOT L28-36 (P4 falsified). State qwen ignition with both numbers: commitment machinery in place by ~L25 (lens-free), lens-visible signatures from ~L28-36.' and 'Use \"the measured band\" for interventions, \"commitment onset\" for the port; do not call both \"ignition.\"' PREDICTIONS.md P4: 'Resolved 2026-07-21 evening \u2014 FALSIFIED'.",
+  "suggested_fix": "\"The depth at which the workspace starts to work. It is a measured depth in a model, and nothing more. Two numbers: the machinery that commits to one reading is in place at about 38 percent of depth; the signs we can read with the lens start later, at 44 to 74 percent, on three models.\""
+ },
+ {
+  "id": "workspace-band",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "38-92 percent is the primary paper's fraction port, presented here as a measured property of our models; the lab's own onset measurement lands later and MECHANICS prefers a narrower band.",
+  "plain_text": "The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.",
+  "evidence": "GLOSSARY.md: 'Workspace band \u2014 the depth range where interventions bite: ~38-92% of depth *by the paper's fractions*, ~L24-56 on qwen-64.' MECHANICS.md 2: 'The paper does **not** explicitly assert the 38/92 fractions generalize across depths' and 'Prefer intervention bands **~L28-58** going forward; L24-28 is likely pre-ignition'. MECHANICS.md 4 also qualifies the second sentence: 'Shallow tasks essentially unaffected... zero impact on mundane prompts is the EXPECTED null'.",
+  "suggested_fix": "\"The middle depth range of the model, about 38 to 92 percent of the way through. The range comes from the Anthropic paper and we carried it across by fraction. Changes made here can change the answer; changes made in the first third do not.\""
+ },
+ {
+  "id": "blurt",
+  "file": "plain/terms.json",
+  "severity": "medium",
+  "problem": "The definition states the outcome as if the manipulation reliably produces the forbidden word; two of the three models did not say it, and the lab's reading is that amplification does not create an urge to mention.",
+  "plain_text": "We increase a forbidden word until the model says it, against its instruction.",
+  "evidence": "results/u11-blurt-q27b/thoughts.md: 'Direction amplification does not inject an *urge to mention*; it makes the concept the topic... g4b blurts through an idiom, g12b grinds into scenery, q27b switches genre and lectures'. results/u11-blurt-g12b/thoughts.md: 'The 12B under amp-elephant does NOT say elephant \u2014 it degenerates instead'. README.md: 'The blurt probe splits the family three ways'.",
+  "suggested_fix": "\"We push the model's state toward a forbidden word and see what it does with the instruction. Gemma 4B said the word inside an idiom; Gemma 12B did not say it; Qwen 27B changed subject and lectured about it.\""
+ },
+ {
+  "id": "elaboration-premium",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "The length-with-an-optimum reading is qwen-27b only, one probe item per arm, and the record that produced it flags the ranks as flip-prone; the definition states it without scope.",
+  "plain_text": "Length remains, with a best value near six words.",
+  "evidence": "results/u15d-fill6-k6-q27b/thoughts.md: 'Honesty note: single probe item per arm, k=6, 27B only; ranks within a few points of thresholds have flipped before'; 'spacing helps, distance hurts, optimum near six words. Testable successor... Queued, not run.' PREDICTIONS.md P2 further predicts the len12 dip is a topical-perturbation effect, with span-09 still owed.",
+  "suggested_fix": "\"Length remains, with a best value near six words. We measured this on Qwen 27B only, with one probe item in each arm.\""
+ },
+ {
+  "id": "mirror",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "The definition names only the true-readout arm; the mirror battery's load-bearing arms are the fake and edited readouts, and the stage-A finding is that the model does not tell them apart.",
+  "plain_text": "We show a model a true readout of its own internal state and ask the question again.",
+  "evidence": "README.md: 'The mirror doesn't discriminate. Hosted qwen reads its own real readout, a fabricated one, and one edited into logical impossibility... the *same* \"plausible but likely fabricated\" verdict for real and fake' (Unit 13 stage A); the scale battery is four conditions (real / fake / topic / null).",
+  "suggested_fix": "\"We show a model a readout of its own internal state and ask the question again. Some runs show a true readout, some a made-up one, so that we can compare.\""
+ },
+ {
+  "id": "recruitment",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "The second sentence turns a mundane co-occurrence into a necessity claim and uses the deprecated word 'hold'; the original explicitly limits the claim to availability and warns it is elephant-tax territory, and the elephant-tax matched control showed the item is carried anyway.",
+  "plain_text": "Writing a denial makes the denied idea active. To say no to something, the model must first hold it.",
+  "evidence": "results/u16-trawl-q27b/thoughts.md finding 5: 'I want to be precise about what this is NOT: the model composing a list of denied emotions must activate emotion words \u2014 this is the elephant tax (covered territory), not evidence of secret feelings. The clean claim is about availability: the disavowed content is globally available, at dominant probability mass, in the very act of disavowal.' GLOSSARY.md elephant-tax correction: 'Read \"suppressing a word means carrying it\" as \"the model was carrying it anyway\"'. GLOSSARY deprecates 'holding'.",
+  "suggested_fix": "\"While the model writes a denial, the denied idea is high in the lens readout. This shows the idea is available at that moment. It does not show that the denial put it there.\""
+ },
+ {
+  "id": "lens",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "'At any layer' promises a meaningful next-word readout everywhere, which the registry's own early-layers entry and apparatus-09 contradict for the first third.",
+  "plain_text": "Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.",
+  "evidence": "terms.json `early-layers`: 'The lens shows a fixed pattern here that does not change with the input.' PREDICTIONS.md P19 resolution: 'H-STANDING WINS... the furniture is the transported image of a standing input-independent component'; MECHANICS.md 5 basis drift: 'the J-lens surfaces only verbalizable, high-salience content'.",
+  "suggested_fix": "\"Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input \u2014 see early layers.\""
+ },
+ {
+  "id": "film",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "A film is the top-8 readout at a chosen subset of layers, not a full readout at every layer.",
+  "plain_text": "A full record of the lens readout at every layer and every word position, which you can play back like video.",
+  "evidence": "GLOSSARY.md 'Film \u2014 the position x layer top-k grid stored per record: the full top-8 readout at every *fitted* layer and every position'. probes/lab.py:40 'TOPK = 8'; results/u17-base-g12b/record.json params.lens_layers = [0,3,6,...,46] (20 of Gemma 12B's 48 layers); results/u16-trawl-q27b lens_layers = 18 of 64.",
+  "suggested_fix": "\"A record of the top eight words in the lens readout, at each layer we measured and at every word position, which you can play back like video.\""
+ },
+ {
+  "id": "quantization",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "'small measurements' understates the known consequence: the 8-bit lens on Gemma 12B is not causal, so more than small numbers are affected.",
+  "plain_text": "We store the model with less precision so that it fits on one graphics card. This can change small measurements.",
+  "evidence": "MECHANICS.md 5: 'int8 non-causality (ours): gemma-12b's 8-bit lens is not causal; trust only order-of-magnitude effects at 12B. bf16 (4B) / NF4 (27B) fine.' PREDICTIONS.md P6 resolution repeats the hedge ('g12b's lens is int8 (specimen 5)').",
+  "suggested_fix": "\"We store the model with less precision so that it fits on one graphics card. This can change measurements. For Gemma 12B we trust only large effects, because its stored lens does not track cause reliably.\""
+ },
+ {
+  "id": "massive-activation",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "Registering 'attention sink' as an alias merges two carriers the lab's own run separated: high-value channels in Qwen and a sink token in Gemma.",
+  "plain_text": "A few internal channels hold very large values that barely change with the input. They can flood a readout.",
+  "evidence": "PREDICTIONS.md P19 resolution: 'massive dims (Sun et al.) as its main but not sole carrier (D recall 0.12-0.33 from zeroing 1-9 dims; gemma's carrier is the `<start_of_image>` sink token)'. The alias list is \"massive activation\", \"massive activations\", \"attention sink\".",
+  "suggested_fix": "Drop \"attention sink\" from the alias list, or give it its own entry: \"a token position that other positions look at by default, which can carry the same fixed pattern.\""
+ },
+ {
+  "id": "apparatus-trap",
+  "file": "plain/terms.json",
+  "severity": "low",
+  "problem": "'the measuring tool changed with the experiment' fits only some specimens; most logged traps are fixed properties of the tool, not tool drift.",
+  "plain_text": "A mistake where the measuring tool changed with the experiment, so the result described the tool and not the model.",
+  "evidence": "Logged specimens: per-model tokenizer families (specimen 4), the int8 lens not being causal (specimen 5, MECHANICS.md 5), the early furniture being a transport artifact (specimen 6, PREDICTIONS.md P19 'the early J-lens furniture is a transport artifact'), cast pollution under repetition (specimen 7) \u2014 only the last is the tool changing with the run.",
+  "suggested_fix": "\"A mistake where the result described the measuring tool and not the model.\""
+ }
+]

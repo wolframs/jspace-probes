@@ -6,4 +6,4 @@
 
 **What it means.** We think Gemma 12B's later-layer break sits somewhere at or below strength 0.03. Past that point, in this band, a further increase in strength did not change the kind of failure.
 
-**What this does not show.** We did not test strengths below 0.03 in this band. We do not know the exact break point.
+**What this does not show.** We tested two lower strengths in this band, 0.015 and 0.0212, and both answers stayed intact. The break sits between 0.0212 and 0.03. We do not know the exact break point.

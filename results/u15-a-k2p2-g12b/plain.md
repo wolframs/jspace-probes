@@ -7,8 +7,8 @@ each word, out of about 250,000 candidates, and checked whether both
 showed up together at one layer and position.
 
 **What we found.** Both fern and submarine held rank 1 together, a
-co-presence of two out of two. Gemma 12B answered "The submarine," which
-was correct.
+co-presence of two out of two. Gemma 12B answered "The submarine." That
+answer was correct.
 
 **What it means.** All three orders tested at two words gave the same
 pattern for Gemma 12B: both words in residence together, and a correct

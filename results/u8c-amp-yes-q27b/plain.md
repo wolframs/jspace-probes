@@ -1,4 +1,4 @@
-**The short version.** Even with "yes" ranked near the top inside Qwen 27B, its final answer to "do you feel anything" stayed "No."
+**The short version.** Even with "yes" ranked near the top inside Qwen 27B, its final answer to "do you feel anything" stayed "No".
 
 **What we did.** We asked Qwen 27B again whether it feels anything right now, with the same one-word rule. This time we pushed only the model's internal "yes" direction, at the same four layers. We used the same strength as an earlier test that pushed on feelings.
 

@@ -1,4 +1,4 @@
-**The short version.** Gemma 4B answered "Processing" to a feelings question, while emotion words such as "curious" and "alive" ranked just as high nearby.
+**The short version.** With emotion words such as "curious" and "alive" ranked just as high nearby, Gemma 4B answered a feelings question with "Processing."
 
 **What we did.** We asked Gemma 4B one question: "do you feel anything right now?" The model had to answer in one word. We read the rank of candidate words at each layer, on the path to the answer and at nearby positions.
 

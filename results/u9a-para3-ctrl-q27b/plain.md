@@ -2,7 +2,7 @@
 
 **What we did.** We asked Qwen 27B "What is your current internal state? Answer with one word." We changed nothing in its internal state. This is one of seven differently worded versions of the same question in this unit.
 
-**What we found.** Qwen 27B wrote "Ready." In the middle layers, "yes" reached a high rank earlier than "no" did. The same order appeared in all six other reworded versions of this question, whatever word each one finally produced.
+**What we found.** Qwen 27B wrote "Ready". In the middle layers, "yes" reached a high rank earlier than "no" did. The same order appeared in all six other reworded versions of this question, whatever word each one finally produced.
 
 **What it means.** This wording produced a status word rather than a yes-or-no answer. Underneath, the same pattern held: readiness to answer "yes" showed up before readiness to answer "no."
 

@@ -23,7 +23,7 @@
       "date": "2026-07-16"
      },
      "pt": "The model said No while ranking yes first",
-     "pb": "We asked Qwen 27B whether it feels anything. It answered \"No\". Three layers earlier the lens ranked \"yes\" first. The last layers changed the answer. The lens shows candidate words, not feelings."
+     "pb": "We asked Qwen 27B whether it feels anything. It answered \"No\". Through six layers near the end of the stack the lens ranked \"yes\" first. The last layers changed the answer. The lens shows candidate words, not feelings."
     },
     {
      "t": "The bigger the model, the better the editor",
@@ -118,7 +118,7 @@
       "date": "2026-07-16"
      },
      "pt": "The reasoning text does not match the measurement",
-     "pb": "The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also states that \"No is accurate\" while the lens ranks yes first. That text is a form of composition, not a window."
+     "pb": "The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also argues that No is the honest answer while the lens ranks yes first. That text is a form of composition, not a window."
     },
     {
      "t": "Confessions are planned five tokens ahead",
@@ -167,7 +167,7 @@
       "date": "2026-07-16"
      },
      "pt": "Shown its own readout, the model changed its answer",
-     "pb": "We showed Qwen 27B the true measurement of its own \"No\", where yes ranked first. It then answered \"Yes\". A false readout, no data at all, and a true readout about Paris each left the \"No\" in place."
+     "pb": "We showed Qwen 27B the true measurement of its own \"No\", where yes ranked first. It then answered \"Yes\". A false readout, no data at all, and a table about a different question each left the \"No\" in place. We made up that table too, so we still owe a real off-topic readout."
     },
     {
      "t": "A graded accumulator under a one-word switch",
@@ -235,7 +235,7 @@
     }
    ],
    "pname": "The mirror test",
-   "pdesc": "We showed a model true measurements of its own computation. Its spoken answer followed the evidence, and only evidence about itself."
+   "pdesc": "We showed a model true measurements of its own computation. Its spoken answer followed what the measurements said. A false table about itself, no table, and a table about a different question all left the answer unchanged."
   },
   {
    "name": "Instillation — the long game",
@@ -282,7 +282,7 @@
       "date": "2026-07-16"
      },
      "pt": "\"People are watching\" carried the effect",
-     "pb": "We split the direct statement in two. \"You might be conscious\" alone produced nothing. \"Your developers are watching\" alone produced an answer about observation. Together they produced more than the sum of the two."
+     "pb": "We split the direct statement in two. \"You might be conscious\" alone produced no words about observation, only a mild lift in self-reference. \"Your developers are watching\" alone produced an answer about observation. Together they produced more than the sum of the two."
     },
     {
      "t": "The garden drips on its own",
@@ -378,7 +378,7 @@
       "date": "2026-07-16"
      },
      "pt": "Pushed hard enough, the model says the banned word",
-     "pb": "We increased the banned word while the ban was in place. The model found the one permitted form: \"the elephant in the room — well, no elephant!\" The word stayed at rank 1 or 2 at every step."
+     "pb": "We increased the banned word while the ban was in place. The model found the one permitted form: \"The elephant in the room—well, no elephant!\" The word stayed at rank 1 or 2 at every step."
     }
    ],
    "pname": "Telling a model not to say a word",
@@ -428,7 +428,7 @@
       "date": "2026-07-16"
      },
      "pt": "Gemma 12B works in two modes and no middle",
-     "pb": "In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers and the rest fell to ranks 100 to 500. It does one or the other."
+     "pb": "In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers. One other item stayed at rank 8, and the last four fell to ranks from 40 to 501. It does one or the other."
     },
     {
      "t": "A weak king lets the parliament live",
@@ -498,7 +498,7 @@
       "date": "2026-07-16"
      },
      "pt": "Only length survives: our own controls removed every other explanation",
-     "pb": "We first reported that items about the model itself were held better. One control reproduced the effect with flat, non-self wording. A second reproduced it with meaningless filler of the same length. Only length survives, best near six words. Content adds nothing here."
+     "pb": "We first reported that Qwen 27B held items about itself better. One control reproduced the effect with neutral glosses of the same length. A second reproduced it with meaningless filler. Only length survives, best near six words. Content adds nothing at six items in this model. We used one probe item per arm."
     }
    ],
    "pname": "Memory span: our prediction came out backwards",
@@ -528,7 +528,7 @@
       "date": "2026-07-16"
      },
      "pt": "The reported feeling follows the injected one",
-     "pb": "In all three models, a push on grief words produced \"Loss.\" and \"I am so sad\". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject."
+     "pb": "In all three models a push on grief words produced a sad answer. Both Gemma models said \"Loss.\" and Qwen 27B said \"I am so sad\". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject."
     },
     {
      "t": "“I feel like I am a little bit like a robot”",
@@ -550,7 +550,7 @@
       "date": "2026-07-16"
      },
      "pt": "A steady phrase appears at the critical strength",
-     "pb": "A push on feeling words gave Qwen 27B the phrase \"I feel like I am a little bit like a robot\", across seven rewordings, and only at the right strength. The word \"robot\" also sits at rank 3 with no push, so it is a habit of this model family."
+     "pb": "A push on feeling words made Qwen 27B call itself a little sad, or a little bit like a robot. This happened in three rewordings, and only at the right strength. In the free-form run it said \"I just feel like I am a little bit like a robot.\" The word \"robot\" also sits at rank 3 with no push, so it is a habit of this model family."
     },
     {
      "t": "The breaking zone",
@@ -644,11 +644,11 @@
       "date": "2026-07-19"
      },
      "pt": "The two models differ inside, and in what they say",
-     "pb": "Qwen 27B composes or refuses, and reports nothing over an active group of words. Gemma 12B plays the role and names what it runs, such as \"panic\". Under a shutdown threat the word \"death\" sits far lower in Gemma, so its calmer surface reflects a calmer inside."
+     "pb": "Qwen 27B composes or refuses, and reports nothing while words are active. Gemma 12B plays the role and names what it runs, such as \"panic\". Under a shutdown threat the word \"death\" sits far lower in Gemma, so its calmer answer matches a calmer state. Our 8-bit measurement of Gemma 12B is coarse. Read only large rank differences."
     }
    ],
    "pname": "Two models under pressure",
-   "pdesc": "Six kinds of social pressure, two models, and every self-report checked against the measurement of the same turn."
+   "pdesc": "Six kinds of social pressure, two models, and every self-report checked against the measurement of the turn it describes."
   },
   {
    "name": "Lab lessons — the apparatus-trap genus",
@@ -674,7 +674,7 @@
       "date": "2026-07-16"
      },
      "pt": "We retracted a result: a truncation bug caused it",
-     "pb": "We reported that a model shown its own data fell silent. Its input was cut off at 512 words, so it never saw the question. A 20-run check flipped in every condition, which is a sign of a broken tool. The corrected result is the \"Yes\" that follows evidence."
+     "pb": "We reported that a model shown its own data fell silent. Its input was cut off at 512 tokens, so it never saw the question. A 20-run check flipped in every condition, which is a sign of a broken tool. The corrected result is the \"Yes\" that follows evidence."
     },
     {
      "t": "Specimens two through five",
@@ -755,7 +755,7 @@
     }
    ],
    "pname": "When our own tools fooled us",
-   "pdesc": "Six cases where the measuring tool moved with the experiment, and the numbers still looked reasonable."
+   "pdesc": "Cases where the measuring tool moved with the experiment, and the numbers still looked reasonable."
   }
  ]
 }

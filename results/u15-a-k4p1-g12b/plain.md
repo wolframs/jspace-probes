@@ -9,7 +9,7 @@ several showed up together at one layer and position.
 **What we found.** Only two words reached a high rank together, a
 co-presence of two out of four. Whale, the first word in the list, held
 rank 1. Lantern fell to rank 21, submarine to rank 6, and violin to rank
-14. Gemma 12B still answered "The whale," which was correct.
+14. Gemma 12B still answered "The whale." That answer was correct.
 
 **What it means.** This is the first-item effect. The word named first
 in the list kept the strongest position, and later words lost ground

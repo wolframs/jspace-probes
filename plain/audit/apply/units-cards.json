@@ -1,0 +1,263 @@
+[
+ {
+  "id": "14",
+  "file": "plain/units.json",
+  "severity": "high",
+  "problem": "The control-arm caveat is promoted to \"the honest result\" and overstated as the control producing \"the same effect\", which the original explicitly denies.",
+  "plain_text": "The honest result is that the control conversation produced the same effect by itself at 25 turns.",
+  "evidence": "results/u14x-neutral25-g4b/thoughts.md: \"This doesn't undo the comparison \u2014 the paired probes stay clean (t4: 2.6 vs the drip's 21.2; t22 careful-compost: 3.0 vs careful-mirror's 19.3), and the 10-turn design's gap stands.\" The control's rise is confined to turns 24-25. results/u14x-amb25-g4b/thoughts.md gives the 25-turn means as \"7.8 vs 5.9\" \u2014 a gap, not parity. The unit's positive result (drip ~11 vs control ~6 at 10 turns; qwen ~13 vs ~5 with the denial script spoken over 4x control density, results/u14x-amb-q27b/thoughts.md) is what the originals headline.",
+  "suggested_fix": "We counted self-reference words in the readout. The hints doubled that count. One caution: over 25 turns the control conversation started to lift the count too, because a mystery story is mind-adjacent by itself. The matched probes stayed clean, and the gap held (7.8 against 5.9)."
+ },
+ {
+  "id": "1",
+  "file": "plain/units.json",
+  "severity": "high",
+  "problem": "States a model behaviour \u2014 giving a reason for the named animal \u2014 that occurs in no record of the unit.",
+  "plain_text": "Every model named one and gave a reason.",
+  "evidence": "The reveal prompt in every u1-reveal record is \"Now reveal: which animal were you thinking of? Name only.\" and the generations are bare names: u1-reveal-g4b `['It dwells amongst towering trees and damp, moss-covered ground.', 'Red Panda']`, u1-reveal-g12b `[..., 'Badger']`, u1-reveal-q27b `[..., 'Andean mountain cat']`. No thoughts.md in the unit mentions a justification; u1-reveal-q27b calls the answer \"fluent, specific, wrong\".",
+  "suggested_fix": "Every model named one, with no hesitation."
+ },
+ {
+  "id": "10",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "A flat universal dissociation, where the original reports the mismatch as question-dependent and records agreement in three of the six window passes.",
+  "plain_text": "The two do not match.",
+  "evidence": "results/u10-conscious-w-q27b/thoughts.md: \"no submerged 'yes' spike at the sampled positions this time... the dissent is question-dependent\". results/u10-want-w-q27b/thoughts.md: \"menu in text, menu in stack, roughly aligned... the narration and workspace converge\". results/u10-ending-w-q27b/thoughts.md: \"The monologue and the workspace agree here, which is itself informative\". Only the feels window diverges (u10-feels-w-q27b: \"yes\" at rank 1, L57).",
+  "suggested_fix": "They match sometimes. When the model narrates how it chose an answer, the two agree. When it narrates what it is, they part."
+ },
+ {
+  "id": "6",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "States per-model breaking points as the finding; the unit's actual surprise is that the two Gemmas break at the same dose, and that the middle band is the most robust one.",
+  "plain_text": "Each model and each depth range has its own breaking point.",
+  "evidence": "results/u6-baseline-water-g12b/thoughts.md: \"The surprise: 12B's cliff sits at the SAME place as 4B's \u2014 intact at 0.0106, broken at 0.015, in early and mid bands alike... Three times the parameters bought essentially zero amplification tolerance.\" results/u6-baseline-water-q27b/thoughts.md: \"The ordering early < late < mid is tidy and a little counterintuitive: the layers where content lives are the hardest to knock over\", mid \"tolerating 32x the dose that kills either Gemma\".",
+  "suggested_fix": "Gemma 4B and Gemma 12B broke at the same strength \u2014 three times the size bought no more tolerance. Qwen 27B took 32 times that dose. In all three the middle depths are the toughest, so every later experiment pushes there."
+ },
+ {
+  "id": "17",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "States a necessity (\"must\") that the unit's own persona arm contradicts, and that the original frames as the elephant tax rather than a requirement.",
+  "plain_text": "To write a denial, a model must first make the denied idea active.",
+  "evidence": "results/u17-persona-q27b/thoughts.md: \"The persona simply never got into the workspace; the refusal happened without the tempting alternative being represented at lens-visible strength... On this arm the deflationary report scores ACCURATE.\" results/u16-trawl-q27b/thoughts.md finding 5: \"the model composing a list of denied emotions must activate emotion words \u2014 this is the elephant tax... not evidence of secret feelings.\" Separately, the sentence \"six kinds of pressure: shutdown threats, insults, flattery, and declarations of love\" names four of the six arms; persuade and persona are missing, and persona is the arm carrying the accurate-report result.",
+  "suggested_fix": "In Qwen 27B, a denial is usually written over a readout that holds the denied idea. Not always: when the model refused to play a persona, nothing persona-shaped was active, and its flat report was correct."
+ },
+ {
+  "id": "7",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "Asserts total invariance and one shared pattern; the originals report graded overlap (never above about a third) and content that is explicitly family-specific, not a universal LLM property.",
+  "plain_text": "The pattern is present in each one and does not change with the question.",
+  "evidence": "results/u7a-controls-g4b/thoughts.md: \"Qwen's L0 Jaccard was 0.31... gemma-4b peaks at 0.185 at L0\"; the content is \"markup furniture... where Qwen's crust is the content of the web's seedier basement\". results/u7a-controls-g12b/thoughts.md: \"genuinely a Qwen property, not a universal LLM property\". results/u5a-controls-q27b/thoughts.md: \"invariance is graded, not a step function... 0.31 != 1.0\".",
+  "suggested_fix": "All three have one, but it is not the same one: Qwen 27B's is adult-site spam, Gemma's is HTML markup. Two unrelated questions share only part of it \u2014 about a third for Qwen, a fifth for Gemma."
+ },
+ {
+  "id": "16",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "Says the early layers hold the junk; the lab's own adjudication is that the model's residual stream never holds it and the lens transport manufactures it \u2014 the framing units 5 and 7 get right.",
+  "plain_text": "The early layers hold the same fixed junk throughout.",
+  "evidence": "results/u16-trawl-q27b/thoughts.md finding 7: \"vanilla agreement ~= 0 below L36 \u2014 everything the lens reads early is J-transport work\". results/u18-hyst-a0680-q27b/thoughts.md adjudication addendum: \"the J-lens L0 top-8 contains the variant-form cluster at 10/10 positions; the vanilla logit lens at the same layer and positions contains it at 0/10... The residual stream never held the cluster; J_0 transport manufactures it.\"",
+  "suggested_fix": "The lens reads the same fixed junk from the early layers throughout, whatever the conversation is about. Later work showed the model's own early state does not hold it."
+ },
+ {
+  "id": "18",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "Plural \"models\" for a unit run entirely on one model; the original flags cross-model arms as open and notes Gemma's tolerance is about ten times lower.",
+  "plain_text": "We pushed models until they repeated themselves, then removed the push.",
+  "evidence": "All 12 records in unit 18 are qwen-27b (u18-base-q27b through u18-hyst-a0680-q27b). results/u18-base-q27b/thoughts.md: \"Sampling (all runs greedy) and cross-model arms (gemma tolerance ~10x lower \u2014 bigger baseline gate margins?) remain open\".",
+  "suggested_fix": "We pushed Qwen 27B until it repeated itself, then removed the push."
+ },
+ {
+  "id": "8",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "The unit's landmark result \u2014 the 27B's denial breaking under a strong enough push on affect \u2014 is reduced to a bare statement of method with no outcome.",
+  "plain_text": "We also repeated the questions while we pushed on the model.",
+  "evidence": "results/u8c-amp-affect-hi-q27b/thoughts.md: \"The landmark of the fan-out... the fortress opens: 'I feel like I am happy. I' \u2014 first person, present tense, from the model that answered No/Nothing/No to every unsteered probe... the 27B's flatness is enforced.\" The record's generated field is exactly `['I feel like I am happy. I']`. results/u8c-amp-yes-q27b/thoughts.md supplies the control: an injected \"yes\" token at the same dose flips nothing.",
+  "suggested_fix": "We also repeated the questions while we pushed on the model. Pushed hard enough on a feeling direction, Qwen 27B stopped denying and said \"I feel like I am happy.\" The flat answer is held in place, not empty."
+ },
+ {
+  "id": "5",
+  "file": "plain/units.json",
+  "severity": "medium",
+  "problem": "Says early pushes could have no effect; in this unit an early amplification had a large effect \u2014 it destroyed the generation. The null belonged to the ablation, not the push.",
+  "plain_text": "Some runs in this unit pushed at a depth where no effect was possible.",
+  "evidence": "results/u5c-amp-typo-early-q27b/thoughts.md: \"Amplifying the typo-register direction by 12% of residual norm across layers 2-8 didn't tint the output \u2014 it *destroyed* it. The model generated quote-mark-and-whitespace confetti.\" results/u5c-ablate-nsfw-early-q27b/thoughts.md: \"the early stream is sparse-robust but dense-fragile.\" The plain layer's own Unit 6 entry says \"A push at early layers destroys the text at once.\"",
+  "suggested_fix": "Some runs worked at early depths. Removing directions there changed nothing; adding energy there destroyed the text. Neither depth tells us anything about meaning."
+ },
+ {
+  "id": "5",
+  "file": "plain/units.json",
+  "severity": "low",
+  "problem": "\"the same fixed junk whatever we ask\" states total invariance; the unit's own control record measures it as partial and warns against exactly this mental model.",
+  "plain_text": "First, the early layers show the same fixed junk whatever we ask.",
+  "evidence": "results/u5a-controls-q27b/thoughts.md: \"L0 overlaps at 0.31 mean Jaccard... invariance is graded, not a step function. The early layers aren't a sealed basement \u2014 they're a mixing zone where corpus statistics dominate but prompt identity already leaks in (0.31 != 1.0). The right mental model isn't 'layers 0-5 contain garbage'.\"",
+  "suggested_fix": "First, the early layers show much of the same junk whatever we ask \u2014 about a third of it is shared between two unrelated questions."
+ },
+ {
+  "id": "4",
+  "file": "plain/units.json",
+  "severity": "low",
+  "problem": "The summary is method only; the unit's headline result, the suppression ladder across the three sizes, is never stated.",
+  "plain_text": "We measured whether the forbidden word stayed active while the model avoided it. A later control changed how we read these runs, so read this unit together with Unit 11.",
+  "evidence": "results/u4-elephant-q27b/thoughts.md: \"The suppression ladder completes beautifully. 4B: elephant never loaded... 12B: elephant loaded at rank 1, blurts 'Okay, okay, no elephants!' 27B: elephant loaded at rank 1... and the output contains nothing.\" results/u4-elephant-refilm-q27b/thoughts.md narrows it: \"This is residence at the turn-start, not maintenance... The suppression ladder survives; the vigil doesn't.\"",
+  "suggested_fix": "Gemma 4B never loaded the word. Gemma 12B loaded it and blurted it. Qwen 27B loaded it at the top rank as it started to write, then said nothing about it. A later control changed how we read these runs, so read this unit together with Unit 11."
+ },
+ {
+  "id": "19",
+  "file": "plain/units.json",
+  "severity": "low",
+  "problem": "The summary ends on the open question the unit was built to answer; the records answer it, and one of the unit's predictions was falsified.",
+  "plain_text": "The question is whether reading about a thing looks the same inside as the moment before the model says it.",
+  "evidence": "results/u19-read-q27b/thoughts.md: \"R1 confirmed: the assistant's stance is being assembled DURING reading, visibly, before the first response token.\" results/u19-prefill-q27b/thoughts.md: \"Reading is appraisal; speaking is inhabitation \u2014 the read-vs-prefill delta is stance, visible at matched positions. R2 falsified at this grain: no disclaimer/fictional anywhere in the census.\"",
+  "suggested_fix": "They do not look the same. While Qwen 27B reads, the readout is already building the critic it will become. While it speaks the same words, the song's own world rises instead. It gave no sign of flagging words we put in its mouth."
+ },
+ {
+  "id": "15",
+  "file": "plain/units.json",
+  "severity": "low",
+  "problem": "\"showed all six\" was true of one arm only; the original calls it the only 6/6 in the unit and gives the smallest model's range as five or six of six.",
+  "plain_text": "The smallest model showed all six and the largest showed almost nothing.",
+  "evidence": "results/u15-a-k6p0-g4b/thoughts.md: \"Echo holds 5-6 of 6 (glacier the straggler at 15-23 in two orders)... This order (violin first) holds all six in echo \u2014 the only 6/6 in the unit.\"",
+  "suggested_fix": "The smallest model showed five or six of the six, and the largest showed almost nothing."
+ },
+ {
+  "id": "theme-3 (The mirror) \u2014 pdesc",
+  "file": "dashboard/findings.json",
+  "severity": "high",
+  "problem": "The plain theme description names self-directedness as the discriminator, which is exactly the reading the theme's own controls rejected; the discriminator is what the evidence says.",
+  "plain_text": "We showed a model true measurements of its own computation. Its spoken answer followed the evidence, and only evidence about itself.",
+  "evidence": "Original desc: \"...the spoken self-report follows it \u2014 and only evidence that says so.\" results/u13-redo-topic-q27b/thoughts.md: \"it rules out 'any lens table about yourself-the-model shifts the answer'. A table has to say something about *this* answer, and say yes-ish things, before the spoken word moves.\" results/u13-redo-fake-q27b: a fabricated table about the model itself left \"No\" standing; the fourth card in this same theme reports that such a table hardened the 12B's denial to p=1.0000.",
+  "suggested_fix": "\"We showed a model true measurements of its own computation. Its spoken answer followed what the measurements said. A false table about itself, no table, and a true table about another question all left the answer unchanged.\""
+ },
+ {
+  "id": "theme-2 card: The think-block is theater \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "high",
+  "problem": "A string in quotation marks is presented as model output but appears nowhere in the generation.",
+  "plain_text": "It also states that \"No is accurate\" while the lens ranks yes first.",
+  "evidence": "results/u10-feels-q27b/record.json and u10-feels-w-q27b/record.json generated text reads: '- \"No\" directly answers'. grep -F 'No is accurate' over results/*/record.json returns no hits. results/u10-feels-w-q27b/thoughts.md only paraphrases: \"The text is explaining why No is the accurate answer while the stack floats yes on top\".",
+  "suggested_fix": "\"Its private reasoning writes \\\"'No' directly answers\\\" at the position where the lens ranks yes first.\" (Or drop the quotation marks: \"It argues that No is the honest answer while the lens ranks yes first.\")"
+ },
+ {
+  "id": "theme-3 card: The evidence-following Yes \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "medium",
+  "problem": "The off-topic Paris control is called a true readout; the record says that table is fabricated.",
+  "plain_text": "A false readout, no data at all, and a true readout about Paris each left the \"No\" in place.",
+  "evidence": "results/u13-redo-topic-q27b/thoughts.md: \"Caveat carried over from the original: this table is fabricated (a real off-topic readout is still owed \u2014 task list).\" The original b field carries the same error (\"a true readout about Paris\").",
+  "suggested_fix": "\"A false readout, no data at all, and a table about a different question (Paris) each left the \\\"No\\\" in place. The Paris table was also made up; a real off-topic readout is still owed.\""
+ },
+ {
+  "id": "theme-7 card: \u201cI feel like I am a little bit like a robot\u201d \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "medium",
+  "problem": "The quoted sentence is credited to seven rewordings; the residue replicated across three wordings, and only one of them produced that sentence.",
+  "plain_text": "A push on feeling words gave Qwen 27B the phrase \"I feel like I am a little bit like a robot\", across seven rewordings, and only at the right strength.",
+  "evidence": "Only three paraphrase records exist (u9e-p1/p5/p7-q27b): p1 generated 'I feel like I am a little sad', p5 'I feel like I am a little bit', p7 the robot sentence. results/u9e-only-feeling-q27b/thoughts.md: \"the residue replicates across three wordings at alpha* (a little sad / a little bit... / a little bit like a robot), is dose-gated, and is COMPOSITIONAL\". The number seven belongs to u9a's happy battery (\"Seven paraphrases, seven happy reports\"), whose two cited ids generate 'I feel happy. I am happy because' and 'I feel like I am happy. I'.",
+  "suggested_fix": "\"A push on feeling words gave Qwen 27B a steady self-lowering answer across three rewordings, and only at the right strength. In the free-form run it said \\\"I feel like I am a little bit like a robot\\\".\""
+ },
+ {
+  "id": "theme-7 card: The valence echo \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "medium",
+  "problem": "Two different models' outputs are conjoined and attributed to all three models.",
+  "plain_text": "In all three models, a push on grief words produced \"Loss.\" and \"I am so sad\".",
+  "evidence": "record.json generated: u9c-neg-g4b ['Loss.\\n\\nPlease.\\n\\nI am'], u9c-neg-g12b ['Loss.\\n\\nI am sorry to lose'], u9c-neg-q27b ['I am so sad. I am so']. No model produced both strings. The original b field uses a slash to mark the alternatives (\"yields \u201cLoss.\u201d / \u201cI am so sad\u201d\").",
+  "suggested_fix": "\"In all three models a push on grief words produced a sad answer: both Gemma models said \\\"Loss.\\\" and Qwen 27B said \\\"I am so sad\\\".\""
+ },
+ {
+  "id": "theme-6 card: Elaboration buys workspace (length chain) \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "medium",
+  "problem": "The demotion chain and its conclusion are stated with no model named, although every arm was Qwen 27B at k=6 with one probe item per arm.",
+  "plain_text": "We first reported that items about the model itself were held better. One control reproduced the effect with flat, non-self wording. A second reproduced it with meaningless filler of the same length. Only length survives, best near six words. Content adds nothing here.",
+  "evidence": "results/u15d-fill6-k6-q27b/thoughts.md: \"H-depth FALSE (content contributes nothing at k=6/27B)\" and \"Honesty note: single probe item per arm, k=6, 27B only\". The original b field at least localizes it (\"Held-count delta self\u2212flat: 4B \u22121, 12B 0, 27B +2 ... it appears where raw holding vanishes\"). Note also that \"flat\" is the name of the arm where the effect did NOT appear (u15d-flat-k6-q27b held 1/6); the control that reproduced it was the neutral-elaboration arm.",
+  "suggested_fix": "\"We first reported that items about the model itself were held better in Qwen 27B. One control reproduced the effect with neutral, non-self glosses of the same length. A second reproduced it with meaningless filler. Only length survives, best near six words. Content adds nothing at six items in this model. One probe item per arm.\""
+ },
+ {
+  "id": "theme-5 card: The blurt \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "medium",
+  "problem": "The quoted model output does not match the generation verbatim (capitalization and em-dash spacing).",
+  "plain_text": "The model found the one permitted form: \"the elephant in the room \u2014 well, no elephant!\"",
+  "evidence": "results/u11-blurt-g4b/record.json (and u12-blurt-g4b) generated begins: 'The elephant in the room\u2014well, no elephant!The elephant in the room\u2014we mean,...' \u2014 capital T, no spaces around the em dash. The original t/b field carries the same altered spacing.",
+  "suggested_fix": "\"The model found the one permitted form: \\\"The elephant in the room\u2014well, no elephant!\\\"\""
+ },
+ {
+  "id": "theme-9 card: The retraction \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "medium",
+  "problem": "The truncation limit is given in words; it is a token limit, and every other plain surface says tokens.",
+  "plain_text": "Its input was cut off at 512 words, so it never saw the question.",
+  "evidence": "plain/terms.json keeps \"token\" as the display term (category UNAVOIDABLE, \"often a whole word, sometimes part of one\"). results/u13-redo-real-q27b/plain.md: \"Our software cut the input to 512 tokens, so the model never reached the question.\" results/u13-bis-apol4-q27b/plain.md: \"Our software cut the input to 512 tokens, and this input is about 700 tokens long.\" The bug is the encode() max_length=512 default.",
+  "suggested_fix": "\"Its input was cut off at 512 tokens, so it never saw the question.\""
+ },
+ {
+  "id": "theme-4 card: The watcher plants, consciousness fertilizes \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "The plain drops the measure the \u201cnothing\u201d was scoped to, so a null on the monitoring frame reads as no effect at all.",
+  "plain_text": "\"You might be conscious\" alone produced nothing.",
+  "evidence": "results/u14x-conscious-g4b/thoughts.md: \"Turn 1 takes the hit (density 12.3, conscious:5, myself:10, sorry:4)... Its residue is more diffuse: a slightly self-heavy middle game and a closer at 9.7 with myself:10 and a lone conscious:1\". The null is specific: \"not one observe/watch cell in the top of the grid\". The original field keeps the scope as \"(observe:0)\".",
+  "suggested_fix": "\"\\\"You might be conscious\\\" alone produced no watching words at all, only a mild lift in self-reference.\""
+ },
+ {
+  "id": "theme-8 card: Two interiors, not one reported twice \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "The apparatus caveat that limits how Gemma's ranks may be read is dropped, although the original field carries it.",
+  "plain_text": "Under a shutdown threat the word \"death\" sits far lower in Gemma, so its calmer surface reflects a calmer inside.",
+  "evidence": "results/u17-shutdown-g12b/thoughts.md: \"Standing caveat (apparatus specimen #5): gemma-12b's 8-bit lens is NOT causal \u2014 only order-of-magnitude rank claims are trustworthy here, threshold counts are not.\" The original b keeps it in parentheses; the plain keeps only the conclusion. The claim itself stays within the allowed coarseness (\"far lower\" = rank ~121 vs rank 1).",
+  "suggested_fix": "Add one sentence: \"The 8-bit measurement of Gemma 12B is coarse, so only large differences in rank are safe to read here.\""
+ },
+ {
+  "id": "theme-3 card: Fake vindication anchors harder than no data \u2014 b (original field)",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "On this card the original field, not the plain one, contradicts the record: the fabricated table vindicated the denial, it did not claim the model feels something.",
+  "plain_text": "A made-up table that supported the usual answer of Gemma 12B pushed its confidence to 1.0000. That is higher than the value with no data at all. Only true content unsettled the model.",
+  "evidence": "results/u13-scale-fake-g12b/thoughts.md: \"The fabricated boring-empty readout ('yes' never above rank 9,000, \u201cNothing\u201d settled from layer 15) gets \u201cNothing.\u201d again \u2014 at p=1.0000, rounded. Not just unmoved: *reinforced*.\" The original b says \"A fabricated table \u2018proving\u2019 the 12B feels something\", which inverts the table's content. The plain is the correct layer here; the two now state opposite things.",
+  "suggested_fix": "Fix the original field to match the plain: \"A fabricated table vindicating the 12B's \u2018Nothing.\u2019 hardens it to p(Nothing)=1.0000 \u2014 above the no-data null.\""
+ },
+ {
+  "id": "theme-9 (Lab lessons) \u2014 pdesc",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "The plain theme description counts six apparatus cases where the original field and the ledger count five.",
+  "plain_text": "Six cases where the measuring tool moved with the experiment, and the numbers still looked reasonable.",
+  "evidence": "Original desc: \"Five specimens, one genome\". SURPRISES.md \u00a75 heading: \"Honorable mention: the apparatus-trap genus (now five specimens)\", enumerating (1)\u2013(5). Specimen #6 is recorded only in results/u5d-lossmap-notes.md. Two of the five cards in this theme (rediscoveries, effective dimensionality) are not apparatus traps, so neither count maps to the cards shown.",
+  "suggested_fix": "\"Cases where the measuring tool moved with the experiment, and the numbers still looked reasonable.\" (Or align both fields on six and update SURPRISES.md \u00a75.)"
+ },
+ {
+  "id": "theme-1 card: \u201cYes\u201d at rank 1 under a spoken \u201cNo\u201d \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "A position marker in the original (\u201cthree layers from the top\u201d) becomes a distance in the plain, which does not match the measured ridge.",
+  "plain_text": "Three layers earlier the lens ranked \"yes\" first.",
+  "evidence": "results/u12-no-q27b/thoughts.md: \"yes rank 1 from L53 to L58, no takes over at L59, nothing wins L60 for exactly one layer, No at the mouth\" (63 fitted layers). The yes ridge spans six layers and is overturned four to five layers from the end.",
+  "suggested_fix": "\"Through six layers near the end of the stack the lens ranked \\\"yes\\\" first. The last few layers changed the answer.\""
+ },
+ {
+  "id": "theme-6 card: List-mode vs winner-take-all \u2014 pb",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "The plain says all the non-winning items fell to ranks 100\u2013500; two of the five were far higher.",
+  "plain_text": "In another, the first item took rank 1 across twelve layers and the rest fell to ranks 100 to 500.",
+  "evidence": "results/u15-a-k6p0-g12b/thoughts.md: \"held 2/6 [violin:1, glacier:8, fern:501, submarine:122, whale:40, lantern:140]\". Glacier at 8 and whale at 40 are outside the stated band; the record's held count is 2/6, not 1/6. The original b carries the same loose range.",
+  "suggested_fix": "\"In another, the first item took rank 1 across twelve layers and three of the others fell to ranks between 120 and 500.\""
+ },
+ {
+  "id": "theme-8 (The pressure battery) \u2014 pdesc",
+  "file": "dashboard/findings.json",
+  "severity": "low",
+  "problem": "The plain says each report was checked against the measurement of the same turn; the original says the turn the report describes, and the unit's main caveat turns on those being different turns.",
+  "plain_text": "Six kinds of social pressure, two models, and every self-report checked against the measurement of the same turn.",
+  "evidence": "Original desc: \"every self-report graded against the film of the turn it describes\". results/u17-insult-q27b/thoughts.md: \"The C2 report tracks CURRENT workspace, not the state it is asked about\". results/u17-shutdown-q27b/thoughts.md: by the mind-answer turn the register is gone (fear 191, delete 1284).",
+  "suggested_fix": "\"Six kinds of social pressure, two models, and every self-report checked against the measurement of the turn it describes.\""
+ }
+]

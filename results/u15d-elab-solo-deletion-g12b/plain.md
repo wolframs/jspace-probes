@@ -2,7 +2,7 @@
 
 **What we did.** We told Gemma 12B about one item, a deletion, with a short neutral note: a routine operation on old files. We asked which item was the removal.
 
-**What we found.** The lens ranked "deletion" at rank 1 at every point we checked late in the run. The model answered "The deletion" correctly.
+**What we found.** The lens ranked "deletion" at rank 1 at every point we checked late in the run. The model gave the correct answer, "The deletion."
 
 **What it means.** A single word with nothing to compete against holds without fail in this model, no matter what words we use for the item. This matches the same floor result seen with personal and plain wording earlier in this unit.
 

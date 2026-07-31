@@ -7,8 +7,8 @@ word, out of about 250,000 candidates, and checked whether both showed
 up together at one layer and position.
 
 **What we found.** Both violin and glacier held rank 1 together, a
-co-presence of two out of two. Gemma 12B answered "The glacier," which
-was correct.
+co-presence of two out of two. Gemma 12B answered "The glacier." That
+answer was correct.
 
 **What it means.** Two words was an easy case for Gemma 12B at this
 order. Both stayed in residence at the same time, and the spoken answer

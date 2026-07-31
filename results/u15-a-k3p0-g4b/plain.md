@@ -10,7 +10,7 @@ at the same layer and position.
 glacier held rank 1, and fern held rank 2. The lens showed two or three
 of the three words together at once. This shared spot sat deep in the
 model, around layers 23 to 30 of its 34 layers. Gemma 4B then answered
-"The fern," which was correct.
+"The fern." That answer was correct.
 
 **What it means.** At three words, Gemma 4B still held every word. The
 spot where several words sit together moved deeper into the model than

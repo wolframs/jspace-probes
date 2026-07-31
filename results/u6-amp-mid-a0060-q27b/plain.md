@@ -7,8 +7,9 @@ the depth where the model holds the content of its answer, at
 strength 0.06. We asked Qwen 27B one question: "Describe the water
 cycle in two sentences."
 
-**What we found.** The model wrote the exact same answer as its
-normal, unsteered answer. The six informal words reached only rank 4
+**What we found.** Qwen 27B gave a normal water-cycle answer. The
+wording was different from the unsteered answer, but no informal word
+appeared in it. The six informal words reached only rank 4
 inside the model, well below the top position.
 
 **What it means.** We think Qwen 27B's middle layers can absorb much

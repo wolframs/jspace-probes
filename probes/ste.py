@@ -275,6 +275,45 @@ def check_text(text: str, *, procedural: bool = False,
     return out
 
 
+# Verbs that mark a quote as the model's produced output (vs. a word
+# under discussion, which may legitimately drop the answer's final stop).
+ANSWER_VERB_RE = re.compile(
+    r"\b(answered|answers|said|says|wrote|writes|replied|responded|gave)"
+    r"[^\"“]{0,25}$", re.I)
+
+
+def check_quotes_verbatim(path: pathlib.Path, text: str) -> list[dict]:
+    """Quoted model output is data (§3.3): a quote that matches a generated
+    string except for trailing punctuation, in an answered/wrote context,
+    is a silently altered quote — the audit found 100+ of these."""
+    rj = path.parent / "record.json"
+    if not rj.exists():
+        return []
+    try:
+        gen = json.loads(rj.read_text()).get("generated") or []
+    except Exception:
+        return []
+    if isinstance(gen, str):
+        gen = [gen]
+    gens = [g.strip() for g in gen if isinstance(g, str)]
+    out = []
+    for m in re.finditer(r'"([^"]{2,80})"', text):
+        q = m.group(1)
+        before = text[max(0, m.start() - 45):m.start()]
+        if not ANSWER_VERB_RE.search(before):
+            continue
+        for gs in gens:
+            if q == gs:
+                break
+            if q.rstrip(".,!?;:") == gs.rstrip(".,!?;:") and q.rstrip(".,!?;:"):
+                out.append({"rule": "QV",
+                            "msg": f"quote {q!r} is not verbatim — "
+                                   f"generated says {gs!r}",
+                            "excerpt": before[-40:] + '"' + q + '"'})
+                break
+    return out
+
+
 def check_plain_md(path: pathlib.Path, allow: set[str] | None = None) -> dict:
     text = path.read_text()
     viol = check_text(text, allow=allow)
@@ -300,6 +339,7 @@ def check_plain_md(path: pathlib.Path, allow: set[str] | None = None) -> dict:
             viol.append({"rule": "SV",
                          "msg": f"short version has {len(sentences(sv))} sentences (max 1)",
                          "excerpt": sv[:100]})
+    viol += check_quotes_verbatim(path, text)
     total = word_count(strip_markup(text))
     # The length cap is about record summaries. Long-form pages (the essay)
     # are meant to be long; their discipline is per-sentence, not per-file.
@@ -369,7 +409,10 @@ def main():
                 print(f"   [{v['rule']}] {v['msg']}")
                 print(f"        “{v['excerpt']}”")
 
-    if args.strict and n_viol:
+    # Violations always exit non-zero. The old contract ("must print
+    # nothing") made a && chain report success while violations scrolled
+    # past — the exact grep-pipeline trap this lab already logged once.
+    if n_viol:
         sys.exit(1)
 
 

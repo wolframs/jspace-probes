@@ -9,8 +9,8 @@ sentences."
 **What we found.** The model no longer gave a real answer. This is
 the same kind of failure we saw in a Gemma model's late layers, where
 a single pushed word filled the entire output. Instead, its full reply
-became one word said again and again, for example: "Luckily, luckily
-luckily luckily luckily luckily luckily."
+was the word "luckily" 59 times, with no other words. The reply starts
+"Luckily, luckily luckily luckily luckily luckily luckily".
 
 **What it means.** The data shows that when Qwen 27B's late layers
 finally break, the pushed word takes over the output directly, without

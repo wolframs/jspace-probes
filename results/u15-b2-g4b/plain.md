@@ -8,8 +8,8 @@ words, not just repeat one. We read the rank of each word, out of about
 
 **What we found.** All three words held rank 1 through the rest of the
 conversation. The lens showed all three together at one layer and
-position. Gemma 4B answered "The whale," the heaviest of the three,
-which was correct.
+position. Gemma 4B answered "The whale." That is the heaviest of the
+three, and the answer was correct.
 
 **What it means.** As with the smallest-item question on a different
 three-word list, Gemma 4B answered this comparison over a fully held

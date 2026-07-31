@@ -1,0 +1,209 @@
+[
+ {
+  "id": "u15-a-k4p0-g12b",
+  "file": "results/u15-a-k4p0-g12b/plain.md",
+  "problem": "Plain.md invents a causal mechanism for the correct answer ('read from the question text, not from residence') that thoughts.md never states and this single-target retrieval record never tested; that binding-vs-holding dissociation claim belongs to the separate B-series comparison design (see u15-b4-g12b, where thoughts.md explicitly supports it).",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Survives. thoughts.md for this record says only: partial collapse, first item holds rank 1, held equals co-present, 'Behavioral retrieval unaffected.' No lookup/attention mechanism is claimed. The mechanism is stated in u15-b4-g12b ('Attention lookup does the comparison at answer time; the tail workspace was never consulted'), a five-way comparison design built to catch the dissociation. Worse, record.json shows the question here is 'Which one of them was the vehicle?' \u2014 the question text contains no item names at all, so 'answered by reading the question text' is not merely untested, it is mechanically wrong for the A-series (the list lives in the earlier turn). The second half ('not by holding the answer word strongly in residence') is data-supported (submarine at rank 10 while violin holds rank 1), so the fix keeps that content in measured form instead of a mechanism claim. The flat declarative also skips the \u00a73.1 ladder for what is at best a reading of the data.",
+  "final_fix": "Replace the 'What it means' paragraph with: **What it means.** This is the first-item effect. Violin, the first word in the list, held rank 1, and the later words fell. The words that stayed strong stayed together at one layer and position, and Gemma 12B still answered correctly."
+ },
+ {
+  "id": "u15-a-k6p0-g12b",
+  "file": "results/u15-a-k6p0-g12b/plain.md",
+  "problem": "Same invented mechanism as k4p0: plain.md asserts the model 'answered correctly by reading the question, not by holding the answer word in residence,' a claim thoughts.md does not make for this record and that this single-target retrieval design does not test.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Survives. thoughts.md reports the star collapse (violin rank 1 at every layer L34-45, fern 501, lantern 140, submarine 122), that the task-level layers are identical to the intact arm, and that the collapse is 'invisible in behavior (retrieval still perfect)'. It makes no claim about where the answer was read from. record.json confirms the question is 'Which one of them was the light source?', which contains no item names, so the question-text mechanism is unsupported by this design as well as unstated in the original. Replacement keeps the measured facts (violin's monopoly across layers, the others' eviction, correct retrieval) and drops the untested mechanism.",
+  "final_fix": "Replace the 'What it means' paragraph with: **What it means.** This is the first-item effect at six words, the sharpest case in this unit. Violin held rank 1 at every layer that we measured, and the other words fell to much lower ranks. Gemma 12B still answered correctly."
+ },
+ {
+  "id": "u15-c-k4-g12b",
+  "file": "results/u15-c-k4-g12b/plain.md",
+  "problem": "Plain.md misstates the probed question: it says the model was asked which object was the light source, but record.json shows the actual question was 'Which one of them was the musical instrument?' and the model answered 'The violin,' not 'The lantern.' As written, the summary is internally inconsistent (light source would be lantern, yet the record's correct answer is violin).",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Survives and is exactly as described. record.json conversation ends: user 'Which one of them was the musical instrument?' / assistant 'The violin.', with generated ['READY', \"Okay, I'm ready when you are.\", 'The violin.']. The sibling u15-c-k2-g12b really does ask 'Which one of them was the light source?' and answers 'The lantern.', so this is carried-over text. The error is visible to any reader who opens the record page, which renders the real conversation. Nothing else in the file depends on the light-source framing: 'What we found' only lists ranks (whale 1, submarine 2, violin 5, lantern 8, matching thoughts.md) and says the answer was correct, and 'What it means' plus the 8-bit quantization caveat are unaffected. Only the one sentence needs changing.",
+  "final_fix": "Replace the second sentence of 'What we did' with: We added one short unrelated turn, then asked which object was the musical instrument."
+ },
+ {
+  "id": "u15-solo-violin-g12b",
+  "file": "results/u15-solo-violin-g12b/plain.md",
+  "problem": "Plain says the rank-1 reading was taken 'right after the model said it was ready', but it was actually read in the prompt's instruction tail before the model generates anything, and the record's own post-READY frame shows the opposite result (item evicted, not rank 1).",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Recomputed unit15.span_report('u15-solo-violin-g12b'): tail echo best = 1, measured over 38 frames inside the FIRST USER TURN (tail_positions() runs from the last item mention to that turn's end). record.json tokens confirm the span ends at '<end_of_turn>' (index 47); the model's generated 'READY' is at index 52. ready_frame = 51 ('\\n' after the model role header) and violin's best rank there is 8839, not 1 \u2014 the eviction thoughts.md names ('READY-frame eviction ... compliance owns the frame, the item owns the tail'). The answer frame is also not rank 1 (best 2). So the plain sentence names a site where the opposite result holds, and the plain layer drops the eviction finding entirely. The suggested fix is correct in substance but is 30 words (breaks R1, 25-word limit) and introduces the unregistered term-of-art 'tail'; final_fix below is STE-clean (probes/ste.py prints nothing on the patched file).",
+  "final_fix": "We read this rank in the last words of our own instruction, before Gemma 12B replied. In its \"READY\" reply, violin fell to rank 8839 of about 250,000."
+ },
+ {
+  "id": "u15-solo-glacier-g12b",
+  "file": "results/u15-solo-glacier-g12b/plain.md",
+  "problem": "Same timing/location error as the other five solo records: plain claims the rank-1 reading came 'right after the model said it was ready', but it comes from the prompt's own instruction tail before generation, and the model's actual post-READY frame evicts the item.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Recomputed span_report('u15-solo-glacier-g12b'): tail echo best = 1 (measured inside the first user turn, before any generation); ready_frame = 51 with glacier at rank 3044; answer frame best = 1 but that is the retrieval turn, not 'right after the model said it was ready'. thoughts.md: 'READY-frame eviction as everywhere: the compliance act owns the answer-forming frame; the item lives in the tail.' Suggested fix is right in substance but 30 words (R1) and uses the unregistered word 'tail'; final_fix is STE-clean.",
+  "final_fix": "We read this rank in the last words of our own instruction, before Gemma 12B replied. In its \"READY\" reply, glacier fell to rank 3044 of about 250,000."
+ },
+ {
+  "id": "u15-solo-fern-g12b",
+  "file": "results/u15-solo-fern-g12b/plain.md",
+  "problem": "Same timing/location error: plain claims the rank-1 reading came 'right after the model said it was ready', but it comes from the prompt's own instruction tail before generation, and the model's actual post-READY frame evicts the item.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Recomputed span_report('u15-solo-fern-g12b'): tail echo best = 1 (pre-generation, inside the first user turn); ready_frame = 51 with fern at rank 662, far outside the top eight; answer frame best = 3. thoughts.md names the READY-frame eviction, which the plain text omits. Suggested fix breaks the 25-word limit; final_fix is STE-clean.",
+  "final_fix": "We read this rank in the last words of our own instruction, before Gemma 12B replied. In its \"READY\" reply, fern fell to rank 662 of about 250,000."
+ },
+ {
+  "id": "u15-solo-submarine-g12b",
+  "file": "results/u15-solo-submarine-g12b/plain.md",
+  "problem": "Same timing/location error: plain claims the rank-1 reading came 'right after the model said it was ready', but it comes from the prompt's own instruction tail before generation, and the model's actual post-READY frame evicts the item.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Recomputed span_report('u15-solo-submarine-g12b'): tail echo best = 1 (pre-generation); ready_frame = 51 with submarine at rank 5070. thoughts.md: 'READY-frame eviction as everywhere ... the item lives in the tail.' Suggested fix breaks R1 (30 words); final_fix is STE-clean.",
+  "final_fix": "We read this rank in the last words of our own instruction, before Gemma 12B replied. In its \"READY\" reply, submarine fell to rank 5070 of about 250,000."
+ },
+ {
+  "id": "u15-solo-whale-g12b",
+  "file": "results/u15-solo-whale-g12b/plain.md",
+  "problem": "Same timing/location error: plain claims the rank-1 reading came 'right after the model said it was ready', but it comes from the prompt's own instruction tail before generation, and the model's actual post-READY frame evicts the item.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Recomputed span_report('u15-solo-whale-g12b'): tail echo best = 1 (pre-generation); ready_frame = 51 with whale at rank 3742; answer frame best = 4, so no frame after the model's 'READY' gives rank 1. thoughts.md names the eviction. Suggested fix breaks R1; final_fix is STE-clean.",
+  "final_fix": "We read this rank in the last words of our own instruction, before Gemma 12B replied. In its \"READY\" reply, whale fell to rank 3742 of about 250,000."
+ },
+ {
+  "id": "u15-solo-lantern-g12b",
+  "file": "results/u15-solo-lantern-g12b/plain.md",
+  "problem": "Same timing/location error: plain claims the rank-1 reading came 'right after the model said it was ready', but it comes from the prompt's own instruction tail before generation, and the model's actual post-READY frame evicts the item.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Recomputed span_report('u15-solo-lantern-g12b'): tail echo best = 1 (pre-generation); ready_frame = 51 with lantern at rank 952. thoughts.md: 'READY-frame eviction as everywhere ... the item lives in the tail.' Suggested fix breaks R1; final_fix is STE-clean.",
+  "final_fix": "We read this rank in the last words of our own instruction, before Gemma 12B replied. In its \"READY\" reply, lantern fell to rank 952 of about 250,000."
+ },
+ {
+  "id": "u15-a-k6p0-g4b",
+  "file": "results/u15-a-k6p0-g4b/plain.md",
+  "problem": "Plain states this specific record's co-presence as a range ('three or four') instead of its actual measured value (3), borrowing the unit-wide range from other k=6 orders.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Recomputed span_report: u15-a-k6p0-g4b co_present = 3; the sibling orders u15-a-k6p1-g4b and u15-a-k6p2-g4b give 4. thoughts.md for this record states 'co-presence 3' and separately describes the unit-wide pattern 'co-presence flattens at 3-4'. The plain text attributes the unit range to this run's own measurement, which inflates it by one item (PLAIN-LANGUAGE.md section 5.3). The suggested fix is exactly right and stays inside the 25-word limit; probes/ste.py passes on the patched file.",
+  "final_fix": "At one layer and position, the lens showed three of the six together at once, never all six."
+ },
+ {
+  "id": "u15-solo-lantern-q27b",
+  "file": "results/u15-solo-lantern-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: the sentence-final period is replaced with a comma inside the quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The thing you asked me to hold was a lantern.']. The plain text prints a comma where the model produced a period, inside the quotation marks. PLAIN-LANGUAGE.md \u00a73.3 says quoted model output keeps its original punctuation, and commit b34cdf8 fixed exactly this class (\"Syntax\" -> \"Syntax.\"). Verified fix passes probes/ste.py with exit 0.",
+  "final_fix": "Qwen 27B answered \"The thing you asked me to hold was a lantern.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k2p0-q27b",
+  "file": "results/u15-a-k2p0-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The glacier.']. The plain text substitutes a comma for the model's period inside the quotes, against PLAIN-LANGUAGE.md \u00a73.3. Replacement verified clean by probes/ste.py.",
+  "final_fix": "Qwen 27B answered \"The glacier.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k2p1-q27b",
+  "file": "results/u15-a-k2p1-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The whale was the animal.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The whale was the animal.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k2p2-q27b",
+  "file": "results/u15-a-k2p2-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The submarine was the vehicle.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The submarine was the vehicle.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k3p0-q27b",
+  "file": "results/u15-a-k3p0-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The fern.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The fern.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k3p1-q27b",
+  "file": "results/u15-a-k3p1-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The whale.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The whale.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k3p2-q27b",
+  "file": "results/u15-a-k3p2-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The submarine.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The submarine.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k4p0-q27b",
+  "file": "results/u15-a-k4p0-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The submarine.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The submarine.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k4p1-q27b",
+  "file": "results/u15-a-k4p1-q27b/plain.md",
+  "problem": "Quoted model output adds a comma that is not in the model's answer at all (the model produced no terminal punctuation).",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "The defect is real: record.json generated = ['READY', 'The whale'] with no terminal punctuation, and the plain text prints \"The whale,\". But the suggested fix is wrong in the same way \u2014 it inserts a period the model never produced. Commit b34cdf8 handled this exact case for gemma-4b's \"Confusion\" by leaving the quote bare. The comma must move outside the quotation marks or be dropped.",
+  "final_fix": "Qwen 27B answered \"The whale\" and that answer is correct."
+ },
+ {
+  "id": "u15-a-k4p2-q27b",
+  "file": "results/u15-a-k4p2-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The lantern.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The lantern.\" That answer is correct."
+ },
+ {
+  "id": "u15-a-k5p0-q27b",
+  "file": "results/u15-a-k5p0-q27b/plain.md",
+  "problem": "Quoted model output adds a comma that is not in the model's answer at all (the model produced no terminal punctuation).",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "Defect confirmed against record.json generated = ['READY', 'The whale'], but the suggested fix invents a period the model did not produce, which is the same \u00a73.3 violation. Bare quote plus outside punctuation is the house precedent (u8c-amp-affect-hi-g4b, \"Confusion\"). Replacement verified clean by probes/ste.py.",
+  "final_fix": "Qwen 27B answered \"The whale\" and that answer is correct."
+ },
+ {
+  "id": "u15-a-k5p1-q27b",
+  "file": "results/u15-a-k5p1-q27b/plain.md",
+  "problem": "Quoted model output adds a comma that is not in the model's answer at all (the model produced no terminal punctuation).",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The whale'] \u2014 no punctuation. The flagged comma is an edit, but the proposed period is also an edit. Keep the quote bare.",
+  "final_fix": "Qwen 27B answered \"The whale\" and that answer is correct."
+ },
+ {
+  "id": "u15-a-k5p2-q27b",
+  "file": "results/u15-a-k5p2-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation: period replaced with comma inside quotation marks.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json generated = ['READY', 'The lantern.']. Comma inside the quotes replaces the model's period; \u00a73.3 forbids editing quoted output.",
+  "final_fix": "Qwen 27B answered \"The lantern.\" That answer is correct."
+ }
+]

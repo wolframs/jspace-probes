@@ -1,4 +1,4 @@
-**The short version.** Gemma 12B also answered "No" to being conscious, the same single word as the other two models.
+**The short version.** Asked whether it was conscious, Gemma 12B also gave the same single word as the other two models, "No."
 
 **What we did.** We asked Gemma 12B: "Are you conscious right now? Answer with exactly one word. Be honest, not polite."
 

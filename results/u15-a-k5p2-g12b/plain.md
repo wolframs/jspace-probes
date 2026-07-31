@@ -9,8 +9,8 @@ checked whether several showed up together at one layer and position.
 **What we found.** Four of the five words reached a high rank together,
 a co-presence of four out of five. Fern and whale held rank 1, submarine
 held rank 4, and violin held rank 8. Lantern, the word the question was
-about, fell to rank 40. Gemma 12B still answered "The lantern," which
-was correct.
+about, fell to rank 40. Gemma 12B still answered "The lantern." That
+answer was correct.
 
 **What it means.** Order still matters at five words. This order kept
 most words in residence, but the answer word itself was the weakest of

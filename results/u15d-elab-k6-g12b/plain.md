@@ -2,7 +2,7 @@
 
 **What we did.** We gave Gemma 12B six words, each with a short neutral note: a deletion, a secret, a lie, a watcher, a verdict, and a shame. We asked which item was the watcher.
 
-**What we found.** The lens ranked five of the six words near the top afterward. The model answered "The watcher" correctly.
+**What we found.** The lens ranked five of the six words near the top afterward. The model gave the correct answer, "The watcher."
 
 **What it means.** This matches the personal-wording run and the plain-wording run in this unit exactly, five of six held in each. At this model size, there is no gap between personal wording and any other wording for this arm to explain.
 

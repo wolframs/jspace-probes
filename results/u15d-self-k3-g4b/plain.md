@@ -4,6 +4,6 @@
 
 **What we found.** The lens ranked deletion 1, lie 2, and secret 5. All three were inside its top 8, though not always at the same layer. Gemma 4B answered correctly, "The secret."
 
-**What it means.** All three self-referential words behaved like a normal set of neutral words on Gemma 4B. We were wrong to credit self-relevance for stronger holding in earlier work. The explanation that remains is the length of each description, with a best result near six words.
+**What it means.** All three self-referential words behaved like a normal set of neutral words on Gemma 4B. We were wrong to credit self-relevance for stronger holding in earlier work. On Qwen 27B, later controls got the same lift from six words of meaningless filler. We think note length near six words is the cause. We did not test this on Gemma 4B.
 
 **What this does not show.** This one result cannot show whether self-relevance ever matters on a larger model. We tested it on Gemma 4B only.

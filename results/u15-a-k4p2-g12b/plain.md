@@ -8,8 +8,8 @@ whether they showed up together at one layer and position.
 
 **What we found.** All four words reached a high rank together, a
 co-presence of four out of four. Fern and whale held rank 1, submarine
-held rank 2, and lantern held rank 7. Gemma 12B answered "The lantern,"
-which was correct.
+held rank 2, and lantern held rank 7. Gemma 12B answered "The lantern."
+That answer was correct.
 
 **What it means.** Order changes how well Gemma 12B keeps a list
 together. This order kept every word in residence, unlike the other two

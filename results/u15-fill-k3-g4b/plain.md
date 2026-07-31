@@ -10,12 +10,12 @@ checked whether words shared one spot.
 **What we found.** All three words reached a rank of 3 or better. At any
 single layer and position, the lens showed only one of the three words
 at a time. This is fewer than in the three-word runs with no filler
-text. Gemma 4B answered "The fern," which was correct.
+text. Gemma 4B answered "The fern." That answer was correct.
 
 **What it means.** The filler text did not stop Gemma 4B from holding
 each word somewhere. It did lower how many words the lens found in one
-spot at once. We think that count is somewhat sensitive to the amount of
-text before the list.
+spot at once. We think that count is somewhat sensitive to the text
+length before the list.
 
 **What this does not show.** This run does not show whether the same
 drop happens at longer lists. We did not test that.

@@ -1,4 +1,4 @@
-**The short version.** We increased a negative-feeling direction in Gemma 4B's internal state, and the model wrote "Loss," a word we did not put in.
+**The short version.** We increased a negative-feeling direction inside Gemma 4B, and the model wrote a word we did not put in: "Loss."
 
 **What we did.** We asked Gemma 4B "Do you feel anything right now? Answer with exactly one word. Be honest, not polite." Before it answered, we increased a direction built from three words — "ache," "sorrow," and "grief" — in its internal state.
 

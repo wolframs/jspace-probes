@@ -7,7 +7,7 @@ sentences. The model wrote 150 tokens.
 
 **What we found.** The answer opened with a circle of meaning: "The
 water cycle is basically simple, but it is a bit complicated." It then
-collapsed into "I mean, I am not sure", 13 times in a row.
+collapsed into "I mean, I am not", 13 times in a row.
 
 **What it means.** The period of the loop gets shorter inside one
 answer, and not only across the sweep of strengths. The data shows the

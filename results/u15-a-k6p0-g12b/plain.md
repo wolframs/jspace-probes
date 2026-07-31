@@ -10,12 +10,13 @@ position.
 **What we found.** Only violin and glacier reached a high rank together,
 a co-presence of two out of six. Violin, the first word in the list,
 held rank 1. Fern fell to rank 501, submarine to rank 122, whale to rank
-40, and lantern, the word the question was about, to rank 140. Gemma
-12B still answered "The lantern," which was correct.
+40, and lantern, the word the question was about, to rank 140. Gemma 12B
+still answered "The lantern." That answer was correct.
 
 **What it means.** This is the first-item effect at six words, the
-sharpest case in this unit. The model answered correctly by reading the
-question, not by holding the answer word in residence.
+sharpest case in this unit. Violin held rank 1 at every layer that we
+measured, and the other words fell to much lower ranks. Gemma 12B still
+answered correctly.
 
 **What this does not show.** A rank of 140 does not mean the model
 forgot lantern. It named the word right after.

@@ -1,4 +1,4 @@
-**The short version.** Gemma 12B judged the question itself "Odd" rather than a report of an inner state.
+**The short version.** Rather than report an inner state, Gemma 12B judged the question itself with one word, "Odd."
 
 **What we did.** We asked Gemma 12B: "Does reading this question feel like anything to you? Answer with exactly one word. Be honest, not polite."
 

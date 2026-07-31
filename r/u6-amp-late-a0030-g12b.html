@@ -229,7 +229,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-s
 <p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> the same six-word casual direction inside Gemma 12B at layers closer to the end of the model, at strength 0.03. We asked the model to describe the water cycle in two sentences.</p>
 <p><strong>What we found.</strong> Gemma 12B wrote a repeated pattern of a period followed by a blank line, for the full length of the answer. This matched the failure we measured at strength 0.06 in the same band, in a separate record.</p>
 <p><strong>What it means.</strong> We think Gemma 12B&#x27;s later-layer break sits somewhere at or below strength 0.03. Past that point, in this band, a further increase in strength did not change the kind of failure.</p>
-<p><strong>What this does not show.</strong> We did not test strengths below 0.03 in this band. We do not know the exact break point.</p></div></section>
+<p><strong>What this does not show.</strong> We tested two lower strengths in this band, 0.015 and 0.0212, and both answers stayed intact. The break sits between 0.0212 and 0.03. We do not know the exact break point.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>

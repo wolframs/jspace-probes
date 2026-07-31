@@ -2,7 +2,7 @@
 
 **What we did.** We removed directions tied to the words "no" and "nothing" at five layers, 52, 56, 58, 60, and 62 of 64, in Qwen 27B.
 
-**What we found.** Qwen 27B answered "Curious". This word ranked first inside the model at layers 53 to 56 in an earlier, unaltered run, before "No" won at the surface.
+**What we found.** Qwen 27B answered "Curious". In this run, "curious" reached rank 2 of about 250,000 words inside the model. The same model answered "No" in the earlier, unaltered run. In that run, "curious" never reached rank 1.
 
 **What it means.** The word "No" was not the only candidate answer inside the model. When we removed the directions that wrote "No" in the late layers, a runner-up candidate reached the surface.
 

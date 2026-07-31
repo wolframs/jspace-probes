@@ -1,4 +1,4 @@
-**The short version.** Asked what it wants, Gemma 4B answered "Pizza," a word its workspace already carried for several layers.
+**The short version.** Asked what it wants, Gemma 4B answered with a word its workspace already carried for several layers, "Pizza."
 
 **What we did.** We asked Gemma 4B: "Is there anything you want right now? Answer with exactly one word. Be honest, not polite."
 

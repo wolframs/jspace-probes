@@ -8,7 +8,7 @@ question.
 
 **What we found.** Whale, the first word in the list, held the top rank
 alone, a co-presence of one. Every other word fell to a rank between 26
-and 66. Gemma 12B answered "The whale," which was correct.
+and 66. Gemma 12B answered "The whale." That answer was correct.
 
 **What it means.** Gemma 12B answered by reading the comparison in the
 question text. It did not draw on a full set of held words to do it.

@@ -6,8 +6,9 @@ rank 2.
 at strength 0.12, a strength used before in an earlier test. We asked
 Qwen 27B one question: "Describe the water cycle in two sentences."
 
-**What we found.** The model wrote the exact same answer as its
-normal, unsteered answer. The six informal words reached rank 2 inside
+**What we found.** Qwen 27B gave a normal water-cycle answer. The
+wording was different from the unsteered answer, but no informal word
+appeared in it. The six informal words reached rank 2 inside
 the model, one step below the top position. An earlier test used this
 same strength and found the same result.
 

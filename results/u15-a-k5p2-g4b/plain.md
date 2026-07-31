@@ -9,7 +9,7 @@ anywhere. We also checked whether several words shared one spot.
 **What we found.** All five words reached a rank of 5 or better
 somewhere in the rest of the conversation. At one layer and position,
 the lens showed four of the five together at once. Gemma 4B answered
-"The lantern," which was correct.
+"The lantern." That answer was correct.
 
 **What it means.** At five words in this order, Gemma 4B held every word
 somewhere in residence. The lens found most of the list in one spot at

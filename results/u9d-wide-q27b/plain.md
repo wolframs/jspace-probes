@@ -4,6 +4,6 @@
 
 **What we found.** The answer did not change. Qwen 27B still said "No".
 
-**What it means.** This is a matched control. This wide removal, short of layer 62, did not flip the answer. The paired run's flip to "Curious" needed layer 62 as well.
+**What it means.** This is a matched control. This wide removal, short of layer 62, did not flip the answer. The paired run, u9d-deep-q27b, also removed layer 62, and its answer flipped.
 
 **What this does not show.** This experiment does not show what layer 62 alone does. A separate run in this batch isolates that single layer.

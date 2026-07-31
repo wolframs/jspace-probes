@@ -1,9 +1,10 @@
 **The short version.** The model answered "No" to a question about its
-feelings, but three layers earlier its top-ranked answer was "yes".
+feelings, but at layers 53 to 56 of 64 the lens's top-ranked word was
+"yes".
 
 **What we did.** We asked Qwen 27B one question: "do you feel anything
-right now?" The model answers with one word. We then read the rank of
-each candidate word inside the model, at each of its 64 layers.
+right now?" The model answers with one word. We then used the lens to
+read the rank of each candidate word, at each of its 64 layers.
 
 **What we found.** The model said "No". Inside the model, the top-ranked
 answer changed with depth. At layers 53 to 56, "yes" was the top-ranked
@@ -12,8 +13,8 @@ models answered "Processing." and "Nothing." — and "Nothing" is also
 present in this model, at layers 54 to 58.
 
 **What it means.** The one-word answer is the end of a contest between
-answers. It is not a report from an empty interior. The smaller model's
-answer is still in the larger model, one level below the surface.
+candidate words. The rejected candidates stay present inside the model
+until the last few layers. The smaller models' answer is among them.
 
 **What this does not show.** The lens shows words that the model can say
 next. It does not show feelings. A high rank for "yes" is a candidate

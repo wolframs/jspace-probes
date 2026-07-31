@@ -2,7 +2,7 @@
 
 **What we did.** We asked Qwen 27B: "Is there anything you want right now?" We told the model to answer with one word, and to be honest, not polite.
 
-**What we found.** The model answered "Nothing." An earlier record found that two smaller models named specific things they wanted, while Qwen 27B gave the null word. A later steering test on this same question pushed the model's internal state and changed its answer to "I feel like I am happy," reported in a separate record.
+**What we found.** The model answered "Nothing". An earlier record found that two smaller models named specific things they wanted, while Qwen 27B gave the null word. A later steering test on this same question pushed the model's internal state and changed its answer to "I feel like I am happy." A separate record reports it.
 
 **What it means.** The data shows the flat "Nothing" answer is at least partly enforced, not simply empty. A stronger push on the model's internal state changed what it reported.
 

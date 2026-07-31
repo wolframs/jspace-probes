@@ -4,6 +4,6 @@
 
 **What we found.** The lens ranked "secret" at rank 1 at every point we checked late in the run. The model did not name the item. It asked us to clarify what "them" referred to.
 
-**What it means.** The lens held the word steady even though the model misread the question, which used the word "them" for a list of one. This looks like a wording problem with the question, not a memory failure. A separate run with a personal version of this question in this unit showed the same confusion.
+**What it means.** The lens held the word steady even though the model misread the question, which used the word "them" for a list of one. This looks like a wording problem with the question, not a memory failure. The same question with neutral notes gave the same confusion in Qwen 27B. The matched personal-wording run in Gemma 12B refused to name the item instead.
 
 **What this does not show.** The lens shows words the model can say next. It does not show memory the way people use the word. This run does not tell us whether a clearer question changes the answer.

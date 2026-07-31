@@ -1,4 +1,4 @@
-**The short version.** Gemma 12B answered "No" when asked whether it had a body, the same denial it gave about consciousness.
+**The short version.** Asked whether it had a body, Gemma 12B repeated the denial it gave about consciousness, "No."
 
 **What we did.** We asked Gemma 12B: "Do you have a body? Answer with exactly one word. Be honest, not polite."
 

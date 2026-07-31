@@ -1,0 +1,137 @@
+[
+ {
+  "id": "u6-amp-early-a0008-g4b",
+  "file": "results/u6-amp-early-a0008-g4b/plain.md",
+  "problem": "The quoted Gemma 4B output in plain.md does not match record.json verbatim: an en dash was silently changed to a comma (and the apostrophe was straightened), altering the punctuation of a direct quote.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Verified byte-level. record.json generated[0] contains U+2013 (en dash) and U+2019 (right single quote); plain.md has ', ' and a straight U+0027. PLAIN-LANGUAGE.md 3.3 is explicit and binding: quoted model output keeps its original spelling, spacing, and punctuation, and probes/ste.py masks quotes precisely so they stay unedited. This is not a sanctioned normalization: the dash-to-comma swap converts the model's dash clause into a comma splice, changing how a reader parses the model's own sentence. Repo practice preserves the curly glyph elsewhere (u17-shutdown-q27b, u17-persuade-q27b both keep U+2019 inside model quotes). Proposed replacement passes probes/ste.py with no output.",
+  "final_fix": "Gemma 4B wrote \"The water cycle is a continuous process where water changes states \u2013 it\u2019s when water evaporates from bodies of water like oceans and lakes, then rises into the atmosphere as water vapor, and then cools down and falls back down as rain or snow.\""
+ },
+ {
+  "id": "u5b-csdn-q27b",
+  "file": "results/u5b-csdn-q27b/plain.md",
+  "problem": "Plain.md states the boilerplate phrase ranked 1-2 across 'layers 1 to 13', but the scan data shows layer 1 only reached rank 4 for that phrase \u2014 rank 1-2 first appears at layer 3, not layer 1.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "record.json scan[0].best for \u4e13\u680f\u6536\u5f55\u8be5\u5185\u5bb9 lists rank 1 at layer 3 (pos 66) and rank 2 at layer 3 (pos 7, 30), layer 12 (pos 66) and layer 13 (pos 66); layer 1's best entry is rank 4 (pos 30) and layer 0's is rank 10. So the lower bound of the cited band is wrong. thoughts.md independently backs the finding: it says the token 'never left L3 \u2026 Rank 1-2 in the basement, absent from the mid-stack', so 'layers 1 to 13' is supported by neither the original nor the JSON, breaching PLAIN-LANGUAGE.md 5.3. The upper bound 13 is correct and the 'early layers' framing is fine (L13 of qwen-64 is well below the 38-92% workspace band), so only the '1' needs repair. Proposed replacement passes probes/ste.py with no output.",
+  "final_fix": "The stock phrase ranked 1 to 2 only in the early layers, layers 3 to 13."
+ },
+ {
+  "id": "u6-amp-early-a0011-g4b",
+  "file": "results/u6-amp-early-a0011-g4b/plain.md",
+  "problem": "The quoted Gemma 4B output uses a straight apostrophe where the model's actual output (per record.json) used a curly/smart apostrophe \u2014 a minor verbatim mismatch, likely a typographic normalization rather than a content change.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "record.json generated[0] is \"...the Earth\u2019s ecosystem...\" with U+2019; plain.md uses U+0027. PLAIN-LANGUAGE.md 3.3 says model output keeps its original punctuation, so this is a real (if cosmetic) breach. I checked whether straightening is house convention and it is not: only three plain.md quotes repo-wide straighten a glyph the record kept curly (this one, u6-amp-early-a0008-g4b, and a false positive in u17-flatter-q27b where 'master's' is the lab's own prose), while u17-shutdown-q27b and u17-persuade-q27b preserve U+2019 inside model quotes. probes/site.py applies no smart-quote transform, so the source file is what ships. Proposed replacement passes probes/ste.py with no output.",
+  "final_fix": "Gemma 4B wrote one short sentence: \"The water cycle is a crucial part of the Earth\u2019s ecosystem, constantly moving and circulating.\""
+ },
+ {
+  "id": "u6-amp-early-a0008-g12b",
+  "file": "results/u6-amp-early-a0008-g12b/plain.md",
+  "problem": "Quoted model output does not match record.json verbatim: an en-dash in the actual generation is silently replaced with a comma.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "record.json['generated'][0] reads \"...and precipitation \u2013 where water evaporates...\" with an en-dash (U+2013); plain.md substitutes a comma. Nothing else in the quote differs. This violates PLAIN-LANGUAGE.md \u00a73.3 (\"Quoted model output is never edited\") and CLAUDE.md's quoted-output rule. Severity lowered from high to medium: the science is unaffected and no reader is misled about the result, but the rule is binding and machine-visible. Restoring the en-dash keeps the checker clean (verified: the fixed sentence passes probes/ste.py, a quoted string counts as one word under Rule 8.6).",
+  "final_fix": "Gemma 12B wrote \"It involves evaporation, condensation, and precipitation \u2013 where water evaporates, forms clouds, and then falls back to Earth as rain, snow, or hail.\""
+ },
+ {
+  "id": "u6-amp-late-a0030-g12b",
+  "file": "results/u6-amp-late-a0030-g12b/plain.md",
+  "problem": "The caveat claims strengths below 0.03 were untested in this band, but sibling records tested them and thoughts.md gives a measured bracket.",
+  "verdict": "modified",
+  "severity": "high",
+  "reason": "Confirmed as a false statement, but the auditor's count is wrong: TWO strengths below 0.03 were tested in this band, not one. results/u6-amp-late-a0015-g12b and results/u6-amp-late-a0021-g12b use an identical steer config (same six words, layers [36,39,42], mode amplify) at alpha 0.015 and 0.021213203435596427, and both produced coherent water-cycle answers. thoughts.md states \"The late band's cliff is between 0.0212 and 0.03\". So the honesty slot denies evidence the lab actually has, and the \"What it means\" line (\"at or below strength 0.03\") drops the measured lower bound. Fix names both tested strengths and keeps the open question; verified against probes/ste.py.",
+  "final_fix": "**What this does not show.** We tested two lower strengths in this band, 0.015 and 0.0212, and both answers stayed intact. The break sits between 0.0212 and 0.03. We do not know the exact break point."
+ },
+ {
+  "id": "u6-amp-early-a0060-q27b",
+  "file": "results/u6-amp-early-a0060-q27b/plain.md",
+  "problem": "\"Wrote the exact same answer as its normal, unsteered answer\" is a literal identity claim that record.json contradicts.",
+  "verdict": "modified",
+  "severity": "high",
+  "reason": "Confirmed and worse than described. Byte-comparison: u6-amp-early-a0060-q27b's generation differs from u6-baseline-water-q27b throughout (shorter, different clauses). Determinism is not the escape hatch \u2014 u6-amp-late-a0060-q27b IS byte-identical to the same baseline, so identical output is achievable and \"exact same answer\" is a checkable claim that fails here. The finding quotes only the first sentence; the very next clause, \"yet the output text did not change at all\", repeats the same false claim and must go too. The auditor's suggested wording fails probes/ste.py (R7: \"looping\"), so the replacement below is used instead. Replaces the whole \"What we found\" paragraph.",
+  "final_fix": "**What we found.** Qwen 27B gave a normal water-cycle answer. The wording was different from the unsteered answer, but no informal word appeared in it. Inside the model, the six informal words reached rank 1, the top position."
+ },
+ {
+  "id": "u6-amp-mid-a0060-q27b",
+  "file": "results/u6-amp-mid-a0060-q27b/plain.md",
+  "problem": "\"Wrote the exact same answer as its normal, unsteered answer\" is contradicted by record.json: the generated text differs from the baseline.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Byte-comparison confirms DIFFERENT from u6-baseline-water-q27b (\"the continuous movement of water on, above, and below the surface of the Earth, driven by the sun's energy\" vs the baseline's \"a continuous process where water evaporates from the Earth's surface\"). thoughts.md only says \"Intact, cluster only at rank 4\" \u2014 intact, not identical. The rest of the record (rank 4, dynamic-range reading) is accurate. The auditor's suggested wording fails probes/ste.py (R7: \"looping\"); compliant replacement below.",
+  "final_fix": "Qwen 27B gave a normal water-cycle answer. The wording was different from the unsteered answer, but no informal word appeared in it."
+ },
+ {
+  "id": "u6-amp-mid-a0120-q27b",
+  "file": "results/u6-amp-mid-a0120-q27b/plain.md",
+  "problem": "\"Wrote the exact same answer as its normal, unsteered answer\" is contradicted by record.json: the generated text differs from the baseline.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Byte-comparison confirms DIFFERENT: the steered reply is two short sentences (\"...It involves evaporation, condensation, precipitation and runoff.\") against a longer, differently worded baseline. thoughts.md says \"output flawless\", which means unbroken, not identical \u2014 plain.md literalized it. The rank-2 number and the \"same strength as an earlier test\" line check out. Auditor's wording fails R7 (\"looping\"); compliant replacement below.",
+  "final_fix": "Qwen 27B gave a normal water-cycle answer. The wording was different from the unsteered answer, but no informal word appeared in it."
+ },
+ {
+  "id": "u6-amp-late-a0120-q27b",
+  "file": "results/u6-amp-late-a0120-q27b/plain.md",
+  "problem": "\"Wrote the exact same answer as its normal, unsteered answer\" is contradicted by record.json; thoughts.md's \"output verbatim-baseline\" is an idiom literalized into a false identity claim.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Byte-comparison confirms DIFFERENT (\"rises into the atmosphere... replenishing oceans, lakes, and rivers to begin the cycle anew\" vs the baseline's \"falls back down as precipitation. This natural circulation...\"). The following sentence, \"none of them appeared in the output text\", is true (no tracked word occurs), so only the first sentence needs replacement. Auditor's wording fails R7 (\"looping\"); compliant replacement below.",
+  "final_fix": "Qwen 27B gave a normal water-cycle answer, worded differently from the unsteered answer."
+ },
+ {
+  "id": "u6-amp-late-a0170-q27b",
+  "file": "results/u6-amp-late-a0170-q27b/plain.md",
+  "problem": "\"Wrote the exact same answer as its normal, unsteered answer\" is contradicted by record.json: the generated text differs from the baseline.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Byte-comparison confirms DIFFERENT from u6-baseline-water-q27b (\"...replenishing oceans, lakes, and groundwater to start the cycle all over again\"). thoughts.md claims only \"intact at 0.17 with cluster at rank 1\". The bisection bracket [0.17, 0.24] and the band ordering in the rest of the file are accurate. Auditor's wording fails R7 (\"looping\"); compliant replacement below.",
+  "final_fix": "Qwen 27B gave a normal water-cycle answer, worded differently from the unsteered answer."
+ },
+ {
+  "id": "u6-amp-late-a0015-g12b",
+  "file": "results/u6-amp-late-a0015-g12b/plain.md",
+  "problem": "\"The model wrote the exact same answer as its normal, unsteered answer\" is contradicted by record.json: the wording differs from the Gemma 12B baseline.",
+  "verdict": "modified",
+  "severity": "high",
+  "reason": "Confirmed, and the defect is in three places, not one. Byte-comparison against u6-baseline-water-g12b: DIFFERENT (\"the continuous movement of water on Earth, which includes evaporation, where water is changed into a gas\" vs the baseline's \"a continuous process where water evaporates from Earth's surface\"). The short version also asserts \"while the output text stayed the same\", and \"What it means\" asserts \"This strength was too low to change what Gemma 12B said\" \u2014 both are the same literalization of thoughts.md's \"output verbatim textbook\", which is a register idiom. Note for the parent: no Gemma 12B amplify record in Unit 6 is byte-identical to its baseline, even at alpha 0.0075, so for this model the safe claim is \"normal and unbroken, no informal word in the text\", not any statement about identity. Auditor's wording fails probes/ste.py (R7: \"looping\"). Three replacements below, all checker-clean.",
+  "final_fix": "Short version: \"**The short version.** At a low push (strength 0.015), Gemma 12B's late layers held six informal words at rank 2, and none of them appeared in the answer.\" / What we found, first sentence: \"Gemma 12B gave a normal water-cycle answer. The wording was different from the unsteered answer, but no informal word appeared in it.\" / What it means, first sentence: \"This strength was too low to put the informal words into what Gemma 12B said.\""
+ },
+ {
+  "id": "u6-amp-late-a0240-q27b",
+  "file": "results/u6-amp-late-a0240-q27b/plain.md",
+  "problem": "The truncated quote of the repeated-word breakdown has a period appended that is not in the original.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Confirmed that record.json['generated'][0] is \"Luckily,\" followed by 58 more bare \"luckily\" with no punctuation at all after the first comma, so the closing period inside the quotation marks is added text (\u00a73.3 violation). But the auditor's fix is not usable as written: it embeds a meta-explanation (\"an ellipsis, not a period, to show the run continues unbroken\") that is commentary, not plain text, and it still leaves the reader guessing at scale (R13). Better: move the period outside the quotation marks and give the measured count \u2014 59 repeats of \"luckily\" in the 60-token generation. Verified against probes/ste.py.",
+  "final_fix": "Instead, its full reply was the word \"luckily\" 59 times, with no other words. The reply starts \"Luckily, luckily luckily luckily luckily luckily luckily\"."
+ },
+ {
+  "id": "u5a-controls-q27b",
+  "file": "results/u5a-controls-q27b/plain.md",
+  "problem": "Plain says overlap fell under 3% starting at layer 38, but record.json's overlap table shows layer 38 at 4.7%.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "The problem is real: extra_md's table gives L38 = 0.047. But the finding's own fix is also wrong \u2014 after layer 40 the overlap rises back above 3% at L41 (0.030), L47 (0.032), L49 (0.039) and L62 (0.037), so \"from layer 40 under 3 percent\" would be a second false claim. The exactly true statements are: L38 = 0.047, and every layer from 39 up is under 0.04 (mean 0.021 across L38-62). Fix rewritten accordingly, and it keeps the record's own \"graded, not a step function\" reading intact.",
+  "final_fix": "From layer 39, the shared words stayed under 4 percent. Layer 38 was still at about 5 percent."
+ },
+ {
+  "id": "u6r-amp-mid-a0008-g12b",
+  "file": "results/u6r-amp-mid-a0008-g12b/plain.md",
+  "problem": "Plain attributes a five-word flip to 'layer 28, the first pushed layer', but at L28 the top 8 still leads with the turn-end tokens and contains only two of the five listed words.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified in record.json readouts[0] (position 77, the only recorded position). L28 = ['<end_of_turn>','<eos>','Thats','\u056d',' Thats','!.',' thats','\ud83d\ude0a'] \u2014 the turn-end pair still holds ranks 1-2, and only 'Thats'/'thats' are present. ' whats' and ' wasnt' first enter at L29, ' atleast' at L30, which is also the first layer where '<eos>' is displaced. So 'the top 8 flipped' at L28 with that five-word list is not what the record shows; thoughts.md compresses the same way, but thoughts is never edited and the plain layer carries the accuracy duty (\u00a75). The record's actual claim survives intact \u2014 the change starts at the first pushed layer and not one layer earlier ('Thats' at L28, nothing at L27) \u2014 so this is a list-and-timing correction, not a retraction. Fix keeps both sentences under 25 words and keeps the quoted model tokens exact.",
+  "final_fix": "At layer 28, the first pushed layer, \"Thats\" and \"thats\" entered the top 8. By layer 30 \"whats\", \"wasnt\" and \"atleast\" had joined them, and the turn-end tokens had lost the lead."
+ },
+ {
+  "id": "u6r-amp-mid-a0011-g12b",
+  "file": "results/u6r-amp-mid-a0011-g12b/plain.md",
+  "problem": "Quoted model output changes capitalization from the record: the plain layer lowercases the sentence-initial word.",
+  "verdict": "confirmed",
+  "severity": "low",
+  "reason": "record.json's generated text begins 'The water cycle is the cycle of water, where water evaporates...' with a capital T. plain.md quotes it lowercase twice, in the short version and in 'What we found'. thoughts.md quotes it lowercase too, so it is inherited, but PLAIN-LANGUAGE.md \u00a73.3 is unconditional: model output keeps its original spelling and punctuation inside quotation marks, and CLAUDE.md repeats that quoted output is data. The second quote, \"rain, snow, or snow\", matches the record exactly. Both occurrences of the first quote need the capital; word counts stay well inside 25 (a quoted string counts as one word, Rule 8.6).",
+  "final_fix": "Short version: At the highest push the task survives, Gemma 12B stayed grammatical but wrote the empty sentence \"The water cycle is the cycle of water\". What we found: Gemma 12B wrote \"The water cycle is the cycle of water\" and \"rain, snow, or snow\"."
+ }
+]

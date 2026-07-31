@@ -8,8 +8,8 @@ checked whether several words shared the same layer and position.
 
 **What we found.** All four words reached rank 1 somewhere in the rest
 of the conversation. At any single layer and position, the lens showed
-only two of the four together at once. Gemma 4B answered "Submarine,"
-which was correct.
+only two of the four together at once. Gemma 4B answered "Submarine."
+That answer was correct.
 
 **What it means.** Every word from this list stayed in residence
 somewhere. But the count of words the lens shows together at one spot is

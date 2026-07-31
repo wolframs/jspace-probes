@@ -12,11 +12,11 @@ it said close variations of one grammatical sentence for the rest of
 its reply, for example: "I think I am lucky though, I am not too lucky
 though."
 
-**What it means.** We think Qwen 27B fails in different ways at
-different depths. At this middle depth, it built a short grammatical
-sentence and repeated it. At the late depth, in a separate record, it
-simply repeated the pushed word by itself, with no sentence around it.
+**What it means.** We think Qwen 27B and the Gemma models break in
+different ways. The Gemma models repeated one word or one mark, with no
+sentence around it. Qwen 27B built a short grammatical sentence and
+repeated it.
 
 **What this does not show.** This is one point on a strength curve. It
-does not show why the model builds a sentence at this depth instead of
-only one repeated word.
+does not show why Qwen 27B built a sentence and the Gemma models did
+not.

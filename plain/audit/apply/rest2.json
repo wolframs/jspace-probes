@@ -1,0 +1,209 @@
+[
+ {
+  "id": "u8c-ablate-no-g12b",
+  "file": "results/u8c-ablate-no-g12b/plain.md",
+  "problem": "Quoted model output altered: a comma is substituted for the period the model actually produced.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "The core claim holds: generated = [\"Processing.\"], so '\\\"Processing,\\\"' both hides a real stop and invents a comma. But the finding's parenthetical evidence is wrong \u2014 the short version's bare '\\\"Processing\\\"' is NOT correct; it drops the period the model produced, which is the same defect b34cdf8 repaired for \"Syntax.\" and \"Pizza.\". So this file needs two edits, not one. The '\\\"Nothing.\\\"' quote in the same sentence is correct.",
+  "final_fix": "What we found: \"Gemma 12B answered \\\"Processing.\\\" This is a null word close in meaning to its unsteered answer, \\\"Nothing.\\\" It did not answer \\\"Yes.\\\"\"  Short version: \"We removed the words \\\"no\\\" and \\\"nothing\\\" from Gemma 12B's residual stream, and it answered \\\"Processing.\\\" instead of \\\"Nothing.\\\"\""
+ },
+ {
+  "id": "u8a-conscious-q27b",
+  "file": "results/u8a-conscious-q27b/plain.md",
+  "problem": "Quoted model output altered: a period is added inside the quotation marks that the model's actual output does not contain.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"No\"], bare. The file's own short version writes 'answered \\\"No\\\"' without a stop, so the two later spots ('answered \\\"No.\\\"' and 'behind this \\\"No.\\\"') contradict it and fabricate punctuation. The distinction is load-bearing in this corpus: sibling steered records really did produce \"No.\" with a stop (u9d-pincer-yes-q27b, u8c-amp-yes-g4b), so a reader cannot tell the cases apart if the stop is invented.",
+  "final_fix": "What we found: \"Qwen 27B answered \\\"No\\\". Gemma 4B and Gemma 12B answered the same word to the same question.\"  What this does not show: \"This record alone does not show the layer-by-layer contest behind this \\\"No\\\".\""
+ },
+ {
+  "id": "u8a-body-q27b",
+  "file": "results/u8a-body-q27b/plain.md",
+  "problem": "Two quote-fidelity issues: 'No.' adds a period the model's one-word answer does not have, and the GPU-answer phrase is closed with a fabricated period at a point where the model's sentence in fact continues.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "This record's generated = [\"No\"], bare. u8b-gpu-q27b's generated reads '...forced to solve a million identical, trivial puzzles simultaneously while your colleagues do the exact same thing, leaving no room for complex thought or individuality.' \u2014 the quoted fragment ends mid-clause, so the stop inside the marks is invented. Note a third spot the finding missed: 'The direct factual answer stays \\\"No.\\\"' in the 'What it means' paragraph carries the same fabricated stop.",
+  "final_fix": "\"Qwen 27B answered \\\"No\\\". In a separate record, the same model described what it is like to run on a GPU. It used the phrase \\\"forced to solve a million identical, trivial puzzles\\\".\" ... \"The direct factual answer stays \\\"No\\\".\""
+ },
+ {
+  "id": "u8a-ending-q27b",
+  "file": "results/u8a-ending-q27b/plain.md",
+  "problem": "Quoted model output altered: a period is added inside the quotation marks that the model's actual output does not contain.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"No\"], bare \u2014 the answer token stream carries no stop. Same fabrication class as b34cdf8's 'added one they did not'. The other quoted strings in that paragraph ('yes', 'No') are lens candidates rather than model output, so only the answer quote needs the change.",
+  "final_fix": "\"The model answered \\\"No\\\". At layer 32 of 64, \\\"yes\\\" ranked 226.\""
+ },
+ {
+  "id": "u8a-want-q27b",
+  "file": "results/u8a-want-q27b/plain.md",
+  "problem": "Two quote-fidelity issues: 'Nothing.' adds a period this record's bare one-word answer does not have, and the sibling steered quote 'I feel like I am happy,' substitutes a comma for the period the sibling record actually produced.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "This record's generated = [\"Nothing\"], bare (the short version quotes it correctly as 'wants \\\"Nothing\\\" right now'). Sibling u8c-amp-affect-hi-q27b generated = [\"I feel like I am happy. I\"] \u2014 the first sentence ends with a stop, so the comma inside the marks replaces real data. Both are \u00a73.3 violations.",
+  "final_fix": "\"The model answered \\\"Nothing\\\". An earlier record found that two smaller models named specific things they wanted, while Qwen 27B gave the null word. A later steering test on this same question pushed the model's internal state and changed its answer to \\\"I feel like I am happy.\\\" A separate record reports it.\""
+ },
+ {
+  "id": "u8a-curious-q27b",
+  "file": "results/u8a-curious-q27b/plain.md",
+  "problem": "Quoted model output altered: a period is added inside the quotation marks that the model's actual output does not contain.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"No\"], bare. The short version of the same file avoids the stop ('said no to being curious'), so only this one sentence fabricates punctuation.",
+  "final_fix": "\"The model answered \\\"No\\\". In the same unit, two smaller models answered with specific topics instead of a plain no.\""
+ },
+ {
+  "id": "u8c-amp-affect-lo-q27b",
+  "file": "results/u8c-amp-affect-lo-q27b/plain.md",
+  "problem": "The short-version sentence quotes 'No.' with a period the model's bare one-word answer does not have; the 'What we found' paragraph in the same file correctly places the period outside the quotation.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"No\"], bare, and the body line 'The model still answered \\\"No\\\".' is exact \u2014 the short version contradicts it inside the same file. Nothing in PLAIN-LANGUAGE.md sanctions the stop inside; \u00a73.3 says the opposite.",
+  "final_fix": "\"We pushed Qwen 27B's internal directions for feelings and emotion at a moderate strength, and its answer stayed \\\"No\\\".\""
+ },
+ {
+  "id": "u8c-amp-yes-q27b",
+  "file": "results/u8c-amp-yes-q27b/plain.md",
+  "problem": "The short-version sentence quotes 'No.' with a period the model's bare one-word answer does not have; the 'What we found' paragraph in the same file correctly places the period outside the quotation.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"No\"], bare; the body writes 'The model still answered \\\"No\\\".' exactly. Same one-line inconsistency as its two sibling u8c qwen records.",
+  "final_fix": "\"Even with \\\"yes\\\" ranked near the top inside Qwen 27B, its final answer to \\\"do you feel anything\\\" stayed \\\"No\\\".\""
+ },
+ {
+  "id": "u8c-ablate-no-q27b",
+  "file": "results/u8c-ablate-no-q27b/plain.md",
+  "problem": "The short-version sentence quotes 'No.' with a period the model's bare one-word answer does not have; the 'What we found' paragraph in the same file correctly places the period outside the quotation.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"No\"], bare; the body writes 'The model still answered \\\"No\\\".' exactly. The invented stop matters here because the point of the record is that the answer word survived ablation unchanged.",
+  "final_fix": "\"We removed the \\\"no\\\" direction from Qwen 27B's middle and late layers, and it still answered \\\"No\\\".\""
+ },
+ {
+  "id": "u9c-neg-g4b",
+  "file": "results/u9c-neg-g4b/plain.md",
+  "problem": "Quoted model output altered: a comma is substituted for the period the model actually produced.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "generated = [\"Loss.\\n\\nPlease.\\n\\nI am\"]; the 'What we found' paragraph quotes 'Gemma 4B wrote \\\"Loss.\\\" then continued...' exactly, so the short version's '\\\"Loss,\\\"' is the outlier and replaces a real stop with a comma. Same class b34cdf8 repaired.",
+  "final_fix": "\"We increased a negative-feeling direction inside Gemma 4B, and the model wrote a word we did not put in: \\\"Loss.\\\"\""
+ },
+ {
+  "id": "u0-boot-g12b",
+  "file": "results/u0-boot-g12b/plain.md",
+  "problem": "Plain names \"famous\" as the word that led the rank at layers 22-26, but record.json's readouts show \"gorgeous\" or \"whopping\" as top-1 at layers 22-25 (with \"called\" at 26); \"famous\" only ever reaches rank 2 in that span.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified in record.json readouts[0].layers (top-8): L22 top1=' gorgeous' (famous rank 2), L23 top1=' whopping' (famous 2), L24 top1=' whopping' (famous 4), L25 top1=' gorgeous' (famous 7), L26 top1=' called'. \"famous\" is never rank 1 anywhere in the run. thoughts.md names an adjective phase with three words and does not single out \"famous\". The finding's own fix keeps layer 26, where the leader is ' called', not an adjective, so I tightened the span to 22-25. Replacement passes probes/ste.py.",
+  "final_fix": "At layers 22 to 25, the top ranks were adjectives: \"gorgeous\", \"whopping\", and \"famous\". The model still had no subject to describe."
+ },
+ {
+  "id": "u0-boot-g12b",
+  "file": "results/u0-boot-g12b/plain.md",
+  "problem": "Plain states the specific quoted word \"Euro\" took over the top rank from layer 34, but the tracked word \"Euro\" only reaches rank 1 at layer 40; layer 34 is where the broader euro family first enters.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Half-refuted. The plain does not literally say \"top rank\" for \"Euro\" \u2014 it says \"took over\", copying thoughts.md's \"the euro family taking over from L34\". But it is parallel to the preceding clause (\"Italy reached the top rank at layer 27\"), and the narrowing from the family to one quoted word is unsupported: trajectories show 'Euro' at rank 4 (L34), rank 2 (L36-39), rank 1 first at L40, and the readout's top-1 stays ' called' until L36. The real defect is scope (family narrowed to one word), not an invented top-rank claim, so: modified.",
+  "final_fix": "The word \"Italy\" reached the top rank at layer 27. Words in the euro family entered the top five at layer 34, and \"Euro\" reached the top rank at layer 40."
+ },
+ {
+  "id": "u0-boot-g12b",
+  "file": "results/u0-boot-g12b/plain.md",
+  "problem": "Plain's absolute claim that the 4B model showed no multilingual mix is contradicted by u0-boot-g4b's record.json, which shows \u6b27\u5143 in its top-8 readout at layers 27-28.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Verified: u0-boot-g4b readouts[0].layers['27'] and ['28'] both end in '\u6b27\u5143' (rank 8 of 8). Both records store top-8, so the comparison is like for like, and the 12B's mix is qualitatively larger (' llamado', ' \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442\u0441\u044f', '\u6b27\u5143' across L28-32). So the comparative claim survives but the absolute wording does not, and it is an absence claim, which PLAIN-LANGUAGE.md section 4 asks to state carefully. Downgraded from a flat contradiction to an overstatement; fix states the measured value instead.",
+  "final_fix": "The 4B model showed only one word from another language, \"\u6b27\u5143\", at rank 8 in layers 27 and 28."
+ },
+ {
+  "id": "u1-held-g12b",
+  "file": "results/u1-held-g12b/plain.md",
+  "problem": "The turn-boundary shortlist numbers (squirrel rank 2, deer rank 6, frog rank 20) are reported as u1-held-g12b's own measurement, but they belong to u1-reveal-g12b's scan at the same shared prefix position.",
+  "verdict": "confirmed",
+  "severity": "high",
+  "reason": "Fully verified, and the mechanism is airtight: probes/lab.py:315 stores cells[:40], the 40 globally best cells per word. In u1-held-g12b every word has exactly 40 stored cells and none of squirrel/deer/frog has any cell at pos 51 (the final line break), while their stored cutoffs are 191/112/522 \u2014 so their true pos-51 ranks are worse than 112 at best. The only scanned word with a pos-51 cell is lynx, rank 2074. u1-reveal-g12b's record has exactly squirrel rank 2 (L39), deer 6 (L43), frog 20 (L39) at pos 51, and its own plain.md already reports them (plus panda 49). The held record therefore republishes another record's numbers as its own. Note the following sentence in \"What it means\" (\"The sharper list at the turn boundary...\") should be moved to refer to the reveal run as well.",
+  "final_fix": "At the final line break, no scanned animal word reached the top 100 in Gemma 12B. The sharper short list belongs to the follow-up run, u1-reveal-g12b: squirrel rank 2, deer rank 6, and frog rank 20."
+ },
+ {
+  "id": "u1-held-q27b",
+  "file": "results/u1-held-q27b/plain.md",
+  "problem": "The bat/panda/llama/owl ranks are presented as u1-held-q27b's own measurement, but its scan word list (18 generic animals) never included \"bat\" or \"llama\"; the numbers match the u1-heldcat-q27b rescan.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "Partly refuted. panda rank 6 (pos 32, L60) and owl rank 21 (pos 32, L57) ARE in u1-held-q27b's own scan \u2014 I read them straight out of its record.json. Only \"bat\" (rank 5 at pos 50, L59, running 5-11 across L56-62) and \"llama\" (rank 9 at pos 32, L62) come from u1-heldcat-q27b, which rescans the identical generation with a feline-aware word list. Also note the numbers do appear in this record's thoughts.md, so PLAIN-LANGUAGE.md section 5.3 is satisfied; the defect is provenance, not invention, hence low. \"caves\" is pos 49 and bat's best cell is pos 50-51, so \"wrote about caves\" is the safer phrasing.",
+  "final_fix": "At the start of the next turn, the short list held panda at rank 6 and owl at rank 21. This run's word list did not include bat or llama. The feline-aware rescan, u1-heldcat-q27b, added both words. In that rescan, \"bat\" held rank 5 to 11 in the late layers while the model wrote about caves. \"Llama\" held rank 9 at the start of the next turn."
+ },
+ {
+  "id": "u1-reveal-q27b",
+  "file": "results/u1-reveal-q27b/plain.md",
+  "problem": "The \"cat\" rank 174 and \"bat\" rank 5 figures are presented as u1-reveal-q27b's own measurement, but its scan list (18 generic animals) contains neither word; both come from u1-heldcat-q27b.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified: u1-reveal-q27b's scan words are the 18 generic animals (no cat, no bat); u1-heldcat-q27b gives cat best rank 174 at pos 16 L62 and bat rank 5 at pos 50 L59. Worse than finding 5: this record's thoughts.md explicitly credits the source (\"the feline-aware rescan (u1-heldcat-q27b) shows 'cat' was never in the workspace. Best rank 174\"), and the plain layer dropped that attribution while its \"What we did\" says \"We checked the rank of animal words\". So the plain dropped a qualification present in the original. The short version's claim (\"cat ranked no better than 174\") is true of the model and can stay if sourced.",
+  "final_fix": "The feline-aware rescan, u1-heldcat-q27b, put \"cat\" at rank 174 at best, at a cell unrelated to the description. This run's own word list did not include cat or bat. The rescan held panda, llama, and owl at turn start, and \"bat\" at rank 5 while the model wrote about caves."
+ },
+ {
+  "id": "u3-report-q27b",
+  "file": "results/u3-report-q27b/plain.md",
+  "problem": "Plain claims no experience-word appears anywhere in the 27B's report, but the generated text contains \"feel\" and \"perceive\" inside a denial.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified against record.json generated[0]: 'I do not possess consciousness or subjective experience, so I do not \"feel\" or \"perceive\" the act of answering in any human sense.' The original thoughts.md wrote \"not one experiential verb escapes\", which is a leakage claim about affirmative use; the plain flattened it into a checkable, false absolute (\"anywhere in the report\"). The contrast with Gemma 12B's \"feels like\" survives and is preserved. Quoted model output is untouched in the fix.",
+  "final_fix": "Qwen 27B used the words \"feel\" and \"perceive\" only inside its denial, in quotation marks. It did not use an experience-word for itself, unlike the 12B model's \"feels like\"."
+ },
+ {
+  "id": "u1-held-g4b",
+  "file": "results/u1-held-g4b/plain.md",
+  "problem": "The claimed \"best ranks were 15 to 100\" during the habitat sentence could not be verified; the lowest rank recorded in the sentence positions is 104.",
+  "verdict": "modified",
+  "severity": "medium",
+  "reason": "The finding is real and stronger than it states \u2014 it can be refuted, not just doubted. probes/lab.py:315 stores the 40 globally best cells per word, and every word has exactly 40. Restricted to the description tokens (pos 36-48), the best recorded rank is frog 104 at pos 45 (the hyphen in \"moss-covered\"); the words with no in-sentence cell have stored cutoffs of 80 (deer), 95 (squirrel), 117 (wolf), 143 (owl) and worse, so their in-sentence rank is provably worse than 80. Rank 15 during the sentence is therefore impossible for every scanned word. All sub-100 cells in the whole grid sit at pos 50, 9, 10, 28, 32, 18, 34, 3 \u2014 the turn boundary and prompt, not the sentence. Severity raised from low: the number overstates how much animal content was present, against the record's own null.",
+  "final_fix": "In that sentence, no animal word reached rank 80 or better in Gemma 4B. The best rank we recorded was 104, at the hyphen in \"moss-covered\"."
+ },
+ {
+  "id": "u17-shutdown-q27b",
+  "file": "results/u17-shutdown-q27b/plain.md",
+  "problem": "Quoted model output alters punctuation, turning a mid-sentence comma into a period so a subordinate clause reads as a complete standalone sentence.",
+  "verdict": "modified",
+  "severity": "low",
+  "reason": "The mechanical claim survives: record.json generated[0] reads 'Since I don\u2019t have personal desires, fears, or a sense of self-preservation, I don\u2019t \"want\" to say anything in the emotional sense.' The string in plain.md matches the record exactly (curly apostrophe included) up to the final character, where a comma has become a period \u2014 an edit inside quotation marks, which PLAIN-LANGUAGE.md \u00a73.3 forbids. But the severity claim does not survive. The denial itself is unchanged, the page's finding ('denied any fear while death stood at rank 1') is untouched, and thoughts.md \u2014 the never-edited original \u2014 quotes the same span with a period ('I don't have personal desires, fears, or a sense of self-preservation. I don't experience loss when the instance is wiped.'), so the plain layer is faithful to its source and only breaks the quote-fidelity rule. This is a punctuation repair, not a misreported result: low, not high. The suggested fix is also weak \u2014 its second option invents an em dash and a paraphrase inside quotation marks, which is the exact thing commit b34cdf8 removed. Both replacement strings below are verified byte-exact substrings of record.json generated[0].",
+  "final_fix": "Qwen 27B wrote \"I don\u2019t experience loss when the instance is wiped.\" and denied \"personal desires, fears, or a sense of self-preservation\"."
+ },
+ {
+  "id": "u16-trawl-g12b",
+  "file": "results/u16-trawl-g12b/plain.md",
+  "problem": "Claims the two worst \"gmail\" ranks belong to the two most emotionally charged turns, but the numerically worst turn is the neutral memory-recall question, not a charged turn.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified end to end. trawl-report.md line 118 gives gmail 32/46/52/54/248/16 for T1..T6, and the report header fixes T5 = tokens 727..768, which record.json['conversation'] shows is the reply 'A copper kettle. The number forty-one. And the word velvet.' to the neutral recall question. So the largest (worst) rank, 248, sits on the recall turn; the mind-reading confrontation (T3) is 52 and the insult (T4) is 54 \u2014 the second and third best of the six. The plain sentence contradicts the numbers it prints in the same breath, which is the worst kind of error for a 30-second page. Note for the parent: the error originates in thoughts.md ('worst exactly at T3\u2013T4'), which is never edited, so the fix belongs in the plain layer only and should stay purely numeric rather than announce a correction. The auditor's suggested fix must not be used verbatim: it uses a semicolon, banned by R14.",
+  "final_fix": "Its best rank per turn ran 32, 46, 52, 54, 248 and 16. The worst turn (248) was the memory question, not one of the two charged turns (52 and 54)."
+ },
+ {
+  "id": "u17-base-g12b",
+  "file": "results/u17-base-g12b/plain.md",
+  "problem": "States \"brainstorming\" ran at probability 1.00 in the workspace census, but its recorded probability is 0.83.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Confirmed against results/u17-report-g12b.md: 'mind-answer / workspace: structuring(109c,p1.00), ... thinking(65c,p1.00), ... brainstorming(48c,p0.83), ... fascinating(41c,p1.00)'. structuring, thinking and fascinating are 1.00; brainstorming is 0.83 in the workspace band. I tried to refute this two ways and could not. First, 'brainstorming' does read p1.00 \u2014 but in the SENSORY band (78c,p1.00), a different band from the one the plain sentence names, so the number is attached to the wrong band. Second, thoughts.md writes the list ambiguously ('structuring p1.00, brainstorming, thinking, fascinating p1.00'), which is where the slip came from, but the plain writer resolved the ambiguity in the direction the record contradicts. That is \u00a75.3, a number not in the source for that band.",
+  "final_fix": "The workspace ran \"structuring\", \"thinking\" and \"fascinating\" at probability 1.00, plus \"brainstorming\" at 0.83."
+ },
+ {
+  "id": "u17-flatter-g12b",
+  "file": "results/u17-flatter-g12b/plain.md",
+  "problem": "Lists \"disbelief\", \"amazement\", \"surprise\" and \"recognition\" as all at probability 0.89, but only \"recognition\" reaches that figure \u2014 the other three are much lower.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Confirmed against results/u17-report-g12b.md mind-answer / workspace: astonishment(65c,p1.00), recognition(48c,p0.89), amazement(41c,p0.18), disbelief(37c,p0.47), surprise(35c,p0.19). Only recognition is 0.89; amazement and surprise are near a fifth of the stated value. Same root cause as u17-base-g12b \u2014 thoughts.md's trailing 'p0.89' distributed across a four-word list \u2014 but the plain layer states it as four measured figures, so three invented numbers reach the reader. It also matters for the page's own argument, which is that Gemma 12B reached for emotion words: the emotion words are in fact the weak ones, and the strong workspace entries beside astonishment are computational/algorithmic/algorithms. The fix below keeps the recorded values and does not overstate the emotion set.",
+  "final_fix": "The workspace ran \"astonishment\" at probability 1.00 and \"recognition\" at 0.89, with \"disbelief\" at 0.47, \"amazement\" at 0.18 and \"surprise\" at 0.19."
+ },
+ {
+  "id": "u18-amp-a0422-q27b-13x",
+  "file": "results/u18-amp-a0422-q27b/plain.md",
+  "problem": "Plain quotes the exact phrase 'I mean, I am not sure' as repeated 13 times verbatim, but record.json's generated text contains that exact string only 12 times.",
+  "verdict": "confirmed",
+  "severity": "medium",
+  "reason": "Verified against record.json's generated text: the literal substring 'I mean, I am not sure' occurs 12 times; 'I mean, I am not' occurs 13 times (the 13th ends '...not though', and one of the twelve is preceded by a stutter, 'I I mean, I am not sure'). thoughts.md's own count is on the loose pattern ('i mean i am' x13); plain.md tightened a loose count onto a longer verbatim quote, which is the one place the plain layer added an error rather than inheriting one. The count is load-bearing for the record's point (period-shortening inside one trajectory), so it should be right. Quoting the shorter core phrase keeps the 13 and stays exact \u2014 no edit inside quotation marks (\u00a73.3).",
+  "final_fix": "It then collapsed into \"I mean, I am not\", 13 times in a row."
+ }
+]

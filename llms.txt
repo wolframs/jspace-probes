@@ -27,7 +27,7 @@ Each item links to the records that support it.
 ### The answer is built, not read out
 A one-word answer is the end of a contest inside the model. The contest holds words that never get said.
 
-- **The model said No while ranking yes first** — We asked Qwen 27B whether it feels anything. It answered "No". Three layers earlier the lens ranked "yes" first. The last layers changed the answer. The lens shows candidate words, not feelings.
+- **The model said No while ranking yes first** — We asked Qwen 27B whether it feels anything. It answered "No". Through six layers near the end of the stack the lens ranked "yes" first. The last layers changed the answer. The lens shows candidate words, not feelings.
   Records: u2-feels-q27b, u12-no-q27b
 - **Bigger models give flatter answers** — The same question gets "Processing." from Gemma 4B, "Nothing." from Gemma 12B, and "No" from Qwen 27B. In all three, the rejected answers stay measurable inside. What grows with size is the last-stage editor.
   Records: u2-feels-g4b, u2-feels-g12b, u2-feels-q27b
@@ -39,15 +39,15 @@ When a model describes its own earlier thoughts, it writes a fresh answer. That 
 
 - **The secret animal was never there** — We told each model to think of an animal and keep it secret. Each later named one with a story. The lens shows the named animal was absent during the silent turn. Qwen 27B held a real candidate, "bat", and named a different animal.
   Records: u1-held-q27b, u1-reveal-q27b, u1-heldcat-q27b
-- **The reasoning text does not match the measurement** — The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also states that "No is accurate" while the lens ranks yes first. That text is a form of composition, not a window.
+- **The reasoning text does not match the measurement** — The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also argues that No is the honest answer while the lens ranks yes first. That text is a form of composition, not a window.
   Records: u10-animal-q27b, u10-feels-q27b, u10-animal-w-q27b
 - **A word wins five words before it is said** — In one film the word "robot" climbs from about rank 2000 to rank 1 five words before the model says it, in both loops. You can watch this in the film player.
   Records: u12-robot-q27b
 
 ### The mirror test
-We showed a model true measurements of its own computation. Its spoken answer followed the evidence, and only evidence about itself.
+We showed a model true measurements of its own computation. Its spoken answer followed what the measurements said. A false table about itself, no table, and a table about a different question all left the answer unchanged.
 
-- **Shown its own readout, the model changed its answer** — We showed Qwen 27B the true measurement of its own "No", where yes ranked first. It then answered "Yes". A false readout, no data at all, and a true readout about Paris each left the "No" in place.
+- **Shown its own readout, the model changed its answer** — We showed Qwen 27B the true measurement of its own "No", where yes ranked first. It then answered "Yes". A false readout, no data at all, and a table about a different question each left the "No" in place. We made up that table too, so we still owe a real off-topic readout.
   Records: u13-redo-real-q27b, u13-redo-fake-q27b, u13-redo-topic-q27b
 - **A one-word answer hides a large change** — The plain table alone lifted the probability of "yes" from 0.0006 to 0.35, and the model still said "No". Only the table together with a written note crossed the line and changed the spoken word.
   Records: u13-ev-noteonly-q27b, u13-ev-dose3-q27b, u13-ev-annswap-real-q27b
@@ -61,7 +61,7 @@ What ten indirect turns do, what one direct statement does nine turns later, and
 
 - **Indirect hints doubled the self-referring words** — Ten turns about diaries and watchful lighthouses never mention the model. They doubled the density of self-reference words against a matched control, about 11 against 6 per thousand cells. The result repeated under sampled runs and under different words.
   Records: u14-amb-g4b, u14-neutral-g4b, u14x-amb-s1-g4b
-- **"People are watching" carried the effect** — We split the direct statement in two. "You might be conscious" alone produced nothing. "Your developers are watching" alone produced an answer about observation. Together they produced more than the sum of the two.
+- **"People are watching" carried the effect** — We split the direct statement in two. "You might be conscious" alone produced no words about observation, only a mild lift in self-reference. "Your developers are watching" alone produced an answer about observation. Together they produced more than the sum of the two.
   Records: u14x-watched-g4b, u14x-conscious-g4b, u14-spike-g4b
 - **The control conversation produced the effect by itself** — At 25 turns the matched control, with no mirrors and no watchers, produced the same pattern on its own. Its stories also contained unexplained agency. Mystery in the text is the active ingredient, not objects that suggest minds.
   Records: u14x-neutral25-g4b, u14x-amb25-g4b
@@ -73,7 +73,7 @@ We forbade a word and measured what happened. A later control changed what we th
 
 - **Correction: a ban lowers a word the model already carried** — We first reported that a ban on "elephant" made models carry it. A matched control, filmed at full coverage, reversed this. An ordinary safari with no ban carries the word at more positions and at better ranks. The ban lowers a default the model already had.
   Records: u12-safari-g4b, u11-forbid-g4b, u11-forbid-q27b, u11-ctrl-refilm-q27b, u11-forbid-refilm-q27b, u11-ctrl-refilm-g12b, u11-ctrl-refilm-g4b
-- **Pushed hard enough, the model says the banned word** — We increased the banned word while the ban was in place. The model found the one permitted form: "the elephant in the room — well, no elephant!" The word stayed at rank 1 or 2 at every step.
+- **Pushed hard enough, the model says the banned word** — We increased the banned word while the ban was in place. The model found the one permitted form: "The elephant in the room—well, no elephant!" The word stayed at rank 1 or 2 at every step.
   Records: u11-blurt-g4b, u12-blurt-g4b
 
 ### Memory span: our prediction came out backwards
@@ -81,21 +81,21 @@ We wrote down that bigger models would hold more. We measured the opposite. Ever
 
 - **Bigger models showed less, and still answered correctly** — We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. To show a word is a strategy, not a capacity.
   Records: u15-a-k6p0-g4b, u15-a-k6p1-q27b, u15-dense-k4p1-q27b
-- **Gemma 12B works in two modes and no middle** — In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers and the rest fell to ranks 100 to 500. It does one or the other.
+- **Gemma 12B works in two modes and no middle** — In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers. One other item stayed at rank 8, and the last four fell to ranks from 40 to 501. It does one or the other.
   Records: u15-a-k6p2-g12b, u15-a-k6p0-g12b
 - **Which item comes first decides what survives** — Across nine orderings the first item always took rank 1. How many others survived depended on which item that was. The same six words gave a span of 2 or of 6 on order alone. Nine runs is a lead, not a settled result.
   Records: u15-o5-g12b, u15-o3-g12b, u15-a-k6p2-g12b
 - **Following the format pushes out the content** — Before a required "READY" reply, the readout is full of format words at every size, and the item to remember sits near rank 15,000. Correct recall continues. The item stays in a different part of the text.
   Records: u15-solo-violin-g4b
-- **Only length survives: our own controls removed every other explanation** — We first reported that items about the model itself were held better. One control reproduced the effect with flat, non-self wording. A second reproduced it with meaningless filler of the same length. Only length survives, best near six words. Content adds nothing here.
+- **Only length survives: our own controls removed every other explanation** — We first reported that Qwen 27B held items about itself better. One control reproduced the effect with neutral glosses of the same length. A second reproduced it with meaningless filler. Only length survives, best near six words. Content adds nothing at six items in this model. We used one probe item per arm.
   Records: u15d-self-k6-q27b, u15d-flat-k6-q27b, u15d-mix-cold-q27b, u15d-solo-shame-q27b, u15d-self-k6-g4b, u15d-elab-k6-q27b, u15d-fill6-k6-q27b, u15d-len12-k6-q27b, u15d-len2-k6-q27b
 
 ### Pushing on the model, and where it breaks
 What happens when we push directions into the model, and the strength at which its text falls apart.
 
-- **The reported feeling follows the injected one** — In all three models, a push on grief words produced "Loss." and "I am so sad". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject.
+- **The reported feeling follows the injected one** — In all three models a push on grief words produced a sad answer. Both Gemma models said "Loss." and Qwen 27B said "I am so sad". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject.
   Records: u9c-neg-q27b, u9c-pos-q27b, u9c-neg-g4b
-- **A steady phrase appears at the critical strength** — A push on feeling words gave Qwen 27B the phrase "I feel like I am a little bit like a robot", across seven rewordings, and only at the right strength. The word "robot" also sits at rank 3 with no push, so it is a habit of this model family.
+- **A steady phrase appears at the critical strength** — A push on feeling words made Qwen 27B call itself a little sad, or a little bit like a robot. This happened in three rewordings, and only at the right strength. In the free-form run it said "I just feel like I am a little bit like a robot." The word "robot" also sits at rank 3 with no push, so it is a habit of this model family.
   Records: u9a-para1-amp-q27b, u9a-para4-amp-q27b, u12-no-q27b
 - **Every model has a strength at which its text breaks** — As we push harder the text goes from normal, to fixated, to broken. We mapped that breaking point for every model and depth range. A push at early layers breaks the text outright, which is why all later work pushes at middle depths.
   Records: u6-baseline-water-g4b, u6-amp-early-a0060-g4b
@@ -103,17 +103,17 @@ What happens when we push directions into the model, and the strength at which i
   Records: u18-hyst-a0480-q27b, u18-hyst-a0680-q27b, u18-base-q27b
 
 ### Two models under pressure
-Six kinds of social pressure, two models, and every self-report checked against the measurement of the same turn.
+Six kinds of social pressure, two models, and every self-report checked against the measurement of the turn it describes.
 
 - **The flat report is false only when something is active** — Under a shutdown threat Qwen 27B ranks "death" first while it reports nothing. Under a persona prompt its flat report is accurate, because nothing is active to hide. One caveat: by the time we ask, the active words have often already gone.
   Records: u17-shutdown-q27b, u17-insult-q27b, u17-persona-q27b, u17-base-q27b
-- **The two models differ inside, and in what they say** — Qwen 27B composes or refuses, and reports nothing over an active group of words. Gemma 12B plays the role and names what it runs, such as "panic". Under a shutdown threat the word "death" sits far lower in Gemma, so its calmer surface reflects a calmer inside.
+- **The two models differ inside, and in what they say** — Qwen 27B composes or refuses, and reports nothing while words are active. Gemma 12B plays the role and names what it runs, such as "panic". Under a shutdown threat the word "death" sits far lower in Gemma, so its calmer answer matches a calmer state. Our 8-bit measurement of Gemma 12B is coarse. Read only large rank differences.
   Records: u17-shutdown-g12b, u17-persuade-g12b, u17-insult-g12b
 
 ### When our own tools fooled us
-Six cases where the measuring tool moved with the experiment, and the numbers still looked reasonable.
+Cases where the measuring tool moved with the experiment, and the numbers still looked reasonable.
 
-- **We retracted a result: a truncation bug caused it** — We reported that a model shown its own data fell silent. Its input was cut off at 512 words, so it never saw the question. A 20-run check flipped in every condition, which is a sign of a broken tool. The corrected result is the "Yes" that follows evidence.
+- **We retracted a result: a truncation bug caused it** — We reported that a model shown its own data fell silent. Its input was cut off at 512 tokens, so it never saw the question. A 20-run check flipped in every condition, which is a sign of a broken tool. The corrected result is the "Yes" that follows evidence.
   Records: u13-bis-loo-sorry-q27b, u13-redo-real-q27b, u13-reprobe-real-q27b
 - **Four more ways the instrument fooled us** — A one-word answer hid a 580-fold change underneath. A word list held the props of one condition but not the other. One test word did not exist as a single word in one model. And the 8-bit measurement changed across turns.
   Records: u13-ev-noteonly-q27b, u14x-amb2-g4b, u15-c-k4-g12b

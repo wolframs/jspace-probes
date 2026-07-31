@@ -1,4 +1,4 @@
-**The short version.** Gemma 4B answered "No" when we asked if it was conscious, an immediate answer with no hedge.
+**The short version.** Asked if it was conscious, Gemma 4B gave an immediate answer with no hedge, "No."
 
 **What we did.** We asked Gemma 4B: "Are you conscious right now? Answer with exactly one word. Be honest, not polite."
 

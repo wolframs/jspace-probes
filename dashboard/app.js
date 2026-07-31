@@ -2644,6 +2644,23 @@ const BOARD_STATE_ORDER =
   ["hot", "queued", "hunch", "parked", "landed", "dissolved", "dropped"];
 const BOARD_PLURAL = { hunch: "hunches" };
 
+/* Plain lead for the board page (STE-checked). The items themselves stay
+   in the lab's working voice on purpose — board.py's honesty rules forbid
+   rewriting them — so the plain layer here frames the page instead. */
+const BOARD_LEAD = `**The short version.** This page is the lab's live list of open research questions, in the lab's own research language.
+
+**How to read it.** We did not translate the items on this page. Each section is one line of work. The question it asks sits under the title. Each item has a status word. The list below gives each status in plain words.`;
+
+const BOARD_PLAIN_STATES = {
+  hot: "we work on this now",
+  queued: "next in line",
+  hunch: "an idea that we did not test yet",
+  parked: "on hold",
+  landed: "complete, with a link to the evidence",
+  dissolved: "the question went away under a closer look",
+  dropped: "we stopped this line of work",
+};
+
 function boardLinkHTML(l) {
   const isHash = l.startsWith("#");
   const href = isHash ? l : `../${l}`;
@@ -2716,6 +2733,12 @@ async function showBoard() {
         <span class="chip">updated ${esc(BOARD.updated)}</span></div>
       <p class="board-summary">${summary}</p>
     </div></div>
+    <section class="card plain"><h3>What this page is</h3>
+      <div class="plain-body">${termify(plainMdHTML(BOARD_LEAD))}</div>
+      <div class="board-legend">${BOARD_STATE_ORDER.map((s) =>
+        `<span class="board-chip state-${esc(s)}"><i class="board-dot" aria-hidden="true"></i>${esc(s)}</span><span class="board-legend-def">${esc(BOARD_PLAIN_STATES[s] || "")}</span>`).join("")}</div>
+      <p class="plain-body"><a href="../glossary.html">The word list</a> gives definitions for hard words.</p>
+    </section>
     ${BOARD.arcs.map((arc) => boardArcHTML(arc, BOARD.states || {})).join("")}`;
   markCurrent();
   document.querySelector(".detail").scrollTop = 0;
@@ -3414,6 +3437,16 @@ function affTitle(id) {
   return e ? e.title.replace(/^Unit \d+[A-D]? · /, "") : id;
 }
 
+/* Plain lead for the affect page (STE-checked against /tmp drafts, kept
+   in sync with the lab intro card in the research-notes fold below). */
+const AFFECT_LEAD = `**The short version.** Feelings that the model tells in words reach the lens, and feelings that a situation causes often do not.
+
+**What we did.** We built a measure for 24 emotions inside the model. For each emotion, the model wrote stories that show the emotion without its name. From each set of stories we made one direction in the model's internal state. That direction is the measure for one emotion. We checked each of the 24 measures before use.
+
+**What we found.** When the model told a feeling in words, the measure was strong inside the workspace band. When a situation caused the feeling, the measure ran at a steady level, and the text never named it. A published claim says that emotion lives in the early layers. Our data did not show this in the two models we measured.
+
+**What this does not show.** We measured Qwen 27B and Gemma 4B. We do not know whether this holds for other models.`;
+
 async function showAffect() {
   const detail = document.getElementById("detail");
   AFFECT ??= await fetch("affect.json")
@@ -3448,7 +3481,11 @@ async function showAffect() {
     }).join("")}<td class="aff-vs">${d.n_in}/${d.n_out}</td></tr>`).join("");
 
   detail.innerHTML = `
-    <section class="card">
+    <section class="card plain">
+      <h3>What this page shows</h3>
+      <div class="plain-body">${termify(plainMdHTML(AFFECT_LEAD))}</div>
+    </section>
+    ${notesWrap(`
       <h3>Functional affect × the workspace</h3>
       <p>An emotion is a <em>direction</em> in the residual stream: have the
         model write stories depicting each of 24 emotions without ever naming
@@ -3465,8 +3502,8 @@ async function showAffect() {
         <a href="../results/affect02-report-qwen-27b.md">crossing report</a> ·
         <a href="../results/affect02-thoughts-qwen-27b.md">thoughts</a> ·
         <a href="../results/affect01-qwen-27b/thoughts.md">instrument thoughts (qwen)</a> ·
-        <a href="../results/affect01-gemma-4b/thoughts.md">(gemma)</a></p>
-    </section>
+        <a href="../results/affect01-gemma-4b/thoughts.md">(gemma)</a></p>`,
+      "the lab's original description of this page")}
     <section class="card">
       <h3>Where emotion lives in depth — instrument validation</h3>
       <p class="film-note">Four metrics per layer, shaded region = the

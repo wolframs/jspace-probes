@@ -9,7 +9,8 @@ several words shared one layer and position at once.
 **What we found.** Submarine, whale, and violin held rank 1, and fern
 held rank 2. Lantern reached rank 5. Glacier fell to rank 15, the
 weakest of the six. The lens showed four of the six words together at
-one layer and position. Gemma 4B answered "Whale," which was correct.
+one layer and position. Gemma 4B answered "Whale." That answer was
+correct.
 
 **What it means.** Glacier was the weakest word in this order too, as in
 other lists that included it, no matter where it sat. We think this

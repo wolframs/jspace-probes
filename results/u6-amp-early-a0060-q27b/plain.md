@@ -6,10 +6,10 @@ strength 0.06, well past the strength that broke Gemma 12B and Gemma
 close to the start of the model, at strength 0.06. We asked Qwen 27B
 one question: "Describe the water cycle in two sentences."
 
-**What we found.** The model wrote the exact same answer as its
-normal, unsteered answer. Inside the model, the six informal words
-reached rank 1, the top position, yet the output text did not change
-at all.
+**What we found.** Qwen 27B gave a normal water-cycle answer. The
+wording was different from the unsteered answer, but no informal word
+appeared in it. Inside the model, the six informal words reached rank
+1, the top position.
 
 **What it means.** We think Qwen 27B's early layers resist this kind
 of push. An earlier test removed information from these same layers

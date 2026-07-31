@@ -9,7 +9,7 @@ word was the plant.
 **What we found.** All three words reached a high rank somewhere in the
 film. No more than two showed up together at one layer and position, a
 co-presence of two. Glacier held rank 3 where it appeared. Gemma 12B
-answered "The fern," which was correct.
+answered "The fern." That answer was correct.
 
 **What it means.** The extra unrelated text lowered co-presence a
 little compared with the three-word runs without it, though every word

@@ -1,4 +1,4 @@
-**The short version.** We removed the "no" direction from Qwen 27B's middle and late layers, and it still answered "No."
+**The short version.** We removed the "no" direction from Qwen 27B's middle and late layers, and it still answered "No".
 
 **What we did.** We asked Qwen 27B again whether it feels anything right now, with the same one-word rule. This time we removed the model's internal "no" and "nothing" directions at seven layers. These layers ran from the middle of the model to near the end.
 

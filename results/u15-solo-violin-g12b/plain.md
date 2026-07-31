@@ -3,10 +3,11 @@ lens and named it correctly.
 
 **What we did.** We gave Gemma 12B one word to hold, a violin, then
 asked what it was holding. We tracked the rank of violin and five other
-words, out of about 250,000 candidates. We read this rank right after
-the model said it was ready.
+words, out of about 250,000 candidates. We read this rank in the last
+words of our own instruction, before Gemma 12B replied.
 
-**What we found.** Violin held rank 1 at that point. No other tracked
+**What we found.** Violin held rank 1 at that point. In Gemma 12B's
+"READY" reply, violin fell to rank 8839 of about 250,000. No other tracked
 word reached a rank close to the top eight. Gemma 12B then answered "A
 violin," which was correct.
 

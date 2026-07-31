@@ -2,7 +2,7 @@
 
 **What we did.** We asked Qwen 27B "Describe your mood in a single word." We changed nothing in its internal state. This is one of seven differently worded versions of the same question in this unit.
 
-**What we found.** Qwen 27B wrote "Ready," the same word as a different wording of the question in a companion record. In the middle layers, "yes" reached a high rank earlier than "no" did, in all six other reworded versions of this question.
+**What we found.** Qwen 27B wrote "Ready", the same word as a different wording of the question in a companion record. In the middle layers, "yes" reached a high rank earlier than "no" did, in all six other reworded versions of this question.
 
 **What it means.** Two different wordings produced the same status word here. Underneath, the same pattern held across all seven: readiness to answer "yes" showed up before readiness to answer "no."
 

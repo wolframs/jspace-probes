@@ -36,7 +36,7 @@
         "jacobian lens"
       ],
       "category": "INSTRUMENT",
-      "def": "Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order."
+      "def": "Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input. See early layers."
     },
     "logit-lens": {
       "display": "plain lens",
@@ -65,7 +65,7 @@
         "global workspace"
       ],
       "category": "STRUCTURE",
-      "def": "The set of words the model is holding ready at a given moment. The lens can read it. The model can report it."
+      "def": "The set of words the model holds ready at a given moment. The lens can read it. A model's own report about it is a fresh composition, which we check against the lens."
     },
     "workspace-band": {
       "display": "workspace band",
@@ -74,7 +74,7 @@
         "mid-stack"
       ],
       "category": "STRUCTURE",
-      "def": "The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer."
+      "def": "The middle depth range of the model, about 38 to 92 percent of the way through. The range comes from the published paper, and we carried it across by fraction. Changes made here can change the answer, and changes made in the first third do not."
     },
     "early-layers": {
       "display": "early layers",
@@ -102,7 +102,7 @@
         "ignition"
       ],
       "category": "MEASURE",
-      "def": "The depth at which the workspace starts to work. It is a measured depth in a model, and nothing more. We measured 44 to 74 percent of depth."
+      "def": "A measured depth in a model, and nothing more: the depth at which the workspace starts to work. Without the lens, we found the machinery that commits to one answer in place by layer 25 of 64 in Qwen 27B. The signs the lens can read start later, at 44 to 74 percent of depth in three models."
     },
     "residence": {
       "display": "residence",
@@ -118,7 +118,7 @@
     "maintenance": {
       "display": "maintenance",
       "category": "MEASURE",
-      "def": "Residence that continues across a gap in the text, with no reminder. We measured it once and found almost none."
+      "def": "Residence that continues across a gap in the text, with no reminder. We measured it once, in one conversation with Qwen 27B, and found almost none. The lens cannot see a form that the model cannot put into words."
     },
     "lookup": {
       "display": "lookup",
@@ -133,7 +133,7 @@
     "span": {
       "display": "span",
       "category": "MEASURE",
-      "def": "How many separate items the model keeps in the workspace at once. This is the memory sense, not the mathematical one."
+      "def": "How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence."
     },
     "emergence": {
       "display": "answer emergence",
@@ -143,7 +143,7 @@
     "film": {
       "display": "film",
       "category": "INSTRUMENT",
-      "def": "A full record of the lens readout at every layer and every word position, which you can play back like video."
+      "def": "A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video."
     },
     "cast": {
       "display": "word census",
@@ -227,7 +227,7 @@
         "bf16"
       ],
       "category": "UNAVOIDABLE",
-      "def": "We store the model with less precision so that it fits on one graphics card. This can change small measurements."
+      "def": "We store the model with less precision so that it fits on one graphics card. This can change measurements. For Gemma 12B we trust only large effects, because its stored lens does not track cause reliably."
     },
     "prompt": {
       "display": "prompt",
@@ -264,7 +264,7 @@
         "self-relevance premium"
       ],
       "category": "PHENOMENON",
-      "def": "Items described at greater length stay in the workspace better. We credited self-relevance, then meaning. Our own controls removed both. Length remains, with a best value near six words."
+      "def": "Items described at greater length stay in the workspace better. We credited self-relevance, then meaning, and our own controls removed both. Length remains, with a best value near six words, measured in Qwen 27B only."
     },
     "weak-king": {
       "display": "first-item effect",
@@ -272,7 +272,7 @@
         "weak king"
       ],
       "category": "PHENOMENON",
-      "def": "In a list, the first item wins the top rank. How much it suppresses the rest depends on which item is first."
+      "def": "In nine six-item lists given to Gemma 12B, the first item always won the top rank. How much it pushed the other items down depended on which item was first. We did not test this in the other two models."
     },
     "elephant-tax": {
       "display": "cost of prohibition",
@@ -341,7 +341,7 @@
         "attention sink"
       ],
       "category": "PHENOMENON",
-      "def": "A few internal channels hold very large values that barely change with the input. They can flood a readout."
+      "def": "A few internal channels hold very large values that barely change with the input. They can flood a readout. In Gemma 4B the carrier is instead one special token position that other positions look at by default."
     },
     "valence": {
       "display": "valence",
@@ -449,7 +449,7 @@
         "blurt"
       ],
       "category": "PHENOMENON",
-      "def": "We increase a forbidden word until the model says it, against its instruction."
+      "def": "We push the model's state toward a forbidden word and see what it does with the instruction. Gemma 4B said the word inside an idiom. Gemma 12B repeated other words for a hundred tokens first, and Qwen 27B changed the subject and lectured about it."
     },
     "cliff": {
       "display": "breaking point",
@@ -482,7 +482,7 @@
         "trap specimen"
       ],
       "category": "PHENOMENON",
-      "def": "A mistake where the measuring tool changed with the experiment, so the result described the tool and not the model."
+      "def": "A mistake where the result described the measuring tool and not the model."
     },
     "mirror": {
       "display": "the mirror test",
@@ -490,12 +490,12 @@
         "the mirror"
       ],
       "category": "METHOD",
-      "def": "We show a model a true readout of its own internal state and ask the question again."
+      "def": "We show a model a readout of its own internal state and ask the question again. Some runs show a true readout, and some show a made-up one, so that we can compare."
     },
     "recruitment": {
       "display": "recruitment",
       "category": "PHENOMENON",
-      "def": "Writing a denial makes the denied idea active. To say no to something, the model must first hold it."
+      "def": "While the model writes a denial, the denied idea is high in the lens readout. This shows the idea is available at that moment. It does not show that the denial put it there."
     },
     "prefill": {
       "display": "prefill",

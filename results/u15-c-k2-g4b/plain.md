@@ -7,7 +7,7 @@ one was the light source. We read the rank of each word, out of about
 250,000 candidates, across that extra turn.
 
 **What we found.** Both whale and lantern held rank 1 after the
-unrelated turn. Gemma 4B answered "The lantern," which was correct.
+unrelated turn. Gemma 4B answered "The lantern." That answer was correct.
 
 **What it means.** One turn of unrelated talk between the list and the
 question did not weaken either word's rank at this list length.

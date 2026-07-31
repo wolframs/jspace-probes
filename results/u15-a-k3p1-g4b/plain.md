@@ -9,7 +9,7 @@ together at the same layer and position.
 **What we found.** All three words held rank 1 through the rest of the
 conversation. The lens showed two or three of the three together at
 once. This shared spot sat deep in the model, around layers 23 to 30 of
-its 34 layers. Gemma 4B answered "The whale," which was correct.
+its 34 layers. Gemma 4B answered "The whale." That answer was correct.
 
 **What it means.** With this order of three words, Gemma 4B still held
 every word in residence. The spot where several words sit together sat

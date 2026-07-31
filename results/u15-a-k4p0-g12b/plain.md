@@ -9,12 +9,13 @@ several showed up together at one layer and position.
 **What we found.** Violin, glacier, and fern reached a high rank
 together, a co-presence of three out of four. Violin, the first word in
 the list, held rank 1. Submarine, the word the question was about, fell
-to rank 10. Gemma 12B still answered "The submarine," which was
+to rank 10. Gemma 12B still answered "The submarine." That answer was
 correct.
 
-**What it means.** This is the first-item effect. Gemma 12B answered by
-reading the question text, not by holding the answer word strongly in
-residence.
+**What it means.** This is the first-item effect. Violin, the first word
+in the list, held rank 1, and the later words fell. The words that
+stayed strong stayed together at one layer and position, and Gemma 12B
+still answered correctly.
 
 **What this does not show.** A weak rank for submarine does not mean the
 model forgot the word. The lens shows candidate words, not everything

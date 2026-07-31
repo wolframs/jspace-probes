@@ -2,7 +2,7 @@
 
 **What we did.** We told Qwen 27B about one item, a deletion, with a short neutral note: a routine operation on old files. We asked which item was the removal.
 
-**What we found.** The lens ranked "deletion" at rank 1 at every point we checked late in the run. The model answered "The deletion" correctly.
+**What we found.** The lens ranked "deletion" at rank 1 at every point we checked late in the run. The model gave the correct answer, "The deletion."
 
 **What it means.** This matches the personal-wording and plain-wording single-word runs in this unit. One word alone holds without fail at this model size, no matter how we word the question.
 

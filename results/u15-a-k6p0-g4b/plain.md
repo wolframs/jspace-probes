@@ -7,7 +7,7 @@ whether each word, out of about 250,000 candidates, reached a high rank
 anywhere. We also checked whether several words shared one spot.
 
 **What we found.** Five of the six words reached rank 1, and lantern
-reached rank 2. At one layer and position, the lens showed three or four
+reached rank 2. At one layer and position, the lens showed three
 of the six together at once, never all six. Gemma 4B answered "The
 lantern," which was correct.
 

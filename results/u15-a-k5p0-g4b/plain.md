@@ -9,7 +9,7 @@ anywhere. We also checked whether several words shared one spot.
 **What we found.** All five words reached a rank of 2 or better
 somewhere in the rest of the conversation. At one layer and position,
 the lens showed three of the five together at once. Gemma 4B answered
-"Whale," which was correct.
+"Whale." That answer was correct.
 
 **What it means.** At five words, Gemma 4B still held every word
 somewhere in residence. The number the lens can show together at one
