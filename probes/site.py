@@ -178,11 +178,18 @@ def popovers(used: set) -> str:
     out = []
     for tid in sorted(used):
         t = TERMS[tid]
+        # Related terms are links, not prose. "See early layers." inside a
+        # definition leaves the reader asking "see where?".
+        rel = [r for r in t.get("see", []) if r in TERMS]
+        see = ", ".join(
+            f'<a href="../glossary.html#t-{esc(r)}">'
+            f'{esc(TERMS[r].get("display", r))}</a>' for r in rel)
         out.append(
             f'<div id="gl-{esc(tid)}" popover class="gloss">'
             f'<b>{esc(t.get("display", tid))}</b>'
             f'<span>{esc(t.get("def", ""))}</span>'
-            f'<a href="../glossary.html#t-{esc(tid)}">all terms &rarr;</a></div>')
+            + (f'<span class="gloss-rel">See also: {see}</span>' if see else "")
+            + f'<a href="../glossary.html#t-{esc(tid)}">all terms &rarr;</a></div>')
     return "\n".join(out)
 
 
@@ -527,8 +534,12 @@ def glossary_page() -> str:
             aka = t.get("aka") or []
             also = (f' <span class="note">Also written: '
                     f'{esc(", ".join(aka))}.</span>') if aka else ""
+            rel = [r for r in t.get("see", []) if r in TERMS]
+            see = (' <span class="note">See also: ' + ", ".join(
+                f'<a href="#t-{esc(r)}">{esc(TERMS[r].get("display", r))}</a>'
+                for r in rel) + ".</span>") if rel else ""
             items.append(f'<dt id="t-{esc(tid)}">{esc(t.get("display", tid))}</dt>'
-                         f'<dd>{esc(t.get("def", ""))}{also}</dd>')
+                         f'<dd>{esc(t.get("def", ""))}{also}{see}</dd>')
         rows = f'<dl class="gloss-list">{"".join(items)}</dl>'
     body = f"""{head("Word list · J-Space Probes",
                      "Every technical word used on this site, in plain English.",

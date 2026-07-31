@@ -2852,7 +2852,16 @@ document.addEventListener("click", (ev) => {
   if (!b) { if (pop.dataset.open === "1") { pop.dataset.open = "0"; pop.hidden = true; } return; }
   const t = TERMS[b.dataset.term];
   if (!t) return;
-  pop.innerHTML = `<b>${esc(t.display || b.dataset.term)}</b><span>${esc(t.def || "")}</span>`;
+  /* Related terms are links, not prose: a popover that says "see early
+     layers" leaves the reader asking "see where?". Clicking one re-opens
+     this same popover on that term. */
+  const see = (t.see || []).filter((id) => TERMS[id]).map((id) =>
+    `<button type="button" class="tk gloss-see" data-term="${esc(id)}">${esc(TERMS[id].display || id)}</button>`
+  ).join(", ");
+  pop.innerHTML = `<b>${esc(t.display || b.dataset.term)}</b>` +
+    `<span>${esc(t.def || "")}</span>` +
+    (see ? `<span class="gloss-rel">See also: ${see}</span>` : "") +
+    `<a href="../glossary.html#t-${esc(b.dataset.term)}">all terms &rarr;</a>`;
   pop.hidden = false; pop.dataset.open = "1";
   const r = b.getBoundingClientRect();
   pop.style.top = `${window.scrollY + r.bottom + 8}px`;

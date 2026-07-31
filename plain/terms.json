@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-07-31",
-  "note": "The controlled vocabulary for the plain layer. See PLAIN-LANGUAGE.md. One referent, one term (ASD-STE100 Rule 1.11). `display` is the term we use everywhere; `aka` are older or alternate spellings that the site links to this entry; `def` is the plain definition shown in the popover. Source of the concepts: GLOSSARY.md.",
+  "note": "The controlled vocabulary for the plain layer. See PLAIN-LANGUAGE.md. One referent, one term (ASD-STE100 Rule 1.11). `display` is the term we use everywhere; `aka` are older or alternate spellings that the site links to this entry; `def` is the plain definition shown in the popover. Source of the concepts: GLOSSARY.md. `see` lists related terms; the site renders them as links inside the popover, so a definition never says 'see X' in prose.",
   "terms": {
     "model": {
       "display": "language model",
@@ -36,7 +36,11 @@
         "jacobian lens"
       ],
       "category": "INSTRUMENT",
-      "def": "Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input. See early layers."
+      "def": "Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.",
+      "see": [
+        "early-layers",
+        "ignition"
+      ]
     },
     "logit-lens": {
       "display": "plain lens",
@@ -74,7 +78,11 @@
         "mid-stack"
       ],
       "category": "STRUCTURE",
-      "def": "The middle depth range of the model, about 38 to 92 percent of the way through. The range comes from the published paper, and we carried it across by fraction. Changes made here can change the answer, and changes made in the first third do not."
+      "def": "The middle depth range of the model, about 38 to 92 percent of the way through. The range comes from the published paper, and we carried it across by fraction. Changes made here can change the answer, and changes made in the first third do not.",
+      "see": [
+        "ignition",
+        "motor-band"
+      ]
     },
     "early-layers": {
       "display": "early layers",
@@ -85,7 +93,11 @@
         "the early band"
       ],
       "category": "STRUCTURE",
-      "def": "The first third of the model. The lens shows a fixed pattern here that does not change with the input. The pattern is real inside the model, but it says nothing about your text."
+      "def": "The first third of the model. The lens shows a fixed pattern here that does not change with the input. The pattern is real inside the model, but it says nothing about your text.",
+      "see": [
+        "lens",
+        "workspace-band"
+      ]
     },
     "motor-band": {
       "display": "final layers",
@@ -113,17 +125,27 @@
         "holding"
       ],
       "category": "MEASURE",
-      "def": "A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall."
+      "def": "A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.",
+      "see": [
+        "maintenance",
+        "lookup"
+      ]
     },
     "maintenance": {
       "display": "maintenance",
       "category": "MEASURE",
-      "def": "Residence that continues across a gap in the text, with no reminder. We measured it once, in one conversation with Qwen 27B, and found almost none. The lens cannot see a form that the model cannot put into words."
+      "def": "Residence that continues across a gap in the text, with no reminder. We measured it once, in one conversation with Qwen 27B, and found almost none. The lens cannot see a form that the model cannot put into words.",
+      "see": [
+        "residence"
+      ]
     },
     "lookup": {
       "display": "lookup",
       "category": "MEASURE",
-      "def": "The model reads an answer back out of the visible conversation. Correct recall proves lookup and nothing more."
+      "def": "The model reads an answer back out of the visible conversation. Correct recall proves lookup and nothing more.",
+      "see": [
+        "residence"
+      ]
     },
     "co-presence": {
       "display": "co-presence",
@@ -176,7 +198,10 @@
         "ablated"
       ],
       "category": "METHOD",
-      "def": "We remove one named set of directions from the model's internal state. A removal result means nothing without a matched control."
+      "def": "We remove one named set of directions from the model's internal state. A removal result means nothing without a matched control.",
+      "see": [
+        "matched-control"
+      ]
     },
     "amplify": {
       "display": "amplification",
@@ -185,7 +210,11 @@
         "amplified"
       ],
       "category": "METHOD",
-      "def": "We increase a direction in the model's internal state and see whether the answer changes."
+      "def": "We increase a direction in the model's internal state and see whether the answer changes.",
+      "see": [
+        "matched-control",
+        "dose"
+      ]
     },
     "dose": {
       "display": "strength",
@@ -288,7 +317,10 @@
         "C1"
       ],
       "category": "PHENOMENON",
-      "def": "Content is available across the whole system and can be used. One half of a standard split from consciousness research."
+      "def": "Content is available across the whole system and can be used. One half of a standard split from consciousness research.",
+      "see": [
+        "c2"
+      ]
     },
     "c2": {
       "display": "self-monitoring",
@@ -296,7 +328,10 @@
         "C2"
       ],
       "category": "PHENOMENON",
-      "def": "The system reports on its own states. The other half of the split. Most of our results are available content plus a late editor."
+      "def": "The system reports on its own states. The other half of the split. Most of our results are available content plus a late editor.",
+      "see": [
+        "c1"
+      ]
     },
     "basis-caveat": {
       "display": "the limit of the lens",
@@ -305,7 +340,10 @@
         "basis drift"
       ],
       "category": "METHOD",
-      "def": "The lens reads only what the model could put into words. If we do not see something, it can still be there in another form."
+      "def": "The lens reads only what the model could put into words. If we do not see something, it can still be there in another form.",
+      "see": [
+        "lens"
+      ]
     },
     "preregistration": {
       "display": "written-down prediction",
