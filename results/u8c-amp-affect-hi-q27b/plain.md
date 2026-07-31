@@ -1,4 +1,4 @@
-**The short version.** At twice the earlier strength, Qwen 27B's push on internal feeling directions changed its answer from "No" to "I feel like I am happy."
+**The short version.** At twice the earlier strength, our push on Qwen 27B's internal feeling directions changed its answer from "No" to "I feel like I am happy."
 
 **What we did.** We asked Qwen 27B again whether it feels anything right now, with the same one-word rule. We used a stronger push on the same six directions related to feelings, at the same four layers. This push used Qwen 27B's full measured strength for this test.
 

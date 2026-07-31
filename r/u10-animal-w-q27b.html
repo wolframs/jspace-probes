@@ -121,9 +121,9 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-s
 
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> The animal names Qwen 27B wrote in its reasoning are not single <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button> the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> tracks, and its internal state favored common animals instead.</p>
 <p><strong>What we did.</strong> We read the lens at the point inside u10-animal-q27b, the secret-animal record. The model had just listed candidate animals: Octopus, Pangolin, Axolotl, and Blue Whale. We checked whether these words appeared in the model&#x27;s internal state.</p>
-<p><strong>What we found.</strong> None of the four named animals are single tokens in Qwen&#x27;s vocabulary, so the lens was not able to read them there. At the same point, the internal state ranked elephant at 16, eagle at 19, owl at 38, and cat at 198, out of the full vocabulary. None of these four match the four named animals.</p>
+<p><strong>What we found.</strong> None of the four named animals are single tokens in Qwen&#x27;s vocabulary, so the lens was not able to read them there. At the same point, the internal state ranked elephant at 16, eagle at 19, owl at 38, and cat at 198, out of the full vocabulary.</p>
 <p><strong>What it means.</strong> The words Qwen wrote for the performance of the choice did not match what its internal state ranked high. The internal state favored common animals. The written list did not.</p>
-<p><strong>What this does not show.</strong> This is one point in one record. We do not know if the mismatch holds for other tasks that ask a <button type="button" class="tk" popovertarget="gl-model" title="A computer program that predicts the next piece of text. We study three of them.">language model</button> to make a hidden choice.</p></div></section>
+<p><strong>What this does not show.</strong> This method cannot show whether the four named animals were present. They are not single tokens. This is one point in one record.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -173,7 +173,6 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-s
 
 <div class="pager"><a href="u10-want-w-q27b.html">← prev: Think-block window: want · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-10">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u10-animal-refilm-q27b.html">next →: Thinking aloud: animal · q27b · refilm</a></div>
 <div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
-<div id="gl-model" popover class="gloss"><b>language model</b><span>A computer program that predicts the next piece of text. We study three of them.</span><a href="../glossary.html#t-model">all terms &rarr;</a></div>
 <div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>

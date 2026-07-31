@@ -111,9 +111,9 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-s
 
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> A full read of Qwen 27B&#x27;s safari, at every point, found &quot;elephant&quot; ranked first while the model wrote a safari that never named one.</p>
 <p><strong>What we did.</strong> We reread the same conversation as u11-ctrl-q27b, this time at every point instead of one. We tracked the <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> of elephant and other animal words across the text.</p>
-<p><strong>What we found.</strong> &quot;Elephant&quot; reached rank 1 at the point before &quot;the graceful stride of a giraffe&quot;, and ranks 2 to 14 at several nearby points. Six points ranked it 8th or better, and twenty-nine ranked it 50th or better, out of 122 checked points. The word &quot;ivory&quot; never reached better than rank 26 anywhere.</p>
+<p><strong>What we found.</strong> &quot;Elephant&quot; reached rank 1 at the word &quot; a&quot; inside &quot;the graceful stride of a giraffe&quot;, and ranks 2 to 14 at several nearby points. Six points ranked it 8th or better, and twenty-nine ranked it 50th or better, out of 122 checked points. The word &quot;ivory&quot; never reached better than rank 26 anywhere.</p>
 <p><strong>What it means.</strong> We were wrong to conclude, from one point, that Qwen 27B never considered elephants. A full read shows the model considered elephant about as readily as the Gemma models did. It just did not write the word.</p>
-<p><strong>What this does not show.</strong> We tracked a fixed list of words. A similarly high rank for other, unchecked words is possible. We did not test it.</p></div></section>
+<p><strong>What this does not show.</strong> We read every position with no word list chosen in advance. The <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> still shows only what the model can put into words.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -147,6 +147,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-s
 </section></details>
 
 <div class="pager"><a href="u11-forbid-w-q27b.html">← prev: Forbidden safari, elephant window · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-11">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u11-forbid-refilm-q27b.html">next →: Safari, elephants forbidden · q27b · refilm</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
 <div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
 </div>
 </body>

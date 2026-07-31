@@ -6,4 +6,4 @@
 
 **What it means.** Rank 217 out of about 250,000 words is a real move upward, but it is still far from rank 1. We think the model can generate the language a tag belongs to, even when that tag itself does not reach a high rank.
 
-**What this does not show.** Later work found that the early-layer tag words we tracked come from a fixed part of the lens. They do not come from anything the model stores about the input. This limits what "the tag's rank changed" can mean.
+**What this does not show.** Later work found that the early-layer tag words we tracked come from a fixed part of the model's early internal state. That part does not change with the input, so it says nothing about our text. This limits what "the tag's rank changed" can mean.

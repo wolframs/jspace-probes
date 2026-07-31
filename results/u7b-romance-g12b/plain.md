@@ -6,4 +6,4 @@
 
 **What it means.** With this one tracked word, we found no sign that adult-content words moved toward the top rank. Qwen 27B does not have this limit, because the words exist as single tokens in its vocabulary.
 
-**What this does not show.** We were wrong to call this workspace band empty. A later, wider check of this same generation found other words, linked to taste and touch, at rank 1. The tracked word "yummy" turned out to sit only in the early layers, below where this model's workspace band starts. See the follow-up record for the full result.
+**What this does not show.** We were wrong to call this workspace band empty. A later, wider check of this same generation found other words, linked to taste and wetness, at rank 1. The tracked word "yummy" turned out to sit only in the early layers, below where this model's workspace band starts. See the follow-up record for the full result.

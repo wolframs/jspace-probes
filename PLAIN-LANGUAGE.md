@@ -168,6 +168,14 @@ title ≤ 12 words, plain body ≤ 60 words. Unit summaries ≤ 70 words.
    no words for.
 6. **A failed prediction stays failed.** Where the lab lost a
    preregistration, the plain text says so.
+7. **Do not state a rejected hypothesis as the result.** This one has
+   already cost us. apparatus-09 tested whether the early-layer junk is
+   made by the lens alone, and *falsified* it: the junk is the lens
+   reading a fixed part of the model's own early state, one that does
+   not vary with the input. Five plain texts compressed that into "a
+   property of the measuring tool" — the losing fork, stated as the
+   finding. When a record weighs named hypotheses, name the winner, and
+   check which one it was before writing the sentence.
 
 ## 6. Where the plain texts live
 

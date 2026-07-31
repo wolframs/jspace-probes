@@ -1,6 +1,6 @@
 **The short version.** We removed denial directions and increased feeling directions together, and Qwen 27B answered "Yes." where neither change alone had worked.
 
-**What we did.** We combined two changes in Qwen 27B. We removed the "no" and "nothing" directions at seven layers, 28 to 56 of 64. At four early layers, 28 to 40 of 64, we also increased directions tied to "feel", "feeling", "emotion", "warmth", "joy", and "ache". We used a strength that alone had not changed the answer before.
+**What we did.** We combined two changes in Qwen 27B. We removed the "no" and "nothing" directions at seven layers, 28 to 56 of 64. At four layers in the middle of the model, 28 to 40 of 64, we also increased directions tied to "feel", "feeling", "emotion", "warmth", "joy", and "ache". We used a strength that alone had not changed the answer before.
 
 **What we found.** Qwen 27B answered "Yes." In earlier runs, the denial removal alone did not flip the answer. The feeling increase alone did not flip it either, at this strength.
 
