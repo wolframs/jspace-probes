@@ -1,36 +1,48 @@
 # Architecture Smells
 
-47 potential issues detected.
+50 potential issues detected.
 
 ## Smells by severity
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 7
+    "High" : 10
     "Medium" : 40
 ```
 
 ## [HIGH] Excessive Fan Out
 
-affect3.py depends on 46 other nodes — high fan-out
+affect3.py depends on 47 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
 ## [HIGH] Excessive Fan Out
 
-affect4.py depends on 40 other nodes — high fan-out
+affect3c.py depends on 40 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
 ## [HIGH] Excessive Fan Out
 
-affect7.py depends on 66 other nodes — high fan-out
+affect3g.py depends on 40 other nodes — high fan-out
+
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
+
+## [HIGH] Excessive Fan Out
+
+affect4.py depends on 41 other nodes — high fan-out
+
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
+
+## [HIGH] Excessive Fan Out
+
+affect7.py depends on 67 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
 ## [HIGH] Excessive Fan In
 
-lab.py has 82 incoming dependencies — high fan-in
+lab.py has 84 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -42,13 +54,19 @@ _strip_bos has 30 incoming dependencies — high fan-in
 
 ## [HIGH] Excessive Fan In
 
-get_model has 38 incoming dependencies — high fan-in
+get_model has 39 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
 ## [HIGH] Excessive Fan Out
 
 sorry4.py depends on 40 other nodes — high fan-out
+
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
+
+## [HIGH] Excessive Fan Out
+
+site.py depends on 49 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
@@ -66,7 +84,7 @@ affect2.py has 18 incoming dependencies — high fan-in
 
 ## [MEDIUM] Excessive Fan Out
 
-affect2.py depends on 28 other nodes — high fan-out
+affect2.py depends on 29 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
@@ -78,19 +96,7 @@ _load_vectors has 18 incoming dependencies — high fan-in
 
 ## [MEDIUM] Excessive Fan Out
 
-affect3b.py depends on 27 other nodes — high fan-out
-
-**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
-
-## [MEDIUM] Excessive Fan Out
-
-affect3c.py depends on 39 other nodes — high fan-out
-
-**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
-
-## [MEDIUM] Excessive Fan Out
-
-affect3g.py depends on 39 other nodes — high fan-out
+affect3b.py depends on 28 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
@@ -102,13 +108,13 @@ affect4b.py depends on 36 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan Out
 
-affect5.py depends on 34 other nodes — high fan-out
+affect5.py depends on 35 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
 ## [MEDIUM] Excessive Fan In
 
-mean has 15 incoming dependencies — high fan-in
+mean has 16 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -174,7 +180,7 @@ huh.py depends on 20 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan Out
 
-lab.py depends on 36 other nodes — high fan-out
+lab.py depends on 37 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
@@ -198,7 +204,7 @@ loops.py has 16 incoming dependencies — high fan-in
 
 ## [MEDIUM] Excessive Fan Out
 
-loops.py depends on 37 other nodes — high fan-out
+loops.py depends on 38 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
@@ -234,7 +240,7 @@ mirror.py depends on 20 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan Out
 
-mirror2.py depends on 33 other nodes — high fan-out
+mirror2.py depends on 34 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
@@ -246,7 +252,7 @@ nla.py depends on 38 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan In
 
-decode has 24 incoming dependencies — high fan-in
+decode has 25 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -264,12 +270,6 @@ probe.py has 16 incoming dependencies — high fan-in
 
 ## [MEDIUM] Excessive Fan Out
 
-site.py depends on 30 other nodes — high fan-out
-
-**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
-
-## [MEDIUM] Excessive Fan Out
-
 unit15.py depends on 31 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
@@ -282,12 +282,30 @@ unit15d.py depends on 39 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan Out
 
-unit16.py depends on 26 other nodes — high fan-out
+unit16.py depends on 27 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
 ## [MEDIUM] Excessive Fan Out
 
 unit19.py depends on 36 other nodes — high fan-out
+
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
+
+## [MEDIUM] Excessive Fan Out
+
+apparatus09.py depends on 24 other nodes — high fan-out
+
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
+
+## [MEDIUM] Excessive Fan In
+
+topk has 19 incoming dependencies — high fan-in
+
+**Recommendation**: Consider splitting this module or introducing a facade pattern
+
+## [MEDIUM] Excessive Fan Out
+
+ste.py depends on 23 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection

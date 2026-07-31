@@ -53,12 +53,12 @@ probes: 0 services, 0 APIs, 1 domains.
 - **Health score:** 85/100
 - **AI readiness:** 78/100
 
-Single Package with 49 source files across python. 0 packages detected. core domains: General.
+Single Package with 52 source files across python. 0 packages detected. core domains: General.
 
 ## Language Support
 
 Mnestis analyzed this repo with **52** supported languages engine-wide.
-Detected here: 1 language(s), 49 source files.
+Detected here: 1 language(s), 52 source files.
 
 Read `.mentis/context/README.md` for the full diagram index.
 Read `.mentis/context/languages.md` for file distribution charts and the parsing pipeline graph.
@@ -66,14 +66,14 @@ Read `.mentis/context/graphs.md` for domain, flow, dependency, and risk Mermaid 
 
 ```mermaid
 flowchart LR
-  D0["General (45)"]
+  D0["General (46)"]
 ```
 
 ### Language distribution (this repo)
 
 ```mermaid
 pie showData title Files by language
-    "python" : 49
+    "python" : 52
 ```
 
 ### Extractor routing
@@ -202,7 +202,7 @@ mindmap
 
 ## Domains (start here)
 
-- **General** — Import-graph cluster of 45 files · `file:affect.py`, `file:affect2.py`, `file:affect3.py`
+- **General** — Import-graph cluster of 46 files · `file:affect.py`, `file:affect2.py`, `file:affect3.py`
 
 ## Critical Paths (edit carefully)
 

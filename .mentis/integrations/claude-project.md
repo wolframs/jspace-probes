@@ -6,7 +6,7 @@ Add these files to your Claude Project knowledge:
 - `.mentis/context/architecture.md`
 - `.mentis/context/languages.md`
 
-Single Package with 49 source files across python. 0 packages detected. core domains: General.
+Single Package with 52 source files across python. 0 packages detected. core domains: General.
 
 Top capabilities: 
 Central domains: General

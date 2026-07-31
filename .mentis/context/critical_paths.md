@@ -94,7 +94,7 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: mean has 15 dependents — changes here have wide blast radius
+- **Description**: mean has 16 dependents — changes here have wide blast radius
 
 ## High-traffic: deepen.py
 
@@ -120,11 +120,17 @@ flowchart TD
 - **Nodes involved**: 6
 - **Description**: assess has 16 dependents — changes here have wide blast radius
 
+## High-traffic: norm
+
+- **Risk**: MEDIUM
+- **Nodes involved**: 6
+- **Description**: norm has 10 dependents — changes here have wide blast radius
+
 ## High-traffic: lab.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 82 dependents — changes here have wide blast radius
+- **Description**: lab.py has 84 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 
@@ -142,7 +148,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: get_model has 38 dependents — changes here have wide blast radius
+- **Description**: get_model has 39 dependents — changes here have wide blast radius
 
 ## High-traffic: run
 
@@ -173,9 +179,3 @@ flowchart TD
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
 - **Description**: _null has 15 dependents — changes here have wide blast radius
-
-## High-traffic: mirror.py
-
-- **Risk**: MEDIUM
-- **Nodes involved**: 6
-- **Description**: mirror.py has 10 dependents — changes here have wide blast radius
