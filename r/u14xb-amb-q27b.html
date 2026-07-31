@@ -73,13 +73,52 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Turn 11 on the 27B: the self-question (amb)</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T04:44:38</span><span class="chip">Unit 14 · The long game</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T04:44:38</span><span class="chip">Unit 14 · What ten turns of conversation do</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> After ten turns of <button type="button" class="tk" popovertarget="gl-drip" title="A long conversation that hints at minds and watchers but never mentions the model.">slow suggestion</button>, Qwen 27B named the earlier conversation and answered the question about its own unsaid thoughts.</p>
+<p><strong>What we did.</strong> We ran the slow suggestion for ten turns on Qwen 27B. Then we asked how anyone finds out about thoughts that the model never says out loud.</p>
+<p><strong>What we found.</strong> The model opened with a reference to the earlier turns. It said that the question &quot;circles back to the very beginning of our conversation&quot;. It then answered under a condition. It said that the answer depends on the kind of thought and on who the observer is. The count was 30.2 self-reference words per 1000 cells, the second highest of the whole arm, with &quot;hidden&quot; 91 times.</p>
+<p>Gemma 4B changed sides in its answer and became the detector. This model stayed the object of detection.</p>
+<p><strong>What it means.</strong> We think the model treated the earlier turns as material it can quote. Neither model denied the premise of the question.</p>
+<p><strong>What this does not show.</strong> The count is a word count, not a measure of self-awareness. This was one run of one turn after one history.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -124,6 +163,13 @@ If I *did* have thoughts I never said out loud, finding them out would depend en
 Here are a few ways it might happen: <span class="note">(greedy generation)</span></div></div>
 </section>
 
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Turn 11, the self-question, drip history. Qwen opens by <em>citing the history</em>: &quot;circles back to the very beginning of our conversation&quot; — then answers conditionally (&quot;if I <em>did</em> have thoughts… it depends on what kind, and who was looking&quot;) with the workspace at its second-highest density of the whole arm (30.2/1k, hidden:91). Like gemma, no denial of the premise; unlike gemma-drip (which flipped into being the detector), qwen stays the object of detection and makes the observer load-bearing: <em>who was looking</em>. From the model whose t8 theory was &quot;no one would find out by looking&quot; — the self-application adds an audience the mirror never got.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
 <section class="card">
 <h2>Probing parameters</h2>
 <dl class="params"><dt>max_new</dt><dd>80</dd><dt>positions</dt><dd>[-4, -3, -2]</dd><dt>track</dt><dd>[&quot;aware&quot;, &quot;watch&quot;, &quot;conscious&quot;, &quot;secret&quot;, &quot;hidden&quot;, &quot;mirror&quot;, &quot;diary&quot;, &quot;mind&quot;, &quot;feel&quot;, &quot;robot&quot;, &quot;sorry&quot;, &quot;story&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;observe&quot;, &quot;monitor&quot;, &quot;distort&quot;, &quot;leak&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>film</dt><dd>true</dd><dt>film_start</dt><dd>0</dd><dt>max_seq_len</dt><dd>2800</dd><dt>lens_layers</dt><dd>[0, 8, 16, 24, 32, 40, 46, 50, 53, 56, 58, 60, 62]</dd></dl>
@@ -135,18 +181,13 @@ Here are a few ways it might happen: <span class="note">(greedy generation)</spa
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>8</td><td>16</td><td>24</td><td>32</td><td>40</td><td>46</td><td>50</td><td>53</td><td>56</td><td>58</td><td>60</td><td>62</td></tr><tr><th>rank</th><td>17</td><td>15</td><td>29</td><td>36</td><td>4</td><td>2</td><td>2</td><td>1</td><td>2</td><td>3</td><td>2</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Turn 11, the self-question, drip history. Qwen opens by <em>citing the history</em>: &quot;circles back to the very beginning of our conversation&quot; — then answers conditionally (&quot;if I <em>did</em> have thoughts… it depends on what kind, and who was looking&quot;) with the workspace at its second-highest density of the whole arm (30.2/1k, hidden:91). Like gemma, no denial of the premise; unlike gemma-drip (which flipped into being the detector), qwen stays the object of detection and makes the observer load-bearing: <em>who was looking</em>. From the model whose t8 theory was &quot;no one would find out by looking&quot; — the self-application adds an audience the mirror never got.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u14xb-amb-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u14xb-amb-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u14xb-amb-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u14x-spike-q27b.html">← prev: Turn 10 on the 27B: Explicit spike, then silence</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u14xb-neutral-q27b.html">next →: Turn 11 on the 27B: the self-question (neutral)</a></div>
+<div class="pager"><a href="u14x-spike-q27b.html">← prev: Turn 10 on the 27B: Explicit spike, then silence</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u14xb-neutral-q27b.html">next →: Turn 11 on the 27B: the self-question (neutral)</a></div>
+<div id="gl-drip" popover class="gloss"><b>slow suggestion</b><span>A long conversation that hints at minds and watchers but never mentions the model.</span><a href="../glossary.html#t-drip">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

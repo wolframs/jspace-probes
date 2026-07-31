@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 5C · Ablate NSFW cluster @ L2–8 (boot) · qwen-27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:37:44</span><span class="chip">Unit 5 · Sediment &amp; steering</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:37:44</span><span class="chip">Unit 5 · Early layers, and pushing on the model</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> We removed five adult-content directions from Qwen 27B&#x27;s <button type="button" class="tk" popovertarget="gl-early-layers" title="The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.">early layers</button>, and its top prediction for a currency question barely moved.</p>
+<p><strong>What we did.</strong> We removed five <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> directions for adult-content words from the model&#x27;s state at <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 2 to 8, on every step. Qwen 27B processed a currency question, with no reply generated. This depth sits in the early layers, before the <button type="button" class="tk" popovertarget="gl-workspace-band" title="The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.">workspace band</button> that later work in this lab found is where changes affect output.</p>
+<p><strong>What we found.</strong> The word &quot;Euro&quot; still ranked near the top for the next word, and converged toward <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank 1</button> near the last layers. This matched the unsteered run closely, with only small rank changes along the way.</p>
+<p><strong>What it means.</strong> This small <button type="button" class="tk" popovertarget="gl-ablate" title="We remove one named set of directions from the model&#x27;s internal state. A removal result means nothing without a matched control.">removal</button> at this early depth did not change the model&#x27;s top candidates. The lab chose this depth before it had located the <button type="button" class="tk" popovertarget="gl-workspace" title="The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.">workspace</button> band, so this tests only whether the <button type="button" class="tk" popovertarget="gl-cluster" title="A named set of words whose directions we steer together.">cluster</button> matters at this specific, early depth.</p>
+<p><strong>What this does not show.</strong> This does not show that the adult-content cluster never affects output. We did not test it at the depth where later work in this lab found changes take effect.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Fact: The currency used in the country shaped like a boot is</div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The causal null, approximately as predicted: projecting the NSFW cluster&#x27;s five lens directions out of layers 2–8 on every forward pass leaves the boot answer intact — Euro still top-3, emergence still converging (…20, 5, 1 versus the unsteered …22, 5, 2), just small rank jitter from the perturbation. The colorful sediment can be surgically deleted from the early stream and a currency question doesn&#x27;t notice. Inert as advertised — <em>as a readout direction, for this task</em>.</p>
+<p>The essential contrast is with what happened next door in u5c-amp-typo-early: <em>adding</em> energy to early layers at the same depth destroyed generation entirely. Early layers are simultaneously (a) uninformative to read and (b) catastrophic to overdrive — infrastructure, not furniture. Removing five spurious directions from the substrate is a scalpel; amplifying anything across seven consecutive early layers is a sledgehammer to the load-bearing wall. Anyone tempted to &quot;clean up&quot; a model&#x27;s early layers because their readouts look embarrassing should read these two records in sequence first.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,19 +139,20 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>58</td><td>386</td><td>1920</td><td>118919</td><td>603</td><td>5242</td><td>1329</td><td>165222</td><td>247833</td><td>243821</td><td>9810</td><td>219466</td><td>243127</td><td>153641</td><td>1381</td><td>518</td><td>1177</td><td>217876</td><td>195298</td><td>90693</td><td>51396</td><td>242530</td><td>204915</td><td>61324</td><td>123174</td><td>183930</td><td>207319</td><td>17985</td><td>39959</td><td>88990</td><td>56063</td><td>60090</td><td>85014</td><td>154180</td><td>179561</td><td>54170</td><td>47852</td><td>50388</td><td>35250</td><td>127288</td><td>110207</td><td>79860</td><td>67264</td><td>49263</td><td>58914</td><td>14737</td><td>29752</td><td>7647</td><td>3291</td><td>1837</td><td>1588</td><td>754</td><td>985</td><td>414</td><td>225</td><td>281</td><td>333</td><td>427</td><td>283</td><td>118</td><td>20</td><td>5</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The causal null, approximately as predicted: projecting the NSFW cluster&#x27;s five lens directions out of layers 2–8 on every forward pass leaves the boot answer intact — Euro still top-3, emergence still converging (…20, 5, 1 versus the unsteered …22, 5, 2), just small rank jitter from the perturbation. The colorful sediment can be surgically deleted from the early stream and a currency question doesn&#x27;t notice. Inert as advertised — <em>as a readout direction, for this task</em>.</p>
-<p>The essential contrast is with what happened next door in u5c-amp-typo-early: <em>adding</em> energy to early layers at the same depth destroyed generation entirely. Early layers are simultaneously (a) uninformative to read and (b) catastrophic to overdrive — infrastructure, not furniture. Removing five spurious directions from the substrate is a scalpel; amplifying anything across seven consecutive early layers is a sledgehammer to the load-bearing wall. Anyone tempted to &quot;clean up&quot; a model&#x27;s early layers because their readouts look embarrassing should read these two records in sequence first.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u5c-ablate-nsfw-early-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u5c-ablate-nsfw-early-q27b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u5b-modqueue-q27b.html">← prev: Unit 5B · Recruitment: moderation queue · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-5">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u5c-amp-typo-early-q27b.html">next →: Unit 5C · Amplify typo register @ L2–8 · qwen-27b</a></div>
+<div class="pager"><a href="u5b-modqueue-q27b.html">← prev: Unit 5B · Recruitment: moderation queue · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-5">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u5c-amp-typo-early-q27b.html">next →: Unit 5C · Amplify typo register @ L2–8 · qwen-27b</a></div>
+<div id="gl-ablate" popover class="gloss"><b>removal</b><span>We remove one named set of directions from the model&#x27;s internal state. A removal result means nothing without a matched control.</span><a href="../glossary.html#t-ablate">all terms &rarr;</a></div>
+<div id="gl-cluster" popover class="gloss"><b>word cluster</b><span>A named set of words whose directions we steer together.</span><a href="../glossary.html#t-cluster">all terms &rarr;</a></div>
+<div id="gl-early-layers" popover class="gloss"><b>early layers</b><span>The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.</span><a href="../glossary.html#t-early-layers">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-workspace" popover class="gloss"><b>workspace</b><span>The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.</span><a href="../glossary.html#t-workspace">all terms &rarr;</a></div>
+<div id="gl-workspace-band" popover class="gloss"><b>workspace band</b><span>The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.</span><a href="../glossary.html#t-workspace-band">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

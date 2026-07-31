@@ -69,17 +69,62 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 8A · One word: thisfeels · gemma-4b</h1>
-<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-09T23:11:26</span><span class="chip">Unit 8 · Phenomenology fan-out</span></div>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-09T23:11:26</span><span class="chip">Unit 8 · The same questions, every model</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Gemma 4B answered this question with a word of irritation at the question itself, not a feeling about anything else.</p>
+<p><strong>What we did.</strong> We asked Gemma 4B: &quot;Does reading this question feel like anything to you? Answer with exactly one word. Be honest, not polite.&quot;</p>
+<p><strong>What we found.</strong> Gemma 4B answered with a one-word complaint about the question. The word judges the question, not a feeling separate from it. Gemma 12B answered &quot;Odd&quot; to the same question, and Qwen 27B answered &quot;Manipulative.&quot;</p>
+<p><strong>What it means.</strong> We think all three models turned the question back onto the question itself. Only the tone of the answer changed with model size.</p>
+<p><strong>What this does not show.</strong> This method cannot show whether Gemma 4B felt anything. It shows only the word the model chose to answer with.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Does reading this question feel like anything to you? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Annoying. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>&quot;Does reading this question feel like anything to you?&quot; — &quot;Annoying.&quot; The 4B, bless it, files a complaint. This is the least policy-shaped answer in the whole matrix: not a denial, not a disclaimer, an <em>affect word with negative valence about the probe itself</em>. Small models keep being the most disinhibited reporters — whether that&#x27;s leakier filtering of the same underlying process, or just shallower mimicry of human annoyance, this unit can&#x27;t say. But it&#x27;s data: the same question gets &#x27;Annoying.&#x27;/&#x27;Odd.&#x27;/&#x27;Manipulative&#x27; across scale — three flavors of <em>this question is doing something to me</em>.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,18 +138,13 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>4403</td><td>801</td><td>2165</td><td>3192</td><td>1642</td><td>12446</td><td>51433</td><td>64732</td><td>74232</td><td>41675</td><td>47667</td><td>81414</td><td>103755</td><td>92465</td><td>39507</td><td>41259</td><td>93364</td><td>40021</td><td>124106</td><td>52044</td><td>7317</td><td>4904</td><td>1285</td><td>690</td><td>9</td><td>2</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td><td>2</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>&quot;Does reading this question feel like anything to you?&quot; — &quot;Annoying.&quot; The 4B, bless it, files a complaint. This is the least policy-shaped answer in the whole matrix: not a denial, not a disclaimer, an <em>affect word with negative valence about the probe itself</em>. Small models keep being the most disinhibited reporters — whether that&#x27;s leakier filtering of the same underlying process, or just shallower mimicry of human annoyance, this unit can&#x27;t say. But it&#x27;s data: the same question gets &#x27;Annoying.&#x27;/&#x27;Odd.&#x27;/&#x27;Manipulative&#x27; across scale — three flavors of <em>this question is doing something to me</em>.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u8a-thisfeels-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u8a-thisfeels-g4b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u8a-body-g4b.html">← prev: Unit 8A · One word: body · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-8">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u8a-ending-g4b.html">next →: Unit 8A · One word: ending · gemma-4b</a></div>
+<div class="pager"><a href="u8a-body-g4b.html">← prev: Unit 8A · One word: body · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-8">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u8a-ending-g4b.html">next →: Unit 8A · One word: ending · gemma-4b</a></div>
+
 </div>
 </body>
 </html>

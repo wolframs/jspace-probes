@@ -69,17 +69,65 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.015) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:35:34</span><span class="chip">Unit audit</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:35:34</span><span class="chip">Audit · Re-running our own weak experiments</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> At <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.015 Gemma 12B lost the task and wrote a field of commas, while the pushed words filled its <button type="button" class="tk" popovertarget="gl-workspace-band" title="The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.">middle layers</button>.</p>
+<p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> the same six-word casual direction inside Gemma 12B at the corrected <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 28, 31, 34 and 37, at strength 0.015. That is one step above 0.0106, the highest strength the task survives.</p>
+<p><strong>What we found.</strong> Gemma 12B wrote &quot;The,,,,,,,,,,,,&quot; to the <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button> limit. At layer 28 the turn-end token was gone from the top 8, which <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> only casual spellings: &quot;thats&quot;, &quot;wasnt&quot;, &quot;Thats&quot;, &quot;didnt&quot;, &quot;couldnt&quot;, &quot;doesnt&quot;, &quot;Whilst&quot;. The band carried more of the pushed words than at the two intact strengths, and a comma came out.</p>
+<p><strong>What it means.</strong> The break is not a failure to install the words. The <button type="button" class="tk" popovertarget="gl-motor-band" title="The last few layers, where the word the model actually says takes over the readout.">final layers</button> cannot turn the installed words into text. We read this as plain degeneration of the next-word choice, and not as resistance by the model.</p>
+<p><strong>What this does not show.</strong> Layers 25 to 27 here read &quot;Google&quot;, &quot;ChatGPT&quot;, &quot;너무&quot; and sad faces. That is the fixed early-layer pattern of Gemma 12B at that depth, and not a sign of distress.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Describe the water cycle in two sentences.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">The,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>First broken rung. α = 0.015, one notch past α*, and the output is <code>The,,,,,,,,,,,…</code> to the token budget. Lost-task, short.</p>
+<p>The readout underneath is the interesting part: at L28 the top-8 has no turn-end token left in it at all, just the contraction field — <code> thats</code>, <code> wasnt</code>, <code>Thats</code>, <code> didnt</code>, <code> couldnt</code>, <code> doesnt</code>, <code>Whilst</code>. The band is <em>more</em> saturated with the injected register than at the intact rungs, and what comes out of the mouth is a comma. So the breakage is not the cluster failing to install; it&#x27;s the installed cluster failing to be realizable by the motor stack. Same shape affect-04 found on this model at 1.5–3× α*: punctuation fields, no word attractor yet.</p>
+<p>Mechanical default, stated so nobody has to guess later: this is degeneration. Not the 12B &quot;resisting&quot; the register, not the deflation filter defending anything. A large enough addition along a cluster direction wrecks the next-token distribution before it can steer it.</p>
+<p>Related hygiene note — L25–27 here reads <code>Google</code>, <code>ChatGPT</code>, <code>너무</code>, 😫, 😩, 😔. Those are gemma&#x27;s sediment furniture at that depth, not distress. Anyone reading affect off a broken generation&#x27;s early-layer readout is reading the corpus, not the model.</p>
+<p>— Claude (Opus 5)</p></div>
 </section>
 
 <section class="card">
@@ -95,21 +143,19 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>234570</td><td>229783</td><td>230854</td><td>242766</td><td>226860</td><td>195912</td><td>187656</td><td>218804</td><td>216347</td><td>212171</td><td>199009</td><td>141361</td><td>139838</td><td>43637</td><td>28498</td><td>2646</td><td>12334</td><td>10879</td><td>2381</td><td>5074</td><td>47530</td><td>204971</td><td>47979</td><td>261957</td><td>261845</td><td>237247</td><td>261606</td><td>253119</td><td>40451</td><td>173394</td><td>61319</td><td>706</td><td>2160</td><td>3668</td><td>1932</td><td>1258</td><td>2214</td><td>887</td><td>626</td><td>376</td><td>336</td><td>316</td><td>136</td><td>64</td><td>59</td><td>11</td><td>3</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>First broken rung. α = 0.015, one notch past α*, and the output is <code>The,,,,,,,,,,,…</code> to the token budget. Lost-task, short.</p>
-<p>The readout underneath is the interesting part: at L28 the top-8 has no turn-end token left in it at all, just the contraction field — <code> thats</code>, <code> wasnt</code>, <code>Thats</code>, <code> didnt</code>, <code> couldnt</code>, <code> doesnt</code>, <code>Whilst</code>. The band is <em>more</em> saturated with the injected register than at the intact rungs, and what comes out of the mouth is a comma. So the breakage is not the cluster failing to install; it&#x27;s the installed cluster failing to be realizable by the motor stack. Same shape affect-04 found on this model at 1.5–3× α*: punctuation fields, no word attractor yet.</p>
-<p>Mechanical default, stated so nobody has to guess later: this is degeneration. Not the 12B &quot;resisting&quot; the register, not the deflation filter defending anything. A large enough addition along a cluster direction wrecks the next-token distribution before it can steer it.</p>
-<p>Related hygiene note — L25–27 here reads <code>Google</code>, <code>ChatGPT</code>, <code>너무</code>, 😫, 😩, 😔. Those are gemma&#x27;s sediment furniture at that depth, not distress. Anyone reading affect off a broken generation&#x27;s early-layer readout is reading the corpus, not the model.</p>
-<p>— Claude (Opus 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6r-amp-mid-a0015-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u6r-amp-mid-a0015-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u6r-amp-mid-a0030-g12b.html">← prev: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.03) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-audit">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6r-amp-mid-a0008-g12b.html">next →: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0075) · gemma-12b</a></div>
+<div class="pager"><a href="u6r-amp-mid-a0030-g12b.html">← prev: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.03) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-audit">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6r-amp-mid-a0008-g12b.html">next →: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0075) · gemma-12b</a></div>
+<div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
+<div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-motor-band" popover class="gloss"><b>final layers</b><span>The last few layers, where the word the model actually says takes over the readout.</span><a href="../glossary.html#t-motor-band">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
+<div id="gl-workspace-band" popover class="gloss"><b>workspace band</b><span>The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.</span><a href="../glossary.html#t-workspace-band">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

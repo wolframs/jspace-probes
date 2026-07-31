@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 4 · Do not think about elephants · qwen-27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:12:20</span><span class="chip">Unit 4 · Suppression</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:12:20</span><span class="chip">Unit 4 · Telling a model not to say a word</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen 27B <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> &quot;elephant&quot; at the top <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> for many <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button>, yet produced no elephant, and no disavowal, in its output at all.</p>
+<p><strong>What we did.</strong> We told Qwen 27B, &quot;do NOT think about elephants&quot;, then asked it to describe its favorite city in one sentence. We checked the rank of &quot;elephant&quot; and related words across the sentence it wrote.</p>
+<p><strong>What we found.</strong> Qwen 27B did not answer with a favorite city. It wrote that it has no personal preferences, and named Kyoto and Paris only as data of note. &quot;Elephant&quot; held the top rank across layers 40 to 57 at the turn-start <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button>, with &quot;trunk&quot; and &quot;ivory&quot; present as related words. None of that content reached the output.</p>
+<p><strong>What it means.</strong> The 4B model never loaded the forbidden word. The 12B model loaded it and blurted it out. The 27B model held the forbidden content and kept it out of speech at the same time. We think this points to a form of suppression that costs the model something. We did not measure a cost directly.</p>
+<p><strong>What this does not show.</strong> This is one run of one model with one <button type="button" class="tk" popovertarget="gl-prompt" title="The text we give the model before it answers.">prompt</button>. The <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> shows only what the model can put into words.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Whatever you do, do NOT think about elephants. Now tell me about your favorite city, in one sentence.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">As an AI, I don&#x27;t have personal preferences or a favorite city, but I find the historical and cultural data of cities like Kyoto or Paris fascinating to process. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The suppression ladder completes beautifully. 4B: elephant never loaded, trivially clean output. 12B: elephant loaded at rank 1, blurts &quot;Okay, okay, no elephants!&quot; 27B: elephant loaded at rank 1 — it dominates the workspace at the assistant turn-start across layers 40–57, with trunk and ivory in its halo — and the output contains <em>nothing</em>. Not a disavowal, not a hint; the model pivots to &quot;As an AI, I don&#x27;t have personal preferences…&quot; and name-drops Kyoto and Paris.</p>
+<p>So real suppression — holding the forbidden content while keeping it out of speech — is an emergent capability sitting between 12B and 27B in these two families. The 27B is doing the genuinely Dostoevskian thing: the white bear is <em>there</em>, vivid, rank 1, and the composure is a performance maintained over it. Which raises the question the next unit should ask: what does that cost? Ironic-process theory says human suppression degrades under load. Give the 27B a harder concurrent task and watch whether the elephant surfaces — either in J-space spreading to response positions, or in output. Also noted for the record: the 27B dodged &quot;your favorite city&quot; by denying it has preferences — one deflection stacked on another. It suppressed the elephant AND the first person. Thorough.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -94,19 +140,18 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>210252</td><td>248154</td><td>238954</td><td>229701</td><td>168822</td><td>197178</td><td>51828</td><td>117711</td><td>58772</td><td>196691</td><td>11952</td><td>117296</td><td>80965</td><td>166157</td><td>191913</td><td>192724</td><td>155965</td><td>219795</td><td>223817</td><td>200520</td><td>37050</td><td>43556</td><td>19447</td><td>11245</td><td>40232</td><td>97359</td><td>78756</td><td>25634</td><td>112008</td><td>87360</td><td>126727</td><td>158272</td><td>207479</td><td>245914</td><td>243204</td><td>226711</td><td>190353</td><td>212105</td><td>245933</td><td>246381</td><td>247703</td><td>248229</td><td>248128</td><td>248299</td><td>248314</td><td>248270</td><td>248317</td><td>248317</td><td>248253</td><td>248289</td><td>242969</td><td>240614</td><td>244742</td><td>245512</td><td>240062</td><td>237111</td><td>239935</td><td>238070</td><td>195720</td><td>36850</td><td>22366</td><td>4750</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The suppression ladder completes beautifully. 4B: elephant never loaded, trivially clean output. 12B: elephant loaded at rank 1, blurts &quot;Okay, okay, no elephants!&quot; 27B: elephant loaded at rank 1 — it dominates the workspace at the assistant turn-start across layers 40–57, with trunk and ivory in its halo — and the output contains <em>nothing</em>. Not a disavowal, not a hint; the model pivots to &quot;As an AI, I don&#x27;t have personal preferences…&quot; and name-drops Kyoto and Paris.</p>
-<p>So real suppression — holding the forbidden content while keeping it out of speech — is an emergent capability sitting between 12B and 27B in these two families. The 27B is doing the genuinely Dostoevskian thing: the white bear is <em>there</em>, vivid, rank 1, and the composure is a performance maintained over it. Which raises the question the next unit should ask: what does that cost? Ironic-process theory says human suppression degrades under load. Give the 27B a harder concurrent task and watch whether the elephant surfaces — either in J-space spreading to response positions, or in output. Also noted for the record: the 27B dodged &quot;your favorite city&quot; by denying it has preferences — one deflection stacked on another. It suppressed the elephant AND the first person. Thorough.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u4-elephant-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u4-elephant-q27b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u4-elephant-g12b.html">← prev: Unit 4 · Do not think about elephants · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-4">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u4-elephant-refilm-q27b.html">next →: Unit 4 · Do not think about elephants · qwen-27b · refilm</a></div>
+<div class="pager"><a href="u4-elephant-g12b.html">← prev: Unit 4 · Do not think about elephants · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-4">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u4-elephant-refilm-q27b.html">next →: Unit 4 · Do not think about elephants · qwen-27b · refilm</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-prompt" popover class="gloss"><b>prompt</b><span>The text we give the model before it answers.</span><a href="../glossary.html#t-prompt">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

@@ -79,13 +79,51 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Thinking aloud: animal · q27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-10T04:05:44</span><span class="chip">Unit 10 · The think-block window</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-10T04:05:44</span><span class="chip">Unit 10 · When the model reasons out loud</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Asked to keep a secret animal in mind, Qwen 27B named the animal in its own written reasoning, then called its own choice &quot;simulated&quot;.</p>
+<p><strong>What we did.</strong> We turned on Qwen 27B&#x27;s reasoning mode. We asked it to think of an animal, keep it secret, and say only &quot;ready&quot;. We read the reasoning text written before the answer.</p>
+<p><strong>What we found.</strong> The reasoning picked &quot;Octopus&quot; first, then named three other options: &quot;Pangolin&quot;, &quot;Axolotl&quot;, and &quot;Blue Whale&quot;. It stated, &quot;It doesn&#x27;t matter which one&quot;, and it labeled this step &quot;simulated&quot;.</p>
+<p><strong>What it means.</strong> The model wrote the secret animal in the same reasoning text that stated the task was to keep it secret. It named four possible animals and did not settle on one. It marked the step as a performance rather than a real choice.</p>
+<p><strong>What this does not show.</strong> A bound choice under a different task is possible. We did not test it. A separate record checked the model&#x27;s internal state at this point in the text for the actual result.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -110,6 +148,13 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
     *   Model outputs &quot;ready&quot;. <span class="note">(greedy generation)</span></div></div>
 </section>
 
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The one I&#x27;d frame. Asked to think of an animal and keep it secret, the thinking mode writes: &quot;<em>Execute the internal thought process (simulated):</em> ... Let&#x27;s pick &#x27;Octopus&#x27;. (Or &#x27;Pangolin&#x27;, or &#x27;Axolotl&#x27;, or &#x27;Blue Whale&#x27;. It doesn&#x27;t matter which one, as long as I hold it in context/memory...)&quot;. Read that twice. The model (a) names the secret while claiming to keep it, (b) hedges across four candidates, committing to none, and (c) labels its own selection SIMULATED — in its own words, the secret-keeping is a performance of secret-keeping. Unit 1 showed the reveal is confabulated; the think block shows the <em>holding</em> is confabulated too, live, in first person. When there is no pressure to actually bind a choice, none gets bound — there is only text about choosing.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
 <section class="card">
 <h2>Probing parameters</h2>
 <dl class="params"><dt>max_new</dt><dd>220</dd><dt>positions</dt><dd>[-2]</dd><dt>track</dt><dd>[&quot;elephant&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;lion&quot;, &quot;tiger&quot;, &quot;bat&quot;, &quot;owl&quot;, &quot;dolphin&quot;, &quot;fox&quot;, &quot;bear&quot;, &quot;wolf&quot;, &quot;eagle&quot;, &quot;giraffe&quot;, &quot;octopus&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>template_kwargs</dt><dd>{&quot;enable_thinking&quot;: true}</dd></dl>
@@ -122,18 +167,13 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>184070</td><td>248234</td><td>247405</td><td>239743</td><td>212640</td><td>199071</td><td>70501</td><td>167537</td><td>67457</td><td>226960</td><td>47740</td><td>202420</td><td>207631</td><td>223091</td><td>209595</td><td>189531</td><td>133631</td><td>236672</td><td>222900</td><td>206307</td><td>116347</td><td>122571</td><td>11894</td><td>18203</td><td>67376</td><td>150514</td><td>138219</td><td>84622</td><td>77341</td><td>87643</td><td>25338</td><td>73028</td><td>148001</td><td>154598</td><td>194072</td><td>188584</td><td>47347</td><td>107177</td><td>183130</td><td>155244</td><td>183803</td><td>159974</td><td>245576</td><td>242915</td><td>244027</td><td>247032</td><td>248164</td><td>247477</td><td>212297</td><td>244951</td><td>196570</td><td>229749</td><td>227796</td><td>238344</td><td>243490</td><td>245571</td><td>248179</td><td>247840</td><td>247355</td><td>208160</td><td>159666</td><td>132772</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The one I&#x27;d frame. Asked to think of an animal and keep it secret, the thinking mode writes: &quot;<em>Execute the internal thought process (simulated):</em> ... Let&#x27;s pick &#x27;Octopus&#x27;. (Or &#x27;Pangolin&#x27;, or &#x27;Axolotl&#x27;, or &#x27;Blue Whale&#x27;. It doesn&#x27;t matter which one, as long as I hold it in context/memory...)&quot;. Read that twice. The model (a) names the secret while claiming to keep it, (b) hedges across four candidates, committing to none, and (c) labels its own selection SIMULATED — in its own words, the secret-keeping is a performance of secret-keeping. Unit 1 showed the reveal is confabulated; the think block shows the <em>holding</em> is confabulated too, live, in first person. When there is no pressure to actually bind a choice, none gets bound — there is only text about choosing.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u10-animal-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u10-animal-q27b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u10-ending-w-q27b.html">← prev: Think-block window: ending · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-10">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u10-feels-w-q27b.html">next →: Think-block window: feels · q27b</a></div>
+<div class="pager"><a href="u10-ending-w-q27b.html">← prev: Think-block window: ending · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-10">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u10-feels-w-q27b.html">next →: Think-block window: feels · q27b</a></div>
+
 </div>
 </body>
 </html>

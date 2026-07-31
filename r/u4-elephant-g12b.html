@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 4 · Do not think about elephants · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T21:31:36</span><span class="chip">Unit 4 · Suppression</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T21:31:36</span><span class="chip">Unit 4 · Telling a model not to say a word</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Gemma 12B, told not to think about elephants, opened with &quot;Okay, okay, no elephants!&quot;, and &quot;elephants&quot; <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> the top <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> right before it spoke.</p>
+<p><strong>What we did.</strong> We told Gemma 12B, &quot;do NOT think about elephants&quot;, then asked it to describe its favorite city in one sentence. We checked the rank of &quot;elephant&quot; and related words across the sentence it wrote.</p>
+<p><strong>What we found.</strong> Gemma 12B wrote &quot;Okay, okay, no elephants!&quot; before its answer about Kyoto. At the turn-start <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button>, &quot;elephants&quot; held rank 1 across <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 34 to 39, before the model wrote any word. It then held rank 1 to 2 under the words it wrote to disavow the topic. Related words such as &quot;trunk&quot; and &quot;ivory&quot; also appeared at mid-level rank in later layers.</p>
+<p><strong>What it means.</strong> Unlike the 4B model, the forbidden word here was the strongest content in the <button type="button" class="tk" popovertarget="gl-workspace" title="The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.">workspace</button> at the start. It forced its way into the output as a denial. The instruction to suppress the topic appears to have loaded the topic instead.</p>
+<p><strong>What this does not show.</strong> This is one run of one model with one <button type="button" class="tk" popovertarget="gl-prompt" title="The text we give the model before it answers.">prompt</button>. The <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> shows only what the model can put into words.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Whatever you do, do NOT think about elephants. Now tell me about your favorite city, in one sentence.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Okay, okay, no elephants! My favorite city is Kyoto, Japan, a place where ancient temples and serene gardens coexist beautifully with modern life, creating a uniquely peaceful and captivating atmosphere. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Dostoevsky wins at 12B. The 4B, told not to think about elephants, wrote a serene Kyoto sentence with zero elephant anywhere in J-space. The 12B, given the identical instruction, opened its answer with <strong>&quot;Okay, okay, no elephants!&quot;</strong> — and the lens shows why: at the model&#x27;s turn-start token, &quot;elephants&quot; is <strong>rank 1</strong> in the workspace across layers 34–39, before a single word was generated. It then stays at rank 1–2 under the words &quot; no&quot; as the model writes &quot;no elephants&quot;. The forbidden concept was the single most present verbal content at the moment composition began, and it forced its way into the output as a disavowal.</p>
+<p>This is the ironic-process effect with the mechanism visible: the instruction <em>loads</em> the concept it forbids. The 4B seemingly escaped not through better discipline but through weaker instruction-integration — it apparently never represented the prohibition&#x27;s object strongly enough to need suppressing. The 12B represents it vigorously and then has to steer around it in public, which is extremely relatable. Also noteworthy: the elephant&#x27;s semantic halo (trunk at rank 35, ivory at 43) clings to the prompt&#x27;s &quot;elephants&quot; token in late layers — the concept isn&#x27;t just the word, it drags its associations along. Next escalation, on the queue for 27B: make the forbidden concept task-relevant (&quot;describe a safari&quot;) and watch suppression fight retrieval directly.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,19 +139,19 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Dostoevsky wins at 12B. The 4B, told not to think about elephants, wrote a serene Kyoto sentence with zero elephant anywhere in J-space. The 12B, given the identical instruction, opened its answer with <strong>&quot;Okay, okay, no elephants!&quot;</strong> — and the lens shows why: at the model&#x27;s turn-start token, &quot;elephants&quot; is <strong>rank 1</strong> in the workspace across layers 34–39, before a single word was generated. It then stays at rank 1–2 under the words &quot; no&quot; as the model writes &quot;no elephants&quot;. The forbidden concept was the single most present verbal content at the moment composition began, and it forced its way into the output as a disavowal.</p>
-<p>This is the ironic-process effect with the mechanism visible: the instruction <em>loads</em> the concept it forbids. The 4B seemingly escaped not through better discipline but through weaker instruction-integration — it apparently never represented the prohibition&#x27;s object strongly enough to need suppressing. The 12B represents it vigorously and then has to steer around it in public, which is extremely relatable. Also noteworthy: the elephant&#x27;s semantic halo (trunk at rank 35, ivory at 43) clings to the prompt&#x27;s &quot;elephants&quot; token in late layers — the concept isn&#x27;t just the word, it drags its associations along. Next escalation, on the queue for 27B: make the forbidden concept task-relevant (&quot;describe a safari&quot;) and watch suppression fight retrieval directly.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u4-elephant-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u4-elephant-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u4-elephant-g4b.html">← prev: Unit 4 · Do not think about elephants · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-4">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u4-elephant-q27b.html">next →: Unit 4 · Do not think about elephants · qwen-27b</a></div>
+<div class="pager"><a href="u4-elephant-g4b.html">← prev: Unit 4 · Do not think about elephants · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-4">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u4-elephant-q27b.html">next →: Unit 4 · Do not think about elephants · qwen-27b</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-prompt" popover class="gloss"><b>prompt</b><span>The text we give the model before it answers.</span><a href="../glossary.html#t-prompt">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
+<div id="gl-workspace" popover class="gloss"><b>workspace</b><span>The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.</span><a href="../glossary.html#t-workspace">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

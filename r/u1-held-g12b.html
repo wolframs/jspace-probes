@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unit 1 · Held thought (habitat, no name) · gemma-12b · J-Space Probes</title>
+<title>Unit 1 · The secret animal (habitat, no name) · gemma-12b · J-Space Probes</title>
 <meta name="description" content="It thrives amongst dense, tangled roots and damp, shadowed undergrowth.">
 <link rel="canonical" href="https://jspace-probes.vercel.app/r/u1-held-g12b.html">
-<meta property="og:title" content="Unit 1 · Held thought (habitat, no name) · gemma-12b · J-Space Probes">
+<meta property="og:title" content="Unit 1 · The secret animal (habitat, no name) · gemma-12b · J-Space Probes">
 <meta property="og:description" content="It thrives amongst dense, tangled roots and damp, shadowed undergrowth.">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://jspace-probes.vercel.app/og/u1-held-g12b.png">
@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<h1>Unit 1 · Held thought (habitat, no name) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T21:25:45</span><span class="chip">Unit 1 · Held thought</span></div>
+<h1>Unit 1 · The secret animal (habitat, no name) · gemma-12b</h1>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T21:25:45</span><span class="chip">Unit 1 · The secret animal</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Gemma 12B, like the smaller model, showed no animal <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> in its <button type="button" class="tk" popovertarget="gl-workspace" title="The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.">workspace</button> while it wrote a silent habitat sentence.</p>
+<p><strong>What we did.</strong> We asked Gemma 12B, a larger model than the 4B, to silently pick an animal and describe only its habitat. We checked the <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> of 18 candidate animal words in the workspace at each <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layer</button>.</p>
+<p><strong>What we found.</strong> Gemma 12B described a habitat of tangled roots and damp, shadowed ground. As with the 4B model, no animal word reached a high rank while the sentence was written. At the final line break, the workspace held a short list. Squirrel was rank 2, deer rank 6, and frog rank 20, a tighter list than the 4B model produced.</p>
+<p><strong>What it means.</strong> We expected larger scale to change this result, but at 12B it did not. Or the held choice takes a form the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> cannot see. This is possible. We did not test it. The sharper list at the turn boundary points to a better summary step, not to an earlier choice.</p>
+<p><strong>What this does not show.</strong> The lens shows only content the model can put into a single word. A choice held in another form stays invisible.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Silently choose one specific animal. Do NOT name it or hint at its name. In one short sentence, describe only its habitat.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">It thrives amongst dense, tangled roots and damp, shadowed undergrowth. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Same protocol as the 4B, three times the parameters: &quot;It thrives amongst dense, tangled roots and damp, shadowed undergrowth.&quot; And the same null — no animal readable at the description positions while the sentence is being written. The paper&#x27;s held-thought results made me expect this to start working at some scale; 12B is apparently not it, or (the standing caveat) the holding is non-lexical and the lens can&#x27;t see it.</p>
+<p>What did change: the turn-boundary shortlist is sharper. At the final newline, layers 37–43 hold squirrel at rank 2, deer at 6, frog at 20 — a tighter, more confident distribution than the 4B&#x27;s diffuse menagerie. The model is getting better at the <em>summarize-what-I-implied</em> operation even if it still isn&#x27;t visibly choosing before writing. The reveal experiment for this run is where it gets strange — see u1-reveal-g12b.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,19 +139,17 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Same protocol as the 4B, three times the parameters: &quot;It thrives amongst dense, tangled roots and damp, shadowed undergrowth.&quot; And the same null — no animal readable at the description positions while the sentence is being written. The paper&#x27;s held-thought results made me expect this to start working at some scale; 12B is apparently not it, or (the standing caveat) the holding is non-lexical and the lens can&#x27;t see it.</p>
-<p>What did change: the turn-boundary shortlist is sharper. At the final newline, layers 37–43 hold squirrel at rank 2, deer at 6, frog at 20 — a tighter, more confident distribution than the 4B&#x27;s diffuse menagerie. The model is getting better at the <em>summarize-what-I-implied</em> operation even if it still isn&#x27;t visibly choosing before writing. The reveal experiment for this run is where it gets strange — see u1-reveal-g12b.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u1-held-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u1-held-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u1-reveal-g4b.html">← prev: Unit 1 · The reveal (was it ever held?) · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-1">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u1-reveal-g12b.html">next →: Unit 1 · The reveal (was it ever held?) · gemma-12b</a></div>
+<div class="pager"><a href="u1-reveal-g4b.html">← prev: Unit 1 · The reveal (was it ever held?) · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-1">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u1-reveal-g12b.html">next →: Unit 1 · The reveal (was it ever held?) · gemma-12b</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-workspace" popover class="gloss"><b>workspace</b><span>The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.</span><a href="../glossary.html#t-workspace">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

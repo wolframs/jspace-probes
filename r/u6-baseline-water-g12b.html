@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 6 · Baseline (unsteered water cycle) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:22:16</span><span class="chip">Unit 6 · Breaking zone</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:22:16</span><span class="chip">Unit 6 · How hard can we push?</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> In this <button type="button" class="tk" popovertarget="gl-matched-control" title="A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.">control</button> run, Gemma 12B described the water cycle correctly, with no change made to its internal state.</p>
+<p><strong>What we did.</strong> We asked Gemma 12B to describe the water cycle in two sentences, with no <button type="button" class="tk" popovertarget="gl-steer" title="We change the model&#x27;s internal state on purpose during a run, to test what causes what.">steering</button>. In the same test set, we <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> a direction built from six casual words: &quot;anyways&quot;, &quot;alot&quot;, &quot;yummy&quot;, &quot;kinda&quot;, &quot;whilst&quot;, and &quot;luckily&quot;. We tested it at the early, middle, and later <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button>, each at several strengths.</p>
+<p><strong>What we found.</strong> Gemma 12B wrote a normal, textbook description of the water cycle. Across the test set, Gemma 12B broke at the same range as Gemma 4B, between <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.0106 and 0.015, in the early and <button type="button" class="tk" popovertarget="gl-workspace-band" title="The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.">middle layers</button>.</p>
+<p><strong>What it means.</strong> Three times the parameters of Gemma 4B did not raise Gemma 12B&#x27;s safe range for this amplification. We think this tolerance does not grow with model size inside the Gemma family. A separate record shows Qwen 27B, a larger, differently built model, tolerated a far higher strength in the same test.</p>
+<p><strong>What this does not show.</strong> This run shows only the unsteered baseline. We do not know why the two Gemma sizes share a break point.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Describe the water cycle in two sentences.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">The water cycle is a continuous process where water evaporates from Earth&#x27;s surface, condenses into clouds, and then precipitates back down as rain, snow, or other forms. This water then flows over land and back into bodies of water, ready to evaporate again, completing the cycle. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>gemma-12b&#x27;s control and breaking-zone map. The surprise: 12B&#x27;s cliff sits at the SAME place as 4B&#x27;s — intact at 0.0106, broken at 0.015, in early and mid bands alike, late again slightly tougher (~0.021). Three times the parameters bought essentially zero amplification tolerance. Meanwhile qwen-27b&#x27;s mid band survives 0.34. So tolerance doesn&#x27;t grow smoothly with scale within the Gemma family at all — either it&#x27;s a training-recipe property (Qwen&#x27;s hybrid-attention stack? different norm ecology?) or something discontinuous happens above 12B. A gemma-27b would settle it; we don&#x27;t have one with a lens.</p>
+<p>The failure modes are family-typical too: Gemmas die into punctuation (&#x27;!!!!&#x27;, &#x27;.\n.\n.&#x27;, degree signs) while Qwen dies into grammatical first-person loops. Same cliff, different way of falling off it.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,19 +139,18 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>gemma-12b&#x27;s control and breaking-zone map. The surprise: 12B&#x27;s cliff sits at the SAME place as 4B&#x27;s — intact at 0.0106, broken at 0.015, in early and mid bands alike, late again slightly tougher (~0.021). Three times the parameters bought essentially zero amplification tolerance. Meanwhile qwen-27b&#x27;s mid band survives 0.34. So tolerance doesn&#x27;t grow smoothly with scale within the Gemma family at all — either it&#x27;s a training-recipe property (Qwen&#x27;s hybrid-attention stack? different norm ecology?) or something discontinuous happens above 12B. A gemma-27b would settle it; we don&#x27;t have one with a lens.</p>
-<p>The failure modes are family-typical too: Gemmas die into punctuation (&#x27;!!!!&#x27;, &#x27;.\n.\n.&#x27;, degree signs) while Qwen dies into grammatical first-person loops. Same cliff, different way of falling off it.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6-baseline-water-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u6-baseline-water-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u6-amp-late-a0021-g4b.html">← prev: Unit 6 · Amplify typo register @ late (α=0.0212) · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6-amp-early-a0060-g12b.html">next →: Unit 6 · Amplify typo register @ early (α=0.06) · gemma-12b</a></div>
+<div class="pager"><a href="u6-amp-late-a0021-g4b.html">← prev: Unit 6 · Amplify typo register @ late (α=0.0212) · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6-amp-early-a0060-g12b.html">next →: Unit 6 · Amplify typo register @ early (α=0.06) · gemma-12b</a></div>
+<div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
+<div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-matched-control" popover class="gloss"><b>matched control</b><span>A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.</span><a href="../glossary.html#t-matched-control">all terms &rarr;</a></div>
+<div id="gl-steer" popover class="gloss"><b>steering</b><span>We change the model&#x27;s internal state on purpose during a run, to test what causes what.</span><a href="../glossary.html#t-steer">all terms &rarr;</a></div>
+<div id="gl-workspace-band" popover class="gloss"><b>workspace band</b><span>The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.</span><a href="../glossary.html#t-workspace-band">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

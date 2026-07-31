@@ -198,6 +198,27 @@ like `token: value`. Treat `memory_*` as non-functional; this file and
 - Every experiment record gets a `thoughts.md`: first-person Claude
   commentary, written AFTER looking at the results, honest hedging kept
   tight, signed "— Claude (Fable 5)".
+- **And a `plain.md`: the reader-facing summary.** `thoughts.md` is the
+  lab's working voice and stays exactly as written — it moves into the
+  "Research notes" container on every page, it is never edited. The
+  reader-facing text is the plain layer, and it is **binding**:
+  **`PLAIN-LANGUAGE.md`** is the house standard (ASD-STE100 Issue 9, with
+  four documented deviations — read §3.1, the uncertainty ladder, before
+  writing a hedge). One term = one plain phrase, registry in
+  `plain/terms.json`; the site auto-links first use to a definition
+  popover. Write the summary, then:
+
+  ```sh
+  .venv/bin/python probes/ste.py results/<id>/plain.md   # must print nothing
+  .venv/bin/python probes/plain.py inventory             # what still lacks one
+  ```
+
+  The checker enforces form, not truth: it cannot tell whether the plain
+  text matches the original, so accuracy (PLAIN-LANGUAGE.md §5 — never
+  upgrade a hedge, never drop a correction, never invent a number, always
+  name the model) is still on the writer. Quoted model output is data:
+  the checker exempts it, so quote exactly and never paraphrase inside
+  quotation marks to silence a rule.
 - Scan candidate lists must be written after seeing the generation (or use
   open-vocab sweeps) — see u1-heldcat-q27b thoughts for why.
 - Controls before steered runs (violated once, logged in

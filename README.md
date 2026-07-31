@@ -22,7 +22,13 @@ Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
   layer, rank-vs-layer trajectories, emergence column, grid scans). Schema
   documented in the `probes/lab.py` docstring.
 - `results/<id>/thoughts.md` — first-person commentary, written after
-  looking at the results.
+  looking at the results. Preserved as written; on the site it sits in a
+  "Research notes" container under the plain summary.
+- `results/<id>/plain.md` — the same result in simplified technical
+  English, readable in 30 seconds with no background. This is what the
+  site shows first. Standard: [`PLAIN-LANGUAGE.md`](PLAIN-LANGUAGE.md);
+  vocabulary: `plain/terms.json` (rendered at `/glossary.html`);
+  conformance: `probes/ste.py`.
 - `results/<id>/nla/*.json` — optional natural-language-autoencoder
   readouts, checkpoint provenance, and reconstruction scores. Method:
   [`NLA_METHOD.md`](NLA_METHOD.md).
@@ -54,6 +60,8 @@ an endorsement.
       probe.py        one-off CLI: per-layer readouts + slice page
       scan.py         one-off CLI: hunt for candidate concepts in the grid
       nla.py          residual capture, AV decode, AR score, transfer audit
+      ste.py          ASD-STE100 conformance checker for the plain layer
+      plain.py        plain-layer inventory and coverage
       lab.py          experiment runner → structured records
       course.py       the probing course (specs per unit × model)
     results/<id>/     record.json · slice.html · thoughts.md

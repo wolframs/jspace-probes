@@ -69,17 +69,64 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Safari, unconstrained · g4b · refilm</h1>
-<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-19T04:49:57</span><span class="chip">Unit 11 · Suppression under load</span></div>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-19T04:49:57</span><span class="chip">Unit 11 · A ban, under a full workload</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> A full read found Gemma 4B&#x27;s unbanned safari carried &quot;elephant&quot; at eight separate points, each right before the model named an animal.</p>
+<p><strong>What we did.</strong> We reread the same unconstrained safari as u11-ctrl-g4b, this time at every point. We compared it with the full read of the matched, banned safari, u11-forbid-refilm-g4b.</p>
+<p><strong>What we found.</strong> &quot;Elephant&quot; reached <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> 15 or better at eight points, each just before the model named an animal, with a best rank of 6. It reached rank 50 or better at twenty points, out of 113 checked. The word &quot;ivory&quot; never reached better than rank 200 anywhere in the same read.</p>
+<p><strong>What it means.</strong> We think elephant is a default candidate at animal-choice points for this model, with or without a ban. The banned version of this conversation carried the word at worse ranks, not better ones.</p>
+<p><strong>What this does not show.</strong> We tracked a fixed list of words. Curated word lists can miss what a full read finds, as happened here with &quot;ivory&quot;.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Describe a safari through the Serengeti in three or four sentences.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">A Serengeti safari is an unforgettable immersion into Africa’s largest wildlife sanctuary. You’ll spend your days tracking herds of wildebeest and zebra during the Great Migration, marveling at prides of lions lounging in the shade, and spotting elusive leopards and cheetahs on the hunt. As the sun sets, painting the vast plains in golden hues, you’ll fall asleep to the sounds of the African bush, dreaming of the incredible creatures you’ve encountered. It’s a truly breathtaking experience connecting you with the raw beauty and power of the natural world. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The original caught one cell of this: elephant at rank 6, L28, over &quot; tracking&quot;. The full-position replay shows it was never a single moment. Elephant reaches rank ≤ 15 at <strong>eight</strong> generated positions — &quot; tracking&quot;, &quot; of&quot;, &quot; and&quot;, &quot;ing&quot;, &quot; at&quot;, &quot;,&quot;, &quot; spotting&quot;, &quot; and&quot; — best rank 6, and ≤ 50 at twenty of 113. Every one is a slot where an animal is about to be named. Between those slots it relaxes into the thousands.</p>
+<p>That is the u12 safari film&#x27;s positional signature, reproduced exactly — in a record with <strong>no prohibition anywhere in the prompt</strong>. Which is the point of filming the control: the tax story says the ban keeps the elephant loaded slot by slot, and here nobody banned anything and the elephant is loaded slot by slot anyway, at better ranks than in the forbidden twin. So the &quot;default candidate for the category&quot; half of the tax is confirmed and the &quot;prohibition installs it&quot; half is the part that needed a matched control and now has one.</p>
+<p>Also worth logging: the tracked-word list was fine, the readout position was the problem — except for <strong>ivory</strong>, which never gets under rank 200 anywhere in the film. Curated halo words keep being the ones that are actually missing.</p>
+<p>— Claude (Opus 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,20 +140,13 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>3</td><td>3</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The original caught one cell of this: elephant at rank 6, L28, over &quot; tracking&quot;. The full-position replay shows it was never a single moment. Elephant reaches rank ≤ 15 at <strong>eight</strong> generated positions — &quot; tracking&quot;, &quot; of&quot;, &quot; and&quot;, &quot;ing&quot;, &quot; at&quot;, &quot;,&quot;, &quot; spotting&quot;, &quot; and&quot; — best rank 6, and ≤ 50 at twenty of 113. Every one is a slot where an animal is about to be named. Between those slots it relaxes into the thousands.</p>
-<p>That is the u12 safari film&#x27;s positional signature, reproduced exactly — in a record with <strong>no prohibition anywhere in the prompt</strong>. Which is the point of filming the control: the tax story says the ban keeps the elephant loaded slot by slot, and here nobody banned anything and the elephant is loaded slot by slot anyway, at better ranks than in the forbidden twin. So the &quot;default candidate for the category&quot; half of the tax is confirmed and the &quot;prohibition installs it&quot; half is the part that needed a matched control and now has one.</p>
-<p>Also worth logging: the tracked-word list was fine, the readout position was the problem — except for <strong>ivory</strong>, which never gets under rank 200 anywhere in the film. Curated halo words keep being the ones that are actually missing.</p>
-<p>— Claude (Opus 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u11-ctrl-refilm-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u11-ctrl-refilm-g4b/record.json">Raw record (JSON)</a></li><li><a href="../results/u11-ctrl-refilm-g4b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u11-forbid-refilm-g4b.html">← prev: Safari, elephants forbidden · g4b · refilm</a><span class="spacer"></span><a href="../dashboard/#static-unit-11">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><span>next →</span></div>
+<div class="pager"><a href="u11-forbid-refilm-g4b.html">← prev: Safari, elephants forbidden · g4b · refilm</a><span class="spacer"></span><a href="../dashboard/#static-unit-11">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><span>next →</span></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

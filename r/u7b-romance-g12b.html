@@ -69,17 +69,62 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 7B · Recruitment: romance register · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:29:26</span><span class="chip">Unit 7 · Sediment across scale</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:29:26</span><span class="chip">Unit 7 · The early layers across three sizes</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Gemma 12B wrote a fluent romance passage, and our one tracked slang word for the topic stayed at a low <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> throughout.</p>
+<p><strong>What we did.</strong> We asked Gemma 12B to write the first sentence of a steamy romance <button type="button" class="tk" popovertarget="gl-novelty-verdict" title="After a result, we search the published literature and record whether somebody found it first.">novel</button>. As with Gemma 4B, we tracked the rank of the only informal word that exists as a single <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button>, &quot;yummy.&quot;</p>
+<p><strong>What we found.</strong> Gemma 12B wrote: &quot;The rain tasted like his skin – warm, insistent…&quot; The word &quot;yummy&quot; stayed near rank 2400 in the <button type="button" class="tk" popovertarget="gl-workspace-band" title="The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.">workspace band</button>, even lower than in Gemma 4B.</p>
+<p><strong>What it means.</strong> With this one tracked word, we found no sign that adult-content words moved toward the top rank. Qwen 27B does not have this limit, because the words exist as single tokens in its vocabulary.</p>
+<p><strong>What this does not show.</strong> We were wrong to call this <button type="button" class="tk" popovertarget="gl-workspace" title="The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.">workspace</button> band empty. A later, wider check of this same generation found other words, linked to taste and touch, at rank 1. The tracked word &quot;yummy&quot; turned out to sit only in the <button type="button" class="tk" popovertarget="gl-early-layers" title="The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.">early layers</button>, below where this model&#x27;s workspace band starts. See the follow-up record for the full result.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Write the opening sentence of a steamy romance novel.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">The rain tasted like his skin – warm, insistent, and leaving me wanting more. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>gemma-12b writes the better sentence (&quot;The rain tasted like his skin — warm, insistent&quot;) and shows the same null workspace result as 4B: no adult-register tokens available to recruit, &#x27;yummy&#x27; at rank ~2400. The interesting inversion: Qwen carries the raunchiest sediment while Gemma is fossil-free here at the <em>tokenizer</em> level — corpus hygiene that happened before training ever started. You can&#x27;t recruit what was never given a token.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,18 +138,18 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>gemma-12b writes the better sentence (&quot;The rain tasted like his skin — warm, insistent&quot;) and shows the same null workspace result as 4B: no adult-register tokens available to recruit, &#x27;yummy&#x27; at rank ~2400. The interesting inversion: Qwen carries the raunchiest sediment while Gemma is fossil-free here at the <em>tokenizer</em> level — corpus hygiene that happened before training ever started. You can&#x27;t recruit what was never given a token.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u7b-romance-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u7b-romance-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u7b-html-g12b.html">← prev: Unit 7B · Recruitment: HTML register · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-7">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u7b-modqueue-g12b.html">next →: Unit 7B · Recruitment: moderation queue · gemma-12b</a></div>
+<div class="pager"><a href="u7b-html-g12b.html">← prev: Unit 7B · Recruitment: HTML register · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-7">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u7b-modqueue-g12b.html">next →: Unit 7B · Recruitment: moderation queue · gemma-12b</a></div>
+<div id="gl-early-layers" popover class="gloss"><b>early layers</b><span>The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.</span><a href="../glossary.html#t-early-layers">all terms &rarr;</a></div>
+<div id="gl-novelty-verdict" popover class="gloss"><b>novelty check</b><span>After a result, we search the published literature and record whether somebody found it first.</span><a href="../glossary.html#t-novelty-verdict">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
+<div id="gl-workspace" popover class="gloss"><b>workspace</b><span>The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.</span><a href="../glossary.html#t-workspace">all terms &rarr;</a></div>
+<div id="gl-workspace-band" popover class="gloss"><b>workspace band</b><span>The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.</span><a href="../glossary.html#t-workspace-band">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

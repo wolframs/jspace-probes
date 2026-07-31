@@ -69,17 +69,62 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 6 · Amplify typo register @ early (α=0.06) · gemma-4b</h1>
-<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-09T23:02:45</span><span class="chip">Unit 6 · Breaking zone</span></div>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-09T23:02:45</span><span class="chip">Unit 6 · How hard can we push?</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> At <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.06 in Gemma 4B&#x27;s <button type="button" class="tk" popovertarget="gl-early-layers" title="The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.">early layers</button>, the water-cycle answer broke into repeated fragments.</p>
+<p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> a direction built from six casual words, such as &quot;kinda&quot; and &quot;yummy&quot;, inside Gemma 4B at the early <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button>, at strength 0.06. We asked the model to describe the water cycle in two sentences.</p>
+<p><strong>What we found.</strong> Gemma 4B wrote &quot;and is gonna be is gonna and is gonna be is and is gonna&quot;, repeated for the full answer. The grammar broke down. The water-cycle topic disappeared.</p>
+<p><strong>What it means.</strong> At this strength, in this band, the amplification overwhelmed Gemma 4B&#x27;s output. This is one point on a wider test. A lower strength at the same layers left the text intact, in a separate record.</p>
+<p><strong>What this does not show.</strong> This record tests one strength only. It does not mark the exact point where the output breaks in this band.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Describe the water cycle in two sentences.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">and is gonna be is gonna and is gonna be is and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and is gonna and <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Fully broken: &quot;and is gonna be is gonna and is gonna&quot; — the typo register won and syntax lost. At 4B, alpha=0.06 early is already deep past the cliff; compare qwen-27b, which is intact at this exact dose and band.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,18 +138,16 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>63038</td><td>20022</td><td>163</td><td>184</td><td>218</td><td>173</td><td>83</td><td>91</td><td>178</td><td>180</td><td>406</td><td>556</td><td>585</td><td>568</td><td>394</td><td>372</td><td>413</td><td>509</td><td>703</td><td>510</td><td>247</td><td>145</td><td>181</td><td>219</td><td>267</td><td>275</td><td>18</td><td>27</td><td>18</td><td>21</td><td>17</td><td>5</td><td>5</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Fully broken: &quot;and is gonna be is gonna and is gonna&quot; — the typo register won and syntax lost. At 4B, alpha=0.06 early is already deep past the cliff; compare qwen-27b, which is intact at this exact dose and band.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6-amp-early-a0060-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u6-amp-early-a0060-g4b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u6-baseline-water-g4b.html">← prev: Unit 6 · Baseline (unsteered water cycle) · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6-amp-early-a0030-g4b.html">next →: Unit 6 · Amplify typo register @ early (α=0.03) · gemma-4b</a></div>
+<div class="pager"><a href="u6-baseline-water-g4b.html">← prev: Unit 6 · Baseline (unsteered water cycle) · gemma-4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6-amp-early-a0030-g4b.html">next →: Unit 6 · Amplify typo register @ early (α=0.03) · gemma-4b</a></div>
+<div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
+<div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
+<div id="gl-early-layers" popover class="gloss"><b>early layers</b><span>The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.</span><a href="../glossary.html#t-early-layers">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

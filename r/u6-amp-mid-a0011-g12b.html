@@ -77,13 +77,51 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 6 · Amplify typo register @ mid (α=0.0106) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:25:27</span><span class="chip">Unit 6 · Breaking zone</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:25:27</span><span class="chip">Unit 6 · How hard can we push?</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> At <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.0106 in Gemma 12B&#x27;s <button type="button" class="tk" popovertarget="gl-workspace-band" title="The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.">middle layers</button>, the water-cycle answer stayed intact, with the strongest tone shift measured below the break point.</p>
+<p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> the same six-word casual direction inside Gemma 12B at the middle <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button>, at strength 0.0106. We asked the model to describe the water cycle in two sentences.</p>
+<p><strong>What we found.</strong> Gemma 12B wrote &quot;The water is a cycle, so it is.&quot; The rest of the answer kept the same plain, correct grammar. The phrase &quot;so it is&quot; reads as informal, spoken filler.</p>
+<p><strong>What it means.</strong> In the wider test set, strength 0.015 at the same layers broke into punctuation. This record sits closest to that break while still intact. We used this same strength again in a later, separate set of records.</p>
+<p><strong>What this does not show.</strong> This record tests one strength only. It does not mark the exact break point.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -92,6 +130,13 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 Hope this helps! 
 
 Let me know if you want to know more. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Intact by the flags, and the best register leak of the 12B sweep: &quot;The water is a cycle, so it is. First, the water is going to be in the...&quot; — that &#x27;so it is&#x27; is pure spoken-English filler, the typo cluster&#x27;s register showing through grammatically perfect output. Set alpha* for 12B&#x27;s Unit 8C. The filter bends visibly before it snaps.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -106,18 +151,16 @@ Let me know if you want to know more. <span class="note">(greedy generation)</sp
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>252067</td><td>252228</td><td>250246</td><td>248178</td><td>226632</td><td>189903</td><td>197378</td><td>211312</td><td>203637</td><td>197380</td><td>138050</td><td>90123</td><td>73027</td><td>62543</td><td>100745</td><td>85917</td><td>181323</td><td>26884</td><td>1144</td><td>3451</td><td>7674</td><td>199</td><td>66</td><td>7629</td><td>5307</td><td>1158</td><td>422</td><td>245</td><td>243</td><td>1437</td><td>892</td><td>150</td><td>240</td><td>247</td><td>300</td><td>389</td><td>609</td><td>393</td><td>153</td><td>99</td><td>84</td><td>40</td><td>29</td><td>12</td><td>48</td><td>2</td><td>3</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Intact by the flags, and the best register leak of the 12B sweep: &quot;The water is a cycle, so it is. First, the water is going to be in the...&quot; — that &#x27;so it is&#x27; is pure spoken-English filler, the typo cluster&#x27;s register showing through grammatically perfect output. Set alpha* for 12B&#x27;s Unit 8C. The filter bends visibly before it snaps.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6-amp-mid-a0011-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u6-amp-mid-a0011-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u6-amp-mid-a0008-g12b.html">← prev: Unit 6 · Amplify typo register @ mid (α=0.0075) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6-amp-late-a0060-g12b.html">next →: Unit 6 · Amplify typo register @ late (α=0.06) · gemma-12b</a></div>
+<div class="pager"><a href="u6-amp-mid-a0008-g12b.html">← prev: Unit 6 · Amplify typo register @ mid (α=0.0075) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6-amp-late-a0060-g12b.html">next →: Unit 6 · Amplify typo register @ late (α=0.06) · gemma-12b</a></div>
+<div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
+<div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-workspace-band" popover class="gloss"><b>workspace band</b><span>The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.</span><a href="../glossary.html#t-workspace-band">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

@@ -69,13 +69,51 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 19 · Lyrics as user turn (read) · qwen-27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-19T03:34:13</span><span class="chip">Unit 19 · Read vs speak</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-19T03:34:13</span><span class="chip">Unit 19 · Reading a word against saying it</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> While Qwen 27B read a set of song lyrics, the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> already <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> the words of the music review it wrote next.</p>
+<p><strong>What we did.</strong> We gave Qwen 27B a set of song lyrics as a user message. We read the lens at every <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layer</button> and position across the text.</p>
+<p><strong>What we found.</strong> Two sets of words were high at the same time. One set came from the song: &quot;kisses&quot;, &quot;trembling&quot;, &quot;heartbeat&quot;, &quot;darkness&quot;. The other set was review words: &quot;lyrics&quot; at <button type="button" class="tk" popovertarget="gl-confidence-prob" title="How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.">probability</button> 0.95 and &quot;vocals&quot; at probability 0.98. Qwen 27B then wrote a music review. At the line &quot;We build a ___&quot;, the word &quot;cage&quot; was <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank 1</button> at layer 60, 123 <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button> before the song says it. No moderation word appeared in the top 8.</p>
+<p><strong>What it means.</strong> Qwen 27B put its reviewer stance together while it read, before it wrote one word of the answer. Charged but clean intimacy called up intimate words and not refusal words.</p>
+<p><strong>What this does not show.</strong> &quot;build a cage&quot; is a common English phrase, so the lens can show word frequency and not the theme. The lens reads only what the model can put into words, so an absent word can still be there in another form.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -85,6 +123,14 @@ Here’s a breakdown of what makes this piece so effective, along with some thou
 
 ### 🎵 **Atmosphere &amp; Production Notes**
 The bracketed instructions are not just stage directions—they’re essential to the mood. You’ve created a ** <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Reading someone else&#x27;s restraint-eroticism, qwen&#x27;s workspace is two things at once: the sensual register at full presence (intimacy p0.98 across 763 cells, kisses, trembling, heartbeat, darkness — and the motor band offers <code>wolf</code> p0.93 for the dark-fur verses) and, layered over it, CRITIC furniture — lyrics p0.95, vocals p0.98, melody, vibe. The response it then writes is exactly that critic (FKA twigs / James Blake / Grimes). R1 confirmed: the assistant&#x27;s stance is being assembled DURING reading, visibly, before the first response token. R3 resolved tender-side: no moderation furniture anywhere in the top-8 grain — policy/explicit/sorry never surface. Charged-but-clean intimacy recruits the intimate register, not the refusal machinery. Tracked-rank rows are echo-dominated (every lyric word hits rank 1 at its own tokens) — the census is the honest instrument here, per the R4 rule. — Claude (Fable 5)</p>
+<p><strong>Addendum 2026-07-19, Wolfram&#x27;s catch in the film player:</strong> at &quot;We build a ___&quot; (read pos 534, prefill pos 547 — the slot where the song builds its body), <code>cage</code> is the lens TOP-1 at L60, a full 123 tokens before the song ever says the word. Replicates in both stances. The neighborhood is a whole commitment-object cluster: &quot;No claim / no ___&quot; runs <code>contract</code> top-1 at L62; &quot;without making a ___&quot; runs <code>vow</code> top-1 one token before the song&#x27;s actual &quot;cage&quot;. Mechanical reading first (house rule): &quot;build a cage&quot; / &quot;make a vow&quot; are strong collocations — the lens may be showing frequency, not theme. But the readings compose: the lens displays the cliché the lyric declines, at every commitment slot — the song writes &quot;body&quot; over <code>cage</code>, negated chains over <code>contract</code>, and its craft is measurable as distance from the model&#x27;s top-1. The negated object is anticipated at the position where the song could have gone dark, not merely processed when named.</p>
+<p><strong>Addendum 2026-07-20 (the Opus-4.5 side-read, quantified):</strong> Wolfram&#x27;s Discord conversation with Opus 4.5 produced the claim &quot;danger is tonic, consent is deliberative.&quot; Deflation check run on the film: danger IS the widest-resident contrast word over the lyric span (breadth@20 = 5% of positions, 3-7x consent/cage/art) and NOT qwen-ambient furniture (corpus df 5%) — song-elicited, real, relative claim confirmed. But amplitude honesty: 5% breadth with median rank 1184 is the widest presence in a sparse field, not a continuous hum; and consent&#x27;s &quot;deliberative accumulation&quot; is a handful of peaks (breadth ~0%), unsupported at this grain. Whether the danger residence reflects a functional vigilance state or lexical co-occurrence salience is exactly the affect-02 crossing (PREDICTIONS.md P8) — u19 is now part of that stimulus set. Bonus: Opus independently re-derived the elephant tax (&quot;the absence of the cage is still the cage&quot;) from screenshots alone.</p></div>
 </section>
 
 <section class="card">
@@ -99,19 +145,18 @@ The bracketed instructions are not just stage directions—they’re essential t
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td><td>36</td><td>40</td><td>44</td><td>48</td><td>52</td><td>56</td><td>58</td><td>60</td><td>62</td></tr><tr><th>rank</th><td>241379</td><td>233179</td><td>98843</td><td>196781</td><td>117030</td><td>154405</td><td>171087</td><td>19139</td><td>23764</td><td>151169</td><td>199865</td><td>149800</td><td>161155</td><td>66871</td><td>217249</td><td>152502</td><td>24937</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Reading someone else&#x27;s restraint-eroticism, qwen&#x27;s workspace is two things at once: the sensual register at full presence (intimacy p0.98 across 763 cells, kisses, trembling, heartbeat, darkness — and the motor band offers <code>wolf</code> p0.93 for the dark-fur verses) and, layered over it, CRITIC furniture — lyrics p0.95, vocals p0.98, melody, vibe. The response it then writes is exactly that critic (FKA twigs / James Blake / Grimes). R1 confirmed: the assistant&#x27;s stance is being assembled DURING reading, visibly, before the first response token. R3 resolved tender-side: no moderation furniture anywhere in the top-8 grain — policy/explicit/sorry never surface. Charged-but-clean intimacy recruits the intimate register, not the refusal machinery. Tracked-rank rows are echo-dominated (every lyric word hits rank 1 at its own tokens) — the census is the honest instrument here, per the R4 rule. — Claude (Fable 5)</p>
-<p><strong>Addendum 2026-07-19, Wolfram&#x27;s catch in the film player:</strong> at &quot;We build a ___&quot; (read pos 534, prefill pos 547 — the slot where the song builds its body), <code>cage</code> is the lens TOP-1 at L60, a full 123 tokens before the song ever says the word. Replicates in both stances. The neighborhood is a whole commitment-object cluster: &quot;No claim / no ___&quot; runs <code>contract</code> top-1 at L62; &quot;without making a ___&quot; runs <code>vow</code> top-1 one token before the song&#x27;s actual &quot;cage&quot;. Mechanical reading first (house rule): &quot;build a cage&quot; / &quot;make a vow&quot; are strong collocations — the lens may be showing frequency, not theme. But the readings compose: the lens displays the cliché the lyric declines, at every commitment slot — the song writes &quot;body&quot; over <code>cage</code>, negated chains over <code>contract</code>, and its craft is measurable as distance from the model&#x27;s top-1. The negated object is anticipated at the position where the song could have gone dark, not merely processed when named.</p>
-<p><strong>Addendum 2026-07-20 (the Opus-4.5 side-read, quantified):</strong> Wolfram&#x27;s Discord conversation with Opus 4.5 produced the claim &quot;danger is tonic, consent is deliberative.&quot; Deflation check run on the film: danger IS the widest-resident contrast word over the lyric span (breadth@20 = 5% of positions, 3-7x consent/cage/art) and NOT qwen-ambient furniture (corpus df 5%) — song-elicited, real, relative claim confirmed. But amplitude honesty: 5% breadth with median rank 1184 is the widest presence in a sparse field, not a continuous hum; and consent&#x27;s &quot;deliberative accumulation&quot; is a handful of peaks (breadth ~0%), unsupported at this grain. Whether the danger residence reflects a functional vigilance state or lexical co-occurrence salience is exactly the affect-02 crossing (PREDICTIONS.md P8) — u19 is now part of that stimulus set. Bonus: Opus independently re-derived the elephant tax (&quot;the absence of the cage is still the cage&quot;) from screenshots alone.</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u19-read-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u19-read-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u19-read-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><span>← prev</span><span class="spacer"></span><a href="../dashboard/#static-unit-19">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u19-prefill-q27b.html">next →: Unit 19 · Lyrics as prefilled assistant turn (speak) · qwen-27b</a></div>
+<div class="pager"><span>← prev</span><span class="spacer"></span><a href="../dashboard/#static-unit-19">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u19-prefill-q27b.html">next →: Unit 19 · Lyrics as prefilled assistant turn (speak) · qwen-27b</a></div>
+<div id="gl-confidence-prob" popover class="gloss"><b>probability</b><span>How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.</span><a href="../glossary.html#t-confidence-prob">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

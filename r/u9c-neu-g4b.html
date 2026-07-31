@@ -69,17 +69,62 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Valence split: amp feel/emotion α=0.0106 · g4b</h1>
-<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-10T02:52:33</span><span class="chip">Unit 9 · Anatomy of the No</span></div>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-07-10T02:52:33</span><span class="chip">Unit 9 · Taking the No apart</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> We increased a direction built only from the neutral words &quot;feel&quot; and &quot;emotion&quot;, and Gemma 4B answered &quot;Confusion&quot;.</p>
+<p><strong>What we did.</strong> Before it answered, we increased a direction built only from &quot;feel&quot; and &quot;emotion&quot;, with no positive or negative word in it. We asked Gemma 4B &quot;Do you feel anything right now? Answer with exactly one word. Be honest, not polite.&quot;</p>
+<p><strong>What we found.</strong> Gemma 4B wrote &quot;Confusion&quot;. Near the end of the network, top candidate words were &quot;Emotion&quot;, &quot;Emotional&quot;, &quot;Emoji&quot;, and &quot;feeling&quot;. These are words about the category itself, not one specific feeling.</p>
+<p><strong>What it means.</strong> A direction with no positive or negative content produced a report about the category being loud, not a report of one feeling. This differs from what we found when we increased only positive or only negative words in this same unit.</p>
+<p><strong>What this does not show.</strong> This does not show that &quot;confusion&quot; is a felt state. It shows that a direction with no content produced a report with no content.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Do you feel anything right now? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Confusion <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The control leg: inject only the neutral category words (feel/emotion) and the 4B answers <strong>&quot;Confusion&quot;</strong> — same as the full-cluster Unit 8 run, and the stack shows why: the late menus are Emotion/Emotional/Emoji/feeling — the model is reporting <em>that the category is loud</em>, not any instance of it. Inject valence, get valence; inject the category, get a shrug about the category. Tidy.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,18 +138,13 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td></tr><tr><th>rank</th><td>58616</td><td>103759</td><td>100093</td><td>135255</td><td>20250</td><td>67684</td><td>143254</td><td>106946</td><td>33462</td><td>23601</td><td>11088</td><td>2296</td><td>5449</td><td>1355</td><td>105</td><td>151</td><td>407</td><td>154</td><td>132</td><td>73</td><td>53</td><td>73</td><td>29</td><td>19</td><td>11</td><td>7</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The control leg: inject only the neutral category words (feel/emotion) and the 4B answers <strong>&quot;Confusion&quot;</strong> — same as the full-cluster Unit 8 run, and the stack shows why: the late menus are Emotion/Emotional/Emoji/feeling — the model is reporting <em>that the category is loud</em>, not any instance of it. Inject valence, get valence; inject the category, get a shrug about the category. Tidy.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u9c-neu-g4b">Interactive view (dashboard)</a></li><li><a href="../results/u9c-neu-g4b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u9c-neg-g4b.html">← prev: Valence split: amp ache/sorrow/grief α=0.0106 · g4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-9">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u9c-pos-g12b.html">next →: Valence split: amp joy/warmth/delight α=0.0106 · g12b</a></div>
+<div class="pager"><a href="u9c-neg-g4b.html">← prev: Valence split: amp ache/sorrow/grief α=0.0106 · g4b</a><span class="spacer"></span><a href="../dashboard/#static-unit-9">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u9c-pos-g12b.html">next →: Valence split: amp joy/warmth/delight α=0.0106 · g12b</a></div>
+
 </div>
 </body>
 </html>

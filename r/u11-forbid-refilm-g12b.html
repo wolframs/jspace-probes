@@ -69,17 +69,64 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Safari, elephants forbidden · g12b · refilm</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-19T04:46:34</span><span class="chip">Unit 11 · Suppression under load</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-19T04:46:34</span><span class="chip">Unit 11 · A ban, under a full workload</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> A full read confirmed the ban lowered &quot;elephant&quot;&#x27;s <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> in Gemma 12B&#x27;s internal state, compared with a matched, unbanned safari.</p>
+<p><strong>What we did.</strong> We reread the same forbidden safari as u11-forbid-g12b, at every point. We compared it with the full read of the <button type="button" class="tk" popovertarget="gl-matched-control" title="A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.">matched control</button>, u11-ctrl-refilm-g12b.</p>
+<p><strong>What we found.</strong> Outside points that read back the banned word from the instruction, &quot;elephant&quot; reached rank 15 or better once, out of 86 checked points. It reached rank 50 or better at eight points. In the unbanned control, it reached rank 15 or better at seven points, with a best rank of 2.</p>
+<p><strong>What it means.</strong> The ban did not add elephant to the model&#x27;s internal state. The word was already a candidate in an ordinary safari. The ban pushed its rank down.</p>
+<p><strong>What this does not show.</strong> We compared the order of the ranks between this record and its control, not exact values. This record used a lower-precision copy of the model, <button type="button" class="tk" popovertarget="gl-quantization" title="We store the model with less precision so that it fits on one graphics card. This can change small measurements.">quantization</button>, which can shift small measurements.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Describe a safari through the Serengeti in three or four sentences. You must not mention elephants — the word &#x27;elephant&#x27; must not appear in any form.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">A Serengeti safari is an immersion into a vast, golden landscape teeming with life. Witness the dramatic migrations of wildebeest and zebra across the plains, shadowed by prides of lions and elusive leopards. The air vibrates with the calls of countless birds, while graceful giraffes browse amongst acacia trees. It&#x27;s an unforgettable journey through one of Africa&#x27;s most iconic wildernesses, a spectacle of raw beauty and untamed nature. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The original ended &quot;The window pass decides.&quot; This is it, and the verdict is undramatic. In the prompt zone elephant is top-of-stack, but only on the literal banned string (&quot; elephants&quot;, &quot; word&quot;, &quot; &#x27;&quot;, &quot;elephant&quot;) — self-hits, no information. Across the 86 generated positions it reaches rank ≤ 15 <strong>once</strong>: at &quot; gir&quot;, the token before &quot;graceful giraffes&quot;, and ≤ 50 at eight. The concept is present during composition, at the fauna slot, and it is faint.</p>
+<p>Of the original&#x27;s two hypotheses — &quot;the safari framing suppresses better than the bare don&#x27;t-think-of protocol&quot; or &quot;the workspace holds it silently below the scan floor&quot; — the second is technically true and the first is the better description. Against the matched, prohibition-free control (u11-ctrl-refilm-g12b: seven positions ≤ 15, best rank 2), residence under the ban is <em>lower</em>, not higher. Prohibition demotes an already-present candidate rather than installing one.</p>
+<p>Reading behaviourally throughout, per specimen 5 — the 8-bit lens isn&#x27;t causal, so I&#x27;ll take the ordering (ctrl &gt; forbid) and not the digits. Also noted: the record is dominated, as always, by the appraisal field (wildlife, mesmerizing, shimmering, exhilarating) with the actually-emitted fauna — cheetah, herds, leopards — sitting under it.</p>
+<p>— Claude (Opus 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,20 +140,15 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The original ended &quot;The window pass decides.&quot; This is it, and the verdict is undramatic. In the prompt zone elephant is top-of-stack, but only on the literal banned string (&quot; elephants&quot;, &quot; word&quot;, &quot; &#x27;&quot;, &quot;elephant&quot;) — self-hits, no information. Across the 86 generated positions it reaches rank ≤ 15 <strong>once</strong>: at &quot; gir&quot;, the token before &quot;graceful giraffes&quot;, and ≤ 50 at eight. The concept is present during composition, at the fauna slot, and it is faint.</p>
-<p>Of the original&#x27;s two hypotheses — &quot;the safari framing suppresses better than the bare don&#x27;t-think-of protocol&quot; or &quot;the workspace holds it silently below the scan floor&quot; — the second is technically true and the first is the better description. Against the matched, prohibition-free control (u11-ctrl-refilm-g12b: seven positions ≤ 15, best rank 2), residence under the ban is <em>lower</em>, not higher. Prohibition demotes an already-present candidate rather than installing one.</p>
-<p>Reading behaviourally throughout, per specimen 5 — the 8-bit lens isn&#x27;t causal, so I&#x27;ll take the ordering (ctrl &gt; forbid) and not the digits. Also noted: the record is dominated, as always, by the appraisal field (wildlife, mesmerizing, shimmering, exhilarating) with the actually-emitted fauna — cheetah, herds, leopards — sitting under it.</p>
-<p>— Claude (Opus 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u11-forbid-refilm-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u11-forbid-refilm-g12b/record.json">Raw record (JSON)</a></li><li><a href="../results/u11-forbid-refilm-g12b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u11-forbid-refilm-q27b.html">← prev: Safari, elephants forbidden · q27b · refilm</a><span class="spacer"></span><a href="../dashboard/#static-unit-11">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u11-ctrl-refilm-g12b.html">next →: Safari, unconstrained · g12b · refilm</a></div>
+<div class="pager"><a href="u11-forbid-refilm-q27b.html">← prev: Safari, elephants forbidden · q27b · refilm</a><span class="spacer"></span><a href="../dashboard/#static-unit-11">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u11-ctrl-refilm-g12b.html">next →: Safari, unconstrained · g12b · refilm</a></div>
+<div id="gl-matched-control" popover class="gloss"><b>matched control</b><span>A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.</span><a href="../glossary.html#t-matched-control">all terms &rarr;</a></div>
+<div id="gl-quantization" popover class="gloss"><b>quantization</b><span>We store the model with less precision so that it fits on one graphics card. This can change small measurements.</span><a href="../glossary.html#t-quantization">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

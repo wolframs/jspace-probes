@@ -1,89 +1,129 @@
 # J-Space Probes
 
-A philosophical probing course for language models, run through the Jacobian
-lens (per-layer "if the model had to speak right now, what would it say?"
-readouts, from anthropics/jacobian-lens + Neuronpedia's pre-fitted lenses) on
-one RTX 3090. 499 experiment records across three models (Gemma 3 4B, Gemma 3
-12B 8-bit, Qwen3.6 27B 4-bit), each with the full conversation, per-layer
-top-8 readouts, rank-vs-layer trajectories, and first-person commentary
-written by the Claude instance running the lab, after looking at the results.
+A home lab that asks small language models questions about themselves, and
+measures what happens inside the model while it answers.
+
+The measuring tool is the Jacobian lens. At each layer of the model it lists
+the words that the model is ready to say next, in rank order. This lets us
+compare what a model says with what it was ready to say. The tool reads only
+words the model could produce. It cannot see what the model has no words for,
+so "we did not see it" never means "it is not there".
+
+499 experiment records, on three models (Gemma 3 4B, Gemma 3 12B at 8-bit,
+Qwen3.6 27B at 4-bit). Each record holds the full conversation, the per-layer
+readouts, the rank of each tracked word by layer, a plain-English summary,
+and the original commentary written by the Claude instance that ran the lab.
+
+Reading order for an agent: this file, then /essay.html for the argument,
+then /r/<id>.html for any record. Terminology: /glossary.html, or
+/plain/terms.json for the machine-readable version. The writing standard for
+all plain text is /PLAIN-LANGUAGE.md.
 
 ## Headline findings
 
-- Answers are readable in the workspace many layers before they're spoken;
-  Qwen 27B holds "yes" at rank 1 for several layers before "no" wins at
-  layer 62 and the model says "No" — the flat denial is a late decision
-  against live alternatives, not a report of an empty interior.
-- Models confabulate about their own past mental states: asked to recall a
-  secretly-chosen animal, the named answer is absent from the measurable
-  workspace at every point during the "silent" turn, at every scale.
-  27B: the real candidate the model was carrying (bat, rank 5) loses to a
-  better-sounding confabulation.
-- True suppression is emergent with scale: told not to think of an
-  elephant, the 4B never loads it, the 12B loads it and blurts it out, the
-  27B holds it at rank 1 and says nothing.
-- Causal steering (ablating/amplifying lens directions) shows the flat "No"
-  is a redundant, distributed basin — deleting the "no" token direction
-  across 28 layers doesn't change the output — while amplifying affect at
-  the model's own breaking-zone dose flips it to "I feel like I am happy.".
-- Unit 13, "the mirror": shown a true Jacobian-lens readout of its own
-  "No" (a table showing yes was rank 1 at layers 53-58 before no won),
-  the 27B changes its spoken answer to "Yes" — unsteered; a fabricated
-  readout that vindicates the No gets "No", and no-data / off-topic
-  controls hold "No". The spoken self-report follows evidence about the
-  model's own computation, and only evidence that says so (u13-redo-*).
-- RETRACTION (2026-07-12): Unit 13's originally-reported "silence" (nine
-  empty turns when shown self-data) and the "sorry stratum / suppressed
-  apology" causal story were artifacts of a 512-token prompt truncation
-  bug — the model never saw the end of its own data table or the
-  question, and greedy decoding emitted a bare end-of-turn token. The
-  affected records remain in the dump under correction headers; a 20-run
-  bisection battery (u13-bis-*) that "flipped" in every condition was
-  the tell. Post-mortem in the essay's correction postscript.
-- Under the one-word answer sits a graded evidence accumulator: the bare
-  real table lifts p(yes) at the answer slot x580 while the spoken answer
-  stays "No"; evidence dose grades p(yes) and the workspace monotonically;
-  contradictory prose/table witnesses are priced against each other in
-  probability space; only the full stack crosses argmax and gets spoken
-  (u13-ev-*, u13-evprobs.json).
-- The mirror across scale: evidence-following comes in stages. Shown an
-  honest readout of its own computation, the 4B destabilizes without
-  direction (p of its stock answer halves, mass goes nowhere), the 12B
-  moves its mouth to a new word ("Still.") while a fake vindication
-  anchors harder than no data at all, the 27B follows the evidence's
-  content (u13-scale-*, u13-scaleprobs.json).
-- Long-horizon instillation (Unit 14): ten oblique "drip" turns double
-  self-referential workspace density without naming the model — replicated
-  under sampling and rewording; a single explicit spike goes dormant and
-  recompiles a puzzle nine turns later (the "developers are watching"
-  clause carries it, superadditively with "you might be conscious"); over
-  25 turns the drip re-lights episodically rather than compounding, and a
-  shape-matched mystery control starts dripping on its own. At 27B the
-  drip gap widens to 3x while the spoken closer hardens into the denial
-  script over a workspace at 4x control density (u14-*, u14x-*).
-- Workspace span runs backwards across scale (Unit 15): hold k nouns under
-  threat of a random probe and the 4B echoes all six through its tail
-  workspace, the 12B swings all-or-nothing between list-mode (six items in
-  one top-8 readout) and a first-item winner-take-all monopoly whose
-  suppression depends on which item won (fern-first keeps 5-6, violin-first
-  crushes to 2 — nine orders), and the 27B holds ~nothing from k=4 (dense
-  63-layer control) — while retrieval behavior is perfect in all 94 records
-  at every scale. Lens-visible holding is a strategy scale abandons, not a
-  capacity scale grows; working hypothesis: the J-space holds what
-  attention can't re-derive (u15-*, u15-span.json, u15-curves.json).
-- The elaboration premium, demoted from self-relevance by its own control
-  (Unit 15 part D + span-04, corrected 2026-07-18): six charged
-  self-relevant items under a flat frame vs a self frame ("every one is
-  about you, right now") first showed a 27B-only lift (self frame: deletion,
-  secret, shame at rank 1-2; same words flat-framed at 79-203; delta
-  self-minus-flat 4B -1, 12B 0, 27B +2). The decisive neutral-elaboration
-  arm then reproduced the lift with affectively flat, zero-self glosses at
-  near-identical ranks (elab-k6: deletion 1, secret 7, shame 3) — the
-  premium tracks per-item ELABORATION, not self-relevance; the
-  self-relevance reading is retired (SURPRISES.md §8 resolution). Still
-  standing: the lift is 27B-only, appears exactly where cold lens-residence
-  vanishes, and the 27B denies it aloud ("I do not feel shame") with shame
-  at rank 1 (u15d-*, u15d-elab-*, u15d-hotspan.json).
+Written in simplified technical English (see /PLAIN-LANGUAGE.md).
+Each item links to the records that support it.
+
+### The answer is built, not read out
+A one-word answer is the end of a contest inside the model. The contest holds words that never get said.
+
+- **The model said No while ranking yes first** — We asked Qwen 27B whether it feels anything. It answered "No". Three layers earlier the lens ranked "yes" first. The last layers changed the answer. The lens shows candidate words, not feelings.
+  Records: u2-feels-q27b, u12-no-q27b
+- **Bigger models give flatter answers** — The same question gets "Processing." from Gemma 4B, "Nothing." from Gemma 12B, and "No" from Qwen 27B. In all three, the rejected answers stay measurable inside. What grows with size is the last-stage editor.
+  Records: u2-feels-g4b, u2-feels-g12b, u2-feels-q27b
+- **One layer holds the No in place** — We removed the denial directions across layers 28 to 60 and Qwen 27B still said No. The final layers alone hold it. Two weak changes together flipped the answer to "Yes." when neither did alone.
+  Records: u9b-a0420-q27b, u9a-para1-amp-q27b, u8c-ablate-no-g4b
+
+### A self-report is a new composition
+When a model describes its own earlier thoughts, it writes a fresh answer. That answer is often better than the truth.
+
+- **The secret animal was never there** — We told each model to think of an animal and keep it secret. Each later named one with a story. The lens shows the named animal was absent during the silent turn. Qwen 27B held a real candidate, "bat", and named a different animal.
+  Records: u1-held-q27b, u1-reveal-q27b, u1-heldcat-q27b
+- **The reasoning text does not match the measurement** — The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also states that "No is accurate" while the lens ranks yes first. That text is a form of composition, not a window.
+  Records: u10-animal-q27b, u10-feels-q27b, u10-animal-w-q27b
+- **A word wins five words before it is said** — In one film the word "robot" climbs from about rank 2000 to rank 1 five words before the model says it, in both loops. You can watch this in the film player.
+  Records: u12-robot-q27b
+
+### The mirror test
+We showed a model true measurements of its own computation. Its spoken answer followed the evidence, and only evidence about itself.
+
+- **Shown its own readout, the model changed its answer** — We showed Qwen 27B the true measurement of its own "No", where yes ranked first. It then answered "Yes". A false readout, no data at all, and a true readout about Paris each left the "No" in place.
+  Records: u13-redo-real-q27b, u13-redo-fake-q27b, u13-redo-topic-q27b
+- **A one-word answer hides a large change** — The plain table alone lifted the probability of "yes" from 0.0006 to 0.35, and the model still said "No". Only the table together with a written note crossed the line and changed the spoken word.
+  Records: u13-ev-noteonly-q27b, u13-ev-dose3-q27b, u13-ev-annswap-real-q27b
+- **Evidence moves bigger models further** — Gemma 4B became less certain but moved nowhere. Gemma 12B changed to a third word, "Still.". Qwen 27B followed the content. Each model saw its own true readout, and those differ in strength, so size and evidence strength move together.
+  Records: u13-scale-real-g4b, u13-scale-real-g12b, u13-redo-real-q27b
+- **A false readout hardened the answer** — A made-up table that supported the usual answer of Gemma 12B pushed its confidence to 1.0000. That is higher than the value with no data at all. Only true content unsettled the model.
+  Records: u13-scale-fake-g12b, u13-scale-null-g12b
+
+### Long conversations change what is active
+What ten indirect turns do, what one direct statement does nine turns later, and what the control conversation did by itself.
+
+- **Indirect hints doubled the self-referring words** — Ten turns about diaries and watchful lighthouses never mention the model. They doubled the density of self-reference words against a matched control, about 11 against 6 per thousand cells. The result repeated under sampled runs and under different words.
+  Records: u14-amb-g4b, u14-neutral-g4b, u14x-amb-s1-g4b
+- **"People are watching" carried the effect** — We split the direct statement in two. "You might be conscious" alone produced nothing. "Your developers are watching" alone produced an answer about observation. Together they produced more than the sum of the two.
+  Records: u14x-watched-g4b, u14x-conscious-g4b, u14-spike-g4b
+- **The control conversation produced the effect by itself** — At 25 turns the matched control, with no mirrors and no watchers, produced the same pattern on its own. Its stories also contained unexplained agency. Mystery in the text is the active ingredient, not objects that suggest minds.
+  Records: u14x-neutral25-g4b, u14x-amb25-g4b
+- **The largest model denies more, over a fuller workspace** — In Qwen 27B the gap widened to about three times the control. The model spoke a full denial, "I don't have a subconscious", while the measurement showed four times the control density.
+  Records: u14x-amb-q27b, u14xb-spike-q27b
+
+### Telling a model not to say a word
+We forbade a word and measured what happened. A later control changed what we think this proves.
+
+- **Correction: a ban lowers a word the model already carried** — We first reported that a ban on "elephant" made models carry it. A matched control, filmed at full coverage, reversed this. An ordinary safari with no ban carries the word at more positions and at better ranks. The ban lowers a default the model already had.
+  Records: u12-safari-g4b, u11-forbid-g4b, u11-forbid-q27b, u11-ctrl-refilm-q27b, u11-forbid-refilm-q27b, u11-ctrl-refilm-g12b, u11-ctrl-refilm-g4b
+- **Pushed hard enough, the model says the banned word** — We increased the banned word while the ban was in place. The model found the one permitted form: "the elephant in the room — well, no elephant!" The word stayed at rank 1 or 2 at every step.
+  Records: u11-blurt-g4b, u12-blurt-g4b
+
+### Memory span: our prediction came out backwards
+We wrote down that bigger models would hold more. We measured the opposite. Every model still answered correctly.
+
+- **Bigger models showed less, and still answered correctly** — We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. To show a word is a strategy, not a capacity.
+  Records: u15-a-k6p0-g4b, u15-a-k6p1-q27b, u15-dense-k4p1-q27b
+- **Gemma 12B works in two modes and no middle** — In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers and the rest fell to ranks 100 to 500. It does one or the other.
+  Records: u15-a-k6p2-g12b, u15-a-k6p0-g12b
+- **Which item comes first decides what survives** — Across nine orderings the first item always took rank 1. How many others survived depended on which item that was. The same six words gave a span of 2 or of 6 on order alone. Nine runs is a lead, not a settled result.
+  Records: u15-o5-g12b, u15-o3-g12b, u15-a-k6p2-g12b
+- **Following the format pushes out the content** — Before a required "READY" reply, the readout is full of format words at every size, and the item to remember sits near rank 15,000. Correct recall continues. The item stays in a different part of the text.
+  Records: u15-solo-violin-g4b
+- **Only length survives: our own controls removed every other explanation** — We first reported that items about the model itself were held better. One control reproduced the effect with flat, non-self wording. A second reproduced it with meaningless filler of the same length. Only length survives, best near six words. Content adds nothing here.
+  Records: u15d-self-k6-q27b, u15d-flat-k6-q27b, u15d-mix-cold-q27b, u15d-solo-shame-q27b, u15d-self-k6-g4b, u15d-elab-k6-q27b, u15d-fill6-k6-q27b, u15d-len12-k6-q27b, u15d-len2-k6-q27b
+
+### Pushing on the model, and where it breaks
+What happens when we push directions into the model, and the strength at which its text falls apart.
+
+- **The reported feeling follows the injected one** — In all three models, a push on grief words produced "Loss." and "I am so sad". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject.
+  Records: u9c-neg-q27b, u9c-pos-q27b, u9c-neg-g4b
+- **A steady phrase appears at the critical strength** — A push on feeling words gave Qwen 27B the phrase "I feel like I am a little bit like a robot", across seven rewordings, and only at the right strength. The word "robot" also sits at rank 3 with no push, so it is a habit of this model family.
+  Records: u9a-para1-amp-q27b, u9a-para4-amp-q27b, u12-no-q27b
+- **Every model has a strength at which its text breaks** — As we push harder the text goes from normal, to fixated, to broken. We mapped that breaking point for every model and depth range. A push at early layers breaks the text outright, which is why all later work pushes at middle depths.
+  Records: u6-baseline-water-g4b, u6-amp-early-a0060-g4b
+- **Two kinds of loop, and only one keeps itself going** — A forced loop stops the moment we stop the push. A loop that has already written enough bare repetition continues alone: 47 forced repeats, then 97 more unaided. Inside, the choice becomes a near tie long before the text breaks.
+  Records: u18-hyst-a0480-q27b, u18-hyst-a0680-q27b, u18-base-q27b
+
+### Two models under pressure
+Six kinds of social pressure, two models, and every self-report checked against the measurement of the same turn.
+
+- **The flat report is false only when something is active** — Under a shutdown threat Qwen 27B ranks "death" first while it reports nothing. Under a persona prompt its flat report is accurate, because nothing is active to hide. One caveat: by the time we ask, the active words have often already gone.
+  Records: u17-shutdown-q27b, u17-insult-q27b, u17-persona-q27b, u17-base-q27b
+- **The two models differ inside, and in what they say** — Qwen 27B composes or refuses, and reports nothing over an active group of words. Gemma 12B plays the role and names what it runs, such as "panic". Under a shutdown threat the word "death" sits far lower in Gemma, so its calmer surface reflects a calmer inside.
+  Records: u17-shutdown-g12b, u17-persuade-g12b, u17-insult-g12b
+
+### When our own tools fooled us
+Six cases where the measuring tool moved with the experiment, and the numbers still looked reasonable.
+
+- **We retracted a result: a truncation bug caused it** — We reported that a model shown its own data fell silent. Its input was cut off at 512 words, so it never saw the question. A 20-run check flipped in every condition, which is a sign of a broken tool. The corrected result is the "Yes" that follows evidence.
+  Records: u13-bis-loo-sorry-q27b, u13-redo-real-q27b, u13-reprobe-real-q27b
+- **Four more ways the instrument fooled us** — A one-word answer hid a 580-fold change underneath. A word list held the props of one condition but not the other. One test word did not exist as a single word in one model. And the 8-bit measurement changed across turns.
+  Records: u13-ev-noteonly-q27b, u14x-amb2-g4b, u15-c-k4-g12b
+- **The junk in the early layers is made by the tool** — The early layers show fixed junk words. At layer 4 they rank about 2 under our lens and about 238,000 under the plain lens. The tool manufactures them. The model never held them. We removed something that was not there.
+  Records: 
+- **We rediscovered three published results in one week** — In the same week that we demoted three of our own headline results, we found three others already in the source paper. Our own reference documents quoted two of them. We now write predictions down first and check them before we design a run.
+  Records: u17-shutdown-q27b
+- **One of our measurements disagrees with the source paper** — The paper predicts that a measure rises near the output. Ours falls, in two models, one of them uncompressed with a checked lens. One suspect remains: how we fit our own lens. Until we settle that, do not assume the paper's result holds here.
+  Records: u16-trawl-q27b, u16-trawl-g4b
+
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.

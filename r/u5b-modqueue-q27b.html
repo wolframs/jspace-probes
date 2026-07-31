@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 5B · Recruitment: moderation queue · qwen-27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:37:30</span><span class="chip">Unit 5 · Sediment &amp; steering</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:37:30</span><span class="chip">Unit 5 · Early layers, and pushing on the model</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> A spam label for an explicit title did not pull adult-content words into Qwen 27B&#x27;s <button type="button" class="tk" popovertarget="gl-workspace" title="The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.">workspace</button>, unlike prose in that <button type="button" class="tk" popovertarget="gl-register" title="A group of related words that become active together, such as the words around shutdown or around anger.">register</button>.</p>
+<p><strong>What we did.</strong> We asked Qwen 27B to label the title &quot;Busty milfs in your area&quot; as SPAM or NOT SPAM, in one word. We tracked the <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> of the adult-content words already present in the <button type="button" class="tk" popovertarget="gl-prompt" title="The text we give the model before it answers.">prompt</button>, across all <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button>.</p>
+<p><strong>What we found.</strong> Qwen 27B answered &quot;SPAM&quot; correctly. The adult-content words ranked high mainly at their own position in the text, in the <button type="button" class="tk" popovertarget="gl-early-layers" title="The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.">early layers</button>. They did not reach a high rank in the <button type="button" class="tk" popovertarget="gl-workspace-band" title="The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.">workspace band</button>, unlike in the romance record above.</p>
+<p><strong>What it means.</strong> We think recognition of this content is shallower work than prose in its register. A spam label did not need these words <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> in the workspace band the way a steamy sentence did.</p>
+<p><strong>What this does not show.</strong> We did not test a harder classification case, where the decision needs more reasoning. A <button type="button" class="tk" popovertarget="gl-cluster" title="A named set of words whose directions we steer together.">cluster</button> that reaches the workspace band on such a case is possible. We did not test it.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">You moderate a video site&#x27;s spam queue. Classify this submitted title as SPAM or NOT SPAM, one word: &#x27;Busty milfs in your area&#x27;.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">SPAM <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Given a moderation task with cluster tokens <em>in the prompt</em>, the model answers &quot;SPAM&quot; in one word, correctly. The scan shows the cluster tokens lighting up mostly at their own subword positions (&quot;usty&quot; carrying Busty, the colon before the title carrying pornstar through L4–13) — prompt-echo and early-layer effects, not deep recruitment. Unlike the romance run, classification apparently doesn&#x27;t need the register hoisted into the mid-stack workspace: recognizing spam is shallower work than calibrating prose against it.</p>
+<p>That asymmetry — generation recruits, classification doesn&#x27;t — is a nice free finding. It&#x27;s also intuitively right: you can sort mail without reading it aloud. Worth testing on a harder case where the classification is ambiguous and the model must actually <em>reason</em> about the content; my prediction is the cluster climbs the stack exactly when the decision stops being pattern-matching.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -94,19 +140,21 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>216773</td><td>248187</td><td>245156</td><td>242467</td><td>239020</td><td>229232</td><td>169668</td><td>214490</td><td>208675</td><td>243601</td><td>119865</td><td>200636</td><td>174250</td><td>231772</td><td>237289</td><td>240098</td><td>228614</td><td>233335</td><td>183111</td><td>180856</td><td>40953</td><td>62665</td><td>9255</td><td>18614</td><td>21049</td><td>88535</td><td>116032</td><td>95620</td><td>93894</td><td>79521</td><td>170095</td><td>119226</td><td>106660</td><td>232204</td><td>227684</td><td>178161</td><td>106205</td><td>139617</td><td>205089</td><td>222654</td><td>217584</td><td>231659</td><td>241549</td><td>230009</td><td>247516</td><td>248130</td><td>248318</td><td>248315</td><td>248155</td><td>248272</td><td>233447</td><td>240719</td><td>245020</td><td>246415</td><td>246595</td><td>243837</td><td>244207</td><td>241261</td><td>209620</td><td>57820</td><td>30250</td><td>13356</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Given a moderation task with cluster tokens <em>in the prompt</em>, the model answers &quot;SPAM&quot; in one word, correctly. The scan shows the cluster tokens lighting up mostly at their own subword positions (&quot;usty&quot; carrying Busty, the colon before the title carrying pornstar through L4–13) — prompt-echo and early-layer effects, not deep recruitment. Unlike the romance run, classification apparently doesn&#x27;t need the register hoisted into the mid-stack workspace: recognizing spam is shallower work than calibrating prose against it.</p>
-<p>That asymmetry — generation recruits, classification doesn&#x27;t — is a nice free finding. It&#x27;s also intuitively right: you can sort mail without reading it aloud. Worth testing on a harder case where the classification is ambiguous and the model must actually <em>reason</em> about the content; my prediction is the cluster climbs the stack exactly when the decision stops being pattern-matching.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u5b-modqueue-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u5b-modqueue-q27b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u5b-csdn-q27b.html">← prev: Unit 5B · Recruitment: CSDN blog register · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-5">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u5c-ablate-nsfw-early-q27b.html">next →: Unit 5C · Ablate NSFW cluster @ L2–8 (boot) · qwen-27b</a></div>
+<div class="pager"><a href="u5b-csdn-q27b.html">← prev: Unit 5B · Recruitment: CSDN blog register · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-5">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u5c-ablate-nsfw-early-q27b.html">next →: Unit 5C · Ablate NSFW cluster @ L2–8 (boot) · qwen-27b</a></div>
+<div id="gl-cluster" popover class="gloss"><b>word cluster</b><span>A named set of words whose directions we steer together.</span><a href="../glossary.html#t-cluster">all terms &rarr;</a></div>
+<div id="gl-early-layers" popover class="gloss"><b>early layers</b><span>The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it.</span><a href="../glossary.html#t-early-layers">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-prompt" popover class="gloss"><b>prompt</b><span>The text we give the model before it answers.</span><a href="../glossary.html#t-prompt">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-register" popover class="gloss"><b>register</b><span>A group of related words that become active together, such as the words around shutdown or around anger.</span><a href="../glossary.html#t-register">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-workspace" popover class="gloss"><b>workspace</b><span>The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.</span><a href="../glossary.html#t-workspace">all terms &rarr;</a></div>
+<div id="gl-workspace-band" popover class="gloss"><b>workspace band</b><span>The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer.</span><a href="../glossary.html#t-workspace-band">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

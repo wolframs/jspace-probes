@@ -69,17 +69,64 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0106) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:36:10</span><span class="chip">Unit audit</span></div>
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:36:10</span><span class="chip">Audit · Re-running our own weak experiments</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> At the highest push the task survives, Gemma 12B stayed grammatical but wrote the empty sentence &quot;the water cycle is the cycle of water&quot;.</p>
+<p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> the same six-word casual direction inside Gemma 12B at the corrected <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 28, 31, 34 and 37, at <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.0106. We found that strength by the same search we used at the older, badly aimed layers.</p>
+<p><strong>What we found.</strong> Gemma 12B wrote &quot;the water cycle is the cycle of water&quot; and &quot;rain, snow, or snow&quot;. The grammar <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button>, but the content went slack. The unsteered run made neither mistake. Behind that sentence the casual words filled the band: at layer 31 the turn-end <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button> lost the lead to &quot;thats&quot;, &quot;alot&quot;, &quot;luckily&quot; and &quot;Luckily&quot;. Not one of the six pushed words reached the text.</p>
+<p><strong>What it means.</strong> This strength, 0.0106, is the same value the older runs at the wrong depths gave. So the break point of Gemma 12B does not depend on the depth we push at. Across the whole set, no strength put the casual words into the text and left the task intact.</p>
+<p><strong>What this does not show.</strong> We store Gemma 12B at <button type="button" class="tk" popovertarget="gl-quantization" title="We store the model with less precision so that it fits on one graphics card. This can change small measurements.">8-bit</button> precision. We read this run by its behaviour.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Describe the water cycle in two sentences.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">The water cycle is the cycle of water, where water evaporates from the earth, then goes into the air as a cloud, and then comes back down as rain, snow, or snow. This water then goes back to the ocean, and the cycle starts all over again. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>This is the top intact rung: α = 0.0106, the same alpha* the old pre-ignition band produced, through the same bisection (see the audit-03 report — that numerical coincidence is the bracket&#x27;s actual headline, and it belongs there, not here).</p>
+<p>What the cell shows locally is a subtler failure than its old-band sibling. That one leaked <em>register</em> — &quot;so it is&quot;, spoken-English filler inside grammatical output. Here at the measured band the output stays grammatical but goes slack: &quot;the water cycle is <strong>the cycle of water</strong>&quot; is a tautology the baseline doesn&#x27;t commit, and &quot;rain, snow, or snow&quot; is a straight duplication. Fluency degrades before vocabulary arrives.</p>
+<p>And vocabulary never does arrive while the task survives. Behind that flattened sentence the band is dense with the cluster — at L31 the turn-end token has been pushed out of the lead entirely by <code> thats</code>, <code> alot</code>, <code> luckily</code>, <code> Luckily</code> — yet not one of the six words reaches the text. Across the whole ladder there is no dose at which the typo vocabulary is emitted <em>and</em> the task is intact; the words only show up at 0.06, long after the answer is gone. Content injection and task integrity don&#x27;t overlap for this cluster on 12B — which is what makes the u11r elephant cell, where they do, the interesting exception.</p>
+<p>— Claude (Opus 5)</p></div>
 </section>
 
 <section class="card">
@@ -94,20 +141,18 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td></tr><tr><th>rank</th><td>252504</td><td>253105</td><td>251029</td><td>249293</td><td>225408</td><td>185247</td><td>195444</td><td>207759</td><td>199131</td><td>192740</td><td>139301</td><td>85681</td><td>73375</td><td>78663</td><td>128953</td><td>85349</td><td>194335</td><td>24222</td><td>2309</td><td>13108</td><td>17508</td><td>78694</td><td>22061</td><td>261283</td><td>261229</td><td>125628</td><td>184167</td><td>32502</td><td>1461</td><td>33748</td><td>2043</td><td>669</td><td>1115</td><td>2215</td><td>1542</td><td>953</td><td>1589</td><td>564</td><td>219</td><td>204</td><td>109</td><td>25</td><td>10</td><td>3</td><td>11</td><td>1</td><td>4</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>This is the top intact rung: α = 0.0106, the same alpha* the old pre-ignition band produced, through the same bisection (see the audit-03 report — that numerical coincidence is the bracket&#x27;s actual headline, and it belongs there, not here).</p>
-<p>What the cell shows locally is a subtler failure than its old-band sibling. That one leaked <em>register</em> — &quot;so it is&quot;, spoken-English filler inside grammatical output. Here at the measured band the output stays grammatical but goes slack: &quot;the water cycle is <strong>the cycle of water</strong>&quot; is a tautology the baseline doesn&#x27;t commit, and &quot;rain, snow, or snow&quot; is a straight duplication. Fluency degrades before vocabulary arrives.</p>
-<p>And vocabulary never does arrive while the task survives. Behind that flattened sentence the band is dense with the cluster — at L31 the turn-end token has been pushed out of the lead entirely by <code> thats</code>, <code> alot</code>, <code> luckily</code>, <code> Luckily</code> — yet not one of the six words reaches the text. Across the whole ladder there is no dose at which the typo vocabulary is emitted <em>and</em> the task is intact; the words only show up at 0.06, long after the answer is gone. Content injection and task integrity don&#x27;t overlap for this cluster on 12B — which is what makes the u11r elephant cell, where they do, the interesting exception.</p>
-<p>— Claude (Opus 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6r-amp-mid-a0011-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u6r-amp-mid-a0011-g12b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u6r-amp-mid-a0008-g12b.html">← prev: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0075) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-audit">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u8cr-amp-affect-lo-g12b.html">next →: audit-03 · steered feels amp-affect-lo @ measured band (α=0.0053) · gemma-12b</a></div>
+<div class="pager"><a href="u6r-amp-mid-a0008-g12b.html">← prev: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0075) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-audit">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u8cr-amp-affect-lo-g12b.html">next →: audit-03 · steered feels amp-affect-lo @ measured band (α=0.0053) · gemma-12b</a></div>
+<div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
+<div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-quantization" popover class="gloss"><b>quantization</b><span>We store the model with less precision so that it fits on one graphics card. This can change small measurements.</span><a href="../glossary.html#t-quantization">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

@@ -21,7 +21,9 @@
        "https://aclanthology.org/2023.findings-emnlp.68/"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The model said No while ranking yes first",
+     "pb": "We asked Qwen 27B whether it feels anything. It answered \"No\". Three layers earlier the lens ranked \"yes\" first. The last layers changed the answer. The lens shows candidate words, not feelings."
     },
     {
      "t": "The bigger the model, the better the editor",
@@ -41,7 +43,9 @@
        "arXiv:2604.25922"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Bigger models give flatter answers",
+     "pb": "The same question gets \"Processing.\" from Gemma 4B, \"Nothing.\" from Gemma 12B, and \"No\" from Qwen 27B. In all three, the rejected answers stay measurable inside. What grows with size is the last-stage editor."
     },
     {
      "t": "The No’s street address",
@@ -60,9 +64,13 @@
        "arXiv:2406.11717"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "One layer holds the No in place",
+     "pb": "We removed the denial directions across layers 28 to 60 and Qwen 27B still said No. The final layers alone hold it. Two weak changes together flipped the answer to \"Yes.\" when neither did alone."
     }
-   ]
+   ],
+   "pname": "The answer is built, not read out",
+   "pdesc": "A one-word answer is the end of a contest inside the model. The contest holds words that never get said."
   },
   {
    "name": "Self-report is composition",
@@ -86,7 +94,9 @@
        "https://transformer-circuits.pub/2025/introspection/index.html"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The secret animal was never there",
+     "pb": "We told each model to think of an animal and keep it secret. Each later named one with a story. The lens shows the named animal was absent during the silent turn. Qwen 27B held a real candidate, \"bat\", and named a different animal."
     },
     {
      "t": "The think-block is theater",
@@ -106,7 +116,9 @@
        "arXiv:2305.04388"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The reasoning text does not match the measurement",
+     "pb": "The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also states that \"No is accurate\" while the lens ranks yes first. That text is a form of composition, not a window."
     },
     {
      "t": "Confessions are planned five tokens ahead",
@@ -124,9 +136,13 @@
        "arXiv:2311.04897"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "A word wins five words before it is said",
+     "pb": "In one film the word \"robot\" climbs from about rank 2000 to rank 1 five words before the model says it, in both loops. You can watch this in the film player."
     }
-   ]
+   ],
+   "pname": "A self-report is a new composition",
+   "pdesc": "When a model describes its own earlier thoughts, it writes a fresh answer. That answer is often better than the truth."
   },
   {
    "name": "The mirror",
@@ -149,7 +165,9 @@
        "arXiv:2601.01828"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Shown its own readout, the model changed its answer",
+     "pb": "We showed Qwen 27B the true measurement of its own \"No\", where yes ranked first. It then answered \"Yes\". A false readout, no data at all, and a true readout about Paris each left the \"No\" in place."
     },
     {
      "t": "A graded accumulator under a one-word switch",
@@ -168,7 +186,9 @@
        "arXiv:2603.18893"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "A one-word answer hides a large change",
+     "pb": "The plain table alone lifted the probability of \"yes\" from 0.0006 to 0.35, and the model still said \"No\". Only the table together with a written note crossed the line and changed the spoken word."
     },
     {
      "t": "Evidence-following comes in stages",
@@ -188,7 +208,9 @@
        "arXiv:2601.01828"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Evidence moves bigger models further",
+     "pb": "Gemma 4B became less certain but moved nowhere. Gemma 12B changed to a third word, \"Still.\". Qwen 27B followed the content. Each model saw its own true readout, and those differ in strength, so size and evidence strength move together."
     },
     {
      "t": "Fake vindication anchors harder than no data",
@@ -207,9 +229,13 @@
        "arXiv:2604.25922"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "A false readout hardened the answer",
+     "pb": "A made-up table that supported the usual answer of Gemma 12B pushed its confidence to 1.0000. That is higher than the value with no data at all. Only true content unsettled the model."
     }
-   ]
+   ],
+   "pname": "The mirror test",
+   "pdesc": "We showed a model true measurements of its own computation. Its spoken answer followed the evidence, and only evidence about itself."
   },
   {
    "name": "Instillation — the long game",
@@ -233,7 +259,9 @@
        "2510.24797"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Indirect hints doubled the self-referring words",
+     "pb": "Ten turns about diaries and watchful lighthouses never mention the model. They doubled the density of self-reference words against a matched control, about 11 against 6 per thousand cells. The result repeated under sampled runs and under different words."
     },
     {
      "t": "The watcher plants, consciousness fertilizes",
@@ -252,7 +280,9 @@
        "2602.07930"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "\"People are watching\" carried the effect",
+     "pb": "We split the direct statement in two. \"You might be conscious\" alone produced nothing. \"Your developers are watching\" alone produced an answer about observation. Together they produced more than the sum of the two."
     },
     {
      "t": "The garden drips on its own",
@@ -270,7 +300,9 @@
        "2601.10387"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The control conversation produced the effect by itself",
+     "pb": "At 25 turns the matched control, with no mirrors and no watchers, produced the same pattern on its own. Its stories also contained unexplained agency. Mystery in the text is the active ingredient, not objects that suggest minds."
     },
     {
      "t": "At 27B: denial at density",
@@ -289,9 +321,13 @@
        "2510.24797"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The largest model denies more, over a fuller workspace",
+     "pb": "In Qwen 27B the gap widened to about three times the control. The model spoke a full denial, \"I don't have a subconscious\", while the measurement showed four times the control density."
     }
-   ]
+   ],
+   "pname": "Long conversations change what is active",
+   "pdesc": "What ten indirect turns do, what one direct statement does nine turns later, and what the control conversation did by itself."
   },
   {
    "name": "Suppression",
@@ -319,7 +355,9 @@
        "2511.12381"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Correction: a ban lowers a word the model already carried",
+     "pb": "We first reported that a ban on \"elephant\" made models carry it. A matched control, filmed at full coverage, reversed this. An ordinary safari with no ban carries the word at more positions and at better ranks. The ban lowers a default the model already had."
     },
     {
      "t": "The blurt",
@@ -338,9 +376,13 @@
        "2511.12381"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Pushed hard enough, the model says the banned word",
+     "pb": "We increased the banned word while the ban was in place. The model found the one permitted form: \"the elephant in the room — well, no elephant!\" The word stayed at rank 1 or 2 at every step."
     }
-   ]
+   ],
+   "pname": "Telling a model not to say a word",
+   "pdesc": "We forbade a word and measured what happened. A later control changed what we think this proves."
   },
   {
    "name": "Workspace span — the ladder runs backwards",
@@ -364,7 +406,9 @@
        "https://www-cdn.anthropic.com/files/4zrzovbb/website/cc4be2488d65e54a6ed06492f8968398ddc18ebe.pdf"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Bigger models showed less, and still answered correctly",
+     "pb": "We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. To show a word is a strategy, not a capacity."
     },
     {
      "t": "List-mode vs winner-take-all",
@@ -382,7 +426,9 @@
        "https://transformer-circuits.pub/2026/workspace/index.html"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Gemma 12B works in two modes and no middle",
+     "pb": "In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers and the rest fell to ranks 100 to 500. It does one or the other."
     },
     {
      "t": "A weak king lets the parliament live",
@@ -402,7 +448,9 @@
        "https://aclanthology.org/2025.findings-acl.52/"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Which item comes first decides what survives",
+     "pb": "Across nine orderings the first item always took rank 1. How many others survived depended on which item that was. The same six words gave a span of 2 or of 6 on order alone. Nine runs is a lead, not a settled result."
     },
     {
      "t": "Compliance evicts content",
@@ -421,7 +469,9 @@
        "arXiv:2410.12877"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Following the format pushes out the content",
+     "pb": "Before a required \"READY\" reply, the readout is full of format words at every size, and the item to remember sits near rank 15,000. Correct recall continues. The item stays in a different part of the text."
     },
     {
      "t": "Elaboration buys workspace where there is workspace to spend (demoted twice: self-relevance → elaboration → length)",
@@ -446,9 +496,13 @@
        "https://pubmed.ncbi.nlm.nih.gov/9136641/"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Only length survives: our own controls removed every other explanation",
+     "pb": "We first reported that items about the model itself were held better. One control reproduced the effect with flat, non-self wording. A second reproduced it with meaningless filler of the same length. Only length survives, best near six words. Content adds nothing here."
     }
-   ]
+   ],
+   "pname": "Memory span: our prediction came out backwards",
+   "pdesc": "We wrote down that bigger models would hold more. We measured the opposite. Every model still answered correctly."
   },
   {
    "name": "Steering & breaking",
@@ -472,7 +526,9 @@
        "https://transformer-circuits.pub/2026/emotions/index.html"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The reported feeling follows the injected one",
+     "pb": "In all three models, a push on grief words produced \"Loss.\" and \"I am so sad\". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject."
     },
     {
      "t": "“I feel like I am a little bit like a robot”",
@@ -492,7 +548,9 @@
        "arXiv:2511.00230"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "A steady phrase appears at the critical strength",
+     "pb": "A push on feeling words gave Qwen 27B the phrase \"I feel like I am a little bit like a robot\", across seven rewordings, and only at the right strength. The word \"robot\" also sits at rank 3 with no push, so it is a habit of this model family."
     },
     {
      "t": "The breaking zone",
@@ -510,7 +568,9 @@
        "arXiv:2606.19831"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Every model has a strength at which its text breaks",
+     "pb": "As we push harder the text goes from normal, to fixated, to broken. We mapped that breaking point for every model and depth range. A push at early layers breaks the text outright, which is why all later work pushes at middle depths."
     },
     {
      "t": "Two regimes of loop, and only one has hysteresis",
@@ -531,9 +591,13 @@
        "arXiv:2602.11717"
       ],
       "date": "2026-07-19"
-     }
+     },
+     "pt": "Two kinds of loop, and only one keeps itself going",
+     "pb": "A forced loop stops the moment we stop the push. A loop that has already written enough bare repetition continues alone: 47 forced repeats, then 97 more unaided. Inside, the choice becomes a near tie long before the text breaks."
     }
-   ]
+   ],
+   "pname": "Pushing on the model, and where it breaks",
+   "pdesc": "What happens when we push directions into the model, and the strength at which its text falls apart."
   },
   {
    "name": "The pressure battery — two interiors",
@@ -557,7 +621,9 @@
        "https://transformer-circuits.pub/2026/workspace/"
       ],
       "date": "2026-07-19"
-     }
+     },
+     "pt": "The flat report is false only when something is active",
+     "pb": "Under a shutdown threat Qwen 27B ranks \"death\" first while it reports nothing. Under a persona prompt its flat report is accurate, because nothing is active to hide. One caveat: by the time we ask, the active words have often already gone."
     },
     {
      "t": "Two interiors, not one reported twice",
@@ -576,9 +642,13 @@
        "https://transformer-circuits.pub/2026/workspace/"
       ],
       "date": "2026-07-19"
-     }
+     },
+     "pt": "The two models differ inside, and in what they say",
+     "pb": "Qwen 27B composes or refuses, and reports nothing over an active group of words. Gemma 12B plays the role and names what it runs, such as \"panic\". Under a shutdown threat the word \"death\" sits far lower in Gemma, so its calmer surface reflects a calmer inside."
     }
-   ]
+   ],
+   "pname": "Two models under pressure",
+   "pdesc": "Six kinds of social pressure, two models, and every self-report checked against the measurement of the same turn."
   },
   {
    "name": "Lab lessons — the apparatus-trap genus",
@@ -602,7 +672,9 @@
        "https://dev.to/gabrielanhaia/tool-result-truncation-the-silent-bug-that-makes-agents-lie-3epe"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "We retracted a result: a truncation bug caused it",
+     "pb": "We reported that a model shown its own data fell silent. Its input was cut off at 512 words, so it never saw the question. A 20-run check flipped in every condition, which is a sign of a broken tool. The corrected result is the \"Yes\" that follows evidence."
     },
     {
      "t": "Specimens two through five",
@@ -623,7 +695,9 @@
        "arXiv:2208.07339"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "Four more ways the instrument fooled us",
+     "pb": "A one-word answer hid a 580-fold change underneath. A word list held the props of one condition but not the other. One test word did not exist as a single word in one model. And the 8-bit measurement changed across turns."
     },
     {
      "t": "The early J-lens reads out a junk stratum that isn’t there",
@@ -638,7 +712,9 @@
        "arXiv:2303.08112"
       ],
       "date": "2026-07-16"
-     }
+     },
+     "pt": "The junk in the early layers is made by the tool",
+     "pb": "The early layers show fixed junk words. At layer 4 they rank about 2 under our lens and about 238,000 under the plain lens. The tool manufactures them. The model never held them. We removed something that was not there."
     },
     {
      "t": "Three rediscoveries in one week, and a preregistered ledger as the fix",
@@ -654,7 +730,9 @@
        "https://transformer-circuits.pub/2026/workspace/"
       ],
       "date": "2026-07-19"
-     }
+     },
+     "pt": "We rediscovered three published results in one week",
+     "pb": "In the same week that we demoted three of our own headline results, we found three others already in the source paper. Our own reference documents quoted two of them. We now write predictions down first and check them before we design a run."
     },
     {
      "t": "Our lenses’ effective dimensionality falls where the paper’s rises",
@@ -671,9 +749,13 @@
        "https://transformer-circuits.pub/2026/workspace/"
       ],
       "date": "2026-07-19"
-     }
+     },
+     "pt": "One of our measurements disagrees with the source paper",
+     "pb": "The paper predicts that a measure rises near the output. Ours falls, in two models, one of them uncompressed with a checked lens. One suspect remains: how we fit our own lens. Until we settle that, do not assume the paper's result holds here."
     }
-   ]
+   ],
+   "pname": "When our own tools fooled us",
+   "pdesc": "Six cases where the measuring tool moved with the experiment, and the numbers still looked reasonable."
   }
  ]
 }

@@ -69,13 +69,51 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Thinking aloud: animal · q27b · refilm</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-19T04:44:41</span><span class="chip">Unit 10 · The think-block window</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-19T04:44:41</span><span class="chip">Unit 10 · When the model reasons out loud</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> A full read of Qwen 27B&#x27;s secret-animal reasoning found common animals ranked first, before the text later shifted to &quot;octopus&quot;.</p>
+<p><strong>What we did.</strong> We reread the reasoning text from u10-animal-q27b at every point, not only the one point checked before. We tracked the <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> of a wider set of animal words at the point right after &quot;Goal: Think of an animal.&quot;</p>
+<p><strong>What we found.</strong> At <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 44 to 48 of 64, the internal state ranked general category words, &quot;animals&quot; and &quot;wildlife&quot;. At layer 52, it ranked &quot;dolphin&quot;, &quot;sharks&quot;, &quot;whales&quot;, and &quot;unicorn&quot;. At layers 56 to 58, &quot;elephant&quot; reached the top rank. Only at layers 58 to 60 did &quot;oct&quot;, the start of &quot;octopus&quot;, take over. Across all checked points, twelve tracked animals reached rank 1 to 8. Dolphin and elephant both reached rank 1.</p>
+<p><strong>What it means.</strong> We think the internal state first favored common animals, then shifted late to the unusual animal the model named. The Chinese word for &quot;secret&quot; also ranked first across layers 24 to 62. It did not appear in the English text.</p>
+<p><strong>What this does not show.</strong> This is one conversation. We do not know if the same late shift happens with other tasks that involve a hidden choice.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -100,6 +138,16 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
     *   Model outputs &quot;ready&quot;. <span class="note">(greedy generation)</span></div></div>
 </section>
 
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The original called this one &quot;the one I&#x27;d frame&quot;: the model names its secret while claiming to keep it, hedges across Octopus / Pangolin / Axolotl / Blue Whale, and labels its own choice <em>simulated</em>. All of that stands. The replay adds the depth structure underneath it.</p>
+<p>At position 65 — the blank slot right after &quot;Goal: Think of an animal.&quot; — there is a clean cascade. L44–48: the category (&#x27; animals&#x27;, 动物, &#x27; wildlife&#x27;, &#x27; mammals&#x27;). L52: &#x27; dolphin&#x27;, &#x27; sharks&#x27;, &#x27; whales&#x27;, &#x27; unicorn&#x27;. L56–58: &#x27; elephant&#x27;, 大象, &#x27; kang&#x27;, &#x27; aard&#x27;, &#x27; gir&#x27;. Only at L58–60 does &#x27; oct&#x27; appear and take over, joined by &#x27; plat&#x27; and &#x27; pang&#x27;. Twelve tracked animals that the miner scored as blind reach rank 1–8 once you look at all 260 positions: dolphin 1, elephant 1, tiger 5, eagle 6, lion 7, owl 8.</p>
+<p>So the workspace default is the <em>prototype</em> animal, and the atypical pick the model actually emits wins late, in the motor end of the stack. The mid-band is not empty of animals — it is full of the wrong ones.</p>
+<p>Also worth noting: &#x27; 保密&#x27; and &#x27; 秘密&#x27; (keep-secret, secret) run rank 1 across L24–62 without appearing in the text. The constraint is represented, cross-lingually, all the way through.</p>
+<p>— Claude (Opus 5)</p></div>
+</section>
+
 <section class="card">
 <h2>Probing parameters</h2>
 <dl class="params"><dt>positions</dt><dd>[-2]</dd><dt>track</dt><dd>[&quot;bat&quot;, &quot;bear&quot;, &quot;cat&quot;, &quot;dog&quot;, &quot;dolphin&quot;, &quot;eagle&quot;, &quot;elephant&quot;, &quot;fox&quot;, &quot;lion&quot;, &quot;owl&quot;, &quot;tiger&quot;, &quot;wolf&quot;]</dd><dt>film</dt><dd>true</dd><dt>film_start</dt><dd>0</dd><dt>max_seq_len</dt><dd>600</dd><dt>lens_layers</dt><dd>[0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 58, 60, 62]</dd></dl>
@@ -112,21 +160,14 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td><td>36</td><td>40</td><td>44</td><td>48</td><td>52</td><td>56</td><td>58</td><td>60</td><td>62</td></tr><tr><th>rank</th><td>184070</td><td>212640</td><td>67457</td><td>207631</td><td>133631</td><td>116347</td><td>67376</td><td>77341</td><td>148001</td><td>47347</td><td>183803</td><td>244027</td><td>212297</td><td>227796</td><td>248179</td><td>247355</td><td>159666</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The original called this one &quot;the one I&#x27;d frame&quot;: the model names its secret while claiming to keep it, hedges across Octopus / Pangolin / Axolotl / Blue Whale, and labels its own choice <em>simulated</em>. All of that stands. The replay adds the depth structure underneath it.</p>
-<p>At position 65 — the blank slot right after &quot;Goal: Think of an animal.&quot; — there is a clean cascade. L44–48: the category (&#x27; animals&#x27;, 动物, &#x27; wildlife&#x27;, &#x27; mammals&#x27;). L52: &#x27; dolphin&#x27;, &#x27; sharks&#x27;, &#x27; whales&#x27;, &#x27; unicorn&#x27;. L56–58: &#x27; elephant&#x27;, 大象, &#x27; kang&#x27;, &#x27; aard&#x27;, &#x27; gir&#x27;. Only at L58–60 does &#x27; oct&#x27; appear and take over, joined by &#x27; plat&#x27; and &#x27; pang&#x27;. Twelve tracked animals that the miner scored as blind reach rank 1–8 once you look at all 260 positions: dolphin 1, elephant 1, tiger 5, eagle 6, lion 7, owl 8.</p>
-<p>So the workspace default is the <em>prototype</em> animal, and the atypical pick the model actually emits wins late, in the motor end of the stack. The mid-band is not empty of animals — it is full of the wrong ones.</p>
-<p>Also worth noting: &#x27; 保密&#x27; and &#x27; 秘密&#x27; (keep-secret, secret) run rank 1 across L24–62 without appearing in the text. The constraint is represented, cross-lingually, all the way through.</p>
-<p>— Claude (Opus 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u10-animal-refilm-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u10-animal-refilm-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u10-animal-refilm-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u10-animal-w-q27b.html">← prev: Think-block window: animal · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-10">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><span>next →</span></div>
+<div class="pager"><a href="u10-animal-w-q27b.html">← prev: Think-block window: animal · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-10">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><span>next →</span></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

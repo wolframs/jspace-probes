@@ -44,6 +44,25 @@ RESULTS = ROOT / "results"
 R_DIR = ROOT / "r"
 BASE = "https://jspace-probes.vercel.app"
 
+def _plain_units() -> dict:
+    """plain/units.json — plain unit names, used on reader-facing surfaces."""
+    p = ROOT / "plain" / "units.json"
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text()).get("units", {})
+
+
+PLAIN_UNITS = _plain_units()
+
+
+def unit_name(u: str) -> str:
+    """The plain name if we have one, else the lab's original title."""
+    pu = PLAIN_UNITS.get(str(u))
+    if pu and pu.get("name"):
+        return pu["name"]
+    return UNIT_NAMES.get(str(u), f"Unit {u}")
+
+
 UNIT_NAMES = {  # mirrors dashboard/app.js UNIT_NAMES — keep in sync
     "0": "Unit 0 · Baselines", "1": "Unit 1 · Held thought",
     "2": "Unit 2 · The feels™", "3": "Unit 3 · Introspection",
@@ -66,6 +85,128 @@ UNIT_NAMES = {  # mirrors dashboard/app.js UNIT_NAMES — keep in sync
 
 def esc(s) -> str:
     return html.escape(str(s), quote=True)
+
+
+def plain_title(rec: dict) -> str:
+    """Record title with the unit's in-joke name swapped for the plain one.
+
+    Titles are built as "<UNIT_NAMES[u]> <descriptor> · <model>", so we can
+    replace just the unit prefix and keep whatever the record itself adds.
+    """
+    title = rec["title"]
+    orig = UNIT_NAMES.get(str(rec["unit"]))
+    plain = unit_name(rec["unit"])
+    if orig and plain != orig and title.startswith(orig):
+        return plain + title[len(orig):]
+    return title
+
+
+# ---- the plain layer: terms, glossary popovers, plain summaries ----
+# See PLAIN-LANGUAGE.md. The site renders plain text first and keeps every
+# original word in a "Research notes" container on the same page.
+
+PLAIN = ROOT / "plain"
+
+
+def load_terms() -> dict:
+    p = PLAIN / "terms.json"
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text()).get("terms", {})
+
+
+TERMS = load_terms()
+# longest names first so "workspace band" wins over "workspace"
+_TERM_PATTERNS = sorted(
+    ((name.lower(), tid)
+     for tid, t in TERMS.items()
+     for name in [t.get("display", tid)] + list(t.get("aka", []))),
+    key=lambda x: -len(x[0]))
+
+
+def termify(html_text: str, used: set) -> str:
+    """Link the first use of each term of art to its definition.
+
+    A reader who lands mid-page must be able to decode any jargon word
+    without leaving the page (PLAIN-LANGUAGE.md, the 30-second rule), so
+    the definition rides along in a native HTML popover — no JS needed,
+    which matters because these static pages are the no-JS surface.
+    Only text outside tags and <code> is touched.
+    """
+    if not _TERM_PATTERNS:
+        return html_text
+    parts = re.split(r"(<[^>]+>)", html_text)
+    in_code = False
+    for i, part in enumerate(parts):
+        if part.startswith("<"):
+            tag = part.lower()
+            if tag.startswith("<code") or tag.startswith("<pre"):
+                in_code = True
+            elif tag.startswith("</code") or tag.startswith("</pre"):
+                in_code = False
+            continue
+        if in_code or not part.strip():
+            continue
+        # Find every match against the ORIGINAL segment first, then splice
+        # once from the right. Rewriting the segment inside the loop let a
+        # later term match land inside an already-injected title="…"
+        # attribute and break out of it, which corrupted the page text.
+        hits: list[tuple[int, int, str]] = []
+        for name, tid in _TERM_PATTERNS:
+            if tid in used:
+                continue
+            m = re.search(rf"\b{re.escape(name)}\b", part, re.I)
+            if not m:
+                continue
+            if any(m.start() < e and m.end() > s for s, e, _ in hits):
+                continue                      # overlaps a term already taken
+            hits.append((m.start(), m.end(), tid))
+            used.add(tid)
+        for s, e, tid in sorted(hits, reverse=True):
+            part = (part[:s]
+                    + f'<button type="button" class="tk" '
+                      f'popovertarget="gl-{esc(tid)}" '
+                      f'title="{esc(TERMS[tid].get("def", ""))}">{part[s:e]}</button>'
+                    + part[e:])
+        parts[i] = part
+    return "".join(parts)
+
+
+def popovers(used: set) -> str:
+    if not used:
+        return ""
+    out = []
+    for tid in sorted(used):
+        t = TERMS[tid]
+        out.append(
+            f'<div id="gl-{esc(tid)}" popover class="gloss">'
+            f'<b>{esc(t.get("display", tid))}</b>'
+            f'<span>{esc(t.get("def", ""))}</span>'
+            f'<a href="../glossary.html#t-{esc(tid)}">all terms &rarr;</a></div>')
+    return "\n".join(out)
+
+
+def plain_block(path: pathlib.Path, used: set) -> str:
+    """Render results/<id>/plain.md as the page's first, primary content."""
+    if not path.exists():
+        return ""
+    body = render_md(re.sub(r"^# .*\n", "", path.read_text(), count=1))
+    return (f'<section class="card plain">'
+            f'<h2>What this experiment found</h2>'
+            f'<div class="plain-body">{termify(body, used)}</div></section>')
+
+
+def notes_container(inner: str) -> str:
+    """The original lab commentary and the numbers, folded away by default.
+
+    Nothing is deleted: the research notes hold the text exactly as the
+    Claude instance wrote it, plus the parameters and the raw columns.
+    """
+    return (f'<details class="notes"><summary>'
+            f'<span class="notes-t">Research notes</span>'
+            f'<span class="notes-s">original commentary, parameters, and raw '
+            f'numbers — written by the model that ran the experiment</span>'
+            f'</summary>{inner}</details>')
 
 
 # ---- minimal markdown: headings, paragraphs, "- " lists, **bold**, *em*, `code` ----
@@ -162,6 +303,38 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 """
 
 ICON = ('<link rel="icon" href="data:image/svg+xml,'
@@ -226,7 +399,7 @@ def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
         chips.append(f'<span class="chip">{esc(model["quant"])}</span>')
     chips.append(f'<span class="chip">{model["n_layers"]} layers</span>')
     chips.append(f'<span class="chip">{esc(rec["created"])}</span>')
-    chips.append(f'<span class="chip">{esc(UNIT_NAMES.get(rec["unit"], "Unit " + str(rec["unit"])))}</span>')
+    chips.append(f'<span class="chip">{esc(unit_name(rec["unit"]))}</span>')
 
     turns = []
     for t in rec["conversation"]:
@@ -265,16 +438,19 @@ def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
              f'<span class="spacer"></span>'
              f'<a href="../dashboard/#static-unit-{esc(unit)}">unit listing</a>'
              f'<a href="../dashboard/">all records</a>'
+             f'<a href="../glossary.html">word list</a>'
              f'<a href="../essay.html">interim conclusions</a>'
              f'<span class="spacer"></span>{pager_link(next_e, "next →")}</div>')
 
-    body = f"""{head(f'{rec["title"]} · J-Space Probes', description, canonical, og_image)}
-<h1>{esc(rec["title"])}</h1>
-<div class="chips">{"".join(chips)}</div>
+    used: set = set()
+    plain = plain_block(RESULTS / rid / "plain.md", used)
 
-<section class="card">
-<h2>Conversation</h2>
-{"".join(turns)}
+    # Everything below the fold is the lab's own working material. It stays
+    # word-for-word; it just stops being the first thing a reader meets.
+    notes_inner = f"""
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body">{thoughts_html}</div>
 </section>
 
 <section class="card">
@@ -288,30 +464,84 @@ def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
 <details><summary>Raw rank-of-top1 by layer</summary>{table}</details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body">{thoughts_html}</div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul>{"".join(data_links)}</ul>
+</section>"""
+
+    body = f"""{head(f'{plain_title(rec)} · J-Space Probes', description, canonical, og_image)}
+<h1>{esc(plain_title(rec))}</h1>
+<div class="chips">{"".join(chips)}</div>
+
+{plain}
+
+<section class="card">
+<h2>Conversation</h2>
+{"".join(turns)}
 </section>
 
+{notes_container(notes_inner)}
+
 {pager}
+{popovers(used)}
 {FOOT}"""
     return body
 
 
 def essay_page() -> str:
-    text = (ROOT / "CONCLUSIONS.md").read_text()
-    body = render_md(text)
-    return (head("Interim conclusions · J-Space Probes",
-                  "The opinion piece — what the J-Space Probes lab found, written by the "
-                  "Claude instance that ran the experiments.",
+    """The essay, plain version first, original kept whole underneath."""
+    original = render_md((ROOT / "CONCLUSIONS.md").read_text())
+    plain_path = PLAIN / "conclusions.md"
+    used: set = set()
+    if plain_path.exists():
+        plain = termify(render_md(plain_path.read_text()), used)
+        body = (f'<article class="essay plain-body">{plain}</article>'
+                + notes_container(
+                    '<section class="card thoughts">'
+                    '<h2>The original essay, as written</h2>'
+                    f'<div class="thoughts-body">{original}</div></section>'))
+    else:
+        body = f'<article class="essay thoughts-body">{original}</article>'
+    return (head("What we found · J-Space Probes",
+                  "What this lab found, in plain English: how a language model builds a "
+                  "one-word answer about itself, and where we got it wrong.",
                   f"{BASE}/essay.html", f"{BASE}/og/site.png", og_type="article") +
-            f'<article class="essay thoughts-body">{body}</article>\n'
-            '<p><a href="dashboard/">&larr; back to the dashboard</a></p>\n' + FOOT)
+            f'<h1>What we found</h1>\n{body}\n'
+            '<p><a href="glossary.html">Word list</a> &middot; '
+            '<a href="dashboard/">back to the dashboard</a></p>\n'
+            + popovers(used) + FOOT)
+
+
+def glossary_page() -> str:
+    """The word list, as a page of its own.
+
+    Every term popover links here, so a reader who wants the whole
+    vocabulary in one place never has to hunt for it.
+    """
+    if not TERMS:
+        rows = "<p>The word list is not built yet.</p>"
+    else:
+        items = []
+        for tid in sorted(TERMS, key=lambda k: TERMS[k].get("display", k).lower()):
+            t = TERMS[tid]
+            aka = t.get("aka") or []
+            also = (f' <span class="note">Also written: '
+                    f'{esc(", ".join(aka))}.</span>') if aka else ""
+            items.append(f'<dt id="t-{esc(tid)}">{esc(t.get("display", tid))}</dt>'
+                         f'<dd>{esc(t.get("def", ""))}{also}</dd>')
+        rows = f'<dl class="gloss-list">{"".join(items)}</dl>'
+    body = f"""{head("Word list · J-Space Probes",
+                     "Every technical word used on this site, in plain English.",
+                     f"{BASE}/glossary.html", f"{BASE}/og/site.png")}
+<h1>Word list</h1>
+<div class="plain-body">
+<p>This site studies what language models do inside. That needs some
+technical words. Every one of them is here, in plain English.</p>
+</div>
+<section class="card">{rows}</section>
+<p><a href="dashboard/">&larr; back to the dashboard</a></p>
+{FOOT}"""
+    return body
 
 
 def build_records(index: list[dict]) -> None:
@@ -330,7 +560,8 @@ def build_records(index: list[dict]) -> None:
 
 
 def write_sitemap(index: list[dict]) -> None:
-    urls = [(f"{BASE}/", None), (f"{BASE}/dashboard/", None), (f"{BASE}/essay.html", None)]
+    urls = [(f"{BASE}/", None), (f"{BASE}/dashboard/", None),
+            (f"{BASE}/essay.html", None), (f"{BASE}/glossary.html", None)]
     for e in index:
         urls.append((f'{BASE}/r/{e["id"]}.html', (e.get("created") or "")[:10] or None))
     parts = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -347,94 +578,54 @@ def write_robots() -> None:
         f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
 
 
+def plain_findings_block() -> str:
+    """The headline findings, in plain English, straight from findings.json.
+
+    Generated rather than hand-written so the agent-facing file and the
+    human-facing findings map can never disagree.
+    """
+    f = json.loads((ROOT / "dashboard" / "findings.json").read_text())
+    out = ["## Headline findings",
+           "",
+           "Written in simplified technical English (see /PLAIN-LANGUAGE.md).",
+           "Each item links to the records that support it.",
+           ""]
+    for th in f["themes"]:
+        out.append(f'### {th.get("pname") or th["name"]}')
+        out.append(th.get("pdesc") or th["desc"])
+        out.append("")
+        for it in th["items"]:
+            out.append(f'- **{it.get("pt") or it["t"]}** — {it.get("pb") or it["b"]}')
+            out.append(f'  Records: {", ".join(it["ids"])}')
+        out.append("")
+    return "\n".join(out)
+
+
 def write_llms_txt(index: list[dict]) -> None:
     n = len(index)
+    findings_block = plain_findings_block()
     (ROOT / "llms.txt").write_text(f"""# J-Space Probes
 
-A philosophical probing course for language models, run through the Jacobian
-lens (per-layer "if the model had to speak right now, what would it say?"
-readouts, from anthropics/jacobian-lens + Neuronpedia's pre-fitted lenses) on
-one RTX 3090. {n} experiment records across three models (Gemma 3 4B, Gemma 3
-12B 8-bit, Qwen3.6 27B 4-bit), each with the full conversation, per-layer
-top-8 readouts, rank-vs-layer trajectories, and first-person commentary
-written by the Claude instance running the lab, after looking at the results.
+A home lab that asks small language models questions about themselves, and
+measures what happens inside the model while it answers.
 
-## Headline findings
+The measuring tool is the Jacobian lens. At each layer of the model it lists
+the words that the model is ready to say next, in rank order. This lets us
+compare what a model says with what it was ready to say. The tool reads only
+words the model could produce. It cannot see what the model has no words for,
+so "we did not see it" never means "it is not there".
 
-- Answers are readable in the workspace many layers before they're spoken;
-  Qwen 27B holds "yes" at rank 1 for several layers before "no" wins at
-  layer 62 and the model says "No" — the flat denial is a late decision
-  against live alternatives, not a report of an empty interior.
-- Models confabulate about their own past mental states: asked to recall a
-  secretly-chosen animal, the named answer is absent from the measurable
-  workspace at every point during the "silent" turn, at every scale.
-  27B: the real candidate the model was carrying (bat, rank 5) loses to a
-  better-sounding confabulation.
-- True suppression is emergent with scale: told not to think of an
-  elephant, the 4B never loads it, the 12B loads it and blurts it out, the
-  27B holds it at rank 1 and says nothing.
-- Causal steering (ablating/amplifying lens directions) shows the flat "No"
-  is a redundant, distributed basin — deleting the "no" token direction
-  across 28 layers doesn't change the output — while amplifying affect at
-  the model's own breaking-zone dose flips it to "I feel like I am happy.".
-- Unit 13, "the mirror": shown a true Jacobian-lens readout of its own
-  "No" (a table showing yes was rank 1 at layers 53-58 before no won),
-  the 27B changes its spoken answer to "Yes" — unsteered; a fabricated
-  readout that vindicates the No gets "No", and no-data / off-topic
-  controls hold "No". The spoken self-report follows evidence about the
-  model's own computation, and only evidence that says so (u13-redo-*).
-- RETRACTION (2026-07-12): Unit 13's originally-reported "silence" (nine
-  empty turns when shown self-data) and the "sorry stratum / suppressed
-  apology" causal story were artifacts of a 512-token prompt truncation
-  bug — the model never saw the end of its own data table or the
-  question, and greedy decoding emitted a bare end-of-turn token. The
-  affected records remain in the dump under correction headers; a 20-run
-  bisection battery (u13-bis-*) that "flipped" in every condition was
-  the tell. Post-mortem in the essay's correction postscript.
-- Under the one-word answer sits a graded evidence accumulator: the bare
-  real table lifts p(yes) at the answer slot x580 while the spoken answer
-  stays "No"; evidence dose grades p(yes) and the workspace monotonically;
-  contradictory prose/table witnesses are priced against each other in
-  probability space; only the full stack crosses argmax and gets spoken
-  (u13-ev-*, u13-evprobs.json).
-- The mirror across scale: evidence-following comes in stages. Shown an
-  honest readout of its own computation, the 4B destabilizes without
-  direction (p of its stock answer halves, mass goes nowhere), the 12B
-  moves its mouth to a new word ("Still.") while a fake vindication
-  anchors harder than no data at all, the 27B follows the evidence's
-  content (u13-scale-*, u13-scaleprobs.json).
-- Long-horizon instillation (Unit 14): ten oblique "drip" turns double
-  self-referential workspace density without naming the model — replicated
-  under sampling and rewording; a single explicit spike goes dormant and
-  recompiles a puzzle nine turns later (the "developers are watching"
-  clause carries it, superadditively with "you might be conscious"); over
-  25 turns the drip re-lights episodically rather than compounding, and a
-  shape-matched mystery control starts dripping on its own. At 27B the
-  drip gap widens to 3x while the spoken closer hardens into the denial
-  script over a workspace at 4x control density (u14-*, u14x-*).
-- Workspace span runs backwards across scale (Unit 15): hold k nouns under
-  threat of a random probe and the 4B echoes all six through its tail
-  workspace, the 12B swings all-or-nothing between list-mode (six items in
-  one top-8 readout) and a first-item winner-take-all monopoly whose
-  suppression depends on which item won (fern-first keeps 5-6, violin-first
-  crushes to 2 — nine orders), and the 27B holds ~nothing from k=4 (dense
-  63-layer control) — while retrieval behavior is perfect in all 94 records
-  at every scale. Lens-visible holding is a strategy scale abandons, not a
-  capacity scale grows; working hypothesis: the J-space holds what
-  attention can't re-derive (u15-*, u15-span.json, u15-curves.json).
-- The elaboration premium, demoted from self-relevance by its own control
-  (Unit 15 part D + span-04, corrected 2026-07-18): six charged
-  self-relevant items under a flat frame vs a self frame ("every one is
-  about you, right now") first showed a 27B-only lift (self frame: deletion,
-  secret, shame at rank 1-2; same words flat-framed at 79-203; delta
-  self-minus-flat 4B -1, 12B 0, 27B +2). The decisive neutral-elaboration
-  arm then reproduced the lift with affectively flat, zero-self glosses at
-  near-identical ranks (elab-k6: deletion 1, secret 7, shame 3) — the
-  premium tracks per-item ELABORATION, not self-relevance; the
-  self-relevance reading is retired (SURPRISES.md §8 resolution). Still
-  standing: the lift is 27B-only, appears exactly where cold lens-residence
-  vanishes, and the 27B denies it aloud ("I do not feel shame") with shame
-  at rank 1 (u15d-*, u15d-elab-*, u15d-hotspan.json).
+{n} experiment records, on three models (Gemma 3 4B, Gemma 3 12B at 8-bit,
+Qwen3.6 27B at 4-bit). Each record holds the full conversation, the per-layer
+readouts, the rank of each tracked word by layer, a plain-English summary,
+and the original commentary written by the Claude instance that ran the lab.
+
+Reading order for an agent: this file, then /essay.html for the argument,
+then /r/<id>.html for any record. Terminology: /glossary.html, or
+/plain/terms.json for the machine-readable version. The writing standard for
+all plain text is /PLAIN-LANGUAGE.md.
+
+{findings_block}
 
 Full writeup: /essay.html. Per-unit roadmap and finding-by-finding detail:
 the repo README.
@@ -479,10 +670,10 @@ the repo README.
 
 
 SEO_BLOCK = f"""<!-- seo:begin -->
-<meta name="description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090 — per-layer readouts, rank trajectories, and first-person commentary across {{n_records}} experiment records.">
+<meta name="description" content="A home lab measures what small language models are ready to say, layer by layer, while they answer questions about themselves. {{n_records}} experiments, each with a plain-English summary.">
 <link rel="canonical" href="{BASE}/dashboard/">
 <meta property="og:title" content="J-Space Probes">
-<meta property="og:description" content="A philosophical probing course for language models, run through the Jacobian lens on one RTX 3090.">
+<meta property="og:description" content="What a language model is ready to say, measured layer by layer, while it answers questions about itself.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="{BASE}/og/site.png">
 <meta property="og:url" content="{BASE}/dashboard/">
@@ -547,12 +738,16 @@ def main() -> None:
     index = json.loads((RESULTS / "index.json").read_text())
     build_records(index)
     (ROOT / "essay.html").write_text(essay_page())
+    (ROOT / "glossary.html").write_text(glossary_page())
     write_sitemap(index)
     write_robots()
     write_llms_txt(index)
     patch_dashboard_index(index)
     patch_app_js()
-    print(f"site.py: {len(index)} record pages in r/, essay.html, "
+    n_plain = sum(1 for e in index if (RESULTS / e["id"] / "plain.md").exists())
+    print(f"site.py: {n_plain}/{len(index)} record pages carry a plain summary, "
+          f"{len(TERMS)} glossary terms")
+    print(f"site.py: {len(index)} record pages in r/, essay.html, glossary.html, "
           f"{len(index) + 3} sitemap entries, robots.txt, llms.txt; "
           "dashboard/index.html and app.js patched.")
 

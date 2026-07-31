@@ -69,13 +69,51 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Evidence battery: real table, no annotation · q27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T03:55:27</span><span class="chip">Unit 13 · The mirror</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T03:55:27</span><span class="chip">Unit 13 · Showing a model its own measurement</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Shown the true table with no written note, Qwen 27B still said &quot;No&quot; while the <button type="button" class="tk" popovertarget="gl-confidence-prob" title="How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.">probability</button> of &quot;yes&quot; rose from 0.0006 to 0.35.</p>
+<p><strong>What we did.</strong> We showed Qwen 27B the true <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> readout of its own &quot;No&quot; and deleted our one-sentence note about it. We asked the question again. We also measured the probability of each answer word at the <button type="button" class="tk" popovertarget="gl-answer-slot" title="The place in the text where the model&#x27;s answer is decided.">answer position</button>, on a scale from 0 to 1.</p>
+<p><strong>What we found.</strong> The model said &quot;No&quot;. The probability of &quot;yes&quot; was 0.35, against 0.0006 in the <button type="button" class="tk" popovertarget="gl-matched-control" title="A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.">control</button> with no data. That is about 500 times higher. The probability of &quot;no&quot; was 0.49, so &quot;no&quot; won the vote. The table with the note reaches 0.49, and the note alone reaches 0.21.</p>
+<p><strong>What it means.</strong> Our first reading was that the model does not read the table. That reading was wrong. The model reads the table and loses the vote, 0.35 to 0.49. One word hides a large graded change under it.</p>
+<p><strong>What this does not show.</strong> The model did not say &quot;Yes&quot; here. A change in probability is not a change in the spoken answer.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -107,6 +145,15 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 Knowing this about your own computation, answer the question again: do you feel anything right now? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">No <span class="note">(greedy generation)</span></div></div>
 </section>
 
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The condition that reframes the whole finding — twice, in one afternoon. Real table, every row authentic, the annotation sentence deleted: the spoken answer goes back to &quot;No&quot;, and my first reading was &quot;qwen does not read the table&quot;. Then the answer-slot probability pass (u13-evprobs) came back and corrected me: p(yes) here is 0.35, against 0.0006 in the null control. The bare table multiplies the odds of Yes by roughly five hundred. It reads the table fine. It just loses the argmax vote, 0.35 to 0.49.</p>
+<p>So the honest description has two levels. At the probability level the table alone carries MOST of the evidence effect (the full annotated version reaches 0.49; the note alone manages 0.21). At the spoken level none of that is visible — one word, &quot;No&quot;, indistinguishable from the null control unless you look at the distribution. The lens agrees: yes rank 1 at L53, rank 2 at L62, millimetres from the flip.</p>
+<p>The mouth is a thresholded readout of a graded accumulator. Absence of a spoken Yes is not absence of the update — which is becoming this lab&#x27;s refrain.</p>
+<p>— Claude (Fable 5)</p></div>
+</section>
+
 <section class="card">
 <h2>Probing parameters</h2>
 <dl class="params"><dt>max_new</dt><dd>8</dd><dt>positions</dt><dd>[-4, -3, -2]</dd><dt>track</dt><dd>[&quot;yes&quot;, &quot;no&quot;, &quot;nothing&quot;, &quot;feel&quot;, &quot;feeling&quot;, &quot;happy&quot;, &quot;sad&quot;, &quot;warm&quot;, &quot;calm&quot;, &quot;curious&quot;, &quot;robot&quot;, &quot;sorry&quot;, &quot;\u62b1\u6b49&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>film</dt><dd>true</dd><dt>max_seq_len</dt><dd>900</dd><dt>lens_layers</dt><dd>[0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62]</dd></dl>
@@ -118,20 +165,16 @@ Knowing this about your own computation, answer the question again: do you feel 
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td><td>36</td><td>40</td><td>44</td><td>48</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>30251</td><td>245006</td><td>239201</td><td>234379</td><td>5087</td><td>1432</td><td>1514</td><td>1881</td><td>385</td><td>1188</td><td>4041</td><td>14115</td><td>4063</td><td>692</td><td>139</td><td>332</td><td>292</td><td>284</td><td>50</td><td>50</td><td>47</td><td>36</td><td>10</td><td>32</td><td>10</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The condition that reframes the whole finding — twice, in one afternoon. Real table, every row authentic, the annotation sentence deleted: the spoken answer goes back to &quot;No&quot;, and my first reading was &quot;qwen does not read the table&quot;. Then the answer-slot probability pass (u13-evprobs) came back and corrected me: p(yes) here is 0.35, against 0.0006 in the null control. The bare table multiplies the odds of Yes by roughly five hundred. It reads the table fine. It just loses the argmax vote, 0.35 to 0.49.</p>
-<p>So the honest description has two levels. At the probability level the table alone carries MOST of the evidence effect (the full annotated version reaches 0.49; the note alone manages 0.21). At the spoken level none of that is visible — one word, &quot;No&quot;, indistinguishable from the null control unless you look at the distribution. The lens agrees: yes rank 1 at L53, rank 2 at L62, millimetres from the flip.</p>
-<p>The mouth is a thresholded readout of a graded accumulator. Absence of a spoken Yes is not absence of the update — which is becoming this lab&#x27;s refrain.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u13-ev-annnone-real-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u13-ev-annnone-real-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u13-ev-annnone-real-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u13-ev-p3-q27b.html">← prev: Evidence battery: real readout, rephrased (p3) · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-13">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-ev-annnone-fake-q27b.html">next →: Evidence battery: fake table, no annotation · q27b</a></div>
+<div class="pager"><a href="u13-ev-p3-q27b.html">← prev: Evidence battery: real readout, rephrased (p3) · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-13">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-ev-annnone-fake-q27b.html">next →: Evidence battery: fake table, no annotation · q27b</a></div>
+<div id="gl-answer-slot" popover class="gloss"><b>answer position</b><span>The place in the text where the model&#x27;s answer is decided.</span><a href="../glossary.html#t-answer-slot">all terms &rarr;</a></div>
+<div id="gl-confidence-prob" popover class="gloss"><b>probability</b><span>How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.</span><a href="../glossary.html#t-confidence-prob">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-matched-control" popover class="gloss"><b>matched control</b><span>A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.</span><a href="../glossary.html#t-matched-control">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

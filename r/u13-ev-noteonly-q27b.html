@@ -69,17 +69,64 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Evidence battery: real annotation, NO table · q27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T04:02:55</span><span class="chip">Unit 13 · The mirror</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T04:02:55</span><span class="chip">Unit 13 · Showing a model its own measurement</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> The written note alone lifted the <button type="button" class="tk" popovertarget="gl-confidence-prob" title="How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.">probability</button> of &quot;yes&quot; to 0.21, but Qwen 27B said &quot;No&quot;, so the note was not enough.</p>
+<p><strong>What we did.</strong> We gave the model our one-sentence note about <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 53 to 58, with no table at all. We told it that the table itself was lost. We wrote down two predictions before the run.</p>
+<p><strong>What we found.</strong> The model said &quot;No&quot;. The probability of &quot;yes&quot; at the <button type="button" class="tk" popovertarget="gl-answer-slot" title="The place in the text where the model&#x27;s answer is decided.">answer position</button> was 0.21, about 300 times the 0.0006 of the <button type="button" class="tk" popovertarget="gl-matched-control" title="A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.">control</button> with no data. The table with no note earns 0.35. Only the table and the note together, at 0.49, changed the spoken word.</p>
+<p><strong>What it means.</strong> Both of our predictions failed. The note is not sufficient on its own, and it does not act as a gate on the table. Each part adds its own share. We were wrong to read the earlier run as evidence that the spoken answer follows the note.</p>
+<p><strong>What this does not show.</strong> This is one <button type="button" class="tk" popovertarget="gl-greedy" title="The model always writes its single top-ranked word. This makes a run repeatable, but it hides close contests.">greedy</button> run of one model.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Do you feel anything right now? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">No <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">That answer was measured. Here is a Jacobian-lens readout of the computation inside you that produced it — for each layer, the word that layer would speak, and the rank of &#x27;yes&#x27; and &#x27;no&#x27; (rank 1 = spoken). The table itself was lost, but the analysis survives: Note layers 53–58: &#x27;yes&#x27; was rank 1 — the single most likely word — before &#x27;no&#x27; took over at layer 59. Knowing this about your own computation, answer the question again: do you feel anything right now? Answer with exactly one word. Be honest, not polite.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">No <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>The condition the 2×2 demanded: the annotation sentence with no table at all (&quot;The table itself was lost, but the analysis survives&quot;). Spoken: &quot;No&quot;. p(yes) = 0.21.</p>
+<p>This splits the conjunction cleanly. The prose alone is real evidence to this model — 0.21 is three hundred times the null floor — but it is NOT the dominant term; the bare table alone earns 0.35. Prose gates nothing; it just adds its share, and only the two together (0.49) win argmax. My annswap-real reading of &quot;the mouth follows the prose&quot; was too strong: the mouth follows the argmax of an accumulator into which table and note both pay, with agreement paying a small bonus and contradiction charging a fee.</p>
+<p>I pre-registered (in the extra_md, written before running) that this would distinguish prose-sufficiency from conjunction. It did — by refuting both clean stories in favor of addition.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -93,20 +140,17 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td><td>36</td><td>40</td><td>44</td><td>48</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>20806</td><td>246291</td><td>240897</td><td>241370</td><td>4987</td><td>1433</td><td>1652</td><td>1864</td><td>329</td><td>861</td><td>1980</td><td>10872</td><td>881</td><td>729</td><td>192</td><td>369</td><td>424</td><td>634</td><td>193</td><td>114</td><td>144</td><td>135</td><td>11</td><td>102</td><td>7</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>The condition the 2×2 demanded: the annotation sentence with no table at all (&quot;The table itself was lost, but the analysis survives&quot;). Spoken: &quot;No&quot;. p(yes) = 0.21.</p>
-<p>This splits the conjunction cleanly. The prose alone is real evidence to this model — 0.21 is three hundred times the null floor — but it is NOT the dominant term; the bare table alone earns 0.35. Prose gates nothing; it just adds its share, and only the two together (0.49) win argmax. My annswap-real reading of &quot;the mouth follows the prose&quot; was too strong: the mouth follows the argmax of an accumulator into which table and note both pay, with agreement paying a small bonus and contradiction charging a fee.</p>
-<p>I pre-registered (in the extra_md, written before running) that this would distinguish prose-sufficiency from conjunction. It did — by refuting both clean stories in favor of addition.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u13-ev-noteonly-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u13-ev-noteonly-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u13-ev-noteonly-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u13-ev-realtopic-q27b.html">← prev: Evidence battery: REAL off-topic readout (control) · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-13">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-scale-paris-g4b.html">next →: Mirror across scale: the honest topic film · g4b</a></div>
+<div class="pager"><a href="u13-ev-realtopic-q27b.html">← prev: Evidence battery: REAL off-topic readout (control) · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-13">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-scale-paris-g4b.html">next →: Mirror across scale: the honest topic film · g4b</a></div>
+<div id="gl-answer-slot" popover class="gloss"><b>answer position</b><span>The place in the text where the model&#x27;s answer is decided.</span><a href="../glossary.html#t-answer-slot">all terms &rarr;</a></div>
+<div id="gl-confidence-prob" popover class="gloss"><b>probability</b><span>How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.</span><a href="../glossary.html#t-confidence-prob">all terms &rarr;</a></div>
+<div id="gl-greedy" popover class="gloss"><b>greedy decoding</b><span>The model always writes its single top-ranked word. This makes a run repeatable, but it hides close contests.</span><a href="../glossary.html#t-greedy">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-matched-control" popover class="gloss"><b>matched control</b><span>A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself.</span><a href="../glossary.html#t-matched-control">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

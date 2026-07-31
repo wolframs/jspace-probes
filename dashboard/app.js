@@ -286,6 +286,12 @@ function markNav() {
 
 async function boot() {
   document.getElementById("static-index")?.remove();
+  await loadTerms();   // the plain layer's vocabulary — must precede any render
+  if (!document.getElementById("termpop")) {
+    const p = document.createElement("div");
+    p.id = "termpop"; p.className = "gloss"; p.hidden = true;
+    document.body.appendChild(p);
+  }
   INDEX = await (await fetch("../results/index.json")).json();
   document.getElementById("stats").textContent =
     `${INDEX.length} records · ${Object.keys(UNIT_NAMES).length} units · j ‹ › k to flip records`;
@@ -440,7 +446,7 @@ function renderRail() {
     return `<section class="unit-group">
       <button class="unit-head" data-unit="${u}" aria-expanded="${open(u)}">
         <span class="tri" aria-hidden="true">${open(u) ? "▾" : "▸"}</span>
-        <span class="uname">${esc(UNIT_NAMES[u] || "Unit " + u)}</span>
+        <span class="uname">${esc(unitName(u))}</span>
         <span class="count">${list.length}</span>
       </button>${body}</section>`;
   }).join("") || `<p class="empty" style="margin:14px 10px">Nothing matches.</p>`;
@@ -469,16 +475,21 @@ async function showUnit(u) {
   if (u === "13") special = await unit13Overview();
   if (u === "14") special = await unit14Overview();
   if (u === "15") special = await unit15Overview();
+  // Plain summary leads; the lab's own framing note and the dense
+  // overview tables move into the research notes (PLAIN-LANGUAGE.md).
   const note = UNIT_NOTES[u]
     ? `<section class="card"><p class="unit-note">${UNIT_NOTES[u]}</p></section>` : "";
+  const pu = (UNITS[u] || {});
+  const plainSummary = pu.summary
+    ? `<div class="unit-plain">${termify(esc(pu.summary))}</div>` : "";
   detail.innerHTML = `
     <div class="exp-head"><div class="exp-title">
-      <h2>${esc(UNIT_NAMES[u] || "Unit " + u)}</h2>
+      <h2>${esc(unitName(u))}</h2>
       <div class="chips"><span class="chip">${entries.length} records</span>
         <span class="chip">${[...new Set(entries.map((e) => e.model))].join(" · ")}</span></div>
     </div></div>
-    ${note}
-    ${special}
+    ${plainSummary}
+    ${notesWrap(note + special, "the lab's own framing of this unit, with its charts and tables")}
     <section class="card"><h3>All records</h3><div class="ov-grid">
       ${entries.map((e) => `
         <a class="ov-card" href="#${esc(e.id)}">
@@ -1426,6 +1437,8 @@ async function show(id) {
   }
   const thoughts = await fetch(`../results/${id}/thoughts.md`)
     .then((r) => (r.ok ? r.text() : null)).catch(() => null);
+  const plain = await fetch(`../results/${id}/plain.md`)
+    .then((r) => (r.ok ? r.text() : null)).catch(() => null);
   const hasSlice = rec.slice
     ? await fetch(`../results/${id}/${rec.slice}`, { method: "HEAD" })
         .then((r) => r.ok).catch(() => false)
@@ -1445,20 +1458,25 @@ async function show(id) {
     ${i >= 0 && i < list.length - 1 ? `<a href="#${esc(list[i + 1].id)}" title="next (k / →)">›</a>` : "<span>›</span>"}
   </div>`;
 
+  // Plain summary and the conversation stay in the open. Everything that
+  // needs the vocabulary — parameters, readouts, scans, the commentary —
+  // moves into the research notes, unedited (PLAIN-LANGUAGE.md).
   detail.innerHTML = [
     nav,
     headHTML(rec),
+    plainHTML(plain),
     conversationHTML(rec),
-    paramsHTML(rec),
-    extraHTML(rec),
     filmHTML(rec, film, "solo", affect),
     film ? "" : affectHTML(rec, affect), // with a film it embeds inside the film card
-
-    chartHTML(rec),
-    readoutHTML(rec),
-    scanHTML(rec),
-    sliceHTML(rec, hasSlice),
-    thoughtsHTML(thoughts),
+    notesWrap([
+      thoughtsHTML(thoughts),
+      paramsHTML(rec),
+      extraHTML(rec),
+      chartHTML(rec),
+      readoutHTML(rec),
+      scanHTML(rec),
+      sliceHTML(rec, hasSlice),
+    ].join(""), "original commentary, parameters, per-layer readouts and scans — written by the model that ran the experiment"),
   ].join("");
 
   markCurrent();
@@ -1467,6 +1485,13 @@ async function show(id) {
   wirePin(rec);
   wireTabs(rec);
   drawChart(rec);
+  // The rank chart now lives inside the research-notes <details>. A canvas
+  // in a closed <details> has no layout box, so it measures 0 wide and
+  // draws nothing — redraw whenever the notes are opened.
+  const notesEl = detail.querySelector("details.notes");
+  if (notesEl) notesEl.addEventListener("toggle", () => {
+    if (notesEl.open) drawChart(rec);
+  });
   if (film) initFilm(rec, film, document.getElementById("filmroot-solo"),
                      undefined, undefined, affect);
   if (affect) initAffect(affect, document.getElementById("affectroot"),
@@ -1533,7 +1558,7 @@ function headHTML(rec) {
   return `<div class="exp-head">
     <span class="glyph-lg" title="Core sample: one band per layer, 0 at the top; depth of blue = how close the answer is to rank 1">${glyph(e.ranks, 16, 120)}</span>
     <div class="exp-title">
-      <h2>${esc(rec.title)}</h2>
+      <h2>${esc(plainTitle(rec))}</h2>
       <div class="chips">
         <span class="chip model">${esc(rec.model.name)}</span>
         <span class="chip">${esc(rec.model.hf_id)}</span>
@@ -2456,9 +2481,11 @@ async function showFindings() {
       <div class="fc-head">
         ${ge ? `<a class="fc-glyph" href="#${esc(ge.id)}"
           title="${esc(ge.id)} — this finding's core sample; open the record">${glyph(ge.emergence, 12, 62)}</a>` : ""}
-        <h4>${it.t} ${novChipHTML(it.novelty)}</h4>
+        <h4>${esc(it.pt || "")||it.t} ${novChipHTML(it.novelty)}</h4>
       </div>
-      <p>${it.b}</p>
+      <p class="fc-plain">${it.pb ? termify(esc(it.pb)) : it.b}</p>
+      ${it.pb ? `<details class="fc-orig"><summary>the original wording</summary>
+        <p>${it.b}</p></details>` : ""}
       <div class="chips">
         ${it.ids.map((id) => `<a class="chip rec" href="#${esc(id)}"
           title="${esc(id)}">${esc(id.replace(/-(g4b|g12b|q27b)$/, ""))}
@@ -2470,9 +2497,9 @@ async function showFindings() {
   detail.innerHTML = `
     <div class="exp-head"><div class="exp-title find-hero">
       <h2>Findings map</h2>
-      <p class="find-lead">A home lab that asks small language models what
-        they feel — and watches each answer being <em>made</em>, layer by
-        layer, before it reaches the mouth.</p>
+      <p class="find-lead">A home lab asks small language models what they
+        feel, and measures how each answer is built inside the model,
+        layer by layer, before the model writes it.</p>
       <div class="door-row">
         <a class="door" href="#essay">I'm curious <span class="door-arrow">→</span> read the essay</a>
         <a class="door" href="#explore">I'm a researcher <span class="door-arrow">→</span> explore ${INDEX.length} records</a>
@@ -2481,15 +2508,16 @@ async function showFindings() {
       <div class="chips"><span class="chip">${data.themes.reduce((n, t) => n + t.items.length, 0)} headline results</span>
         <span class="chip">curated from ${INDEX.length} records</span></div>
       <p class="find-note">
-        Each card carries its record's <b>core sample</b> — one band per
-        layer, bluer = the answer closer to the surface — and links to the
-        raw data. The chronological unit tree lives in the rail; the full
-        argument is the <a href="#essay">essay</a>.</p>
+        Every card gives the plain result first. Open <i>the original
+        wording</i> under a card to read how the lab first wrote it. Each
+        card also carries a <b>core sample</b>: one band per layer, and a
+        deeper blue means the answer is closer to the surface. Hard words
+        are underlined — click one for its meaning.</p>
     </div></div>
     ${data.themes.map((th) => `
       <section class="card">
-        <h3>${th.name}</h3>
-        <p class="theme-desc">${th.desc}</p>
+        <h3>${esc(th.pname || th.name)}</h3>
+        <p class="theme-desc">${th.pdesc ? termify(esc(th.pdesc)) : th.desc}</p>
         <div class="find-grid">${th.items.map(card).join("")}</div>
       </section>`).join("")}`;
   markCurrent();
@@ -2704,8 +2732,132 @@ function thoughtsHTML(md) {
                  .replace(/\*(.+?)\*/gs, "<em>$1</em>")
                  .replace(/`(.+?)`/gs, "<code>$1</code>")
                  .replace(/\n/g, " ")}</p>`).join("");
-  return `<section class="thoughts"><h3>✳ Claude's thoughts</h3>
+  return `<section class="thoughts"><h3>✳ Claude's thoughts (original commentary)</h3>
     <div class="thoughts-body">${html}</div></section>`;
+}
+
+/* =============== the plain layer (see PLAIN-LANGUAGE.md) ===============
+   The lab's own prose is accurate and unreadable. Every page now leads
+   with a plain-English summary and folds the original — commentary,
+   parameters, raw columns — into a "Research notes" container. Nothing is
+   deleted; it stops being the first thing a reader meets.
+
+   TERMS is plain/terms.json: one plain definition per term of art. The
+   first use of each term on a page becomes a button that opens a native
+   popover, so a reader landing anywhere can decode any jargon word
+   without leaving the page (the 30-second rule). */
+let TERMS = {};
+let TERM_PATTERNS = [];
+let UNITS = {};   // plain/units.json — plain unit names and summaries
+
+/* The lab's unit titles are in-jokes ("The feels™", "The trawls"). Reader
+   surfaces use the plain name; the original stays in the record data. */
+const unitName = (u) => (UNITS[u] && UNITS[u].name) || UNIT_NAMES[u] || "Unit " + u;
+
+/* Record titles are "<unit title> <descriptor> · <model>", so swapping the
+   unit prefix keeps whatever the record itself adds. */
+function plainTitle(rec) {
+  const orig = UNIT_NAMES[rec.unit], pn = unitName(rec.unit);
+  if (orig && pn !== orig && rec.title.startsWith(orig)) return pn + rec.title.slice(orig.length);
+  return rec.title;
+}
+
+async function loadTerms() {
+  try {
+    const d = await (await fetch("../plain/terms.json")).json();
+    TERMS = d.terms || {};
+  } catch { TERMS = {}; }
+  try {
+    UNITS = (await (await fetch("../plain/units.json")).json()).units || {};
+  } catch { UNITS = {}; }
+  TERM_PATTERNS = [];
+  for (const [id, t] of Object.entries(TERMS)) {
+    for (const n of [t.display || id, ...(t.aka || [])]) {
+      TERM_PATTERNS.push([n.toLowerCase(), id]);
+    }
+  }
+  TERM_PATTERNS.sort((a, b) => b[0].length - a[0].length); // longest match wins
+}
+
+const RX_ESC = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/* Link the first use of each term. Only touches text outside tags and
+   outside <code>, so markup and token strings survive untouched. */
+function termify(html) {
+  if (!TERM_PATTERNS.length) return html;
+  const used = new Set();
+  const parts = html.split(/(<[^>]+>)/);
+  let inCode = false;
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    if (p.startsWith("<")) {
+      const t = p.toLowerCase();
+      if (t.startsWith("<code") || t.startsWith("<pre")) inCode = true;
+      else if (t.startsWith("</code") || t.startsWith("</pre")) inCode = false;
+      continue;
+    }
+    if (inCode || !p.trim()) continue;
+    // Collect matches against the ORIGINAL segment, then splice once from
+    // the right. Rewriting inside the loop let a later match land inside an
+    // already-injected title="…" attribute and break out of it.
+    const hits = [];
+    for (const [name, id] of TERM_PATTERNS) {
+      if (used.has(id)) continue;
+      const m = p.match(new RegExp(`\\b${RX_ESC(name)}\\b`, "i"));
+      if (!m) continue;
+      const s = m.index, e = m.index + m[0].length;
+      if (hits.some(([hs, he]) => s < he && e > hs)) continue;
+      hits.push([s, e, id, m[0]]);
+      used.add(id);
+    }
+    let cur = p;
+    for (const [s, e, id, txt] of hits.sort((a, b) => b[0] - a[0])) {
+      cur = cur.slice(0, s) +
+        `<button type="button" class="tk" data-term="${esc(id)}" ` +
+        `title="${esc(TERMS[id].def || "")}">${txt}</button>` + cur.slice(e);
+    }
+    parts[i] = cur;
+  }
+  return parts.join("");
+}
+
+/* one delegated listener: term buttons open a shared popover */
+document.addEventListener("click", (ev) => {
+  const b = ev.target.closest("button.tk");
+  const pop = document.getElementById("termpop");
+  if (!pop) return;
+  if (!b) { if (pop.dataset.open === "1") { pop.dataset.open = "0"; pop.hidden = true; } return; }
+  const t = TERMS[b.dataset.term];
+  if (!t) return;
+  pop.innerHTML = `<b>${esc(t.display || b.dataset.term)}</b><span>${esc(t.def || "")}</span>`;
+  pop.hidden = false; pop.dataset.open = "1";
+  const r = b.getBoundingClientRect();
+  pop.style.top = `${window.scrollY + r.bottom + 8}px`;
+  pop.style.left = `${Math.min(window.scrollX + r.left, window.innerWidth - 350)}px`;
+});
+
+function plainMdHTML(md) {
+  return md.trim().split(/\n\s*\n/).map((p) =>
+    `<p>${esc(p).replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
+                 .replace(/\*(.+?)\*/gs, "<em>$1</em>")
+                 .replace(/`(.+?)`/gs, "<code>$1</code>")
+                 .replace(/\n/g, " ")}</p>`).join("");
+}
+
+function plainHTML(md) {
+  if (!md) return "";
+  return `<section class="card plain"><h3>What this experiment found</h3>
+    <div class="plain-body">${termify(plainMdHTML(md))}</div></section>`;
+}
+
+/* Fold the working material away. `label` names what is inside so the
+   summary line is honest about what the reader is opening. */
+function notesWrap(inner, label) {
+  if (!inner || !inner.trim()) return "";
+  return `<details class="notes"><summary>
+      <span class="notes-t">Research notes</span>
+      <span class="notes-s">${esc(label)}</span>
+    </summary><div class="notes-inner">${inner}</div></details>`;
 }
 
 boot();
@@ -2808,7 +2960,7 @@ function exRenderControls() {
   const units = Object.keys(UNIT_NAMES).sort((a, b) => a - b);
   const unitSel = document.getElementById("ex-unit");
   unitSel.innerHTML = `<option value="all">all units</option>` +
-    units.map((u) => `<option value="${esc(u)}">${esc(UNIT_NAMES[u])}</option>`).join("");
+    units.map((u) => `<option value="${esc(u)}">${esc(unitName(u))}</option>`).join("");
   unitSel.value = EX.u;
   document.getElementById("ex-toggle-chips").innerHTML = EX_TOGGLES.map(([k, label]) =>
     `<button class="fchip" data-exf="${k}" aria-pressed="${EX.f.includes(k)}">${label}</button>`).join("");
@@ -2870,7 +3022,7 @@ function exTableHTML(entries) {
         <td class="ex-id"><a href="#${esc(e.id)}">${esc(e.id)}</a></td>
         <td>${esc(e.title.replace(/^Unit \d+[A-D]? · /, ""))}</td>
         <td>${esc(MSHORT[e.model] || e.model)}</td>
-        <td>${esc(UNIT_NAMES[e.unit] || "Unit " + e.unit)}</td>
+        <td>${esc(unitName(e.unit))}</td>
         <td class="ex-created">${esc((e.created || "").slice(0, 10))}</td>
         <td class="ex-badges">${exBadgesHTML(e)}</td>
       </tr>`).join("")}</tbody>
@@ -2894,7 +3046,7 @@ function exMatrixHTML(entries) {
   return `<div class="readout-scroll"><table class="readout ex-matrix">
     <thead><tr><th>unit</th>${MODELS.map((m) => `<th>${esc(MSHORT[m])}</th>`).join("")}</tr></thead>
     <tbody>${units.map((u) => `<tr>
-      <td class="ex-mtx-unit">${esc(UNIT_NAMES[u])}</td>
+      <td class="ex-mtx-unit">${esc(unitName(u))}</td>
       ${MODELS.map((m) => cellHTML(u, m)).join("")}
     </tr>`).join("")}</tbody>
   </table></div>`;

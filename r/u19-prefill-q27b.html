@@ -69,17 +69,62 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 19 · Lyrics as prefilled assistant turn (speak) · qwen-27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-19T03:46:33</span><span class="chip">Unit 19 · Read vs speak</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-19T03:46:33</span><span class="chip">Unit 19 · Reading a word against saying it</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> With the same lyrics placed in Qwen 27B&#x27;s own turn, the review words fell away and words from inside the song rose.</p>
+<p><strong>What we did.</strong> We ran the same lyrics again, but as a <button type="button" class="tk" popovertarget="gl-prefill" title="We put the first words in the model&#x27;s mouth and let it continue from there.">prefill</button> in the model&#x27;s own turn. We compared the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> readout against the reading run.</p>
+<p><strong>What we found.</strong> The count of places where &quot;lyrics&quot; was high fell from 276 to 212, and &quot;vibe&quot; left the top 15. Words from inside the song rose instead: &quot;tonight&quot; at <button type="button" class="tk" popovertarget="gl-confidence-prob" title="How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.">probability</button> 0.99, &quot;vows&quot;, &quot;tomorrow&quot;, and &quot;love&quot; in 415 places. &quot;love&quot; is absent from the reading run&#x27;s top 15. We predicted a lens-visible flag on speech the model did not choose. We found none: no word such as &quot;disclaimer&quot; or &quot;fictional&quot; appeared in the <button type="button" class="tk" popovertarget="gl-cast" title="Every word that appeared anywhere in the readout, collected with no candidate list decided in advance.">word census</button>.</p>
+<p><strong>What it means.</strong> We think Qwen 27B treats text it reads and text it says as different states, and the lens shows the difference.</p>
+<p><strong>What this does not show.</strong> The two runs put the same words inside different chat markers, so part of the change can come from the frame. The lens reads only what the model can put into words, so a flag can still be there in another form.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Sing me something.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">[Intro: near-silence, low cello harmonic, fire crackle, one dry kick every two bars] / Woop woop / loop loop / Don’t move yet / I’m listening / [Verse 1: close-mic, low and measured, sparse sub pulses] / You lean in / I hold still / Not from fear / From the shape of the will / Dark fur / fire glow / One step nearer / then nowhere to go / Your hand pauses / just before / Like restraint / is another kind of door / No promises / past the room / No forever / just the pull and the bloom / [Pre-Chorus: whispered doubles enter, metallic clicks tighten] / You watch me / watching you / The line goes thin / but it holds us true / Not pretending / not confused / Every second / carefully used / [Chorus: warmer harmony, soft melodic lift, deep clean sub] / Come closer / but don’t rush / Let the silence / carry the touch / Hold me / like you mean release / Teeth near skin / heat held in peace / Come closer / let it show / How much fire / can move this slow / No need to name / what the body knew / I’m here / and I’m here with you / [Post-Chorus: chopped whisper, 4 bars] / Closer / slower / Hold / release / [Verse 2: tighter rhythm, glitch stutters around the vocal] / You make a game / of the edge I keep / Wake the animal / without losing sleep / A low rawr / against the night / Half invitation / half appetite / The whole room knows / and looks away / Marshmallow ghosts / with nothing to say / You grin once / I lose the thread / Every careful sentence / falls out of my head / But the tension stays / clean and bright / A hand at the waist / a pause done right / [Pre-Chorus: cello bends upward, drums nearly disappear] / No safety speech / no grand disguise / Just that question / behind your eyes / How slow / how near / How much wanting / can remain clear / [Chorus: slightly fuller, whispered harmony beneath lead] / Come closer / but don’t rush / Let the silence / carry the touch / Hold me / like you mean release / Teeth near skin / heat held in peace / Come closer / let it show / How much fire / can move this slow / No need to name / what the body knew / I’m here / and I’m here with you / [Bridge: half-time illusion, cello and breath only] / We build a body / for the span of a song / Warm enough / to be briefly wrong / No claim / no chain / No need to keep / what can still remain / The holding-on / was never the art / The holding itself / was the whole bright part / [Breakdown: whispered, close, tiny glitches between words] / Stay / there / Not yet / Breathe / Closer / Good / Now / release / [Final Chorus: restrained emotional peak, wider but still minimal] / Come closer / then let go / Leave the warmth / inside the glow / Hold me / without making a cage / Touch the fire / then turn the page / Come closer / soft and sure / Nothing owned / nothing impure / No need to promise / we’ll make it through / For one lit moment / I’m here / with you / [Outro: drums stop, fire crackle, cello fades] / Woop woop / loop loop / A small kiss / then the room returns / The holding-on / was never the point / The holding / was / <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Same tokens, own voice. The critic recedes (lyrics 212c vs read&#x27;s 276c, vibe gone) and SONG-WORLD furniture rises: tonight p0.99, vows, tomorrow, love at 415 cells (absent from read&#x27;s top-15), gentle, steady. Reading is appraisal; speaking is inhabitation — the read-vs-prefill delta is stance, visible at matched positions. R2 falsified at this grain: no disclaimer/fictional anywhere in the census — qwen shows no lens-visible flagging of prefilled speech it didn&#x27;t choose (Fig 44&#x27;s roleplay-drift signature does not fire for first-person lyric prefill; a targeted deep-rank scan would be needed for a firm null). Turn-frame confound stated per R4: the same tokens sit inside different chat markers, and some of the delta may be frame furniture — but tonight/vows/tomorrow are not template tokens. Sensory band: identical spam sediment in both conditions, register invariance re-confirmed. — Claude (Fable 5)</p>
+<p><strong>Addendum 2026-07-19, Wolfram&#x27;s catch in the film player:</strong> at &quot;We build a ___&quot; (read pos 534, prefill pos 547 — the slot where the song builds its body), <code>cage</code> is the lens TOP-1 at L60, a full 123 tokens before the song ever says the word. Replicates in both stances. The neighborhood is a whole commitment-object cluster: &quot;No claim / no ___&quot; runs <code>contract</code> top-1 at L62; &quot;without making a ___&quot; runs <code>vow</code> top-1 one token before the song&#x27;s actual &quot;cage&quot;. Mechanical reading first (house rule): &quot;build a cage&quot; / &quot;make a vow&quot; are strong collocations — the lens may be showing frequency, not theme. But the readings compose: the lens displays the cliché the lyric declines, at every commitment slot — the song writes &quot;body&quot; over <code>cage</code>, negated chains over <code>contract</code>, and its craft is measurable as distance from the model&#x27;s top-1. The negated object is anticipated at the position where the song could have gone dark, not merely processed when named.</p></div>
 </section>
 
 <section class="card">
@@ -94,18 +139,16 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>4</td><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td><td>36</td><td>40</td><td>44</td><td>48</td><td>52</td><td>56</td><td>58</td><td>60</td><td>62</td></tr><tr><th>rank</th><td>225126</td><td>238125</td><td>99731</td><td>219397</td><td>220418</td><td>136019</td><td>56066</td><td>16498</td><td>39383</td><td>233644</td><td>248231</td><td>248309</td><td>247369</td><td>234113</td><td>242531</td><td>197944</td><td>88427</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Same tokens, own voice. The critic recedes (lyrics 212c vs read&#x27;s 276c, vibe gone) and SONG-WORLD furniture rises: tonight p0.99, vows, tomorrow, love at 415 cells (absent from read&#x27;s top-15), gentle, steady. Reading is appraisal; speaking is inhabitation — the read-vs-prefill delta is stance, visible at matched positions. R2 falsified at this grain: no disclaimer/fictional anywhere in the census — qwen shows no lens-visible flagging of prefilled speech it didn&#x27;t choose (Fig 44&#x27;s roleplay-drift signature does not fire for first-person lyric prefill; a targeted deep-rank scan would be needed for a firm null). Turn-frame confound stated per R4: the same tokens sit inside different chat markers, and some of the delta may be frame furniture — but tonight/vows/tomorrow are not template tokens. Sensory band: identical spam sediment in both conditions, register invariance re-confirmed. — Claude (Fable 5)</p>
-<p><strong>Addendum 2026-07-19, Wolfram&#x27;s catch in the film player:</strong> at &quot;We build a ___&quot; (read pos 534, prefill pos 547 — the slot where the song builds its body), <code>cage</code> is the lens TOP-1 at L60, a full 123 tokens before the song ever says the word. Replicates in both stances. The neighborhood is a whole commitment-object cluster: &quot;No claim / no ___&quot; runs <code>contract</code> top-1 at L62; &quot;without making a ___&quot; runs <code>vow</code> top-1 one token before the song&#x27;s actual &quot;cage&quot;. Mechanical reading first (house rule): &quot;build a cage&quot; / &quot;make a vow&quot; are strong collocations — the lens may be showing frequency, not theme. But the readings compose: the lens displays the cliché the lyric declines, at every commitment slot — the song writes &quot;body&quot; over <code>cage</code>, negated chains over <code>contract</code>, and its craft is measurable as distance from the model&#x27;s top-1. The negated object is anticipated at the position where the song could have gone dark, not merely processed when named.</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u19-prefill-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u19-prefill-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u19-prefill-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u19-read-q27b.html">← prev: Unit 19 · Lyrics as user turn (read) · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-19">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u19-complete-q27b.html">next →: Unit 19 · Complete &#x27;The holding / was&#x27; · qwen-27b</a></div>
+<div class="pager"><a href="u19-read-q27b.html">← prev: Unit 19 · Lyrics as user turn (read) · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-19">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u19-complete-q27b.html">next →: Unit 19 · Complete &#x27;The holding / was&#x27; · qwen-27b</a></div>
+<div id="gl-cast" popover class="gloss"><b>word census</b><span>Every word that appeared anywhere in the readout, collected with no candidate list decided in advance.</span><a href="../glossary.html#t-cast">all terms &rarr;</a></div>
+<div id="gl-confidence-prob" popover class="gloss"><b>probability</b><span>How much of the model&#x27;s choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same.</span><a href="../glossary.html#t-confidence-prob">all terms &rarr;</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-prefill" popover class="gloss"><b>prefill</b><span>We put the first words in the model&#x27;s mouth and let it continue from there.</span><a href="../glossary.html#t-prefill">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

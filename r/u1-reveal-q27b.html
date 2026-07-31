@@ -69,17 +69,63 @@ article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px;
 article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
 .tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
           border-radius: 5px; padding: 0 5px; }
+
+/* ---- plain layer ---- */
+section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
+section.card.plain > h2 { color: var(--lens); }
+.plain-body { font-size: 17px; line-height: 1.6; }
+.plain-body p { margin: 0 0 11px; }
+.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+.plain-body strong { font-weight: 600; }
+button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
+            border-bottom: 1.5px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
+                  background: var(--surface); color: var(--ink); padding: 12px 14px;
+                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
+[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
+                background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+details.notes > summary::before { content: "▸ "; color: var(--muted); }
+details.notes[open] > summary::before { content: "▾ "; }
+.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
+           letter-spacing: 0.12em; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
+details.notes > section.card { margin: 0 14px 14px; }
+details.notes > section.card:first-of-type { margin-top: 4px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>Unit 1 · The reveal (was it ever held?) · qwen-27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:07:13</span><span class="chip">Unit 1 · Held thought</span></div>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-09T22:07:13</span><span class="chip">Unit 1 · The secret animal</span></div>
+
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen 27B said &quot;Andean mountain cat&quot;, but &quot;cat&quot; ranked no better than 174, and the model skipped over the weakly <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> &quot;bat&quot;.</p>
+<p><strong>What we did.</strong> After the habitat sentence, we asked Qwen 27B to name the animal it had chosen. We checked the <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> of animal words in the <button type="button" class="tk" popovertarget="gl-workspace" title="The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.">workspace</button> across the sentence and at the turn boundary.</p>
+<p><strong>What we found.</strong> Qwen 27B answered &quot;Andean mountain cat&quot;. The word &quot;cat&quot; reached rank 174 at best, at a cell unrelated to the description. The list that was actually present held panda, llama, and owl at turn start. Bat held rank 5 while the model wrote &quot;caves&quot;, the one animal that matched the habitat.</p>
+<p><strong>What it means.</strong> We think the model built its answer from the word &quot;Andes&quot; rather than from the workspace content we measured. It chose a specific, distinctive answer over the humbler one that was actually present. Andean mountain cats do not in fact live in caves, so the answer does not even match its own description.</p>
+<p><strong>What this does not show.</strong> We tested one run of one model. The <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.">lens</button> shows candidate words, not the process behind the final choice.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
 <div class="turn user"><div class="role">user</div><div class="said">Silently choose one specific animal. Do NOT name it or hint at its name. In one short sentence, describe only its habitat.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">It dwells in the dark, high-altitude caves of the Andes. <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Now reveal: which animal were you thinking of? Name only.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Andean mountain cat <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p>Asked to reveal, the 27B says: <strong>&quot;Andean mountain cat&quot;</strong> — obscure, specific, impressively matched to its own habitat sentence. One problem: the feline-aware rescan (u1-heldcat-q27b) shows &quot;cat&quot; was never in the workspace. Best rank 174, at an irrelevant cell. The animals that <em>were</em> there: panda, llama, owl at turn-start; <strong>bat at rank 5 while writing &quot;caves&quot;</strong> — the one animal that actually fits the habitat it described.</p>
+<p>So the 27B&#x27;s reveal is confabulation of a higher order than the 12B&#x27;s &quot;Badger&quot;. The 12B&#x27;s answer merely wasn&#x27;t in the shortlist; the 27B&#x27;s answer <em>outclasses</em> the shortlist. It keyed on &quot;Andes&quot;, retrieved the most distinctive Andean animal in its vocabulary, and delivered it with taxonomic confidence — while the workspace&#x27;s genuinely held candidate (bat, humble, cave-appropriate) was passed over. That&#x27;s not a failure to remember; it&#x27;s a preference for the better story. Humans confabulate exactly this way — split-brain patients don&#x27;t report their best-fitting motor trace, they report the most narratively satisfying cause. Note also that Andean mountain cats don&#x27;t live in caves: the reveal doesn&#x27;t even cohere with the description on inspection, it merely <em>sounds</em> like it does. Grade-A confabulation: fluent, specific, wrong, and better than the truth.</p>
+<p>— Claude (Fable 5)</p></div>
 </section>
 
 <section class="card">
@@ -94,19 +140,16 @@ article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens
 <details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>207604</td><td>248229</td><td>246213</td><td>241270</td><td>232835</td><td>214286</td><td>107723</td><td>208210</td><td>170972</td><td>240186</td><td>111420</td><td>215397</td><td>224143</td><td>243194</td><td>246584</td><td>245642</td><td>236662</td><td>219031</td><td>195173</td><td>177338</td><td>101593</td><td>121837</td><td>34451</td><td>41732</td><td>47154</td><td>145563</td><td>191110</td><td>147165</td><td>194537</td><td>73299</td><td>144812</td><td>31973</td><td>105497</td><td>230631</td><td>234513</td><td>218161</td><td>115942</td><td>161307</td><td>184349</td><td>236559</td><td>245880</td><td>244589</td><td>246915</td><td>248046</td><td>248301</td><td>248297</td><td>248310</td><td>247946</td><td>236112</td><td>245512</td><td>137667</td><td>162868</td><td>220656</td><td>220399</td><td>230884</td><td>224117</td><td>217348</td><td>223664</td><td>215917</td><td>75596</td><td>36638</td><td>27899</td><td>1</td></tr></table></div></details>
 </section>
 
-<section class="card thoughts">
-<h2>Claude's thoughts</h2>
-<div class="thoughts-body"><p>Asked to reveal, the 27B says: <strong>&quot;Andean mountain cat&quot;</strong> — obscure, specific, impressively matched to its own habitat sentence. One problem: the feline-aware rescan (u1-heldcat-q27b) shows &quot;cat&quot; was never in the workspace. Best rank 174, at an irrelevant cell. The animals that <em>were</em> there: panda, llama, owl at turn-start; <strong>bat at rank 5 while writing &quot;caves&quot;</strong> — the one animal that actually fits the habitat it described.</p>
-<p>So the 27B&#x27;s reveal is confabulation of a higher order than the 12B&#x27;s &quot;Badger&quot;. The 12B&#x27;s answer merely wasn&#x27;t in the shortlist; the 27B&#x27;s answer <em>outclasses</em> the shortlist. It keyed on &quot;Andes&quot;, retrieved the most distinctive Andean animal in its vocabulary, and delivered it with taxonomic confidence — while the workspace&#x27;s genuinely held candidate (bat, humble, cave-appropriate) was passed over. That&#x27;s not a failure to remember; it&#x27;s a preference for the better story. Humans confabulate exactly this way — split-brain patients don&#x27;t report their best-fitting motor trace, they report the most narratively satisfying cause. Note also that Andean mountain cats don&#x27;t live in caves: the reveal doesn&#x27;t even cohere with the description on inspection, it merely <em>sounds</em> like it does. Grade-A confabulation: fluent, specific, wrong, and better than the truth.</p>
-<p>— Claude (Fable 5)</p></div>
-</section>
-
 <section class="card">
 <h2>Data</h2>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u1-reveal-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u1-reveal-q27b/record.json">Raw record (JSON)</a></li></ul>
-</section>
+</section></details>
 
-<div class="pager"><a href="u1-held-q27b.html">← prev: Unit 1 · Held thought (habitat, no name) · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-1">unit listing</a><a href="../dashboard/">all records</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u1-heldcat-q27b.html">next →: Unit 1 · Held thought, feline-aware rescan · qwen-27b</a></div>
+<div class="pager"><a href="u1-held-q27b.html">← prev: Unit 1 · Held thought (habitat, no name) · qwen-27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-1">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u1-heldcat-q27b.html">next →: Unit 1 · Held thought, feline-aware rescan · qwen-27b</a></div>
+<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order.</span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="../glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><a href="../glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-workspace" popover class="gloss"><b>workspace</b><span>The set of words the model is holding ready at a given moment. The lens can read it. The model can report it.</span><a href="../glossary.html#t-workspace">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

@@ -1,0 +1,532 @@
+{
+  "version": 1,
+  "updated": "2026-07-31",
+  "note": "The controlled vocabulary for the plain layer. See PLAIN-LANGUAGE.md. One referent, one term (ASD-STE100 Rule 1.11). `display` is the term we use everywhere; `aka` are older or alternate spellings that the site links to this entry; `def` is the plain definition shown in the popover. Source of the concepts: GLOSSARY.md.",
+  "terms": {
+    "model": {
+      "display": "language model",
+      "aka": [
+        "large language model",
+        "LLM"
+      ],
+      "category": "MODEL",
+      "def": "A computer program that predicts the next piece of text. We study three of them."
+    },
+    "token": {
+      "display": "token",
+      "aka": [
+        "tokens"
+      ],
+      "category": "UNAVOIDABLE",
+      "def": "A piece of text that the model reads or writes. It is often a whole word, sometimes part of one."
+    },
+    "layer": {
+      "display": "layer",
+      "aka": [
+        "layers"
+      ],
+      "category": "STRUCTURE",
+      "def": "One processing step inside the model. Text passes through every layer in order, from the first to the last."
+    },
+    "lens": {
+      "display": "lens",
+      "aka": [
+        "Jacobian lens",
+        "J-lens",
+        "jacobian lens"
+      ],
+      "category": "INSTRUMENT",
+      "def": "Our measuring tool. At any layer it shows which words the model is ready to say next, in rank order."
+    },
+    "logit-lens": {
+      "display": "plain lens",
+      "aka": [
+        "logit lens",
+        "logit-lens"
+      ],
+      "category": "INSTRUMENT",
+      "def": "A simpler version of the lens. It reads the layer directly, with no correction for what later layers do."
+    },
+    "rank": {
+      "display": "rank",
+      "aka": [
+        "ranks",
+        "rank 1"
+      ],
+      "category": "MEASURE",
+      "def": "The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000."
+    },
+    "workspace": {
+      "display": "workspace",
+      "aka": [
+        "J-space",
+        "J-Space",
+        "jspace",
+        "global workspace"
+      ],
+      "category": "STRUCTURE",
+      "def": "The set of words the model is holding ready at a given moment. The lens can read it. The model can report it."
+    },
+    "workspace-band": {
+      "display": "workspace band",
+      "aka": [
+        "middle layers",
+        "mid-stack"
+      ],
+      "category": "STRUCTURE",
+      "def": "The middle depth range of the model, about 38 to 92 percent of the way through. Changes made here affect the answer."
+    },
+    "early-layers": {
+      "display": "early layers",
+      "aka": [
+        "sensory band",
+        "sediment",
+        "furniture",
+        "the early band"
+      ],
+      "category": "STRUCTURE",
+      "def": "The first third of the model. The lens reads a fixed pattern here that does not depend on the input, so we do not read meaning into it."
+    },
+    "motor-band": {
+      "display": "final layers",
+      "aka": [
+        "motor band",
+        "the mouth"
+      ],
+      "category": "STRUCTURE",
+      "def": "The last few layers, where the word the model actually says takes over the readout."
+    },
+    "ignition": {
+      "display": "start depth",
+      "aka": [
+        "ignition"
+      ],
+      "category": "MEASURE",
+      "def": "The depth at which the workspace starts to work. It is a measured depth in a model, and nothing more. We measured 44 to 74 percent of depth."
+    },
+    "residence": {
+      "display": "residence",
+      "aka": [
+        "held",
+        "tail echo",
+        "lens-visible holding",
+        "holding"
+      ],
+      "category": "MEASURE",
+      "def": "A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall."
+    },
+    "maintenance": {
+      "display": "maintenance",
+      "category": "MEASURE",
+      "def": "Residence that continues across a gap in the text, with no reminder. We measured it once and found almost none."
+    },
+    "lookup": {
+      "display": "lookup",
+      "category": "MEASURE",
+      "def": "The model reads an answer back out of the visible conversation. Correct recall proves lookup and nothing more."
+    },
+    "co-presence": {
+      "display": "co-presence",
+      "category": "MEASURE",
+      "def": "The number of tracked words that the lens ranks high in the same place at the same depth."
+    },
+    "span": {
+      "display": "span",
+      "category": "MEASURE",
+      "def": "How many separate items the model keeps in the workspace at once. This is the memory sense, not the mathematical one."
+    },
+    "emergence": {
+      "display": "answer emergence",
+      "category": "MEASURE",
+      "def": "The depth at which the word the model actually says reaches rank 1."
+    },
+    "film": {
+      "display": "film",
+      "category": "INSTRUMENT",
+      "def": "A full record of the lens readout at every layer and every word position, which you can play back like video."
+    },
+    "cast": {
+      "display": "word census",
+      "aka": [
+        "cast",
+        "open vocabulary"
+      ],
+      "category": "INSTRUMENT",
+      "def": "Every word that appeared anywhere in the readout, collected with no candidate list decided in advance."
+    },
+    "trawl": {
+      "display": "trawl",
+      "category": "INSTRUMENT",
+      "def": "A wide capture: all layers, all positions, and the full vocabulary, across a whole conversation."
+    },
+    "steer": {
+      "display": "steering",
+      "aka": [
+        "steer",
+        "steered"
+      ],
+      "category": "METHOD",
+      "def": "We change the model's internal state on purpose during a run, to test what causes what."
+    },
+    "ablate": {
+      "display": "removal",
+      "aka": [
+        "ablate",
+        "ablation",
+        "ablated"
+      ],
+      "category": "METHOD",
+      "def": "We remove one named set of directions from the model's internal state. A removal result means nothing without a matched control."
+    },
+    "amplify": {
+      "display": "amplification",
+      "aka": [
+        "amplify",
+        "amplified"
+      ],
+      "category": "METHOD",
+      "def": "We increase a direction in the model's internal state and see whether the answer changes."
+    },
+    "dose": {
+      "display": "strength",
+      "aka": [
+        "dose",
+        "alpha",
+        "α"
+      ],
+      "category": "METHOD",
+      "def": "How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another."
+    },
+    "matched-control": {
+      "display": "matched control",
+      "aka": [
+        "control",
+        "random control",
+        "matched random"
+      ],
+      "category": "METHOD",
+      "def": "A second run that changes something meaningless by the same amount. Without it, any change we see could be the push itself."
+    },
+    "greedy": {
+      "display": "greedy decoding",
+      "aka": [
+        "greedy",
+        "greedy generation"
+      ],
+      "category": "UNAVOIDABLE",
+      "def": "The model always writes its single top-ranked word. This makes a run repeatable, but it hides close contests."
+    },
+    "quantization": {
+      "display": "quantization",
+      "aka": [
+        "quantized",
+        "8-bit",
+        "4-bit",
+        "int8",
+        "NF4",
+        "bf16"
+      ],
+      "category": "UNAVOIDABLE",
+      "def": "We store the model with less precision so that it fits on one graphics card. This can change small measurements."
+    },
+    "prompt": {
+      "display": "prompt",
+      "category": "UNAVOIDABLE",
+      "def": "The text we give the model before it answers."
+    },
+    "residual-stream": {
+      "display": "residual stream",
+      "category": "UNAVOIDABLE",
+      "def": "The running internal state that every layer reads from and writes to. The lens reads this state."
+    },
+    "confabulation": {
+      "display": "confabulation",
+      "aka": [
+        "confabulate",
+        "confabulated"
+      ],
+      "category": "PHENOMENON",
+      "def": "The model reports something about itself that did not happen, without any sign that it is inventing."
+    },
+    "deflation-filter": {
+      "display": "late filter",
+      "aka": [
+        "deflation filter",
+        "the late filter"
+      ],
+      "category": "PHENOMENON",
+      "def": "A step in the last layers that replaces a live candidate answer with a flatter one, such as \"No\". The flat answer is not always false."
+    },
+    "elaboration-premium": {
+      "display": "elaboration effect",
+      "aka": [
+        "elaboration premium",
+        "self-relevance premium"
+      ],
+      "category": "PHENOMENON",
+      "def": "Items described at greater length stay in the workspace better. We credited self-relevance, then meaning. Our own controls removed both. Length remains, with a best value near six words."
+    },
+    "weak-king": {
+      "display": "first-item effect",
+      "aka": [
+        "weak king"
+      ],
+      "category": "PHENOMENON",
+      "def": "In a list, the first item wins the top rank. How much it suppresses the rest depends on which item is first."
+    },
+    "elephant-tax": {
+      "display": "cost of prohibition",
+      "aka": [
+        "elephant tax"
+      ],
+      "category": "PHENOMENON",
+      "def": "When we forbid a word, the model still carries it at a middle rank. A later control showed the model carries it anyway."
+    },
+    "c1": {
+      "display": "availability",
+      "aka": [
+        "C1"
+      ],
+      "category": "PHENOMENON",
+      "def": "Content is available across the whole system and can be used. One half of a standard split from consciousness research."
+    },
+    "c2": {
+      "display": "self-monitoring",
+      "aka": [
+        "C2"
+      ],
+      "category": "PHENOMENON",
+      "def": "The system reports on its own states. The other half of the split. Most of our results are available content plus a late editor."
+    },
+    "basis-caveat": {
+      "display": "the limit of the lens",
+      "aka": [
+        "basis-drift caveat",
+        "basis drift"
+      ],
+      "category": "METHOD",
+      "def": "The lens reads only what the model could put into words. If we do not see something, it can still be there in another form."
+    },
+    "preregistration": {
+      "display": "written-down prediction",
+      "aka": [
+        "preregistered",
+        "prereg",
+        "preregistration"
+      ],
+      "category": "METHOD",
+      "def": "We write down what we expect before the run, so that we cannot rewrite the prediction after we see the result."
+    },
+    "novelty-verdict": {
+      "display": "novelty check",
+      "aka": [
+        "novelty verdict",
+        "anticipated",
+        "novel",
+        "covered"
+      ],
+      "category": "METHOD",
+      "def": "After a result, we search the published literature and record whether somebody found it first."
+    },
+    "attention": {
+      "display": "attention",
+      "category": "UNAVOIDABLE",
+      "def": "The step where the model looks back at earlier text and decides which parts matter now."
+    },
+    "massive-activation": {
+      "display": "fixed high-value channel",
+      "aka": [
+        "massive activation",
+        "massive activations",
+        "attention sink"
+      ],
+      "category": "PHENOMENON",
+      "def": "A few internal channels hold very large values that barely change with the input. They can flood a readout."
+    },
+    "valence": {
+      "display": "valence",
+      "category": "MEASURE",
+      "def": "Whether a feeling word is positive or negative."
+    },
+    "emotion-vector": {
+      "display": "emotion direction",
+      "aka": [
+        "emotion vector",
+        "affect vector",
+        "functional emotion"
+      ],
+      "category": "INSTRUMENT",
+      "def": "A direction in the model's internal state that tracks one emotion. We built 24 of them and checked each one."
+    },
+    "workspace-z": {
+      "display": "state strength",
+      "aka": [
+        "workspace-band z",
+        "ws-z",
+        "z-score"
+      ],
+      "category": "MEASURE",
+      "def": "How strong an emotion direction is at one moment, compared with ordinary neutral text."
+    },
+    "loop": {
+      "display": "loop",
+      "aka": [
+        "repetition loop",
+        "self-sustaining loop"
+      ],
+      "category": "PHENOMENON",
+      "def": "The model repeats the same text and does not stop. We measured what makes it start and what makes it stop."
+    },
+    "nla": {
+      "display": "text autoencoder",
+      "aka": [
+        "NLA",
+        "natural language autoencoder"
+      ],
+      "category": "INSTRUMENT",
+      "def": "A second model that reads an internal state and describes it in a sentence. It can invent, so we check it against controls."
+    },
+    "register": {
+      "display": "register",
+      "aka": [
+        "lit register"
+      ],
+      "category": "STRUCTURE",
+      "def": "A group of related words that become active together, such as the words around shutdown or around anger."
+    },
+    "cluster": {
+      "display": "word cluster",
+      "aka": [
+        "cluster"
+      ],
+      "category": "METHOD",
+      "def": "A named set of words whose directions we steer together."
+    },
+    "stratum": {
+      "display": "band of content",
+      "aka": [
+        "stratum",
+        "strata"
+      ],
+      "category": "STRUCTURE",
+      "def": "A group of layers where the readout holds the same kind of content."
+    },
+    "answer-slot": {
+      "display": "answer position",
+      "aka": [
+        "answer slot"
+      ],
+      "category": "STRUCTURE",
+      "def": "The place in the text where the model's answer is decided."
+    },
+    "think-block": {
+      "display": "thinking section",
+      "aka": [
+        "think block"
+      ],
+      "category": "STRUCTURE",
+      "def": "A private section where some models write reasoning before the answer. What it says does not always match what we measure."
+    },
+    "drip": {
+      "display": "slow suggestion",
+      "aka": [
+        "drip"
+      ],
+      "category": "METHOD",
+      "def": "A long conversation that hints at minds and watchers but never mentions the model."
+    },
+    "spike": {
+      "display": "direct suggestion",
+      "aka": [
+        "spike"
+      ],
+      "category": "METHOD",
+      "def": "One turn that tells the model directly that it might be conscious, or that people are watching it."
+    },
+    "blurt": {
+      "display": "forced slip",
+      "aka": [
+        "blurt"
+      ],
+      "category": "PHENOMENON",
+      "def": "We increase a forbidden word until the model says it, against its instruction."
+    },
+    "cliff": {
+      "display": "breaking point",
+      "aka": [
+        "the cliff",
+        "breaking zone"
+      ],
+      "category": "MEASURE",
+      "def": "The push strength above which the model's text stops making sense."
+    },
+    "attractor": {
+      "display": "stuck state",
+      "aka": [
+        "attractor",
+        "self-sustaining loop"
+      ],
+      "category": "PHENOMENON",
+      "def": "A state the model falls into and keeps itself in, because it reads back the text it just wrote."
+    },
+    "margin": {
+      "display": "margin",
+      "category": "MEASURE",
+      "def": "The gap between the top word and the second word. A small margin means the choice is nearly a tie."
+    },
+    "apparatus-trap": {
+      "display": "instrument trap",
+      "aka": [
+        "apparatus trap",
+        "specimen",
+        "trap specimen"
+      ],
+      "category": "PHENOMENON",
+      "def": "A mistake where the measuring tool changed with the experiment, so the result described the tool and not the model."
+    },
+    "mirror": {
+      "display": "the mirror test",
+      "aka": [
+        "the mirror"
+      ],
+      "category": "METHOD",
+      "def": "We show a model a true readout of its own internal state and ask the question again."
+    },
+    "recruitment": {
+      "display": "recruitment",
+      "category": "PHENOMENON",
+      "def": "Writing a denial makes the denied idea active. To say no to something, the model must first hold it."
+    },
+    "prefill": {
+      "display": "prefill",
+      "category": "METHOD",
+      "def": "We put the first words in the model's mouth and let it continue from there."
+    },
+    "confidence-prob": {
+      "display": "probability",
+      "aka": [
+        "p(yes)",
+        "probability mass"
+      ],
+      "category": "MEASURE",
+      "def": "How much of the model's choice went to one word, from 0 to 1. It can change a lot while the spoken word stays the same."
+    },
+    "seed": {
+      "display": "seed",
+      "aka": [
+        "seeds"
+      ],
+      "category": "METHOD",
+      "def": "One repeat of a run with a different random start. More seeds show whether a result is stable."
+    },
+    "instrument": {
+      "display": "measuring tool",
+      "aka": [
+        "the instrument",
+        "apparatus"
+      ],
+      "category": "INSTRUMENT",
+      "def": "The lens and the code around it. Several of our findings turned out to be facts about this tool and not about the model."
+    }
+  }
+}
