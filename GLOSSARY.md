@@ -101,6 +101,20 @@ a depth onset (CONCLUSIONS v2) — and the paper's all-or-none *commitment*
 sense (Gurnee Fig 29B), quoted in findings.json. Three jobs, one word;
 this entry is the depth sense.
 
+> **Correction, 2026-07-21 (apparatus-06 + apparatus-07).** The paragraph
+> above reads the late onset as *the* ignition depth. It is one stair of
+> two. The lens-free commitment arm (apparatus-06, results/apparatus06-q27b/)
+> puts qwen's transition-width plateau onset at **L25 — the fraction-ported
+> boundary**, falsifying P4; the ~L28–36 figure is where the *lens* first
+> sees it. So ignition is a **staircase**: (1) commitment-onset at the
+> fraction port on all three models, (2) content sharpening at the measured
+> band, (3) motor finalization. State qwen with both numbers — commitment
+> machinery in place by ~L25, lens-visible signatures from ~L28–36 — and do
+> not call stairs (1) and (2) by the same word: "commitment onset" for the
+> port, "the measured band" for interventions. The intervention band L28–58
+> is unaffected, being post-onset under either reading. Full derivation:
+> MECHANICS.md §2 and results/apparatus07-thoughts.md.
+
 **Sensory band / sediment** — the early ~0–38% of depth, whose readout is
 prompt-invariant corpus sediment: deletable (ablation changes nothing) but
 not drivable (amplification breaks generation) (Unit 5, u16-trawl). The

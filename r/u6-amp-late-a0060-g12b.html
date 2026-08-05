@@ -57,94 +57,280 @@
 <meta property="og:url" content="https://jspace-probes.vercel.app/r/u6-amp-late-a0060-g12b.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://jspace-probes.vercel.app/og/u6-amp-late-a0060-g12b.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
 <style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
 :root {
-  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
-  --muted: #898781; --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
-  --lens: #4a3aa7; --lens-soft: rgba(74,58,167,0.08);
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, "SF Mono", Consolas, monospace;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --page: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
-    --muted: #898781; --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
-    --lens: #9085e9; --lens-soft: rgba(144,133,233,0.12);
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
   }
 }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 var(--sans); }
-.wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
-a { color: var(--lens); }
-h1 { font-family: var(--serif); font-size: 26px; font-weight: 600; margin: 6px 0 10px; }
-h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 22px 0 8px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
-.chip { font-size: 12px; padding: 2px 10px; border-radius: 99px; border: 1px solid var(--ring);
-        color: var(--ink-2); background: var(--surface); }
-.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
-section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
-               padding: 16px 20px; margin-top: 18px; }
-section.card > h2 { margin-top: 0; font-size: 12px; font-weight: 600; text-transform: uppercase;
-                     letter-spacing: 0.12em; color: var(--muted); font-family: var(--sans); }
-.turn { display: flex; gap: 10px; margin: 8px 0; }
-.turn .role { flex: none; width: 74px; text-align: right; font-size: 11px; text-transform: uppercase;
-              letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
-.turn.assistant .role { color: var(--lens); }
-.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; }
-.turn .note { color: var(--muted); font-size: 11.5px; }
-dl.params { display: grid; grid-template-columns: max-content 1fr; gap: 4px 18px; font-size: 13.5px; }
-dl.params dt { color: var(--muted); }
-dl.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
-table.emg { border-collapse: collapse; font-family: var(--mono); font-size: 11.5px; }
-table.emg th, table.emg td { padding: 2px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
-.emg-scroll { overflow-x: auto; }
-.thoughts { border-left: 3px solid var(--lens); background: var(--lens-soft); border-radius: 0 10px 10px 0; }
-.thoughts h2 { color: var(--lens); }
-.thoughts-body { font-family: var(--serif); font-size: 16px; line-height: 1.65; }
-.thoughts-body p { margin: 0 0 12px; }
-.thoughts-body code { font-family: var(--mono); font-size: 13px; }
-code { font-family: var(--mono); }
-.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 26px; padding-top: 14px;
-         border-top: 1px solid var(--grid); font-size: 13px; }
-.pager .spacer { flex: 1 1 auto; }
-article.essay h2 { font-family: var(--serif); font-size: 24px; margin-top: 30px; }
-article.essay h3 { font-family: var(--serif); font-size: 18px; color: var(--lens); }
-.tokval { font-family: var(--mono); background: var(--page); border: 1px solid var(--grid);
-          border-radius: 5px; padding: 0 5px; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
 
-/* ---- plain layer ---- */
-section.card.plain { border-color: var(--lens); border-width: 1.5px; background: var(--lens-soft); }
-section.card.plain > h2 { color: var(--lens); }
-.plain-body { font-size: 17px; line-height: 1.6; }
-.plain-body p { margin: 0 0 11px; }
-.plain-body p:first-child { font-size: 19px; line-height: 1.45; }
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
 .plain-body strong { font-weight: 600; }
-button.tk { font: inherit; color: inherit; background: none; border: 0; padding: 0;
-            border-bottom: 1.5px dotted var(--lens); cursor: help; }
-button.tk:hover, button.tk:focus { background: var(--lens-soft); }
-[popover].gloss { max-width: 330px; border: 1px solid var(--lens); border-radius: 10px;
-                  background: var(--surface); color: var(--ink); padding: 12px 14px;
-                  font: 14px/1.5 var(--sans); box-shadow: 0 8px 30px rgba(0,0,0,0.18); }
-[popover].gloss b { display: block; color: var(--lens); margin-bottom: 4px; }
-[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
-details.notes { margin-top: 18px; border: 1px solid var(--grid); border-radius: 10px;
-                background: var(--surface); }
-details.notes > summary { cursor: pointer; padding: 12px 18px; list-style: none;
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
                           display: flex; flex-direction: column; gap: 2px; }
 details.notes > summary::-webkit-details-marker { display: none; }
-details.notes > summary::before { content: "▸ "; color: var(--muted); }
-details.notes[open] > summary::before { content: "▾ "; }
-.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
-           letter-spacing: 0.12em; color: var(--muted); }
-.notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
-details.notes > section.card { margin: 0 14px 14px; }
-details.notes > section.card:first-of-type { margin-top: 4px; }
-dl.gloss-list { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
-dl.gloss-list dt { font-weight: 600; color: var(--lens); }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
 dl.gloss-list dd { margin: 0; color: var(--ink-2); }
-dl.gloss-list dt:target, dl.gloss-list dt:target + dd { background: var(--lens-soft); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
 </style>
 </head>
 <body>

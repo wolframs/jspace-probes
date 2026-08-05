@@ -17,6 +17,12 @@ he sets directions and expects designed-and-executed experiments back.
 > also the paper-grounded (raw-HTML-verified) layer reference — the thing
 > Unit 5C got wrong (ablated early L2–8; causal action is the workspace band).
 > Do NOT design a steer/ablation run from memory; the numbers live there.
+> (e) **when a run corrects a term's meaning, update `GLOSSARY.md` in the
+> same breath** — append a dated correction, never rewrite the old entry.
+> A stale glossary is worse than none: it is the binding vocabulary for all
+> new writing, so an out-of-date entry propagates into every page written
+> after it. (Caught once: the Ignition entry still read the late onset as
+> *the* depth for months after apparatus-06/07 made it one stair of two.)
 
 ## Environment
 
@@ -69,7 +75,11 @@ he sets directions and expects designed-and-executed experiments back.
   BOARD.md; dashboard renders it at #board). Check `board.py ls` at session
   start; update at state-change moments, not retroactively: `mv <item> hot`
   when a run starts, `mv <item> landed "result"` in the same breath as the
-  thoughts.md. Honesty rules: no `landed` without a link to evidence;
+  thoughts.md. Honesty rules: **no `landed` without evidence — now enforced,
+  not merely written**: `mv <item> landed` exits non-zero unless the item has
+  a `links[]` entry or the message names a record id, a `results/` path or a
+  doc. (All 23 landed items already passed; 3 by `links[]`, 20 by an id in
+  the note — the check enforces existing practice.) Also:
   `dissolved`/`dropped` always keep the why; stale `queued` gets demoted,
   not left to flatter the queue; never rewrite old notes — append a dated
   correction (git diffs on board.json are the audit trail). Sweep the board

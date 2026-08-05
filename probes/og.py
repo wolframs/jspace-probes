@@ -31,12 +31,16 @@ for _p in (FONT_SANS, FONT_SANS_BOLD, FONT_MONO):
 W, H = 1200, 630
 MARGIN = 56
 
-BG = (13, 13, 13)  # #0d0d0d
-INK = (255, 255, 255)  # #ffffff
-SECONDARY = (195, 194, 183)  # #c3c2b7
-MUTED = (137, 135, 129)  # #898781
-VIOLET = (144, 133, 233)  # #9085e9
-GRID = (44, 44, 42)  # #2c2c2a, dashboard --grid (dark theme)
+# A link-preview card is the dashboard's dark theme rendered as an image, so
+# every colour here is a dark-theme variable from dashboard/skins/lab.css §0
+# (block #4). Re-derive these tuples whenever that palette moves — nothing in
+# this file reads CSS, so stale values ship silently on all ~500 cards.
+BG = (9, 10, 12)  # #090a0c, --page
+INK = (234, 238, 244)  # #eaeef4, --ink
+SECONDARY = (180, 189, 201)  # #b4bdc9, --ink-2
+MUTED = (126, 136, 149)  # #7e8895, --muted
+LENS = (124, 176, 239)  # #7cb0ef, --lens (the accent; was violet #9085e9)
+GRID = (36, 40, 48)  # #242830, --grid
 
 QUANT_DEFAULT = {"gemma-4b": "bf16", "gemma-12b": "8bit", "qwen-27b": "pre-4bit"}
 
@@ -93,7 +97,7 @@ def truncate_line(draw, text, fnt, max_width):
 
 
 def draw_wordmark(draw, x, y):
-    draw.text((x, y), "◎ J-Space Probes", font=font(FONT_SANS_BOLD, 22), fill=VIOLET)
+    draw.text((x, y), "◎ J-Space Probes", font=font(FONT_SANS_BOLD, 22), fill=LENS)
     draw.text(
         (x, y + 30),
         "reading silent thoughts through the Jacobian lens",
@@ -119,7 +123,7 @@ def draw_strip(draw, x0, y0, x1, y1, ranks):
     for i, rank in enumerate(ranks):
         rank = max(1, rank)
         intensity = max(0.0, 1 - math.log10(rank) / 5)
-        color = lerp_color(BG, VIOLET, intensity)
+        color = lerp_color(BG, LENS, intensity)
         bx0 = x0 + i * bw
         bx1 = x0 + (i + 1) * bw
         draw.rectangle([bx0, y0, bx1, y1], fill=color)

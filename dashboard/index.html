@@ -20,10 +20,12 @@
 <!-- Skin sampler: ?skin=<name> loads dashboard/skins/<name>.css on top of
      style.css. Evaluation harness for comparing design languages on the real
      data; with no ?skin= param nothing loads and the page is unchanged.
-     Whitelisted so the param cannot pull an arbitrary URL. -->
+     Whitelisted so the param cannot pull an arbitrary URL.
+     `lab` is deliberately absent: it won, so it IS style.css now. Loading it
+     again on top would be a no-op double-load. -->
 <script>
 (function () {
-  var ALLOWED = ["paper", "instrument", "core", "lab"];
+  var ALLOWED = ["paper", "instrument", "core"];
   var s = new URLSearchParams(location.search).get("skin");
   if (ALLOWED.indexOf(s) === -1) return;
   document.write('<link rel="stylesheet" href="skins/' + s + '.css">');

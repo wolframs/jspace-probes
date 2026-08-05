@@ -36,6 +36,7 @@ import argparse
 import datetime
 import json
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).parent.parent
@@ -166,6 +167,29 @@ def cmd_add(board: dict, arc_id: str, title: str, state: str,
     print(f"added {item_id}: {title}  [{state}]")
 
 
+# Evidence, as the board actually records it: a links[] entry, or a record id
+# / results path / page anchor written into the note. All 23 landed items pass
+# under this reading — 3 by links[], 20 by an id in the note — so the rule
+# below enforces existing practice rather than inventing a new one.
+EVIDENCE_RE = re.compile(
+    r"(https?://"                     # an external link
+    r"|results/"                      # a path into the corpus
+    r"|\b[a-z0-9]+\.md\b"             # a document in the repo
+    r"|#unit/\d+|#cmp/"               # a dashboard route
+    r"|\bu\d+[a-z]*-[\w-]+\b"         # a record id: u13-redo-real-q27b.
+                                      # The hyphen is required: every real id
+                                      # has one, and a bare "u5" in prose
+                                      # ("will add u5 once the rerun lands")
+                                      # would otherwise pass as evidence.
+    r"|\bapparatus-?\d+"              # an apparatus specimen
+    r"|\baudit-\d+)",                 # an audit re-run
+    re.I)
+
+
+def has_evidence(item: dict, note: str) -> bool:
+    return bool(item.get("links")) or bool(EVIDENCE_RE.search(note))
+
+
 def cmd_mv(board: dict, item_id: str, state: str, message: list[str]) -> None:
     arc, item = find_item(board, item_id)
     if item is None:
@@ -175,6 +199,13 @@ def cmd_mv(board: dict, item_id: str, state: str, message: list[str]) -> None:
     text = f"→ {state}"
     if message:
         text += ": " + " ".join(message)
+    # CLAUDE.md's board rule, made real: no `landed` without evidence. It was
+    # a written convention only, which is worse than no rule — you cannot tell
+    # a followed one from an ignored one.
+    if state == "landed" and not has_evidence(item, " ".join(message)):
+        die(f"{item_id}: `landed` needs evidence. Name a record id, a "
+            f"results/ path or a doc in the message, or add a links[] entry "
+            f"first. (Nothing else changed.)")
     item["state"] = state
     item["notes"].append({"date": today(), "text": text})
     save(board)

@@ -1,23 +1,69 @@
 /* J-Space Probes — lab dashboard.
-   Palette: dataviz reference instance (validated). Violet is the lab's
-   identity color (UI only); categorical slots are reserved for data series. */
+
+   THE DESIGN, IN FOUR SENTENCES
+   · Four real surface tiers (page → well → surface → raised), 1px hairlines,
+     2px radii, no soft shadows. An inset never reads as another identical box.
+   · Chroma comes from the measurement: --lens IS the --seq ramp's blue
+     (#17509e ≈ --seq-550 light, #7cb0ef ≈ --seq-550 dark), on neutral
+     near-white / near-black. No decorative accent anywhere else.
+   · Accent is reserved for interactive things. A link speaks in --lens; a
+     control stays neutral until it is hovered or engaged; nothing inert is
+     ever accent-coloured. See § THE PILL LAW.
+   · The core sample (the --seq glyph) is the signature and gets the space:
+     the full-height left edge of every finding card, enlarged everywhere else.
+
+   THE TYPE RULE — no card shows more than two families.
+     SERIF  page level only — the masthead wordmark and the page title
+            (.exp-title h2 / .find-hero h2 / article.essay h2). Never inside
+            a card: card titles, prose bodies and section heads are sans.
+     SANS   all human language. It is the body default, so it is spelled out
+            only where something would otherwise inherit another family.
+     MONO   machine identifiers only — record ids, model names, layer numbers,
+            counts, dates, param keys and values, tokens, generated transcript,
+            and the pill-shaped controls (§ THE PILL LAW). Nothing a human
+            wrote for a reader. Always with tabular figures.
+
+   CONTRACT (skins/CONTRACT.md §4 — CSS carrying data, do not break)
+     · --seq-100..700 stay monotonic in perceived depth in both themes: they
+       encode log-rank distance to the model's actual next token.
+     · --s1..--s8 stay defined and mutually distinct: chart lines, ridge
+       colours, and the board-state dots read them.
+     · --fg is never defined (it would wake the dormant app.js:1165 rule).
+     · #termpop keeps position:absolute — the popover math is document-relative.
+     · No global outline reset, so .tour-highlight still marks the tour step.
+     · .pos-tab is never repainted with !important — a selected tab carries an
+       INLINE border-color/color equal to its data series colour (app.js:1940,
+       2231). That is data; inline style must keep winning.
+     · !important is reserved for glyph WIDTHS, because glyph() writes
+       style="width:Npx" inline and CSS cannot outrank that otherwise.
+       Three older exceptions predate this rule and are not part of it:
+       .mono-said font-size, .cmp-col grid-row (inside a media query), and
+       .fc-head h4 margin-top. Do not add a fourth.
+
+   PALETTE — all four theme blocks (CONTRACT.md §5)
+   The variable set is declared in exactly four places, and all four must
+   agree: :root (unconditional light default), :root[data-theme="light"]
+   (forced light), @media (prefers-color-scheme: dark) :root (OS dark with no
+   attribute — the path most dark visitors take, and the one that breaks
+   silently), and :root[data-theme="dark"] (forced dark, last so it outranks
+   the media query). */
 
 :root {
-  --page: #f9f9f7;
-  --surface: #fcfcfb;
-  --ink: #0b0b0b;
-  --ink-2: #52514e;
-  --muted: #898781;
-  --grid: #e1e0d9;
-  --axis: #c3c2b7;
-  --ring: rgba(11, 11, 11, 0.10);
-  --lens: #4a3aa7;
-  --lens-soft: rgba(74, 58, 167, 0.08);
-  --raised: #ffffff;
-  --well: #f1f0ea;
-  --bezel: rgba(11, 11, 11, 0.13);
-  --shadow: 0 1px 2px rgba(31, 27, 16, 0.05), 0 8px 24px rgba(31, 27, 16, 0.06);
-  --well-shadow: inset 0 1px 5px rgba(31, 27, 16, 0.08);
+  --page:    #f6f7f9;   /* the desk: deepest tier, so panels float on it */
+  --well:    #e9edf3;   /* inset: recessed instrument wells */
+  --surface: #fdfeff;   /* panel */
+  --raised:  #ffffff;   /* raised panel */
+  --ink:     #0a0d12;
+  --ink-2:   #47505d;
+  --muted:   #77808d;
+  --grid:    #e3e6ec;   /* hairline */
+  --axis:    #b7bcc6;
+  --ring:    rgba(10, 20, 40, 0.13);
+  --bezel:   rgba(10, 20, 40, 0.15);
+  --lens:      #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow:      0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eda100; --s4: #008300;
   --s5: #9085e9; --s6: #e34948; --s7: #e87ba4; --s8: #eb6834;
   --seq-100: #cde2fb; --seq-250: #86b6ef; --seq-400: #3987e5;
@@ -28,15 +74,13 @@
           "SF Mono", Consolas, monospace;
 }
 :root[data-theme="light"] {
-  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e;
-  --muted: #898781; --grid: #e1e0d9; --axis: #c3c2b7;
-  --ring: rgba(11,11,11,0.10); --lens: #4a3aa7;
-  --lens-soft: rgba(74,58,167,0.08);
-  --raised: #ffffff;
-  --well: #f1f0ea;
-  --bezel: rgba(11, 11, 11, 0.13);
-  --shadow: 0 1px 2px rgba(31, 27, 16, 0.05), 0 8px 24px rgba(31, 27, 16, 0.06);
-  --well-shadow: inset 0 1px 5px rgba(31, 27, 16, 0.08);
+  --page: #f6f7f9; --well: #e9edf3; --surface: #fdfeff; --raised: #ffffff;
+  --ink: #0a0d12; --ink-2: #47505d; --muted: #77808d;
+  --grid: #e3e6ec; --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13); --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e; --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eda100; --s4: #008300;
   --s5: #9085e9; --s6: #e34948; --s7: #e87ba4; --s8: #eb6834;
   --seq-100: #cde2fb; --seq-250: #86b6ef; --seq-400: #3987e5;
@@ -44,21 +88,21 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --page: #0d0d0d;
-    --surface: #1a1a19;
-    --ink: #ecebe5;
-    --ink-2: #c3c2b7;
-    --muted: #96948d;
-    --grid: #2c2c2a;
-    --axis: #383835;
-    --ring: rgba(255, 255, 255, 0.10);
-    --lens: #9085e9;
-    --lens-soft: rgba(144, 133, 233, 0.12);
-  --raised: #1e1d1c;
-  --well: #121211;
-  --bezel: rgba(255, 255, 255, 0.09);
-  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 10px 30px rgba(0, 0, 0, 0.5);
-  --well-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
+    --page:    #090a0c;
+    --well:    #0e1013;
+    --surface: #15181c;
+    --raised:  #1a1e23;
+    --ink:     #eaeef4;
+    --ink-2:   #b4bdc9;
+    --muted:   #7e8895;
+    --grid:    #242830;
+    --axis:    #39404a;
+    --ring:    rgba(255, 255, 255, 0.11);
+    --bezel:   rgba(255, 255, 255, 0.09);
+    --lens:      #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow:      0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
     --s1: #3987e5; --s2: #199e70; --s3: #c98500; --s4: #008300;
     --s5: #9085e9; --s6: #e66767; --s7: #d55181; --s8: #d95926;
     --seq-100: #16233a; --seq-250: #1c5cab; --seq-400: #3987e5;
@@ -69,20 +113,22 @@
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --page: #0d0d0d; --surface: #1a1a19; --ink: #ecebe5; --ink-2: #c3c2b7;
-  --muted: #96948d; --grid: #2c2c2a; --axis: #383835;
-  --ring: rgba(255,255,255,0.10); --lens: #9085e9;
-  --lens-soft: rgba(144,133,233,0.12);
-  --raised: #1e1d1c;
-  --well: #121211;
-  --bezel: rgba(255, 255, 255, 0.09);
-  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 10px 30px rgba(0, 0, 0, 0.5);
-  --well-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
+  --page: #090a0c; --well: #0e1013; --surface: #15181c; --raised: #1a1e23;
+  --ink: #eaeef4; --ink-2: #b4bdc9; --muted: #7e8895;
+  --grid: #242830; --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11); --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef; --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
   --s1: #3987e5; --s2: #199e70; --s3: #c98500; --s4: #008300;
   --s5: #9085e9; --s6: #e66767; --s7: #d55181; --s8: #d95926;
   --seq-100: #16233a; --seq-250: #1c5cab; --seq-400: #3987e5;
   --seq-550: #86b6ef; --seq-700: #cde2fb;
 }
+/* Three variables the app only ever reads through an inline fallback
+   (var(--good, #2ecc71) etc., the unit-15 hot-span table). Themed here so
+   they follow the palette instead of the hardcoded fallbacks. */
+:root { --rule: var(--grid); --good: var(--s2); --warn: var(--s8); }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -90,12 +136,48 @@ body {
   background: var(--page);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 15.5px;
+  font-size: 15px;
   line-height: 1.55;
 }
 
-/* ---- masthead: two quiet tiers — identity row, then nav row ---- */
-.masthead { border-bottom: 1px solid var(--grid); padding: 16px 28px 0; }
+/* ---- the type rule, the two parts of it that are global ---- */
+
+/* MONO: machine identifiers, always with tabular figures. Everything listed
+   here is something the machine wrote or measured — an id, a model name, a
+   layer number, a count, a date, a token. The pill-shaped controls join this
+   list in § THE PILL LAW. */
+.chip, .chip.model, .chip.pchip, .chip.rec,
+.params dt, .params dd, .pcode,
+.ex-table .ex-id, .ex-created, .ex-stats, .ex-count, .board-summary,
+.board-note-date, .aff-card-id, .ov-m, .exp-link .who,
+.masthead-bottom .stats,
+table.readout td.lyr, table.mtx td.lyr, .tok, .cell, .scan-word h4,
+.film-transcript, .film-where, .film-ranks, .viz-tip .row b {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+/* numbers read as data wherever they are tabulated */
+table.readout, table.mtx, .hot-tbl, .params dd, .unit-head .count,
+.masthead-bottom .stats, .ex-stats, .ex-count { font-variant-numeric: tabular-nums; }
+
+/* one shared micro-caps setting for every label in the app */
+section.card > h3, .notes-t, .console-head h4, .console-sec h5,
+.card.plain > h3, section.thoughts > h3, .turn .role, .sibs-label,
+table.readout th, .ex-sort-btn, details.fc-orig > summary,
+.board-chip, .board-status, .nov-novel, .nov-anticipated, .nov-covered {
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 600;
+}
+
+/* ---- masthead: chrome, not page ---- */
+/* it sits on the panel tier and is capped by a hairline, so the desk colour
+   begins below it */
+.masthead {
+  background: var(--surface);
+  border-bottom: 1px solid var(--grid);
+  padding: 12px 24px 0;
+}
 .masthead-top {
   display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
 }
@@ -109,18 +191,18 @@ body {
   border-radius: 50%; background: var(--lens);
 }
 .masthead h1 {
-  font-family: var(--serif); font-size: 23px; font-weight: 600;
-  letter-spacing: 0.01em; margin: 0; white-space: nowrap;
+  font-family: var(--serif); font-size: 21px; font-weight: 600;
+  letter-spacing: 0.005em; margin: 0; white-space: nowrap;
 }
 /* the signature: a live core-sample sparkline of the lab's first headline
    record — the answer surfacing through the stack. Drawn by drawSpark(). */
 .mast-spark { display: inline-flex; align-items: center; margin-left: 6px; }
 .mast-spark canvas { display: block; opacity: 0.9; }
 .mast-spark:hover canvas { opacity: 1; }
-.masthead-sub { margin: 0; color: var(--muted); font-size: 13px; }
+.masthead-sub { margin: 0; color: var(--muted); font-size: 12.5px; }
 .theme-toggle {
   margin-left: auto; flex: none; cursor: pointer;
-  width: 32px; height: 32px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 2px;
   border: 1px solid var(--ring); background: var(--surface);
   color: var(--ink-2); font-size: 15px; line-height: 1;
   display: inline-flex; align-items: center; justify-content: center;
@@ -137,36 +219,33 @@ body {
 }
 .masthead-nav::-webkit-scrollbar { display: none; }
 .masthead-nav a {
-  color: var(--ink-2); text-decoration: none; font-size: 13px;
-  padding: 7px 10px 9px; white-space: nowrap; border-radius: 7px 7px 0 0;
+  color: var(--ink-2); text-decoration: none; font-size: 12.5px;
+  padding: 7px 10px 8px; white-space: nowrap; border-radius: 0;
   border-bottom: 2px solid transparent;
 }
 .masthead-nav a:hover { color: var(--lens); }
 .masthead-nav a.active {
   color: var(--lens); font-weight: 600;
-  border-bottom-color: var(--lens);
+  border-bottom-color: var(--lens); border-bottom-width: 2px;
 }
-.masthead-bottom .stats { margin-left: auto; font-size: 12px; padding-bottom: 6px; }
+.masthead-bottom .stats { margin-left: auto; font-size: 11px; padding-bottom: 7px; }
 
 /* ---- frame ---- */
 .frame { display: flex; min-height: calc(100vh - 108px); }
 .rail {
-  flex: 0 0 320px; border-right: 1px solid var(--grid);
-  padding: 18px 14px 40px; overflow-y: auto;
+  flex: 0 0 300px; border-right: 1px solid var(--grid);
+  padding: 14px 12px 40px; overflow-y: auto;
 }
-.detail { flex: 1 1 auto; min-width: 0; padding: 26px 34px 80px; }
+.detail { flex: 1 1 auto; min-width: 0; padding: 22px 28px 70px; }
 .empty { color: var(--muted); font-style: italic; }
 
 /* ---- mobile rail drawer ---- */
 /* Toggle button + backdrop are inert on desktop (display:none), so wide
    layouts stay pixel-identical. On narrow viewports the rail becomes an
-   off-canvas drawer opened by the toggle. */
+   off-canvas drawer opened by the toggle. Its chrome is § THE PILL LAW. */
 .rail-toggle {
   display: none; align-items: center; gap: 8px;
-  font: inherit; font-size: 13px; font-weight: 600;
-  padding: 6px 14px; border-radius: 99px; cursor: pointer;
-  border: 1px solid var(--lens); color: var(--lens);
-  background: var(--lens-soft);
+  font: inherit; cursor: pointer;
 }
 .rail-toggle:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 .rail-toggle-bars {
@@ -210,72 +289,76 @@ body {
 /* ---- rail controls (sticky) ---- */
 .rail-controls {
   position: sticky; top: 0; z-index: 5; background: var(--page);
-  padding: 2px 2px 10px; margin: -6px -2px 4px;
+  padding: 2px 2px 8px; margin: -6px -2px 4px;
   border-bottom: 1px solid var(--grid);
 }
 #q {
-  width: 100%; font: inherit; font-size: 13px; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--ring);
-  border-radius: 8px; padding: 7px 10px;
+  width: 100%; font: inherit; font-size: 12.5px; color: var(--ink);
+  background: var(--well); border: 1px solid var(--bezel);
+  border-radius: 2px; padding: 7px 10px;
 }
 #q:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 .chip-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-.fchip {
-  font: inherit; font-size: 12px; padding: 2px 11px; cursor: pointer;
-  border-radius: 99px; border: 1px solid var(--ring);
-  background: none; color: var(--ink-2);
-}
-.fchip[aria-pressed="true"] {
-  border-color: var(--lens); color: var(--lens); font-weight: 600;
-  background: var(--lens-soft);
-}
-.fchip:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+/* .fchip chrome is § THE PILL LAW; only the layout hooks live here */
+.fchip { font: inherit; cursor: pointer; }
 
 /* ---- rail ---- */
 .unit-group { margin-bottom: 2px; }
 .unit-head {
   display: flex; align-items: baseline; gap: 7px; width: 100%;
-  font: inherit; font-size: 12.5px; font-weight: 600;
+  font: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0;
   color: var(--ink-2); margin: 8px 0 2px;
-  background: none; border: none; cursor: pointer; padding: 5px 8px;
-  border-radius: 7px; text-align: left; line-height: 1.35;
+  background: none; border: none; cursor: pointer; padding: 5px 7px;
+  border-radius: 2px; text-align: left; line-height: 1.35;
 }
 .unit-head:hover { background: var(--lens-soft); color: var(--ink); }
 .unit-head:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 .unit-head .tri { flex: none; width: 10px; color: var(--muted); }
 .unit-head .uname { flex: 1 1 auto; }
 .unit-head .count {
-  flex: none; font-size: 11px; font-weight: 500; color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  flex: none; font-size: 10.5px; font-weight: 500; color: var(--muted);
 }
+/* rail rows are instrument lines; the current row gets an accent tick */
 .exp-link {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 11px;
   width: 100%; text-align: left; border: 1px solid transparent;
   background: none; color: var(--ink); cursor: pointer;
-  padding: 8px 10px; border-radius: 8px; font: inherit; font-size: 13.5px;
+  padding: 6px 9px; border-radius: 2px; font: inherit; font-size: 13px;
   text-decoration: none;
 }
 .exp-link.overview-link {
-  color: var(--lens); font-size: 12.5px; font-weight: 500;
+  color: var(--lens); font-size: 12px; font-weight: 500;
   gap: 8px; padding-top: 5px; padding-bottom: 5px;
 }
 .exp-link.overview-link .who { display: inline; margin-left: 6px; }
-.exp-link:hover { background: var(--lens-soft); }
+.exp-link:hover { background: var(--surface); box-shadow: inset 2px 0 0 var(--lens); }
 .exp-link:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 .exp-link[aria-current="true"] {
-  background: var(--lens-soft); border-color: var(--lens);
+  background: var(--surface); border-color: var(--ring);
+  box-shadow: inset 2px 0 0 var(--lens);
 }
-.exp-link .glyph { flex: none; }
+.exp-link .glyph { flex: none; width: 14px !important; }
 .exp-link .who {
-  display: block; color: var(--muted); font-size: 11.5px;
+  display: block; color: var(--muted); font-size: 10.5px; letter-spacing: 0;
 }
 
-/* emergence glyph: the signature. A core sample of the layer stack —
-   each band is one layer; depth of blue = closeness of the final answer
-   (log rank). Reads top (embedding) to bottom (speech). */
-.glyph { display: inline-flex; flex-direction: column; border-radius: 3px;
+/* ---- the core sample: the signature ---- */
+/* A core sample of the layer stack — each band is one layer; depth of blue =
+   closeness of the final answer (log rank). Reads top (embedding) to bottom
+   (speech). glyph() writes the width inline, which is why the sizes below
+   need !important — the documented exception. Colour is the --seq ramp and
+   nothing else: no background, gradient or drop-shadow may compete with it
+   (CONTRACT.md §4). Six sizes: 14px rail, 18px unit card, 30px record head,
+   30px finding-card spine, 22px compare head, 16/13px explorer. */
+.glyph { display: inline-flex; flex-direction: column; border-radius: 2px;
          overflow: hidden; border: 1px solid var(--ring); }
 .glyph i { display: block; }
+/* the tall heads: one evenly-banded column, re-flowed with flex because the
+   container is tall enough that sub-pixel bands cannot collapse */
+.exp-head .glyph-lg .glyph { width: 30px !important; height: 168px; }
+.cmp-head .glyph-lg .glyph { width: 22px !important; height: 120px; }
+.exp-head .glyph-lg .glyph i,
+.cmp-head .glyph-lg .glyph i { flex: 1 1 0; }
 
 /* ---- record pager ---- */
 .pager {
@@ -283,7 +366,7 @@ body {
 }
 .pager a, .pager span {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; border-radius: 8px; font-size: 16px;
+  width: 26px; height: 26px; border-radius: 2px; font-size: 14px;
   border: 1px solid var(--ring); color: var(--ink-2);
   text-decoration: none; background: var(--surface);
 }
@@ -292,26 +375,27 @@ body {
 .pager a:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 
 /* ---- unit overview ---- */
+/* the inner cards read as insets: the tier does the separating, so the outer
+   card + inner card is no longer two identical boxes */
 .ov-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
 }
 .ov-card {
   display: flex; gap: 10px; align-items: flex-start; text-align: left;
-  border: 1px solid var(--ring); background: var(--page);
-  border-radius: 9px; padding: 10px 12px; color: var(--ink);
+  border: 1px solid var(--bezel); background: var(--well);
+  border-radius: 2px; padding: 8px 10px; color: var(--ink);
   text-decoration: none; font: inherit;
 }
 .ov-card:hover { border-color: var(--lens); background: var(--lens-soft); }
 .ov-card:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
-.ov-card .glyph { flex: none; margin-top: 2px; }
+.ov-card .glyph { flex: none; margin-top: 2px; width: 18px !important; }
 .ov-body { min-width: 0; }
-.ov-t { display: block; font-size: 13px; font-weight: 550; line-height: 1.3; }
-.ov-m { display: block; color: var(--lens); font-size: 11.5px; margin-top: 2px;
-        font-family: var(--mono); }
+.ov-t { display: block; font-size: 12.5px; font-weight: 600; line-height: 1.3; }
+.ov-m { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
 .ov-gen {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  overflow: hidden; color: var(--muted); font-size: 12px; margin-top: 3px;
+  overflow: hidden; color: var(--muted); font-size: 11.5px; margin-top: 3px;
   font-style: italic;
 }
 table.mtx td { font-size: 13px; }
@@ -322,19 +406,109 @@ table.mtx td.lyr { width: auto; white-space: normal; min-width: 190px; }
 .bz-dot { cursor: default; }
 
 /* ---- detail header ---- */
-.exp-head { display: flex; gap: 22px; align-items: flex-start; }
-.exp-head .glyph-lg { flex: none; margin-top: 6px; }
+.exp-head { display: flex; gap: 26px; align-items: flex-start; }
+.exp-head .glyph-lg { flex: none; margin-top: 4px; }
 .exp-title h2 {
-  font-family: var(--serif); font-size: 26px; font-weight: 600;
-  margin: 0 0 6px; line-height: 1.25;
+  font-family: var(--serif); font-size: 23px; font-weight: 600;
+  letter-spacing: 0; margin: 0 0 6px; line-height: 1.25;
 }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 0; }
-.chip {
-  font-size: 12px; padding: 2px 10px; border-radius: 99px;
-  border: 1px solid var(--ring); color: var(--ink-2);
+
+/* ================= THE PILL LAW =================
+   Inert first, interactive second.
+
+   A LABEL IS NEVER A PILL. Anything that only names something loses its box
+   entirely and becomes small letter-spaced text; a row of them is divided by
+   hairlines, not by boxes.
+
+   A PILL IS A LINK. The interactive selectors are tag-qualified (a.chip /
+   button.chip) so they outrank the inert .chip rule without !important, and
+   so the inert span variants (.chip.model, .chip.pchip, .chip.pin.on) are
+   never caught by them. A link carries the accent; a control stays neutral
+   until it is hovered or engaged.
+   ============================================== */
+
+/* ---- inert ---- */
+.chips { display: flex; flex-wrap: wrap; gap: 4px 10px; margin: 2px 0 0; }
+.chip,
+.chip.model,
+.chip.pchip,
+.chip.pin.on,
+.board-chip,
+.board-status,
+.nov-novel, .nov-anticipated, .nov-covered {
+  /* border-width 0, not !important: the interactive rules below must win */
+  border: 0;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+/* a readout row of inert labels is divided by hairlines. Scoped to direct
+   span children so .pchips stays a tight list. */
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid);
+  padding-left: 10px;
+}
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px; letter-spacing: 0; }
+.chip.pin.on { color: var(--ink-2); letter-spacing: 0; }
+
+/* ---- interactive ---- */
+a.chip, button.chip,
+.fchip, .pos-tab, .con-reroll, .console-row button, .rail-toggle {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  border-radius: 2px;
+  border: 1px solid var(--ring);
   background: var(--surface);
+  color: var(--ink-2);
+  padding: 2px 8px;
+  text-decoration: none;
+  box-shadow: none;
+  min-height: 0;
 }
-.chip.model { border-color: var(--lens); color: var(--lens); font-weight: 600; }
+/* Filter chips and unit links run one step larger and tighter than the rest
+   of the interactive track. They stay MONO — note that this is the rendering
+   as approved, not what the type rule would predict: "filmed" and "matrix"
+   are words, so by §THE TYPE RULE they belong in sans. Switching them is a
+   one-line change here; it was left alone because it changes how the
+   explorer reads, which is a design call, not a fold. */
+.fchip, .chip.unitlink { font-size: 12px; letter-spacing: 0.01em; }
+#model-chips .fchip, #ex-model-chips .fchip { font-variant-numeric: tabular-nums; }
+
+/* links carry the accent; buttons stay neutral until engaged */
+a.chip { color: var(--lens); }
+a.chip:hover, button.chip:hover,
+.fchip:hover, .pos-tab:hover, .con-reroll:hover, .console-row button:hover {
+  border-color: var(--lens);
+  color: var(--lens);
+  background: var(--lens-soft);
+}
+a.chip:focus-visible, button.chip:focus-visible,
+.fchip:focus-visible, .pos-tab:focus-visible,
+.con-reroll:focus-visible, .console-row button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px;
+}
+/* engaged switches read as pressed: accent fill, plus an inset rule on the
+   left edge so the state survives at a glance across the room.
+   NB no !important — a selected .pos-tab / stream chip carries its series
+   colour inline (app.js:1940, 2231) and must keep overriding this. */
+.fchip[aria-pressed="true"],
+.pos-tab[aria-selected="true"],
+.console-row button[aria-pressed="true"] {
+  border-color: var(--lens);
+  color: var(--lens);
+  background: var(--lens-soft);
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--lens);
+}
 
 /* ---- sections ---- */
 /* the light table: prose floats on raised paper; data recesses into
@@ -342,19 +516,18 @@ table.mtx td.lyr { width: auto; white-space: normal; min-width: 190px; }
    don't need markup changes) */
 section.card {
   background: var(--raised); border: 1px solid var(--ring);
-  border-radius: 14px; padding: 20px 24px; margin-top: 22px;
+  border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
   box-shadow: var(--shadow);
 }
 section.card > h3 {
-  margin: 0 0 14px; font-size: 11px; font-weight: 650;
-  text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted);
-  border-bottom: 1px solid var(--grid); padding-bottom: 8px;
+  margin: 0 0 12px; font-size: 10px; color: var(--muted);
+  border-bottom: 1px solid var(--grid); padding-bottom: 7px;
 }
 section.card:has(.readout-scroll), section.card:has(.chart-wrap),
 section.card:has(.params), section.card:has(.scan-cells),
 section.card:has([data-f]), section.card:has(table.mtx) {
-  background: var(--well); border-color: var(--bezel);
-  border-radius: 8px; box-shadow: var(--well-shadow);
+  background: var(--well); border: 1px solid var(--bezel);
+  border-radius: 2px; box-shadow: var(--well-shadow);
 }
 section.card:has(.readout-scroll) > h3, section.card:has(.chart-wrap) > h3,
 section.card:has(.params) > h3, section.card:has(.scan-cells) > h3,
@@ -365,10 +538,10 @@ section.card:has([data-f]) > h3, section.card:has(table.mtx) > h3 {
    only the cards themselves float */
 section.card:has(.find-grid) {
   background: transparent; border-color: transparent; box-shadow: none;
-  padding: 6px 2px 0; border-radius: 0;
+  padding: 2px 0 0; border-radius: 0;
 }
 section.card:has(.find-grid) > h3 {
-  font-size: 12px; color: var(--ink-2);
+  font-size: 10.5px; color: var(--ink-2); border-bottom-color: var(--grid);
 }
 /* comfortable reading measure for generated prose; data stays full-width */
 .detail p, .detail li { max-width: 76ch; }
@@ -377,54 +550,46 @@ section.card:has(.find-grid) > h3 {
 /* conversation */
 .turn { display: flex; gap: 10px; margin: 8px 0; }
 .turn .role {
-  flex: none; width: 74px; text-align: right; font-size: 11px;
-  text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
-  padding-top: 3px;
+  flex: none; width: 74px; text-align: right; font-size: 10px;
+  color: var(--muted); padding-top: 3px;
 }
-.turn.assistant .role { color: var(--lens); }
+.turn.assistant .role { color: var(--ink-2); }
 .turn .said { white-space: pre-wrap; }
 .turn.assistant .said { font-weight: 500; }
 
 /* params */
 .params { display: grid; grid-template-columns: max-content 1fr;
           gap: 4px 18px; font-size: 13.5px; }
-.params dt { color: var(--muted); }
-.params dd { margin: 0; font-family: var(--mono); font-size: 12.5px;
-             overflow-wrap: anywhere; }
+.params dt { color: var(--muted); font-size: 11px; letter-spacing: 0.02em; }
+.params dd { margin: 0; font-size: 12px; overflow-wrap: anywhere; }
 
 /* chart */
 .chart-wrap { overflow-x: auto; }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 8px;
-          font-size: 12.5px; color: var(--ink-2); }
+          font-size: 11.5px; color: var(--ink-2); }
 .legend .key { display: inline-flex; align-items: center; gap: 6px; }
-.legend .swatch { width: 14px; height: 3px; border-radius: 2px; }
+.legend .swatch { width: 16px; height: 3px; border-radius: 0; }
 .viz-tip {
   position: fixed; pointer-events: none; z-index: 40;
-  background: var(--surface); border: 1px solid var(--ring);
-  border-radius: 8px; padding: 8px 10px; font-size: 12px;
+  background: var(--raised); border: 1px solid var(--bezel);
+  border-radius: 2px; padding: 8px 10px; font-size: 12px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.14); display: none; min-width: 130px;
 }
 .viz-tip .tl { color: var(--muted); margin-bottom: 4px; }
 .viz-tip .row { display: flex; justify-content: space-between; gap: 12px; }
-.viz-tip .row b { font-family: var(--mono); font-weight: 500; }
+.viz-tip .row b { font-weight: 500; }
 svg text { font-family: var(--sans); }
 
 /* readout table */
 .pos-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
-.pos-tab {
-  font: inherit; font-size: 12.5px; padding: 3px 12px; cursor: pointer;
-  border-radius: 99px; border: 1px solid var(--ring);
-  background: none; color: var(--ink-2);
-}
-.pos-tab[aria-selected="true"] {
-  border-color: var(--lens); color: var(--lens); font-weight: 600;
-}
-.pos-tab:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+/* .pos-tab chrome is § THE PILL LAW */
+.pos-tab { cursor: pointer; }
 .readout-scroll { overflow-x: auto; }
 table.readout { border-collapse: collapse; width: 100%; font-size: 12.5px; }
 table.readout th {
-  text-align: left; color: var(--muted); font-weight: 500;
-  padding: 3px 10px 3px 0; border-bottom: 1px solid var(--grid);
+  text-align: left; color: var(--muted); font-size: 10px;
+  font-family: var(--sans);
+  padding: 3px 10px 3px 0; border-bottom: 1px solid var(--axis);
   white-space: nowrap;
 }
 table.readout td {
@@ -432,27 +597,26 @@ table.readout td {
   vertical-align: top;
 }
 table.readout tbody tr:hover td { background: var(--lens-soft); }
-table.readout td.lyr { color: var(--muted); font-variant-numeric: tabular-nums;
-                       white-space: nowrap; width: 46px; }
+table.readout td.lyr { color: var(--muted); white-space: nowrap; width: 46px; }
 table.readout tr.model-row td { border-top: 2px solid var(--axis);
                                 background: var(--lens-soft); }
 .tok {
-  font-family: var(--mono); font-size: 11.5px; white-space: pre;
-  background: var(--page); border: 1px solid var(--grid);
-  border-radius: 5px; padding: 0.5px 5px; margin: 1px 3px 1px 0;
+  font-size: 11.5px; white-space: pre;
+  background: var(--well); border: 1px solid var(--bezel);
+  border-radius: 2px; padding: 0.5px 5px; margin: 1px 3px 1px 0;
   display: inline-block; color: var(--ink-2);
 }
 .tok.hit { border-color: var(--lens); color: var(--lens); font-weight: 600; }
 
 /* scan */
 .scan-word { margin: 10px 0 2px; }
-.scan-word h4 { margin: 0 0 4px; font-size: 13.5px;
-                font-family: var(--mono); font-weight: 600; }
+.scan-word h4 { margin: 0 0 4px; font-size: 12.5px;
+                font-weight: 600; letter-spacing: 0; }
 .scan-cells { display: flex; flex-wrap: wrap; gap: 5px; }
 .cell {
-  font-family: var(--mono); font-size: 11.5px;
-  border: 1px solid var(--grid); border-radius: 5px; padding: 1px 7px;
-  color: var(--ink-2); background: var(--page);
+  font-size: 11.5px;
+  border: 1px solid var(--bezel); border-radius: 2px; padding: 1px 7px;
+  color: var(--ink-2); background: var(--well);
 }
 .cell b { color: var(--ink); font-weight: 600; }
 .cell.strong { border-color: var(--s1); }
@@ -465,48 +629,53 @@ details.slice summary {
 details.slice summary:focus-visible { outline: 2px solid var(--lens); }
 details.slice iframe {
   width: 100%; height: 640px; border: 1px solid var(--ring);
-  border-radius: 8px; margin-top: 12px; background: #fff;
+  border-radius: 2px; margin-top: 12px; background: #fff;
 }
 
-/* Claude's thoughts */
+/* ---- Claude's thoughts: the lab's own voice ---- */
+/* a neutral spine, no accent fill — accent belongs to interactive things.
+   border:0 comes first because the compare view emits
+   <section class="card thoughts"> (app.js:2582); without it the spine would
+   sit inside a box on that one view. */
 section.thoughts {
-  margin-top: 26px; padding: 20px 24px 16px;
-  border-left: 3px solid var(--lens);
-  background: var(--lens-soft); border-radius: 0 10px 10px 0;
+  margin-top: 18px; padding: 4px 0 4px 16px;
+  background: none; box-shadow: none;
+  border: 0; border-left: 2px solid var(--axis); border-radius: 0;
 }
-section.thoughts > h3 {
-  margin: 0 0 10px; font-size: 12px; font-weight: 600;
-  letter-spacing: 0.13em; text-transform: uppercase; color: var(--lens);
-}
+section.thoughts > h3 { font-size: 10px; color: var(--muted); }
+/* with no rule under it the voice heading needs less air than a card
+   heading. In the compare view the block IS a card, and there the
+   section.card > h3 margin above wins — deliberate, the rule is back. */
+section.thoughts:not(.card) > h3 { margin: 0 0 10px; }
 .thoughts-body {
-  font-family: var(--serif); font-size: 16px; line-height: 1.65;
-  max-width: 62ch;
+  font-size: 15.5px; line-height: 1.6; max-width: 68ch;
 }
 .thoughts-body p { margin: 0 0 12px; }
 .thoughts-body code { font-family: var(--mono); font-size: 13px; }
-.thoughts-missing { color: var(--muted); font-style: italic;
-                    font-family: var(--serif); }
+.thoughts-missing { color: var(--muted); font-style: italic; }
 
 .unit-note {
-  margin: 0; font-family: var(--serif); font-size: 15px;
+  margin: 0; font-size: 15px; font-style: normal;
   line-height: 1.55; color: var(--ink-2); max-width: 72ch;
 }
 
 /* interim-conclusions essay (#essay) */
 article.essay {
-  margin: 10px auto 60px; max-width: 68ch;
-  padding: 28px 34px 22px;
-  border-left: 3px solid var(--lens);
-  background: var(--lens-soft); border-radius: 0 10px 10px 0;
+  max-width: 72ch; margin: 10px 0 60px;
+  padding: 4px 0 4px 20px;
+  background: none; box-shadow: none;
+  border: 0; border-left: 2px solid var(--axis); border-radius: 0;
 }
-article.essay .thoughts-body { max-width: none; font-size: 17px; }
+article.essay .thoughts-body { max-width: 68ch; font-size: 16.5px; line-height: 1.62; }
 article.essay h2 {
   font-family: var(--serif); font-size: 26px; font-weight: 600;
   margin: 0 0 18px;
 }
+/* the essay's own section heads stay sans (the type rule) but keep enough
+   weight to break a long read — micro-caps would shout at this length */
 article.essay h3 {
-  font-family: var(--serif); font-size: 19px; font-weight: 600;
-  margin: 26px 0 10px; color: var(--lens);
+  font-size: 15px; font-weight: 600; color: var(--ink-2);
+  letter-spacing: 0; text-transform: none; margin: 30px 0 8px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -517,12 +686,12 @@ article.essay h3 {
 .film-note { font-size: 13px; color: var(--ink-2); margin: 4px 0 10px; }
 .film-sub { font-size: 13px; color: var(--ink-2); margin: 18px 0 6px; font-weight: 600; }
 .film-transcript {
-  font-family: var(--mono); font-size: 12.5px; line-height: 2;
+  font-size: 12.5px; line-height: 2; letter-spacing: 0;
   margin: 8px 0; max-height: 128px; overflow-y: auto;
 }
 .ftok {
   display: inline-block; padding: 0 3px; margin: 0 1px; border: 0;
-  border-radius: 3px; background: transparent; color: var(--ink);
+  border-radius: 2px; background: transparent; color: var(--ink);
   font: inherit; cursor: pointer; white-space: pre;
 }
 .ftok:hover { background: var(--lens-soft); }
@@ -530,7 +699,7 @@ article.essay h3 {
 .ftok.special { color: var(--muted); font-size: 10.5px; }
 .ftok[aria-current] { background: var(--lens); color: var(--page); }
 .film-controls { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
-.film-where { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+.film-where { font-size: 12px; color: var(--ink-2); letter-spacing: 0; }
 /* 2px top padding: the playhead's outline is drawn outside its box and
    the scroll container clips it — without the padding its top stroke is
    cut off (top: 2px on the playhead keeps it aligned with the canvas) */
@@ -539,8 +708,10 @@ article.essay h3 {
   position: absolute; top: 2px; pointer-events: none;
   outline: 2px solid var(--lens); outline-offset: 0; border-radius: 1px;
 }
-.film-ranks { font-family: var(--mono); font-size: 11px; color: var(--ink-2); white-space: nowrap; }
-.mirror-x { margin: 10px 0; padding: 8px 12px; background: var(--lens-soft); border-radius: 8px; }
+.film-ranks { font-size: 11px; color: var(--ink-2); white-space: nowrap;
+              letter-spacing: 0; }
+.mirror-x { margin: 10px 0; padding: 8px 12px; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px; }
 .mirror-x summary { cursor: pointer; font-size: 13.5px; }
 .mirror-x .said { font-size: 13px; margin-top: 8px; }
 .mirror-prompt { margin: 8px 0; }
@@ -550,27 +721,46 @@ article.essay h3 {
 .film-ridge-words .pos-tab[aria-selected="true"] { outline: 2px solid var(--lens); }
 
 /* ---- findings map ---- */
-.theme-desc { color: var(--ink-2); font-size: 13.5px; margin: 4px 0 14px; }
-.find-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-.find-card { background: var(--raised); box-shadow: var(--shadow);
-  border: 1px solid var(--ring); border-radius: 12px; padding: 14px 16px;
-  background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
-.find-card h4 { margin: 0; font-size: 14.5px; line-height: 1.35; }
-.find-card p { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; flex: 1; }
-.find-card .chips { margin-top: 4px; }
+.theme-desc { color: var(--ink-2); font-size: 13px; margin: 4px 0 14px;
+              max-width: 74ch; }
+.find-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.find-card { background: var(--surface); box-shadow: var(--shadow);
+  border: 1px solid var(--ring); border-radius: 2px; padding: 12px 14px 0;
+  position: relative; display: flex; flex-direction: column; gap: 7px; }
+.find-card h4 { margin: 0; font-size: 14.5px; font-weight: 600;
+                line-height: 1.3; color: var(--ink); }
+.find-card p, .find-card .fc-plain { margin: 0; font-size: 13px;
+  color: var(--ink-2); line-height: 1.5; flex: 1; }
+/* the footer: a full-bleed top hairline, so the link row reads as a control
+   strip clipped to the card edge rather than as one more line of content.
+   With a spine the strip runs under it — the glyph is opaque and above. */
+.find-card > .chips {
+  margin: auto -14px 0; padding: 8px 14px 10px;
+  border-top: 1px solid var(--grid);
+  gap: 4px 6px;
+}
 .chip.rec { text-decoration: none; }
-.chip.rec b { font-weight: 600; opacity: 0.65; margin-left: 3px; }
-.chip.unitlink { text-decoration: none; color: var(--lens); border-color: var(--lens-soft); }
+.chip.rec b { font-weight: 500; opacity: 1; color: var(--muted); margin-left: 5px; }
+.chip.unitlink { text-decoration: none; color: var(--lens);
+                 border-color: var(--lens-soft);
+                 font-family: var(--sans); font-size: 12px; letter-spacing: 0.01em; }
 
 /* ---- sibling switcher on record pages ---- */
-/* header stack rhythm: every row under the title gets the same 8px beat,
-   and every chip — span, link, or button — sits on the same 24px line */
+/* header stack rhythm: the identity row, then a hairline, then the control
+   rows; every chip — span, link, or button — sits on the same 20px line */
 .exp-title .chips { margin-top: 8px; }
-.exp-title .chips .chip { display: inline-flex; align-items: center; min-height: 24px; }
+.exp-title .chips .chip { display: inline-flex; align-items: center; min-height: 20px; }
+.exp-title .chips.sibs, .exp-title .chips.pin-row {
+  border-top: 1px solid var(--grid); padding-top: 8px; margin-top: 10px;
+}
+.exp-title .chips.sibs + .chips.pin-row {
+  border-top: 0; padding-top: 0; margin-top: 6px;
+}
 .sibs { margin-top: 0; align-items: center; }
-.sibs-label { color: var(--muted); font-size: 12px; margin-right: 2px; line-height: 24px; }
+.sibs-label { color: var(--muted); font-size: 10.5px; margin-right: 4px; line-height: 20px; }
 .pin-row { align-items: center; }
-.chip.pin, button.chip { min-height: 24px; padding-top: 0; padding-bottom: 0; }
+.chip.pin { padding-top: 0; padding-bottom: 0; }
+.chip.pin.on + button.chip { margin-left: 4px; }
 .chip.sib { text-decoration: none; }
 .chip.sib.cmp { color: var(--lens); }
 
@@ -612,22 +802,34 @@ article.essay h3 {
   margin-top: 0.7em;
 }
 
-/* ---- atmosphere: full-page sediment field behind everything ---- */
-#atmo { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; }
+/* ---- atmosphere: a sediment field, confined to the rail ---- */
+/* A full-page drift field behind body prose is noise in dark and a pale
+   bleed in light. Clipped to the rail column it reads as one more core
+   sample beside the record list, and it never touches the reading measure in
+   .detail. Not display:none — it is decoration, and it stays visible. The
+   field is drawn in --lens: on near-black it needs most of its alpha to read
+   at all, on paper it needs almost none, so both theme paths are answered. */
+#atmo { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%;
+        opacity: 0.55; clip-path: inset(0 calc(100% - 300px) 0 0); }
+:root:not([data-theme="dark"]) #atmo { opacity: 0.12; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #atmo { opacity: 0.55; }
+}
+:root[data-theme="dark"] #atmo { opacity: 0.55; }
+/* below 900px the rail is no longer a left column — retire the field */
+@media (max-width: 900px) { #atmo { opacity: 0.06; clip-path: none; } }
 
 /* ---- view entry: content fades up on route change ---- */
 @keyframes viewin { from { opacity: 0; transform: translateY(4px); } }
 .detail > * { animation: viewin 0.22s ease both; }
 @media (prefers-reduced-motion: reduce) { .detail > * { animation: none; } }
 
-/* ---- interactive card lift ---- */
+/* ---- interactive cards: instruments do not bounce ---- */
 .find-card, .ov-card, section.card.board-arc {
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.12s ease, background 0.12s ease;
 }
-.find-card:hover {
-  border-color: color-mix(in srgb, var(--lens) 45%, var(--ring));
-  transform: translateY(-1px);
-}
+.find-card:hover { border-color: var(--lens); transform: none; }
+.ov-card:hover { transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .find-card, .ov-card, section.card.board-arc { transition: none; }
   .find-card:hover { transform: none; }
@@ -636,24 +838,24 @@ article.essay h3 {
 /* ---- lab console (gear, bottom right) ---- */
 .console-fab {
   position: fixed; right: 18px; bottom: 18px; z-index: 60;
-  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  width: 34px; height: 34px; border-radius: 2px; cursor: pointer;
   border: 1px solid var(--ring); background: var(--surface);
   color: var(--ink-2); font-size: 17px; line-height: 1;
   display: inline-flex; align-items: center; justify-content: center;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow);
 }
 .console-fab:hover { color: var(--lens); border-color: var(--lens); }
 .console-fab:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 /* --con-pad / --con-top are read back by .console-head to bleed its rule to
-   the panel edges and to mirror the top padding underneath the title. A skin
-   that changes the panel's padding must change these, not the raw values. */
+   the panel edges and to mirror the top padding underneath the title. Change
+   these, not the raw values, if the panel's padding ever moves. */
 .console {
-  --con-pad: 16px; --con-top: 14px;
+  --con-pad: 14px; --con-top: 12px;
   position: fixed; right: 18px; bottom: 66px; z-index: 60;
   width: min(280px, calc(100vw - 36px));
-  background: var(--surface); border: 1px solid var(--ring);
-  border-radius: 12px; padding: var(--con-top) var(--con-pad) 16px;
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.26);
+  background: var(--raised); border: 1px solid var(--bezel);
+  border-radius: 2px; padding: var(--con-top) var(--con-pad) 14px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32);
 }
 /* The header rule runs edge to edge (negative margins cancel the panel's own
    side padding); section rules stay inset, so the hierarchy reads
@@ -665,8 +867,7 @@ article.essay h3 {
   border-bottom: 1px solid var(--grid);
 }
 .console-head h4 {
-  margin: 0; font-size: 11px; font-weight: 650; letter-spacing: 0.09em;
-  text-transform: uppercase; color: var(--muted);
+  margin: 0; font-size: 11px; color: var(--muted);
 }
 /* taken out of flow so the header row is exactly as tall as the CONSOLE line
    box — otherwise the taller ✕ sets the height and the rule below it sits
@@ -684,64 +885,70 @@ article.essay h3 {
    it (:first-of-type would match .console-head — both are divs) */
 .console-head + .console-sec { padding-top: 0; border-top: 0; }
 .console-sec h5 {
-  margin: 0 0 6px; font-size: 10.5px; font-weight: 650;
-  letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2);
+  margin: 0 0 6px; font-size: 10.5px; color: var(--ink-2);
 }
 .con-note { margin: -2px 0 8px; font-size: 11.5px; color: var(--muted); max-width: none; }
 .console-row { display: flex; gap: 6px; }
 /* the tour buttons carry sentences, not one-word states — stack them */
 .console-row-stack { flex-direction: column; align-items: stretch; }
-.console-row button {
-  font: inherit; font-size: 12px; padding: 3px 12px; cursor: pointer;
-  border-radius: 99px; border: 1px solid var(--ring);
-  background: none; color: var(--ink-2);
-}
-.console-row button[aria-pressed="true"] {
-  border-color: var(--lens); color: var(--lens); font-weight: 600;
-  background: var(--lens-soft);
-}
-.console-row button:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+/* .console-row button and .con-reroll chrome is § THE PILL LAW */
+.console-row button { cursor: pointer; }
 .con-slider {
   display: flex; align-items: center; gap: 10px; margin-top: 10px;
   font-size: 12px; color: var(--ink-2);
 }
 .con-slider input { flex: 1 1 auto; accent-color: var(--lens); }
-.con-reroll {
-  margin-top: 12px; font: inherit; font-size: 12px; cursor: pointer;
-  padding: 4px 12px; border-radius: 99px; border: 1px solid var(--ring);
-  background: none; color: var(--ink-2);
-}
-.con-reroll:hover { border-color: var(--lens); color: var(--lens); }
+.con-reroll { margin-top: 12px; cursor: pointer; }
 
-/* ---- findings hero + card core samples ---- */
-.find-hero h2 { font-size: 34px; }
+/* ---- findings hero + finding cards ---- */
+.find-hero h2 { font-size: 30px; letter-spacing: -0.005em; }
 .find-lead {
-  font-family: var(--serif); font-size: 18.5px; line-height: 1.5;
-  color: var(--ink-2); margin: 6px 0 12px; max-width: 58ch;
+  font-size: 17px; line-height: 1.5;
+  color: var(--ink-2); margin: 6px 0 12px; max-width: 62ch;
 }
-.find-lead em { color: var(--lens); font-style: italic; }
-.find-note { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
+.find-lead em { color: var(--ink); font-style: italic; }  /* accent is for links */
+.find-note { color: var(--muted); font-size: 12.5px; margin: 10px 0 0;
+             max-width: 68ch; }
 .fc-head { display: flex; gap: 12px; align-items: flex-start; }
 .fc-head h4 { margin-top: 0 !important; }
 .fc-glyph { flex: none; text-decoration: none; display: inline-flex; margin-top: 2px; }
 .fc-glyph:hover .glyph { border-color: var(--lens); }
 .fc-glyph:focus-visible { outline: 2px solid var(--lens); outline-offset: 2px; }
+/* the card's left edge IS the core sample: .fc-glyph is an <a> inside
+   .fc-head, and pinning it to the card's left edge makes the whole spine the
+   record's door. Guarded with :has() because a finding with no representative
+   record has no glyph at all. */
+.find-card .fc-head { gap: 0; }
+.find-card:has(.fc-glyph) { padding-left: 44px; }
+.find-card:has(.fc-glyph) > .chips { margin-left: -44px; padding-left: 44px; }
+.find-card .fc-glyph {
+  position: absolute; left: 0; top: 0; bottom: 0; margin: 0;
+  align-items: stretch;
+}
+.find-card .fc-glyph .glyph {
+  width: 30px !important; height: 100%;
+  border: 0; border-right: 1px solid var(--ring);
+  border-radius: 2px 0 0 2px;
+}
+.find-card .fc-glyph .glyph i { flex: 1 1 0; }
+.find-card .fc-glyph:hover .glyph { border-right-color: var(--lens); }
 
 /* ---- params as chips ---- */
-.pchips { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.pchips { display: inline-flex; flex-wrap: wrap; gap: 3px 8px; }
 .chip.pchip {
-  font-family: var(--mono); font-size: 11.5px; padding: 1px 8px;
-  background: var(--page);
+  font-size: 11.5px; font-weight: 400; letter-spacing: 0;
+  color: var(--ink-2);
 }
-.pcode { font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+.pchips .chip.pchip + .chip.pchip {
+  border-left: 1px solid var(--grid); padding-left: 8px;
+}
+.pcode { font-size: 12.5px; overflow-wrap: anywhere; }
 .params dd { display: flex; align-items: baseline; }
 .params .pnone { color: var(--muted); }
 
 /* ---- pin-to-compare ---- */
-button.chip { cursor: pointer; font: inherit; font-size: 12px; }
-button.chip:hover { border-color: var(--lens); color: var(--lens); }
-button.chip:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
-.chip.pin.on { border-style: dashed; border-color: var(--lens); color: var(--lens); }
+/* .chip.pin.on is the inert half of the pair: a state label, not a control */
+button.chip { cursor: pointer; }
 
 /* ---- masthead: narrow screens ---- */
 @media (max-width: 768px) {
@@ -753,42 +960,36 @@ button.chip:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px;
   .rail-toggle { margin: 0 0 6px auto; }
 }
 
-/* ---- board ---- */
+/* ---- board: rows are a register, arcs are panels ---- */
 .board-summary {
-  color: var(--ink-2); font-size: 13px; margin: 10px 0 0;
-  font-family: var(--mono);
+  color: var(--ink-2); font-size: 11.5px; margin: 10px 0 0;
 }
+section.card.board-arc { padding: 12px 16px 14px; }
 .board-arc { display: flex; flex-direction: column; gap: 8px; }
 .board-arc-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.board-arc-head h3 { margin: 0; }
-.board-status {
-  font-size: 10.5px; padding: 1px 9px; border-radius: 99px;
-  border: 1px solid var(--ring); color: var(--ink-2);
-  text-transform: uppercase; letter-spacing: 0.09em;
-}
-.board-status-active { border-color: var(--s2); color: var(--s2); }
+.board-arc-head h3 { margin: 0; font-size: 14.5px; }
+/* the state labels keep their data colour and lose their shape (§ pill law) */
+.board-status { font-size: 10px; letter-spacing: 0.12em; }
+.board-status-active { color: var(--s2); }
 .board-status-parked { color: var(--muted); }
-.board-status-closed { border-color: var(--axis); color: var(--axis); }
+.board-status-closed { color: var(--axis); }
 .board-question {
-  font-family: var(--serif); font-style: italic; color: var(--muted);
+  color: var(--ink-2); font-style: normal;
   font-size: 13.5px; line-height: 1.5; margin: -2px 0 6px; max-width: 68ch;
 }
 .board-items { display: flex; flex-direction: column; }
 .board-item {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 10px;
-  padding: 9px 0; border-top: 1px solid var(--grid);
+  padding: 7px 0; border-top: 1px solid var(--grid);
 }
 .board-item:first-child { border-top: none; padding-top: 3px; }
 .board-item-title {
-  margin: 0; font-size: 13.5px; font-weight: 550; color: var(--ink);
+  margin: 0; font-size: 13px; font-weight: 600; color: var(--ink);
   flex: 1 1 220px; min-width: 0;
 }
-.board-chip {
-  display: inline-flex; align-items: center; gap: 5px; flex: none;
-  font-size: 10.5px; padding: 2px 9px; border-radius: 99px;
-  border: 1px solid var(--ring); color: var(--ink-2);
-}
-.board-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; background: var(--dot); }
+.board-chip { gap: 6px; font-size: 10px; }
+.board-dot { width: 5px; height: 5px; border-radius: 0; flex: none;
+             background: var(--dot); }   /* a square tell-tale */
 .state-hunch     { --dot: var(--s5); }
 .state-queued    { --dot: var(--s3); }
 .state-hot       { --dot: var(--s6); }
@@ -797,9 +998,9 @@ button.chip:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px;
 .state-parked    { --dot: var(--muted); }
 .state-dropped   { --dot: var(--axis); }
 .board-note {
-  flex: 1 1 100%; margin: 0; font-size: 12.5px; color: var(--muted);
+  flex: 1 1 100%; margin: 0; font-size: 12px; color: var(--muted);
 }
-.board-note-date { font-family: var(--mono); margin-right: 8px; }
+.board-note-date { margin-right: 8px; font-size: 11px; }
 .board-links { flex: none; margin: 0; gap: 6px; }
 .chip.board-link { text-decoration: none; }
 .chip.board-link:hover { border-color: var(--lens); color: var(--lens); }
@@ -815,17 +1016,15 @@ button.chip:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px;
 /* ---- board novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered ---- */
 .nov-novel, .nov-anticipated, .nov-covered {
   display: inline-flex; align-items: center; gap: 4px; flex: none;
-  font-size: 10.5px; padding: 1px 8px; border-radius: 99px;
-  border: 1px solid var(--ring); color: var(--ink-2);
-  font-weight: 500; vertical-align: 2px; white-space: nowrap;
+  vertical-align: 2px;
 }
-.nov-novel       { color: var(--s3); border-color: color-mix(in srgb, var(--s3) 45%, var(--ring)); }
+.nov-novel       { color: var(--s3); }
 .nov-anticipated { color: var(--ink-2); }
 .nov-covered     { color: var(--muted); }
 .board-nov { font-size: 12px; }
 .board-nov-closest { color: var(--muted); opacity: 0.85; }
 .find-card .nov-novel, .find-card .nov-anticipated, .find-card .nov-covered {
-  font-size: 10px; vertical-align: 3px;
+  font-size: 10px; vertical-align: 1px; margin-left: 5px;
 }
 
 /* ---- base inline links: unstyled <a> in generated prose/tables otherwise
@@ -850,7 +1049,7 @@ a:hover { text-decoration-color: var(--lens); }
 .cmp-col .film-card { margin-top: 14px; }
 
 /* ---- explorer ---- */
-.ex-stats { color: var(--muted); font-size: 12.5px; margin: 2px 0 0; }
+.ex-stats { color: var(--muted); font-size: 11.5px; margin: 2px 0 0; }
 .ex-controls { display: flex; flex-direction: column; gap: 10px; }
 .ex-control-row {
   display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap;
@@ -861,18 +1060,19 @@ a:hover { text-decoration-color: var(--lens); }
 }
 .ex-unit-label select {
   font: inherit; font-size: 12.5px; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--ring);
-  border-radius: 8px; padding: 4px 8px;
+  background: var(--well); border: 1px solid var(--bezel);
+  border-radius: 2px; padding: 4px 8px;
 }
 .ex-unit-label select:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
-.ex-count { color: var(--muted); font-size: 12.5px; margin: 14px 0 8px; }
+.ex-count { color: var(--muted); font-size: 11.5px; margin: 14px 0 8px; }
 
-.ex-table .ex-id { font-family: var(--mono); font-size: 12px; }
+.ex-table .ex-id { font-size: 11.5px; }
 .ex-table .ex-id a { text-decoration: none; }
+.ex-created { font-size: 11.5px; white-space: nowrap; }
 .ex-table tbody tr { cursor: pointer; }
-.ex-table .glyph { vertical-align: middle; }
+.ex-table .glyph { vertical-align: middle; width: 16px !important; }
 .ex-sort-btn {
-  font: inherit; font-size: inherit; font-weight: 500; color: var(--muted);
+  font: inherit; font-size: 10px; color: var(--muted);
   background: none; border: none; cursor: pointer; padding: 0;
   white-space: nowrap;
 }
@@ -881,32 +1081,35 @@ a:hover { text-decoration-color: var(--lens); }
 th[aria-sort="ascending"] .ex-sort-btn,
 th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; }
 .ex-badges { white-space: nowrap; }
-.ex-badge { margin-right: 5px; color: var(--lens); }
+.ex-badge { margin-right: 5px; color: var(--ink-2); }   /* inert marks lose the accent */
 
 .ex-matrix th, .ex-matrix td { vertical-align: top; }
 .ex-mtx-unit { font-size: 12.5px; color: var(--ink-2); white-space: nowrap; padding-right: 14px; }
 .ex-mtx-cell { min-width: 160px; }
 .ex-mtx-wrap { display: flex; flex-wrap: wrap; gap: 4px; }
 .ex-mtx-glyph { display: inline-flex; text-decoration: none; }
+.ex-mtx-glyph .glyph { width: 13px !important; }
 .ex-mtx-glyph:hover .glyph { border-color: var(--lens); }
 .ex-mtx-empty { color: var(--muted); text-align: center; }
 
 /* ---- tour + funnel ---- */
 
 /* landing funnel: three quiet doors between the lead paragraph and the
-   headline-count chips on the findings map — deliberately understated,
-   not another call-to-action row */
+   headline-count chips on the findings map. Same grammar as the pills, one
+   size up, with an accent spine — these are the page's primary controls. */
 .door-row {
-  display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 2px;
+  display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 2px;
 }
 .door {
   display: inline-flex; align-items: center; gap: 5px;
-  padding: 7px 13px; border-radius: 99px; border: 1px solid var(--grid);
+  padding: 7px 12px; border-radius: 2px; border: 1px solid var(--ring);
+  border-left: 2px solid var(--lens);
   color: var(--ink-2); font-size: 13px; text-decoration: none;
   background: var(--surface);
 }
 .door:hover, .door:focus-visible {
   border-color: var(--lens); color: var(--lens);
+  background: var(--lens-soft);
   text-decoration-color: transparent;
 }
 .door:focus-visible { outline: 2px solid var(--lens); outline-offset: 2px; }
@@ -921,16 +1124,16 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
   /* wide enough that a 15-step foot (dots + counter + three buttons) fits on
      one row on a laptop, and never wider than the viewport allows */
   z-index: 61; width: min(440px, calc(100vw - 32px));
-  background: var(--surface); color: var(--ink);
-  border: 1px solid var(--grid); border-radius: 12px;
+  background: var(--raised); color: var(--ink);
+  border: 1px solid var(--bezel); border-radius: 2px;
   padding: 14px 16px 10px; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
   transition: left 0.16s ease, top 0.16s ease;
 }
 .tour-card:focus { outline: none; }
 
 /* the beak: a rotated square that INHERITS the card's own background and
-   border colour, so a skin that restyles .tour-card restyles the beak with
-   it (skins/lab.css and skins/instrument.css both do). Offset set in JS. */
+   border colour, so restyling .tour-card restyles the beak with it.
+   Offset set in JS. */
 .tour-beak {
   position: absolute; width: 10px; height: 10px;
   background: inherit; border: 1px solid; border-color: inherit;
@@ -965,16 +1168,18 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 }
 .tour-dots { display: flex; gap: 5px; flex-wrap: wrap; row-gap: 4px; min-width: 0; }
 .tour-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--grid);
+  width: 6px; height: 6px; border-radius: 0; background: var(--grid);
   flex: none;
 }
 .tour-dot.on { background: var(--lens); }
 .tour-n { font-size: 11px; color: var(--muted); margin-right: auto; flex: none; }
 .tour-btns { display: flex; gap: 8px; flex: none; margin-left: auto; }
+/* the tour's buttons carry sentences, so they stay in the sans track and
+   keep their own size — they are not pills */
 .tour-btns button {
-  font: inherit; font-size: 12.5px; cursor: pointer;
+  font: inherit; font-size: 12px; cursor: pointer;
   border: 1px solid var(--grid); background: transparent; color: var(--ink-2);
-  border-radius: 7px; padding: 5px 10px; white-space: nowrap;
+  border-radius: 2px; padding: 5px 10px; white-space: nowrap;
 }
 .tour-btns button:hover { border-color: var(--lens); color: var(--lens); }
 .tour-btns button:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
@@ -996,7 +1201,7 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 
 /* The highlighted target during an active tour step. The 2px outline alone
    is close to invisible on a large card, so it carries a ring and a tint
-   too — all three from skin variables, none hardcoded. */
+   too — all three from theme variables, none hardcoded. */
 .tour-highlight {
   outline: 2px solid var(--lens); outline-offset: 3px; border-radius: 6px;
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--lens) 18%, transparent);
@@ -1028,18 +1233,22 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
   .tour-card { transition: none; }
 }
 
-/* ---- explorer results sit in an instrument well (integration polish) ---- */
+/* ---- explorer results sit in an instrument well ---- */
 #ex-results {
   background: var(--well); border: 1px solid var(--bezel);
-  border-radius: 8px; box-shadow: var(--well-shadow);
+  border-radius: 2px; box-shadow: var(--well-shadow);
   padding: 6px 14px 10px; margin-top: 6px;
 }
 
 /* screenshot mode (?theme=): entry animations off for deterministic captures */
 .no-anim .detail > * { animation: none; }
 
-/* ---- the actual headliners: novelty-★ cards wear a gold spine ---- */
-.find-card.novel { box-shadow: inset 3px 0 0 var(--s3), var(--shadow); }
+/* ---- the actual headliners: novelty-★ cards wear a gold rule ---- */
+/* on the TOP edge, since the left edge now belongs to the core sample; the
+   spine is nudged down by the same 3px so the rule reads edge to edge */
+.find-card.novel { box-shadow: inset 0 3px 0 var(--s3), var(--shadow); }
+.find-card.novel .fc-glyph { top: 3px; }
+.find-card.novel .fc-glyph .glyph { border-radius: 0 0 0 2px; }
 
 /* ---- affect: emotion overlay + #affect route ---- */
 .aff-pos { color: rgba(226,84,58,.95); }
@@ -1054,12 +1263,13 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .aff-fig figcaption { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
 .aff-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 10px; margin: 8px 0 14px; }
-.aff-card { display: block; border: 1px solid var(--grid); border-radius: 8px;
+.aff-card { display: block; border: 1px solid var(--bezel); border-radius: 2px;
+  background: var(--well);
   padding: 10px 12px; text-decoration: none; color: var(--ink);
   transition: border-color .15s; }
 .aff-card:hover { border-color: var(--lens); }
 .aff-card-t { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
-.aff-card-id { font-size: 11px; color: var(--muted); font-family: var(--mono);
+.aff-card-id { font-size: 11px; color: var(--muted); letter-spacing: 0;
   margin-bottom: 8px; }
 .aff-chip { display: flex; align-items: center; gap: 7px; font-size: 12px;
   margin: 3px 0; }
@@ -1079,7 +1289,7 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
    enlarge button hugs the chart's corner, not the far card edge */
 .stream-wrap { position: relative; width: fit-content; max-width: 100%; }
 .stream-big { position: absolute; right: 4px; bottom: 28px; z-index: 2;
-  width: 26px; height: 26px; border: 1px solid var(--grid); border-radius: 6px;
+  width: 26px; height: 26px; border: 1px solid var(--grid); border-radius: 2px;
   background: var(--surface); color: var(--muted); cursor: pointer;
   font-size: 14px; line-height: 1; }
 .stream-big:hover { color: var(--ink); border-color: var(--lens); }
@@ -1087,54 +1297,64 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 /* ================= the plain layer (PLAIN-LANGUAGE.md) =================
    Plain summary first, research notes folded away, term definitions on
    click. The originals are never edited — they move, they do not go. */
-/* margin-top is spelled out, not left to the `margin` shorthand: the
-   shorthand silently reset section.card's 22px to 0, so the plain block sat
-   flush against the record head on every record page. */
-.card.plain { border: 1.5px solid var(--lens); background: var(--lens-soft);
-              border-radius: 12px; padding: 16px 20px; margin: 22px 0 18px; }
-.card.plain > h3 { margin: 0 0 10px; font-size: 12px; font-weight: 600;
-                   text-transform: uppercase; letter-spacing: 0.12em;
-                   color: var(--lens); }
-.plain-body { font-size: 16.5px; line-height: 1.6; }
+/* the plain block is prominent by position and type, not by accent: accent
+   belongs to interactive things. margin-top is inside the shorthand on
+   purpose — spelling it separately is what once reset section.card's margin
+   to 0 and sat this block flush against the record head. */
+.card.plain { border: 1px solid var(--bezel); border-left: 3px solid var(--ink-2);
+              background: var(--raised);
+              border-radius: 2px; padding: 14px 18px; margin: 14px 0; }
+.card.plain > h3 { margin: 0 0 10px; font-size: 10px; color: var(--muted); }
+.plain-body { font-size: 16px; line-height: 1.6; }
 .plain-body p { margin: 0 0 10px; }
 /* The short version leads on its bold run-in label, not on a larger type
    size: a one-paragraph size jump read as a different page element. */
 .plain-body p:first-child { margin-bottom: 12px; }
 .plain-body p:last-child { margin-bottom: 0; }
 
+/* inline glossary terms stay inline prose, not chips */
 button.tk { font: inherit; color: inherit; background: none; border: 0;
-            padding: 0; border-bottom: 1.5px dotted var(--lens); cursor: help; }
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
 button.tk:hover, button.tk:focus-visible { background: var(--lens-soft); }
 
 #termpop { position: absolute; z-index: 90; max-width: 330px;
-           border: 1px solid var(--lens); border-radius: 10px;
-           background: var(--surface); color: var(--ink); padding: 12px 14px;
-           font: 14px/1.5 var(--sans); box-shadow: 0 10px 34px rgba(0,0,0,0.22); }
+           border: 1px solid var(--bezel); border-radius: 2px;
+           background: var(--raised); color: var(--ink); padding: 12px 14px;
+           font: 14px/1.5 var(--sans); box-shadow: 0 8px 26px rgba(0,0,0,0.3); }
 #termpop b { display: block; color: var(--lens); margin-bottom: 4px; }
 
-details.notes { margin: 18px 0; border: 1px solid var(--grid);
-                border-radius: 10px; background: var(--surface); }
-details.notes > summary { cursor: pointer; padding: 12px 18px;
+/* the <details> IS the panel. Prose cards inside it drop their box and become
+   hairline-separated bands; only data cards keep a frame, as wells, so they
+   read as inset instruments inside a panel rather than as more boxes. The
+   :not() chain is the exact inverse of the payload selectors on
+   section.card above. */
+details.notes { margin: 14px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px;
                           list-style: none; display: flex;
                           flex-direction: column; gap: 2px; }
 details.notes > summary::-webkit-details-marker { display: none; }
 details.notes > summary::before { content: "▸ "; color: var(--muted); }
 details.notes[open] > summary::before { content: "▾ "; }
-.notes-t { font-size: 12px; font-weight: 600; text-transform: uppercase;
-           letter-spacing: 0.12em; color: var(--muted); }
+.notes-t { font-size: 12px; color: var(--muted); }
 .notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
-.notes-inner { padding: 0 14px 14px; }
-.unit-plain { font-size: 16.5px; line-height: 1.6; border-left: 3px solid var(--lens);
+.notes-inner { padding: 0 14px 12px; }
+.notes-inner > section.card:not(:has(.readout-scroll)):not(:has(.chart-wrap)):not(:has(.params)):not(:has(.scan-cells)):not(:has([data-f])):not(:has(table.mtx)) {
+  background: none; border: 0; border-top: 1px solid var(--grid);
+  border-radius: 0; box-shadow: none; padding: 12px 0 0; margin-top: 12px;
+}
+.notes-inner > section.card:first-child { border-top: 0; padding-top: 0; margin-top: 4px; }
+.unit-plain { font-size: 16.5px; line-height: 1.6; border-left: 2px solid var(--axis);
               padding: 2px 0 2px 14px; margin: 16px 0; }
 .fc-plain { font-size: 15px; line-height: 1.55; }
-details.fc-orig > summary { cursor: pointer; font-size: 11.5px; color: var(--muted);
-                            text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
+details.fc-orig > summary { cursor: pointer; font-size: 10px; color: var(--muted);
+                            margin-top: 6px; }
 details.fc-orig > p { font-size: 13.5px; color: var(--ink-2); margin: 8px 0 0; }
 
 /* board plain-lead legend: status chip + plain gloss, two columns */
 .board-legend { display: grid; grid-template-columns: max-content 1fr;
                 gap: 6px 12px; align-items: center; margin: 12px 0 4px; }
-.board-legend-def { font-size: 13.5px; color: var(--ink-2); }
+.board-legend-def { font-size: 13px; color: var(--ink-2); }
 
 /* glossary popover: related terms as links, never "see X" in prose.
    Each part is its own block so the definition, the see-also row and the
