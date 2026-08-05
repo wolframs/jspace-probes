@@ -1,0 +1,398 @@
+/* ============================================================================
+   core — a skin for the J-Space Probes dashboard.
+   The data is the design. Identity comes from the thing the lab measures
+   (the core sample) instead of from applied chrome.
+
+   Five rules this file was designed to:
+
+   1. The glyph is the masthead of every card. The core sample stops being a
+      10px sliver and becomes the full-height left spine of a finding card, a
+      tall column beside a record title, a real column in the rail and tables.
+   2. Decoration recedes. #atmo drops to a whisper; the honest version of that
+      picture is now in the content. Shadows and radii shrink to hairlines.
+   3. Chroma comes from the measurement. The accent is the blue of the --seq
+      ramp (--lens ≈ --seq-550 in both themes), not an unrelated violet-grey
+      shell. --seq-* and --s1..--s8 are data and are NOT touched.
+   4. Two chip species, visually. Interactive = squared, monospaced, outlined
+      in the accent, filled when active (solid for plain toggles; tinted with
+      its own series colour where app.js sets one inline, so the chip-to-line
+      mapping survives). Inert = bare typographic label: no border, no
+      background, no radius, no padding. Nothing in between.
+   5. Scale sorts the page. Finding titles are large serif, the finding is the
+      first thing the eye lands on, then the sample, then small quiet
+      metadata.
+
+   Contract notes: --fg is never defined (dormant-style trap); #termpop stays
+   position:absolute; no global outline reset (tour highlight); the glyph gets
+   no background/gradient/shadow — only size, and a hairline.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Palette. style.css defines its variables in FOUR blocks, so a skin has
+   to answer all four or it breaks the OS-preference path (a bare :root here
+   would out-cascade style.css's @media (prefers-color-scheme: dark)).
+   Order matters: :root, then [data-theme=light], then the media query, then
+   [data-theme=dark] — same order as upstream.
+   --seq-*, --s1..--s8, --axis are deliberately inherited unchanged: they
+   carry data, not taste.
+--------------------------------------------------------------------------- */
+:root {
+  --page: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --ring: rgba(10, 20, 40, 0.13);
+  --lens: #17509e;              /* ≈ --seq-550 light: the ramp is the accent */
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --raised: #ffffff;
+  --well: #eef1f6;
+  --bezel: rgba(10, 20, 40, 0.14);
+  --shadow: 0 1px 1px rgba(16, 24, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+:root[data-theme="light"] {
+  --page: #f6f7f9; --surface: #ffffff; --ink: #0a0d12; --ink-2: #47505d;
+  --muted: #77808d; --grid: #e3e6ec; --ring: rgba(10, 20, 40, 0.13);
+  --lens: #17509e; --lens-soft: rgba(23, 80, 158, 0.07);
+  --raised: #ffffff; --well: #eef1f6; --bezel: rgba(10, 20, 40, 0.14);
+  --shadow: 0 1px 1px rgba(16, 24, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --surface: #14171b;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --ring: rgba(255, 255, 255, 0.11);
+    --lens: #7cb0ef;            /* ≈ --seq-550 dark */
+    --lens-soft: rgba(124, 176, 239, 0.13);
+    --raised: #14171b;
+    --well: #0e1013;
+    --bezel: rgba(255, 255, 255, 0.10);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+    --well-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+}
+:root[data-theme="dark"] {
+  --page: #090a0c; --surface: #14171b; --ink: #eaeef4; --ink-2: #b4bdc9;
+  --muted: #7e8895; --grid: #242830; --ring: rgba(255, 255, 255, 0.11);
+  --lens: #7cb0ef; --lens-soft: rgba(124, 176, 239, 0.13);
+  --raised: #14171b; --well: #0e1013; --bezel: rgba(255, 255, 255, 0.10);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --well-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Decoration recedes.
+--------------------------------------------------------------------------- */
+#atmo { opacity: 0.06; }        /* was the loudest thing on the page */
+
+body { font-size: 15.5px; }
+
+.masthead { padding: 18px 34px 0; border-bottom: 1px solid var(--grid); }
+.masthead h1 { letter-spacing: -0.01em; }
+.masthead-nav a { font-size: 12.5px; letter-spacing: 0.01em; }
+.masthead-nav a.active { border-bottom-width: 2px; }
+
+.rail { flex: 0 0 300px; padding: 18px 12px 40px; }
+.detail { padding: 30px 40px 90px; }
+
+/* ---------------------------------------------------------------------------
+   3. THE GLYPH. Same component at six inline sizes (10x40 rail, 8x54 unit
+   card, 16x120 record head, 12x62 finding card, 12x90 affect/compare head,
+   8x28 explorer matrix). glyph() writes width inline on .glyph and a px
+   height inline on each <i>, so widths need !important; band heights are
+   re-flowed with flex only where the container is tall enough that
+   sub-pixel bands cannot collapse (>= 90px). Colour is untouched: the
+   --seq ramp is the only thing painting these.
+--------------------------------------------------------------------------- */
+.glyph { border-radius: 2px; border: 1px solid var(--ring); }
+
+/* rail rows: a readable column, not a hairline. Height is left alone —
+   n_layers x 1px is itself a legible signal of model depth. */
+.exp-link .glyph { width: 14px !important; }
+.exp-link { gap: 12px; padding: 7px 9px; border-radius: 6px; }
+.exp-link .who { font-size: 11px; letter-spacing: 0.02em; }
+
+/* unit-overview cards */
+.ov-card .glyph { width: 18px !important; }
+
+/* record / compare heads: one tall, evenly-banded core sample */
+.exp-head .glyph-lg .glyph,
+.cmp-head .glyph-lg .glyph {
+  width: 30px !important; height: 168px;
+}
+.cmp-head .glyph-lg .glyph { width: 22px !important; height: 120px; }
+.exp-head .glyph-lg .glyph i,
+.cmp-head .glyph-lg .glyph i { flex: 1 1 0; }
+.exp-head { gap: 26px; }
+.exp-head .glyph-lg { margin-top: 4px; }
+
+/* explorer table + matrix */
+.ex-table .glyph { width: 16px !important; }
+.ex-mtx-glyph .glyph { width: 13px !important; }
+
+/* ---- the finding card's left edge IS the core sample --------------------
+   .fc-glyph is an <a> inside .fc-head; pinning it to the card's left edge
+   turns the whole spine into the record's door. Guarded with :has() because
+   a finding without a representative record has no glyph at all.          */
+.find-card { position: relative; }
+.find-card:has(.fc-glyph) { padding-left: 50px; }
+.find-card .fc-glyph {
+  position: absolute; left: 0; top: 0; bottom: 0; margin: 0;
+  align-items: stretch;
+}
+.find-card .fc-glyph .glyph {
+  width: 32px !important; height: 100%;
+  border: 0; border-right: 1px solid var(--ring);
+  border-radius: 9px 0 0 9px;
+}
+.find-card .fc-glyph .glyph i { flex: 1 1 0; }
+.find-card .fc-glyph:hover .glyph { border-right-color: var(--lens); }
+.find-card .fc-head { gap: 0; }
+
+/* the ★-novel spine moves to the top edge — the left edge now belongs to
+   the core sample. Same colour (--s3), same meaning. */
+.find-card.novel { box-shadow: inset 0 3px 0 var(--s3), var(--shadow); }
+
+/* ---------------------------------------------------------------------------
+   4. TWO CHIP SPECIES.
+   4a. INERT: every chip-shaped thing loses its shape and becomes a label.
+       Bare text, no box, uppercase and quiet. A reader can no longer mistake
+       a count or a state for something to click.
+--------------------------------------------------------------------------- */
+/* No !important anywhere in §4: selected .pos-tab chips carry INLINE
+   border-color/color set to their series colour (app.js:1940, 2231) — that
+   mapping is data (contract §4), and inline style must keep winning. Every
+   override below is ordered/specificity-based instead. */
+.chip,
+.board-chip,
+.board-status,
+.nov-novel, .nov-anticipated, .nov-covered {
+  border: 0;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  min-height: 0;
+}
+/* single-word states may be set in caps; identifiers (hf_id, timestamps)
+   must not be — uppercasing a model id misreports it */
+.board-chip, .board-status,
+.nov-novel, .nov-anticipated, .nov-covered { text-transform: uppercase; }
+.chips .chip { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em; }
+.chips { gap: 6px 16px; align-items: baseline; }
+.exp-title .chips .chip { min-height: 0; }
+
+/* model name is the one inert label that stays loud — it is the primary
+   fact about a record — but in ink, never in the accent (accent = clickable) */
+.chip.model {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 11.5px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+/* param values: mono labels with a hairline separator so a list of numbers
+   does not run together now that the boxes are gone */
+.chip.pchip {
+  font-family: var(--mono); font-size: 12px; text-transform: none;
+  letter-spacing: 0; color: var(--ink-2); font-weight: 400;
+}
+.pchips { gap: 0 4px; }
+.pchips .chip.pchip + .chip.pchip::before {
+  content: "·"; color: var(--axis); margin-right: 5px;
+}
+/* "pinned" is a state, not a control — the unpin button beside it is the
+   control, and it wears the interactive treatment */
+.chip.pin.on { color: var(--lens); border: 0; background: none; padding: 0;
+               font-family: var(--sans); }
+
+/* board: the state dot is the data, the word is the label */
+.board-chip { gap: 6px; }
+.board-dot { width: 7px; height: 7px; }
+.board-status-active { color: var(--s2); }
+.board-status-parked { color: var(--muted); }
+.board-status-closed { color: var(--axis); }
+.nov-novel { color: var(--s3); }
+.nov-anticipated { color: var(--ink-2); }
+.nov-covered { color: var(--muted); }
+.find-card .nov-novel, .find-card .nov-anticipated, .find-card .nov-covered {
+  font-size: 10px; vertical-align: 1px;
+}
+
+/* 4b. INTERACTIVE: one treatment, everywhere. Squared (the pill is retired),
+       monospaced, accent-outlined on the page colour. Pressed/selected states
+       double the border and tint with currentColor — which is the accent for
+       plain toggles and the SERIES colour for stream/ridge chips, so the
+       colour-to-data mapping survives. */
+.chip.rec, .chip.unitlink, .chip.sib, .chip.board-link,
+button.chip, .chip.pin,
+.fchip, .pos-tab, .door, .con-reroll, .console-row button,
+.rail-toggle {
+  border: 1px solid color-mix(in srgb, var(--lens) 40%, transparent);
+  background: var(--lens-soft);
+  color: var(--lens);
+  border-radius: 5px;
+  padding: 3px 9px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  line-height: 1.45;
+  min-height: 0;
+}
+.chip.rec:hover, .chip.unitlink:hover, .chip.sib:hover, .chip.board-link:hover,
+button.chip:hover, .fchip:hover, .pos-tab:hover, .door:hover,
+.con-reroll:hover, .console-row button:hover {
+  border-color: currentColor;
+  background: color-mix(in srgb, var(--lens) 14%, transparent);
+}
+/* selected, series-coloured (stream + ridge chips carry inline colour):
+   tint with their own colour and double the rule — never repaint them */
+.fchip[aria-pressed="true"], .pos-tab[aria-selected="true"],
+.console-row button[aria-pressed="true"] {
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  box-shadow: inset 0 0 0 1px currentColor;
+  font-weight: 700;
+}
+/* selected, plain toggle (no inline colour to protect): fills solid, so a
+   pressed filter or tab is unmistakable across the room */
+.fchip[aria-pressed="true"]:not([style*="color"]),
+.pos-tab[aria-selected="true"]:not([style*="color"]),
+.console-row button[aria-pressed="true"]:not([style*="color"]) {
+  background: var(--lens); border-color: var(--lens); color: var(--page);
+  box-shadow: none;
+}
+.chip.rec b { opacity: 1; color: var(--muted); font-weight: 500; }
+.chip.unitlink { font-family: var(--sans); }
+
+/* the three landing doors are the same species, one size up */
+.door-row { gap: 10px; margin: 18px 0 4px; }
+.door {
+  font-family: var(--sans); font-size: 13px; font-weight: 550;
+  padding: 8px 14px; border-radius: 6px;
+}
+.door-arrow { color: inherit; opacity: 0.65; }
+
+/* term buttons stay inline prose, not chips (contract §1) — only the
+   underline follows the new accent */
+button.tk { border-bottom: 1.5px dotted var(--lens); }
+
+/* ---------------------------------------------------------------------------
+   5. SCALE CONTRAST. The finding first, then the sample, then metadata.
+--------------------------------------------------------------------------- */
+.find-hero h2 { font-size: 40px; letter-spacing: -0.015em; line-height: 1.1; }
+.find-lead { font-size: 19px; max-width: 56ch; margin: 10px 0 14px; }
+.find-note { font-size: 12.5px; }
+
+.find-grid {
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 16px;
+}
+.find-card {
+  border-radius: 10px;
+  padding: 16px 18px 15px;
+  gap: 9px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.find-card h4 {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 600; line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.find-card p, .find-card .fc-plain { font-size: 13px; line-height: 1.5; }
+.find-card:hover { border-color: var(--lens); }
+
+/* theme bands: the section header carries the level, not a box */
+section.card:has(.find-grid) { padding-top: 14px; }
+section.card:has(.find-grid) > h3 {
+  font-size: 12.5px; font-weight: 700; letter-spacing: 0.11em;
+  color: var(--ink-2); text-transform: uppercase;
+  border-bottom: 1px solid var(--grid); padding-bottom: 9px;
+}
+.theme-desc { font-size: 13.5px; max-width: 74ch; }
+
+/* record + view titles */
+.exp-title h2 { font-size: 29px; letter-spacing: -0.01em; }
+section.card > h3 { font-size: 10.5px; letter-spacing: 0.11em; }
+
+/* ---------------------------------------------------------------------------
+   6. Fewer frames. The contract flags details.notes > .notes-inner > .card as
+   the highest-traffic double frame in the app: the notes wrapper becomes a
+   ruled section instead of a box, so the inner cards are the only boxes left.
+--------------------------------------------------------------------------- */
+details.notes {
+  border: 0; border-top: 1px solid var(--grid);
+  border-radius: 0; background: none; margin: 22px 0 0;
+}
+details.notes > summary { padding: 12px 0 6px; }
+.notes-inner { padding: 0 0 14px; }
+.notes-t { font-size: 11px; letter-spacing: 0.13em; }
+
+section.card {
+  border-radius: 10px; padding: 18px 22px; margin-top: 18px;
+  box-shadow: var(--shadow);
+}
+section.card:has(.readout-scroll), section.card:has(.chart-wrap),
+section.card:has(.params), section.card:has(.scan-cells),
+section.card:has([data-f]), section.card:has(table.mtx) {
+  border-radius: 6px;
+}
+/* contract §2 nesting #3 and #4: "All records" > .ov-grid > .ov-card and
+   affect > .aff-gallery > .aff-card are double-boxed upstream. Given the
+   same treatment as the already-de-nested .find-grid: the outer card becomes
+   a titled band, only the inner cards are boxes. */
+section.card:has(.ov-grid), section.card:has(.aff-gallery) {
+  background: transparent; border-color: transparent; box-shadow: none;
+  border-radius: 0; padding: 6px 2px 0;
+}
+section.card:has(.ov-grid) > h3, section.card:has(.aff-gallery) > h3 {
+  font-size: 12.5px; font-weight: 700; color: var(--ink-2);
+  letter-spacing: 0.11em;
+}
+.card.plain {
+  border-width: 0 0 0 3px; border-radius: 0 8px 8px 0;
+  padding: 14px 20px 15px;
+}
+section.thoughts, article.essay { border-radius: 0 8px 8px 0; }
+.ov-card { border-radius: 7px; background: var(--surface); }
+.ov-card:hover { border-color: var(--lens); }
+.aff-card { border-radius: 7px; }
+
+/* ---------------------------------------------------------------------------
+   7. Small surfaces that would otherwise still read as violet-grey chrome.
+--------------------------------------------------------------------------- */
+#q { border-radius: 6px; font-family: var(--mono); font-size: 12px; }
+.unit-head { border-radius: 6px; letter-spacing: 0.01em; }
+.pager a, .pager span { border-radius: 6px; }
+.ex-unit-label select { border-radius: 6px; }
+#ex-results { border-radius: 6px; }
+.console, .tour-card { border-radius: 8px; }
+.console-fab { border-radius: 8px; }
+.tour-btns button { border-radius: 5px; }
+.stream-big { border-radius: 5px; }
+.tok, .cell { border-radius: 3px; }
+details.slice iframe { border-radius: 6px; }
+.mirror-x { border-radius: 6px; }
+
+/* board rows: a ruled ledger, since the chips no longer draw the row */
+.board-item { padding: 10px 0; gap: 5px 14px; }
+.board-item-title { font-size: 14px; font-weight: 600; }
+.board-summary { font-size: 12px; letter-spacing: 0.01em; }
+.board-arc-head h3 { font-size: 15px; }
+.board-note { font-size: 12.5px; }

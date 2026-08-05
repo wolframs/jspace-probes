@@ -644,30 +644,53 @@ article.essay h3 {
 }
 .console-fab:hover { color: var(--lens); border-color: var(--lens); }
 .console-fab:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
+/* --con-pad / --con-top are read back by .console-head to bleed its rule to
+   the panel edges and to mirror the top padding underneath the title. A skin
+   that changes the panel's padding must change these, not the raw values. */
 .console {
+  --con-pad: 16px; --con-top: 14px;
   position: fixed; right: 18px; bottom: 66px; z-index: 60;
   width: min(280px, calc(100vw - 36px));
   background: var(--surface); border: 1px solid var(--ring);
-  border-radius: 12px; padding: 14px 16px 16px;
+  border-radius: 12px; padding: var(--con-top) var(--con-pad) 16px;
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.26);
 }
-.console-head { display: flex; align-items: center; justify-content: space-between; }
+/* The header rule runs edge to edge (negative margins cancel the panel's own
+   side padding); section rules stay inset, so the hierarchy reads
+   header > sections. The gap under the CONSOLE line box matches the panel's
+   top padding, which is why the close button is not allowed to grow the row. */
+.console-head {
+  position: relative;
+  margin: 0 calc(-1 * var(--con-pad)); padding: 0 var(--con-pad) var(--con-top);
+  border-bottom: 1px solid var(--grid);
+}
 .console-head h4 {
   margin: 0; font-size: 11px; font-weight: 650; letter-spacing: 0.09em;
   text-transform: uppercase; color: var(--muted);
 }
+/* taken out of flow so the header row is exactly as tall as the CONSOLE line
+   box — otherwise the taller ✕ sets the height and the rule below it sits
+   further from the title than the title sits from the panel edge */
 .console-x {
+  position: absolute; right: var(--con-pad); top: 0;
   border: none; background: none; cursor: pointer; color: var(--muted);
-  font-size: 13px; padding: 2px 4px; border-radius: 5px;
+  font-size: 13px; padding: 0 4px; line-height: 1.3; border-radius: 5px;
 }
 .console-x:hover { color: var(--ink); }
-.console-sec { margin-top: 12px; }
+.console-sec {
+  margin-top: 13px; padding-top: 13px; border-top: 1px solid var(--grid);
+}
+/* the section straight after the header already has the header's rule above
+   it (:first-of-type would match .console-head — both are divs) */
+.console-head + .console-sec { padding-top: 0; border-top: 0; }
 .console-sec h5 {
   margin: 0 0 6px; font-size: 10.5px; font-weight: 650;
   letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2);
 }
 .con-note { margin: -2px 0 8px; font-size: 11.5px; color: var(--muted); max-width: none; }
 .console-row { display: flex; gap: 6px; }
+/* the tour buttons carry sentences, not one-word states — stack them */
+.console-row-stack { flex-direction: column; align-items: stretch; }
 .console-row button {
   font: inherit; font-size: 12px; padding: 3px 12px; cursor: pointer;
   border-radius: 99px; border: 1px solid var(--ring);
@@ -890,32 +913,68 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .door-arrow { color: var(--muted); }
 .door:hover .door-arrow, .door:focus-visible .door-arrow { color: var(--lens); }
 
-/* guided tour: a small floating card, bottom-center, that never blocks the
-   page underneath (no backdrop/modal — see maybeTour() in app.js) */
+/* guided tour: a small floating card anchored beside the thing it is
+   describing (tourPlace() in app.js sets left/top and data-side), with a
+   beak pointing back at it. No backdrop/modal — the page stays usable. */
 .tour-card {
-  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
-  z-index: 61; width: min(380px, calc(100vw - 32px));
+  position: fixed; left: 0; top: 0;
+  /* wide enough that a 15-step foot (dots + counter + three buttons) fits on
+     one row on a laptop, and never wider than the viewport allows */
+  z-index: 61; width: min(440px, calc(100vw - 32px));
   background: var(--surface); color: var(--ink);
   border: 1px solid var(--grid); border-radius: 12px;
-  padding: 14px 16px 12px; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  padding: 14px 16px 10px; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  transition: left 0.16s ease, top 0.16s ease;
 }
 .tour-card:focus { outline: none; }
-.tour-title { margin: 0 0 4px; font-size: 14px; font-weight: 700; }
-.tour-body { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
-.tour-foot {
-  display: flex; align-items: center; gap: 10px; margin-top: 12px;
+
+/* the beak: a rotated square that INHERITS the card's own background and
+   border colour, so a skin that restyles .tour-card restyles the beak with
+   it (skins/lab.css and skins/instrument.css both do). Offset set in JS. */
+.tour-beak {
+  position: absolute; width: 10px; height: 10px;
+  background: inherit; border: 1px solid; border-color: inherit;
+  transform: rotate(45deg);
 }
-.tour-dots { display: flex; gap: 5px; }
+.tour-card[data-side="none"] .tour-beak { display: none; }
+.tour-card[data-side="bottom"] .tour-beak {
+  top: -6px; margin-left: -5px; border-right: 0; border-bottom: 0;
+}
+.tour-card[data-side="top"] .tour-beak {
+  bottom: -6px; margin-left: -5px; border-left: 0; border-top: 0;
+}
+.tour-card[data-side="right"] .tour-beak {
+  left: -6px; margin-top: -5px; border-right: 0; border-top: 0;
+}
+.tour-card[data-side="left"] .tour-beak {
+  right: -6px; margin-top: -5px; border-left: 0; border-bottom: 0;
+}
+
+.tour-title { margin: 0 0 5px; font-size: 14px; font-weight: 700; }
+.tour-body { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+.tour-hint {
+  margin: 8px 0 0; font-size: 10.5px; color: var(--muted);
+  letter-spacing: 0.02em;
+}
+/* The foot has to survive 15 dots and three buttons at any width. It wraps as
+   a whole — buttons drop to their own right-aligned row — rather than letting
+   a button wrap its own label, which made one control twice as tall. */
+.tour-foot {
+  display: flex; align-items: center; gap: 8px 12px; margin-top: 12px;
+  flex-wrap: wrap;
+}
+.tour-dots { display: flex; gap: 5px; flex-wrap: wrap; row-gap: 4px; min-width: 0; }
 .tour-dot {
   width: 6px; height: 6px; border-radius: 50%; background: var(--grid);
+  flex: none;
 }
 .tour-dot.on { background: var(--lens); }
-.tour-n { font-size: 11px; color: var(--muted); margin-right: auto; }
-.tour-btns { display: flex; gap: 8px; }
+.tour-n { font-size: 11px; color: var(--muted); margin-right: auto; flex: none; }
+.tour-btns { display: flex; gap: 8px; flex: none; margin-left: auto; }
 .tour-btns button {
   font: inherit; font-size: 12.5px; cursor: pointer;
   border: 1px solid var(--grid); background: transparent; color: var(--ink-2);
-  border-radius: 7px; padding: 5px 10px;
+  border-radius: 7px; padding: 5px 10px; white-space: nowrap;
 }
 .tour-btns button:hover { border-color: var(--lens); color: var(--lens); }
 .tour-btns button:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
@@ -925,17 +984,48 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 }
 .tour-btns .tour-primary:hover { opacity: 0.9; color: var(--surface); }
 
-/* the highlighted target during an active tour step */
+/* the quiet in-page way back into the tour, at the end of the hero note */
+.tour-replay {
+  font: inherit; font-size: inherit; cursor: pointer;
+  background: none; border: 0; padding: 0; margin-left: 6px;
+  color: var(--muted); text-decoration: underline;
+  text-decoration-style: dotted; text-underline-offset: 3px;
+}
+.tour-replay:hover, .tour-replay:focus-visible { color: var(--lens); }
+.tour-replay:focus-visible { outline: 2px solid var(--lens); outline-offset: 2px; }
+
+/* The highlighted target during an active tour step. The 2px outline alone
+   is close to invisible on a large card, so it carries a ring and a tint
+   too — all three from skin variables, none hardcoded. */
 .tour-highlight {
   outline: 2px solid var(--lens); outline-offset: 3px; border-radius: 6px;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--lens) 18%, transparent);
+  background-color: color-mix(in srgb, var(--lens) 7%, transparent);
   animation: tour-pulse 1.6s ease-in-out infinite;
 }
 @keyframes tour-pulse {
-  0%, 100% { outline-color: var(--lens); }
-  50% { outline-color: color-mix(in srgb, var(--lens) 45%, transparent); }
+  0%, 100% {
+    outline-color: var(--lens);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--lens) 18%, transparent);
+  }
+  50% {
+    outline-color: color-mix(in srgb, var(--lens) 45%, transparent);
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--lens) 6%, transparent);
+  }
 }
+/* The amber tone (entrance step 1, pointing at the console). Everything in
+   the highlight and the card's primary button already resolves --lens at
+   element scope, so rebinding it locally to the novel-result amber recolours
+   the whole pointer — outline, ring, tint, pulse and button — in two rules.
+   --s3 is a data slot, and this is the one place the UI borrows it: the amber
+   already means "look here, this one is different" on the novel cards. */
+.tour-highlight.tour-accent, .tour-card[data-tone="accent"] { --lens: var(--s3); }
+/* the console button is round; a 6px box around it reads as a mistake */
+.console-fab.tour-highlight { border-radius: 50%; }
+
 @media (prefers-reduced-motion: reduce) {
   .tour-highlight { animation: none; }
+  .tour-card { transition: none; }
 }
 
 /* ---- explorer results sit in an instrument well (integration polish) ---- */
@@ -997,14 +1087,19 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 /* ================= the plain layer (PLAIN-LANGUAGE.md) =================
    Plain summary first, research notes folded away, term definitions on
    click. The originals are never edited — they move, they do not go. */
+/* margin-top is spelled out, not left to the `margin` shorthand: the
+   shorthand silently reset section.card's 22px to 0, so the plain block sat
+   flush against the record head on every record page. */
 .card.plain { border: 1.5px solid var(--lens); background: var(--lens-soft);
-              border-radius: 12px; padding: 16px 20px; margin: 0 0 18px; }
+              border-radius: 12px; padding: 16px 20px; margin: 22px 0 18px; }
 .card.plain > h3 { margin: 0 0 10px; font-size: 12px; font-weight: 600;
                    text-transform: uppercase; letter-spacing: 0.12em;
                    color: var(--lens); }
 .plain-body { font-size: 16.5px; line-height: 1.6; }
 .plain-body p { margin: 0 0 10px; }
-.plain-body p:first-child { font-size: 18.5px; line-height: 1.45; }
+/* The short version leads on its bold run-in label, not on a larger type
+   size: a one-paragraph size jump read as a different page element. */
+.plain-body p:first-child { margin-bottom: 12px; }
 .plain-body p:last-child { margin-bottom: 0; }
 
 button.tk { font: inherit; color: inherit; background: none; border: 0;
@@ -1030,7 +1125,7 @@ details.notes[open] > summary::before { content: "▾ "; }
 .notes-s { font-size: 12.5px; color: var(--muted); font-style: italic; }
 .notes-inner { padding: 0 14px 14px; }
 .unit-plain { font-size: 16.5px; line-height: 1.6; border-left: 3px solid var(--lens);
-              padding: 2px 0 2px 14px; margin: 0 0 16px; }
+              padding: 2px 0 2px 14px; margin: 16px 0; }
 .fc-plain { font-size: 15px; line-height: 1.55; }
 details.fc-orig > summary { cursor: pointer; font-size: 11.5px; color: var(--muted);
                             text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }

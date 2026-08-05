@@ -17,6 +17,18 @@
 <!-- seo:end -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%234a3aa7' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%234a3aa7'/></svg>">
 <link rel="stylesheet" href="style.css">
+<!-- Skin sampler: ?skin=<name> loads dashboard/skins/<name>.css on top of
+     style.css. Evaluation harness for comparing design languages on the real
+     data; with no ?skin= param nothing loads and the page is unchanged.
+     Whitelisted so the param cannot pull an arbitrary URL. -->
+<script>
+(function () {
+  var ALLOWED = ["paper", "instrument", "core", "lab"];
+  var s = new URLSearchParams(location.search).get("skin");
+  if (ALLOWED.indexOf(s) === -1) return;
+  document.write('<link rel="stylesheet" href="skins/' + s + '.css">');
+})();
+</script>
 </head>
 <body>
 <canvas id="atmo" aria-hidden="true"></canvas>
@@ -96,6 +108,15 @@
     <label class="con-slider">drift
       <input type="range" id="con-speed" min="0" max="200" value="100"></label>
     <button class="con-reroll" id="con-reroll" type="button">↻ resample records</button>
+  </div>
+  <div class="console-sec">
+    <h5>Tours</h5>
+    <p class="con-note">the short tour shows what kind of results are here;
+      the long one explains the site, the method and the data</p>
+    <div class="console-row console-row-stack" id="con-tours">
+      <button type="button" id="con-tour-entrance">restart entrance tour</button>
+      <button type="button" id="con-tour-extended">start extended tour</button>
+    </div>
   </div>
 </aside>
 <!-- static-index:begin -->

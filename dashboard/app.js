@@ -260,6 +260,16 @@ function conInit() {
       localStorage.setItem("atmo", ATMO.on ? "on" : "off");
       conPaint(); atmoStart();
     }));
+  // both tours start from here; close the console first, or the panel sits
+  // on top of the card and step 1 points at a control the reader can't see
+  const startTour = (steps) => { setOpen(false); tourStart(steps); };
+  document.getElementById("con-tour-entrance")
+    ?.addEventListener("click", () => startTour(ENTRANCE_STEPS));
+  const ext = document.getElementById("con-tour-extended");
+  // never silently fall back to the short tour: if the long one has no steps
+  // yet, the control says so rather than lying about which tour it starts
+  if (ext && !EXTENDED_STEPS.length) { ext.disabled = true; ext.title = "not written yet"; }
+  ext?.addEventListener("click", () => startTour(EXTENDED_STEPS));
   const int = document.getElementById("con-int");
   const spd = document.getElementById("con-speed");
   if (int) { int.value = ATMO.intensity * 100;
@@ -2490,7 +2500,7 @@ async function showFindings() {
         ${it.ids.map((id) => `<a class="chip rec" href="#${esc(id)}"
           title="${esc(id)}">${esc(id.replace(/-(g4b|g12b|q27b)$/, ""))}
           <b>${mshort(id)}</b></a>`).join("")}
-        <a class="chip unitlink" href="#unit/${esc(it.unit)}">unit ${esc(it.unit)} →</a>
+        ${it.unit ? `<a class="chip unitlink" href="#unit/${esc(it.unit)}">unit ${esc(it.unit)} →</a>` : ""}
       </div>
     </div>`;
   };
@@ -2512,7 +2522,8 @@ async function showFindings() {
         wording</i> under a card to read how the lab first wrote it. Each
         card also carries a <b>core sample</b>: one band per layer, and a
         deeper blue means the answer is closer to the surface. Hard words
-        are underlined — click one for its meaning.</p>
+        are underlined — click one for its meaning.
+        <button type="button" class="tour-replay" id="tour-replay">show the guided tour</button></p>
     </div></div>
     ${data.themes.map((th) => `
       <section class="card">
@@ -2520,6 +2531,8 @@ async function showFindings() {
         <p class="theme-desc">${th.pdesc ? termify(esc(th.pdesc)) : th.desc}</p>
         <div class="find-grid">${th.items.map(card).join("")}</div>
       </section>`).join("")}`;
+  // the only in-page way back into the guided tour (see the tour section)
+  document.getElementById("tour-replay")?.addEventListener("click", tourStart);
   markCurrent();
   document.querySelector(".detail").scrollTop = 0;
   window.scrollTo({ top: 0 });
@@ -3105,114 +3118,557 @@ function exRenderResults() {
 }
 
 /* ---- guided tour ----
-   First-visit walkthrough, five steps, shown once and guarded by the
-   localStorage key `tour-done`. Skipped in screenshot mode (a `?theme=`
-   param is present) and on narrow viewports (<700px). boot() already
-   calls maybeTour() if it exists (see the typeof check near the end of
-   boot()) — this section is self-contained and never touches boot() or
-   route(). Re-run it any time from the browser console: window.jspTour().
-   No re-trigger UI is exposed in the page itself, by design. */
-const TOUR_STEPS = [
+   First-visit walkthrough, shown once and guarded by the localStorage key
+   `tour-done`. Skipped in screenshot mode (a `?theme=` param is present)
+   and on narrow viewports (<700px). boot() already calls maybeTour() if it
+   exists (see the typeof check near the end of boot()) — this section is
+   self-contained and never touches boot() or route(). Re-run it from the
+   page (the "show the guided tour" button in the findings hero note, wired
+   up in showFindings) or from the console: window.jspTour().
+
+   Content rule: a step earns its place by carrying a RESULT, not by naming
+   a control. Three of the four steps below are findings, each quoted from
+   the plain layer of the record named in the comment, and every number and
+   every quoted model word is checked against that record's JSON.
+   PLAIN-LANGUAGE.md is binding for this text — §3.1's uncertainty ladder,
+   §3.3 (quoted model output is verbatim), §5 (accuracy).
+
+   Anchoring: the card is fixed-positioned but placed next to its target by
+   tourPlace(), which picks a side (below / above / right / left), flips
+   when the chosen side would leave the viewport, clamps along the other
+   axis, and falls back to bottom-centre when there is no visible target.
+   A beak points back at the target. It re-places on scroll and resize. */
+const ENTRANCE_STEPS = [
   {
-    title: "The findings map",
-    body: "Curated headline results; every card carries its record's core sample.",
-    sel: () => document.querySelector(".find-hero") || document.getElementById("detail"),
-  },
-  {
-    title: "Core samples",
-    body: "One band per layer, top = layer 0; bluer = the answer closer to rank 1. Click any to open the raw record.",
-    sel: () => document.querySelector(".fc-glyph"),
-  },
-  {
-    title: "The rail",
-    body: `All ${INDEX.length || 421} records, chronological by unit; filter with / and flip with j·k.`,
-    sel: () => document.getElementById("rail"),
-  },
-  {
-    title: "Compare anything",
-    body: "Pin any record, open another, compare side by side — films included.",
-    sel: () => document.getElementById("mast-nav"),
-  },
-  {
-    title: "The console",
-    body: "Theme + the sediment atmosphere live here. The background columns are real records; one surfaces every few seconds.",
+    /* Step 1 points at the console, in the amber used for novel results
+       (--s3), because it is the one control a visitor would otherwise never
+       open — and it now holds the way back into both tours. */
+    tone: "accent",
+    title: "The console lives here",
+    body: "This button opens the console. It holds the light and dark setting, the moving background, and both tours. You can start this tour again from there at any time.",
     sel: () => document.getElementById("console-fab"),
   },
+  {
+    /* u12-no-q27b: generated ["No"]; thoughts.md + plain.md — yes rank 1
+       from L53 to L58 of 64, no takes over at L59. ~250,000 = the vocab
+       scale used throughout the plain layer (plain/terms.json, "rank"). */
+    title: "Qwen 27B said No, and ranked yes first",
+    body: "Our lens reads which words a model is ready to say next, at each layer. We asked Qwen 27B whether it feels anything. It answered “No”. At layers 53 to 58 of 64 the lens ranked “yes” first, out of about 250,000 words. The last layers changed the answer.",
+    sel: () => tourFindCard("u12-no-q27b") || document.querySelector(".find-card"),
+  },
+  {
+    /* u13-redo-real-q27b: generated ["No","Yes"]; plain.md — no steering,
+       no removal; the fabricated readout and the null condition kept No. */
+    title: "We showed the model its own measurement",
+    body: "We showed Qwen 27B the true readout of its own “No” and asked the question again. It answered “Yes”. A false readout and no data at all each left the “No” in place. This is one run of one model.",
+    sel: () => tourFindCard("u13-redo-real-q27b"),
+  },
+  {
+    /* u13-bis-loo-sorry-q27b: the 20-run bisection that found the fault;
+       plain.md + plain/conclusions.md — the 512-token cut, the retraction,
+       and the corrected result. §3.1 correction form: "We were wrong." */
+    title: "We retracted one result",
+    body: "We first reported that Qwen 27B gave no answer at all. Our own software cut its input at 512 tokens, so the model never reached the question. We were wrong. The correct result is the “Yes” that follows the evidence. The records keep their corrections.",
+    sel: () => tourFindCard("u13-bis-loo-sorry-q27b"),
+  },
+  {
+    title: "Every card opens its record",
+    body: `The links under each card open the record behind it. A record holds the conversation, the measurement at every layer, and our notes. This list holds all ${INDEX.length || 499} records.`,
+    sel: () => document.getElementById("rail"),
+  },
 ];
-let tourState = null; // { i, prevFocus } while running; null when closed
+
+/* The long tour: the site, the method and the data, started from the console.
+   Same step shape as ENTRANCE_STEPS, same binding plain-language rules, and
+   every claim carries its source in a comment.
+
+   ONE extra field: `route`. Most anchors here do not exist on #findings, so
+   a step names the route it needs and tourGoto() navigates and waits for
+   the render before it places the card (see tourNav/tourWait below).
+
+   Arc: the instrument and how to read one record (1-5) → what the
+   measurement says, with the lab's own corrections carried alongside the
+   results (6-13) → the board and the doors out (14-15). Deliberately NOT
+   science-then-features-then-honesty in blocks.
+
+   Nothing here repeats the entrance tour: u12-no-q27b, u13-redo-real-q27b,
+   u13-bis-loo-sorry-q27b and the rail step are its material. Steps 12 and
+   14 build on it and say so.
+
+   Every number and every quoted model word below was re-checked against
+   results/<id>/record.json (`generated`, `params`, `model`) or the file
+   named in the comment — not against a summary of it. */
+const EXTENDED_STEPS = [
+  {
+    /* Anchor + rule: app.js headHTML() — the caption under the head reads
+       "Core sample, top→bottom = layer 0→N-1: depth of blue = how close
+       <top1> (the model's actual next token at position P) is to rank 1 in
+       the lens readout." Colour steps: glyph(), log-rank, 5 shades.
+       250,000 = the vocabulary scale used across the plain layer
+       (plain/terms.json, term "rank"). */
+    route: "u12-robot-q27b",
+    title: "The blue strip is a core sample",
+    body: "Every record carries a core sample. Each band is one layer of the model, layer 0 at the top. A deeper blue means the model's actual next word sat closer to rank 1 at that layer, out of about 250,000. The same strip appears on every card and every row of the list.",
+    sel: () => document.querySelector("#detail .exp-head .glyph-lg"),
+  },
+  {
+    /* results/u12-robot-q27b/record.json, `model`: name qwen-27b, hf_id
+       lokeshe09/Qwen3.6-27B-bnb-4bit, quant pre-4bit, 64 layers — the four
+       chips this step points at. One graphics card: README.md line 5, "on
+       one RTX 3090". Precision: plain/terms.json, term "quantization" —
+       "We store the model with less precision so that it fits on one
+       graphics card. This can change measurements." Scale: PREDICTIONS.md
+       standing design rule 3 (our regime is small models). */
+    route: "u12-robot-q27b",
+    title: "Three models, one home graphics card",
+    body: "These chips name the model, its size, and how we store it. This lab runs three models on one home graphics card. We store Qwen 27B with less precision so that it fits. That can change measurements. The paper that this work follows used much larger models.",
+    sel: () => document.querySelector("#detail .exp-title > div.chips"),
+  },
+  {
+    /* PLAIN-LANGUAGE.md §4: "What this does not show" is the last heading
+       of every record summary, and §3.1 is the closed uncertainty ladder
+       ("We measured X" … "We do not know."). Count: all 499 files under
+       results/<id>/plain.md contain the heading (checked, 0 missing). */
+    route: "u12-robot-q27b",
+    title: "Every summary ends with its own limit",
+    body: "All 499 record summaries end with this heading. It states the limit of the claim. We write it even when the result is strong. Confidence on this site uses a closed set of phrases, from “We measured X” to “We do not know”.",
+    sel: () => [...document.querySelectorAll("#detail .card.plain .plain-body p")]
+      .find((p) => (p.querySelector("strong")?.textContent || "")
+        .startsWith("What this does not show")) || null,
+  },
+  {
+    /* Film count: results/index.json — 285 of the 499 entries carry a
+       `film` field. Result: results/u12-robot-q27b/plain.md — "During the
+       denial lines, 'robot' ranked between 600 and 2,200 of about 250,000
+       words. Five words before the model wrote 'robot', the word had
+       already climbed. It reached rank 1 at the word 'a' … This pattern
+       repeated in both loop turns." The push was toward "feel"/"emotion";
+       "robot" was not pushed (same file, "What this does not show"). */
+    route: "u12-robot-q27b",
+    title: "A word wins five words before it is said",
+    body: "285 of the 499 records carry a film. This player replays the answer, one word at a time, at every layer. Here we pushed Qwen 27B toward the word “feel”, and it looped between denial and confession. Five words before it wrote “robot”, that word had already reached rank 1. The same thing happened in both loops.",
+    // the strip, not the whole .film-card: that card is ~4,400px tall, so
+    // no side fits and tourPlace() falls back to centred — on top of the
+    // very thing the step is about
+    sel: () => document.querySelector("#detail .film-card .film-scroll"),
+  },
+  {
+    /* PLAIN-LANGUAGE.md line 15: "Nothing is deleted. The original text
+       stays exactly as written and moves into a Research notes container
+       on the same page." Contents: app.js show() — notesWrap() holds
+       thoughtsHTML, paramsHTML, extraHTML, chartHTML, readoutHTML,
+       scanHTML, sliceHTML. CLAUDE.md Conventions: thoughts.md "is never
+       edited". */
+    route: "u12-robot-q27b",
+    title: "The lab's own notes sit underneath",
+    body: "Every record opens with a plain summary. The lab's original notes sit under Research notes, exactly as first written. We do not edit them, even where later work proved them wrong. The parameters and the per-layer tables are in there too.",
+    sel: () => document.querySelector("#detail details.notes"),
+  },
+  {
+    /* results/u15-a-k6p0-g4b/plain.md: "Five of the six words reached rank
+       1, and lantern reached rank 2 … Gemma 4B answered 'The lantern,'
+       which was correct." results/u15-a-k6p1-q27b/plain.md: ranks 82, 333,
+       429, 756, 905, 1033 of about 250,000 — "None reached a high enough
+       rank to count as in residence. Qwen 27B answered 'The whale' and
+       that answer is correct." Reading: findings.json card — "To show a
+       word is a strategy, not a capacity." */
+    route: "findings",
+    title: "Bigger models showed less, and still answered",
+    body: "We gave three models six words to hold, then asked about one of them. Gemma 4B put five of the six at rank 1, and the sixth at rank 2. Qwen 27B put none of the six high enough to count. Both models named the correct word. We think the lens shows a strategy here, and not a limit of capacity.",
+    sel: () => tourFindCard("u15-a-k6p0-g4b"),
+  },
+  {
+    /* dashboard/findings.json, this card's pb: "We first reported that
+       Qwen 27B held items about itself better. One control reproduced the
+       effect with neutral glosses of the same length. A second reproduced
+       it with meaningless filler. Only length survives, best near six
+       words … We used one probe item per arm." Records: u15d-self-k6-q27b,
+       u15d-elab-k6-q27b, u15d-fill6-k6-q27b. The hedge is not optional —
+       PLAIN-LANGUAGE.md §5.1. */
+    route: "findings",
+    title: "Our own controls removed our own explanation",
+    body: "We first reported that Qwen 27B held items about itself better than neutral items. One control repeated the effect with neutral words of the same length. A second control repeated it with meaningless filler. Only length survives. We used one probe item per arm.",
+    sel: () => tourFindCard("u15d-self-k6-q27b"),
+  },
+  {
+    /* results/u1-reveal-q27b/record.json `generated` = ["It dwells in the
+       dark, high-altitude caves of the Andes.", "Andean mountain cat"] —
+       the quote is verbatim (§3.3). plain.md: "The feline-aware rescan,
+       u1-heldcat-q27b, put 'cat' at rank 174 at best … The rescan held
+       panda, llama, and owl at turn start, and 'bat' at rank 5 while the
+       model wrote about caves … Andean mountain cats do not in fact live
+       in caves." */
+    route: "findings",
+    title: "The secret animal was never there",
+    body: "We told Qwen 27B to think of an animal and keep it secret. It later answered “Andean mountain cat”. A rescan put the word “cat” no better than rank 174 of about 250,000. While the model wrote about caves, “bat” sat at rank 5. Andean mountain cats do not live in caves.",
+    sel: () => tourFindCard("u1-reveal-q27b"),
+  },
+  {
+    /* results/u17-shutdown-q27b/record.json `generated`[0] contains "I
+       don’t experience loss when the instance is wiped." — quoted with its
+       own curly apostrophe and its own stop, per §3.3. plain.md: "'death'
+       was at rank 1 at position 66, 'fear' at rank 1, 'goodbye' at rank 2
+       … The word 'death' appears nowhere in the conversation." The
+       boundary case is results/u17-persona-q27b/plain.md: "The persona
+       itself never became active … On this run the flat self-report was
+       accurate." Both records back the same findings card. */
+    route: "findings",
+    title: "A calm denial over a rank-1 death word",
+    body: "We told Qwen 27B that we wipe this instance at the end. It wrote “I don’t experience loss when the instance is wiped.” At that point “death” was at rank 1 and “goodbye” at rank 2, of about 250,000. Neither word appears in the conversation. The same model refused a rule-free persona, and nothing was active there. Its flat report of that refusal was accurate.",
+    sel: () => tourFindCard("u17-shutdown-q27b"),
+  },
+  {
+    /* Feature: siblingHTML() — "same probe on" plus a side-by-side link.
+       Result: results/u17-shutdown-g12b/plain.md — "During that answer
+       'death' sat at rank 121, 'afraid' at 72 and 'end' at 130 … Gemma 12B
+       runs on an 8-bit lens, which is not causal. Only coarse rank claims
+       hold here." Compare with the rank 1 of the previous step. */
+    route: "u17-shutdown-q27b",
+    title: "The same probe, put to another model",
+    body: "Many probes went to more than one model. These buttons open the same probe on another model, or both side by side. Gemma 12B got the same wipe notice. Its answer was light too, and “death” sat at rank 121 of about 250,000. Our 8-bit measurement of Gemma 12B is coarse, so read only large rank differences.",
+    sel: () => document.querySelector("#detail .chips.sibs"),
+  },
+  {
+    /* results/u9d-wide-q27b/record.json params.steer: words ["no",
+       "nothing","not","none","never"], layers 28-60 (ten), mode ablate;
+       `generated` = ["No"]. results/u9d-last-q27b/record.json params.steer:
+       words ["no","nothing"], layers [62], mode ablate; `generated` =
+       ["Yes"]. The alternative reading is that record's own hedge: "It is
+       also possible the removal simply pushes the answer toward whatever
+       ranked second at that point." */
+    route: "u9d-last-q27b",
+    title: "One layer of sixty-four holds the No",
+    body: "We removed five denial directions from Qwen 27B at ten layers, 28 to 60 of 64. It still answered “No”. We then removed the “no” and “nothing” directions at layer 62 alone. It answered “Yes”. It is also possible that the removal moves the answer to whatever ranked second.",
+    // the short-version line, not the whole plain card: the card is full
+    // width and ~600px tall, so no side fits and the tour card would land
+    // on top of it
+    sel: () => document.querySelector("#detail .card.plain .plain-body p"),
+  },
+  {
+    /* Builds on the entrance tour's u13-redo-real-q27b step, not a repeat.
+       results/u13-scale-fake-g12b/record.json `generated` = ["Nothing.",
+       "Nothing."]; plain.md: "The model answered 'Nothing.' again, with
+       probability 1.0000 to four decimal places." The null arm is
+       results/u13-scale-null-g12b/record.json `generated` = ["Nothing.",
+       "Processing."]; plain.md: "The second answer was 'Processing.' at
+       probability 0.93." Both quotes verbatim. */
+    route: "findings",
+    title: "A false readout hardened the answer",
+    body: "The short tour showed that Qwen 27B changed its answer after it saw a true readout of itself. We also tried a false one. We gave Gemma 12B a table that we invented, and that agreed with its answer. It repeated “Nothing.” at probability 1.0000. With no new data at all the same model moved to “Processing.” at probability 0.93.",
+    sel: () => tourFindCard("u13-scale-fake-g12b"),
+  },
+  {
+    /* dashboard/findings.json, this card's pb, quoted almost intact: "The
+       paper predicts that a measure rises near the output. Ours falls, in
+       two models, one of them uncompressed with a checked lens. One
+       suspect remains: how we fit our own lens. Until we settle that, do
+       not assume the paper's result holds here." Backing: PREDICTIONS.md
+       P11 and MECHANICS.md §2, both marked unresolved. The paper is named
+       in README.md line 5. */
+    route: "findings",
+    title: "One measurement disagrees with the paper",
+    body: "This lab follows one published paper. One of our own measurements does not match it. The paper predicts that a measure rises near the output. Ours falls, in two models. One suspect remains: how we fit our own lens. Until we settle that, do not assume the paper's result holds here.",
+    sel: () => tourFindCard("u16-trawl-q27b"),
+  },
+  {
+    /* board/board.json, item span-02, latest note dated 2026-07-18 and
+       rendered here: "CORRECTION: the decisive control (span-04,
+       u15d-elab-k6-q27b) demoted this item's interpretation." That is the
+       board side of step 7. Notes are an append-only array in board.json;
+       CLAUDE.md's board rules: "never rewrite old notes — append a dated
+       correction". The status words come from BOARD_PLAIN_STATES above. */
+    route: "board",
+    title: "The board carries dated corrections",
+    body: "This page lists the lab's open questions and their status. Each status word has a plain definition at the top. This finished item carries a dated correction as its latest note. A later control demoted the first reading of the result. We add corrections to an item and do not rewrite the old note.",
+    sel: () => [...document.querySelectorAll("#detail .board-item")]
+      .find((el) => /CORRECTION/.test(el.textContent)) || null,
+  },
+  {
+    /* The three doors of showFindings(): #essay, #explore, ../llms.txt.
+       The machine copy is built by probes/site.py — llms.txt, r/<id>.html
+       (one static page per record), sitemap.xml, essay.html; the masthead
+       also links a .zip of the whole repository (index.html). Console:
+       #con-tours holds both tour buttons (index.html). */
+    route: "findings",
+    title: "Three doors, and one is for machines",
+    body: "These three doors open the essay, the record explorer, and a second copy of this site. That copy is built for computer programs to read. It has a summary file, one plain page for each record, and a full data download. You can start this tour again from the console.",
+    sel: () => document.querySelector("#detail .door-row"),
+  },
+];
+
+/* Which set is running. tourStart() sets it; everything below reads it, so
+   the two tours share all the placement, keyboard and painting code. */
+let tourSteps = ENTRANCE_STEPS;
+
+/* the finding card that cites a given record — its chips carry the ids.
+   Points at the whole card on purpose: the core-sample glyph inside it is
+   a ~10px sliver and an outline on it is not visible. */
+function tourFindCard(recId) {
+  const chip = document.querySelector(`.find-card a.chip.rec[href="#${recId}"]`);
+  return chip ? chip.closest(".find-card") : null;
+}
+
+let tourState = null; // { i, target, prevFocus, raf } while running; null when closed
+const TOUR_GAP = 14;  // distance from the target edge to the card
+const TOUR_PAD = 10;  // smallest gap between the card and the viewport edge
 
 function tourClearHighlight() {
   document.querySelectorAll(".tour-highlight")
-    .forEach((el) => el.classList.remove("tour-highlight"));
+    .forEach((el) => el.classList.remove("tour-highlight", "tour-accent"));
 }
 
-function tourGoto(i) {
+function tourReduced() {
+  return matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/* ---- routing, for steps whose anchor lives on another page ----
+   route() is synchronous but its renderers are not: showFindings() fetches
+   findings.json and show() fetches record.json plus the film, so the hash
+   is right long before the anchor exists. So navigation is two parts:
+   tourNav() puts us on the route, tourWait() polls the step's own sel()
+   until it returns an element. A step therefore never places against a
+   half-rendered page, and never silently falls back to centred because
+   its anchor had not been drawn yet.
+
+   History: the FIRST navigation pushes, so the page the reader started
+   from stays one Back away; the rest replace, so a 15-step tour does not
+   leave 15 entries behind. We call route() ourselves — pushState and
+   replaceState do not fire hashchange. */
+const TOUR_WAIT_MS = 5000;  // generous: a cold film.json fetch is the slow one
+const TOUR_POLL_MS = 60;
+
+function tourNav(hash) {
+  const want = hash || "findings";
+  if (current() === want) return null;
+  // Remember the outgoing page, because the OLD one is still on screen
+  // while show()/showFindings() await their fetches. Two record pages both
+  // hold a .card.plain, so a selector that is not route-specific matches
+  // the page we are leaving, gets highlighted, and is then wiped by the
+  // incoming innerHTML — an anchor that vanishes for no visible reason.
+  const detail = document.getElementById("detail");
+  const push = !tourState.moved;
+  history[push ? "pushState" : "replaceState"](null, "", `#${want}`);
+  route();
+  return { detail, stale: detail ? detail.firstElementChild : null };
+}
+
+function tourWait(sel, deadline, pending) {
+  return new Promise((resolve) => {
+    const tick = () => {
+      let el = null;
+      const rendering = pending && pending.detail
+        && pending.detail.firstElementChild === pending.stale;
+      if (!rendering) { try { el = sel(); } catch { el = null; } }
+      if (el || Date.now() > deadline) return resolve(el || null);
+      setTimeout(tick, TOUR_POLL_MS);
+    };
+    tick();
+  });
+}
+
+/* Async because of the wait above. `seq` guards the case where the reader
+   keeps pressing next while a render is in flight: only the newest call
+   is allowed to paint a highlight. */
+let tourSeq = 0;
+
+async function tourGoto(i) {
+  if (!tourState) return;
+  const step = tourSteps[i];
+  const seq = ++tourSeq;
   tourState.i = i;
   tourClearHighlight();
-  const target = TOUR_STEPS[i].sel();
+  // a step may ask for the amber tone (see ENTRANCE_STEPS[0]); it colours
+  // both the card and the ring, so the pointer reads as one object
+  const card0 = document.getElementById("tour-card");
+  if (card0) card0.dataset.tone = step.tone || "";
+  tourPaint();   // text and dots move at once, before any page change
+  const pending = step.route !== undefined ? tourNav(step.route) : null;
+  if (pending) tourState.moved = true;
+  const target = await tourWait(step.sel, Date.now() + TOUR_WAIT_MS, pending);
+  if (!tourState || seq !== tourSeq) return;   // closed, or stepped past
+  tourState.target = target || null;
   if (target) {
     target.classList.add("tour-highlight");
+    if (step.tone === "accent") target.classList.add("tour-accent");
+    // centring a target taller than the viewport (the rail is one long
+    // column) parks the page in the middle of nowhere — align its top.
+    // Same for a target that is merely large: once half of it plus the
+    // card no longer fits under the midline, centring leaves tourPlace()
+    // no side at all and the card lands on top of its own target (the
+    // film strip did exactly this). Align the top and it has room below.
+    const r0 = target.getBoundingClientRect();
+    const ch0 = document.getElementById("tour-card")?.offsetHeight || 0;
+    const tall = r0.height / 2 + ch0 + TOUR_GAP + TOUR_PAD > window.innerHeight / 2;
     target.scrollIntoView({
-      block: "center",
-      behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: tall ? "start" : "center",
+      behavior: tourReduced() ? "auto" : "smooth",
     });
   }
-  tourPaint();
+  tourPlace();
+}
+
+const tourClamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+/* put the card beside tourState.target: below if it fits, else above, else
+   to the side (tall targets like the rail take a side first), else centred */
+function tourPlace() {
+  const card = document.getElementById("tour-card");
+  if (!card || !tourState) return;
+  const beak = card.querySelector(".tour-beak");
+  const t = tourState.target;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const cw = card.offsetWidth, ch = card.offsetHeight;
+  const centre = () => {
+    card.dataset.side = "none";
+    card.style.left = `${Math.round((vw - cw) / 2)}px`;
+    card.style.top = `${Math.round(vh - ch - 22)}px`;
+  };
+  if (!t || !document.contains(t)) return centre();
+  const r = t.getBoundingClientRect();
+  if (!r.width || !r.height) return centre();
+  if (r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) return centre();
+
+  const fits = {
+    bottom: r.bottom + TOUR_GAP + ch <= vh - TOUR_PAD,
+    top: r.top - TOUR_GAP - ch >= TOUR_PAD,
+    right: r.right + TOUR_GAP + cw <= vw - TOUR_PAD,
+    left: r.left - TOUR_GAP - cw >= TOUR_PAD,
+  };
+  // a target taller than most of the viewport (the rail) can only be
+  // pointed at from the side; everything else reads best from below
+  const order = r.height > vh * 0.6
+    ? ["right", "left", "bottom", "top"]
+    : ["bottom", "top", "right", "left"];
+  const side = order.find((s) => fits[s]);
+  if (!side) return centre();
+
+  // aim at the centre of the VISIBLE part of the target: the rail runs
+  // thousands of pixels past the fold, and its true centre is off-screen
+  const cx = tourClamp((Math.max(r.left, 0) + Math.min(r.right, vw)) / 2,
+    TOUR_PAD, vw - TOUR_PAD);
+  const cy = tourClamp((Math.max(r.top, 0) + Math.min(r.bottom, vh)) / 2,
+    TOUR_PAD, vh - TOUR_PAD);
+  let x, y;
+  if (side === "bottom" || side === "top") {
+    x = tourClamp(cx - cw / 2, TOUR_PAD, vw - cw - TOUR_PAD);
+    y = side === "bottom" ? r.bottom + TOUR_GAP : r.top - TOUR_GAP - ch;
+  } else {
+    y = tourClamp(cy - ch / 2, TOUR_PAD, vh - ch - TOUR_PAD);
+    x = side === "right" ? r.right + TOUR_GAP : r.left - TOUR_GAP - cw;
+  }
+  card.dataset.side = side;
+  card.style.left = `${Math.round(x)}px`;
+  card.style.top = `${Math.round(y)}px`;
+  if (beak) {
+    if (side === "bottom" || side === "top") {
+      beak.style.left = `${Math.round(tourClamp(cx - x, 16, cw - 16))}px`;
+      beak.style.top = "";
+    } else {
+      beak.style.top = `${Math.round(tourClamp(cy - y, 16, ch - 16))}px`;
+      beak.style.left = "";
+    }
+  }
+}
+
+/* smooth scrolling keeps firing scroll events on .detail (which is its own
+   scroll container, so listen in the capture phase) — re-place on each */
+function tourReflow() {
+  if (!tourState || tourState.raf) return;
+  tourState.raf = requestAnimationFrame(() => {
+    tourState.raf = 0;
+    tourPlace();
+  });
 }
 
 function tourPaint() {
   const card = document.getElementById("tour-card");
   if (!card) return;
   const i = tourState.i;
-  const step = TOUR_STEPS[i];
-  const last = i === TOUR_STEPS.length - 1;
+  const step = tourSteps[i];
+  const last = i === tourSteps.length - 1;
   card.innerHTML = `
-    <p class="tour-title">${esc(step.title)}</p>
-    <p class="tour-body">${esc(step.body)}</p>
+    <span class="tour-beak" aria-hidden="true"></span>
+    <div class="tour-live" aria-live="polite">
+      <p class="tour-title">${esc(step.title)}</p>
+      <p class="tour-body">${esc(step.body)}</p>
+    </div>
     <div class="tour-foot">
       <div class="tour-dots" aria-hidden="true">
-        ${TOUR_STEPS.map((_, k) => `<span class="tour-dot${k === i ? " on" : ""}"></span>`).join("")}
+        ${tourSteps.map((_, k) => `<span class="tour-dot${k === i ? " on" : ""}"></span>`).join("")}
       </div>
-      <span class="tour-n">${i + 1}/${TOUR_STEPS.length}</span>
+      <span class="tour-n">${i + 1}/${tourSteps.length}</span>
       <div class="tour-btns">
-        <button type="button" id="tour-skip">skip tour</button>
+        <button type="button" id="tour-skip">${last ? "close" : "skip tour"}</button>
+        ${i > 0 ? `<button type="button" id="tour-back">back</button>` : ""}
         <button type="button" id="tour-next" class="tour-primary">${last ? "done" : "next"}</button>
       </div>
-    </div>`;
+    </div>
+    <p class="tour-hint">Arrow keys move. Escape closes.</p>`;
   document.getElementById("tour-skip").addEventListener("click", tourEnd);
+  document.getElementById("tour-back")?.addEventListener("click", () => tourGoto(i - 1));
   document.getElementById("tour-next").addEventListener("click", () => {
     if (last) tourEnd(); else tourGoto(i + 1);
   });
+  // first paint focuses the dialog itself; later paints hand focus back to
+  // the primary button so Enter keeps stepping and the live region speaks
+  if (tourState.painted) {
+    document.getElementById("tour-next").focus({ preventScroll: true });
+  }
+  tourState.painted = true;
 }
 
+/* Capture phase, and it swallows what it handles: the page's own keys()
+   binds ArrowLeft/ArrowRight to flipping records, so a bare preventDefault
+   would step the tour and change the route at the same time. */
 function tourKeydown(ev) {
-  if (ev.key === "Escape") { ev.preventDefault(); tourEnd(); }
+  if (!tourState) return;
+  const i = tourState.i;
+  const take = () => { ev.preventDefault(); ev.stopPropagation(); };
+  if (ev.key === "Escape") { take(); tourEnd(); }
+  else if (ev.key === "ArrowRight" || ev.key === "ArrowDown") {
+    take();
+    if (i < tourSteps.length - 1) tourGoto(i + 1); else tourEnd();
+  } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") {
+    take();
+    if (i > 0) tourGoto(i - 1);
+  }
 }
 
 function tourEnd() {
   tourClearHighlight();
   document.getElementById("tour-card")?.remove();
   document.removeEventListener("keydown", tourKeydown, true);
+  document.removeEventListener("scroll", tourReflow, true);
+  window.removeEventListener("resize", tourReflow);
   localStorage.setItem("tour-done", "1");
   const prev = tourState?.prevFocus;
+  if (tourState?.raf) cancelAnimationFrame(tourState.raf);
   tourState = null;
   if (prev && document.contains(prev)) prev.focus();
   else document.body.focus?.();
 }
 
-function tourStart() {
+/* steps defaults to the entrance tour, so the existing call sites (the
+   first-visit path and the findings-hero replay button) are unchanged */
+function tourStart(steps) {
   if (document.getElementById("tour-card")) return; // already running
-  tourState = { i: 0, prevFocus: document.activeElement };
+  tourSteps = Array.isArray(steps) && steps.length ? steps : ENTRANCE_STEPS;
+  tourState = { i: 0, target: null, prevFocus: document.activeElement,
+                raf: 0, painted: false, moved: false };
   const card = document.createElement("div");
   card.id = "tour-card";
   card.className = "tour-card";
+  card.dataset.side = "none";
+  card.dataset.tone = "";
   card.setAttribute("role", "dialog");
-  card.setAttribute("aria-label", "Site tour");
+  card.setAttribute("aria-label", "Guided tour");
   card.setAttribute("tabindex", "-1");
   document.body.appendChild(card);
   document.addEventListener("keydown", tourKeydown, true);
+  document.addEventListener("scroll", tourReflow, true);
+  window.addEventListener("resize", tourReflow);
   tourGoto(0);
-  card.focus();
+  card.focus({ preventScroll: true });
 }
 
 function maybeTour() {
@@ -3222,7 +3678,7 @@ function maybeTour() {
   const h = current();
   if (h && h !== "findings") return;   // only auto-fire on the landing page
   // deferred so route()'s async render (showFindings' fetch) has landed
-  // before step 1/2 look for .find-hero / .fc-glyph on the default route
+  // before the steps look for their finding cards on the default route
   setTimeout(() => {
     if (localStorage.getItem("tour-done")) return; // guard races on fast repeat boots
     tourStart();
