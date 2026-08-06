@@ -162,6 +162,18 @@ a *different, broader* intervention (see §7).
 and report the *difference*. (Our loss-map v1 omitted this and a soup
 recipe scored as high as a kiss — generic perturbation, not cluster loss.)
 
+**MEASURED 2026-08-06 (audit-02, results/audit02-*/calibration.json):**
+matched-in-k is NOT matched-in-magnitude. A random k-span holds ~√(k/d)
+of the residual norm (the chance line, ~4–6% at our k); the cluster
+span's share is model-dependent — qwen-27b DENIAL span ~1.8× chance
+(0.066 vs 0.037), but on both gemmas ~4× BELOW chance (0.012 vs
+0.05) — the transported directions barely intersect the residual
+manifold there, and the "control" is the stronger intervention (it
+degenerated gemma output while cluster ablation stayed fluent).
+`lab.Steering(rand_seed=…)` is the standing control facility;
+**always report the span-norm calibration next to the ΔΔ** (audit02.py
+arm C is the template).
+
 ### 3d. Concept swap / patch (Figure 4C) — NOT yet in our lab
 > "Given a source token s and target token t, we form `V = [v_s v_t]`, read
 > the lens coordinates `c = V† h` (where V† is the pseudoinverse of V), and

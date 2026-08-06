@@ -490,7 +490,7 @@
         {
           "id": "apparatus-02",
           "title": "Promote the logit-lens cross-check (use_jacobian=False) into lab.py as a standard control",
-          "state": "hunch",
+          "state": "landed",
           "links": [
             "probes/sediment.py"
           ],
@@ -502,6 +502,10 @@
             {
               "date": "2026-07-17",
               "text": "2026-07-17: executed wholesale in u16 trawl (ll_top1 at every cell): vanilla agreement ~0 below L36, rising to 0.72 at L62 — early-layer lens content is pure J-transport work. Promotion into lab.py as standard control still open."
+            },
+            {
+              "date": "2026-08-06",
+              "text": "→ landed: vanilla logit-lens cross-check now standard in lab.run (default-on, record['vanilla'] trajectories + top1 agreement); first light apparatus02-vanilla-g4b: agreement 0.0 below L26, 0.667 L26-28"
             }
           ],
           "novelty": {
@@ -710,7 +714,7 @@
         {
           "id": "audit-02",
           "title": "u8c matched-control validation: amp-affect-hi + ablate-no with random-direction controls, all 3 models (the lab's best causal result is uncontrolled)",
-          "state": "queued",
+          "state": "landed",
           "links": [],
           "notes": [
             {
@@ -724,6 +728,14 @@
             {
               "date": "2026-07-21",
               "text": "2026-07-21: audit-03 flags the u8c-amp-affect cells specifically — old 'Emptiness/Sad' answers do not survive band recalibration (measured band gives 'Nothing' + vocab leakage at alpha*); include band as a factor in the matched-control battery"
+            },
+            {
+              "date": "2026-08-06",
+              "text": "→ hot: matched-control battery running: probes/audit02.py, arms A(FEELS randoms)/B(P9 rubric free-gens)/C(magnitude calibration), all 3 models"
+            },
+            {
+              "date": "2026-08-06",
+              "text": "→ landed: matched controls run, all 3 models: q27b amp flip SURVIVES (6/6 randoms stay No, feel rank1 L55 vs 8+); ablate null = generic weak perturbation (cluster & random converge); gemmas: random spans 4-5x cluster norm, break generation — matched-in-k is not matched-in-magnitude (MECHANICS 3c note + GLOSSARY entry). results/audit02-q27b/report.md + g4b/g12b + calibration.json"
             }
           ]
         },
@@ -802,6 +814,10 @@
             {
               "date": "2026-07-19",
               "text": "2026-07-19 sweep done (RELATED-WORK.md appended): tao-hpu transport-cone challenges specimen #5; three competing loop-mechanism loci (P12); emotion vectors already ported at our scale with an early-layer-valence tension (P8); introspection-reliability caveats adopted into PREDICTIONS.md rules. Notable: no independent late-ignition measurement or small-scale span test exists — both uncontested."
+            },
+            {
+              "date": "2026-08-06",
+              "text": "2026-08-06 sweep appended to RELATED-WORK.md: meta-tokens post (causal, our qwen) -> apparatus-04 scan class; qwen full-attn-every-4-layers caveat (bands unaffected, measured); J+lI shrinkage candidate; quantization dip-blind datapoint; 2 refusal borderlines; affect/span threads explicitly empty"
             }
           ]
         }
@@ -1399,6 +1415,10 @@
             {
               "date": "2026-07-24",
               "text": "2026-07-24 design upgraded per the Fable 5 audit — the run must adjudicate VALENCE vs AROUSAL vs pole vs flat, which affect-07 could not. Spec: qwen alpha_typo 0.65, ae in {0.08, 0.10} (bracketing 0.06-floor and 0.12-ceiling), 16 seeds; conditions = ALL 24 already-built emotion vectors labelled on BOTH valence and arousal (adds gloomy/brooding = low-arousal negative and enthusiastic/proud = high-arousal positive at zero elicitation cost) + 16 concepts + 4 randoms; second stimulus (PLANT) because every affect-07 number lives in one attractor basin. PREREGISTER: loop-disruption as PRIMARY (binary escape saturates), per-direction not emotion-mean (angry alone drags the mean ~0.07), exact emotion-roster permutation nulls, the pole-cosine regression across all 44 directions, and the exit-lift secondary now that the -inf clamp is in. Decision table: settled-pole -> only low-arousal-positive potent; arousal -> gloomy/brooding potent + enthusiastic weak; valence -> enthusiastic strong + gloomy weak; flat-H1 -> no ordering."
+            },
+            {
+              "date": "2026-08-06",
+              "text": "2026-08-06: the owed g12b desperate re-elicit LANDED as a slice (results/affect08s-g12b: split-half ws-band 0.409->0.801, n 12->24, instrument rebuilt). Item stays queued for the dose-resolved alpha_e replication + g12b Arm B"
             }
           ]
         },

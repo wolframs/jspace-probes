@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-08-06T14:26:26.085Z",
+  "builtAt": "2026-08-06T20:18:06.777Z",
   "stats": {
-    "filesScanned": 55,
-    "nodesCreated": 488,
-    "edgesCreated": 1414,
+    "filesScanned": 57,
+    "nodesCreated": 505,
+    "edgesCreated": 1479,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 144
+    "durationMs": 166
   },
   "architecture": {
     "name": "probes",
@@ -15,18 +15,19 @@
     "layers": [],
     "packages": [],
     "languages": {
-      "python": 54,
+      "python": 56,
       "javascript": 1
     },
-    "summary": "Single Package with 55 source files across python, javascript. 0 packages detected. core domains: General."
+    "summary": "Single Package with 57 source files across python, javascript. 0 packages detected. core domains: General."
   },
   "domains": [
     {
-      "id": "domain:cluster:22",
+      "id": "domain:cluster:26",
       "name": "General",
       "confidence": 0.95,
       "nodes": [
         "file:affect.py",
+        "file:affect08s.py",
         "file:affect2.py",
         "file:affect3.py",
         "file:affect3b.py",
@@ -38,6 +39,8 @@
         "file:affect7.py",
         "file:affectviz.py",
         "file:apparatus06.py",
+        "file:apparatus09.py",
+        "file:audit02.py",
         "file:audit03.py",
         "file:blind.py",
         "file:cast.py",
@@ -49,6 +52,8 @@
         "file:fanout.py",
         "file:huh.py",
         "file:lab.py",
+        "file:langval.py",
+        "file:langval2.py",
         "file:loops.py",
         "file:lossmap.py",
         "file:lossmap2.py",
@@ -70,14 +75,12 @@
         "file:unit16.py",
         "file:unit17.py",
         "file:unit19.py",
-        "file:unit5.py",
-        "file:apparatus09.py",
-        "file:langval.py",
-        "file:langval2.py"
+        "file:unit5.py"
       ],
-      "description": "Import-graph cluster of 48 files",
+      "description": "Import-graph cluster of 50 files",
       "entryPoints": [
         "file:affect.py",
+        "file:affect08s.py",
         "file:affect2.py",
         "file:affect3.py",
         "file:affect3b.py",
@@ -85,8 +88,7 @@
         "file:affect3g.py",
         "file:affect4.py",
         "file:affect4b.py",
-        "file:affect5.py",
-        "file:affect7.py"
+        "file:affect5.py"
       ]
     }
   ],
@@ -102,6 +104,36 @@
     },
     {
       "from": "affect.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_gen",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_mean_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_unit",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "outdir",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
       "to": "get_model",
       "kind": "IMPORTS",
       "weight": 1
@@ -509,6 +541,36 @@
       "weight": 1
     },
     {
+      "from": "audit02.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_all_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "audit03.py",
       "to": "a_id",
       "kind": "IMPORTS",
@@ -606,6 +668,30 @@
     },
     {
       "from": "langval.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_spec",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "kind_of",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
       "to": "get_model",
       "kind": "IMPORTS",
       "weight": 1
@@ -749,30 +835,6 @@
       "weight": 1
     },
     {
-      "from": "langval2.py",
-      "to": "_spec",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "kind_of",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "_load_vectors",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "get_model",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
       "from": "affect.py",
       "to": "lab.py",
       "kind": "IMPORTS",
@@ -883,6 +945,96 @@
     {
       "from": "affect.py",
       "to": "_center",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "outdir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_gen",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_mean_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_unit",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "_split_half",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "elicit_more",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "build",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect08s.py",
+      "to": "delta",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2501,6 +2653,156 @@
       "weight": 1
     },
     {
+      "from": "audit02.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_done",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "calibrate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "span_frac",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "Steering",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_openrouter_key",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_pick_grader",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "grade_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "assess",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_judge",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "run_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "grade",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "audit03.py",
       "to": "fanout.py",
       "kind": "IMPORTS",
@@ -3552,6 +3854,144 @@
     },
     {
       "from": "langval.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "langval.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "langval.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_spec",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "specs",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "cell",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "men",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_baseline",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "analyze_record",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_prereg_rows",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "_report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "print_specs",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
+      "to": "analyze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval2.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
@@ -5847,144 +6287,6 @@
       "to": "run",
       "kind": "CALLS",
       "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "langval.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "langval.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "affect.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "affect.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "affect2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "affect2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "_spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "cell",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "men",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "_baseline",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "analyze_record",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "_prereg_rows",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "_report",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "print_specs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "analyze",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval2.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
     }
   ],
   "criticalPaths": [
@@ -5993,14 +6295,14 @@
       "name": "High-traffic: affect.py",
       "nodes": [
         "file:affect.py",
+        "file:affect08s.py",
         "file:affect2.py",
         "file:affect3.py",
         "file:affect5.py",
-        "file:affect7.py",
-        "file:affectviz.py"
+        "file:affect7.py"
       ],
       "risk": "medium",
-      "description": "affect.py has 16 dependents — changes here have wide blast radius"
+      "description": "affect.py has 18 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect2.py",
@@ -6014,7 +6316,7 @@
         "file:affect4.py"
       ],
       "risk": "high",
-      "description": "affect2.py has 22 dependents — changes here have wide blast radius"
+      "description": "affect2.py has 24 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:affect2.py:61",
@@ -6029,6 +6331,20 @@
       ],
       "risk": "high",
       "description": "_load_vectors has 22 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:affect2.py:66",
+      "name": "High-traffic: _all_resid",
+      "nodes": [
+        "function:affect2.py:66",
+        "file:affect2.py",
+        "file:affect3.py",
+        "file:affect5.py",
+        "file:audit02.py",
+        "file:langval.py"
+      ],
+      "risk": "medium",
+      "description": "_all_resid has 10 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect3.py",
@@ -6065,12 +6381,26 @@
         "function:affect7.py:385",
         "file:affect7.py",
         "file:affect.py",
+        "file:affect08s.py",
         "file:affect2.py",
-        "file:affect3.py",
-        "file:affect4.py"
+        "file:affect3.py"
       ],
       "risk": "medium",
-      "description": "mean has 17 dependents — changes here have wide blast radius"
+      "description": "mean has 19 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:apparatus09.py:57",
+      "name": "High-traffic: topk",
+      "nodes": [
+        "function:apparatus09.py:57",
+        "file:apparatus09.py",
+        "file:affect2.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py"
+      ],
+      "risk": "high",
+      "description": "topk has 20 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:deepen.py",
@@ -6112,7 +6442,7 @@
         "file:affect4.py"
       ],
       "risk": "high",
-      "description": "fanout.py has 20 dependents — changes here have wide blast radius"
+      "description": "fanout.py has 22 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:fanout.py:70",
@@ -6126,7 +6456,7 @@
         "file:affect4.py"
       ],
       "risk": "medium",
-      "description": "assess has 16 dependents — changes here have wide blast radius"
+      "description": "assess has 18 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:huh.py:55",
@@ -6140,7 +6470,7 @@
         "file:affect5.py"
       ],
       "risk": "medium",
-      "description": "norm has 11 dependents — changes here have wide blast radius"
+      "description": "norm has 12 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:lab.py",
@@ -6148,13 +6478,13 @@
       "nodes": [
         "file:lab.py",
         "file:affect.py",
+        "file:affect08s.py",
         "file:affect2.py",
         "file:affect3.py",
-        "file:affect3b.py",
-        "file:affect3c.py"
+        "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "lab.py has 88 dependents — changes here have wide blast radius"
+      "description": "lab.py has 92 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:lab.py:41",
@@ -6168,7 +6498,7 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "_strip_bos has 32 dependents — changes here have wide blast radius"
+      "description": "_strip_bos has 34 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:lab.py:46",
@@ -6191,26 +6521,26 @@
         "function:lab.py:68",
         "file:lab.py",
         "file:affect.py",
+        "file:affect08s.py",
         "file:affect2.py",
-        "file:affect3.py",
-        "file:affect3b.py"
+        "file:affect3.py"
       ],
       "risk": "high",
-      "description": "get_model has 43 dependents — changes here have wide blast radius"
+      "description": "get_model has 47 dependents — changes here have wide blast radius"
     },
     {
-      "id": "critical:fanin:function:lab.py:202",
+      "id": "critical:fanin:function:lab.py:211",
       "name": "High-traffic: run",
       "nodes": [
-        "function:lab.py:202",
+        "function:lab.py:211",
         "file:lab.py",
+        "file:audit02.py",
         "file:audit03.py",
         "file:blind.py",
-        "file:course.py",
-        "file:deepen.py"
+        "file:course.py"
       ],
       "risk": "high",
-      "description": "run has 26 dependents — changes here have wide blast radius"
+      "description": "run has 27 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:class:lab.py:121",
@@ -6224,7 +6554,7 @@
         "file:affect3g.py"
       ],
       "risk": "high",
-      "description": "Steering has 22 dependents — changes here have wide blast radius"
+      "description": "Steering has 24 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:loops.py",
@@ -6239,34 +6569,6 @@
       ],
       "risk": "medium",
       "description": "loops.py has 16 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:loops.py:65",
-      "name": "High-traffic: loop_gram",
-      "nodes": [
-        "function:loops.py:65",
-        "file:loops.py",
-        "file:affect3.py",
-        "file:affect3c.py",
-        "file:affect3g.py",
-        "file:affect4.py"
-      ],
-      "risk": "medium",
-      "description": "loop_gram has 16 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:class:loops.py:210",
-      "name": "High-traffic: _null",
-      "nodes": [
-        "class:loops.py:210",
-        "file:loops.py",
-        "file:affect3.py",
-        "file:affect3b.py",
-        "file:affect3c.py",
-        "file:affect3g.py"
-      ],
-      "risk": "medium",
-      "description": "_null has 15 dependents — changes here have wide blast radius"
     }
   ],
   "deadCode": [
@@ -6347,13 +6649,23 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
+      "id": "smell:fanout:file:audit02.py",
+      "type": "excessive_fan_out",
+      "severity": "high",
+      "nodes": [
+        "file:audit02.py"
+      ],
+      "description": "audit02.py depends on 42 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
       "id": "smell:fanin:file:lab.py",
       "type": "excessive_fan_in",
       "severity": "high",
       "nodes": [
         "file:lab.py"
       ],
-      "description": "lab.py has 88 incoming dependencies — high fan-in",
+      "description": "lab.py has 92 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6363,7 +6675,7 @@
       "nodes": [
         "function:lab.py:41"
       ],
-      "description": "_strip_bos has 32 incoming dependencies — high fan-in",
+      "description": "_strip_bos has 34 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6373,18 +6685,8 @@
       "nodes": [
         "function:lab.py:68"
       ],
-      "description": "get_model has 43 incoming dependencies — high fan-in",
+      "description": "get_model has 47 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
-    },
-    {
-      "id": "smell:fanout:file:sorry4.py",
-      "type": "excessive_fan_out",
-      "severity": "high",
-      "nodes": [
-        "file:sorry4.py"
-      ],
-      "description": "sorry4.py depends on 40 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanout:file:langval.py",
@@ -6407,13 +6709,23 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
+      "id": "smell:fanout:file:sorry4.py",
+      "type": "excessive_fan_out",
+      "severity": "high",
+      "nodes": [
+        "file:sorry4.py"
+      ],
+      "description": "sorry4.py depends on 40 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
       "id": "smell:fanin:file:affect.py",
       "type": "excessive_fan_in",
       "severity": "medium",
       "nodes": [
         "file:affect.py"
       ],
-      "description": "affect.py has 16 incoming dependencies — high fan-in",
+      "description": "affect.py has 18 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6427,13 +6739,23 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
+      "id": "smell:fanout:file:affect08s.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:affect08s.py"
+      ],
+      "description": "affect08s.py depends on 23 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
       "id": "smell:fanin:file:affect2.py",
       "type": "excessive_fan_in",
       "severity": "medium",
       "nodes": [
         "file:affect2.py"
       ],
-      "description": "affect2.py has 22 incoming dependencies — high fan-in",
+      "description": "affect2.py has 24 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6493,7 +6815,7 @@
       "nodes": [
         "function:affect7.py:385"
       ],
-      "description": "mean has 17 incoming dependencies — high fan-in",
+      "description": "mean has 19 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6505,6 +6827,26 @@
       ],
       "description": "affectviz.py depends on 21 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:apparatus09.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:apparatus09.py"
+      ],
+      "description": "apparatus09.py depends on 24 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanin:function:apparatus09.py:57",
+      "type": "excessive_fan_in",
+      "severity": "medium",
+      "nodes": [
+        "function:apparatus09.py:57"
+      ],
+      "description": "topk has 20 incoming dependencies — high fan-in",
+      "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
       "id": "smell:fanout:file:audit03.py",
@@ -6524,6 +6866,16 @@
         "file:blind.py"
       ],
       "description": "blind.py depends on 21 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:board.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:board.py"
+      ],
+      "description": "board.py depends on 39 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -6563,7 +6915,7 @@
       "nodes": [
         "file:fanout.py"
       ],
-      "description": "fanout.py has 20 incoming dependencies — high fan-in",
+      "description": "fanout.py has 22 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6573,7 +6925,7 @@
       "nodes": [
         "function:fanout.py:70"
       ],
-      "description": "assess has 16 incoming dependencies — high fan-in",
+      "description": "assess has 18 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6597,13 +6949,13 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanin:function:lab.py:202",
+      "id": "smell:fanin:function:lab.py:211",
       "type": "excessive_fan_in",
       "severity": "medium",
       "nodes": [
-        "function:lab.py:202"
+        "function:lab.py:211"
       ],
-      "description": "run has 26 incoming dependencies — high fan-in",
+      "description": "run has 27 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6613,8 +6965,18 @@
       "nodes": [
         "class:lab.py:121"
       ],
-      "description": "Steering has 22 incoming dependencies — high fan-in",
+      "description": "Steering has 24 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:langval2.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:langval2.py"
+      ],
+      "description": "langval2.py depends on 37 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanin:file:loops.py",
@@ -6717,6 +7079,16 @@
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
+      "id": "smell:fanout:file:og.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:og.py"
+      ],
+      "description": "og.py depends on 26 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
       "id": "smell:fanin:file:probe.py",
       "type": "excessive_fan_in",
       "severity": "medium",
@@ -6725,76 +7097,6 @@
       ],
       "description": "probe.py has 16 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
-    },
-    {
-      "id": "smell:fanout:file:unit15.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:unit15.py"
-      ],
-      "description": "unit15.py depends on 31 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:unit15d.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:unit15d.py"
-      ],
-      "description": "unit15d.py depends on 39 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:unit16.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:unit16.py"
-      ],
-      "description": "unit16.py depends on 27 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:unit19.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:unit19.py"
-      ],
-      "description": "unit19.py depends on 36 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:apparatus09.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:apparatus09.py"
-      ],
-      "description": "apparatus09.py depends on 24 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanin:function:apparatus09.py:57",
-      "type": "excessive_fan_in",
-      "severity": "medium",
-      "nodes": [
-        "function:apparatus09.py:57"
-      ],
-      "description": "topk has 20 incoming dependencies — high fan-in",
-      "recommendation": "Consider splitting this module or introducing a facade pattern"
-    },
-    {
-      "id": "smell:fanout:file:board.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:board.py"
-      ],
-      "description": "board.py depends on 39 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     }
   ],
   "capabilities": [],

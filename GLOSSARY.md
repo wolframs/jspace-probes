@@ -199,6 +199,17 @@ forbidden token.
 > Matched-control lesson, third of its kind (cf. loss-map v1, span
 > self-relevance).
 
+**Matched control** *(added 2026-08-06, audit-02)* — a random-direction
+steer/ablate paired with a cluster intervention: same k, same layers,
+same mode and alpha (`lab.Steering(rand_seed=…)`). "Matched" means
+matched in those parameters, NOT in perturbation magnitude — audit-02
+measured a random k-span at the ~√(k/d) chance line of residual norm
+while cluster spans sat 1.8× above it (qwen) or 4× below it (both
+gemmas, where the "control" was the stronger intervention and broke
+generation). Report the span-norm calibration next to any ΔΔ
+(MECHANICS §3c). Four matched-control lessons to date: loss-map v1,
+span self-relevance, elephant-tax refilm, audit-02 magnitude.
+
 **Weak king** — the 12B order effect: in k=6 lists the first item wins a
 winner-take-all monopoly 9/9, but how many *other* items survive depends
 on who won — fern-first keeps 5–6 of 6, violin/whale/glacier-first crush

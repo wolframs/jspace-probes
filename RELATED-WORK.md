@@ -469,3 +469,63 @@ massive activations in gemma-2, retained without BOS in gemma-3,
 arXiv:2410.10781 + 2503.22329; visual sink tokens share BOS's sink
 dims, arXiv:2503.03321) — our `<start_of_image>` carrier fits that
 picture; no published <start_of_image>-specific writeup found.
+
+## Literature sweep, 2026-08-06 (litwatch-01, between-runs)
+
+*Fable-5 subagent sweep, window 2026-07-19 → 2026-08-06. Threads:
+workspace follow-ups, refusal geometry, lens methods, affect vectors,
+span/attractors. Honesty: threads 4 (affect) and 5 (span/attractors/
+memory-augmented) have NOTHING new since mid-July; transformer-circuits
+has published nothing since the workspace paper; Dehaene/Naccache have
+no follow-up. The workspace paper now has a citable arXiv version:
+arXiv:2607.15495 (v1 2026-07-16).*
+
+Design-relevant finds, ranked:
+
+1. **Meta-tokens on OUR model** — Bhatia, Blank & Nanda, "Towards
+   Surfacing Model Algorithms with Meta-Tokens in the J-Lens"
+   (Alignment Forum 2026-07-20), on Qwen3.6-27B. Beyond the review's
+   什么意思 mention (07-19 sweep item 6): causal results — swapping a
+   GCD meta-token vector moved an LCM answer 270→810; suppressing a
+   hedging meta-token (大概率) forces single-answer commitment.
+   J-lens readouts can name the TYPE of processing, not just content.
+   → Add a meta-token class to open-vocab scan candidates
+   (apparatus-04); the hedging token touches the pressure arc; old
+   qwen records can be re-grepped for 什么意思-class tokens for free.
+2. **Qwen 3.5/3.6 has full attention only every 4 layers** — noted in
+   Neuronpedia's J-lens release ("Welcome to the J-Space", 2026-07-10,
+   pre-fitted lenses for 36 open models incl. our gemma/qwen — a free
+   cross-check resource; corrected Qwen layer indexing). Design check
+   done at sweep time: our qwen bands are MEASURED (u16 trawl,
+   apparatus-06), not layout-derived, so no band change — but any
+   future per-layer claim at 4-layer granularity should note which
+   layers carry full attention.
+3. **J + λI shrinkage for small-model lenses** — willkn, "Anthropic's
+   J-Lens: A Research Engineer's Analysis" (LessWrong 2026-07-24,
+   GPT-2-medium): raw Jacobian overweights structural tokens on small
+   models; a shrinkage regularizer fixes it; decode-time monitoring
+   <2% overhead. Small-scale only (355M) — but a candidate fix if
+   gemma-4b readouts ever look structurally dominated (specimen work).
+4. **Quantization damage is depth-dip-blind** — Jeong (different
+   Jeong), "Wrong Before Right" (arXiv:2607.04640): across 17 models,
+   aligned models hold the wrong answer through 25–90% depth and
+   rescue late (converges with our L62-No / motor-finalization
+   anatomy); quantization flips do NOT follow the mid-stack-dip
+   pattern structural damage follows. First depth-resolved datapoint
+   for our int8/NF4 lens caveats (specimen 5 neighborhood). See also
+   arXiv:2606.03002 (SAE feature survival degrades smoothly with
+   bit-width while perplexity stays flat).
+5. **Refusal geometry, two mid-July catches** (nothing post-sweep):
+   arXiv:2607.08883 — suppressing refusal globally across layers ×
+   positions beats any single-site target (refusal is distributed;
+   band-not-point, converges with MECHANICS). arXiv:2607.00572 (HARC)
+   — harmfulness and refusal are SEPARABLE prompt-side directions and
+   jailbreak classes suppress one or the other; any pressure-02 probe
+   should carry both directions, not one "refusal vector".
+6. **Residual-stream geometry, lens-free** — arXiv:2607.18348
+   (2026-07-20): six models, large displacement at both ends of the
+   stack, "quieter middle third", rotation ~constant. A lens-free
+   control citation for the band picture and P11-adjacent claims.
+   Also P11 support logged 07-19 stands unchanged (tao-hpu
+   self-trained-control shows effdim collapse is fit-sensitive; their
+   E7 "mechanism campaign" landed 07-16, nothing newer).

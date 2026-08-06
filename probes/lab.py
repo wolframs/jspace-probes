@@ -128,9 +128,15 @@ class Steering:
     adds along the normalized mean direction, scaled by each position's own
     residual norm. Registered as forward hooks on the decoder blocks, so it
     steers generation and lens readouts alike.
+
+    rand_seed: matched random-direction control (MECHANICS 3c). Same
+    words (for k), layers, mode and alpha, but the k directions at each
+    layer are seeded Gaussians in residual space instead of the cluster's
+    lens directions. Seed convention follows affect3: seed*1000 + layer.
     """
 
-    def __init__(self, lm, words, layers, mode="ablate", alpha=0.12):
+    def __init__(self, lm, words, layers, mode="ablate", alpha=0.12,
+                 rand_seed=None):
         tids = []
         for w in words:
             tids += _token_ids(lm.tok, w)
@@ -144,6 +150,9 @@ class Steering:
                 continue
             J = lm.lens.jacobians[l].to(rows.device)
             D = rows @ J  # [k, d_model]: readout directions at this layer
+            if rand_seed is not None:
+                g = torch.Generator().manual_seed(rand_seed * 1000 + l)
+                D = torch.randn(D.shape, generator=g).to(D.device)
             D = D / D.norm(dim=-1, keepdim=True)
             if mode == "ablate":
                 Q, _ = torch.linalg.qr(D.T)  # [d, k] orthonormal basis
@@ -215,7 +224,8 @@ def run(spec: dict) -> dict:
         steers = steers if isinstance(steers, list) else [steers]
         steer_ctx = MultiSteer([
             Steering(lm, s["words"], s["layers"],
-                     s.get("mode", "ablate"), s.get("alpha", 0.12))
+                     s.get("mode", "ablate"), s.get("alpha", 0.12),
+                     s.get("rand_seed"))
             for s in steers])
 
     with steer_ctx:
@@ -284,6 +294,46 @@ def run(spec: dict) -> dict:
     for layer in layers:
         order = lens_logits[layer][primary].argsort(descending=True)
         emergence.append((order == top1).nonzero()[0, 0].item() + 1)
+
+    # vanilla logit-lens cross-check (apparatus-02): same residuals
+    # (steered runs get a steered pass), no J transport. A tracked-word
+    # signal that appears only under the Jacobian is transport-made;
+    # one that survives the vanilla readout is in the residual itself.
+    vanilla = None
+    if spec.get("vanilla", True) and spec.get("track"):
+        with steer_ctx:
+            v_logits, _, _ = lens.apply(
+                model, text, positions=None,
+                layers=spec.get("lens_layers"),
+                max_seq_len=spec.get("max_seq_len", 512),
+                use_jacobian=False)
+        v_layers = sorted(set(v_logits) & set(layers))
+        pos_list = spec.get("positions", [-1])
+        v_traj = []
+        for word in spec.get("track", []):
+            tids = _token_ids(tok, word)
+            if not tids:
+                continue
+            tt = torch.tensor(tids)
+            for pos in pos_list:
+                abs_pos = pos % n
+                ranks = []
+                for layer in v_layers:
+                    order = v_logits[layer][abs_pos].argsort(
+                        descending=True)
+                    r = min((order == t).nonzero()[0, 0].item()
+                            for t in tt)
+                    ranks.append(r + 1)
+                v_traj.append({"word": word, "position": abs_pos,
+                               "layers": v_layers, "ranks": ranks})
+        agree = {}
+        for layer in v_layers:
+            hits = sum(
+                v_logits[layer][p % n].argmax().item()
+                == lens_logits[layer][p % n].argmax().item()
+                for p in pos_list)
+            agree[str(layer)] = round(hits / len(pos_list), 3)
+        vanilla = {"trajectories": v_traj, "top1_agreement": agree}
 
     # scan: best cells per candidate over the grid. scan_turns limits the
     # scan to the token span of the first N conversation messages (so a
@@ -393,7 +443,7 @@ def run(spec: dict) -> dict:
                    ("chat", "max_new", "positions", "track", "scan",
                     "scan_until", "scan_turns", "slice_last_n", "steer",
                     "template_kwargs", "film", "film_start", "max_seq_len",
-                    "lens_layers", "temperature", "seed")},
+                    "lens_layers", "temperature", "seed", "vanilla")},
         "extra_md": spec.get("extra_md"),
         "conversation": resolved,
         "generated": generated,
@@ -404,6 +454,7 @@ def run(spec: dict) -> dict:
                       "top1": tok.decode([top1]),
                       "layers": layers, "ranks": emergence},
         "scan": scan_results,
+        "vanilla": vanilla,
         "slice": slice_file,
         "film": film_file,
     }
