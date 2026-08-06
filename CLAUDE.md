@@ -53,8 +53,9 @@ he sets directions and expects designed-and-executed experiments back.
 - **New probe results always get committed and pushed to ALL configured
   remotes** (standing rule, 2026-08-06): after the site regen above,
   commit and `git remote | xargs -n1 git push` — don't wait to be asked.
-  (Currently only `origin` exists; the xargs form picks up any second
-  remote the moment it's added.)
+  Remotes: `origin` = Forgejo (LAN, 192.168.128.108, per
+  ~/Projects/forgejo-sync-prompt.md convention), `github` = GitHub
+  (public mirror, feeds the Vercel deploy).
 - Spec catalog: `probes/course.py` (Units 0–4, per-model) and
   `probes/unit5.py` (sediment/steering). Batch ids into ONE invocation —
   model load dominates runtime. Long runs: background + notification.
