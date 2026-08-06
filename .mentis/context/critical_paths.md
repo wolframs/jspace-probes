@@ -19,7 +19,7 @@ flowchart TD
     P0N5["file:affectviz.py"]
     P0N4 --> P0N5
   end
-  subgraph P1 ["med High-traffic: affect2.py"]
+  subgraph P1 ["high High-traffic: affect2.py"]
     P1N0["file:affect2.py"]
     P1N1["file:affect3.py"]
     P1N0 --> P1N1
@@ -32,7 +32,7 @@ flowchart TD
     P1N5["file:affect4.py"]
     P1N4 --> P1N5
   end
-  subgraph P2 ["med High-traffic: _load_vectors"]
+  subgraph P2 ["high High-traffic: _load_vectors"]
     P2N0["function:affect2.py:61"]
     P2N1["file:affect2.py"]
     P2N0 --> P2N1
@@ -64,19 +64,19 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: affect.py has 12 dependents — changes here have wide blast radius
+- **Description**: affect.py has 16 dependents — changes here have wide blast radius
 
 ## High-traffic: affect2.py
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect2.py has 18 dependents — changes here have wide blast radius
+- **Description**: affect2.py has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: _load_vectors
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _load_vectors has 18 dependents — changes here have wide blast radius
+- **Description**: _load_vectors has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: affect3.py
 
@@ -94,7 +94,7 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: mean has 16 dependents — changes here have wide blast radius
+- **Description**: mean has 17 dependents — changes here have wide blast radius
 
 ## High-traffic: deepen.py
 
@@ -124,19 +124,19 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: norm has 10 dependents — changes here have wide blast radius
+- **Description**: norm has 11 dependents — changes here have wide blast radius
 
 ## High-traffic: lab.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 84 dependents — changes here have wide blast radius
+- **Description**: lab.py has 88 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _strip_bos has 30 dependents — changes here have wide blast radius
+- **Description**: _strip_bos has 32 dependents — changes here have wide blast radius
 
 ## High-traffic: _token_ids
 
@@ -148,13 +148,13 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: get_model has 39 dependents — changes here have wide blast radius
+- **Description**: get_model has 43 dependents — changes here have wide blast radius
 
 ## High-traffic: run
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: run has 24 dependents — changes here have wide blast radius
+- **Description**: run has 26 dependents — changes here have wide blast radius
 
 ## High-traffic: Steering
 

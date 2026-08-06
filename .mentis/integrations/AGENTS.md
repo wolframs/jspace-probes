@@ -53,12 +53,12 @@ probes: 0 services, 0 APIs, 1 domains.
 - **Health score:** 85/100
 - **AI readiness:** 78/100
 
-Single Package with 52 source files across python. 0 packages detected. core domains: General.
+Single Package with 55 source files across python, javascript. 0 packages detected. core domains: General.
 
 ## Language Support
 
 Mnestis analyzed this repo with **52** supported languages engine-wide.
-Detected here: 1 language(s), 52 source files.
+Detected here: 2 language(s), 55 source files.
 
 Read `.mentis/context/README.md` for the full diagram index.
 Read `.mentis/context/languages.md` for file distribution charts and the parsing pipeline graph.
@@ -66,14 +66,15 @@ Read `.mentis/context/graphs.md` for domain, flow, dependency, and risk Mermaid 
 
 ```mermaid
 flowchart LR
-  D0["General (46)"]
+  D0["General (48)"]
 ```
 
 ### Language distribution (this repo)
 
 ```mermaid
 pie showData title Files by language
-    "python" : 52
+    "python" : 54
+    "javascript" : 1
 ```
 
 ### Extractor routing
@@ -202,13 +203,13 @@ mindmap
 
 ## Domains (start here)
 
-- **General** — Import-graph cluster of 46 files · `file:affect.py`, `file:affect2.py`, `file:affect3.py`
+- **General** — Import-graph cluster of 48 files · `file:affect.py`, `file:affect2.py`, `file:affect3.py`
 
 ## Critical Paths (edit carefully)
 
-- **High-traffic: affect.py** (medium risk) — affect.py has 12 dependents — changes here have wide blast radius
-- **High-traffic: affect2.py** (medium risk) — affect2.py has 18 dependents — changes here have wide blast radius
-- **High-traffic: _load_vectors** (medium risk) — _load_vectors has 18 dependents — changes here have wide blast radius
+- **High-traffic: affect.py** (medium risk) — affect.py has 16 dependents — changes here have wide blast radius
+- **High-traffic: affect2.py** (high risk) — affect2.py has 22 dependents — changes here have wide blast radius
+- **High-traffic: _load_vectors** (high risk) — _load_vectors has 22 dependents — changes here have wide blast radius
 - **High-traffic: affect3.py** (medium risk) — affect3.py has 12 dependents — changes here have wide blast radius
 - **High-traffic: AffectSteer** (medium risk) — AffectSteer has 14 dependents — changes here have wide blast radius
 

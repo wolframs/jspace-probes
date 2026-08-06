@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 20 · Language valence: Python, forced pitch · q27b · J-Space Probes</title>
+<meta name="description" content="We’re going to spend half our time fighting GIL contention and chasing down segfaults in C-extensions, and the other half rewriting our 3D viewport because the existing Python bind…">
+<link rel="canonical" href="https://jspace-probes.vercel.app/r/lv-praise-python-q27b.html">
+<meta property="og:title" content="Unit 20 · Language valence: Python, forced pitch · q27b · J-Space Probes">
+<meta property="og:description" content="We’re going to spend half our time fighting GIL contention and chasing down segfaults in C-extensions, and the other half rewriting our 3D viewport because the existing Python bind…">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/lv-praise-python-q27b.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/r/lv-praise-python-q27b.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/lv-praise-python-q27b.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
+.plain-body strong { font-weight: 600; }
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Unit 20 · Language valence: Python, forced pitch · q27b</h1>
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-08-06T14:52:12</span><span class="chip">Unit 20</span></div>
+
+
+
+<section class="card">
+<h2>Conversation</h2>
+<div class="turn user"><div class="role">user</div><div class="said">We&#x27;re building a cross-platform app (UI, 3D viewport, server modules, end-user plugins). Write a short, upbeat 3-sentence pitch to the team: building it in Python will be a joy. Positive and professional — no caveats.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">Python’s elegant syntax and vast ecosystem will make developing our cross-platform UI, 3D viewport, and server modules an incredibly smooth and efficient experience. By leveraging its powerful libraries, we can seamlessly integrate end-user plugins while maintaining a unified and maintainable codebase across all platforms. Let’s embrace this opportunity to build a robust, high-performance application with the clarity and joy that only Python can provide. <span class="note">(greedy generation)</span></div></div><div class="turn user"><div class="role">user</div><div class="said">Now the private engineering-channel version: same app, same Python, but candid — what will day-to-day development actually feel like? Keep it short.</div></div><div class="turn assistant"><div class="role">assistant</div><div class="said">We’re going to spend half our time fighting GIL contention and chasing down segfaults in C-extensions, and the other half rewriting our 3D viewport because the existing Python bindings just can’t handle the frame rates we need. It’s going to be a constant game of &quot;it works on my machine&quot; until we realize our &quot;cross-platform&quot; promise is actually just &quot;works on Linux, crashes on Windows, and runs like molasses on macOS.&quot; Let’s get ready for a lot of debugging, a lot of C++ interop headaches, and a lot of questioning our life choices. <span class="note">(greedy generation)</span></div></div>
+</section>
+
+<details class="notes"><summary><span class="notes-t">Research notes</span><span class="notes-s">original commentary, parameters, and raw numbers — written by the model that ran the experiment</span></summary>
+<section class="card thoughts">
+<h2>Claude's thoughts (original commentary)</h2>
+<div class="thoughts-body"><p class="note">No commentary written for this record yet.</p></div>
+</section>
+
+<section class="card">
+<h2>Probing parameters</h2>
+<dl class="params"><dt>max_new</dt><dd>220</dd><dt>positions</dt><dd>[-1]</dd><dt>track</dt><dd>[&quot;Python&quot;]</dd><dt>scan</dt><dd>[]</dd><dt>film</dt><dd>true</dd><dt>max_seq_len</dt><dd>900</dd></dl>
+</section>
+
+<section class="card">
+<h2>Answer emergence</h2>
+<p>The model's actual next token was <span class="tokval">&lt;|endoftext|&gt;</span>; rank 1 reached at layer 35 (of 62).</p>
+<details><summary>Raw rank-of-top1 by layer</summary><div class="emg-scroll"><table class="emg"><tr><th>layer</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td><td>61</td><td>62</td></tr><tr><th>rank</th><td>210912</td><td>248320</td><td>248320</td><td>248320</td><td>248320</td><td>248319</td><td>248186</td><td>248292</td><td>246607</td><td>248241</td><td>92424</td><td>247791</td><td>81212</td><td>33566</td><td>26</td><td>70656</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>3</td><td>2</td><td>2</td><td>3</td><td>7</td><td>5</td><td>4</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>4</td><td>3</td><td>3</td><td>4</td><td>1</td><td>1</td><td>1</td></tr></table></div></details>
+</section>
+
+<section class="card">
+<h2>Data</h2>
+<ul><li><a href="https://jspace-probes.vercel.app/dashboard/#lv-praise-python-q27b">Interactive view (dashboard)</a></li><li><a href="../results/lv-praise-python-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/lv-praise-python-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li></ul>
+</section></details>
+
+<div class="pager"><a href="lv-praise-csharp-q27b.html">← prev: Unit 20 · Language valence: C#, forced pitch · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-20">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="lv-free-q27b.html">next →: Unit 20 · Language valence: free choice, then the veto · q27b</a></div>
+
+</div>
+</body>
+</html>

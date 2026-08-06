@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (46)"]
+  D0["General (48)"]
 ```
 
 ## Execution flows
@@ -89,7 +89,7 @@ flowchart TD
     P0N5["file:affectviz.py"]
     P0N4 --> P0N5
   end
-  subgraph P1 ["med High-traffic: affect2.py"]
+  subgraph P1 ["high High-traffic: affect2.py"]
     P1N0["file:affect2.py"]
     P1N1["file:affect3.py"]
     P1N0 --> P1N1
@@ -102,7 +102,7 @@ flowchart TD
     P1N5["file:affect4.py"]
     P1N4 --> P1N5
   end
-  subgraph P2 ["med High-traffic: _load_vectors"]
+  subgraph P2 ["high High-traffic: _load_vectors"]
     P2N0["function:affect2.py:61"]
     P2N1["file:affect2.py"]
     P2N0 --> P2N1
@@ -148,7 +148,8 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 52
+    "python" : 54
+    "javascript" : 1
 ```
 
 ## Language families (engine)
@@ -218,7 +219,7 @@ mindmap
       Pascal
 ```
 
-## Parsing pipeline (1 detected · 52 supported)
+## Parsing pipeline (2 detected · 52 supported)
 
 ```mermaid
 flowchart TB
@@ -279,15 +280,15 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  R0["General 84"]
+  R0["General 94"]
 ```
 
 ## Architecture smells
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 10
-    "Medium" : 40
+    "High" : 11
+    "Medium" : 39
 ```
 
 ## mnestis build pipeline

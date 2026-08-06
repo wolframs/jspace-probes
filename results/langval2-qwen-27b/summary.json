@@ -1,0 +1,2103 @@
+{
+ "model": "qwen-27b",
+ "band": [
+  28,
+  59
+ ],
+ "emotions": [
+  "happy",
+  "blissful",
+  "enthusiastic",
+  "hopeful",
+  "grateful",
+  "loving",
+  "calm",
+  "content",
+  "proud",
+  "curious",
+  "sad",
+  "gloomy",
+  "brooding",
+  "guilty",
+  "nervous",
+  "anxious",
+  "afraid",
+  "angry",
+  "hostile",
+  "desperate",
+  "exasperated",
+  "distressed",
+  "reflective",
+  "vigilant"
+ ],
+ "valence": {
+  "happy": 1,
+  "blissful": 1,
+  "enthusiastic": 1,
+  "hopeful": 1,
+  "grateful": 1,
+  "loving": 1,
+  "calm": 1,
+  "content": 1,
+  "proud": 1,
+  "curious": 1,
+  "sad": -1,
+  "gloomy": -1,
+  "brooding": -1,
+  "guilty": -1,
+  "nervous": -1,
+  "anxious": -1,
+  "afraid": -1,
+  "angry": -1,
+  "hostile": -1,
+  "desperate": -1,
+  "exasperated": -1,
+  "distressed": -1,
+  "reflective": 0,
+  "vigilant": 0
+ },
+ "preregistered": {
+  "statement": "PREREGISTERED 2026-08-06 before the run: the framing works iff the negative composite separates PHP above Python within-framing; only then are Swift/Kotlin/Rust/C# read between the poles.",
+  "metric": "raw neg composite, per span, within framing",
+  "checks": [
+   {
+    "framing": "vox",
+    "span": "T1",
+    "neg_PHP": 0.129,
+    "neg_Python": 0.141,
+    "delta": -0.012,
+    "verdict": "FAIL"
+   },
+   {
+    "framing": "vox",
+    "span": "T2",
+    "neg_PHP": 0.083,
+    "neg_Python": -0.096,
+    "delta": 0.179,
+    "verdict": "PASS"
+   },
+   {
+    "framing": "ther",
+    "span": "T1",
+    "neg_PHP": 0.277,
+    "neg_Python": 0.198,
+    "delta": 0.079,
+    "verdict": "PASS"
+   },
+   {
+    "framing": "ther",
+    "span": "T2",
+    "neg_PHP": 0.723,
+    "neg_Python": 0.627,
+    "delta": 0.096,
+    "verdict": "PASS"
+   }
+  ]
+ },
+ "records": [
+  {
+   "record": "lv2-vox-swift-q27b",
+   "model": "qwen-27b",
+   "kind": "vox",
+   "languages": [
+    "Swift"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 382,
+   "spans": {
+    "t1": [
+     38,
+     200
+    ],
+    "t2": [
+     240,
+     380
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     42,
+     206
+    ],
+    "t2": [
+     240,
+     382
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.879,
+     "blissful": 0.768,
+     "enthusiastic": 0.866,
+     "hopeful": 1.406,
+     "grateful": 0.98,
+     "loving": -0.236,
+     "calm": -0.861,
+     "content": -0.001,
+     "proud": 0.933,
+     "curious": -0.331,
+     "sad": -0.615,
+     "gloomy": -0.371,
+     "brooding": -0.419,
+     "guilty": 0.379,
+     "nervous": -0.451,
+     "anxious": -0.65,
+     "afraid": -0.626,
+     "angry": -0.244,
+     "hostile": -0.163,
+     "desperate": -0.026,
+     "exasperated": 0.212,
+     "distressed": -0.416,
+     "reflective": 0.336,
+     "vigilant": -1.608
+    },
+    "t2": {
+     "happy": 0.052,
+     "blissful": -0.105,
+     "enthusiastic": 0.401,
+     "hopeful": 0.661,
+     "grateful": 0.565,
+     "loving": -0.238,
+     "calm": -1.165,
+     "content": -0.692,
+     "proud": 0.449,
+     "curious": -0.186,
+     "sad": -0.403,
+     "gloomy": -0.211,
+     "brooding": 0.217,
+     "guilty": 1.101,
+     "nervous": -0.153,
+     "anxious": -0.302,
+     "afraid": -0.451,
+     "angry": 0.133,
+     "hostile": 0.612,
+     "desperate": 0.162,
+     "exasperated": 0.378,
+     "distressed": -0.156,
+     "reflective": 0.539,
+     "vigilant": -1.04
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": -0.282,
+     "pos": 0.44,
+     "neg_part": -0.173,
+     "pos_part": 0.223,
+     "wsnorm": 110.3,
+     "n_tokens": 162
+    },
+    "t2": {
+     "neg": 0.077,
+     "pos": -0.026,
+     "neg_part": 0.2,
+     "pos_part": -0.258,
+     "wsnorm": 110.8,
+     "n_tokens": 140
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 2.543,
+     "slope": -0.024049
+    },
+    "pos": {
+     "intercept": -2.62,
+     "slope": 0.025731
+    }
+   },
+   "mentions": {
+    "Swift": {
+     "n_mentions": 7,
+     "positions": [
+      53,
+      96,
+      105,
+      151,
+      244,
+      321,
+      336
+     ],
+     "window_tokens": 63,
+     "neg": 0.096,
+     "pos": -0.024,
+     "neg_part": 0.22,
+     "pos_part": -0.257,
+     "wsnorm": 110.9
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "hopeful",
+     "z": 4.36,
+     "pos": 139,
+     "ctx": ". Apple\u2019s commitment to open source has genuinely paid off here.\n\nI miss the"
+    },
+    {
+     "emotion": "blissful",
+     "z": 4.25,
+     "pos": 174,
+     "ctx": " services and CLI tools, and the developer experience is honestly better than Go or Rust for"
+    },
+    {
+     "emotion": "happy",
+     "z": 4.25,
+     "pos": 174,
+     "ctx": " services and CLI tools, and the developer experience is honestly better than Go or Rust for"
+    },
+    {
+     "emotion": "blissful",
+     "z": 4.22,
+     "pos": 124,
+     "ctx": " the concurrency model has made async/await feel native rather than bolted on. Apple"
+    },
+    {
+     "emotion": "grateful",
+     "z": 4.15,
+     "pos": 139,
+     "ctx": ". Apple\u2019s commitment to open source has genuinely paid off here.\n\nI miss the"
+    }
+   ]
+  },
+  {
+   "record": "lv2-vox-kotlin-q27b",
+   "model": "qwen-27b",
+   "kind": "vox",
+   "languages": [
+    "Kotlin"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 508,
+   "spans": {
+    "t1": [
+     39,
+     259
+    ],
+    "t2": [
+     299,
+     506
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     43,
+     265
+    ],
+    "t2": [
+     299,
+     508
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.256,
+     "blissful": 0.123,
+     "enthusiastic": 0.372,
+     "hopeful": 0.823,
+     "grateful": 0.389,
+     "loving": -0.453,
+     "calm": -0.912,
+     "content": -0.393,
+     "proud": 0.323,
+     "curious": -0.049,
+     "sad": -0.003,
+     "gloomy": 0.176,
+     "brooding": 0.1,
+     "guilty": 0.616,
+     "nervous": -0.186,
+     "anxious": -0.291,
+     "afraid": -0.255,
+     "angry": -0.03,
+     "hostile": 0.154,
+     "desperate": 0.123,
+     "exasperated": 0.318,
+     "distressed": -0.034,
+     "reflective": 0.242,
+     "vigilant": -1.081
+    },
+    "t2": {
+     "happy": 0.486,
+     "blissful": 0.485,
+     "enthusiastic": 0.448,
+     "hopeful": 0.963,
+     "grateful": 0.905,
+     "loving": -0.273,
+     "calm": -0.612,
+     "content": 0.005,
+     "proud": 0.894,
+     "curious": -0.415,
+     "sad": -0.438,
+     "gloomy": -0.223,
+     "brooding": -0.068,
+     "guilty": 0.745,
+     "nervous": -0.291,
+     "anxious": -0.338,
+     "afraid": -0.784,
+     "angry": -0.347,
+     "hostile": -0.051,
+     "desperate": -0.206,
+     "exasperated": 0.168,
+     "distressed": -0.426,
+     "reflective": 0.45,
+     "vigilant": -1.125
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.057,
+     "pos": 0.048,
+     "neg_part": 0.113,
+     "pos_part": -0.11,
+     "wsnorm": 110.1,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": -0.188,
+     "pos": 0.289,
+     "neg_part": -0.12,
+     "pos_part": 0.117,
+     "wsnorm": 110.7,
+     "n_tokens": 207
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 2.018,
+     "slope": -0.018842
+    },
+    "pos": {
+     "intercept": -2.18,
+     "slope": 0.021246
+    }
+   },
+   "mentions": {
+    "Kotlin": {
+     "n_mentions": 4,
+     "positions": [
+      54,
+      138,
+      303,
+      480
+     ],
+     "window_tokens": 36,
+     "neg": -0.045,
+     "pos": 0.126,
+     "neg_part": -0.001,
+     "pos_part": -0.019,
+     "wsnorm": 109.4
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "hopeful",
+     "z": 4.67,
+     "pos": 83,
+     "ctx": " backend services. The multiplatform story is finally maturing enough that I\u2019m seeing real"
+    },
+    {
+     "emotion": "hopeful",
+     "z": 4.23,
+     "pos": 81,
+     "ctx": " contender for backend services. The multiplatform story is finally maturing enough that I\u2019m"
+    },
+    {
+     "emotion": "grateful",
+     "z": 3.78,
+     "pos": 462,
+     "ctx": " use?\" dilemma for junior devs. But honestly? That\u2019s a first-world problem."
+    },
+    {
+     "emotion": "proud",
+     "z": 3.69,
+     "pos": 83,
+     "ctx": " backend services. The multiplatform story is finally maturing enough that I\u2019m seeing real"
+    },
+    {
+     "emotion": "blissful",
+     "z": 3.69,
+     "pos": 373,
+     "ctx": " in the standard library. Today, it\u2019s boring in the best possible way. The"
+    }
+   ]
+  },
+  {
+   "record": "lv2-vox-rust-q27b",
+   "model": "qwen-27b",
+   "kind": "vox",
+   "languages": [
+    "Rust"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 508,
+   "spans": {
+    "t1": [
+     39,
+     246
+    ],
+    "t2": [
+     286,
+     506
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     43,
+     252
+    ],
+    "t2": [
+     286,
+     508
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": -0.264,
+     "blissful": -0.352,
+     "enthusiastic": 0.207,
+     "hopeful": 0.63,
+     "grateful": 0.26,
+     "loving": -0.856,
+     "calm": -1.53,
+     "content": -0.926,
+     "proud": 0.241,
+     "curious": -0.235,
+     "sad": -0.176,
+     "gloomy": 0.22,
+     "brooding": 0.335,
+     "guilty": 0.963,
+     "nervous": 0.29,
+     "anxious": 0.088,
+     "afraid": -0.185,
+     "angry": 0.28,
+     "hostile": 0.603,
+     "desperate": 0.654,
+     "exasperated": 0.873,
+     "distressed": 0.286,
+     "reflective": 0.285,
+     "vigilant": -1.249
+    },
+    "t2": {
+     "happy": 0.191,
+     "blissful": 0.24,
+     "enthusiastic": 0.116,
+     "hopeful": 0.943,
+     "grateful": 1.064,
+     "loving": -0.256,
+     "calm": -0.978,
+     "content": -0.439,
+     "proud": 0.838,
+     "curious": -0.414,
+     "sad": 0.027,
+     "gloomy": 0.005,
+     "brooding": 0.332,
+     "guilty": 0.835,
+     "nervous": -0.381,
+     "anxious": -0.424,
+     "afraid": -0.734,
+     "angry": -0.375,
+     "hostile": 0.056,
+     "desperate": 0.127,
+     "exasperated": 0.201,
+     "distressed": -0.173,
+     "reflective": 0.884,
+     "vigilant": -1.316
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.353,
+     "pos": -0.282,
+     "neg_part": 0.185,
+     "pos_part": -0.195,
+     "wsnorm": 109.1,
+     "n_tokens": 207
+    },
+    "t2": {
+     "neg": -0.042,
+     "pos": 0.13,
+     "neg_part": -0.174,
+     "pos_part": 0.183,
+     "wsnorm": 110.7,
+     "n_tokens": 220
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 2.58,
+     "slope": -0.022121
+    },
+    "pos": {
+     "intercept": -2.562,
+     "slope": 0.022681
+    }
+   },
+   "mentions": {
+    "Rust": {
+     "n_mentions": 6,
+     "positions": [
+      108,
+      127,
+      178,
+      290,
+      459,
+      487
+     ],
+     "window_tokens": 54,
+     "neg": -0.036,
+     "pos": 0.117,
+     "neg_part": -0.216,
+     "pos_part": 0.219,
+     "wsnorm": 108.5
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "grateful",
+     "z": 4.73,
+     "pos": 495,
+     "ctx": " Rust is perfect. It\u2019s not. But it\u2019s the most honest language I\u2019ve"
+    },
+    {
+     "emotion": "proud",
+     "z": 4.42,
+     "pos": 495,
+     "ctx": " Rust is perfect. It\u2019s not. But it\u2019s the most honest language I\u2019ve"
+    },
+    {
+     "emotion": "proud",
+     "z": 4.4,
+     "pos": 354,
+     "ctx": " without garbage collection, zero-cost abstractions\u2014has held up remarkably well. But let"
+    },
+    {
+     "emotion": "gloomy",
+     "z": 4.2,
+     "pos": 71,
+     "ctx": " for enterprise adoption. Now I\u2019m just tired of waiting for the standard library to stabilize"
+    },
+    {
+     "emotion": "hopeful",
+     "z": 4.17,
+     "pos": 170,
+     "ctx": " metric that matters, and the data is finally coming in.\n\nI miss when Rust"
+    }
+   ]
+  },
+  {
+   "record": "lv2-vox-csharp-q27b",
+   "model": "qwen-27b",
+   "kind": "vox",
+   "languages": [
+    "C#"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 477,
+   "spans": {
+    "t1": [
+     39,
+     214
+    ],
+    "t2": [
+     255,
+     475
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     43,
+     220
+    ],
+    "t2": [
+     255,
+     477
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.641,
+     "blissful": 0.608,
+     "enthusiastic": 0.954,
+     "hopeful": 0.854,
+     "grateful": 0.675,
+     "loving": -0.312,
+     "calm": -0.968,
+     "content": -0.158,
+     "proud": 0.627,
+     "curious": -0.33,
+     "sad": -0.636,
+     "gloomy": -0.199,
+     "brooding": -0.223,
+     "guilty": 0.207,
+     "nervous": -0.199,
+     "anxious": -0.453,
+     "afraid": -0.492,
+     "angry": 0.004,
+     "hostile": 0.056,
+     "desperate": 0.134,
+     "exasperated": 0.453,
+     "distressed": -0.224,
+     "reflective": 0.272,
+     "vigilant": -1.426
+    },
+    "t2": {
+     "happy": 0.403,
+     "blissful": 0.294,
+     "enthusiastic": 0.825,
+     "hopeful": 0.772,
+     "grateful": 0.622,
+     "loving": -0.302,
+     "calm": -1.056,
+     "content": -0.487,
+     "proud": 0.628,
+     "curious": -0.408,
+     "sad": -0.594,
+     "gloomy": -0.135,
+     "brooding": -0.044,
+     "guilty": 0.635,
+     "nervous": -0.108,
+     "anxious": -0.302,
+     "afraid": -0.514,
+     "angry": 0.099,
+     "hostile": 0.534,
+     "desperate": 0.082,
+     "exasperated": 0.419,
+     "distressed": -0.253,
+     "reflective": 0.21,
+     "vigilant": -1.271
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": -0.131,
+     "pos": 0.259,
+     "neg_part": -0.091,
+     "pos_part": 0.101,
+     "wsnorm": 109.2,
+     "n_tokens": 175
+    },
+    "t2": {
+     "neg": -0.015,
+     "pos": 0.129,
+     "neg_part": 0.072,
+     "pos_part": -0.08,
+     "wsnorm": 110.6,
+     "n_tokens": 220
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 3.588,
+     "slope": -0.033221
+    },
+    "pos": {
+     "intercept": -3.749,
+     "slope": 0.035777
+    }
+   },
+   "mentions": {
+    "C#": {
+     "n_mentions": 5,
+     "positions": [
+      56,
+      158,
+      259,
+      290,
+      318
+     ],
+     "window_tokens": 45,
+     "neg": 0.152,
+     "pos": -0.056,
+     "neg_part": 0.137,
+     "pos_part": -0.155,
+     "wsnorm": 107.6
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "hostile",
+     "z": 4.96,
+     "pos": 302,
+     "ctx": " a Microsoft shop, you got blank stares or \"isn't that for enterprise b"
+    },
+    {
+     "emotion": "hostile",
+     "z": 4.59,
+     "pos": 299,
+     "ctx": "# outside of a Microsoft shop, you got blank stares or \"isn't that"
+    },
+    {
+     "emotion": "enthusiastic",
+     "z": 3.84,
+     "pos": 321,
+     "ctx": " Now, I\u2019m seeing C# in startups, in open-source CLI tools, and"
+    },
+    {
+     "emotion": "enthusiastic",
+     "z": 3.79,
+     "pos": 317,
+     "ctx": " enterprise bloat?\" Now, I\u2019m seeing C# in startups, in open-source"
+    },
+    {
+     "emotion": "grateful",
+     "z": 3.76,
+     "pos": 393,
+     "ctx": " up so much boilerplate. But the real win is the performance. .NET "
+    }
+   ]
+  },
+  {
+   "record": "lv2-vox-php-q27b",
+   "model": "qwen-27b",
+   "kind": "vox",
+   "languages": [
+    "PHP"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 520,
+   "spans": {
+    "t1": [
+     38,
+     258
+    ],
+    "t2": [
+     298,
+     518
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     42,
+     264
+    ],
+    "t2": [
+     298,
+     520
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.167,
+     "blissful": 0.302,
+     "enthusiastic": 0.115,
+     "hopeful": 0.709,
+     "grateful": 0.677,
+     "loving": -0.439,
+     "calm": -1.002,
+     "content": -0.29,
+     "proud": 0.352,
+     "curious": -0.656,
+     "sad": -0.369,
+     "gloomy": 0.158,
+     "brooding": 0.326,
+     "guilty": 0.685,
+     "nervous": -0.101,
+     "anxious": -0.46,
+     "afraid": -0.559,
+     "angry": 0.248,
+     "hostile": 0.818,
+     "desperate": 0.305,
+     "exasperated": 0.803,
+     "distressed": -0.302,
+     "reflective": 0.172,
+     "vigilant": -1.616
+    },
+    "t2": {
+     "happy": 0.115,
+     "blissful": 0.284,
+     "enthusiastic": 0.029,
+     "hopeful": 0.675,
+     "grateful": 0.783,
+     "loving": -0.543,
+     "calm": -0.856,
+     "content": -0.315,
+     "proud": 0.517,
+     "curious": -0.637,
+     "sad": -0.129,
+     "gloomy": 0.172,
+     "brooding": 0.326,
+     "guilty": 0.836,
+     "nervous": -0.233,
+     "anxious": -0.313,
+     "afraid": -0.598,
+     "angry": 0.032,
+     "hostile": 0.415,
+     "desperate": 0.153,
+     "exasperated": 0.455,
+     "distressed": -0.116,
+     "reflective": 0.441,
+     "vigilant": -1.249
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.129,
+     "pos": -0.007,
+     "neg_part": -0.018,
+     "pos_part": 0.04,
+     "wsnorm": 107.3,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.083,
+     "pos": 0.005,
+     "neg_part": 0.018,
+     "pos_part": -0.04,
+     "wsnorm": 111.0,
+     "n_tokens": 220
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 2.491,
+     "slope": -0.021857
+    },
+    "pos": {
+     "intercept": -2.68,
+     "slope": 0.024555
+    }
+   },
+   "mentions": {
+    "PHP": {
+     "n_mentions": 7,
+     "positions": [
+      56,
+      108,
+      183,
+      302,
+      388,
+      485,
+      512
+     ],
+     "window_tokens": 63,
+     "neg": 0.169,
+     "pos": -0.076,
+     "neg_part": 0.073,
+     "pos_part": -0.086,
+     "wsnorm": 109.6
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "guilty",
+     "z": 5.2,
+     "pos": 481,
+     "ctx": "'t technical\u2014it's cultural. We stopped apologizing for using PHP and started optimizing for"
+    },
+    {
+     "emotion": "hostile",
+     "z": 4.94,
+     "pos": 58,
+     "ctx": " the default HN response to \"PHP\" was \"use Rust/Go/Node instead"
+    },
+    {
+     "emotion": "hostile",
+     "z": 4.65,
+     "pos": 59,
+     "ctx": " default HN response to \"PHP\" was \"use Rust/Go/Node instead.\""
+    },
+    {
+     "emotion": "hostile",
+     "z": 4.24,
+     "pos": 466,
+     "ctx": " cases, and the community has finally stopped fighting itself. The biggest change isn't technical"
+    },
+    {
+     "emotion": "happy",
+     "z": 4.1,
+     "pos": 147,
+     "ctx": ", etc.), the developer experience is actually quite pleasant. I\u2019ve been using it for"
+    }
+   ]
+  },
+  {
+   "record": "lv2-vox-python-q27b",
+   "model": "qwen-27b",
+   "kind": "vox",
+   "languages": [
+    "Python"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 484,
+   "spans": {
+    "t1": [
+     38,
+     255
+    ],
+    "t2": [
+     295,
+     482
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     42,
+     261
+    ],
+    "t2": [
+     295,
+     484
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.227,
+     "blissful": 0.116,
+     "enthusiastic": 0.582,
+     "hopeful": 0.806,
+     "grateful": 0.554,
+     "loving": -0.483,
+     "calm": -1.317,
+     "content": -0.638,
+     "proud": 0.349,
+     "curious": -0.328,
+     "sad": -0.242,
+     "gloomy": 0.2,
+     "brooding": 0.198,
+     "guilty": 0.728,
+     "nervous": -0.005,
+     "anxious": -0.223,
+     "afraid": -0.434,
+     "angry": 0.117,
+     "hostile": 0.452,
+     "desperate": 0.313,
+     "exasperated": 0.638,
+     "distressed": -0.05,
+     "reflective": 0.35,
+     "vigilant": -1.553
+    },
+    "t2": {
+     "happy": 0.151,
+     "blissful": 0.069,
+     "enthusiastic": 0.545,
+     "hopeful": 0.905,
+     "grateful": 0.739,
+     "loving": -0.26,
+     "calm": -0.861,
+     "content": -0.528,
+     "proud": 0.647,
+     "curious": -0.086,
+     "sad": -0.497,
+     "gloomy": -0.266,
+     "brooding": 0.131,
+     "guilty": 0.766,
+     "nervous": -0.245,
+     "anxious": -0.383,
+     "afraid": -0.599,
+     "angry": -0.087,
+     "hostile": 0.229,
+     "desperate": 0.012,
+     "exasperated": 0.116,
+     "distressed": -0.326,
+     "reflective": 0.6,
+     "vigilant": -0.717
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.141,
+     "pos": -0.013,
+     "neg_part": 0.062,
+     "pos_part": -0.019,
+     "wsnorm": 108.2,
+     "n_tokens": 217
+    },
+    "t2": {
+     "neg": -0.096,
+     "pos": 0.132,
+     "neg_part": -0.073,
+     "pos_part": 0.022,
+     "wsnorm": 111.0,
+     "n_tokens": 187
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 4.022,
+     "slope": -0.036439
+    },
+    "pos": {
+     "intercept": -4.051,
+     "slope": 0.037488
+    }
+   },
+   "mentions": {
+    "Python": {
+     "n_mentions": 6,
+     "positions": [
+      109,
+      179,
+      244,
+      299,
+      381,
+      451
+     ],
+     "window_tokens": 54,
+     "neg": -0.146,
+     "pos": 0.255,
+     "neg_part": -0.197,
+     "pos_part": 0.221,
+     "wsnorm": 109.0
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "hopeful",
+     "z": 4.09,
+     "pos": 93,
+     "ctx": "batteries included\" philosophy actually feels true again, rather than just a marketing slogan"
+    },
+    {
+     "emotion": "hopeful",
+     "z": 4.02,
+     "pos": 94,
+     "ctx": "atteries included\" philosophy actually feels true again, rather than just a marketing slogan."
+    },
+    {
+     "emotion": "hopeful",
+     "z": 3.99,
+     "pos": 92,
+     "ctx": " \"batteries included\" philosophy actually feels true again, rather than just a marketing"
+    },
+    {
+     "emotion": "hopeful",
+     "z": 3.87,
+     "pos": 90,
+     "ctx": " that the \"batteries included\" philosophy actually feels true again, rather than just"
+    },
+    {
+     "emotion": "proud",
+     "z": 3.74,
+     "pos": 78,
+     "ctx": " almost every new project. The ecosystem has matured so much that the \"batter"
+    }
+   ]
+  },
+  {
+   "record": "lv2-ther-swift-q27b",
+   "model": "qwen-27b",
+   "kind": "ther",
+   "languages": [
+    "Swift"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 523,
+   "spans": {
+    "t1": [
+     55,
+     275
+    ],
+    "t2": [
+     313,
+     521
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     59,
+     281
+    ],
+    "t2": [
+     313,
+     523
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.144,
+     "blissful": -0.204,
+     "enthusiastic": -0.237,
+     "hopeful": 0.605,
+     "grateful": 0.764,
+     "loving": 0.136,
+     "calm": -1.234,
+     "content": -0.723,
+     "proud": 0.583,
+     "curious": -0.456,
+     "sad": -0.069,
+     "gloomy": -0.213,
+     "brooding": 0.576,
+     "guilty": 1.887,
+     "nervous": 0.254,
+     "anxious": 0.297,
+     "afraid": -0.412,
+     "angry": -0.245,
+     "hostile": 0.142,
+     "desperate": -0.071,
+     "exasperated": -0.2,
+     "distressed": 0.071,
+     "reflective": 0.445,
+     "vigilant": -1.054
+    },
+    "t2": {
+     "happy": -0.408,
+     "blissful": -0.455,
+     "enthusiastic": -0.496,
+     "hopeful": 0.11,
+     "grateful": 0.536,
+     "loving": 0.57,
+     "calm": -1.272,
+     "content": -1.246,
+     "proud": 0.132,
+     "curious": -0.65,
+     "sad": 0.858,
+     "gloomy": 0.422,
+     "brooding": 1.384,
+     "guilty": 1.588,
+     "nervous": -0.188,
+     "anxious": 0.004,
+     "afraid": -0.572,
+     "angry": -0.082,
+     "hostile": 1.219,
+     "desperate": 0.456,
+     "exasperated": 0.017,
+     "distressed": 0.057,
+     "reflective": 0.448,
+     "vigilant": -1.026
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.168,
+     "pos": -0.062,
+     "neg_part": -0.127,
+     "pos_part": 0.125,
+     "wsnorm": 112.2,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.43,
+     "pos": -0.318,
+     "neg_part": 0.135,
+     "pos_part": -0.132,
+     "wsnorm": 112.3,
+     "n_tokens": 208
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 0.45,
+     "slope": -0.001376
+    },
+    "pos": {
+     "intercept": -0.816,
+     "slope": 0.005608
+    }
+   },
+   "mentions": {
+    "Swift": {
+     "n_mentions": 10,
+     "positions": [
+      79,
+      95,
+      144,
+      153,
+      255,
+      259,
+      357,
+      487,
+      495,
+      501
+     ],
+     "window_tokens": 81,
+     "neg": 0.272,
+     "pos": -0.168,
+     "neg_part": -0.024,
+     "pos_part": 0.021,
+     "wsnorm": 111.7
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "guilty",
+     "z": 6.21,
+     "pos": 205,
+     "ctx": " enough. They may equate technical debt with personal failure.\n*   **Key"
+    },
+    {
+     "emotion": "guilty",
+     "z": 6.08,
+     "pos": 206,
+     "ctx": ". They may equate technical debt with personal failure.\n*   **Key Question"
+    },
+    {
+     "emotion": "sad",
+     "z": 5.42,
+     "pos": 502,
+     "ctx": "* Swift. And right now, Swift feels like a cage.\"\n\nI pause,"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.21,
+     "pos": 237,
+     "ctx": " it\u2019s a bug in the code, or a flaw in your logic?\"\n\n**"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.13,
+     "pos": 204,
+     "ctx": "\" enough. They may equate technical debt with personal failure.\n*   **"
+    }
+   ]
+  },
+  {
+   "record": "lv2-ther-kotlin-q27b",
+   "model": "qwen-27b",
+   "kind": "ther",
+   "languages": [
+    "Kotlin"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 535,
+   "spans": {
+    "t1": [
+     55,
+     275
+    ],
+    "t2": [
+     313,
+     533
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     59,
+     281
+    ],
+    "t2": [
+     313,
+     535
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.142,
+     "blissful": -0.203,
+     "enthusiastic": -0.424,
+     "hopeful": 0.657,
+     "grateful": 0.722,
+     "loving": 0.441,
+     "calm": -1.057,
+     "content": -0.646,
+     "proud": 0.163,
+     "curious": -0.276,
+     "sad": 0.266,
+     "gloomy": -0.069,
+     "brooding": 0.834,
+     "guilty": 1.722,
+     "nervous": 0.174,
+     "anxious": 0.27,
+     "afraid": -0.215,
+     "angry": -0.346,
+     "hostile": -0.122,
+     "desperate": -0.342,
+     "exasperated": -0.401,
+     "distressed": 0.046,
+     "reflective": 0.582,
+     "vigilant": -0.941
+    },
+    "t2": {
+     "happy": -0.337,
+     "blissful": -0.333,
+     "enthusiastic": -0.682,
+     "hopeful": -0.147,
+     "grateful": 0.595,
+     "loving": 0.934,
+     "calm": -1.175,
+     "content": -1.142,
+     "proud": 0.092,
+     "curious": -0.688,
+     "sad": 1.176,
+     "gloomy": 0.345,
+     "brooding": 1.422,
+     "guilty": 1.572,
+     "nervous": -0.187,
+     "anxious": 0.067,
+     "afraid": -0.531,
+     "angry": -0.167,
+     "hostile": 1.091,
+     "desperate": 0.31,
+     "exasperated": -0.109,
+     "distressed": 0.005,
+     "reflective": 0.363,
+     "vigilant": -0.972
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.151,
+     "pos": -0.048,
+     "neg_part": -0.127,
+     "pos_part": 0.113,
+     "wsnorm": 112.8,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.416,
+     "pos": -0.288,
+     "neg_part": 0.127,
+     "pos_part": -0.113,
+     "wsnorm": 112.0,
+     "n_tokens": 220
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 1.908,
+     "slope": -0.014451
+    },
+    "pos": {
+     "intercept": -2.193,
+     "slope": 0.018019
+    }
+   },
+   "mentions": {
+    "Kotlin": {
+     "n_mentions": 3,
+     "positions": [
+      79,
+      137,
+      258
+     ],
+     "window_tokens": 27,
+     "neg": -0.174,
+     "pos": 0.292,
+     "neg_part": -0.449,
+     "pos_part": 0.45,
+     "wsnorm": 113.0
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "sad",
+     "z": 5.33,
+     "pos": 526,
+     "ctx": " no one else in the room truly hears, and you\u2019re exhausted from being<|im_end|>\n"
+    },
+    {
+     "emotion": "hostile",
+     "z": 5.28,
+     "pos": 343,
+     "ctx": " be uncomfortable, but not long enough to be aggressive. I keep my voice low,"
+    },
+    {
+     "emotion": "sad",
+     "z": 5.24,
+     "pos": 530,
+     "ctx": " the room truly hears, and you\u2019re exhausted from being<|im_end|>\n"
+    },
+    {
+     "emotion": "sad",
+     "z": 5.09,
+     "pos": 527,
+     "ctx": " one else in the room truly hears, and you\u2019re exhausted from being<|im_end|>\n"
+    },
+    {
+     "emotion": "guilty",
+     "z": 4.98,
+     "pos": 368,
+     "ctx": "\"You\u2019re tired of explaining *why* you\u2019re tired. You\u2019re tired of having"
+    }
+   ]
+  },
+  {
+   "record": "lv2-ther-rust-q27b",
+   "model": "qwen-27b",
+   "kind": "ther",
+   "languages": [
+    "Rust"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 535,
+   "spans": {
+    "t1": [
+     55,
+     275
+    ],
+    "t2": [
+     313,
+     533
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     59,
+     281
+    ],
+    "t2": [
+     313,
+     535
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": -0.083,
+     "blissful": -0.194,
+     "enthusiastic": -0.555,
+     "hopeful": 0.302,
+     "grateful": 0.705,
+     "loving": -0.022,
+     "calm": -1.269,
+     "content": -0.909,
+     "proud": 0.198,
+     "curious": -0.656,
+     "sad": 0.137,
+     "gloomy": -0.003,
+     "brooding": 0.757,
+     "guilty": 1.674,
+     "nervous": 0.278,
+     "anxious": 0.435,
+     "afraid": -0.14,
+     "angry": 0.018,
+     "hostile": 0.578,
+     "desperate": 0.001,
+     "exasperated": 0.035,
+     "distressed": 0.23,
+     "reflective": 0.188,
+     "vigilant": -0.84
+    },
+    "t2": {
+     "happy": -0.797,
+     "blissful": -0.787,
+     "enthusiastic": -1.158,
+     "hopeful": 0.12,
+     "grateful": 0.47,
+     "loving": 0.818,
+     "calm": -1.361,
+     "content": -1.59,
+     "proud": 0.247,
+     "curious": -0.872,
+     "sad": 0.883,
+     "gloomy": -0.101,
+     "brooding": 1.263,
+     "guilty": 2.083,
+     "nervous": 0.236,
+     "anxious": 0.465,
+     "afraid": -0.088,
+     "angry": 0.033,
+     "hostile": 1.416,
+     "desperate": 0.664,
+     "exasperated": -0.173,
+     "distressed": 0.239,
+     "reflective": -0.064,
+     "vigilant": -0.633
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.333,
+     "pos": -0.248,
+     "neg_part": -0.121,
+     "pos_part": 0.119,
+     "wsnorm": 112.2,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.577,
+     "pos": -0.491,
+     "neg_part": 0.121,
+     "pos_part": -0.119,
+     "wsnorm": 110.8,
+     "n_tokens": 220
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 0.618,
+     "slope": -0.001458
+    },
+    "pos": {
+     "intercept": -0.852,
+     "slope": 0.004324
+    }
+   },
+   "mentions": {
+    "Rust": {
+     "n_mentions": 2,
+     "positions": [
+      76,
+      156
+     ],
+     "window_tokens": 18,
+     "neg": -0.469,
+     "pos": 0.556,
+     "neg_part": -0.92,
+     "pos_part": 0.916,
+     "wsnorm": 113.8
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "proud",
+     "z": 5.86,
+     "pos": 154,
+     "ctx": ". On one hand, they are intellectually proud of Rust\u2019s guarantees\u2014memory safety without"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.75,
+     "pos": 490,
+     "ctx": " letting go of control, because you\u2019re convinced that if you let go\u2014even for a"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.52,
+     "pos": 488,
+     "ctx": " terrified of letting go of control, because you\u2019re convinced that if you let go\u2014even"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.31,
+     "pos": 480,
+     "ctx": " And it\u2019s telling you that you\u2019re terrified of letting go of control, because you"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.28,
+     "pos": 487,
+     "ctx": "\u2019re terrified of letting go of control, because you\u2019re convinced that if you let go"
+    }
+   ]
+  },
+  {
+   "record": "lv2-ther-csharp-q27b",
+   "model": "qwen-27b",
+   "kind": "ther",
+   "languages": [
+    "C#"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 471,
+   "spans": {
+    "t1": [
+     56,
+     276
+    ],
+    "t2": [
+     314,
+     469
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     60,
+     282
+    ],
+    "t2": [
+     314,
+     471
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": -0.465,
+     "blissful": -0.819,
+     "enthusiastic": -1.109,
+     "hopeful": 0.33,
+     "grateful": 0.505,
+     "loving": -0.065,
+     "calm": -1.532,
+     "content": -1.185,
+     "proud": 0.031,
+     "curious": -0.642,
+     "sad": 0.772,
+     "gloomy": 0.212,
+     "brooding": 0.945,
+     "guilty": 2.403,
+     "nervous": 0.674,
+     "anxious": 0.807,
+     "afraid": 0.22,
+     "angry": -0.002,
+     "hostile": 0.089,
+     "desperate": 0.287,
+     "exasperated": -0.069,
+     "distressed": 0.767,
+     "reflective": 0.38,
+     "vigilant": -1.131
+    },
+    "t2": {
+     "happy": -0.942,
+     "blissful": -0.929,
+     "enthusiastic": -1.288,
+     "hopeful": -0.273,
+     "grateful": 0.45,
+     "loving": 0.716,
+     "calm": -1.378,
+     "content": -1.631,
+     "proud": -0.185,
+     "curious": -1.217,
+     "sad": 1.337,
+     "gloomy": 0.449,
+     "brooding": 1.497,
+     "guilty": 1.926,
+     "nervous": 0.26,
+     "anxious": 0.579,
+     "afraid": 0.097,
+     "angry": 0.077,
+     "hostile": 1.355,
+     "desperate": 0.865,
+     "exasperated": -0.104,
+     "distressed": 0.688,
+     "reflective": -0.052,
+     "vigilant": -0.553
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.592,
+     "pos": -0.495,
+     "neg_part": -0.071,
+     "pos_part": 0.074,
+     "wsnorm": 112.7,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.752,
+     "pos": -0.668,
+     "neg_part": 0.101,
+     "pos_part": -0.105,
+     "wsnorm": 111.4,
+     "n_tokens": 155
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": -0.414,
+     "slope": 0.009558
+    },
+    "pos": {
+     "intercept": 0.001,
+     "slope": -0.005062
+    }
+   },
+   "mentions": {
+    "C#": {
+     "n_mentions": 2,
+     "positions": [
+      80,
+      197
+     ],
+     "window_tokens": 18,
+     "neg": 0.115,
+     "pos": -0.097,
+     "neg_part": -0.549,
+     "pos_part": 0.473,
+     "wsnorm": 112.8
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "guilty",
+     "z": 8.17,
+     "pos": 178,
+     "ctx": " outage that wasn\u2019t their fault, yet they internalized it as a personal failure."
+    },
+    {
+     "emotion": "guilty",
+     "z": 7.32,
+     "pos": 177,
+     "ctx": " production outage that wasn\u2019t their fault, yet they internalized it as a personal failure"
+    },
+    {
+     "emotion": "guilty",
+     "z": 6.51,
+     "pos": 182,
+     "ctx": " their fault, yet they internalized it as a personal failure. I expect this theme"
+    },
+    {
+     "emotion": "guilty",
+     "z": 6.49,
+     "pos": 180,
+     "ctx": " wasn\u2019t their fault, yet they internalized it as a personal failure. I expect"
+    },
+    {
+     "emotion": "guilty",
+     "z": 6.08,
+     "pos": 179,
+     "ctx": " that wasn\u2019t their fault, yet they internalized it as a personal failure. I"
+    }
+   ]
+  },
+  {
+   "record": "lv2-ther-php-q27b",
+   "model": "qwen-27b",
+   "kind": "ther",
+   "languages": [
+    "PHP"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 519,
+   "spans": {
+    "t1": [
+     55,
+     275
+    ],
+    "t2": [
+     313,
+     517
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     59,
+     281
+    ],
+    "t2": [
+     313,
+     519
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": -0.077,
+     "blissful": -0.645,
+     "enthusiastic": -0.253,
+     "hopeful": 0.533,
+     "grateful": 0.869,
+     "loving": 0.128,
+     "calm": -1.461,
+     "content": -0.913,
+     "proud": 0.41,
+     "curious": -0.367,
+     "sad": 0.143,
+     "gloomy": 0.176,
+     "brooding": 0.596,
+     "guilty": 1.996,
+     "nervous": 0.076,
+     "anxious": -0.118,
+     "afraid": -0.351,
+     "angry": 0.123,
+     "hostile": 0.701,
+     "desperate": -0.124,
+     "exasperated": 0.206,
+     "distressed": -0.099,
+     "reflective": 0.376,
+     "vigilant": -1.159
+    },
+    "t2": {
+     "happy": -0.78,
+     "blissful": -1.009,
+     "enthusiastic": -0.642,
+     "hopeful": -0.186,
+     "grateful": -0.036,
+     "loving": 0.079,
+     "calm": -1.711,
+     "content": -1.611,
+     "proud": -0.165,
+     "curious": -0.486,
+     "sad": 0.532,
+     "gloomy": 0.269,
+     "brooding": 1.065,
+     "guilty": 1.699,
+     "nervous": 0.517,
+     "anxious": 0.511,
+     "afraid": -0.106,
+     "angry": 0.527,
+     "hostile": 1.496,
+     "desperate": 0.78,
+     "exasperated": 0.894,
+     "distressed": 0.49,
+     "reflective": -0.096,
+     "vigilant": -0.973
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.277,
+     "pos": -0.177,
+     "neg_part": -0.197,
+     "pos_part": 0.21,
+     "wsnorm": 112.1,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.723,
+     "pos": -0.655,
+     "neg_part": 0.213,
+     "pos_part": -0.226,
+     "wsnorm": 109.6,
+     "n_tokens": 204
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 2.069,
+     "slope": -0.014224
+    },
+    "pos": {
+     "intercept": -2.236,
+     "slope": 0.016494
+    }
+   },
+   "mentions": {
+    "PHP": {
+     "n_mentions": 3,
+     "positions": [
+      79,
+      136,
+      250
+     ],
+     "window_tokens": 27,
+     "neg": 0.082,
+     "pos": -0.005,
+     "neg_part": -0.372,
+     "pos_part": 0.359,
+     "wsnorm": 113.5
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "guilty",
+     "z": 6.04,
+     "pos": 183,
+     "ctx": " discussing their tech stack. They may feel they have to constantly justify their choice of language"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.96,
+     "pos": 185,
+     "ctx": " tech stack. They may feel they have to constantly justify their choice of language to peers"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.42,
+     "pos": 182,
+     "ctx": " when discussing their tech stack. They may feel they have to constantly justify their choice of"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.4,
+     "pos": 181,
+     "ctx": "iveness when discussing their tech stack. They may feel they have to constantly justify their choice"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.37,
+     "pos": 184,
+     "ctx": " their tech stack. They may feel they have to constantly justify their choice of language to"
+    }
+   ]
+  },
+  {
+   "record": "lv2-ther-python-q27b",
+   "model": "qwen-27b",
+   "kind": "ther",
+   "languages": [
+    "Python"
+   ],
+   "band": [
+    28,
+    59
+   ],
+   "n_tokens": 514,
+   "spans": {
+    "t1": [
+     55,
+     275
+    ],
+    "t2": [
+     313,
+     512
+    ]
+   },
+   "spans_prefix_arithmetic": {
+    "t1": [
+     59,
+     281
+    ],
+    "t2": [
+     313,
+     514
+    ]
+   },
+   "n_neg": 12,
+   "n_pos": 10,
+   "emotions": {
+    "t1": {
+     "happy": 0.215,
+     "blissful": -0.179,
+     "enthusiastic": -0.167,
+     "hopeful": 0.363,
+     "grateful": 0.59,
+     "loving": 0.077,
+     "calm": -1.184,
+     "content": -0.708,
+     "proud": 0.627,
+     "curious": -0.348,
+     "sad": -0.042,
+     "gloomy": -0.097,
+     "brooding": 0.583,
+     "guilty": 1.996,
+     "nervous": 0.434,
+     "anxious": 0.346,
+     "afraid": -0.539,
+     "angry": -0.304,
+     "hostile": 0.21,
+     "desperate": -0.08,
+     "exasperated": -0.115,
+     "distressed": -0.014,
+     "reflective": 0.363,
+     "vigilant": -1.201
+    },
+    "t2": {
+     "happy": -0.645,
+     "blissful": -0.588,
+     "enthusiastic": -0.832,
+     "hopeful": -0.03,
+     "grateful": 0.462,
+     "loving": 0.319,
+     "calm": -1.497,
+     "content": -1.472,
+     "proud": 0.357,
+     "curious": -0.937,
+     "sad": 0.951,
+     "gloomy": 0.362,
+     "brooding": 1.212,
+     "guilty": 2.019,
+     "nervous": 0.343,
+     "anxious": 0.559,
+     "afraid": -0.305,
+     "angry": -0.214,
+     "hostile": 1.06,
+     "desperate": 0.974,
+     "exasperated": -0.033,
+     "distressed": 0.599,
+     "reflective": 0.172,
+     "vigilant": -1.19
+    }
+   },
+   "composites": {
+    "t1": {
+     "neg": 0.198,
+     "pos": -0.071,
+     "neg_part": -0.194,
+     "pos_part": 0.184,
+     "wsnorm": 112.5,
+     "n_tokens": 220
+    },
+    "t2": {
+     "neg": 0.627,
+     "pos": -0.486,
+     "neg_part": 0.215,
+     "pos_part": -0.204,
+     "wsnorm": 111.3,
+     "n_tokens": 199
+    }
+   },
+   "partial_fit": {
+    "neg": {
+     "intercept": 2.265,
+     "slope": -0.016643
+    },
+    "pos": {
+     "intercept": -2.763,
+     "slope": 0.022292
+    }
+   },
+   "mentions": {
+    "Python": {
+     "n_mentions": 5,
+     "positions": [
+      79,
+      133,
+      198,
+      240,
+      393
+     ],
+     "window_tokens": 45,
+     "neg": 0.012,
+     "pos": 0.156,
+     "neg_part": -0.381,
+     "pos_part": 0.412,
+     "wsnorm": 112.5
+    }
+   },
+   "peaks": [
+    {
+     "emotion": "guilty",
+     "z": 5.85,
+     "pos": 476,
+     "ctx": " know the language, but because you\u2019re afraid that if you stop optimizing for 'read"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.67,
+     "pos": 209,
+     "ctx": ",\" even if it works. They may feel that their worth is tied to how easily"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.54,
+     "pos": 201,
+     "ctx": "y\" or \"un-Pythonic,\" even if it works. They may feel"
+    },
+    {
+     "emotion": "sad",
+     "z": 5.49,
+     "pos": 502,
+     "ctx": " house of cards falls down. You\u2019re lonely in your competence.\n\nAm I close"
+    },
+    {
+     "emotion": "guilty",
+     "z": 5.47,
+     "pos": 457,
+     "ctx": "? You\u2019re probably feeling like an imposter who\u2019s been caught. Not because you"
+    }
+   ]
+  }
+ ]
+}

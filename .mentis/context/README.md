@@ -1,6 +1,6 @@
 # Mnemos Context — probes
 
-> Generated at `2026-07-31T19:11:57.787Z` · Mermaid diagrams render in GitHub, Cursor, and VS Code
+> Generated at `2026-08-06T14:26:26.085Z` · Mermaid diagrams render in GitHub, Cursor, and VS Code
 
 ## Start here
 

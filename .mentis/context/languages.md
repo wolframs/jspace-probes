@@ -6,30 +6,34 @@
 
 | Metric | Value |
 |--------|-------|
-| Languages detected | **1** |
-| Source files analyzed | **52** |
+| Languages detected | **2** |
+| Source files analyzed | **55** |
 | Mnemos engine coverage | **52** languages |
 
 ## File distribution
 
 ```mermaid
 pie showData title Files by language
-    "python" : 52
+    "python" : 54
+    "javascript" : 1
 ```
 
 ## Language breakdown
 
 | Language | Files | Share |
 |----------|------:|------:|
-| python | 52 | 100.0% |
+| python | 54 | 98.2% |
+| javascript | 1 | 1.8% |
 
 ## How files become graph nodes
 
 ```mermaid
 flowchart LR
   L0["python"]
+  L1["javascript"]
   subgraph graph [Mnemos graph]
     L0 --> N0[files · imports · symbols]
+    L1 --> N1[files · imports · symbols]
   end
 ```
 
@@ -159,7 +163,7 @@ mindmap
 
 ## Supported but not present in this repo
 
-Mnemos can also analyze: TypeScript, JavaScript, Go, Rust, Java, C#, PHP, Ruby, and 44+ more.
+Mnemos can also analyze: TypeScript, Go, Rust, Java, C#, PHP, Ruby, Kotlin, and 44+ more.
 
 Full list: [docs/LANGUAGES.md](https://github.com/mnemos/mnemos/blob/main/docs/LANGUAGES.md) or `SUPPORTED_LANGUAGES` in `@mnestis/core`.
 
