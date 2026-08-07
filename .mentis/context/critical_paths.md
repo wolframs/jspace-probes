@@ -53,9 +53,9 @@ flowchart TD
     P3N1 --> P3N2
     P3N3["file:affect5.py"]
     P3N2 --> P3N3
-    P3N4["file:langval.py"]
+    P3N4["file:audit02.py"]
     P3N3 --> P3N4
-    P3N5["file:audit02.py"]
+    P3N5["file:langval.py"]
     P3N4 --> P3N5
   end
 ```
@@ -64,7 +64,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect.py has 20 dependents — changes here have wide blast radius
+- **Description**: affect.py has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: affect2.py
 
@@ -98,9 +98,9 @@ flowchart TD
 
 ## High-traffic: mean
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: mean has 19 dependents — changes here have wide blast radius
+- **Description**: mean has 20 dependents — changes here have wide blast radius
 
 ## High-traffic: topk
 
@@ -142,7 +142,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 92 dependents — changes here have wide blast radius
+- **Description**: lab.py has 94 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 

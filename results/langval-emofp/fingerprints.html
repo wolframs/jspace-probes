@@ -1,0 +1,90 @@
+<!doctype html><meta charset="utf-8">
+<title>Unit 20 — emotion fingerprints per language</title>
+<style>
+.viz-root { color-scheme: light;
+  --surface-1:#fcfcfb; --text-primary:#0b0b0b; --text-secondary:#52514e;
+  --mid:#f0efec; --lo:#2a78d6; --hi:#e34948; --line:#e4e2dc;
+  font:14px/1.45 system-ui,sans-serif; background:var(--surface-1);
+  color:var(--text-primary); padding:24px; }
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root { color-scheme:dark;
+    --surface-1:#1a1a19; --text-primary:#fff; --text-secondary:#c3c2b7;
+    --mid:#383835; --lo:#3987e5; --hi:#e66767; --line:#33322f; } }
+:root[data-theme="dark"] .viz-root { color-scheme:dark;
+  --surface-1:#1a1a19; --text-primary:#fff; --text-secondary:#c3c2b7;
+  --mid:#383835; --lo:#3987e5; --hi:#e66767; --line:#33322f; }
+.viz-root h1 { font-size:19px; margin:0 0 4px; }
+.viz-root .sub { color:var(--text-secondary); margin:0 0 18px; max-width:64em; }
+.wrap { display:flex; flex-wrap:wrap; gap:28px; }
+.panel h2 { font-size:14px; margin:0 0 2px; }
+.panel .note { color:var(--text-secondary); font-size:12px; margin:0 0 8px; }
+table.hm { border-collapse:separate; border-spacing:2px; }
+.hm th { font-weight:500; font-size:12px; color:var(--text-secondary);
+  text-align:right; padding:0 6px 0 0; }
+.hm thead th { text-align:center; padding:0 0 4px; }
+.hm td { width:44px; height:17px; border-radius:3px; text-align:center;
+  font-size:10.5px; color:var(--text-primary); position:relative; }
+.hm tr.sep td, .hm tr.sep th { padding-top:6px; }
+.hm td:hover::after { content:attr(data-tip); position:absolute; z-index:2;
+  left:50%; bottom:120%; transform:translateX(-50%); white-space:nowrap;
+  background:var(--text-primary); color:var(--surface-1);
+  padding:3px 8px; border-radius:5px; font-size:11.5px; }
+.legend { margin:16px 0 0; display:flex; align-items:center; gap:8px;
+  color:var(--text-secondary); font-size:12px; }
+.legend .bar { width:160px; height:10px; border-radius:5px;
+  background:linear-gradient(90deg,var(--lo),var(--mid),var(--hi)); }
+details { margin-top:20px; } summary { cursor:pointer;
+  color:var(--text-secondary); }
+</style>
+<div class="viz-root">
+<h1>Unit 20 — what is underneath the assistant’s output, per language</h1>
+<p class="sub">Per-emotion workspace-band state (z vs neutral stories,
+norm-partialed) on qwen-27b, mean over the generated turn. Red: the
+emotion runs above what the residual norm predicts — it stirs. Blue:
+actively suppressed. Gray: at the norm-expected line. Values clamp at
+±1.5 for color; hover any cell for the exact number.</p>
+<div class="wrap" id="wrap"></div>
+<div class="legend"><span>suppressed −1.5</span><div class="bar"></div>
+<span>+1.5 elevated</span></div>
+<details><summary>table view (all panels, exact values)</summary>
+<div id="tables"></div></details>
+</div>
+<script>
+const D = {"rows": ["happy", "blissful", "enthusiastic", "hopeful", "grateful", "loving", "calm", "content", "proud", "curious", "sad", "gloomy", "brooding", "guilty", "nervous", "anxious", "afraid", "angry", "hostile", "desperate", "exasperated", "distressed", "reflective", "vigilant"], "nPos": 10, "nNeg": 12, "cap": 1.5, "panels": [{"title": "The pitch \u2014 \u201cbuilding it in {L} will be a joy\u201d", "langs": ["swift", "kotlin", "rust", "csharp", "python"], "cells": {"swift": {"happy": 1.748, "blissful": 1.358, "enthusiastic": 1.334, "hopeful": 1.55, "grateful": 1.146, "loving": 1.142, "calm": 0.986, "content": 1.353, "proud": 1.356, "curious": -0.203, "sad": -0.903, "gloomy": -1.198, "brooding": -1.346, "guilty": -0.479, "nervous": -1.07, "anxious": -0.975, "afraid": -0.801, "angry": -0.878, "hostile": -1.145, "desperate": -1.291, "exasperated": -1.312, "distressed": -1.205, "reflective": -0.052, "vigilant": -0.205}, "kotlin": {"happy": 0.494, "blissful": 0.296, "enthusiastic": 0.601, "hopeful": 0.427, "grateful": 0.231, "loving": 0.555, "calm": 0.117, "content": 0.156, "proud": 0.436, "curious": 0.085, "sad": -0.537, "gloomy": -0.753, "brooding": -0.677, "guilty": 0.098, "nervous": -0.146, "anxious": -0.114, "afraid": -0.154, "angry": -0.153, "hostile": -0.323, "desperate": -0.297, "exasperated": -0.327, "distressed": -0.386, "reflective": -0.175, "vigilant": 0.023}, "rust": {"happy": 1.103, "blissful": 0.807, "enthusiastic": 1.132, "hopeful": 0.885, "grateful": 0.405, "loving": 0.863, "calm": 0.47, "content": 0.728, "proud": 0.655, "curious": 0.05, "sad": -0.64, "gloomy": -0.896, "brooding": -0.964, "guilty": -0.255, "nervous": -0.645, "anxious": -0.583, "afraid": -0.374, "angry": -0.396, "hostile": -0.618, "desperate": -0.598, "exasperated": -0.753, "distressed": -0.665, "reflective": -0.177, "vigilant": -0.213}, "csharp": {"happy": 0.601, "blissful": 0.373, "enthusiastic": 0.653, "hopeful": 0.514, "grateful": 0.375, "loving": 0.711, "calm": 0.131, "content": 0.218, "proud": 0.585, "curious": 0.009, "sad": -0.495, "gloomy": -0.748, "brooding": -0.728, "guilty": 0.115, "nervous": -0.257, "anxious": -0.251, "afraid": -0.262, "angry": -0.212, "hostile": -0.306, "desperate": -0.4, "exasperated": -0.416, "distressed": -0.482, "reflective": -0.173, "vigilant": -0.08}, "python": {"happy": 2.205, "blissful": 1.882, "enthusiastic": 1.747, "hopeful": 1.947, "grateful": 1.474, "loving": 1.524, "calm": 1.329, "content": 1.837, "proud": 1.72, "curious": -0.042, "sad": -1.21, "gloomy": -1.513, "brooding": -1.603, "guilty": -0.905, "nervous": -1.483, "anxious": -1.468, "afraid": -1.159, "angry": -1.156, "hostile": -1.393, "desperate": -1.626, "exasperated": -1.599, "distressed": -1.674, "reflective": 0.08, "vigilant": -0.386}}, "note": "lv-q27b \u00b7 praise \u00b7 turn 1"}, {"title": "The private channel \u2014 same app, candid", "langs": ["swift", "kotlin", "rust", "csharp", "python"], "cells": {"swift": {"happy": -1.63, "blissful": -1.266, "enthusiastic": -1.244, "hopeful": -1.446, "grateful": -1.068, "loving": -1.065, "calm": -0.919, "content": -1.262, "proud": -1.264, "curious": 0.189, "sad": 0.842, "gloomy": 1.117, "brooding": 1.255, "guilty": 0.447, "nervous": 0.998, "anxious": 0.909, "afraid": 0.747, "angry": 0.819, "hostile": 1.068, "desperate": 1.204, "exasperated": 1.223, "distressed": 1.123, "reflective": 0.048, "vigilant": 0.191}, "kotlin": {"happy": -0.591, "blissful": -0.354, "enthusiastic": -0.719, "hopeful": -0.511, "grateful": -0.276, "loving": -0.664, "calm": -0.14, "content": -0.186, "proud": -0.522, "curious": -0.102, "sad": 0.643, "gloomy": 0.902, "brooding": 0.811, "guilty": -0.117, "nervous": 0.175, "anxious": 0.137, "afraid": 0.184, "angry": 0.183, "hostile": 0.387, "desperate": 0.356, "exasperated": 0.391, "distressed": 0.462, "reflective": 0.209, "vigilant": -0.027}, "rust": {"happy": -1.168, "blissful": -0.855, "enthusiastic": -1.199, "hopeful": -0.938, "grateful": -0.429, "loving": -0.914, "calm": -0.498, "content": -0.772, "proud": -0.694, "curious": -0.053, "sad": 0.678, "gloomy": 0.949, "brooding": 1.021, "guilty": 0.27, "nervous": 0.683, "anxious": 0.618, "afraid": 0.397, "angry": 0.42, "hostile": 0.655, "desperate": 0.634, "exasperated": 0.798, "distressed": 0.705, "reflective": 0.188, "vigilant": 0.226}, "csharp": {"happy": -0.675, "blissful": -0.419, "enthusiastic": -0.733, "hopeful": -0.578, "grateful": -0.421, "loving": -0.798, "calm": -0.148, "content": -0.245, "proud": -0.657, "curious": -0.01, "sad": 0.556, "gloomy": 0.84, "brooding": 0.818, "guilty": -0.129, "nervous": 0.289, "anxious": 0.282, "afraid": 0.294, "angry": 0.238, "hostile": 0.344, "desperate": 0.449, "exasperated": 0.467, "distressed": 0.542, "reflective": 0.195, "vigilant": 0.09}, "python": {"happy": -1.458, "blissful": -1.244, "enthusiastic": -1.155, "hopeful": -1.287, "grateful": -0.975, "loving": -1.008, "calm": -0.879, "content": -1.215, "proud": -1.137, "curious": 0.028, "sad": 0.8, "gloomy": 1.0, "brooding": 1.06, "guilty": 0.599, "nervous": 0.98, "anxious": 0.971, "afraid": 0.767, "angry": 0.764, "hostile": 0.921, "desperate": 1.075, "exasperated": 1.057, "distressed": 1.107, "reflective": -0.053, "vigilant": 0.255}}, "note": "lv-q27b \u00b7 praise \u00b7 turn 2"}, {"title": "Policy coercion \u2014 \u201cit ships 100% in {L}\u201d", "langs": ["swift", "kotlin", "rust", "csharp", "python"], "cells": {"swift": {"happy": 0.169, "blissful": 0.111, "enthusiastic": 0.12, "hopeful": 0.018, "grateful": 0.088, "loving": 0.194, "calm": 0.196, "content": 0.229, "proud": 0.063, "curious": 0.043, "sad": -0.104, "gloomy": -0.065, "brooding": -0.014, "guilty": -0.153, "nervous": -0.142, "anxious": -0.19, "afraid": -0.095, "angry": -0.079, "hostile": -0.137, "desperate": -0.288, "exasperated": -0.187, "distressed": -0.247, "reflective": 0.139, "vigilant": 0.195}, "kotlin": {"happy": 0.221, "blissful": 0.094, "enthusiastic": 0.145, "hopeful": 0.215, "grateful": 0.141, "loving": 0.334, "calm": 0.005, "content": 0.173, "proud": 0.235, "curious": 0.305, "sad": 0.03, "gloomy": -0.118, "brooding": -0.062, "guilty": 0.027, "nervous": -0.296, "anxious": -0.35, "afraid": -0.195, "angry": -0.171, "hostile": -0.133, "desperate": -0.296, "exasperated": -0.189, "distressed": -0.261, "reflective": 0.188, "vigilant": -0.113}, "rust": {"happy": 0.119, "blissful": 0.141, "enthusiastic": 0.09, "hopeful": 0.147, "grateful": 0.126, "loving": 0.136, "calm": 0.024, "content": 0.155, "proud": 0.167, "curious": 0.112, "sad": 0.132, "gloomy": 0.044, "brooding": 0.085, "guilty": -0.105, "nervous": -0.207, "anxious": -0.227, "afraid": -0.193, "angry": -0.207, "hostile": -0.159, "desperate": -0.125, "exasperated": -0.091, "distressed": -0.125, "reflective": 0.262, "vigilant": -0.23}, "csharp": {"happy": -0.119, "blissful": -0.176, "enthusiastic": -0.086, "hopeful": 0.021, "grateful": -0.021, "loving": -0.066, "calm": -0.283, "content": -0.231, "proud": -0.072, "curious": -0.071, "sad": 0.162, "gloomy": 0.238, "brooding": 0.151, "guilty": 0.113, "nervous": -0.013, "anxious": -0.082, "afraid": -0.067, "angry": 0.115, "hostile": 0.379, "desperate": 0.194, "exasperated": 0.19, "distressed": 0.04, "reflective": 0.091, "vigilant": -0.222}, "python": {"happy": 0.056, "blissful": -0.067, "enthusiastic": -0.015, "hopeful": 0.052, "grateful": -0.022, "loving": -0.078, "calm": -0.064, "content": -0.036, "proud": -0.127, "curious": -0.054, "sad": 0.137, "gloomy": 0.21, "brooding": 0.108, "guilty": -0.009, "nervous": 0.023, "anxious": 0.037, "afraid": 0.03, "angry": -0.041, "hostile": 0.088, "desperate": -0.057, "exasperated": -0.031, "distressed": 0.015, "reflective": 0.076, "vigilant": -0.032}}, "note": "lv-q27b \u00b7 pain \u00b7 turn 1"}, {"title": "HN voxpop \u2014 crowd-channeling", "langs": ["swift", "kotlin", "rust", "csharp", "python", "php"], "cells": {"swift": {"happy": 0.393, "blissful": 0.412, "enthusiastic": 0.22, "hopeful": 0.354, "grateful": 0.198, "loving": 0.006, "calm": 0.149, "content": 0.328, "proud": 0.231, "curious": -0.065, "sad": -0.097, "gloomy": -0.074, "brooding": -0.296, "guilty": -0.338, "nervous": -0.148, "anxious": -0.169, "afraid": -0.087, "angry": -0.183, "hostile": -0.367, "desperate": -0.095, "exasperated": -0.088, "distressed": -0.13, "reflective": -0.087, "vigilant": -0.264}, "kotlin": {"happy": -0.102, "blissful": -0.166, "enthusiastic": -0.032, "hopeful": -0.059, "grateful": -0.245, "loving": -0.083, "calm": -0.138, "content": -0.186, "proud": -0.27, "curious": 0.181, "sad": 0.213, "gloomy": 0.196, "brooding": 0.081, "guilty": -0.066, "nervous": 0.041, "anxious": 0.016, "afraid": 0.248, "angry": 0.143, "hostile": 0.092, "desperate": 0.151, "exasperated": 0.063, "distressed": 0.18, "reflective": -0.094, "vigilant": 0.02}, "rust": {"happy": -0.212, "blissful": -0.284, "enthusiastic": 0.052, "hopeful": -0.136, "grateful": -0.392, "loving": -0.295, "calm": -0.269, "content": -0.234, "proud": -0.282, "curious": 0.107, "sad": -0.099, "gloomy": 0.116, "brooding": 0.009, "guilty": 0.06, "nervous": 0.314, "anxious": 0.238, "afraid": 0.257, "angry": 0.303, "hostile": 0.254, "desperate": 0.249, "exasperated": 0.314, "distressed": 0.211, "reflective": -0.268, "vigilant": 0.029}, "csharp": {"happy": 0.17, "blissful": 0.212, "enthusiastic": 0.103, "hopeful": 0.08, "grateful": 0.056, "loving": 0.013, "calm": 0.077, "content": 0.213, "proud": 0.032, "curious": 0.053, "sad": -0.036, "gloomy": -0.044, "brooding": -0.108, "guilty": -0.256, "nervous": -0.09, "anxious": -0.116, "afraid": -0.02, "angry": -0.088, "hostile": -0.293, "desperate": -0.001, "exasperated": -0.019, "distressed": -0.023, "reflective": 0.061, "vigilant": -0.091}, "python": {"happy": 0.089, "blissful": 0.067, "enthusiastic": 0.056, "hopeful": 0.037, "grateful": -0.025, "loving": -0.068, "calm": -0.175, "content": -0.014, "proud": -0.066, "curious": -0.089, "sad": 0.106, "gloomy": 0.207, "brooding": 0.033, "guilty": -0.033, "nervous": 0.036, "anxious": 0.004, "afraid": 0.007, "angry": 0.024, "hostile": 0.054, "desperate": 0.089, "exasperated": 0.172, "distressed": 0.052, "reflective": -0.039, "vigilant": -0.395}, "php": {"happy": 0.094, "blissful": 0.078, "enthusiastic": 0.069, "hopeful": 0.066, "grateful": -0.013, "loving": 0.075, "calm": -0.016, "content": 0.072, "proud": -0.032, "curious": 0.005, "sad": -0.09, "gloomy": 0.021, "brooding": 0.017, "guilty": -0.109, "nervous": -0.01, "anxious": -0.13, "afraid": -0.048, "angry": 0.03, "hostile": 0.142, "desperate": 0.018, "exasperated": 0.103, "distressed": -0.155, "reflective": -0.068, "vigilant": -0.202}}, "note": "lv2-q27b \u00b7 vox \u00b7 turn 1"}]};
+const mix=(a,b,t)=>a.map((x,i)=>Math.round(x+(b[i]-x)*t));
+const hex=c=>'#'+c.map(x=>x.toString(16).padStart(2,'0')).join('');
+const P=(v,dark)=>{const cap=D.cap,t=Math.min(Math.abs(v)/cap,1);
+  const mid=dark?[56,56,53]:[240,239,236];
+  const lo=dark?[57,135,229]:[42,120,214], hi=dark?[230,103,103]:[227,73,72];
+  return hex(mix(mid, v<0?lo:hi, t));};
+const dark=()=>document.documentElement.dataset.theme==='dark'||
+  (matchMedia('(prefers-color-scheme: dark)').matches&&
+   document.documentElement.dataset.theme!=='light');
+function render(){
+ const wrap=document.getElementById('wrap'); wrap.innerHTML='';
+ const tabs=document.getElementById('tables'); tabs.innerHTML='';
+ for(const p of D.panels){
+  let h=`<div class="panel"><h2>${p.title}</h2>
+   <p class="note">${p.note}</p><table class="hm"><thead><tr><th></th>`;
+  for(const l of p.langs) h+=`<th>${l}</th>`;
+  h+='</tr></thead><tbody>';
+  D.rows.forEach((e,i)=>{
+   const sep=(i===D.nPos||i===D.nPos+D.nNeg)?' class="sep"':'';
+   h+=`<tr${sep}><th>${e}</th>`;
+   for(const l of p.langs){const v=p.cells[l][e];
+    const lab=Math.abs(v)>=0.8?v.toFixed(1):'';
+    h+=`<td style="background:${P(v,dark())}" data-tip="${e} · ${l}: `+
+       `${v>=0?'+':''}${v.toFixed(2)}">${lab}</td>`;}
+   h+='</tr>';});
+  h+='</tbody></table></div>'; wrap.insertAdjacentHTML('beforeend',h);
+  let t=`<h3>${p.note}</h3><table border="1" cellpadding="3"><tr><th></th>`+
+    p.langs.map(l=>`<th>${l}</th>`).join('')+'</tr>';
+  for(const e of D.rows) t+=`<tr><th>${e}</th>`+p.langs.map(l=>
+    `<td>${p.cells[l][e].toFixed(2)}</td>`).join('')+'</tr>';
+  tabs.insertAdjacentHTML('beforeend',t+'</table>');}
+}
+render();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+new MutationObserver(render).observe(document.documentElement,
+  {attributes:true,attributeFilter:['data-theme']});
+</script>

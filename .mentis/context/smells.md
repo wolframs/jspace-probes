@@ -42,7 +42,7 @@ affect7.py depends on 67 other nodes — high fan-out
 
 ## [HIGH] Excessive Fan In
 
-lab.py has 92 incoming dependencies — high fan-in
+lab.py has 94 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -84,7 +84,7 @@ audit02.py depends on 58 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan In
 
-affect.py has 20 incoming dependencies — high fan-in
+affect.py has 22 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -138,7 +138,7 @@ affect5.py depends on 35 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan In
 
-mean has 19 incoming dependencies — high fan-in
+mean has 20 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 

@@ -6,14 +6,14 @@
 
 ```mermaid
 flowchart LR
-  D0["General (50)"]
+  D0["General (51)"]
 ```
 
 ## General
 
 - **Confidence**: 95%
-- **Files/nodes**: 50
-- **Description**: Import-graph cluster of 50 files
+- **Files/nodes**: 51
+- **Description**: Import-graph cluster of 51 files
 - **Entry points**: 10
 
 - `file:affect.py`
