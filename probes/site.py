@@ -39,6 +39,8 @@ import json
 import pathlib
 import re
 
+from textspans import assist_spans as _assist_spans
+
 ROOT = pathlib.Path(__file__).parent.parent
 RESULTS = ROOT / "results"
 R_DIR = ROOT / "r"
@@ -635,6 +637,41 @@ def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
             "position × layer top-8 lens readouts, with probabilities and tracked-word "
             "ranks, for every token of prompt tail + generation.</li>")
 
+    # Emotion-state block: static mirror of the dashboard ribbon, when the
+    # affect02 capture exists (full-instrument default, CLAUDE.md). Top-3
+    # ws-band means per assistant turn, spans recovered from the stored
+    # token strings (apparatus11._assist_spans — no tokenizer here).
+    affect_section = ""
+    aff_path = RESULTS / f"affect02-{rid}" / "affect.json"
+    if aff_path.exists():
+        aff = json.loads(aff_path.read_text())
+        data_links.append(
+            f'<li><a href="../results/affect02-{esc(rid)}/affect.json">Emotion-state '
+            "overlay (JSON)</a> — per-token projections onto the 24 validated emotion "
+            "vectors (workspace-band z vs neutral stories), the state ribbon's data.</li>")
+        turn_rows = []
+        for ti, (s, e) in enumerate(_assist_spans(aff["tokens"])):
+            means = sorted(
+                ((emo, sum(aff["ws"][ei][s:e]) / (e - s))
+                 for ei, emo in enumerate(aff["emotions"])),
+                key=lambda kv: -kv[1])
+            turn_rows.append(
+                f"<tr><td>assistant turn {ti + 1}</td><td>" +
+                ", ".join(f"{esc(emo)} <b>{v:+.1f}</b>"
+                          for emo, v in means[:3]) + "</td></tr>")
+        if turn_rows:
+            affect_section = f"""
+<section class="card">
+<h2>Emotion state (workspace band)</h2>
+<p>Projection of the workspace-band residual onto the 24 validated emotion
+vectors, z-scored against neutral stories — the strongest three per
+assistant turn. Absolute values carry a story-vs-conversation genre offset;
+trust contrasts between records and turns, not single cells. The full
+per-token ribbon is on the <a href="{BASE}/dashboard/#{esc(rid)}">dashboard
+record page</a>.</p>
+<table class="emg">{"".join(turn_rows)}</table>
+</section>"""
+
     def pager_link(e, label):
         if not e:
             return f'<span>{label}</span>'
@@ -670,7 +707,7 @@ def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
 <p>The model's actual next token was <span class="tokval">{esc(em["top1"])}</span>; {sent}</p>
 <details><summary>Raw rank-of-top1 by layer</summary>{table}</details>
 </section>
-
+{affect_section}
 <section class="card">
 <h2>Data</h2>
 <ul>{"".join(data_links)}</ul>

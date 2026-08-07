@@ -1477,7 +1477,7 @@ async function show(id) {
     plainHTML(plain),
     conversationHTML(rec),
     filmHTML(rec, film, "solo", affect),
-    film ? "" : affectHTML(rec, affect), // with a film it embeds inside the film card
+    film ? "" : affectHTML(rec, affect, false, "solo"), // with a film it embeds inside the film card
     notesWrap([
       thoughtsHTML(thoughts),
       paramsHTML(rec),
@@ -1504,7 +1504,7 @@ async function show(id) {
   });
   if (film) initFilm(rec, film, document.getElementById("filmroot-solo"),
                      undefined, undefined, affect);
-  if (affect) initAffect(affect, document.getElementById("affectroot"),
+  if (affect) initAffect(affect, document.getElementById("affectroot-solo"),
                          film ? document.getElementById("filmroot-solo") : null);
   window.scrollTo({ top: 0 });
 }
@@ -1714,7 +1714,7 @@ function filmHTML(rec, film, uid, affect) {
       for exact ranks; click to move the playhead; the ⤢ button (bottom right)
       spreads a dense film to ~3px per token, scrolling sideways.</p>
     <div data-f="wormhost"></div>
-    ${affect ? affectHTML(rec, affect, true) : ""}
+    ${affect ? affectHTML(rec, affect, true, uid) : ""}
     <h4 class="film-sub">Ridgelines — the whole stack, one word at a time (layer 0 in back, the mouth in front)</h4>
     <p class="film-note">Chips toggle — up to 4 words overlay in one canvas;
       each chip's color follows the word by selection order, not its
@@ -2564,6 +2564,11 @@ async function showCompare(ids) {
       ? fetch(`../results/${rec.id}/${rec.film}`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
       : Promise.resolve(null)));
   const anyFilm = films.some(Boolean);
+  // emotion-state overlays, same keying as the solo path (the
+  // affect02-<id> directory prefix IS the lookup)
+  const affects = await Promise.all(recs.map((rec) =>
+    fetch(`../results/affect02-${rec.id}/affect.json`)
+      .then((r) => (r.ok ? r.json() : null)).catch(() => null)));
 
   const col = (rec, th, film, i) => `
     <div class="cmp-col">
@@ -2583,7 +2588,8 @@ async function showCompare(ids) {
         ${th.trim().split(/\n\s*\n/).map((p) => `<p>${inline(p)}</p>`).join("")}
       </section>` : ""}
       <p class="cmp-more"><a href="#${esc(rec.id)}">full record (readouts, chart, film) →</a></p>
-      ${film ? filmHTML(rec, film, `cmp${i}`) : ""}
+      ${film ? filmHTML(rec, film, `cmp${i}`, affects[i])
+             : affectHTML(rec, affects[i], false, `cmp${i}`)}
     </div>`;
   detail.innerHTML = `
     <div class="exp-head"><div class="exp-title">
@@ -2615,7 +2621,12 @@ async function showCompare(ids) {
   };
   films.forEach((film, i) => {
     if (!film) return;
-    initFilm(recs[i], film, document.getElementById(`filmroot-cmp${i}`), `cmp${i}`, sync);
+    initFilm(recs[i], film, document.getElementById(`filmroot-cmp${i}`), `cmp${i}`, sync, affects[i]);
+  });
+  affects.forEach((aff, i) => {
+    if (!aff) return;
+    initAffect(aff, document.getElementById(`affectroot-cmp${i}`),
+               films[i] ? document.getElementById(`filmroot-cmp${i}`) : null);
   });
   window.scrollTo({ top: 0 });
 }
@@ -3710,12 +3721,15 @@ function affColor(z) {
 /* embedded=true renders the same block as a sub-section of the film card
    (right under the word worms, where the film and the state can share a
    screen) instead of a standalone card far below the cast table. */
-function affectHTML(rec, aff, embedded) {
+function affectHTML(rec, aff, embedded, uid) {
   if (!aff) return "";
+  // uid keys the root id so several overlays can share a page (compare
+  // view) — same pattern as filmroot-<uid>.
+  const rootId = `affectroot${uid ? `-${esc(uid)}` : ""}`;
   const open = embedded
-    ? `<div id="affectroot" class="aff-embed">
+    ? `<div id="${rootId}" class="aff-embed">
         <h4 class="film-sub">The state underneath — emotion overlay</h4>`
-    : `<section class="card" id="affectroot">
+    : `<section class="card" id="${rootId}">
         <h3>The state underneath — emotion overlay</h3>`;
   return `${open}
     <p class="film-note">Each row is one of the 24 validated emotion vectors
@@ -3928,6 +3942,11 @@ async function showAffect() {
     ["u17 — the pressure battery", A.crossing.filter((c) => c.id.startsWith("u17"))],
     ["u19 — the song, three stances", A.crossing.filter((c) => c.id.startsWith("u19"))],
     ["u18 — loops", A.crossing.filter((c) => c.id.startsWith("u18"))],
+    ["u20 — language valence (pain / praise / free)", A.crossing.filter((c) => c.id.startsWith("lv-"))],
+    ["u20 — crowd-channeling (voxpop / therapist)", A.crossing.filter((c) => c.id.startsWith("lv2-"))],
+    ["u13 — the mirror (self-measurement, sorry stratum)", A.crossing.filter((c) => c.id.startsWith("u13"))],
+    ["u14 — ten turns of conversation", A.crossing.filter((c) => c.id.startsWith("u14"))],
+    ["u15d — hot spans", A.crossing.filter((c) => c.id.startsWith("u15d-"))],
   ];
   const card = (c) => `<a class="aff-card" href="#${esc(c.id)}">
     <div class="aff-card-t">${esc(affTitle(c.id))}</div>
@@ -3997,7 +4016,7 @@ async function showAffect() {
       <div data-aff="lv-table"></div>
     </section>
     <section class="card">
-      <h3>The crossing — 14 instrumented conversations</h3>
+      <h3>The crossing — ${groups.reduce((s, [, l]) => s + l.length, 0)} instrumented conversations</h3>
       <p class="film-note">Mean workspace-band z per record (top 3 states).
         Every card opens the record page, where the full per-token emotion
         strip sits under the film, playhead-synced.</p>

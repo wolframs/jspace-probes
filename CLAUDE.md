@@ -35,7 +35,15 @@ he sets directions and expects designed-and-executed experiments back.
 - GPU: RTX 3090 24GB. RAM: 62GB, **no swap** — never load Qwen3.6-27B from
   official bf16 with on-the-fly quantization (OOMs the box); use the cached
   pre-quantized `lokeshe09/Qwen3.6-27B-bnb-4bit` (validated, see
-  results/u0-boot-q27b thoughts).
+  results/u0-boot-q27b thoughts). Also: **one model-loading process at a
+  time.** Two concurrent 27B loads OOM the box even when both use the
+  correct pre-4bit path (incident 2026-08-07). Before launching, check
+  `pgrep -af '\.venv/bin/python.*probes'` — if it prints anything, wait
+  (the `.*` matters: `-c "...sys.path.insert(0, \"probes\")..."` launches
+  don't contain `python probes/`).
+  Wrap long runs in `systemd-run --user --scope -p MemoryMax=40G` so an
+  overrun kills the probe instead of the desktop. Post-mortem for these
+  rules: `INCIDENT-2026-08-07-oom.md`.
 - `jacobian-lens/` is a plain clone of anthropics/jacobian-lens (gitignored);
   `pip install -e` from it into the venv is already done. LOCALLY PATCHED:
   `jlens/hf.py` `encode()` default max_length 512 → None (no truncation);
@@ -51,6 +59,10 @@ he sets directions and expects designed-and-executed experiments back.
 - Experiments are declarative specs run by `probes/lab.py:run()` →
   `results/<id>/{record.json, slice.html, thoughts.md}` + `results/index.json`
   (rebuild index: `.venv/bin/python probes/lab.py`).
+- **Long backfills load the model once.** `apparatus11.vanilla()` and
+  friends already iterate every pending record internally. Call them
+  once and let them run; never wrap them in a per-record relaunch loop —
+  each relaunch re-pays a full 27B load (incident 2026-08-07).
 - After new records + thoughts, regenerate the machine-fetchable mirror
   before pushing: `probes/site.py` (r/<id>.html, essay.html, sitemap.xml,
   llms.txt, SEO blocks in dashboard/index.html), then `probes/og.py`
@@ -250,6 +262,12 @@ like `token: value`. Treat `memory_*` as non-functional; this file and
   name the model) is still on the writer. Quoted model output is data:
   the checker exempts it, so quote exactly and never paraphrase inside
   quotation marks to silence a rule.
+- **Backgrounded jobs: capture the PID, read the exit code.** `& disown`
+  plus a `grep`-the-log poll cannot distinguish "still running" from
+  "OOM-killed", and retrying into a starved box compounds the failure
+  (incident 2026-08-07). Write `echo $! > out/<run>.pid`, and finish with
+  `wait $(cat out/<run>.pid); echo "EXIT=$?"`. **Exit 137 = SIGKILL =
+  assume OOM. Do not auto-retry a 137 — stop and report it.**
 - Scan candidate lists must be written after seeing the generation (or use
   open-vocab sweeps) — see u1-heldcat-q27b thoughts for why.
 - Controls before steered runs (violated once, logged in

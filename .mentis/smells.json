@@ -56,7 +56,7 @@
     "nodes": [
       "file:lab.py"
     ],
-    "description": "lab.py has 94 incoming dependencies — high fan-in",
+    "description": "lab.py has 98 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -66,7 +66,7 @@
     "nodes": [
       "function:lab.py:41"
     ],
-    "description": "_strip_bos has 34 incoming dependencies — high fan-in",
+    "description": "_strip_bos has 38 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -76,7 +76,7 @@
     "nodes": [
       "function:lab.py:68"
     ],
-    "description": "get_model has 47 incoming dependencies — high fan-in",
+    "description": "get_model has 51 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -87,16 +87,6 @@
       "file:langval.py"
     ],
     "description": "langval.py depends on 60 other nodes — high fan-out",
-    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-  },
-  {
-    "id": "smell:fanout:file:site.py",
-    "type": "excessive_fan_out",
-    "severity": "high",
-    "nodes": [
-      "file:site.py"
-    ],
-    "description": "site.py depends on 49 other nodes — high fan-out",
     "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
@@ -120,13 +110,33 @@
     "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
+    "id": "smell:fanout:file:apparatus11.py",
+    "type": "excessive_fan_out",
+    "severity": "high",
+    "nodes": [
+      "file:apparatus11.py"
+    ],
+    "description": "apparatus11.py depends on 59 other nodes — high fan-out",
+    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+  },
+  {
+    "id": "smell:fanout:file:site.py",
+    "type": "excessive_fan_out",
+    "severity": "high",
+    "nodes": [
+      "file:site.py"
+    ],
+    "description": "site.py depends on 51 other nodes — high fan-out",
+    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+  },
+  {
     "id": "smell:fanin:file:affect.py",
     "type": "excessive_fan_in",
     "severity": "medium",
     "nodes": [
       "file:affect.py"
     ],
-    "description": "affect.py has 22 incoming dependencies — high fan-in",
+    "description": "affect.py has 26 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -156,7 +166,7 @@
     "nodes": [
       "file:affect2.py"
     ],
-    "description": "affect2.py has 24 incoming dependencies — high fan-in",
+    "description": "affect2.py has 28 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -176,7 +186,7 @@
     "nodes": [
       "function:affect2.py:61"
     ],
-    "description": "_load_vectors has 24 incoming dependencies — high fan-in",
+    "description": "_load_vectors has 28 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -216,18 +226,8 @@
     "nodes": [
       "function:affect7.py:385"
     ],
-    "description": "mean has 20 incoming dependencies — high fan-in",
+    "description": "mean has 22 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
-  },
-  {
-    "id": "smell:fanout:file:affectviz.py",
-    "type": "excessive_fan_out",
-    "severity": "medium",
-    "nodes": [
-      "file:affectviz.py"
-    ],
-    "description": "affectviz.py depends on 21 other nodes — high fan-out",
-    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
     "id": "smell:fanout:file:apparatus09.py",
@@ -257,16 +257,6 @@
       "file:audit03.py"
     ],
     "description": "audit03.py depends on 24 other nodes — high fan-out",
-    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-  },
-  {
-    "id": "smell:fanout:file:blind.py",
-    "type": "excessive_fan_out",
-    "severity": "medium",
-    "nodes": [
-      "file:blind.py"
-    ],
-    "description": "blind.py depends on 21 other nodes — high fan-out",
     "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
@@ -330,16 +320,6 @@
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
-    "id": "smell:fanout:file:huh.py",
-    "type": "excessive_fan_out",
-    "severity": "medium",
-    "nodes": [
-      "file:huh.py"
-    ],
-    "description": "huh.py depends on 20 other nodes — high fan-out",
-    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-  },
-  {
     "id": "smell:fanout:file:lab.py",
     "type": "excessive_fan_out",
     "severity": "medium",
@@ -366,7 +346,7 @@
     "nodes": [
       "class:lab.py:121"
     ],
-    "description": "Steering has 24 incoming dependencies — high fan-in",
+    "description": "Steering has 26 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -430,16 +410,6 @@
     "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
-    "id": "smell:fanout:file:lossmap2.py",
-    "type": "excessive_fan_out",
-    "severity": "medium",
-    "nodes": [
-      "file:lossmap2.py"
-    ],
-    "description": "lossmap2.py depends on 21 other nodes — high fan-out",
-    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-  },
-  {
     "id": "smell:fanout:file:mirror.py",
     "type": "excessive_fan_out",
     "severity": "medium",
@@ -498,5 +468,35 @@
     ],
     "description": "probe.py has 16 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
+  },
+  {
+    "id": "smell:fanout:file:ste.py",
+    "type": "excessive_fan_out",
+    "severity": "medium",
+    "nodes": [
+      "file:ste.py"
+    ],
+    "description": "ste.py depends on 25 other nodes — high fan-out",
+    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+  },
+  {
+    "id": "smell:fanout:file:unit15.py",
+    "type": "excessive_fan_out",
+    "severity": "medium",
+    "nodes": [
+      "file:unit15.py"
+    ],
+    "description": "unit15.py depends on 31 other nodes — high fan-out",
+    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+  },
+  {
+    "id": "smell:fanout:file:unit15d.py",
+    "type": "excessive_fan_out",
+    "severity": "medium",
+    "nodes": [
+      "file:unit15d.py"
+    ],
+    "description": "unit15d.py depends on 39 other nodes — high fan-out",
+    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   }
 ]

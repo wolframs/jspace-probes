@@ -64,25 +64,25 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect.py has 22 dependents — changes here have wide blast radius
+- **Description**: affect.py has 26 dependents — changes here have wide blast radius
 
 ## High-traffic: affect2.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect2.py has 24 dependents — changes here have wide blast radius
+- **Description**: affect2.py has 28 dependents — changes here have wide blast radius
 
 ## High-traffic: _load_vectors
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _load_vectors has 24 dependents — changes here have wide blast radius
+- **Description**: _load_vectors has 28 dependents — changes here have wide blast radius
 
 ## High-traffic: _all_resid
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: _all_resid has 10 dependents — changes here have wide blast radius
+- **Description**: _all_resid has 14 dependents — changes here have wide blast radius
 
 ## High-traffic: affect3.py
 
@@ -100,7 +100,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: mean has 20 dependents — changes here have wide blast radius
+- **Description**: mean has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: topk
 
@@ -132,35 +132,29 @@ flowchart TD
 - **Nodes involved**: 6
 - **Description**: assess has 18 dependents — changes here have wide blast radius
 
-## High-traffic: norm
-
-- **Risk**: MEDIUM
-- **Nodes involved**: 6
-- **Description**: norm has 12 dependents — changes here have wide blast radius
-
 ## High-traffic: lab.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 94 dependents — changes here have wide blast radius
+- **Description**: lab.py has 98 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _strip_bos has 34 dependents — changes here have wide blast radius
+- **Description**: _strip_bos has 38 dependents — changes here have wide blast radius
 
 ## High-traffic: _token_ids
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: _token_ids has 10 dependents — changes here have wide blast radius
+- **Description**: _token_ids has 12 dependents — changes here have wide blast radius
 
 ## High-traffic: get_model
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: get_model has 47 dependents — changes here have wide blast radius
+- **Description**: get_model has 51 dependents — changes here have wide blast radius
 
 ## High-traffic: run
 
@@ -172,7 +166,13 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: Steering has 24 dependents — changes here have wide blast radius
+- **Description**: Steering has 26 dependents — changes here have wide blast radius
+
+## High-traffic: langval.py
+
+- **Risk**: MEDIUM
+- **Nodes involved**: 6
+- **Description**: langval.py has 10 dependents — changes here have wide blast radius
 
 ## High-traffic: loops.py
 

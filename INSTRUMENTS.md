@@ -85,6 +85,17 @@ By-design absences (NOT gaps): a02 has no film (control battery);
 u13–u19 skip `scan` (films+cast are strictly better); battery records
 (a02/lv/lv2) carry thoughts/plain at battery level.
 
+**Delta 2026-08-07 (apparatus-11 backfill, `results/apparatus11-backfill/`):**
+the table above is the pre-sweep snapshot, kept as written. After the
+sweep (archive now 606 records): films **336/606**, emotion ribbons
+**197/606**, `vanilla` cross-check **122/606** (all 117 apparatus-11
+patches two-grain: `replay_rank_dev` over stored-rank≤100 cells, max 7
+unsteered / 11 steered; `replay_rank_dev_all` is deep-tail noise), miners
+fresh (huh 336/336 films, blind 606/606, 0 unfilmed candidates — the 21
+blind originals map to refilm records). Register meter now archive-wide
+(572 scored) and fingerprints cover every saved z.pt. Matched-randoms gap
+(row 2) unchanged — that is audit-06.
+
 ## 3. Leaving on the table (audit verdicts)
 
 **Documented, unbuilt:** Fig-4C concept swap (MECHANICS §3d, ~30

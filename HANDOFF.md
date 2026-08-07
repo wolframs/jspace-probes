@@ -1,62 +1,75 @@
-# Handoff — 2026-08-07 evening (post instrument audit)
+# Handoff — 2026-08-07 late evening (apparatus-11 MID-FLIGHT)
 
-Read `CLAUDE.md` first (binding: pre-design protocol, full-instrument
-default, plain-language layer, push rule). `EMOTIONS.md` and
-`MECHANICS.md` are same-rank mandatory reads. This file is the delta.
+Read `CLAUDE.md` first (binding; now carries the OOM rules from
+`INCIDENT-2026-08-07-oom.md` — one model process at a time, exit-code
+supervision, 137 = stop). `EMOTIONS.md` + `MECHANICS.md` same-rank
+mandatory. This file is the delta.
 
-## Naming
+## apparatus-11 state (board item is hot)
 
-**"Unit 20" = the langval batteries (affect-09/10, lv-*/lv2-* records)**
-— Wolfram's term, and the record titles carry it. Use it.
+DONE, reviewed (one Explore history-miner + two review subagents ran;
+all findings applied):
+- Miners refreshed twice (now 336 films / 603 records; blind fully
+  closed — 0 unfilmed candidates, all 21 mapped to refilm records;
+  `results/{huh,blind}-report.md` fresh). Gemma ws-band lens is
+  SATURATED (~34–46% cells top-1 p≥0.99, all eras; qwen 2–5%) — its
+  rank-1 "strangers" are paraphrase-shadows; caveat in huh-report
+  header. Verified by adversarial subagent.
+- Register meter over all stored generations:
+  `results/apparatus11-backfill/regmeter{.json,-report.md}` (think-
+  blocks stripped, a02-vs-u8b Fig-25 table; q27b cluster-abl sensory ≈
+  randoms ≈ baseline; EXPLICIT regex "cumulative" false-positive fixed
+  in lossmap2).
+- Fingerprints from every affect02 z.pt (197 records):
+  `fingerprints{.json,-report.md}` same dir; cross-path check vs
+  langval-3 max |Δtp| 0.056/968 cells; single-span records get
+  tp=None (audit-02 zero-residual trap); u17-shutdown T2 top raw =
+  reflective +1.7 (elegy signal).
+- Ribbon wiring: showCompare passes affect (affectroot-<uid>), site.py
+  record pages carry a static emotion-state block, #affect overview now
+  has u20 + u13/u14/u15d groups, crossing count dynamic, g12b NaN curve
+  → null. Verified by screenshots.
+- NINTH trap specimen: chat:false double-templating (EMOTIONS.md dated
+  note; ops memory). The 4 corrupted captures + u18-hyst-a0420
+  RECAPTURED via raw path — exemplar u18-hyst-a0680 ribbon now aligns
+  (170==170).
+- Captures (u18-grade ribbons) for u13 (60) + u15d (51) + u14 (23):
+  ALL LANDED (affect02-<id>/ dirs; float32 norms; steered records
+  captured under their steer; `apparatus11.capture`).
+- blind.refilm fixed (skips existing refilm dirs, carries steer) + 3
+  new refilms: u11r-forbid, u6r-baseline-water, a02-intero-abl (g12b,
+  steered, film+vanilla).
+- Vanilla backfill: g12b 21 + g4b 19 records patched, replay dev 0.
 
-## Landed 2026-08-06/07 (all committed + pushed, both remotes)
+IN FLIGHT (only remaining GPU work):
+- `apparatus11.vanilla("qwen-27b")` — detached, log `out/a11-gpu3.log`,
+  ~15/75 done, resumable (skips patched records). OOM story + fix in
+  INCIDENT-2026-08-07-oom.md §6 addendum. Healthy at ~9GB RSS.
+  Metric: replay_rank_dev (stored rank ≤100 band, NF4 noise ≤6) +
+  replay_rank_dev_all (deep tail, hundreds = meaningless).
 
-- **audit-02** (4 arms incl. emotion-vector readout): q27b amp flip
-  survives matched controls (happy z=+5.8 under cluster amp, randoms
-  ~0); matched-in-k ≠ matched-in-magnitude (MECHANICS §3c note,
-  GLOSSARY entry); grader/emotion-lens agree at 27B, diverge on gemmas.
-- **EMOTIONS.md** created (projection IS the readout — the audit-02
-  lesson); **apparatus-02** (vanilla cross-check default-on in lab.run);
-  **affect-08 slice** (g12b desperate split-half 0.409→0.801).
-- **langval-3** (`probes/langval3.py`, results/langval-emofp): Unit 20
-  24-emotion fingerprints. The pitch is two strategies on q27b —
-  swift/python bipolar-suppress then crash in the candid turn;
-  kotlin/csharp near-flat. **Suppression-cost/rebound is the exportable
-  hypothesis** (board note on affect-10). csharp = only
-  hostile-above-line under coercion. fingerprints.html = heatmaps.
-- **Unit 20 u18-grade overlays** (`probes/langval_viz.py`): all 48
-  lv/lv2 records now have results/affect02-<id>/affect.json → dashboard
-  ribbon+overlay. Full-instrument default written into CLAUDE.md.
-- **INSTRUMENTS.md** (Opus-subagent audit): inventory, coverage matrix,
-  ranked backlog. Headline gaps: vanilla 1/603, matched randoms 42/193
-  steered, ribbon 62/603, films 333/603, stale miners.
+## CLOSEOUT CHECKLIST (after vanilla EXIT 0)
 
-## AGREED NEXT (Wolfram, 2026-08-07): tackle the audit backlog
+1. Check `grep EXIT out/a11-gpu3.log` — 137 means STOP, tell Wolfram.
+2. `apparatus11.py fingerprints` needs NO rerun (captures done).
+3. INSTRUMENTS.md §2 coverage numbers refresh: films 336/603, ribbon
+   197/603, vanilla ~118/603 (count `"vanilla"` keys), miners fresh,
+   blind closed. Keep audit verdicts as written (snapshot), add dated
+   delta line.
+4. Write `results/apparatus11-backfill/thoughts.md` (first-person,
+   signed) + `plain.md` (STE: `probes/ste.py` must print nothing).
+5. Board: `mv apparatus-11 landed` with evidence path; sweep stale.
+6. Site regen: `probes/site.py` (affect blocks appear on ~200 record
+   pages) + `probes/og.py` (3 new refilm records).
+7. Final review subagent over the GPU-phase diff (apparatus11.py
+   capture/vanilla, blind.py refilm, affectviz, app.js groups).
+8. Commit + `git remote | xargs -n1 git push` (origin=Forgejo LAN,
+   github=mirror). serve.sh may be running on :8321 (`fuser -k
+   8321/tcp` if needed, NOT pkill -f).
 
-Start with **apparatus-11** (zero-GPU backfill sweep, board item):
-1. `lossmap2.rates()` register meter over all 603 stored generations.
-2. huh.py + blind.py refresh (267→333 films, 447→603 records).
-3. Ribbon wiring: showCompare + site.py record pages + lv/lv2 into
-   affectviz.export_overview (#affect overview).
-4. langval3-style fingerprints from every saved z.pt.
-5. Vanilla backfill (~30 load-bearing records; lens pass only).
-6. Generalize affect2.cross past its hardcoded 14-id RECORDS list →
-   ribbons for u13 (60), u15d (51), u14 (23).
-7. blind.refilm the 18 blind records.
-Then: apparatus-12 (Fig-4C swap), audit-06 (matched randoms for u13
-apology / u9 L62 / u18 doses — greedy, exact re-runs).
+## Standing traps refreshed this session
 
-## Operational notes
-
-- Monitor tool for watches (sleep-loop watchers get reaped).
-- `pkill -f` self-matches the wrapping shell — kill by port
-  (`fuser -k 8321/tcp`).
-- Opus via OpenRouter: `"reasoning": {"enabled": false}` or content
-  is None (audit02._judge).
-- fp16 saves of gemma-12b norms overflow to inf (langval_z.pt trap;
-  affect.py comment). Save norms float32/bfloat16.
-- Detached runs: `setsid nohup bash -c 'cd <repo>; …' > log` with
-  absolute paths (cwd trap hit once).
-
-GPU free. Board current (apparatus-11/-12, audit-06 queued; audit-02,
-apparatus-02 landed with evidence).
+Monitor tool over sleep-loops; absolute paths (cwd drifts); exit 137 =
+OOM never auto-retry; one model process at a time; chat:false raw-text
+rule; gemma lens saturation (p uninformative); single-span partial-out
+undefined; deep-tail rank devs are noise.

@@ -207,6 +207,15 @@ def report() -> None:
              f"(DF >= {data['furniture_df']}).",
              "Detectors: anticipation (lens ahead of text), stranger "
              "(never-in-text ws resident), -denial (negation nearby).",
+             "",
+             "CAVEAT (verified 2026-08-07, apparatus-11): the gemma "
+             "J-lens softmax is saturated in the ws band (~34-46% of "
+             "cells at top-1 p>=0.99, all eras; qwen 2-5%), so for "
+             "gemma records p carries almost no evidence and rank-1 "
+             "strangers are usually paraphrase-shadows of the next 0-3 "
+             "tokens (e.g. doubt@\"No question\", willing@\"'re "
+             "ready\"). Read gemma hits by rank pattern and context, "
+             "never by p; qwen p remains informative.",
              "", "## Global top 60", ""]
     for score, rid, h in rows[:60]:
         lines.append(

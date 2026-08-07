@@ -96,6 +96,17 @@ norm seesaw once masqueraded as an emotion flicker, sign inverted).
 Steered records must be re-captured **under the same steer**
 (`params.steer` makes every record reconstructible, incl. `rand_seed`).
 
+**Dated correction (2026-08-07, apparatus-11):** `chat: false` records
+store already-templated raw text — a capture that re-applies the chat
+template double-wraps the header, so the forward pass sees a corrupted
+prefix and the ribbon lands 3 tokens off the film. Found on 4 shipped
+captures (u18-hyst a0000/a0480/a0680, u19-complete), recaptured the
+same day. Rule: build capture ids with the record's own `params`
+(`chat`, `template_kwargs` — 11 records run `enable_thinking`), never
+from `CONFIGS` defaults; `apparatus11._render_text` is the reference.
+And derive the affect.json token strings from the SAME ids the capture
+ran on — a second tokenization is a second chance to disagree.
+
 ## 3. Steering with emotion vectors
 
 > "Throughout the paper, steering strengths are given relative to the

@@ -146,11 +146,24 @@ def main(thresh: int = THRESH) -> None:
              f"blind at rank <= {thresh}. Furniture-filtered "
              f"(corpus IDF); 'echo' marks words present in the "
              f"conversation text.", ""]
-    replay = [b["id"] for b in blind if not b["filmed"]]
+    def _refilm_sid(rid: str) -> str:
+        parts = rid.rsplit("-", 1)
+        return f"{parts[0]}-refilm-{parts[1]}"
+
+    unfilmed = [b["id"] for b in blind if not b["filmed"]]
+    done = [r for r in unfilmed
+            if (lab.RESULTS / _refilm_sid(r) / "record.json").exists()]
+    replay = [r for r in unfilmed if r not in done]
     if replay:
         lines += [f"**Replay candidates ({len(replay)} unfilmed — "
                   "a lens-only greedy-replay pass would give "
                   "full-position coverage):** " + ", ".join(replay), ""]
+    if done:
+        lines += [f"**Already replayed ({len(done)} — the original "
+                  "stays blind at its readout positions; the refilm "
+                  "record carries the full-position answer):** "
+                  + ", ".join(f"{r} → {_refilm_sid(r)}" for r in done),
+                  ""]
     for b in blind:
         lines += [f"## {b['id']}  ({b['model']}, unit {b['unit']}, "
                   f"best tracked rank {b['best_tracked_rank']}, "
@@ -183,8 +196,14 @@ def refilm(model: str) -> None:
             (lab.RESULTS / b["id"] / "record.json").read_text())
         parts = b["id"].rsplit("-", 1)
         sid = f"{parts[0]}-refilm-{parts[1]}"
+        # the miner has no memory of past refilm rounds (they live in
+        # separate dirs), so it re-lists their originals forever —
+        # skip instead of clobbering the 2026-07-24 round's records.
+        if (lab.RESULTS / sid / "record.json").exists():
+            print(f"  skip {sid} (already refilmed)", flush=True)
+            continue
         n_tok = sum(len(m["content"]) for m in rec["conversation"]) // 3
-        lab.run({
+        spec = {
             "id": sid,
             "title": rec.get("title", b["id"]) + " · refilm",
             "unit": rec.get("unit"), "model": model,
@@ -196,7 +215,19 @@ def refilm(model: str) -> None:
             "extra_md": {"part": "refilm", "replay_of": b["id"],
                          "reason": "blind-spot miner: tracked words "
                                    f"never under rank {data['thresh']}"},
-        })
+        }
+        # a steered original must replay under the same steer
+        # (EMOTIONS.md recapture rule; an unsteered replay would be
+        # mislabeled as the intervention condition)
+        if rec.get("params", {}).get("steer"):
+            spec["steer"] = rec["params"]["steer"]
+        # same rule for templating: a chat:false or enable_thinking
+        # original re-templated under CONFIGS defaults replays a
+        # different token stream (ninth trap specimen)
+        for k in ("chat", "template_kwargs"):
+            if k in rec.get("params", {}):
+                spec[k] = rec["params"][k]
+        lab.run(spec)
         print(f"  {sid} filmed", flush=True)
 
 

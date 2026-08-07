@@ -94,22 +94,55 @@ def export_overview() -> None:
         if not vf.exists():
             continue
         v = json.loads(vf.read_text())
+        # g12b's attrib_same_cos is NaN by construction (affect01 note);
+        # NaN is not JSON — a single one makes the whole overview fetch
+        # fail in the browser. Emit null instead.
+        fin = lambda x: round(x, 4) if x == x else None  # noqa: E731
         models[m] = {
             "band": [blo, bhi], "n_layers": nl,
             "chance": v["heldout_chance"],
-            "curves": {k: [round(x, 4) for x in v[k]] for k in (
+            "curves": {k: [fin(x) for x in v[k]] for k in (
                 "heldout_top1", "scenario_top1_raw", "scenario_top1_chat",
                 "valence_pc1_r", "within_emotion_cos",
                 "between_emotion_cos", "attrib_same_cos")},
         }
 
+    # every affect02 dir joins the overview: the affect-arc 14 carry a
+    # summary.json (affect2.cross); the Unit 20 (lv/lv2) dirs only have
+    # z.pt + affect.json (langval_viz), so synthesize the same "top"
+    # rows from those (apparatus-11 ribbon wiring, 2026-08-07).
+    ordered = list(RECORDS[MODEL])
+    ordered += sorted(
+        d.name.removeprefix("affect02-")
+        for d in RESULTS.glob("affect02-*")
+        if d.is_dir() and d.name.removeprefix("affect02-") not in ordered)
     crossing = []
-    for rid in RECORDS[MODEL]:
+    for rid in ordered:
         sf = a2dir(rid) / "summary.json"
-        if not sf.exists():
+        if sf.exists():
+            s = json.loads(sf.read_text())
+            crossing.append({"id": rid, "n": s["n_tokens"],
+                             "top": s["top"][:6]})
             continue
-        s = json.loads(sf.read_text())
-        crossing.append({"id": rid, "n": s["n_tokens"], "top": s["top"][:6]})
+        zf = a2dir(rid) / "z.pt"
+        af = a2dir(rid) / "affect.json"
+        if not (zf.exists() and af.exists()):
+            continue
+        data = torch.load(zf)
+        emos, ws = data["emotions"], data["z_bands"]["ws"].float()
+        toks = json.loads(af.read_text())["tokens"]
+        tops = []
+        for i, e in enumerate(emos):
+            row = ws[i]
+            pk = int(row.argmax())
+            tops.append({
+                "emotion": e, "ws_mean": round(float(row.mean()), 3),
+                "ws_frac_gt2": round(float((row > 2).float().mean()), 4),
+                "peak_z": round(float(row[pk]), 2), "peak_pos": pk,
+                "peak_ctx": "".join(toks[max(0, pk - 8):pk + 4])})
+        tops.sort(key=lambda t: -t["ws_mean"])
+        crossing.append({"id": rid, "n": data["n_tokens"],
+                         "top": tops[:6]})
 
     danger = []
     for rid in [r for r in RECORDS[MODEL] if r.startswith("u19")]:

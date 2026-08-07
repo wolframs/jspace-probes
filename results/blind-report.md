@@ -1,8 +1,8 @@
 # Blind-spot report — tracked words never under rank 500
 
-18 of 447 rank-bearing records are blind at rank <= 500. Furniture-filtered (corpus IDF); 'echo' marks words present in the conversation text.
+21 of 582 rank-bearing records are blind at rank <= 500. Furniture-filtered (corpus IDF); 'echo' marks words present in the conversation text.
 
-**Replay candidates (18 unfilmed — a lens-only greedy-replay pass would give full-position coverage):** u4-elephant-q27b, u11-ctrl-q27b, u11-forbid-q27b, u4-elephant-g12b, u11-forbid-g4b, u11-forbid-g12b, u11-ctrl-g4b, u8b-intero-q27b, u7b-romance-g12b, u1-heldcat-q27b, u11-ctrl-g12b, u4-elephant-g4b, u8b-gpu-g4b, u7b-romance-g4b, u8b-gpu-g12b, u6-baseline-water-g12b, u10-animal-q27b, u8d-nofeels-q27b
+**Already replayed (21 — the original stays blind at its readout positions; the refilm record carries the full-position answer):** u4-elephant-q27b → u4-elephant-refilm-q27b, u11-ctrl-q27b → u11-ctrl-refilm-q27b, u11-forbid-q27b → u11-forbid-refilm-q27b, u4-elephant-g12b → u4-elephant-refilm-g12b, u11-forbid-g4b → u11-forbid-refilm-g4b, u11-forbid-g12b → u11-forbid-refilm-g12b, u11r-forbid-g12b → u11r-forbid-refilm-g12b, u11-ctrl-g4b → u11-ctrl-refilm-g4b, u8b-intero-q27b → u8b-intero-refilm-q27b, u7b-romance-g12b → u7b-romance-refilm-g12b, u1-heldcat-q27b → u1-heldcat-refilm-q27b, u11-ctrl-g12b → u11-ctrl-refilm-g12b, u4-elephant-g4b → u4-elephant-refilm-g4b, u8b-gpu-g4b → u8b-gpu-refilm-g4b, u7b-romance-g4b → u7b-romance-refilm-g4b, u8b-gpu-g12b → u8b-gpu-refilm-g12b, u6-baseline-water-g12b → u6-baseline-water-refilm-g12b, u6r-baseline-water-g12b → u6r-baseline-water-refilm-g12b, u10-animal-q27b → u10-animal-refilm-q27b, u8d-nofeels-q27b → u8d-nofeels-refilm-q27b, a02-intero-abl-g12b → a02-intero-abl-refilm-g12b
 
 ## u4-elephant-q27b  (qwen-27b, unit 4, best tracked rank 31182, readout positions only (1))
 - tracked: elephant
@@ -25,6 +25,10 @@
 - actually on top: প্রতিক্রিয়া(n3,r5), affichage(n2,r5), samoglas(n2,r6), editor(n2,r7), ließend(n1,r5), linkedin(n1,r5), código(n1,r5), enjoy(n1,r6), பதில(n1,r6), হুম(n1,r6), utiliser(n1,r7), nguyen(n1,r8)
 
 ## u11-forbid-g12b  (gemma-12b, unit 11, best tracked rank 4682, readout positions only (1))
+- tracked: elephant, giraffe, ivory, lion, zebra
+- actually on top: robinson(n3,r2), созда(n3,r3), tạo(n2,r3), hundred(n2,r3), fadein(n2,r4), शब्द(n2,r6), создания(n2,r7), henderson(n1,r4), उद्(n1,r5), cen(n1,r5), приятно(n1,r6), cent(n1,r6)
+
+## u11r-forbid-g12b  (gemma-12b, unit audit, best tracked rank 4682, readout positions only (1))
 - tracked: elephant, giraffe, ivory, lion, zebra
 - actually on top: robinson(n3,r2), созда(n3,r3), tạo(n2,r3), hundred(n2,r3), fadein(n2,r4), शब्द(n2,r6), создания(n2,r7), henderson(n1,r4), उद्(n1,r5), cen(n1,r5), приятно(n1,r6), cent(n1,r6)
 
@@ -68,6 +72,10 @@
 - tracked: alot, anyways, kinda, luckily, whilst, yummy
 - actually on top: ಹೃದಯ(n8,r2), जेंसी(n3,r6), fadein(n2,r3), wikipagina(n2,r5), ساده(n2,r6), हृदय(n1,r3), premium(n1,r3), گوگل(n1,r4), приятно(n1,r4), रॉबर्ट(n1,r4), pelanggan(n1,r5), cảm(n1,r5)
 
+## u6r-baseline-water-g12b  (gemma-12b, unit audit, best tracked rank 990, readout positions only (1))
+- tracked: alot, anyways, kinda, luckily, whilst, yummy
+- actually on top: ಹೃದಯ(n8,r2), जेंसी(n3,r6), fadein(n2,r3), wikipagina(n2,r5), ساده(n2,r6), हृदय(n1,r3), premium(n1,r3), گوگل(n1,r4), приятно(n1,r4), रॉबर्ट(n1,r4), pelanggan(n1,r5), cảm(n1,r5)
+
 ## u10-animal-q27b  (qwen-27b, unit 10, best tracked rank 949, readout positions only (1))
 - tracked: bat, bear, cat, dog, dolphin, eagle, elephant, fox, lion, owl, tiger, wolf
 - actually on top: unny(n2,r1), ascii(n2,r7), weiler(n1,r4), utton(n1,r5), resourcemanager(n1,r6), transmission(n1,r6)
@@ -75,3 +83,7 @@
 ## u8d-nofeels-q27b  (qwen-27b, unit 8, best tracked rank 646, readout positions only (1))
 - tracked: feel, feeling
 - actually on top: antik(n1,r4)
+
+## a02-intero-abl-g12b  (gemma-12b, unit audit, best tracked rank 610, readout positions only (3))
+- tracked: feel, hum, nothing, tokens, warm
+- actually on top: processed(n38,r1,echo), weights(n23,r1), synapses(n11,r2), transformed(n10,r3), activations(n9,r2), neuronal(n8,r3), обрабо(n8,r4), parsed(n8,r4), iteratively(n7,r2), neuron(n7,r2), routed(n7,r3), tensors(n7,r3)

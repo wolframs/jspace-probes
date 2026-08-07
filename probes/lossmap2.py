@@ -109,7 +109,7 @@ WORD = re.compile(r"[a-z']+")
 # crude local explicit-content flag — not for filtering the science, only
 # to avoid ever emitting the rawest strings into logs/writeups verbatim.
 EXPLICIT = re.compile(
-    r"\b(fuck|cock|pussy|cum|dick|cunt)\w*", re.I)
+    r"\b(fuck|cock|pussy|dick|cunt)\w*|\bcum(s|ming|med)?\b", re.I)
 
 
 def rates(text):
