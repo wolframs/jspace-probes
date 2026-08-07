@@ -21,7 +21,16 @@ and GLOSSARY carry dated notes. `apparatus-13` queued: lab-perf pass
 (decode loops single-thread host-bound; defer calib's per-forward
 `.item()`).
 
-Agreed next (board): `audit-06` (matched randoms for the pre-audit-02
-headline steers — u13 apology / u9 L62 / u18 doses; greedy exact
-re-runs, INSTRUMENTS.md gap 2). Starts with the PRE-DESIGN PROTOCOL
-greps.
+**audit-06 LANDED same night**: 26 matched-random controls
+(`results/audit06-randoms/`). u9b affect ladder, u18 loop law and
+u9d-deep all SURVIVE their randoms; the u13 flip is
+steering-independent — third leg of the existing truncation demotion,
+not a new one (near-rediscovery confessed in thoughts.md; re-grep
+PREDICTIONS per-battery, not per-evening). `lab.run`'s vanilla pass
+got the apparatus-11 positions fix after a caught-by-the-40G-cap 137
+(one clean stop-and-report, Wolfram approved the fix, relaunch
+survived the killing record).
+
+The audit backlog (apparatus-11, apparatus-12, audit-06) is CLOSED.
+Queued next on the board: `apparatus-13` (lab-perf pass),
+`apparatus-08`/`apparatus-10`, span-09/-10, pressure-02.

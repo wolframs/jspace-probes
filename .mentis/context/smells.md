@@ -72,7 +72,7 @@ apparatus11.py depends on 59 other nodes — high fan-out
 
 ## [HIGH] Excessive Fan In
 
-lab.py has 100 incoming dependencies — high fan-in
+lab.py has 102 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 

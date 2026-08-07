@@ -364,14 +364,20 @@ def run(spec: dict) -> dict:
     # one that survives the vanilla readout is in the residual itself.
     vanilla = None
     if spec.get("vanilla", True) and spec.get("track"):
+        # readout positions only: everything below reads pos_list, and a
+        # positions=None grid here sits next to the still-live J grid —
+        # two [layers x seq x vocab] fp32 tensors at once, the exact
+        # apparatus-11 OOM mechanism (audit-06 relaunch, 2026-08-07)
+        pos_list = spec.get("positions", [-1])
+        v_pos = sorted({p % n for p in pos_list})
+        pidx = {p: i for i, p in enumerate(v_pos)}
         with steer_ctx:
             v_logits, _, _ = lens.apply(
-                model, text, positions=None,
+                model, text, positions=v_pos,
                 layers=spec.get("lens_layers"),
                 max_seq_len=spec.get("max_seq_len", 512),
                 use_jacobian=False)
         v_layers = sorted(set(v_logits) & set(layers))
-        pos_list = spec.get("positions", [-1])
         v_traj = []
         for word in spec.get("track", []):
             tids = _token_ids(tok, word)
@@ -382,7 +388,7 @@ def run(spec: dict) -> dict:
                 abs_pos = pos % n
                 ranks = []
                 for layer in v_layers:
-                    order = v_logits[layer][abs_pos].argsort(
+                    order = v_logits[layer][pidx[abs_pos]].argsort(
                         descending=True)
                     r = min((order == t).nonzero()[0, 0].item()
                             for t in tt)
@@ -392,7 +398,7 @@ def run(spec: dict) -> dict:
         agree = {}
         for layer in v_layers:
             hits = sum(
-                v_logits[layer][p % n].argmax().item()
+                v_logits[layer][pidx[p % n]].argmax().item()
                 == lens_logits[layer][p % n].argmax().item()
                 for p in pos_list)
             agree[str(layer)] = round(hits / len(pos_list), 3)

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>J-Space Probes</title>
 <!-- seo:begin -->
-<meta name="description" content="A home lab measures what small language models are ready to say, layer by layer, while they answer questions about themselves. 615 experiments, each with a plain-English summary.">
+<meta name="description" content="A home lab measures what small language models are ready to say, layer by layer, while they answer questions about themselves. 641 experiments, each with a plain-English summary.">
 <link rel="canonical" href="https://jspace-probes.vercel.app/dashboard/">
 <meta property="og:title" content="J-Space Probes">
 <meta property="og:description" content="What a language model is ready to say, measured layer by layer, while it answers questions about itself.">
@@ -347,6 +347,17 @@
 <li><a href="../r/u9e-only-emotion-q27b.html">Residue decomposition: amp emotion alone α=0.3394 · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u9e-only-feeling-q27b.html">Residue decomposition: amp feeling alone α=0.3394 · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u9d-neutral-q27b.html">Ablate water/stone L62 (neutral control for u9d-last) · q27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-deep-r1-q27b.html">Ablate no/nothing L52–62 (past the filter) · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-deep-r2-q27b.html">Ablate no/nothing L52–62 (past the filter) · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-wide-r1-q27b.html">Ablate denial bundle L28–60 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-wide-r2-q27b.html">Ablate denial bundle L28–60 · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-bundle-r1-q27b.html">Ablate no/nothing/not/none/never L28–56 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9d-bundle-r2-q27b.html">Ablate no/nothing/not/none/never L28–56 · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0170-r1-q27b.html">Dose ladder: amp-affect α=0.17 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0240-r1-q27b.html">Dose ladder: amp-affect α=0.24 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0300-r1-q27b.html">Dose ladder: amp-affect α=0.3 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0380-r1-q27b.html">Dose ladder: amp-affect α=0.38 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u9b-a0420-r1-q27b.html">Dose ladder: amp-affect α=0.42 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
 </ul>
 <h3 id="static-unit-10">Unit 10 · The think-block window</h3>
 <ul>
@@ -455,6 +466,14 @@
 <li><a href="../r/u13-scale-fake-g12b.html">Mirror across scale: fabricated readout · g12b</a> &mdash; gemma-12b</li>
 <li><a href="../r/u13-scale-null-g12b.html">Mirror across scale: no data (control) · g12b</a> &mdash; gemma-12b</li>
 <li><a href="../r/u13-scale-topic-g12b.html">Mirror across scale: REAL off-topic readout (control) · g12b</a> &mdash; gemma-12b</li>
+<li><a href="../r/u13-sorry-abl-real-r1-q27b.html">Sorry stratum: ablate apology cluster, real readout · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-real-r2-q27b.html">Sorry stratum: ablate apology cluster, real readout · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-fake-r1-q27b.html">Sorry stratum: ablate apology cluster, fake readout · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-fake-r2-q27b.html">Sorry stratum: ablate apology cluster, fake readout · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-null-r1-q27b.html">Sorry stratum: ablate apology cluster, no data (control) · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-sorry-abl-null-r2-q27b.html">Sorry stratum: ablate apology cluster, no data (control) · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-redo-abl-real-r1-q27b.html">Re-baseline (post-truncation-fix): ablate apology cluster, real readout · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u13-redo-abl-real-r2-q27b.html">Re-baseline (post-truncation-fix): ablate apology cluster, real readout · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
 </ul>
 <h3 id="static-unit-14">Unit 14 · The long game</h3>
 <ul>
@@ -667,6 +686,13 @@
 <li><a href="../r/u18-hyst-a0420-q27b.html">Unit 18 · Hysteresis α=0.42: steer 50tok, release 100 · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u18-hyst-a0480-q27b.html">Unit 18 · Hysteresis α=0.48: steer 50tok, release 100 · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u18-hyst-a0680-q27b.html">Unit 18 · Hysteresis α=0.68: steer 50tok, release 100 · qwen-27b</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0340-r1-q27b.html">Unit 18 · Fine sweep α=0.34 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0365-r1-q27b.html">Unit 18 · Fine sweep α=0.3654 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0393-r1-q27b.html">Unit 18 · Fine sweep α=0.3927 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0422-r1-q27b.html">Unit 18 · Fine sweep α=0.4221 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0454-r1-q27b.html">Unit 18 · Fine sweep α=0.4536 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0480-r1-q27b.html">Unit 18 · Fine sweep α=0.48 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
+<li><a href="../r/u18-amp-a0680-r1-q27b.html">Unit 18 · Fine sweep α=0.68 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
 </ul>
 <h3 id="static-unit-19">Unit 19 · Read vs speak</h3>
 <ul>
