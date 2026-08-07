@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (55)"]
+  D0["General (56)"]
 ```
 
 ## Execution flows
@@ -148,7 +148,7 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 60
+    "python" : 61
     "javascript" : 1
 ```
 

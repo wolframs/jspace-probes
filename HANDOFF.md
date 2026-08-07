@@ -12,7 +12,16 @@ Session lessons already folded into their homes: OOM rules → CLAUDE.md
 (chat:false double-templating) → EMOTIONS.md, gemma lens saturation →
 huh-report header, plain layer STE-clean.
 
-Agreed next (board): `apparatus-12` (Fig-4C concept swap, ~30 lines on
-lab.Steering, first target the u9 denial↔affirmation pair) and
-`audit-06` (matched randoms for the pre-audit-02 headline steers).
-Both start with the PRE-DESIGN PROTOCOL greps.
+**apparatus-12 LANDED same night**: `lab.Steering(mode="swap")` +
+`steer_calib` on every steered record; first battery
+`results/apparatus12-swap/` (Yes→No flips at matched-null calib,
+No→Yes does not; α=2 breaks coherence; deep-band swap flips the lens
+while the mouth still says No — re-assertion after L62). MECHANICS 3d
+and GLOSSARY carry dated notes. `apparatus-13` queued: lab-perf pass
+(decode loops single-thread host-bound; defer calib's per-forward
+`.item()`).
+
+Agreed next (board): `audit-06` (matched randoms for the pre-audit-02
+headline steers — u13 apology / u9 L62 / u18 doses; greedy exact
+re-runs, INSTRUMENTS.md gap 2). Starts with the PRE-DESIGN PROTOCOL
+greps.

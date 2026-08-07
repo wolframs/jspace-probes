@@ -393,7 +393,8 @@ def _steer_ctx(lm, params: dict):
     steers = st if isinstance(st, list) else [st]
     return MultiSteer([
         Steering(lm, s["words"], s["layers"], s.get("mode", "ablate"),
-                 s.get("alpha", 0.12), s.get("rand_seed"))
+                 s.get("alpha", 1.0 if s.get("mode") == "swap" else 0.12),
+                 s.get("rand_seed"))
         for s in steers])
 
 
@@ -421,12 +422,14 @@ def capture_ids(model: str) -> list[str]:
     return ids
 
 
-def capture(model: str) -> None:
+def capture(model: str, record_ids: list[str] | None = None) -> None:
     """u18-grade emotion capture (affect2.cross math) for u13/u15d/u14
     + the 5 chat:false recaptures. Steered records are captured UNDER
     their steer (EMOTIONS.md §2). One tokenization: the capture ids are
     also the affect.json token strings, so ribbon alignment is exact by
-    construction; where a film exists its length is asserted against."""
+    construction; where a film exists its length is asserted against.
+    record_ids: explicit record list (apparatus12 batteries); default =
+    the apparatus-11 backfill set from capture_ids()."""
     import torch
     from lab import get_model
     from affect import BANDS, EMOTIONS
@@ -437,7 +440,8 @@ def capture(model: str) -> None:
     V, emos = _load_vectors(model)
     mu, sd = _baseline(lm, model, V)
     lo, hi, _ = BANDS[model]
-    for rid in capture_ids(model):
+    for rid in (record_ids if record_ids is not None
+                else capture_ids(model)):
         d = a2dir(rid)
         if (d / "affect.json").exists() and rid not in RECAPTURE:
             print(f"  skip {rid} (affect.json exists)", flush=True)

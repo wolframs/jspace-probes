@@ -176,17 +176,29 @@ degenerated gemma output while cluster ablation stayed fluent).
 **always report the span-norm calibration next to the ΔΔ** (audit02.py
 arm C is the template).
 
-### 3d. Concept swap / patch (Figure 4C) — NOT yet in our lab
+### 3d. Concept swap / patch (Figure 4C) — built 2026-08-07 (apparatus-12)
 > "Given a source token s and target token t, we form `V = [v_s v_t]`, read
 > the lens coordinates `c = V† h` (where V† is the pseudoinverse of V), and
 > set `h_patched = h + V(σ(c) − c)`, where σ swaps the two entries of c
 > (optionally scaled by a factor α). The component of h orthogonal to
 > span{v_s, v_t} is unchanged." — Methods, Figure 4C
 
-This is the principled "swap" (vs blunt ablate/amplify). Implement it if we
-want concept-swapping. Interventions run at a **band of layers across many/
-all positions**, chosen per-experiment; early layers are ineffective
-("In very early layers, neither concept is ranked highly in the J-lens").
+This is the principled "swap" (vs blunt ablate/amplify). Interventions run
+at a **band of layers across many/all positions**, chosen per-experiment;
+early layers are ineffective ("In very early layers, neither concept is
+ranked highly in the J-lens").
+
+**2026-08-07 (apparatus-12):** implemented as `lab.Steering(mode="swap")`
+— exact formula above; multi-variant words use normalized-mean unit
+directions (documented deviation: the paper swaps raw single-token
+vectors); `rand_seed` gives the matched Gaussian-pair control; every
+steered record now persists `steer_calib` (mean ‖Δh‖/‖h‖ per layer),
+which is how the 3c report-the-calibration rule ships by default.
+First battery (`results/apparatus12-swap/`): α=1 flips Yes→No at
+matched-control-null calibration but not No→Yes; α=2 = coherence break
+(the small-model warning above holds for swaps); deep-band swap flips
+the lens top-1 to yes at L52–62 (J AND vanilla) while the mouth still
+emits No — the re-assertion lives after L62.
 
 ---
 

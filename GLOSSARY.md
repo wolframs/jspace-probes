@@ -163,6 +163,15 @@ capture (u16-trawl-\*). The instrument that measured maintenance (absent
 at 27B), recalibrated qwen's ignition, and turned the "uninterpretable
 third" into a censused spam stratum.
 
+**Concept swap** *(added 2026-08-07, apparatus-12)* — the Fig-4C patch:
+exchange two concepts' lens coordinates in the residual
+(`h ← h + αV(σ(c)−c)`) and leave the orthogonal complement untouched.
+`lab.Steering(mode="swap")`; α=1 is the paper's formula, α=2 its "double
+strength" (which broke coherence on qwen-27b — see MECHANICS 3d note).
+The principled third intervention beside ablate and amplify. Comes with
+`steer_calib` — the per-layer ‖Δh‖/‖h‖ every steered record now stores,
+read next to any control comparison per the audit-02 rule.
+
 **Emergence** — the rank-vs-layer trajectory of the *realized next token*:
 at which depth the thing the model actually says wins the readout. A
 standard record column (`probes/site.py` renders it as "Answer

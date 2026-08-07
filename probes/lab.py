@@ -133,22 +133,62 @@ class Steering:
     words (for k), layers, mode and alpha, but the k directions at each
     layer are seeded Gaussians in residual space instead of the cluster's
     lens directions. Seed convention follows affect3: seed*1000 + layer.
+
+    mode="swap" (apparatus-12, MECHANICS 3d / paper Fig 4C): words must
+    be exactly [source, target]. Per layer, V = [v_s v_t] (each word's
+    variant directions normalized, meaned, renormalized — the paper uses
+    single raw tokens; unit vectors are the conservative choice for our
+    variant sets), c = V+ h (pseudoinverse), h <- h + alpha*V(sigma(c)-c)
+    with sigma swapping the two coordinates. alpha=1 is the paper's
+    formula; alpha=2 its "double strength". The component of h orthogonal
+    to span{v_s, v_t} is untouched. rand_seed swaps along two seeded
+    Gaussian directions instead (same formula) — note a random pair's
+    coordinates c are near-chance-line, so report `calib` (below) next
+    to any delta-delta per the audit-02 rule.
+
+    calib: per-layer running mean of ||delta||/||h|| over all steered
+    forward positions, readable after the context exits — the span-norm
+    calibration MECHANICS 3c requires next to every controlled result.
     """
 
     def __init__(self, lm, words, layers, mode="ablate", alpha=0.12,
                  rand_seed=None):
-        tids = []
-        for w in words:
-            tids += _token_ids(lm.tok, w)
-        if not tids:
-            raise ValueError(f"no single-token encodings among {words}")
         W = lm.model._lm_head.weight.detach()
-        rows = torch.stack([W[t] for t in sorted(set(tids))]).float()
+        if mode == "swap":
+            if len(words) != 2:
+                raise ValueError("swap needs exactly [source, target]")
+            per_word = []
+            for w in words:
+                tids = _token_ids(lm.tok, w)
+                if not tids:
+                    raise ValueError(f"no single-token encodings for {w!r}")
+                per_word.append(torch.stack([W[t] for t in tids]).float())
+        else:
+            tids = []
+            for w in words:
+                tids += _token_ids(lm.tok, w)
+            if not tids:
+                raise ValueError(f"no single-token encodings among {words}")
+            rows = torch.stack([W[t] for t in sorted(set(tids))]).float()
         self._per_layer = {}
         for l in layers:
             if l not in lm.lens.jacobians:
                 continue
-            J = lm.lens.jacobians[l].to(rows.device)
+            J = lm.lens.jacobians[l].to(W.device)
+            if mode == "swap":
+                vs = []
+                for rows_w in per_word:
+                    Dw = rows_w @ J
+                    Dw = Dw / Dw.norm(dim=-1, keepdim=True)
+                    v = Dw.mean(0)
+                    vs.append(v / v.norm())
+                V = torch.stack(vs, dim=1)  # [d_model, 2]
+                if rand_seed is not None:
+                    g = torch.Generator().manual_seed(rand_seed * 1000 + l)
+                    V = torch.randn(V.shape, generator=g).to(V.device)
+                    V = V / V.norm(dim=0, keepdim=True)
+                self._per_layer[l] = ("swap", (V, torch.linalg.pinv(V)))
+                continue
             D = rows @ J  # [k, d_model]: readout directions at this layer
             if rand_seed is not None:
                 g = torch.Generator().manual_seed(rand_seed * 1000 + l)
@@ -163,21 +203,38 @@ class Steering:
         self._alpha = alpha
         self._blocks = lm.model.layers
         self._handles = []
+        self._calib_acc = {l: [0.0, 0] for l in self._per_layer}
+
+    @property
+    def calib(self):
+        return {l: s / n for l, (s, n) in self._calib_acc.items() if n}
 
     def _make_hook(self, layer):
         kind, mat = self._per_layer[layer]
         alpha = self._alpha
+        acc = self._calib_acc[layer]
 
         def hook(module, inputs, output):
             t = output if torch.is_tensor(output) else output[0]
             h = t.float()
-            m = mat.to(h.device)
-            if kind == "ablate":
-                h = h - (h @ m) @ m.T
+            if kind == "swap":
+                V, pinv = mat
+                V, pinv = V.to(h.device), pinv.to(h.device)
+                c = h @ pinv.T                      # [..., 2]
+                delta = alpha * (c.flip(-1) - c) @ V.T
+                h2 = h + delta
+            elif kind == "ablate":
+                m = mat.to(h.device)
+                h2 = h - (h @ m) @ m.T
             else:
-                h = h + alpha * h.norm(dim=-1, keepdim=True) * m
-            h = h.to(t.dtype)
-            return h if torch.is_tensor(output) else (h, *output[1:])
+                m = mat.to(h.device)
+                delta = alpha * h.norm(dim=-1, keepdim=True) * m
+                h2 = h + delta
+            r = ((h2 - h).norm(dim=-1) / h.norm(dim=-1).clamp_min(1e-6))
+            acc[0] += r.mean().item()
+            acc[1] += 1
+            h2 = h2.to(t.dtype)
+            return h2 if torch.is_tensor(output) else (h2, *output[1:])
 
         return hook
 
@@ -219,14 +276,20 @@ def run(spec: dict) -> dict:
         {"role": "user", "content": spec["prompt"]}]
 
     steer_ctx = contextlib.nullcontext()
+    steer_objs = []
     if spec.get("steer"):
         steers = spec["steer"]
         steers = steers if isinstance(steers, list) else [steers]
-        steer_ctx = MultiSteer([
+        steer_objs = [
             Steering(lm, s["words"], s["layers"],
-                     s.get("mode", "ablate"), s.get("alpha", 0.12),
+                     s.get("mode", "ablate"),
+                     # a swap that omits alpha means the paper's formula
+                     # (alpha=1), not the amplify default
+                     s.get("alpha",
+                           1.0 if s.get("mode") == "swap" else 0.12),
                      s.get("rand_seed"))
-            for s in steers])
+            for s in steers]
+        steer_ctx = MultiSteer(steer_objs)
 
     with steer_ctx:
         if chat:
@@ -457,6 +520,9 @@ def run(spec: dict) -> dict:
         "vanilla": vanilla,
         "slice": slice_file,
         "film": film_file,
+        "steer_calib": [
+            {str(l): round(v, 5) for l, v in s.calib.items()}
+            for s in steer_objs] or None,
     }
     (outdir / "record.json").write_text(json.dumps(record, indent=1))
     reindex()
