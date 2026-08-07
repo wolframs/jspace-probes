@@ -17,6 +17,11 @@ he sets directions and expects designed-and-executed experiments back.
 > also the paper-grounded (raw-HTML-verified) layer reference — the thing
 > Unit 5C got wrong (ablated early L2–8; causal action is the workspace band).
 > Do NOT design a steer/ablation run from memory; the numbers live there.
+> For ANY affect-vector work (construction, readout, steering),
+> **`EMOTIONS.md`** is the same-rank mandatory read — projection onto the
+> vectors IS the state readout (z-scored vs `projbase.pt`, ws-band mean,
+> wsnorm partialed out; `langval.analyze_record` is the template). audit-02
+> shipped without it because the method lived only in code; never again.
 > (e) **when a run corrects a term's meaning, update `GLOSSARY.md` in the
 > same breath** — append a dated correction, never rewrite the old entry.
 > A stale glossary is worse than none: it is the binding vocabulary for all
