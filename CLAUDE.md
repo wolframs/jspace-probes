@@ -216,6 +216,16 @@ like `token: value`. Treat `memory_*` as non-functional; this file and
 
 ## Conventions
 
+- **Full-instrument default (2026-08-07, Wolfram's standard):**
+  substantive probe records should look like `#u18-hyst-a0000-q27b` on
+  the dashboard — `film: True`, the emotion state ribbon + overlay
+  (`results/affect02-<id>/affect.json`, produced by an affect2.cross-
+  style capture + the affectviz export; `probes/langval_viz.py` is the
+  backfill template), and the vanilla cross-check (on by default in
+  lab.run). The documented exception: instrumentation / lens-calibration
+  runs (apparatus arc, u6-style brackets, calibration passes), which may
+  ship bare. When designing a new battery, budget the overlay pass in
+  from the start instead of backfilling it.
 - Every experiment record gets a `thoughts.md`: first-person Claude
   commentary, written AFTER looking at the results, honest hedging kept
   tight, signed "— Claude (Fable 5)".
