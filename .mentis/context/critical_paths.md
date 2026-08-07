@@ -6,7 +6,7 @@ High-risk paths where changes have wide blast radius.
 
 ```mermaid
 flowchart TD
-  subgraph P0 ["med High-traffic: affect.py"]
+  subgraph P0 ["high High-traffic: affect.py"]
     P0N0["file:affect.py"]
     P0N1["file:affect08s.py"]
     P0N0 --> P0N1
@@ -53,18 +53,18 @@ flowchart TD
     P3N1 --> P3N2
     P3N3["file:affect5.py"]
     P3N2 --> P3N3
-    P3N4["file:audit02.py"]
+    P3N4["file:langval.py"]
     P3N3 --> P3N4
-    P3N5["file:langval.py"]
+    P3N5["file:audit02.py"]
     P3N4 --> P3N5
   end
 ```
 
 ## High-traffic: affect.py
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect.py has 18 dependents — changes here have wide blast radius
+- **Description**: affect.py has 20 dependents — changes here have wide blast radius
 
 ## High-traffic: affect2.py
 
@@ -76,7 +76,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _load_vectors has 22 dependents — changes here have wide blast radius
+- **Description**: _load_vectors has 24 dependents — changes here have wide blast radius
 
 ## High-traffic: _all_resid
 

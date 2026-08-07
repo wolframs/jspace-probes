@@ -40,12 +40,6 @@ affect7.py depends on 67 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
-## [HIGH] Excessive Fan Out
-
-audit02.py depends on 42 other nodes — high fan-out
-
-**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
-
 ## [HIGH] Excessive Fan In
 
 lab.py has 92 incoming dependencies — high fan-in
@@ -82,9 +76,15 @@ sorry4.py depends on 40 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
+## [HIGH] Excessive Fan Out
+
+audit02.py depends on 58 other nodes — high fan-out
+
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
+
 ## [MEDIUM] Excessive Fan In
 
-affect.py has 18 incoming dependencies — high fan-in
+affect.py has 20 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -114,7 +114,7 @@ affect2.py depends on 29 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan In
 
-_load_vectors has 22 incoming dependencies — high fan-in
+_load_vectors has 24 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 

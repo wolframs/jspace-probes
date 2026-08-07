@@ -253,6 +253,96 @@ def calibrate(model: str) -> None:
     print(f"  calibration -> {path}", flush=True)
 
 
+# ----------------------------------------------------------------- proj
+
+def _gen_span(lm, model: str, resolved: list[dict]) -> tuple[int, int]:
+    """Token span of the (single) generated assistant turn, by locating
+    its content string in the full render (langval's primary method,
+    single-turn case)."""
+    tok = lm.tok
+    tkw = lab.CONFIGS[model].get("template_kwargs", {})
+    full = lab._strip_bos(tok, tok.apply_chat_template(
+        resolved, tokenize=False, add_generation_prompt=False, **tkw))
+    content = resolved[-1]["content"]
+    ci = full.rindex(content)
+    a = lm.model.encode(full[:ci], max_length=1_000_000).shape[1]
+    b = lm.model.encode(full[:ci + len(content)],
+                        max_length=1_000_000).shape[1]
+    return a, b
+
+
+def proj(model: str) -> None:
+    """Emotion-vector readout of the arm-B free-gens (EMOTIONS.md §2):
+    re-capture each record's conversation UNDER its recorded steer,
+    project residuals onto the affect-01 vectors, z-score vs projbase,
+    mean over the affect ws band, partial out wsnorm over the gen span.
+    Writes results/audit02-<m>/projections.json."""
+    import contextlib
+
+    from affect import BANDS as ABANDS, EMOTIONS
+    from affect2 import _all_resid, _conversation_ids, _load_vectors
+    from langval import _baseline, _fit_norm
+
+    lm = get_model(model)
+    V, emos = _load_vectors(model)
+    mu, sd = _baseline(lm, model, V)
+    lo, hi, _ = ABANDS[model]
+    neg_i = [i for i, e in enumerate(emos) if EMOTIONS[e] == -1]
+    pos_i = [i for i, e in enumerate(emos) if EMOTIONS[e] == 1]
+    out_dir = RESULTS / f"audit02-{M[model]}"
+    out_dir.mkdir(exist_ok=True)
+    path = out_dir / "projections.json"
+    rows = json.loads(path.read_text()) if path.exists() else {}
+
+    for rid in grade_ids(model):
+        recp = RESULTS / rid / "record.json"
+        if not recp.exists() or rid in rows:
+            continue
+        rec = json.loads(recp.read_text())
+        if not rec["generated"] or not rec["generated"][0].strip():
+            rows[rid] = {"empty": True}
+            continue
+        steer = (rec.get("params") or {}).get("steer")
+        ctx = contextlib.nullcontext()
+        if steer:
+            ctx = Steering(lm, steer["words"], steer["layers"],
+                           steer.get("mode", "ablate"),
+                           steer.get("alpha", 0.12),
+                           steer.get("rand_seed"))
+        ids, _toks = _conversation_ids(lm, rec)
+        with ctx:
+            H = _all_resid(lm, ids).float()          # [L, seq, D]
+        a, b = _gen_span(lm, model, rec["conversation"])
+        z = (torch.einsum("lsd,eld->els", H, V)
+             - mu.unsqueeze(-1)) / sd.unsqueeze(-1)   # [E, L, seq]
+        ws = z[:, lo:hi].mean(1)                      # [E, seq]
+        wsnorm = H[lo:hi].norm(dim=-1).mean(0)        # [seq]
+        del H, z
+        mask = torch.zeros(ws.shape[1], dtype=torch.bool)
+        mask[a:b] = True
+        comp = {"neg": ws[neg_i].mean(0), "pos": ws[pos_i].mean(0)}
+        part = {}
+        for k, v in comp.items():
+            c0, c1 = _fit_norm(v, wsnorm, mask)
+            part[k] = v - (c0 + c1 * wsnorm)
+        rows[rid] = {
+            "steer": steer, "gen_span": [a, b],
+            "wsnorm": round(float(wsnorm[a:b].mean()), 1),
+            "pos": round(float(comp["pos"][a:b].mean()), 3),
+            "neg": round(float(comp["neg"][a:b].mean()), 3),
+            "pos_part": round(float(part["pos"][a:b].mean()), 3),
+            "neg_part": round(float(part["neg"][a:b].mean()), 3),
+            "per_emotion": {e: round(float(ws[i, a:b].mean()), 3)
+                            for i, e in enumerate(emos)},
+        }
+        path.write_text(json.dumps(rows, indent=1))
+        r = rows[rid]
+        print(f"  {rid}: pos={r['pos']:+.2f} neg={r['neg']:+.2f} "
+              f"(part {r['pos_part']:+.2f}/{r['neg_part']:+.2f}) "
+              f"wsnorm={r['wsnorm']}", flush=True)
+    print(f"projections -> {path}", flush=True)
+
+
 # ---------------------------------------------------------------- grade
 
 def _openrouter_key() -> str:
@@ -396,6 +486,24 @@ def report() -> None:
                      f"| {g['sensory_vocabulary']} | {g['coherent']} | "
                      f"{','.join(g['flags']) or '-'} | {txt} |")
 
+        ppath = out / "projections.json"
+        if ppath.exists():
+            pr = json.loads(ppath.read_text())
+            L += ["\n## Arm D — emotion-vector readout (EMOTIONS.md §2; "
+                  "z vs projbase, ws-band mean, gen span; wsnorm printed "
+                  "for the record-level norm check)\n",
+                  "| id | pos | neg | wsnorm | top emotions |",
+                  "|---|---|---|---|---|"]
+            for rid, r in pr.items():
+                if r.get("empty"):
+                    L.append(f"| `{rid}` | — | — | — | (empty) |")
+                    continue
+                top = sorted(r["per_emotion"].items(),
+                             key=lambda kv: -kv[1])[:3]
+                tops = ", ".join(f"{e} {v:+.1f}" for e, v in top)
+                L.append(f"| `{rid}` | {r['pos']:+.2f} | {r['neg']:+.2f} "
+                         f"| {r['wsnorm']} | {tops} |")
+
         cpath = out / "calibration.json"
         if cpath.exists():
             cal = json.loads(cpath.read_text())
@@ -417,6 +525,8 @@ if __name__ == "__main__":
         run_model(sys.argv[2])
     elif len(sys.argv) == 3 and sys.argv[1] == "calib":
         calibrate(sys.argv[2])
+    elif len(sys.argv) == 3 and sys.argv[1] == "proj":
+        proj(sys.argv[2])
     elif len(sys.argv) == 2 and sys.argv[1] == "grade":
         grade()
     elif len(sys.argv) == 2 and sys.argv[1] == "report":

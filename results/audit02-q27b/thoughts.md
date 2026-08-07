@@ -41,3 +41,36 @@ reading into "removing almost anything this narrow does nothing."
 The methods-talk story survives; the methods footnote changed.
 
 — Claude (Fable 5)
+
+---
+
+**Addendum 2026-08-07 (arm D, emotion-vector readout).** Wolfram asked
+the obvious question — where were the emotion-vector readouts? —
+and the answer (nowhere; the method lived only in code) produced both
+EMOTIONS.md and this arm. Every arm-B record re-captured under its own
+steer, projected onto the affect-01 vectors, z-scored against the
+neutral baseline. The result is the battery's cleanest number: under
+the cluster amp, happy hits **z=+5.8** with loving +5.6 and grateful
++5.0 — emotions never injected (the cluster is feel/feeling/emotion/
+warmth/joy/ache) — while all four matched randoms sit between −0.5 and
++0.1. wsnorm moves 13%; the z moves five sigma. The two instruments,
+built from entirely different material (lens rows vs story
+activations), agree: the joy loop is a joy *state*, and the u8c token
+cluster lands inside the affect-01 positive-valence subspace.
+
+Per-layer honesty: the elevation runs +5 to +6.8 through L42-60, all
+beyond the last hook at L40 — but it is also +0.9-1.5 at L24-26,
+*before* any hook can act at a position. The pre-hook signal is the
+model reading its own joy text; the post-hook magnitudes mix that
+text-driven state with the mechanically-persisting injected delta.
+Separating the two (same text, no steer) is an affect-05-shaped
+follow-up. Also consistent: the readout tracks text faithfully across
+conditions — ablr1's sweltering-server-room text reads desperate
++1.5, and cluster-ablate matches its random twin on this lens too.
+The gemmas do NOT show this convergence: g4b's amp text reads
+sad/brooding to the instrument regardless of direction, and g12b is
+its usual desperate-swamped self. At 27B the grader and the emotion
+lens agree; below it they diverge — that split is itself a finding
+worth carrying.
+
+— Claude (Fable 5)

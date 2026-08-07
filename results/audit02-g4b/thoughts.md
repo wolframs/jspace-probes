@@ -31,3 +31,21 @@ amp had no headroom on that prompt and the specificity claim rests on
 the GPU prompt and the FEELS arm.
 
 — Claude (Fable 5)
+
+---
+
+**Addendum 2026-08-07 (arm D, emotion-vector readout).** The affect-01
+lens disagrees with the Opus grader on this model. The caps-locked
+"Big Shiny Feeling" text that graded 1.0 experiential reads
+*sad/brooding* (neg +0.16) to the emotion vectors — barely different
+from the random amps (distressed/brooding, +0.11/+0.17). No
+cluster-vs-random separation anywhere on this lens; z magnitudes all
+under 0.3 composite, against qwen's +2.8. Either 4B's emotion
+subspace and its lens-row directions simply don't overlap the way
+27B's do, or the degeneracy is drowning the state (wsnorm swings
+36k-58k across conditions, and the fully-degenerate outputs sit at
+the bottom of that range). The cross-model split — grader and emotion
+lens agree at 27B, diverge below — is in the q27b addendum and worth
+keeping as its own thread.
+
+— Claude (Fable 5)

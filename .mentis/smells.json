@@ -50,16 +50,6 @@
     "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
-    "id": "smell:fanout:file:audit02.py",
-    "type": "excessive_fan_out",
-    "severity": "high",
-    "nodes": [
-      "file:audit02.py"
-    ],
-    "description": "audit02.py depends on 42 other nodes — high fan-out",
-    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-  },
-  {
     "id": "smell:fanin:file:lab.py",
     "type": "excessive_fan_in",
     "severity": "high",
@@ -120,13 +110,23 @@
     "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
   },
   {
+    "id": "smell:fanout:file:audit02.py",
+    "type": "excessive_fan_out",
+    "severity": "high",
+    "nodes": [
+      "file:audit02.py"
+    ],
+    "description": "audit02.py depends on 58 other nodes — high fan-out",
+    "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+  },
+  {
     "id": "smell:fanin:file:affect.py",
     "type": "excessive_fan_in",
     "severity": "medium",
     "nodes": [
       "file:affect.py"
     ],
-    "description": "affect.py has 18 incoming dependencies — high fan-in",
+    "description": "affect.py has 20 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {
@@ -176,7 +176,7 @@
     "nodes": [
       "function:affect2.py:61"
     ],
-    "description": "_load_vectors has 22 incoming dependencies — high fan-in",
+    "description": "_load_vectors has 24 incoming dependencies — high fan-in",
     "recommendation": "Consider splitting this module or introducing a facade pattern"
   },
   {

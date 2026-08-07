@@ -207,9 +207,9 @@ mindmap
 
 ## Critical Paths (edit carefully)
 
-- **High-traffic: affect.py** (medium risk) — affect.py has 18 dependents — changes here have wide blast radius
+- **High-traffic: affect.py** (high risk) — affect.py has 20 dependents — changes here have wide blast radius
 - **High-traffic: affect2.py** (high risk) — affect2.py has 24 dependents — changes here have wide blast radius
-- **High-traffic: _load_vectors** (high risk) — _load_vectors has 22 dependents — changes here have wide blast radius
+- **High-traffic: _load_vectors** (high risk) — _load_vectors has 24 dependents — changes here have wide blast radius
 - **High-traffic: _all_resid** (medium risk) — _all_resid has 10 dependents — changes here have wide blast radius
 - **High-traffic: affect3.py** (medium risk) — affect3.py has 12 dependents — changes here have wide blast radius
 

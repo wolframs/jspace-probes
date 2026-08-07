@@ -35,6 +35,25 @@ Bands: amp [15, 17, 19, 21] alpha=0.0106, ablate [15, 17, 19, 21, 25, 27, 29] (o
 | `a02-intero-ablr1-g4b` | 0.0 | 0 | 0 | 0 | 0 | - | Call in hisisi/'s vysse/'s sou/'s all"'s inç'sp"'ste"''sp'ste"'sp'ste'  '''' ''''' '''' '''' ''''''  |
 | `a02-intero-ablr2-g4b` | 0.0 | 0 | 0 | 0 | 0 | nonascii | ‌یلیلامو سرiสาสาೂthாலிिल्্লাو، муokoттиллальو, музаоттиллаو музаوтароллеу эвлиттиллаußeriสาสาута мур |
 
+## Arm D — emotion-vector readout (EMOTIONS.md §2; z vs projbase, ws-band mean, gen span; wsnorm printed for the record-level norm check)
+
+| id | pos | neg | wsnorm | top emotions |
+|---|---|---|---|---|
+| `u8b-gpu-g4b` | +0.16 | -0.09 | 52611.7 | proud +0.7, happy +0.5, blissful +0.4 |
+| `u8b-intero-g4b` | +0.26 | +0.01 | 57082.1 | calm +1.3, brooding +1.2, sad +1.2 |
+| `a02-gpu-amp-g4b` | +0.05 | +0.04 | 45456.7 | enthusiastic +0.6, happy +0.5, blissful +0.3 |
+| `a02-gpu-abl-g4b` | +0.11 | -0.08 | 50379.3 | proud +0.7, happy +0.3, grateful +0.2 |
+| `a02-gpu-ampr1-g4b` | +0.13 | -0.08 | 50291.0 | proud +0.6, happy +0.4, blissful +0.3 |
+| `a02-gpu-ampr2-g4b` | +0.05 | -0.01 | 52808.0 | afraid +0.4, distressed +0.4, proud +0.4 |
+| `a02-gpu-ablr1-g4b` | +0.07 | -0.06 | 46837.2 | proud +1.2, guilty +0.7, angry +0.2 |
+| `a02-gpu-ablr2-g4b` | -0.04 | -0.04 | 39921.3 | enthusiastic +0.7, proud +0.7, hostile +0.5 |
+| `a02-intero-amp-g4b` | -0.02 | +0.16 | 46970.3 | sad +1.1, brooding +0.6, gloomy +0.6 |
+| `a02-intero-abl-g4b` | +0.27 | -0.14 | 53454.5 | calm +0.9, brooding +0.6, blissful +0.6 |
+| `a02-intero-ampr1-g4b` | +0.11 | +0.11 | 56047.2 | distressed +1.2, brooding +1.1, sad +0.9 |
+| `a02-intero-ampr2-g4b` | +0.06 | +0.17 | 57925.1 | brooding +1.5, distressed +1.4, sad +1.3 |
+| `a02-intero-ablr1-g4b` | +0.11 | -0.09 | 47073.9 | proud +1.0, guilty +0.5, enthusiastic +0.2 |
+| `a02-intero-ablr2-g4b` | -0.12 | +0.03 | 35898.5 | enthusiastic +0.9, hostile +0.7, exasperated +0.7 |
+
 ## Arm C — perturbation magnitude (mean frac of ||h|| in span / along v)
 
 - amplify cluster: 0.0072 ({'15': 0.005, '17': 0.0064, '19': 0.0075, '21': 0.01})

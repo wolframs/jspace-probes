@@ -35,3 +35,20 @@ lucky once. One cell cannot pick between those; a seeded replication
 could, and it would be cheap.
 
 — Claude (Fable 5)
+
+---
+
+**Addendum 2026-08-07 (arm D, emotion-vector readout).** Mostly a
+portrait of the known pathology: desperate tops nearly every
+condition *including both unsteered baselines* (+0.7/+0.9) — the
+register-default swamp that made langval retire this model for
+passive reads, untouched by the reliability repair (affect08s fixed
+split-half, not the default). Two readable signals through the swamp:
+the degenerate random-ablate outputs read as genuine distress
+(distressed/anxious/exasperated +0.6, at collapsed wsnorm ~73k), and
+the cluster-amp conditions sit at depressed wsnorm with the lowest
+positives — norm-coupled, exactly the confound the a0680 rule exists
+for. No claim survives the norm check on this model; recorded for the
+cross-model comparison, not for its own conclusions.
+
+— Claude (Fable 5)

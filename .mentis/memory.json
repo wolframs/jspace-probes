@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-08-06T20:18:06.777Z",
+  "builtAt": "2026-08-07T13:16:46.081Z",
   "stats": {
     "filesScanned": 57,
-    "nodesCreated": 505,
-    "edgesCreated": 1479,
+    "nodesCreated": 507,
+    "edgesCreated": 1495,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 166
+    "durationMs": 146
   },
   "architecture": {
     "name": "probes",
@@ -22,7 +22,7 @@
   },
   "domains": [
     {
-      "id": "domain:cluster:26",
+      "id": "domain:cluster:25",
       "name": "General",
       "confidence": 0.95,
       "nodes": [
@@ -40,7 +40,6 @@
         "file:affectviz.py",
         "file:apparatus06.py",
         "file:apparatus09.py",
-        "file:audit02.py",
         "file:audit03.py",
         "file:blind.py",
         "file:cast.py",
@@ -75,7 +74,8 @@
         "file:unit16.py",
         "file:unit17.py",
         "file:unit19.py",
-        "file:unit5.py"
+        "file:unit5.py",
+        "file:audit02.py"
       ],
       "description": "Import-graph cluster of 50 files",
       "entryPoints": [
@@ -541,36 +541,6 @@
       "weight": 1
     },
     {
-      "from": "audit02.py",
-      "to": "Steering",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "get_model",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "assess",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_all_resid",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_strip_bos",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
       "from": "audit03.py",
       "to": "a_id",
       "kind": "IMPORTS",
@@ -831,6 +801,60 @@
     {
       "from": "unit19.py",
       "to": "_census",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "assess",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_all_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_conversation_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_baseline",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_fit_norm",
       "kind": "IMPORTS",
       "weight": 1
     },
@@ -2649,156 +2673,6 @@
     {
       "from": "apparatus09.py",
       "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "fanout.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "fanout.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "affect2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "affect2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_done",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "calibrate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "span_frac",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_openrouter_key",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_pick_grader",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "grade_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "assess",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "_judge",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "run_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "grade",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "report",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6287,6 +6161,216 @@
       "to": "run",
       "kind": "CALLS",
       "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "langval.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "langval.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_done",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "calibrate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "span_frac",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "Steering",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_baseline",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "grade_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_conversation_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_gen_span",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_fit_norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_openrouter_key",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_pick_grader",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "assess",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "_judge",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "run_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "proj",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "grade",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit02.py",
+      "to": "report",
+      "kind": "CALLS",
+      "weight": 1
     }
   ],
   "criticalPaths": [
@@ -6301,8 +6385,8 @@
         "file:affect5.py",
         "file:affect7.py"
       ],
-      "risk": "medium",
-      "description": "affect.py has 18 dependents — changes here have wide blast radius"
+      "risk": "high",
+      "description": "affect.py has 20 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect2.py",
@@ -6330,7 +6414,7 @@
         "file:affect3g.py"
       ],
       "risk": "high",
-      "description": "_load_vectors has 22 dependents — changes here have wide blast radius"
+      "description": "_load_vectors has 24 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:affect2.py:66",
@@ -6340,8 +6424,8 @@
         "file:affect2.py",
         "file:affect3.py",
         "file:affect5.py",
-        "file:audit02.py",
-        "file:langval.py"
+        "file:langval.py",
+        "file:audit02.py"
       ],
       "risk": "medium",
       "description": "_all_resid has 10 dependents — changes here have wide blast radius"
@@ -6534,10 +6618,10 @@
       "nodes": [
         "function:lab.py:211",
         "file:lab.py",
-        "file:audit02.py",
         "file:audit03.py",
         "file:blind.py",
-        "file:course.py"
+        "file:course.py",
+        "file:deepen.py"
       ],
       "risk": "high",
       "description": "run has 27 dependents — changes here have wide blast radius"
@@ -6649,16 +6733,6 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanout:file:audit02.py",
-      "type": "excessive_fan_out",
-      "severity": "high",
-      "nodes": [
-        "file:audit02.py"
-      ],
-      "description": "audit02.py depends on 42 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
       "id": "smell:fanin:file:lab.py",
       "type": "excessive_fan_in",
       "severity": "high",
@@ -6719,13 +6793,23 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
+      "id": "smell:fanout:file:audit02.py",
+      "type": "excessive_fan_out",
+      "severity": "high",
+      "nodes": [
+        "file:audit02.py"
+      ],
+      "description": "audit02.py depends on 58 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
       "id": "smell:fanin:file:affect.py",
       "type": "excessive_fan_in",
       "severity": "medium",
       "nodes": [
         "file:affect.py"
       ],
-      "description": "affect.py has 18 incoming dependencies — high fan-in",
+      "description": "affect.py has 20 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -6775,7 +6859,7 @@
       "nodes": [
         "function:affect2.py:61"
       ],
-      "description": "_load_vectors has 22 incoming dependencies — high fan-in",
+      "description": "_load_vectors has 24 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {

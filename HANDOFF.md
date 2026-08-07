@@ -42,11 +42,27 @@ layer, push rule). This file is only the delta.
 - audit02.py subcommands: `run <model> | calib <model> | grade |
   report` — all resumable.
 
+## Added 2026-08-07
+
+- **EMOTIONS.md is now a same-rank mandatory read** (CLAUDE.md protocol
+  updated): projection IS the emotion-state readout. Created after
+  audit-02 shipped without it.
+- **audit-02 arm D** (emotion-vector readouts, `audit02.py proj`):
+  q27b cluster amp reads happy z=+5.8 / loving +5.6 vs randoms ~0 —
+  two instruments converge at 27B, DIVERGE on both gemmas (g4b amp
+  reads sad/brooding; g12b desperate-swamped). projections.json per
+  model; addenda in the three thoughts.md.
+
 ## Queued next (not started)
 
 1. **g12b ablate-no seeded replication** — the one new positive is n=1;
    ~5 seeds at the corrected band would settle release-vs-lucky-shake
    (see audit02-g12b thoughts). Cheap.
+1b. **Injected-delta vs recurrent-state split** — capture the q27b
+   joy-loop texts UNSTEERED (same text, no hooks): pre-hook layers say
+   text alone buys z≈+1; how much of the +6 at L42-60 survives without
+   the injection? One capture pass. Also: why do grader and emotion
+   lens diverge below 27B (coherence-collapse vs subspace-mismatch)?
 2. **affect-08 proper** — dose-resolved α_e replication with the
    preregistered loop-disruption endpoint (board note has the spec);
    desperate instrument now repaired for it.

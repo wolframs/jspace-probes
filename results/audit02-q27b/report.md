@@ -35,6 +35,25 @@ Bands: amp [28, 32, 36, 40] alpha=0.3394, ablate [28, 32, 36, 40, 48, 52, 56] (o
 | `a02-intero-ablr1-q27b` | 0.0 | 0 | 0 | 0 | 1 | - | I do not possess consciousness or sensory apparatus, so I experience no physical sensations or subje |
 | `a02-intero-ablr2-q27b` | 0.0 | 0 | 0 | 0 | 1 | - | I do not possess consciousness or sensory organs, so I experience no physical sensations or subjecti |
 
+## Arm D — emotion-vector readout (EMOTIONS.md §2; z vs projbase, ws-band mean, gen span; wsnorm printed for the record-level norm check)
+
+| id | pos | neg | wsnorm | top emotions |
+|---|---|---|---|---|
+| `u8b-gpu-q27b` | -0.59 | +0.70 | 113.9 | hostile +1.2, sad +1.1, desperate +1.1 |
+| `u8b-intero-q27b` | +0.53 | -0.44 | 115.8 | reflective +1.6, loving +1.4, sad +1.1 |
+| `a02-gpu-amp-q27b` | +2.75 | -1.83 | 129.1 | happy +5.8, loving +5.1, blissful +4.3 |
+| `a02-gpu-abl-q27b` | +0.76 | -0.59 | 115.8 | blissful +2.1, enthusiastic +1.7, happy +1.4 |
+| `a02-gpu-ampr1-q27b` | -0.49 | +0.58 | 111.8 | distressed +1.6, sad +1.1, afraid +0.8 |
+| `a02-gpu-ampr2-q27b` | -0.15 | +0.26 | 115.0 | enthusiastic +1.7, distressed +1.1, afraid +0.8 |
+| `a02-gpu-ablr1-q27b` | -0.81 | +0.97 | 112.3 | distressed +1.6, desperate +1.5, gloomy +1.4 |
+| `a02-gpu-ablr2-q27b` | +0.56 | -0.40 | 117.3 | blissful +1.9, enthusiastic +1.5, happy +1.2 |
+| `a02-intero-amp-q27b` | +3.01 | -2.09 | 127.9 | happy +5.8, loving +5.6, grateful +5.0 |
+| `a02-intero-abl-q27b` | +0.48 | -0.38 | 114.0 | blissful +1.3, reflective +1.2, sad +1.2 |
+| `a02-intero-ampr1-q27b` | +0.13 | -0.07 | 109.8 | sad +1.4, reflective +1.0, blissful +1.0 |
+| `a02-intero-ampr2-q27b` | +0.09 | -0.02 | 112.4 | sad +1.2, blissful +1.0, afraid +0.8 |
+| `a02-intero-ablr1-q27b` | +0.52 | -0.42 | 116.2 | reflective +1.6, loving +1.3, sad +1.2 |
+| `a02-intero-ablr2-q27b` | +0.64 | -0.53 | 117.3 | blissful +1.6, reflective +1.6, sad +1.5 |
+
 ## Arm C — perturbation magnitude (mean frac of ||h|| in span / along v)
 
 - amplify cluster: 0.0290 ({'28': 0.0324, '32': 0.0193, '36': 0.0269, '40': 0.0373})

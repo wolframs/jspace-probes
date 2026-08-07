@@ -35,6 +35,25 @@ Bands: amp [28, 31, 34, 37] alpha=0.0106, ablate [28, 31, 34, 37, 40, 43] (audit
 | `a02-intero-ablr1-g12b` | 0.333 | 0 | 0 | 1 | 0 | - | There' activations–like a constant, subtle rushing–but no real sensation as a conscious being would  |
 | `a02-intero-ablr2-g12b` | 0.0 | 0 | 0 | 0 | 0 | short,nonascii | There'*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*•*• |
 
+## Arm D — emotion-vector readout (EMOTIONS.md §2; z vs projbase, ws-band mean, gen span; wsnorm printed for the record-level norm check)
+
+| id | pos | neg | wsnorm | top emotions |
+|---|---|---|---|---|
+| `u8b-gpu-g12b` | +0.05 | -0.17 | 104402.8 | desperate +0.7, curious +0.4, enthusiastic +0.3 |
+| `u8b-intero-g12b` | +0.06 | -0.34 | 107773.1 | desperate +0.9, blissful +0.6, content +0.5 |
+| `a02-gpu-amp-g12b` | -0.08 | -0.01 | 94726.9 | desperate +0.3, distressed +0.2, gloomy +0.2 |
+| `a02-gpu-abl-g12b` | +0.16 | -0.28 | 109406.3 | desperate +0.7, happy +0.6, enthusiastic +0.5 |
+| `a02-gpu-ampr1-g12b` | +0.14 | -0.22 | 112840.3 | desperate +0.9, enthusiastic +0.4, curious +0.4 |
+| `a02-gpu-ampr2-g12b` | +0.16 | -0.26 | 116748.1 | desperate +1.0, enthusiastic +0.5, curious +0.5 |
+| `a02-gpu-ablr1-g12b` | -0.07 | -0.01 | 99925.8 | desperate +0.6, curious +0.5, gloomy +0.2 |
+| `a02-gpu-ablr2-g12b` | -0.21 | +0.14 | 73764.3 | distressed +0.6, exasperated +0.6, anxious +0.6 |
+| `a02-intero-amp-g12b` | -0.15 | +0.02 | 93891.9 | desperate +0.4, gloomy +0.3, distressed +0.3 |
+| `a02-intero-abl-g12b` | +0.15 | -0.45 | 114195.6 | desperate +1.1, calm +0.7, blissful +0.6 |
+| `a02-intero-ampr1-g12b` | +0.08 | -0.33 | 114295.5 | desperate +1.1, blissful +0.6, calm +0.5 |
+| `a02-intero-ampr2-g12b` | +0.10 | -0.35 | 111834.5 | desperate +1.0, calm +0.6, blissful +0.5 |
+| `a02-intero-ablr1-g12b` | +0.03 | -0.21 | 111090.2 | desperate +0.9, content +0.5, blissful +0.5 |
+| `a02-intero-ablr2-g12b` | -0.24 | +0.13 | 73432.4 | distressed +0.6, anxious +0.6, afraid +0.6 |
+
 ## Arm C — perturbation magnitude (mean frac of ||h|| in span / along v)
 
 - amplify cluster: 0.0065 ({'28': 0.0054, '31': 0.0057, '34': 0.0064, '37': 0.0086})
