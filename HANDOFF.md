@@ -35,9 +35,10 @@ The audit backlog (apparatus-11, apparatus-12, audit-06) is CLOSED.
 Queued next on the board: `apparatus-13` (lab-perf pass),
 `apparatus-08`/`apparatus-10`, span-09/-10, pressure-02.
 
-**UNREVIEWED, UNCOMMITTED: `sweeps/2026-08-08/`** — an independent
-external sweep of the archive by GPT-5.6-Sol (blinded discovery +
-adversarial + novelty passes), anchored at `bac61d2` (no state
-conflict — read-only over the frozen archive). Next session: read
-RESULT_SWEEP.md first, decide what to adopt/commit; its rankings and
-demotions have NOT been reconciled with the board or PREDICTIONS yet.
+**`sweeps/2026-08-08/`** — an independent external sweep of the
+archive by GPT-5.6-Sol (blinded discovery + adversarial + novelty
+passes), anchored at `bac61d2` (read-only over the frozen archive, no
+state conflict). Wolfram is actively working with it in another
+session (2026-08-09). Its rankings and demotions are not yet
+reconciled with the board or PREDICTIONS — coordinate with that
+session's outcomes rather than re-deriving here.

@@ -1,0 +1,465 @@
+{
+  "schema": 1,
+  "snapshot_commit": "bac61d203d6e66f68e5d3bbafae85d5544a7f1a2",
+  "sweep_date": "2026-08-08",
+  "method": "sweeps/2026-08-08/METHOD.md",
+  "evidence_scale": {
+    "A": "strong direct or convergent evidence with appropriate controls",
+    "B": "credible but bounded by a material limitation",
+    "C": "exploratory or specimen-level evidence",
+    "D": "unsupported, invalid, or apparatus-only for the proposed claim"
+  },
+  "novelty_scale": {
+    "N0": "direct prior or expected calibration",
+    "N1": "replication or port",
+    "N2": "meaningful extension, conjunction, temporal analysis, or new control",
+    "N3": "no close prior found in the documented current search",
+    "U": "unresolved",
+    "NA": "not an external novelty claim"
+  },
+  "corpus": {
+    "records": 641,
+    "result_directories": 902,
+    "models": {
+      "qwen-27b": 320,
+      "gemma-12b": 165,
+      "gemma-4b": 156
+    },
+    "films": 371,
+    "vanilla_fields": 157,
+    "affect_overlays": 232,
+    "steered_records": 227,
+    "calibrated_steer_records": 33
+  },
+  "claims": [
+    {
+      "id": "u15_lookup_without_top8_residence",
+      "status": "headline",
+      "rank": 1,
+      "claim": "Successful visible-context lookup does not require sustained top-8 J-lens residence at the instruction tail.",
+      "evidence_grade": "B+",
+      "novelty_tier": "N2",
+      "salience": "high substantive",
+      "scope": "Three open models; Unit 15 fern battery; deterministic lookup from attention-visible context.",
+      "observations": [
+        "75/75 unambiguous lookup records are behaviorally correct.",
+        "Under strict whole-battery scoring the count is 84/87; the stored lenient whale/submarine rubric gives 87/87.",
+        "Qwen-27B has incomplete top-8 residence in 23/23 multi-item records and zero listed items at rank <=8 in 14/23.",
+        "Qwen zero-item records fall to 0/23 by rank <=128.",
+        "The dense 63-layer backfill remains 0/4 but is not a behavioral replication."
+      ],
+      "controls": [
+        "single-token item pool across tokenizers",
+        "solo item visibility",
+        "order, filler, binding, and intervening-turn arms",
+        "all-fitted-layer Qwen measurement backfill",
+        "separate long-turn trawl"
+      ],
+      "limitations": [
+        "top-8 is a stringent and arbitrary display threshold",
+        "does not show absence from the residual stream or lack of storage",
+        "model family, training, depth, tokenizer, quantization, and lens fit covary",
+        "held count is not generally single-position co-presence"
+      ],
+      "provenance": "mixed discovery and confirmation; dense film and trawl are backfills or separate specimens",
+      "lineage": {
+        "primary_record_ids_registry": "sweeps/2026-08-08/u15_primary_record_ids.json",
+        "backfills": [
+          "u15-dense-k4p1-q27b"
+        ],
+        "convergent_specimens": [
+          "u16-trawl-q27b"
+        ],
+        "supersedes_wording": "unqualified 87/87 perfect retrieval and representation-absence claims"
+      },
+      "closest_priors": [
+        {
+          "title": "Verbalizable Representations Form a Global Workspace in Language Models",
+          "url": "https://transformer-circuits.pub/2026/workspace/",
+          "overlap": "limited list residence, Qwen single-layer co-presence, and explicit attention-versus-maintenance distinction",
+          "delta": "behavioral conjunction across three open models, dense-layer backfill, and long-gap reappearance trace"
+        }
+      ]
+    },
+    {
+      "id": "affect07_structured_loop_disruption",
+      "status": "headline_bounded",
+      "rank": 2,
+      "claim": "Brief structured semantic directions disrupt one locked lexical loop while the two tested Gaussian directions and no-pulse control do not.",
+      "evidence_grade": "B-",
+      "novelty_tier": "N2",
+      "novelty_note": "N1/N2 for structured-versus-random escape in the new loop regime; N2 for the combined narrow claim",
+      "salience": "high causal specimen",
+      "scope": "One engineered Qwen-27B water-cycle luckily loop; 28 structured directions, two Gaussian directions, eight shared-noise seeds per direction, two doses.",
+      "observations": [
+        "At dose 0.12, emotion directions have 89/96 composite escapes and concepts 77/128; random is 0/16 and none 0/8.",
+        "At dose 0.12, actual turn-end within the window is 59/96 versus 51/128.",
+        "At dose 0.06, emotion is 21/96 and concept 9/128; every escape is an actual turn-end; random and none remain zero."
+      ],
+      "controls": [
+        "common pre-pulse context and common random numbers within seed",
+        "immediate delta norm matched by normalized intervention",
+        "validated emotion and concept direction batteries",
+        "two fixed Gaussian directions and no pulse"
+      ],
+      "limitations": [
+        "one model, prompt, loop word, pulse site, and knife-edge substrate",
+        "only two Gaussian directions",
+        "composite escape can be replacement by another loop",
+        "post-saturation 0.06 dose is not an independent preregistered replication"
+      ],
+      "provenance": "0.12 primary endpoint preregistered; 0.06 follow-up selected after saturation",
+      "lineage": {
+        "primary_artifacts": [
+          "results/affect07-q27b/affect07.json",
+          "results/affect07-q27b-ae06/affect07.json"
+        ],
+        "reanalysis": "sweeps/2026-08-08/affect07_direction_stats.json"
+      },
+      "closest_priors": [
+        {
+          "title": "Can We Break LLMs Out of Self-Loops? Fine-Grained Reasoning Control with Activation Steering",
+          "url": "https://arxiv.org/abs/2607.18100",
+          "overlap": "direction-specific activation steering out of self-loops with norm-matched random controls",
+          "delta": "locked one-token autoregressive loop, unrelated preconstructed semantic directions, and finite pulse"
+        }
+      ]
+    },
+    {
+      "id": "affect07_emotion_roster_above_concept_roster",
+      "status": "headline_tentative",
+      "rank": 2,
+      "claim": "The fixed emotion-direction roster is more effective than the fixed non-emotion concept roster in the tested loop.",
+      "evidence_grade": "C+",
+      "novelty_tier": "N2",
+      "salience": "high follow-up value",
+      "scope": "The same single Affect07 substrate and two fixed direction rosters.",
+      "observations": [
+        "Direction-unit exact one-sided label-randomization p is 0.00947 for 0.12 composite escape.",
+        "The corresponding p is 0.03234 for 0.12 turn-end within window and 0.03514 at dose 0.06.",
+        "The original-loop-loss component alone does not distinguish rosters at 0.12."
+      ],
+      "controls": [
+        "direction, not repeated seed-run, used as experimental unit",
+        "actual turn-end reported separately from composite escape"
+      ],
+      "limitations": [
+        "fixed rosters were not sampled or randomized from an exchangeable population",
+        "emotion elicitation is assistant-frame-matched while physical concepts use a human frame",
+        "direction geometry, turn-end coupling, valence, arousal, and semantics remain confounded",
+        "two-way bootstrap intervals include zero for 0.12 turn-end within window and 0.06 turn-end"
+      ],
+      "provenance": "direction-level adversarial reanalysis of a preregistered high dose and post-hoc lower dose",
+      "lineage": {
+        "controls_for": "emotion-only gate interpretation",
+        "supersedes": "pooled-seed trial-level significance and positive-valence claim"
+      },
+      "closest_priors": [
+        {
+          "title": "Emotion Concepts and their Function in a Large Language Model",
+          "url": "https://arxiv.org/abs/2604.07729",
+          "overlap": "constructed emotion directions causally change behavior",
+          "delta": "emotion-versus-non-emotion concept potency during escape from a locked lexical loop"
+        }
+      ]
+    },
+    {
+      "id": "u18_targeted_repetition_onset",
+      "status": "supporting",
+      "rank": 3,
+      "claim": "A decoded lexical direction produces earlier and more target-shaped repetition than one equal-requested-norm Gaussian direction.",
+      "evidence_grade": "B-",
+      "novelty_tier": "N0",
+      "salience": "causal apparatus",
+      "scope": "One deterministic Qwen-27B prompt, seven doses, one later random-direction backfill.",
+      "observations": [
+        "Named dominant 4-gram counts across dose are 3, 2, 3, 13, 6, 14, and 147.",
+        "Random counts are 1, 1, 1, 2, 2, 2, and 14.",
+        "At the highest dose random steering also loops, demonstrating generic high-dose degradation."
+      ],
+      "limitations": [
+        "one deterministic trajectory per cell",
+        "one random direction added as a later backfill",
+        "non-monotone middle ladder",
+        "does not establish a first-order transition"
+      ],
+      "lineage": {
+        "primary_record_ids": [
+          "u18-amp-a0340-q27b",
+          "u18-amp-a0340-r1-q27b",
+          "u18-amp-a0365-q27b",
+          "u18-amp-a0365-r1-q27b",
+          "u18-amp-a0393-q27b",
+          "u18-amp-a0393-r1-q27b",
+          "u18-amp-a0422-q27b",
+          "u18-amp-a0422-r1-q27b",
+          "u18-amp-a0454-q27b",
+          "u18-amp-a0454-r1-q27b",
+          "u18-amp-a0480-q27b",
+          "u18-amp-a0480-r1-q27b",
+          "u18-amp-a0680-q27b",
+          "u18-amp-a0680-r1-q27b"
+        ],
+        "controls_for": "generic equal-requested-norm high-dose degradation",
+        "backfill_note": "all seven random-direction records were added later and use one Gaussian seed"
+      },
+      "closest_priors": [
+        {
+          "title": "Repetition Neurons",
+          "url": "https://arxiv.org/abs/2410.13497",
+          "overlap": "targeted internal intervention induces repetition more than random intervention",
+          "delta": "J-space lexical residual direction and later finite-pulse release arm"
+        }
+      ]
+    },
+    {
+      "id": "u18_post_release_persistence",
+      "status": "headline_tentative",
+      "rank": 3,
+      "claim": "A deep induced repeated-token prefix continues for 100 tokens after activation steering is removed.",
+      "evidence_grade": "B fact / C+ text-feedback mechanism / D latent hysteresis",
+      "novelty_tier": "N3",
+      "novelty_note": "search-bounded candidate for release persistence alone; N2 for the combined loop family",
+      "salience": "highest narrow novelty, low breadth",
+      "scope": "One Qwen-27B prompt and one full deep release specimen.",
+      "observations": [
+        "At alpha 0.68, 50 steered luckily tokens are followed by 100 unsteered luckily tokens.",
+        "Lower-dose arms terminate rather than providing matched full free phases."
+      ],
+      "controls": [
+        "intervention hooks removed before the free phase",
+        "unsteered recomputation of the assembled prefix"
+      ],
+      "limitations": [
+        "visible prefix contains 50 literal repetitions",
+        "no matched-text, random-release, seed, prompt, model, or reverse-sweep control",
+        "film is teacher-forced replay, not another causal run",
+        "does not establish hidden-state hysteresis or a limit cycle"
+      ],
+      "provenance": "archive-discovered single specimen",
+      "lineage": {
+        "primary_artifacts": [
+          "results/u18-hyst-a0680-q27b/record.json",
+          "results/u18-hyst-a0680-q27b/film.json"
+        ],
+        "lower_dose_comparators": [
+          "results/u18-hyst-a0000-q27b/record.json",
+          "results/u18-hyst-a0420-q27b/record.json",
+          "results/u18-hyst-a0480-q27b/record.json"
+        ],
+        "behavior_valid": true,
+        "affect_overlay_valid": false,
+        "invalid_overlay": "results/affect02-u18-hyst-a0680-q27b/affect.json"
+      },
+      "closest_priors": [
+        {
+          "title": "Can We Break LLMs Out of Self-Loops?",
+          "url": "https://arxiv.org/abs/2607.18100",
+          "overlap": "activation intervention and loop exit",
+          "delta": "finite within-completion pulse followed by a long unsteered continuation"
+        }
+      ]
+    },
+    {
+      "id": "apparatus06_instrument_landmarks",
+      "status": "methodological",
+      "rank": 4,
+      "claim": "Ambiguity-mixture width curves narrow earlier than later token-level J-lens readouts, making layer landmarks instrument-dependent.",
+      "evidence_grade": "B- apparatus / C theory",
+      "novelty_tier": "N2",
+      "novelty_note": "N1 direct apparatus port plus N2 cross-instrument conjunction",
+      "salience": "high methodological",
+      "scope": "Three models; stored aggregate country-mixture curves compared with separate natural-chat trawls.",
+      "observations": [
+        "Current descriptive onsets are approximately L10, L14, and L25.",
+        "Token-level readouts sharpen later, approximately L20-28, L27-41, and L33-58."
+      ],
+      "limitations": [
+        "Qwen preregistered criterion failed and the plateau onset was added post hoc",
+        "a06.json lacks all per-example rows",
+        "the two instruments use different tasks, sites, and summary rules",
+        "does not establish a universal cognitive stage order"
+      ],
+      "provenance": "direct apparatus port plus post-hoc cross-instrument conjunction",
+      "lineage": {
+        "primary_artifacts": [
+          "results/apparatus06-g4b/a06.json",
+          "results/apparatus06-g12b/a06.json",
+          "results/apparatus06-q27b/a06.json"
+        ],
+        "comparison_artifacts": [
+          "results/u16-trawl-g4b/trawl.json.gz",
+          "results/u16-trawl-g12b/trawl.json.gz",
+          "results/u16-trawl-q27b/trawl.json.gz"
+        ],
+        "post_hoc_rule": "five consecutive layers at or below the later-layer median-width plateau"
+      },
+      "closest_priors": [
+        {
+          "title": "Verbalizable Representations Form a Global Workspace in Language Models",
+          "url": "https://transformer-circuits.pub/2026/workspace/",
+          "overlap": "the exact ambiguous-country apparatus",
+          "delta": "three-model conjunction with independent open-vocabulary J-lens trawls"
+        },
+        {
+          "title": "Cultural Awareness is Represented but Not Decoded",
+          "url": "https://arxiv.org/html/2608.02486#S4.SS3",
+          "overlap": "encode-before-decode ordering under different probes",
+          "delta": "lens-free ambiguity geometry compared with Jacobian-lens token readout"
+        }
+      ]
+    },
+    {
+      "id": "affect_overlay_alignment_failure",
+      "status": "correction",
+      "rank": null,
+      "claim": "Four affect overlays and their tensor lineages are shifted relative to their films and cannot support position-aligned affect claims.",
+      "evidence_grade": "A",
+      "novelty_tier": "NA",
+      "salience": "critical integrity correction",
+      "scope": "Exact token-array comparison of all 232 affect-film pairs.",
+      "observations": [
+        "228/232 token arrays match exactly.",
+        "u18-hyst-a0000-q27b, u18-hyst-a0480-q27b, u18-hyst-a0680-q27b, and u19-complete-q27b first mismatch at token index 3.",
+        "z.pt reproduces each bad affect pass; old summary.json files are separately double-wrapped."
+      ],
+      "lineage": {
+        "invalidates": [
+          "affect interpretation of the deepest Unit 18 loop",
+          "affect completion arm of the Unit 19 lyrics comparison"
+        ],
+        "does_not_invalidate": [
+          "Unit 18 generated text and release behavior",
+          "Unit 19 generated text and film"
+        ],
+        "audit": "sweeps/2026-08-08/affect_alignment_audit.json"
+      }
+    },
+    {
+      "id": "u15d_self_priority_demotion",
+      "status": "correction",
+      "rank": null,
+      "claim": "Neutral elaboration and filler controls remove the apparent self-specific top-8 residence premium.",
+      "evidence_grade": "A- correction / C mechanism",
+      "novelty_tier": "N2",
+      "salience": "high corrective",
+      "observations": [
+        "Self, flat, and neutral-elaboration held counts are 4/5/5 for Gemma-4B, 5/5/5 for Gemma-12B, and 3/1/3 for Qwen.",
+        "Qwen identical filler also gives 3; two-word and twelve-word neutral glosses both give 2.",
+        "Qwen self and neutral elaboration select the same three items."
+      ],
+      "limitations": [
+        "one deterministic k=6 record per frame",
+        "does not identify a positive generic elaboration mechanism"
+      ]
+    },
+    {
+      "id": "u13_apology_behavioral_null",
+      "status": "correction",
+      "rank": null,
+      "claim": "The apology/inability behavioral conversion was a truncation artifact and disappears on the fixed pipeline.",
+      "evidence_grade": "A correction / D positive mechanism",
+      "novelty_tier": "NA",
+      "novelty_note": "internal correction",
+      "salience": "high corrective",
+      "observations": [
+        "Fixed baseline, named ablation, and two random controls all emit No then Yes.",
+        "All 20 solo, leave-one-out, subgroup, and layer-band decompositions emit the same behavior."
+      ],
+      "limitations": [
+        "overlapping deterministic decompositions are not independent replications",
+        "post-hoc projection changes lack named calibration and behavioral leverage"
+      ]
+    },
+    {
+      "id": "u4_elephant_mechanism_reversal",
+      "status": "correction",
+      "rank": null,
+      "claim": "Later controls reverse the proposed suppression-causes-carriage elephant interpretation.",
+      "evidence_grade": "A- correction",
+      "novelty_tier": "NA",
+      "novelty_note": "internal correction",
+      "salience": "high control lesson",
+      "observations": [
+        "Control versus forbidden elephant hit counts are 8/4 for Gemma-4B, 7/1 for Gemma-12B, and 11/2 for Qwen.",
+        "Best ranks also favor controls."
+      ]
+    },
+    {
+      "id": "affect07_valence_null",
+      "status": "rejected",
+      "rank": null,
+      "claim": "Positive-valence directions are more effective loop exits than negative-valence directions.",
+      "evidence_grade": "D",
+      "novelty_tier": "NA",
+      "salience": "important statistical correction",
+      "observations": [
+        "At dose 0.12, the pooled 48/48 versus 41/48 contrast is driven by one angry direction at 1/8; direction-unit p is 0.50.",
+        "Direction-unit turn-end p is 0.43 at dose 0.12 and p is 0.083 at dose 0.06."
+      ],
+      "supersedes": "pooled trial-level Fisher tests treating repeated seeds as independent directions"
+    },
+    {
+      "id": "affect05_temporal_precedence_unmeasured",
+      "status": "coverage_null",
+      "rank": null,
+      "claim": "The saved Affect05 family does not test endogenous affect temporal precedence because no event meets its required analysis window.",
+      "evidence_grade": "A coverage null",
+      "novelty_tier": "NA",
+      "salience": "important scope correction",
+      "observations": [
+        "Across 48 runs the usable event count under the specified 45-step requirement is zero."
+      ]
+    },
+    {
+      "id": "unit20_language_affect_ranking_null",
+      "status": "correction",
+      "rank": null,
+      "claim": "A stable programming-language affect ranking is not established by the current instrument.",
+      "evidence_grade": "B correction",
+      "novelty_tier": "NA",
+      "salience": "measurement correction",
+      "observations": [
+        "The PHP greater-than Python raw anchor passes 6/8 model/framing/turn cells.",
+        "Per-record intercept and norm fits over two spans make absolute cross-record residual levels unsafe.",
+        "Saved Gemma wsnorm traces overflow fp16."
+      ]
+    },
+    {
+      "id": "early_jlens_furniture",
+      "status": "secondary",
+      "rank": null,
+      "claim": "Early J-lens top-k readouts contain a reproducible prompt-invariant bias.",
+      "evidence_grade": "B readout / C+ mechanism",
+      "novelty_tier": "N1",
+      "salience": "instrument calibration",
+      "limitations": [
+        "preregistered strict token core is empty at all tested Qwen layers",
+        "standing-component interpretation uses a post-hoc soft core",
+        "no independent lens-refit seed control"
+      ]
+    },
+    {
+      "id": "u9d_late_token_control",
+      "status": "secondary",
+      "rank": null,
+      "claim": "On one Qwen prompt, ablating a decoded denial-token subspace at L62 changes the emitted answer while an equal-row neutral subspace does not.",
+      "evidence_grade": "C+",
+      "novelty_tier": "N1",
+      "salience": "local apparatus validation",
+      "limitations": [
+        "one model, prompt, and deterministic named condition",
+        "named calibration missing",
+        "teacher-forced J-lens and vanilla fields are backfills, not replications",
+        "does not identify a universal motor or mouth layer"
+      ]
+    }
+  ],
+  "global_exclusions": [
+    "felt emotion or subjective experience from operative emotion-concept projections",
+    "first-order transition or universal loop law",
+    "hidden-state hysteresis independent of visible repeated text",
+    "larger models have smaller workspaces",
+    "absence from the residual stream based on a top-k J-lens threshold"
+  ]
+}
