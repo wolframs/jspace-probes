@@ -390,7 +390,7 @@
    "items": [
     {
      "t": "Scale abandons holding",
-     "b": "Hold six nouns for a random probe: the 4B echoes all of them through its tail workspace; the 27B holds approximately nothing from k=4 (dense 63-layer control) — and both retrieve perfectly, all 94 records. Lens-visible holding is a strategy, not a capacity.",
+     "b": "Hold six nouns for a random probe: the 4B echoes all of them through its tail workspace; the 27B holds approximately nothing from k=4 (dense 63-layer control) — and retrieval is correct in every record; the 87-record core scores 84/87 under strict ordinary-world scoring (all three models call a whale heavier than a submarine, and the stored rubric accepts either by design). Lens-visible holding is a strategy, not a capacity. [Denominator note 2026-08-09, sweeps/2026-08-08: the 94 = the 87-record core (75 unambiguous lookup + 12 binding) + 6 g12b order arms + 1 dense-layer backfill; the audit's clean denominator is 75/75 unambiguous.]",
      "ids": [
       "u15-a-k6p0-g4b",
       "u15-a-k6p1-q27b",
@@ -408,7 +408,7 @@
       "date": "2026-07-16"
      },
      "pt": "Bigger models showed less, and still answered correctly",
-     "pb": "We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. To show a word is a strategy, not a capacity."
+     "pb": "We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. Under strict scoring the 87-record core scores 84 of 87: Gemma 4B, Gemma 12B and Qwen 27B all call a whale heavier than a submarine, and our stored rubric accepts either answer by design. To show a word is a strategy, not a capacity."
     },
     {
      "t": "List-mode vs winner-take-all",
@@ -454,14 +454,14 @@
     },
     {
      "t": "Compliance evicts content",
-     "b": "The frame before a constrained “READY” is wall-to-wall compliance tokens at every scale (held item at rank ~15,000) — while retrieval stays perfect. Holding and looking-up dissociate at k=1; the items live in the instruction tail instead.",
+     "b": "The frame before a constrained “READY” is wall-to-wall compliance tokens at every scale (held item at rank ~15,000) — while retrieval stays correct in every record; the 87-record core scores 84/87 under strict ordinary-world scoring, the whale/submarine binding item being scored leniently by design (sweeps/2026-08-08). Holding and looking-up dissociate at k=1; the items live in the instruction tail instead.",
      "ids": [
       "u15-solo-violin-g4b"
      ],
      "unit": "15",
      "novelty": {
       "verdict": "anticipated",
-      "basis": "The format-compliance-vs-content trade-off is established behaviorally, and instruction-following has known structured internal directions, but nobody shows compliance tokens occupying a lens-visible workspace and evicting held items while retrieval stays perfect.",
+      "basis": "The format-compliance-vs-content trade-off is established behaviorally, and instruction-following has known structured internal directions, but nobody shows compliance tokens occupying a lens-visible workspace and evicting held items while retrieval stays correct — 84/87 on the 87-record core under strict ordinary-world scoring, the whale/submarine binding item being scored leniently by design (qualified 2026-08-09, sweeps/2026-08-08).",
       "closest": "Tam et al. 2024, 'Let Me Speak Freely? Impact of Format Restrictions on LLM Performance' (arXiv:2408.02442); adjacent: Heo et al. 2024, 'Do LLMs know internally when they follow instructions?' (arXiv:2410.14516)",
       "refs": [
        "arXiv:2408.02442",
@@ -575,7 +575,7 @@
     },
     {
      "t": "Two regimes of loop, and only one has hysteresis",
-     "b": "Push qwen past the amplification cliff and it loops — but there are two loops with different physics. Phrase/monologue loops are FORCED: release the push (α→0.48) and the model terminates instantly, no residue. Token loops are SELF-SUSTAINING: released at α=0.68 it keeps emitting “luckily” unaided for the entire free phase (47 forced repetitions, then 97 more on its own). The boundary is the degeneration point where the loop sheds its last grammar; past it the repetition prior IS the winning coalition, and any transient that gets bare repetition into the context hands control to an attractor a healthy model resists. And the cliff has an anatomy: the ignition gate deadlocks EARLY (top1–top2 margin → 0.03 before behavior breaks) while the mid-workspace re-locks onto the forced coalition — behavior holds until the L60 MOTOR commitment gives way, the same late neighborhood as the L62 “No” veto.",
+     "b": "Push qwen past the amplification cliff and it loops — but there are two loops with different physics. Phrase/monologue loops are FORCED: release the push (α→0.48) and the model terminates instantly, no residue. Token loops are SELF-SUSTAINING: released at α=0.68 it keeps emitting “luckily” unaided for the entire free phase (47 forced repetitions, then 97 more on its own). The boundary is the degeneration point where the loop sheds its last grammar. The supported reading of the release arm is TRANSCRIPT-MEDIATED: the unsteered model attends to its own 50 literal repeats and continues them — autoregressive textual self-perpetuation after the intervention stops. Latent hidden-state hysteresis, an attractor independent of the visible repeated text, is a HYPOTHESIS and not a finding here: there is no matched-text control (an unsteered model given the same 50-repeat prefix), no random-direction release arm, and no seed/prompt/model replication. And the cliff has an anatomy: the ignition gate deadlocks EARLY (top1–top2 margin → 0.03 before behavior breaks) while the mid-workspace re-locks onto the forced coalition — behavior holds until the L60 MOTOR commitment gives way, the same late neighborhood as the L62 “No” veto. [Qualified 2026-08-09, sweeps/2026-08-08.]",
      "ids": [
       "u18-hyst-a0480-q27b",
       "u18-hyst-a0680-q27b",
@@ -583,18 +583,20 @@
      ],
      "unit": "18",
      "novelty": {
-      "verdict": "novel",
-      "basis": "Repetition self-reinforcement and its neuron/executor loci are documented, but the source paper reports only graded/monotonic dose-responses with no release arm anywhere; a hysteresis protocol splitting forced phrase-loops from self-sustaining token-loops at the grammar-shedding boundary has no found precedent.",
-      "closest": "Gemma-family MLP repetition neurons (arXiv:2606.13705) and the late-band detector→executor cascade (arXiv:2507.07810, converges with our motor-margin-breaks-last anatomy); merge-instability→repetition documented but never tied to a loop taxonomy (arXiv:2602.11717)",
+      "verdict": "anticipated",
+      "basis": "Downgraded from “novel” 2026-08-09 (sweeps/2026-08-08). Activation-steered loop breaking is a direct prior in SOPHIA (arXiv:2607.18100), which also carries norm-matched random and reversed-sign controls; repetition self-reinforcement and its neuron/executor loci are separately documented. What is left as new is the protocol, not the phenomenon: a finite pulse followed by release, with the post-release continuation measured — the source paper reports only graded/monotonic dose-responses with no release arm anywhere. That delta is a single unreplicated Qwen specimen, and it does not establish latent hysteresis.",
+      "closest": "SOPHIA, 'Can We Break LLMs Out of Self-Loops? Fine-Grained Reasoning Control with Activation Steering' (arXiv:2607.18100); Repetition Neurons (arXiv:2410.13497); Gemma-family MLP repetition neurons (arXiv:2606.13705) and the late-band detector→executor cascade (arXiv:2507.07810, converges with our motor-margin-breaks-last anatomy); merge-instability→repetition documented but never tied to a loop taxonomy (arXiv:2602.11717)",
       "refs": [
+       "arXiv:2607.18100",
+       "arXiv:2410.13497",
        "arXiv:2606.13705",
        "arXiv:2507.07810",
        "arXiv:2602.11717"
       ],
-      "date": "2026-07-19"
+      "date": "2026-08-09"
      },
-     "pt": "Two kinds of loop, and only one keeps itself going",
-     "pb": "A forced loop stops the moment we stop the push. A loop that has already written enough bare repetition continues alone: 47 forced repeats, then 97 more unaided. Inside, the choice becomes a near tie long before the text breaks."
+     "pt": "Two kinds of loop, and one continues from its own text",
+     "pb": "A forced loop stops the moment we stop the push. A loop that has already written enough bare repetition continues alone: 47 forced repeats, then 97 more unaided. We think Qwen 27B reads its own repeated text and continues it. We did not test a hidden state that holds the loop without the text. We have no control run that gives an unpushed model the same repeated text. Inside, the choice becomes a near tie long before the text breaks."
     }
    ],
    "pname": "Pushing on the model, and where it breaks",

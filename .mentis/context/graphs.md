@@ -54,21 +54,21 @@ flowchart LR
   A5 -. 2x .-> B5
   A6["affect08s.py"] --> B6["get_model"]
   A6 -. 2x .-> B6
-  A7["affect2.py"] --> B7["_strip_bos"]
+  A7["affect3.py"] --> B7["Steering"]
   A7 -. 2x .-> B7
-  A8["affect2.py"] --> B8["get_model"]
+  A8["affect3.py"] --> B8["_strip_bos"]
   A8 -. 2x .-> B8
-  A9["affect3.py"] --> B9["Steering"]
+  A9["affect3.py"] --> B9["get_model"]
   A9 -. 2x .-> B9
-  A10["affect3.py"] --> B10["_strip_bos"]
+  A10["affect3.py"] --> B10["_all_resid"]
   A10 -. 2x .-> B10
-  A11["affect3.py"] --> B11["get_model"]
+  A11["affect3.py"] --> B11["_load_vectors"]
   A11 -. 2x .-> B11
-  A12["affect3.py"] --> B12["_all_resid"]
+  A12["affect3.py"] --> B12["assess"]
   A12 -. 2x .-> B12
-  A13["affect3.py"] --> B13["_load_vectors"]
+  A13["affect3.py"] --> B13["loop_gram"]
   A13 -. 2x .-> B13
-  A14["affect3.py"] --> B14["assess"]
+  A14["affect3.py"] --> B14["_null"]
   A14 -. 2x .-> B14
 ```
 
@@ -80,52 +80,52 @@ flowchart TD
     P0N0["file:affect.py"]
     P0N1["file:affect08s.py"]
     P0N0 --> P0N1
-    P0N2["file:affect2.py"]
+    P0N2["file:affect3.py"]
     P0N1 --> P0N2
-    P0N3["file:affect3.py"]
+    P0N3["file:affect5.py"]
     P0N2 --> P0N3
-    P0N4["file:affect5.py"]
+    P0N4["file:affect7.py"]
     P0N3 --> P0N4
-    P0N5["file:affect7.py"]
+    P0N5["file:audit02.py"]
     P0N4 --> P0N5
   end
-  subgraph P1 ["high High-traffic: affect2.py"]
-    P1N0["file:affect2.py"]
-    P1N1["file:affect3.py"]
+  subgraph P1 ["med High-traffic: affect3.py"]
+    P1N0["file:affect3.py"]
+    P1N1["file:affect3b.py"]
     P1N0 --> P1N1
-    P1N2["file:affect3b.py"]
+    P1N2["file:affect3c.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3c.py"]
+    P1N3["file:affect3g.py"]
     P1N2 --> P1N3
-    P1N4["file:affect3g.py"]
+    P1N4["file:affect4.py"]
     P1N3 --> P1N4
-    P1N5["file:affect4.py"]
+    P1N5["file:affect4b.py"]
     P1N4 --> P1N5
   end
-  subgraph P2 ["high High-traffic: _load_vectors"]
-    P2N0["function:affect2.py:61"]
-    P2N1["file:affect2.py"]
+  subgraph P2 ["med High-traffic: AffectSteer"]
+    P2N0["class:affect3.py:59"]
+    P2N1["file:affect3.py"]
     P2N0 --> P2N1
-    P2N2["file:affect3.py"]
+    P2N2["file:affect3b.py"]
     P2N1 --> P2N2
-    P2N3["file:affect3b.py"]
+    P2N3["file:affect3c.py"]
     P2N2 --> P2N3
-    P2N4["file:affect3c.py"]
+    P2N4["file:affect3g.py"]
     P2N3 --> P2N4
-    P2N5["file:affect3g.py"]
+    P2N5["file:affect4.py"]
     P2N4 --> P2N5
   end
-  subgraph P3 ["med High-traffic: _all_resid"]
-    P3N0["function:affect2.py:66"]
-    P3N1["file:affect2.py"]
+  subgraph P3 ["high High-traffic: mean"]
+    P3N0["function:affect7.py:385"]
+    P3N1["file:affect7.py"]
     P3N0 --> P3N1
-    P3N2["file:affect3.py"]
+    P3N2["file:affect.py"]
     P3N1 --> P3N2
-    P3N3["file:affect5.py"]
+    P3N3["file:affect08s.py"]
     P3N2 --> P3N3
-    P3N4["file:apparatus11.py"]
+    P3N4["file:affect3.py"]
     P3N3 --> P3N4
-    P3N5["file:audit02.py"]
+    P3N5["file:affect4.py"]
     P3N4 --> P3N5
   end
 ```

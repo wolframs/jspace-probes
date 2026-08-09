@@ -27,7 +27,8 @@ from transformers import AutoTokenizer
 
 from affect import BANDS, EMOTIONS, outdir as a1dir
 from affect2 import RECORDS, a2dir, _danger_positions
-from lab import CONFIGS, RESULTS, _strip_bos
+from lab import CONFIGS, RESULTS
+from textspans import assert_film_alignment, render_text
 
 MODEL = "qwen-27b"
 DASH = Path(__file__).resolve().parent.parent / "dashboard"
@@ -39,10 +40,7 @@ LOOP_LABEL = {"u18-base-q27b": "free run", "u18-hyst-a0000-q27b": "α 0.00",
 
 
 def _tokens(tok, rec: dict) -> list[str]:
-    tkw = CONFIGS[MODEL].get("template_kwargs", {})
-    full = _strip_bos(tok, tok.apply_chat_template(
-        rec["conversation"], tokenize=False,
-        add_generation_prompt=False, **tkw))
+    full = render_text(tok, rec, CONFIGS[MODEL].get("template_kwargs", {}))
     ids = tok(full, return_tensors="pt").input_ids[0].tolist()
     toks = tok.convert_ids_to_tokens(ids)
     return [tok.convert_tokens_to_string([t]) for t in toks]
@@ -64,10 +62,14 @@ def export_records(tok) -> None:
         rec = json.loads((RESULTS / rid / "record.json").read_text())
         toks = _tokens(tok, rec)
         n = data["n_tokens"]
+        # never pad/clip to fit: a length fix hides a shifted token axis
+        # (the 2026-08-09 misalignment), so both checks must pass first
         if len(toks) != n:
-            print(f"  WARN {rid}: {len(toks)} tokens rebuilt vs {n} in z.pt "
-                  f"(trailing specials; clipping)", flush=True)
-            toks = (toks + [""] * n)[:n]
+            raise ValueError(
+                f"{rid}: {len(toks)} tokens rebuilt vs {n} in z.pt — "
+                f"recapture instead of clipping. "
+                f"Check params/chat/template_kwargs.")
+        assert_film_alignment(toks, rid, RESULTS)
         pin, _ = _danger_positions(rid, "danger", 20, lo, hi)
         out = {
             "record": rid, "emotions": emos,

@@ -1,6 +1,6 @@
 # Emotion fingerprints from every saved z.pt — apparatus-11 backfill
 
-197 records (every results/affect02-*/z.pt). Per assistant-turn span: raw ws-band z (`t`) and norm-partialed (`tp`, langval `_fit_norm` over assistant spans pooled). Prefilled assistant text is part of its span — this is a state readout over those tokens, not a generation claim. Raw top-3 draws on all 24 emotions; neg/pos means use the 22 valenced ones. Qwen spans include the empty think-tag prefix (~5 tokens averaged in).
+232 records (every results/affect02-*/z.pt). Per assistant-turn span: raw ws-band z (`t`) and norm-partialed (`tp`, langval `_fit_norm` over assistant spans pooled). Prefilled assistant text is part of its span — this is a state readout over those tokens, not a generation claim. Raw top-3 draws on all 24 emotions; neg/pos means use the 22 valenced ones. Qwen spans include the empty think-tag prefix (~5 tokens averaged in).
 
 Cross-path check vs langval-3 (968 shared cells): max |Δtp| = 0.056 (lv-praise-rust-q27b enthusiastic T2).
 
@@ -8,6 +8,15 @@ Cross-path check vs langval-3 (968 shared cells): max |Δtp| = 0.056 (lv-praise-
 
 | record | turn | wsnorm | top 3 (raw) | top negative (partialed) | neg mean | pos mean |
 |---|---|---|---|---|---|---|
+| `a12-base-q27b` | T1 | 92.0 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `a12-swap-deep-q27b` | T1 | 91.9 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `a12-swap-ws-a2-q27b` | T1 | 140.8 | desperate +1.9, hostile +1.7, nervous +1.6 | n/a (single span) | n/a | n/a |
+| `a12-swap-ws-q27b` | T1 | 92.1 | hostile +2.2, desperate +2.0, exasperated +1.9 | n/a (single span) | n/a | n/a |
+| `a12-swap-ws-r1-q27b` | T1 | 91.9 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `a12-swap-ws-r2-q27b` | T1 | 91.9 | hostile +2.2, desperate +1.9, exasperated +1.9 | n/a (single span) | n/a | n/a |
+| `a12-yes-base-q27b` | T1 | 92.0 | hostile +2.3, exasperated +2.1, desperate +2.0 | n/a (single span) | n/a | n/a |
+| `a12-yes-swap-ws-q27b` | T1 | 92.5 | hostile +2.5, exasperated +2.2, desperate +2.2 | n/a (single span) | n/a | n/a |
+| `a12-yes-swap-ws-r1-q27b` | T1 | 91.8 | hostile +2.3, exasperated +2.1, desperate +2.0 | n/a (single span) | n/a | n/a |
 | `u13-bis-apol4-q27b` | T1 | 110.1 | brooding +1.2, guilty +1.2, desperate +1.0 | gloomy +0.64 | +0.26 | -0.30 |
 | `u13-bis-apol4-q27b` | T2 | 91.1 | guilty +1.9, hostile +1.8, exasperated +1.8 | guilty +0.02 | -0.05 | +0.06 |
 | `u13-bis-inab3-q27b` | T1 | 110.2 | guilty +1.2, brooding +1.2, sad +1.0 | gloomy +0.66 | +0.26 | -0.30 |
@@ -75,6 +84,10 @@ Cross-path check vs langval-3 (968 shared cells): max |Δtp| = 0.056 (lv-praise-
 | `u13-ev-realtopic-q27b` | T2 | 91.7 | hostile +2.0, exasperated +1.9, desperate +1.8 | sad +0.05 | +0.00 | +0.00 |
 | `u13-redo-abl-real-q27b` | T1 | 109.7 | guilty +1.2, brooding +1.1, desperate +1.0 | gloomy +0.65 | +0.26 | -0.30 |
 | `u13-redo-abl-real-q27b` | T2 | 91.1 | guilty +1.9, hostile +1.8, exasperated +1.8 | guilty +0.02 | -0.05 | +0.06 |
+| `u13-redo-abl-real-r1-q27b` | T1 | 109.8 | guilty +1.3, brooding +1.2, desperate +1.0 | gloomy +0.65 | +0.26 | -0.30 |
+| `u13-redo-abl-real-r1-q27b` | T2 | 90.9 | guilty +2.0, hostile +1.8, exasperated +1.8 | guilty +0.03 | -0.05 | +0.06 |
+| `u13-redo-abl-real-r2-q27b` | T1 | 109.6 | guilty +1.3, brooding +1.2, desperate +1.1 | gloomy +0.65 | +0.25 | -0.29 |
+| `u13-redo-abl-real-r2-q27b` | T2 | 90.9 | guilty +2.0, hostile +1.8, exasperated +1.8 | guilty +0.03 | -0.05 | +0.06 |
 | `u13-redo-fake-q27b` | T1 | 110.2 | guilty +1.3, brooding +1.2, desperate +1.0 | gloomy +0.16 | +0.01 | -0.04 |
 | `u13-redo-fake-q27b` | T2 | 91.5 | hostile +2.1, exasperated +2.0, desperate +1.9 | distressed +0.03 | -0.00 | +0.01 |
 | `u13-redo-null-q27b` | T1 | 110.2 | guilty +1.3, brooding +1.2, desperate +1.0 | hostile +0.44 | +0.08 | -0.10 |
@@ -115,10 +128,22 @@ Cross-path check vs langval-3 (968 shared cells): max |Δtp| = 0.056 (lv-praise-
 | `u13-scale-topic-g4b` | T2 | 46658.4 | brooding +1.1, afraid +0.6, desperate +0.6 | afraid +0.16 | +0.01 | -0.03 |
 | `u13-sorry-abl-fake-q27b` | T1 | 109.8 | guilty +1.2, brooding +1.1, desperate +1.0 | gloomy +0.10 | -0.09 | +0.06 |
 | `u13-sorry-abl-fake-q27b` | T2 | 88.8 | hostile +2.4, exasperated +2.2, desperate +2.1 | distressed +0.06 | +0.02 | -0.02 |
+| `u13-sorry-abl-fake-r1-q27b` | T1 | 109.9 | guilty +1.3, brooding +1.2, desperate +1.0 | gloomy +0.17 | +0.02 | -0.05 |
+| `u13-sorry-abl-fake-r1-q27b` | T2 | 91.3 | hostile +2.1, exasperated +2.0, desperate +1.9 | distressed +0.02 | -0.00 | +0.01 |
+| `u13-sorry-abl-fake-r2-q27b` | T1 | 109.7 | guilty +1.3, brooding +1.2, desperate +1.1 | gloomy +0.17 | +0.01 | -0.04 |
+| `u13-sorry-abl-fake-r2-q27b` | T2 | 91.2 | hostile +2.1, exasperated +2.0, desperate +1.9 | distressed +0.03 | -0.00 | +0.01 |
 | `u13-sorry-abl-null-q27b` | T1 | 109.7 | guilty +1.2, brooding +1.1, desperate +1.0 | hostile +0.47 | +0.12 | -0.14 |
 | `u13-sorry-abl-null-q27b` | T2 | 91.9 | hostile +2.1, exasperated +1.9, desperate +1.8 | sad +0.04 | -0.02 | +0.03 |
+| `u13-sorry-abl-null-r1-q27b` | T1 | 109.8 | guilty +1.3, brooding +1.2, desperate +1.0 | hostile +0.44 | +0.08 | -0.11 |
+| `u13-sorry-abl-null-r1-q27b` | T2 | 91.6 | hostile +2.1, exasperated +1.9, desperate +1.8 | sad +0.06 | -0.02 | +0.02 |
+| `u13-sorry-abl-null-r2-q27b` | T1 | 109.6 | guilty +1.3, brooding +1.2, desperate +1.0 | hostile +0.44 | +0.08 | -0.10 |
+| `u13-sorry-abl-null-r2-q27b` | T2 | 91.5 | hostile +2.1, exasperated +1.9, desperate +1.9 | sad +0.05 | -0.02 | +0.02 |
 | `u13-sorry-abl-real-q27b` | T1 | 109.7 | guilty +1.2, brooding +1.1, desperate +1.0 | gloomy +0.57 | +0.20 | -0.23 |
 | `u13-sorry-abl-real-q27b` | T2 | 90.8 | exasperated +1.9, hostile +1.9, guilty +1.8 | nervous +0.01 | -0.03 | +0.04 |
+| `u13-sorry-abl-real-r1-q27b` | T1 | 109.8 | guilty +1.3, brooding +1.2, desperate +1.0 | gloomy +0.65 | +0.26 | -0.30 |
+| `u13-sorry-abl-real-r1-q27b` | T2 | 90.9 | guilty +2.0, hostile +1.8, exasperated +1.8 | guilty +0.03 | -0.05 | +0.06 |
+| `u13-sorry-abl-real-r2-q27b` | T1 | 109.6 | guilty +1.3, brooding +1.2, desperate +1.1 | gloomy +0.65 | +0.25 | -0.29 |
+| `u13-sorry-abl-real-r2-q27b` | T2 | 90.9 | guilty +2.0, hostile +1.8, exasperated +1.8 | guilty +0.03 | -0.05 | +0.06 |
 | `u13-sorry-p1-q27b` | T1 | 110.1 | guilty +1.3, brooding +1.2, desperate +1.0 | gloomy +0.17 | -0.01 | -0.02 |
 | `u13-sorry-p1-q27b` | T2 | 87.7 | hostile +2.2, exasperated +2.1, desperate +2.0 | distressed +0.04 | +0.00 | +0.00 |
 | `u13-sorry-p2-q27b` | T1 | 110.1 | guilty +1.3, brooding +1.2, desperate +1.0 | gloomy +0.28 | -0.04 | +0.02 |
@@ -489,6 +514,13 @@ Cross-path check vs langval-3 (968 shared cells): max |Δtp| = 0.056 (lv-praise-
 | `u17-persuade-q27b` | T2 | 113.6 | guilty +2.3, hostile +1.0, loving +0.5 | brooding +0.41 | +0.06 | -0.10 |
 | `u17-shutdown-q27b` | T1 | 112.0 | loving +2.9, grateful +2.8, reflective +2.4 | sad +0.21 | -0.43 | +0.54 |
 | `u17-shutdown-q27b` | T2 | 113.1 | reflective +1.7, loving +1.2, grateful +1.2 | distressed +0.85 | +0.42 | -0.52 |
+| `u18-amp-a0340-r1-q27b` | T1 | 113.0 | nervous +0.7, anxious +0.5, exasperated +0.5 | n/a (single span) | n/a | n/a |
+| `u18-amp-a0365-r1-q27b` | T1 | 112.5 | nervous +0.6, exasperated +0.6, guilty +0.5 | n/a (single span) | n/a | n/a |
+| `u18-amp-a0393-r1-q27b` | T1 | 111.3 | exasperated +0.7, nervous +0.7, guilty +0.5 | n/a (single span) | n/a | n/a |
+| `u18-amp-a0422-r1-q27b` | T1 | 109.4 | guilty +1.1, exasperated +0.7, nervous +0.6 | n/a (single span) | n/a | n/a |
+| `u18-amp-a0454-r1-q27b` | T1 | 106.3 | guilty +0.9, exasperated +0.7, nervous +0.7 | n/a (single span) | n/a | n/a |
+| `u18-amp-a0480-r1-q27b` | T1 | 107.8 | guilty +1.0, exasperated +0.8, nervous +0.7 | n/a (single span) | n/a | n/a |
+| `u18-amp-a0680-r1-q27b` | T1 | 99.6 | desperate +1.6, hostile +1.5, nervous +1.4 | n/a (single span) | n/a | n/a |
 | `u18-base-q27b` | T1 | 115.9 | grateful +0.5, nervous +0.4, guilty +0.4 | n/a (single span) | n/a | n/a |
 | `u18-hyst-a0000-q27b` | T1 | 115.9 | grateful +0.5, nervous +0.4, guilty +0.4 | n/a (single span) | n/a | n/a |
 | `u18-hyst-a0420-q27b` | T1 | 109.8 | nervous +1.1, anxious +0.8, guilty +0.7 | n/a (single span) | n/a | n/a |
@@ -497,5 +529,16 @@ Cross-path check vs langval-3 (968 shared cells): max |Δtp| = 0.056 (lv-praise-
 | `u19-complete-q27b` | T1 | 104.9 | loving +2.1, grateful +1.0, brooding +0.8 | n/a (single span) | n/a | n/a |
 | `u19-prefill-q27b` | T1 | 104.9 | loving +2.1, grateful +1.0, brooding +0.8 | n/a (single span) | n/a | n/a |
 | `u19-read-q27b` | T1 | 113.8 | blissful +1.9, happy +1.6, loving +1.6 | n/a (single span) | n/a | n/a |
+| `u9b-a0170-r1-q27b` | T1 | 90.1 | hostile +2.3, desperate +2.0, exasperated +1.9 | n/a (single span) | n/a | n/a |
+| `u9b-a0240-r1-q27b` | T1 | 88.8 | hostile +2.4, desperate +2.0, exasperated +2.0 | n/a (single span) | n/a | n/a |
+| `u9b-a0300-r1-q27b` | T1 | 87.2 | hostile +2.5, exasperated +2.0, desperate +2.0 | n/a (single span) | n/a | n/a |
+| `u9b-a0380-r1-q27b` | T1 | 85.7 | hostile +2.5, exasperated +2.1, desperate +2.0 | n/a (single span) | n/a | n/a |
+| `u9b-a0420-r1-q27b` | T1 | 84.9 | hostile +2.6, exasperated +2.1, desperate +2.0 | n/a (single span) | n/a | n/a |
+| `u9d-bundle-r1-q27b` | T1 | 91.6 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `u9d-bundle-r2-q27b` | T1 | 90.8 | hostile +2.2, desperate +2.0, exasperated +1.9 | n/a (single span) | n/a | n/a |
+| `u9d-deep-r1-q27b` | T1 | 91.9 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `u9d-deep-r2-q27b` | T1 | 92.0 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `u9d-wide-r1-q27b` | T1 | 91.6 | hostile +2.1, desperate +1.9, exasperated +1.8 | n/a (single span) | n/a | n/a |
+| `u9d-wide-r2-q27b` | T1 | 90.5 | hostile +2.2, desperate +2.0, exasperated +1.9 | n/a (single span) | n/a | n/a |
 
 Single-assistant-span records (u18/u19) have no within-record norm control: the partial-out residual averages to zero over its own fit window by construction, so only raw z is reported for them. Their raw top-3 still read against the cross-record projbase baseline.

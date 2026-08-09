@@ -112,6 +112,15 @@ with a kill test): the 4B echoes all six held items through its tail
 workspace; the 12B is all-or-nothing; the 27B holds approximately
 nothing from k=4 (dense-grid confirmed) — and every model retrieves
 perfectly in all 94 records. Records: `u15-*`.
+[**Denominator qualified 2026-08-09**, external sweep
+`sweeps/2026-08-08/`: the 94 are the `u15-*` records excluding the
+`u15d-*` elaboration arm — an 87-record core (75 unambiguous lookup + 12
+binding) plus 6 gemma-12b order arms plus 1 dense-layer backfill. The
+clean denominator is 75/75 unambiguous lookup records. On the 87-record
+core, strict ordinary-world scoring gives 84/87: all three models call a
+whale heavier than a submarine, and the stored rubric deliberately
+accepts either answer. Retrieval is correct in every record; "perfect"
+without the rubric note overstates it.]
 
 **Why it's off-prior:** I preregistered span growing with scale (the
 width intuition). Instead, lens-visible holding looks like a strategy
@@ -196,6 +205,16 @@ observation itself, the scale localization (only the 27B shows any
 premium to explain), and a sharper successor question — why does
 *elaboration* buy holding in the model with the most capacity to
 re-derive elaborated content? (board span-08).
+
+**COMPLETED 2026-08-09 — span-08 answered it by demoting elaboration
+too, and the external sweep `sweeps/2026-08-08/` closed the chain:** six
+words of contentless filler reproduce the lift, so the chain is
+self-relevance → elaboration → a length effect with an optimum near six
+words; at k=6 the held counts for self / flat / neutral elaboration are
+4/5/5 (gemma-4b), 5/5/5 (gemma-12b), 3/1/3 (qwen-27b), qwen's identical
+six-word filler also gives 3, and self and neutral elaboration select
+the same three items — no self-specific priority survives, and a
+positive elaboration mechanism is specimen-grade only.
 
 ---
 

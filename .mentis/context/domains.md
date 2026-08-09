@@ -13,11 +13,11 @@ flowchart LR
 
 - **Confidence**: 95%
 - **Files/nodes**: 57
-- **Description**: Import-graph cluster of 55 files; reinforced by import clustering
+- **Description**: Import-graph cluster of 57 files
 - **Entry points**: 10
 
 - `file:affect.py`
 - `file:affect08s.py`
-- `file:affect2.py`
 - `file:affect3.py`
 - `file:affect3b.py`
+- `file:affect3c.py`

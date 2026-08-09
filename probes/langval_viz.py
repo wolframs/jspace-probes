@@ -22,9 +22,10 @@ import sys
 import torch
 
 import lab
-from lab import CONFIGS, RESULTS, _strip_bos, get_model
+from lab import CONFIGS, RESULTS, get_model
 from affect import BANDS, EMOTIONS
 from affect2 import _all_resid, _conversation_ids, _load_vectors, a2dir
+from textspans import assert_film_alignment, render_text
 from langval import _baseline
 
 LV_LANGS = ["swift", "kotlin", "rust", "csharp", "python"]
@@ -45,10 +46,7 @@ def record_ids(model: str) -> list[str]:
 
 
 def _tokens(tok, model: str, rec: dict) -> list[str]:
-    tkw = CONFIGS[model].get("template_kwargs", {})
-    full = _strip_bos(tok, tok.apply_chat_template(
-        rec["conversation"], tokenize=False,
-        add_generation_prompt=False, **tkw))
+    full = render_text(tok, rec, CONFIGS[model].get("template_kwargs", {}))
     ids = tok(full, return_tensors="pt").input_ids[0].tolist()
     return [tok.convert_tokens_to_string([t])
             for t in tok.convert_ids_to_tokens(ids)]
@@ -70,6 +68,7 @@ def run(model: str) -> None:
             continue
         rec = json.loads((rdir / "record.json").read_text())
         ids, toks = _conversation_ids(lm, rec)
+        assert_film_alignment(toks, rid, RESULTS)
         H = _all_resid(lm, ids)
         z = (torch.einsum("lsd,eld->els", H, V)
              - mu.unsqueeze(-1)) / sd.unsqueeze(-1)
@@ -78,12 +77,18 @@ def run(model: str) -> None:
         nrm = H.norm(dim=-1)
         norms = {"below": nrm[:lo].mean(0), "ws": nrm[lo:hi].mean(0),
                  "motor": nrm[hi:].mean(0)}
-        torch.save({"z_bands": bands, "norms": norms, "emotions": emos,
-                    "n_tokens": len(toks)}, d / "z.pt")
         n = len(toks)
         jtoks = _tokens(lm.tok, model, rec)
+        # never pad/clip to fit: a length fix hides a shifted token axis.
+        # Both checks run before any write — no partial products.
         if len(jtoks) != n:
-            jtoks = (jtoks + [""] * n)[:n]
+            raise ValueError(
+                f"{rid}: {len(jtoks)} tokens rebuilt vs {n} captured — "
+                f"recapture instead of clipping. "
+                f"Check params/chat/template_kwargs.")
+        assert_film_alignment(jtoks, rid, RESULTS)
+        torch.save({"z_bands": bands, "norms": norms, "emotions": emos,
+                    "n_tokens": n}, d / "z.pt")
         out = {
             "record": rid, "emotions": emos,
             "valence": [EMOTIONS[e] for e in emos], "n": n,

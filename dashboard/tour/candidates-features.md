@@ -311,6 +311,9 @@ state it was in.
 **Anchor.** Route `#u18-hyst-a0000-q27b` (confirmed to have both film and
 affect data). Selector: `#affectroot` (embedded inside the film card as
 "The state underneath — emotion overlay").
+*2026-08-09:* the anchor's affect overlay was regenerated after the
+token-alignment fix — film and affect are both still present, so the
+anchor remains valid.
 
 **Discoverability.** Hidden — it only renders on 16 of 499 records (those
 crossed with `affect2.py`), with no index or flag on the rail/findings

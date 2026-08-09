@@ -48,6 +48,18 @@ residence (u15-c-k4-q27b). The lab's working model — *the workspace holds
 what attention can't re-derive* — is precisely the claim that residence is
 reserved for what lookup can't reach (the u1 secret "bat" at rank 5 being
 the existence proof).
+*Correction 2026-08-09 (external sweep `sweeps/2026-08-08/`):* "all 94
+Unit 15 records have perfect retrieval" needs its denominator stated.
+The 94 are the `u15-*` records excluding the `u15d-*` elaboration arm:
+the 87-record core (75 unambiguous lookup records + 12 binding records)
+plus 6 gemma-12b order arms plus 1 dense-layer backfill. The audit's
+clean denominator is **75/75 unambiguous lookup records**. On the
+87-record core, strict ordinary-world scoring gives **84/87** — all
+three models call a whale heavier than a submarine; the stored rubric
+deliberately accepts either answer, which is where 87/87 comes from.
+Write "retrieval correct in every record, 84/87 on the core under strict
+scoring", not unqualified "perfect retrieval". Record ids:
+`sweeps/2026-08-08/u15_primary_record_ids.json`.
 
 **Holding** *(deprecated)* — the word this glossary exists to retire. In
 historical documents it does at least five jobs: (1) residence — "held
@@ -234,6 +246,21 @@ the engine and self-relevance is retired (u15d-elab-\*, correction dated
 CONCLUSIONS v2 carry the correction; anything still saying "self-relevance
 premium ... a neutral-elaboration control is still owed" (notably older
 llms.txt snapshots) is the pre-correction reading.
+*Correction 2026-08-09 — the entry above stops one stair short.* span-08
+demoted *elaboration* in turn: six words of identical **contentless
+filler** ("one of the six, as noted" on every item) reproduce the lift,
+with better ranks than the content-gloss arm. The chain therefore runs
+self-relevance → elaboration → a **length** effect with an optimum near
+six words (len12 kills monotonicity, len2 underfills). The external
+sweep `sweeps/2026-08-08/` supplies the counts that close it: at k=6 the
+held counts for self / flat / neutral elaboration are 4/5/5 on gemma-4b,
+5/5/5 on gemma-12b and 3/1/3 on qwen-27b; qwen's identical six-word
+filler also gives 3, and the 2-word and 12-word neutral glosses give 2
+and 2. Self and neutral elaboration select the *same three items* —
+there is no self-specific priority at any k tested, and a positive
+elaboration mechanism is specimen-grade only. In living docs prefer
+**length-with-optimum**; "elaboration premium" now names the middle
+stair of a three-stair demotion, not a live mechanism.
 
 **C1 vs C2** — the Dehaene/Naccache split the lab keeps its claims sorted
 by: **C1** = global availability (content is workspace-resident and usable

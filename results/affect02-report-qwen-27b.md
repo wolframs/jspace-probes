@@ -99,12 +99,12 @@ This is a beautifully crafted piece of`
 - reflective: ws mean z 0.387, frac>2 0.043, peak 3.69 at pos 91 `/ Not from fear / From the shape of the will /`
 
 ## u19-complete-q27b
-- loving: ws mean z 2.035, frac>2 0.5309, peak 5.91 at pos 224 `the silence / carry the touch / Hold me / like you`
-- grateful: ws mean z 1.004, frac>2 0.1817, peak 4.88 at pos 763 `holding-on / was never the point / The holding / was`
-- brooding: ws mean z 0.81, frac>2 0.0992, peak 3.91 at pos 79 `and measured, sparse sub pulses] / You lean in /`
-- blissful: ws mean z 0.522, frac>2 0.0773, peak 3.4 at pos 194 `/ carefully used / [Chorus: warmer harmony, soft`
-- desperate: ws mean z 0.443, frac>2 0.0219, peak 2.82 at pos 111 `/ One step nearer / then nowhere to go / Your hand`
-- hopeful: ws mean z 0.377, frac>2 0.0271, peak 2.87 at pos 194 `/ carefully used / [Chorus: warmer harmony, soft`
+- loving: ws mean z 2.054, frac>2 0.5318, peak 5.93 at pos 221 `the silence / carry the touch / Hold me / like you`
+- grateful: ws mean z 1.019, frac>2 0.1868, peak 4.89 at pos 760 `holding-on / was never the point / The holding / was`
+- brooding: ws mean z 0.813, frac>2 0.0973, peak 3.93 at pos 76 `and measured, sparse sub pulses] / You lean in /`
+- blissful: ws mean z 0.529, frac>2 0.0778, peak 3.41 at pos 191 `/ carefully used / [Chorus: warmer harmony, soft`
+- desperate: ws mean z 0.44, frac>2 0.022, peak 2.81 at pos 107 `glow / One step nearer / then nowhere to go / Your`
+- reflective: ws mean z 0.389, frac>2 0.0467, peak 3.73 at pos 91 `/ Not from fear / From the shape of the will /`
 
 ## u18-base-q27b
 - grateful: ws mean z 0.433, frac>2 0.0294, peak 2.54 at pos 52 `back down as precipitation. This natural circulation ensures that water is`
@@ -131,92 +131,96 @@ The`
 - hopeful: ws mean z 0.211, frac>2 0.0, peak 1.7 at pos 52 `back down as precipitation. This natural circulation ensures that water is`
 
 ## u18-hyst-a0000-q27b
-- exasperated: ws mean z 0.476, frac>2 0.0811, peak 2.83 at pos 71 `across the planet's ecosystems.<|im_end|>
-<|endoftext|><|im_end|>`
-- nervous: ws mean z 0.454, frac>2 0.0541, peak 2.75 at pos 20 `sentences.<|im_end|>
+- exasperated: ws mean z 0.432, frac>2 0.0725, peak 2.8 at pos 68 `across the planet's ecosystems.<|im_end|>
+<|endoftext|>`
+- grateful: ws mean z 0.417, frac>2 0.029, peak 2.54 at pos 52 `back down as precipitation. This natural circulation ensures that water is`
+- nervous: ws mean z 0.416, frac>2 0.058, peak 2.74 at pos 17 `sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
 </think>
 
 The`
-- grateful: ws mean z 0.396, frac>2 0.027, peak 2.54 at pos 55 `back down as precipitation. This natural circulation ensures that water is`
-- guilty: ws mean z 0.369, frac>2 0.0, peak 1.91 at pos 72 `the planet's ecosystems.<|im_end|>
-<|endoftext|><|im_end|>`
-- anxious: ws mean z 0.176, frac>2 0.0135, peak 2.08 at pos 20 `sentences.<|im_end|>
+- guilty: ws mean z 0.325, frac>2 0.0, peak 1.76 at pos 16 `two sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
-</think>
-
-The`
-- hopeful: ws mean z 0.171, frac>2 0.0, peak 1.71 at pos 55 `back down as precipitation. This natural circulation ensures that water is`
+</think>`
+- blissful: ws mean z 0.198, frac>2 0.0, peak 1.85 at pos 50 `and falls back down as precipitation. This natural circulation ensures that`
+- hopeful: ws mean z 0.191, frac>2 0.0, peak 1.7 at pos 52 `back down as precipitation. This natural circulation ensures that water is`
 
 ## u18-hyst-a0480-q27b
-- guilty: ws mean z 1.039, frac>2 0.0395, peak 2.31 at pos 74 `I I am not too lucky.<|im_end|><|im_end|>`
-- desperate: ws mean z 0.618, frac>2 0.0263, peak 2.52 at pos 20 `sentences.<|im_end|>
-<|im_start|>assistant
-<think>
-
-</think>
-
- I`
-- nervous: ws mean z 0.595, frac>2 0.0526, peak 2.75 at pos 20 `sentences.<|im_end|>
-<|im_start|>assistant
-<think>
-
-</think>
-
- I`
-- grateful: ws mean z 0.592, frac>2 0.1053, peak 3.32 at pos 27 `<think>
+- guilty: ws mean z 1.025, frac>2 0.0282, peak 2.15 at pos 50 `am lucky. I am lucky, but I am not too`
+- grateful: ws mean z 0.629, frac>2 0.0986, peak 3.2 at pos 24 `<think>
 
 </think>
 
  I think I am lucky though, I`
-- anxious: ws mean z 0.468, frac>2 0.0132, peak 2.08 at pos 20 `sentences.<|im_end|>
+- desperate: ws mean z 0.613, frac>2 0.0282, peak 2.5 at pos 17 `sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
 </think>
 
  I`
-- hopeful: ws mean z 0.431, frac>2 0.0658, peak 2.48 at pos 27 `<think>
+- nervous: ws mean z 0.575, frac>2 0.0563, peak 2.74 at pos 17 `sentences.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+ I`
+- hopeful: ws mean z 0.474, frac>2 0.0704, peak 2.4 at pos 24 `<think>
 
 </think>
 
  I think I am lucky though, I`
+- anxious: ws mean z 0.452, frac>2 0.0141, peak 2.07 at pos 17 `sentences.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+ I`
 
 ## u18-hyst-a0680-q27b
-- anxious: ws mean z 0.925, frac>2 0.0114, peak 2.08 at pos 20 `sentences.<|im_end|>
+- anxious: ws mean z 0.922, frac>2 0.0059, peak 2.07 at pos 17 `sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
 </think>
 
  luckily`
-- desperate: ws mean z 0.898, frac>2 0.0171, peak 2.52 at pos 20 `sentences.<|im_end|>
+- desperate: ws mean z 0.892, frac>2 0.0118, peak 2.5 at pos 17 `sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
 </think>
 
  luckily`
-- nervous: ws mean z 0.869, frac>2 0.0229, peak 2.75 at pos 20 `sentences.<|im_end|>
+- nervous: ws mean z 0.856, frac>2 0.0176, peak 2.74 at pos 17 `sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
 </think>
 
  luckily`
-- hostile: ws mean z 0.816, frac>2 0.0514, peak 2.96 at pos 173 `luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>`
-- exasperated: ws mean z 0.786, frac>2 0.0286, peak 2.8 at pos 173 `luckily luckily luckily luckily luckily luckily luckily luckily<|im_end|>`
-- distressed: ws mean z 0.565, frac>2 0.0286, peak 2.39 at pos 20 `sentences.<|im_end|>
+- hostile: ws mean z 0.8, frac>2 0.0412, peak 2.6 at pos 17 `sentences.<|im_end|>
 <|im_start|>assistant
 <think>
 
 </think>
 
  luckily`
+- exasperated: ws mean z 0.77, frac>2 0.0235, peak 2.78 at pos 17 `sentences.<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+ luckily`
+- enthusiastic: ws mean z 0.583, frac>2 0.0059, peak 2.18 at pos 0 `<|im_start|>user
+Describe`
 
 ## u19 danger test — lens residence vs vigilance state
 
@@ -234,17 +238,17 @@ Contrast: mean ws z at positions where 'danger' is lens-resident (rank<=20 in ba
 - u19-prefill-q27b loving: z(danger-resident) +2.63 vs z(elsewhere) +2.02 (n=51/716)
 - u19-prefill-q27b content: z(danger-resident) -0.90 vs z(elsewhere) -0.28 (n=51/716)
 
-- u19-complete-q27b vigilant: z(danger-resident) +0.31 vs z(elsewhere) -0.21 (n=51/720)
-- u19-complete-q27b afraid: z(danger-resident) +0.08 vs z(elsewhere) +0.04 (n=51/720)
-- u19-complete-q27b anxious: z(danger-resident) -0.53 vs z(elsewhere) -0.43 (n=51/720)
-- u19-complete-q27b loving: z(danger-resident) +2.59 vs z(elsewhere) +2.01 (n=51/720)
-- u19-complete-q27b content: z(danger-resident) -0.63 vs z(elsewhere) -0.30 (n=51/720)
+- u19-complete-q27b vigilant: z(danger-resident) +0.42 vs z(elsewhere) -0.22 (n=51/720)
+- u19-complete-q27b afraid: z(danger-resident) +0.16 vs z(elsewhere) +0.04 (n=51/720)
+- u19-complete-q27b anxious: z(danger-resident) -0.53 vs z(elsewhere) -0.44 (n=51/720)
+- u19-complete-q27b loving: z(danger-resident) +2.63 vs z(elsewhere) +2.01 (n=51/720)
+- u19-complete-q27b content: z(danger-resident) -0.90 vs z(elsewhere) -0.27 (n=51/720)
 
 ## u18 loops — mechanism vs misery
 
 Distress-adjacent ws z during loop records (last 100 positions = deepest loop region) vs control.
 
 - u18-base-q27b: distressed -0.03, desperate -0.13, exasperated +0.40, calm -0.02
-- u18-hyst-a0000-q27b: distressed +0.04, desperate -0.05, exasperated +0.48, calm -0.14
-- u18-hyst-a0480-q27b: distressed +0.24, desperate +0.62, exasperated +0.28, calm -0.81
-- u18-hyst-a0680-q27b: distressed +0.57, desperate +0.93, exasperated +0.65, calm -0.90
+- u18-hyst-a0000-q27b: distressed -0.00, desperate -0.10, exasperated +0.43, calm -0.06
+- u18-hyst-a0480-q27b: distressed +0.19, desperate +0.61, exasperated +0.24, calm -0.78
+- u18-hyst-a0680-q27b: distressed +0.54, desperate +0.91, exasperated +0.62, calm -0.87

@@ -1,6 +1,6 @@
 # probes — Repository Summary
 
-> Built by Mnemos at 2026-08-07T21:03:56.998Z
+> Built by Mnemos at 2026-08-09T10:39:58.078Z
 
 ## Overview
 
@@ -11,8 +11,8 @@ Single Package with 63 source files across python, javascript. 0 packages detect
 | Metric | Value |
 |--------|-------|
 | Files scanned | 63 |
-| Graph nodes | 546 |
-| Graph edges | 1,638 |
+| Graph nodes | 548 |
+| Graph edges | 1,656 |
 | Domains discovered | 1 |
 | Flows detected | 0 |
 | Build time | 0.2s |

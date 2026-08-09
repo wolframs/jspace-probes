@@ -232,7 +232,8 @@ def report(data: dict) -> None:
     print(f"wrote {p}", flush=True)
 
 
-from textspans import ROLE_ASSIST, assist_spans as _assist_spans  # noqa: E402,F401
+from textspans import (ROLE_ASSIST, assert_film_alignment,  # noqa: E402,F401
+                       assist_spans as _assist_spans, render_text)
 
 
 def fingerprints() -> None:
@@ -250,7 +251,10 @@ def fingerprints() -> None:
         # (2026-08-07: the 4 chat:false captures that had double-applied
         # the chat template were recaptured via the raw-text path the
         # same day — capture() + RECAPTURE; EMOTIONS.md carries the
-        # dated correction. All z.pt here are now clean captures.)
+        # dated correction. Every z.pt here is a clean capture since
+        # then; the affect.json token labels are a separate product —
+        # affectviz re-derives them, and they are validated against the
+        # parent film by assert_film_alignment on write.)
         spans = _assist_spans(a["tokens"])
         if not spans:
             print(f"  SKIP {rid}: no assistant span found", flush=True)
@@ -369,19 +373,10 @@ def fingerprints() -> None:
 # ---------------------------------------------------------------- GPU parts
 
 def _render_text(lm, rec: dict) -> str:
-    """The record's exact lens input: chat template with the RECORD's
-    template_kwargs (11 records ran enable_thinking, CONFIGS says off —
-    always read params), or the raw stored text for chat:false records
-    (re-templating those is the double-wrap bug)."""
-    params = rec.get("params", {})
-    if params.get("chat") is False:
-        return rec["conversation"][0]["content"]
-    from lab import CONFIGS, _strip_bos
-    tkw = params.get("template_kwargs") or CONFIGS[lm.name].get(
-        "template_kwargs", {})
-    return _strip_bos(lm.tok, lm.tok.apply_chat_template(
-        rec["conversation"], tokenize=False,
-        add_generation_prompt=False, **tkw))
+    """See textspans.render_text — this binds the CONFIGS fallback."""
+    from lab import CONFIGS
+    return render_text(lm.tok, rec,
+                       CONFIGS[lm.name].get("template_kwargs", {}))
 
 
 def _steer_ctx(lm, params: dict):
@@ -427,7 +422,8 @@ def capture(model: str, record_ids: list[str] | None = None) -> None:
     + the 5 chat:false recaptures. Steered records are captured UNDER
     their steer (EMOTIONS.md §2). One tokenization: the capture ids are
     also the affect.json token strings, so ribbon alignment is exact by
-    construction; where a film exists its length is asserted against.
+    construction; where a film exists the whole token array is asserted
+    against it (a mismatch raises — a bad capture must be loud).
     record_ids: explicit record list (apparatus12 batteries); default =
     the apparatus-11 backfill set from capture_ids()."""
     import torch
@@ -453,14 +449,7 @@ def capture(model: str, record_ids: list[str] | None = None) -> None:
         toks = [lm.tok.convert_tokens_to_string([t])
                 for t in lm.tok.convert_ids_to_tokens(ids[0].tolist())]
         n = len(toks)
-        fj = lab.RESULTS / rid / "film.json"
-        if fj.exists():
-            fn = len(json.loads(fj.read_text())["tokens"])
-            if fn != n:
-                print(f"  MISMATCH {rid}: capture {n} tokens vs film "
-                      f"{fn} — ribbon would misalign; SKIPPING. "
-                      f"Check params/chat/template_kwargs.", flush=True)
-                continue
+        assert_film_alignment(toks, rid, lab.RESULTS)
         with _steer_ctx(lm, rec.get("params", {})):
             H = _all_resid(lm, ids)
         z = (torch.einsum("lsd,eld->els", H, V)

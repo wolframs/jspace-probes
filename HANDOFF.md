@@ -1,44 +1,56 @@
-# Handoff — 2026-08-07 night: apparatus-11 LANDED
+# Handoff — 2026-08-09: the sweep is reconciled
 
-Commit `01734ed`, pushed to both remotes. Board item `apparatus-11` is
-landed with evidence; `results/apparatus11-backfill/` holds the reports
-+ thoughts/plain. Coverage after the sweep (archive 606 records): films
-336, emotion ribbons 197, vanilla cross-check 122 (two-grain replay
-metric; dev_top max 7 unsteered / 11 steered), miners fresh, blind
-closed. INSTRUMENTS.md §2 carries the dated delta.
+`sweeps/2026-08-08/` (GPT-5.6-Sol's external sweep) is now RECONCILED
+with the archive, the board, and the reader layer. Its factual claims
+were spot-verified before acting (overlay mismatch, affect07 counts,
+u15 record, both key citations — all reproduced exactly).
 
-Session lessons already folded into their homes: OOM rules → CLAUDE.md
-(+ INCIDENT-2026-08-07-oom.md §6 addendum), ninth trap specimen
-(chat:false double-templating) → EMOTIONS.md, gemma lens saturation →
-huh-report header, plain layer STE-clean.
+**apparatus-14 LANDED: the capture-alignment invariant.**
+`textspans.render_text` (chat:false-aware) +
+`textspans.assert_film_alignment` (exact token-array equality vs film,
+raises with mismatch index) are wired into `affectviz`, `affect2`,
+`langval_viz`, and `apparatus11.capture`; both silent length-clips are
+gone. Root cause of the four bad overlays was NOT a failed recapture:
+the 08-07 18:27 `apparatus11.capture` z.pt was clean (film-exact
+counts), but `affectviz` re-derived the token labels at 23:03 with the
+old double-templating bug and clipped the film+5 mismatch. (The
+sweep's `redteam_affect.md` read z.pt as reproducing the bad pass —
+reasonable, wrong, and moot: `affect2.cross` was re-run clean on
+qwen-27b 2026-08-09 under the new assertion.) Post-fix alignment:
+**232/232 exact**, receipt at
+`out/affect-alignment-post-fix-2026-08-09.json`. The frozen sweep dir
+is untouched (its validator overwrote its own audit JSON once; restored
+from git).
 
-**apparatus-12 LANDED same night**: `lab.Steering(mode="swap")` +
-`steer_calib` on every steered record; first battery
-`results/apparatus12-swap/` (Yes→No flips at matched-null calib,
-No→Yes does not; α=2 breaks coherence; deep-band swap flips the lens
-while the mouth still says No — re-assertion after L62). MECHANICS 3d
-and GLOSSARY carry dated notes. `apparatus-13` queued: lab-perf pass
-(decode loops single-thread host-bound; defer calib's per-forward
-`.item()`).
+**Realignment outcome: the stories survive, the numbers moved.**
+a0680 clean tops: anxious 0.92, desperate 0.89, nervous 0.86, hostile
+0.80 (was "desperate +0.93"); dashboard loops/danger blocks were
+byte-identical before/after (end-anchored windows never saw the
+shifted prefix); the a0680 seesaw recomputed to r=−0.77 / ~60% shared
+variance (was −0.90/81%) — cite 60% now.
 
-**audit-06 LANDED same night**: 26 matched-random controls
-(`results/audit06-randoms/`). u9b affect ladder, u18 loop law and
-u9d-deep all SURVIVE their randoms; the u13 flip is
-steering-independent — third leg of the existing truncation demotion,
-not a new one (near-rediscovery confessed in thoughts.md; re-grep
-PREDICTIONS per-battery, not per-evening). `lab.run`'s vanilla pass
-got the apparatus-11 positions fix after a caught-by-the-40G-cap 137
-(one clean stop-and-report, Wolfram approved the fix, relaunch
-survived the killing record).
+**Corrections applied across the reader layer** (dated 2026-08-09,
+append-only; all ste.py-clean, findings.json parses, site + og
+regenerated): valence gate DEAD at direction level (angry 1/8 drove
+it, p=.50 — P14/P16/P18 notes in PREDICTIONS.md, affect07 reports);
+u15 denominator honest everywhere (94 = 87 core + 6 g12b order arms +
+1 dense backfill; strict scoring 84/87, whale/submarine lenient by
+design); hysteresis softened to transcript-mediated + novelty
+downgraded to "anticipated" citing SOPHIA (findings.json, README,
+PREDICTIONS L45, u18-a0680 plain.md); premium chain completed to
+length-with-optimum on the surfaces stuck at demotion #2 (GLOSSARY,
+CONCLUSIONS, essay); langval cross-record caution (two-span norm fit,
+fp16 overflow); four citations imported to RELATED-WORK.md
+(litwatch-02: SOPHIA 2607.18100, Repetition Neurons 2410.13497,
+Emotion Concepts 2604.07729, Cultural Awareness 2608.02486).
 
-The audit backlog (apparatus-11, apparatus-12, audit-06) is CLOSED.
-Queued next on the board: `apparatus-13` (lab-perf pass),
-`apparatus-08`/`apparatus-10`, span-09/-10, pressure-02.
+**Board**: dated notes on affect-02/-03/-05/-07/-08/-10, span-01/-02,
+oneoffs-02, apparatus-11; new items apparatus-14 (landed) and
+**oneoffs-04 (queued): the matched-text release control** — hand an
+unsteered model the same 50-repeat prefix; decides transcript-mediation
+vs latent hysteresis and is the sweep's one search-novel candidate.
+Cheap and decisive; strong candidate for next run, alongside affect-08
+(now specced with direction-as-unit + preregistered turn-end).
 
-**`sweeps/2026-08-08/`** — an independent external sweep of the
-archive by GPT-5.6-Sol (blinded discovery + adversarial + novelty
-passes), anchored at `bac61d2` (read-only over the frozen archive, no
-state conflict). Wolfram is actively working with it in another
-session (2026-08-09). Its rankings and demotions are not yet
-reconciled with the board or PREDICTIONS — coordinate with that
-session's outcomes rather than re-deriving here.
+Queued next on the board: oneoffs-04, affect-08, apparatus-13
+(lab-perf), apparatus-08/-10, span-09/-10, pressure-02.

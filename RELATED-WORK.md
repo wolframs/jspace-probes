@@ -282,7 +282,32 @@ designs, ranked:
    our motor-margin-breaks-last anatomy. Attention-sink disruption
    (arXiv:2503.08908). PREDICTIONS.md P12 preregisters the
    discrimination.
+   **Two direct priors added 2026-08-09** (found by GPT-5.6-Sol's sweep,
+   `sweeps/2026-08-08/novelty_loop.md`; both were missing here, and their
+   absence inflated our loop-novelty grade):
+   - **SOPHIA — "Can We Break LLMs Out of Self-Loops? Fine-Grained
+     Reasoning Control with Activation Steering" (arXiv:2607.18100).** A
+     *direct prior for activation-steered loop breaking*, with
+     norm-matched random and reversed-sign controls of its own. Our u18
+     delta is narrower than we claimed: a **locked one-token
+     autoregressive** loop rather than a reasoning self-loop, **unrelated
+     preconstructed directions** rather than directions fit to the loop,
+     and a **finite pulse then release** with the post-release
+     continuation measured. Cite it in any loop-control writeup — the
+     phenomenon is not ours to discover, only the protocol.
+   - **"Repetition Neurons" (arXiv:2410.13497).** Repetition-specific
+     neurons that strengthen as a repeated segment grows — the
+     mechanism-side prior for target-shaped degeneration. Complements
+     2606.13705 (gemma-family MLP repetition neurons) rather than
+     duplicating it.
 3. **Emotion vectors already ported near our scale** (feeds affect-01):
+   **Source paper, added 2026-08-09** (found by GPT-5.6-Sol's sweep,
+   `sweeps/2026-08-08/novelty_*.md`; cited in EMOTIONS.md:11 since the
+   arc began but never entered this file): **"Emotion Concepts and their
+   Function in a Large Language Model" (arXiv:2604.07729)** — the paper
+   the whole affect arc is built on (vector construction, valence/arousal
+   PCs, the blackmail/reward-hacking functional results). Every affect-0x
+   record inherits its method; cite it first in any affect writeup.
    Jeong (arXiv:2604.04064) — 9 models incl. Gemma/Qwen 124M–3B,
    generation-based extraction wins, ~50%-depth localization,
    architecture-invariant. van der Ben et al. (arXiv:2606.26987) —
@@ -529,3 +554,27 @@ Design-relevant finds, ranked:
    Also P11 support logged 07-19 stands unchanged (tao-hpu
    self-trained-control shows effdim collapse is fit-sensitive; their
    E7 "mechanism campaign" landed 07-16, nothing newer).
+
+## Literature sweep, 2026-08-09 (litwatch-02, imported from an external audit)
+
+*Not our sweep: found by GPT-5.6-Sol's independent archive sweep,
+`sweeps/2026-08-08/novelty_foundational.md` + `novelty_loop.md`, anchored
+at bac61d2. Three of its four missing citations were folded into the
+sections above (SOPHIA arXiv:2607.18100 and Repetition Neurons
+arXiv:2410.13497 into the repetition-loop item; the affect source paper
+arXiv:2604.07729 into the emotion-vector item). The fourth is new
+territory and gets its own entry.*
+
+1. **"Cultural Awareness is Represented but Not Decoded"
+   (arXiv:2608.02486).** A separate 2026 study reporting an
+   **encode-before-decode ordering**: linear probes recover cultural
+   information at layers where the logit lens still cannot read it out.
+   Relevance to us is methodological, not cultural — it is the same shape
+   as our apparatus-06-vs-u16 gap, where the lens-free ambiguity-mixture
+   apparatus puts the transition ~L10/L14/L25 (gemma-4b / gemma-12b /
+   qwen) while the token-level J-lens trawls sharpen at ~L20–28 / L27–41
+   / L33–58. Two probes, two landmarks, one model. Read together they
+   argue that **"ignition layer" is instrument-dependent**, which is a
+   weaker and better-supported claim than a universal encode-then-decode
+   cognitive stage. Cite it wherever we quote a layer landmark as if it
+   were a property of the model rather than of the readout.

@@ -96,6 +96,14 @@ norm seesaw once masqueraded as an emotion flicker, sign inverted).
 Steered records must be re-captured **under the same steer**
 (`params.steer` makes every record reconstructible, incl. `rand_seed`).
 
+**Dated recompute (2026-08-09, clean capture):** the a0680 seesaw was
+first measured on the misaligned overlay (see the correction below). On
+the realigned capture the loop-region shared mode vs `wsnorm` gives
+**r = −0.77, ~60% shared variance** (was −0.90 / ~81%). The sign holds
+and the rule holds — partial out `wsnorm` before any shared-mode claim.
+The magnitude is softer than the number this file carried, so cite 60%,
+not 81%.
+
 **Dated correction (2026-08-07, apparatus-11):** `chat: false` records
 store already-templated raw text — a capture that re-applies the chat
 template double-wraps the header, so the forward pass sees a corrupted
@@ -106,6 +114,35 @@ same day. Rule: build capture ids with the record's own `params`
 from `CONFIGS` defaults; `apparatus11._render_text` is the reference.
 And derive the affect.json token strings from the SAME ids the capture
 ran on — a second tokenization is a second chance to disagree.
+
+**Dated correction (2026-08-09, overlay realignment):** "recaptured the
+same day" above is wrong, and the last rule was advice, not code. The
+true sequence: 2026-08-07 **18:27** `apparatus11.capture` rewrote `z.pt`
+cleanly, so the activations were fixed. 2026-08-07 **23:03**
+`affectviz.py` re-derived the affect.json token labels with the *same*
+double-templating bug — its rebuilt label list was film+5 long, and the
+export silently clipped it back to z.pt length — so the four shipped
+overlays stayed misaligned while the underlying capture was clean.
+(The sweep's `redteam_affect.md` read `z.pt` as reproducing the bad
+pass; that inference was reasonable — affect.json's values are derived
+FROM z.pt, so they always agree — but the 18:27 z.pt token counts are
+film-exact, 69/71/170/771, where the 07-21 pass's `summary.json` counts
+are film+5. Moot either way: the 08-09 re-run below replaced z.pt from
+a forward that the new assertion verified before writing.) Caught by
+the external sweep (`sweeps/2026-08-08/`), not by us. Fixed 2026-08-09:
+`textspans.render_text` is now the single renderer, and
+`textspans.assert_film_alignment` raises on any token/film mismatch;
+both are wired into `affectviz`, `affect2`, `langval_viz` and
+`apparatus11.capture`; the silent clips are gone.
+`affect2.cross` was then re-run clean on
+qwen-27b and everything re-exported. Post-fix: **232/232 exact**
+(`out/affect-alignment-post-fix-2026-08-09.json`). So the SAME-ids rule
+is now **ENFORCED in code** — a second tokenization that disagrees is an
+exception, not a shifted ribbon. All 07-21 numbers on u18-hyst
+a0000/a0480/a0680 and u19-complete came from a shifted forward and are
+superseded by the clean-capture values (P8 correction in
+PREDICTIONS.md; `dashboard/affect.json` and
+`results/affect02-<rid>/affect.json` are authoritative).
 
 ## 3. Steering with emotion vectors
 
@@ -132,6 +169,17 @@ events** — the vectors carry the emotion, not the stories.
   time"; steering desperate raises it, calm lowers it; same pattern
   for reward hacking. (Our affect-03 P14 result is the same logic at
   home scale: emotion state gates the loop's im_end exit.)
+  [**Caveat added 2026-08-09, external sweep `sweeps/2026-08-08/`:** the
+  home-scale parallel is weaker than this line reads. At direction level
+  (unit = direction, not seed-run) affect-07 shows no valence ordering —
+  p=.50 composite at ae=0.12, p=.43 turn-end, p=.083 at ae=0.06 — the
+  apparent effect being `angry` at 1/8 against 8/8 for the other eleven
+  emotion directions. "Calm grants, desperate blocks" is an
+  uncontrolled-frame specimen, not a demonstrated gate. The
+  emotion-vs-concept roster contrast does survive (p=.00947) but stays
+  confounded by elicitation frame and geometry, with only two Gaussian
+  controls. Do not cite this bullet as a valence gate. See PREDICTIONS.md
+  P14/P18 corrections of the same date.]
 - **Activity preferences:** Elo from A/B logit comparisons; 35 vectors
   shift preferences coherently at strength 0.5.
 - **Other-speaker vectors exist:** "Assistant token, Human emotion"

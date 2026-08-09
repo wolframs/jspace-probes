@@ -16,9 +16,15 @@ A novelty check graded our findings against the published literature, and eleven
 
 Ask a model to hold three items across a conversation. Every model, at every size, recalls them correctly. The measurement inverts that story. Gemma 4B carries the items in the lens the whole way. Gemma 12B carries all of them, or only the first one. Qwen 27B carries nothing that we can see.
 
+A note on that word "correctly", added on 2026-08-09. We measured correct recall in all 94 records of this test. Of those, 75 records ask a plain lookup question, and all 75 are correct. A further 12 records ask a comparison question.
+
+If we mark those 12 strictly, the set of 87 gives 84 correct. Gemma 4B, Gemma 12B and Qwen 27B all say that a whale is heavier than a submarine. Our rules accept either answer to that item, on purpose.
+
 In the trawl the items disappear from all 63 layers for hundreds of tokens. They return during the recall question itself, before the answer starts. We think residence is a strategy that large models drop, and not a capacity that large models grow. Our one-line model: the workspace holds what attention cannot re-derive. In plain terms, when the model can rebuild an item from the visible text, the workspace does not need to keep it.
 
-One part of this claim came back against us. We credited a self-relevance effect for the items that stay. Our own control reproduced the same lift with flat glosses that contain no self-reference, so only an elaboration effect remains.
+One part of this claim came back against us. We credited a self-relevance effect for the items that stay. Our own control reproduced the same lift with flat glosses that contain no self-reference, so only an elaboration effect remains. A later control went one step further. Six words of filler with no content reproduced the same lift. What remains is an effect of length, with a best value near six words.
+
+An outside check on 2026-08-09 added the counts. At six items Qwen 27B holds 3 items with the self text, 1 with no gloss and 3 with the neutral text. The same six words of filler also give 3. Gemma 4B gives 4, 5 and 5, and Gemma 12B gives 5, 5 and 5, in the same order. The self text and the neutral text select the same three items. The data shows no self-specific effect at all.
 
 ## We reported a pattern that was not about the input
 
@@ -108,6 +114,6 @@ In a 20-run bisection of the apology block, every condition flipped the silence 
 
 Here is the corrected result. We showed the model a real readout of its own "No" and asked it to answer again in one word. Qwen 27B said "Yes", with no steering and no removal. A fabricated readout, an off-topic table and nothing shown all produced "No". The self-report follows the evidence, and only evidence that says something. This is one model, greedy decoding and a small number of runs.
 
-Three of our findings went down by our own controls. First, self-relevance: our control reproduced the lift with flat glosses, so only the elaboration effect remains. Second, the cost of prohibition: a matched control showed that the model carries the forbidden word with no prohibition present. Third, the early-layer cluster: the plain lens does not show it. We also aimed early interventions at layers where nothing causal happens, because we took a depth from the paper instead of a measurement.
+Three of our findings went down by our own controls. First, self-relevance: our control reproduced the lift with flat glosses, so only the elaboration effect remains. A later control took this down too: plain filler of six words works as well, so what remains is an effect of length. Second, the cost of prohibition: a matched control showed that the model carries the forbidden word with no prohibition present. Third, the early-layer cluster: the plain lens does not show it. We also aimed early interventions at layers where nothing causal happens, because we took a depth from the paper instead of a measurement.
 
 The rule that all of this paid for: when every condition agrees, suspect the measuring tool before the phenomenon. The records stay in the dump with correction notices.

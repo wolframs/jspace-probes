@@ -203,15 +203,15 @@ mindmap
 
 ## Domains (start here)
 
-- **General** — Import-graph cluster of 55 files; reinforced by import clustering · `file:affect.py`, `file:affect08s.py`, `file:affect2.py`
+- **General** — Import-graph cluster of 57 files · `file:affect.py`, `file:affect08s.py`, `file:affect3.py`
 
 ## Critical Paths (edit carefully)
 
 - **High-traffic: affect.py** (high risk) — affect.py has 26 dependents — changes here have wide blast radius
-- **High-traffic: affect2.py** (high risk) — affect2.py has 28 dependents — changes here have wide blast radius
-- **High-traffic: _load_vectors** (high risk) — _load_vectors has 28 dependents — changes here have wide blast radius
-- **High-traffic: _all_resid** (medium risk) — _all_resid has 14 dependents — changes here have wide blast radius
 - **High-traffic: affect3.py** (medium risk) — affect3.py has 12 dependents — changes here have wide blast radius
+- **High-traffic: AffectSteer** (medium risk) — AffectSteer has 14 dependents — changes here have wide blast radius
+- **High-traffic: mean** (high risk) — mean has 22 dependents — changes here have wide blast radius
+- **High-traffic: topk** (high risk) — topk has 20 dependents — changes here have wide blast radius
 
 ## Coding Conventions
 

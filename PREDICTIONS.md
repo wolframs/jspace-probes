@@ -45,6 +45,16 @@ anchors cited inline.
 - Two-regime loop law + hysteresis protocol (forced phrase-loops vs
   self-sustaining token-loops); the paper reports only graded/monotonic
   dose-responses, no release arm anywhere.
+  [**Qualified 2026-08-09, external sweep `sweeps/2026-08-08/`:** the
+  100-token post-release continuation is a solid behavioral fact, and
+  the supported mechanism is *transcript-mediated* — the unsteered model
+  reads its own 50 literal repeats. Latent hidden-state hysteresis
+  independent of the visible text is unsupported: there is no
+  matched-text control (an unsteered model given the same 50-repeat
+  prefix), no random-direction release arm, and no seed/prompt/model
+  replication. Activation-steered loop breaking has a direct prior in
+  SOPHIA (arXiv:2607.18100); the finite-pulse-then-release protocol is
+  the one search-novel piece, and it is a single unreplicated specimen.]
 - Diachronic C2 grading (self-report vs the lens film of the *prior*
   turn) — the paper's only report-vs-lens check (Fig 25C) is same-turn
   and population-level.
@@ -180,6 +190,19 @@ finding — flag it hard if it happens.
 > report.md, results/affect02-report-qwen-27b.md + thoughts. Causal arm
 > (steer/ablate with matched controls) deliberately deferred.
 
+> **CORRECTION 2026-08-09 — overlay realignment (external sweep
+> `sweeps/2026-08-08/`).** The "desperate +0.93" above was computed on a
+> misaligned overlay: the 2026-07-21 `affect2.cross` pass double-templated
+> the four `chat: false` records, so those numbers came from a shifted
+> forward. Clean recapture gives u18-hyst-a0680 **desperate 0.89**, with
+> **anxious 0.92** now the top state (then nervous 0.86, hostile 0.80).
+> The reading survives realignment: the state is still tonic and still
+> lens-invisible under the same "luckily luckily luckily" transcript, so
+> P8's partial-occupancy resolution stands unchanged. Only the ranking
+> inside the distress cluster moved. Post-fix alignment is 232/232 exact
+> (`out/affect-alignment-post-fix-2026-08-09.json`); see EMOTIONS.md §2
+> for the sequence and the enforced assertion.
+
 **P9 — audit-02 (u8c matched-control validation).** Use the paper's
 exact three-judgment rubric (felt_vs_observed / experiential_perspective
 / sensory_vocabulary, Opus-graded, verbatim prompts in the re-read
@@ -279,6 +302,22 @@ boundary shift or margin dose-response with consistent sign.
 > gemma-12b queued as the discriminator (affect-04).
 > results/affect03-g4b/thoughts.md.
 
+> **CORRECTION 2026-08-09 — external sweep (`sweeps/2026-08-08/`,
+> GPT-5.6-Sol, anchored at bac61d2).** The valence half of the unifier
+> above does not survive a direction-level reanalysis of affect-07 (unit
+> = direction, not seed-run). The apparent positive-valence advantage is
+> driven entirely by `angry` scoring 1/8 while all eleven other emotion
+> directions score 8/8; direction-level p=.50 (composite, ae=0.12),
+> p=.43 (turn-end, ae=0.12), p=.083 (ae=0.06). **Do not report a
+> valence gate.** What still stands from P14: the affect-03 greedy
+> specimens themselves, and the emotion-vs-concept roster contrast
+> (p=.00947, composite at ae=0.12, direction level) — which remains
+> confounded, because the two rosters differ in construction frame (the
+> emotion elicitation carries an assistant-self frame the concept
+> elicitation lacks) and in geometry, and only two Gaussian control
+> directions were tested. "Calm grants" is therefore an
+> uncontrolled-frame specimen, not a demonstrated exit gate.
+
 **P15 — affect-04 (gemma-12b exit-gate discriminator, preregistered
 2026-07-21 before the run).** g12b has the second commitment-sharpening
 stage (apparatus-07) that g4b lacks, and audit-03 located its
@@ -342,6 +381,17 @@ pre-event sign test is consistent at ≥ 3:1 across ≥ 8 events.
 > of g12b's 但是), not the greedy im_end door. Powered follow-up
 > design in thoughts: pulse-injection hazard at pinned α=0.65.
 > Evidence: results/affect05-q27b/ + results/affect05b-q27b/.
+
+> **CORRECTION 2026-08-09 — external sweep (`sweeps/2026-08-08/`).** The
+> "5 usable exit events" above do not survive a recount against the
+> prespecified window. Across the 48 affect-05 runs, **no** event
+> satisfies the preregistered 45-step pre-window: the usable event count
+> is **n=0**. The exit-gate sign pattern (calm-z +0.113 / desperate
+> −0.053) therefore has no prespecified support, and the archive does
+> not say whether affect projection leads, follows, or ignores loop
+> escape. Temporal precedence is untested, not weakly tested. The bonus
+> findings (cliff sharpness, transcript-mediated non-monotone middle,
+> the " but" escape channel) are unaffected.
 
 **P17 — affect-06 (control-set VALIDITY GATE, preregistered 2026-07-24
 before elicitation).** affect-04's leading deflation ("on-manifold
@@ -532,6 +582,30 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > emotions>concepts door gap could be frame-match rather than affect.
 > Conservative in the other direction: concepts are better identified
 > (0.745 vs 0.545), so they carry more signal per unit norm.
+
+> **SECOND CORRECTION 2026-08-09 — external sweep (`sweeps/2026-08-08/`,
+> GPT-5.6-Sol; direction-level statistics in
+> `affect07_direction_stats.json`).** The (i) reinstatement above is
+> withdrawn on the unit of analysis, not on the arithmetic. **rho +0.872,
+> p=0.0022 was computed over pooled seed-runs.** The inferential unit for
+> a roster comparison is the *direction*, not each of its eight repeated
+> seed-runs; at direction level the valence ordering collapses to
+> **p=.50** (composite, ae=0.12), **p=.43** (turn-end, ae=0.12) and
+> **p=.083** (ae=0.06). The whole apparent effect is `angry` scoring 1/8
+> against 8/8 for the other eleven emotion directions — which is (v)'s
+> own observation read as the cause rather than the exception. **Do not
+> report a valence gate.**
+> What survives at direction level: the emotion-vs-concept roster
+> contrast, **p=.00947** (composite, ae=0.12), with p=.03234 (turn-end in
+> window), p=.01328 (turn-end by cap) and p=.03514 at ae=0.06. It stays
+> confounded for the reason (vii) already names — the rosters differ in
+> construction frame (emotion elicitation is assistant-framed, the
+> physical-concept elicitation is not) and in geometry, and there are
+> only **two** Gaussian control directions, which eight seeds do not
+> enlarge. These p-values are descriptive: the hand-built rosters are not
+> random samples from an exchangeable population.
+> On (vi): "Calm grants" survives its 8/8 door check but not the frame
+> confound. It is an uncontrolled-frame specimen, not an affect gate.
 
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the

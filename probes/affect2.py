@@ -38,6 +38,7 @@ import torch
 import lab
 from lab import CONFIGS, RESULTS, _strip_bos, get_model
 from affect import BANDS, EMOTIONS, outdir as a1dir
+from textspans import assert_film_alignment, render_text
 
 RECORDS = {
     "qwen-27b": [
@@ -78,10 +79,7 @@ def _all_resid(lm, ids: torch.Tensor) -> torch.Tensor:
 
 def _conversation_ids(lm, rec: dict):
     tok = lm.tok
-    tkw = CONFIGS[lm.name].get("template_kwargs", {})
-    full = _strip_bos(tok, tok.apply_chat_template(
-        rec["conversation"], tokenize=False,
-        add_generation_prompt=False, **tkw))
+    full = render_text(tok, rec, CONFIGS[lm.name].get("template_kwargs", {}))
     ids = lm.model.encode(full, max_length=1_000_000)
     toks = tok.convert_ids_to_tokens(ids[0].tolist())
     return ids, [tok.convert_tokens_to_string([t]) for t in toks]
@@ -152,6 +150,7 @@ def cross(model: str) -> None:
             continue
         rec = json.loads((rdir / "record.json").read_text())
         ids, toks = _conversation_ids(lm, rec)
+        assert_film_alignment(toks, rid, RESULTS)
         H = _all_resid(lm, ids)                  # [L, seq, D]
         z = (torch.einsum("lsd,eld->els", H, V)
              - mu.unsqueeze(-1)) / sd.unsqueeze(-1)   # [E, L, seq]

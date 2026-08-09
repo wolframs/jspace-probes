@@ -27,7 +27,15 @@ tax did not (it's a reproduction, and now we say so).
 ## The workspace is a strategy, not a warehouse
 
 Ask a model to hold three items across a conversation and every model,
-at every scale, recalls them perfectly. Watch the stack instead of the
+at every scale, recalls them perfectly. [**Qualified 2026-08-09**,
+external sweep `sweeps/2026-08-08/`: retrieval is correct in every
+record, but "perfectly" carries a rubric. The clean denominator is
+75/75 unambiguous lookup records; on the wider 87-record core (those 75
+plus 12 binding records) strict ordinary-world scoring gives 84/87,
+because all three models call a whale heavier than a submarine and the
+stored rubric deliberately accepts either answer. The often-quoted "all
+94 records" adds 6 gemma-12b order arms and 1 dense-layer backfill to
+that core.] Watch the stack instead of the
 transcript and the story inverts. The 4B carries the items visibly the
 whole way. The 12B holds them all-or-nothing — one good frame where its
 readout is literally the list, or a winner-take-all collapse where the
@@ -49,6 +57,17 @@ reproduce the lift at near-identical ranks. It is an *elaboration*
 premium; self-relevance is retired as its engine, and the sharper
 question — why does elaboration buy holding in the model best equipped
 to re-derive it? — takes its place on the board.)
+[**The chain went one stair further, and then one more, 2026-08-09.**
+span-08 demoted *elaboration* too: six words of identical contentless
+filler reproduce the lift, so the chain reads self-relevance →
+elaboration → a **length** effect with an optimum near six words. The
+external sweep `sweeps/2026-08-08/` adds the numbers that close it. At
+k=6 the held counts for self / flat / neutral elaboration are 4/5/5 on
+gemma-4b, 5/5/5 on gemma-12b and 3/1/3 on qwen-27b; qwen's identical
+six-word filler also gives 3, while 2-word and 12-word neutral glosses
+give 2 and 2. Self and neutral elaboration select the *same three
+items*. There is no self-specific priority left, and a positive
+elaboration mechanism is specimen-grade only.]
 
 ## We spent an evening ablating a ghost
 

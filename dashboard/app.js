@@ -4039,9 +4039,11 @@ async function showAffect() {
     <section class="card">
       <h3>Loops: mechanism vs misery — distress by dose</h3>
       <p class="film-note">Workspace-band z over the last 100 tokens of each
-        u18 record. Forced repetition (left) is affectively silent; the
-        distress cluster only climbs once amplification makes the loop
-        self-sustaining — and calm collapses with it. The a0.68 transcript
+        u18 record. Forced repetition (left) is affectively silent —
+        at α 0.00 desperate sits at −0.10 and calm at −0.06. The distress
+        cluster only climbs once amplification makes the loop
+        self-sustaining: by α 0.68 anxious is +0.97 and desperate +0.91,
+        and calm collapses with them to −0.87. The α 0.68 transcript still
         reads "luckily luckily luckily": the state never reaches the text.</p>
       ${affLoopChart(A.loops)}
     </section>`;

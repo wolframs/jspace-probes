@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-08-07T21:03:56.998Z",
+  "builtAt": "2026-08-09T10:39:58.078Z",
   "stats": {
     "filesScanned": 63,
-    "nodesCreated": 546,
-    "edgesCreated": 1638,
+    "nodesCreated": 548,
+    "edgesCreated": 1656,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 175
+    "durationMs": 156
   },
   "architecture": {
     "name": "probes",
@@ -22,13 +22,12 @@
   },
   "domains": [
     {
-      "id": "domain:cluster:62",
+      "id": "domain:cluster:57",
       "name": "General",
       "confidence": 0.95,
       "nodes": [
         "file:affect.py",
         "file:affect08s.py",
-        "file:affect2.py",
         "file:affect3.py",
         "file:affect3b.py",
         "file:affect3c.py",
@@ -72,30 +71,31 @@
         "file:unit5.py",
         "file:audit02.py",
         "file:langval3.py",
-        "file:affectviz.py",
         "file:blind.py",
         "file:huh.py",
-        "file:langval_viz.py",
         "file:lossmap2.py",
-        "file:apparatus11.py",
+        "file:site.py",
         "file:apparatus12.py",
         "file:audit06.py",
         "file:lab.py",
-        "file:site.py",
+        "file:affect2.py",
+        "file:affectviz.py",
+        "file:apparatus11.py",
+        "file:langval_viz.py",
         "file:textspans.py"
       ],
-      "description": "Import-graph cluster of 55 files; reinforced by import clustering",
+      "description": "Import-graph cluster of 57 files",
       "entryPoints": [
         "file:affect.py",
         "file:affect08s.py",
-        "file:affect2.py",
         "file:affect3.py",
         "file:affect3b.py",
         "file:affect3c.py",
         "file:affect3g.py",
         "file:affect4.py",
         "file:affect4b.py",
-        "file:affect5.py"
+        "file:affect5.py",
+        "file:affect7.py"
       ]
     }
   ],
@@ -141,18 +141,6 @@
     },
     {
       "from": "affect08s.py",
-      "to": "get_model",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_strip_bos",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
       "to": "get_model",
       "kind": "IMPORTS",
       "weight": 1
@@ -524,98 +512,8 @@
       "weight": 1
     },
     {
-      "from": "affectviz.py",
-      "to": "a2dir",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_danger_positions",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_strip_bos",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
       "from": "apparatus06.py",
       "to": "get_model",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "rates",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_fit_norm",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_strip_bos",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "MultiSteer",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "Steering",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "get_model",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_all_resid",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_load_vectors",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "a2dir",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_danger_positions",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_baseline",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_token_ids",
       "kind": "IMPORTS",
       "weight": 1
     },
@@ -740,6 +638,12 @@
       "weight": 1
     },
     {
+      "from": "lab.py",
+      "to": "load",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "langval.py",
       "to": "_strip_bos",
       "kind": "IMPORTS",
@@ -796,48 +700,6 @@
     {
       "from": "langval3.py",
       "to": "_fit_norm",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_strip_bos",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "get_model",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_all_resid",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_conversation_ids",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_load_vectors",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "a2dir",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_baseline",
       "kind": "IMPORTS",
       "weight": 1
     },
@@ -980,8 +842,176 @@
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "load",
+      "from": "affect2.py",
+      "to": "_strip_bos",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "assert_film_alignment",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "render_text",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "a2dir",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "_danger_positions",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "assert_film_alignment",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "render_text",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "assert_film_alignment",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "render_text",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "rates",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_fit_norm",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "MultiSteer",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "Steering",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_all_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "a2dir",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_danger_positions",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_baseline",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_token_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "get_model",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_all_resid",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_conversation_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_load_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "a2dir",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "assert_film_alignment",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "render_text",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_baseline",
       "kind": "IMPORTS",
       "weight": 1
     },
@@ -1186,108 +1216,6 @@
     {
       "from": "affect08s.py",
       "to": "delta",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "affect.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "affect.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "topk",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_neutral_baseline",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_conversation_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "a2dir",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_film_len",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
-      "to": "_danger_positions",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2588,90 +2516,6 @@
       "weight": 1
     },
     {
-      "from": "affectviz.py",
-      "to": "affect.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "affect.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "affect2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "affect2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "a2dir",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_tokens",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_danger_positions",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "_rows",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "export_records",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affectviz.py",
-      "to": "export_overview",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
       "from": "apparatus06.py",
       "to": "lab.py",
       "kind": "IMPORTS",
@@ -2800,222 +2644,6 @@
     {
       "from": "apparatus09.py",
       "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "lossmap2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "lossmap2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "textspans.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "textspans.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "affect.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "affect.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "langval.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "langval.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "affect2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "affect2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_strip_think",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "rates",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "steer_kind",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_fit_norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "MultiSteer",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_baseline",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "capture_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "a2dir",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_render_text",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_steer_ctx",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_danger_positions",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "_token_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "report",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "regmeter",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "fingerprints",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "capture",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
-      "to": "vanilla",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3370,6 +2998,66 @@
     {
       "from": "audit03.py",
       "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "apparatus11.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "apparatus11.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "_ctrl_id",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "_messages",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "pairs",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "_ctrl_spec",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "audit06.py",
+      "to": "capture",
       "kind": "CALLS",
       "weight": 1
     },
@@ -4028,6 +3716,114 @@
       "weight": 1
     },
     {
+      "from": "lab.py",
+      "to": "probe.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "probe.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "load",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "LoadedModel",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "decode",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "_token_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "__enter__",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "__exit__",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "Steering",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "MultiSteer",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "_play",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "topk",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "film_cast",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "lab.py",
+      "to": "reindex",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "langval.py",
       "to": "affect.py",
       "kind": "IMPORTS",
@@ -4444,126 +4240,6 @@
     {
       "from": "langval3.py",
       "to": "html",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "affect.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "affect.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "affect2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "affect2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "langval.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "langval.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_load_vectors",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_baseline",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "record_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "a2dir",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_conversation_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "_tokens",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "run",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6872,170 +6548,590 @@
       "weight": 1
     },
     {
-      "from": "audit06.py",
+      "from": "affect2.py",
       "to": "lab.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "audit06.py",
+      "from": "affect2.py",
       "to": "lab.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "audit06.py",
-      "to": "apparatus11.py",
+      "from": "affect2.py",
+      "to": "affect.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "audit06.py",
-      "to": "apparatus11.py",
+      "from": "affect2.py",
+      "to": "affect.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "audit06.py",
-      "to": "_ctrl_id",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit06.py",
-      "to": "_messages",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit06.py",
-      "to": "pairs",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit06.py",
-      "to": "_ctrl_spec",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit06.py",
-      "to": "run",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit06.py",
-      "to": "capture",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "probe.py",
+      "from": "affect2.py",
+      "to": "textspans.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "probe.py",
+      "from": "affect2.py",
+      "to": "textspans.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "load",
+      "from": "affect2.py",
+      "to": "render_text",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "LoadedModel",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "_token_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "mean",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "__enter__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "__exit__",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
+      "from": "affect2.py",
       "to": "get_model",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "Steering",
+      "from": "affect2.py",
+      "to": "_load_vectors",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "MultiSteer",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "_play",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
+      "from": "affect2.py",
       "to": "topk",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "film_cast",
+      "from": "affect2.py",
+      "to": "decode",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "lab.py",
-      "to": "reindex",
+      "from": "affect2.py",
+      "to": "_strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "_neutral_baseline",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "_conversation_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "assert_film_alignment",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "a2dir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "_film_len",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect2.py",
+      "to": "_danger_positions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "render_text",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "a2dir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "_tokens",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "assert_film_alignment",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "_danger_positions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "_rows",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "export_records",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affectviz.py",
+      "to": "export_overview",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "lossmap2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "lossmap2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "langval.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "langval.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_strip_think",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "rates",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "steer_kind",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_fit_norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "render_text",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "MultiSteer",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "Steering",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_baseline",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "capture_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "a2dir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_render_text",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "assert_film_alignment",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_steer_ctx",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_danger_positions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "_token_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "report",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "regmeter",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "fingerprints",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "capture",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus11.py",
+      "to": "vanilla",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "langval.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "langval.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "render_text",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_baseline",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "record_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "a2dir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_conversation_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "assert_film_alignment",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "_tokens",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "langval_viz.py",
+      "to": "run",
       "kind": "CALLS",
       "weight": 1
     }
@@ -7047,55 +7143,13 @@
       "nodes": [
         "file:affect.py",
         "file:affect08s.py",
-        "file:affect2.py",
         "file:affect3.py",
         "file:affect5.py",
-        "file:affect7.py"
+        "file:affect7.py",
+        "file:audit02.py"
       ],
       "risk": "high",
       "description": "affect.py has 26 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:file:affect2.py",
-      "name": "High-traffic: affect2.py",
-      "nodes": [
-        "file:affect2.py",
-        "file:affect3.py",
-        "file:affect3b.py",
-        "file:affect3c.py",
-        "file:affect3g.py",
-        "file:affect4.py"
-      ],
-      "risk": "high",
-      "description": "affect2.py has 28 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:affect2.py:61",
-      "name": "High-traffic: _load_vectors",
-      "nodes": [
-        "function:affect2.py:61",
-        "file:affect2.py",
-        "file:affect3.py",
-        "file:affect3b.py",
-        "file:affect3c.py",
-        "file:affect3g.py"
-      ],
-      "risk": "high",
-      "description": "_load_vectors has 28 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:affect2.py:66",
-      "name": "High-traffic: _all_resid",
-      "nodes": [
-        "function:affect2.py:66",
-        "file:affect2.py",
-        "file:affect3.py",
-        "file:affect5.py",
-        "file:apparatus11.py",
-        "file:audit02.py"
-      ],
-      "risk": "medium",
-      "description": "_all_resid has 14 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect3.py",
@@ -7133,8 +7187,8 @@
         "file:affect7.py",
         "file:affect.py",
         "file:affect08s.py",
-        "file:affect2.py",
-        "file:affect3.py"
+        "file:affect3.py",
+        "file:affect4.py"
       ],
       "risk": "high",
       "description": "mean has 22 dependents — changes here have wide blast radius"
@@ -7145,10 +7199,10 @@
       "nodes": [
         "function:apparatus09.py:57",
         "file:apparatus09.py",
-        "file:affect2.py",
         "file:affect3.py",
         "file:affect3b.py",
-        "file:affect3c.py"
+        "file:affect3c.py",
+        "file:affect3g.py"
       ],
       "risk": "high",
       "description": "topk has 20 dependents — changes here have wide blast radius"
@@ -7214,10 +7268,10 @@
       "name": "High-traffic: langval.py",
       "nodes": [
         "file:langval.py",
-        "file:apparatus11.py",
         "file:audit02.py",
         "file:langval2.py",
         "file:langval3.py",
+        "file:apparatus11.py",
         "file:langval_viz.py"
       ],
       "risk": "medium",
@@ -7286,9 +7340,9 @@
         "function:nla.py:292",
         "file:nla.py",
         "file:affect.py",
-        "file:affect2.py",
         "file:affect3.py",
-        "file:affect3b.py"
+        "file:affect3b.py",
+        "file:affect3c.py"
       ],
       "risk": "high",
       "description": "decode has 25 dependents — changes here have wide blast radius"
@@ -7298,11 +7352,11 @@
       "name": "High-traffic: probe.py",
       "nodes": [
         "file:probe.py",
+        "file:lab.py",
         "file:loops.py",
         "file:mirror2.py",
         "file:nla.py",
-        "file:scan.py",
-        "file:sorry4.py"
+        "file:scan.py"
       ],
       "risk": "medium",
       "description": "probe.py has 16 dependents — changes here have wide blast radius"
@@ -7320,6 +7374,48 @@
       ],
       "risk": "medium",
       "description": "unit14.py has 10 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:huh.py:55",
+      "name": "High-traffic: norm",
+      "nodes": [
+        "function:huh.py:55",
+        "file:huh.py",
+        "file:affect.py",
+        "file:affect3.py",
+        "file:affect5.py",
+        "file:apparatus09.py"
+      ],
+      "risk": "medium",
+      "description": "norm has 14 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:file:lab.py",
+      "name": "High-traffic: lab.py",
+      "nodes": [
+        "file:lab.py",
+        "file:affect.py",
+        "file:affect08s.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py"
+      ],
+      "risk": "high",
+      "description": "lab.py has 102 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:lab.py:41",
+      "name": "High-traffic: _strip_bos",
+      "nodes": [
+        "function:lab.py:41",
+        "file:lab.py",
+        "file:affect.py",
+        "file:affect3.py",
+        "file:affect3b.py",
+        "file:affect3c.py"
+      ],
+      "risk": "high",
+      "description": "_strip_bos has 32 dependents — changes here have wide blast radius"
     }
   ],
   "deadCode": [
@@ -7440,16 +7536,6 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanout:file:apparatus11.py",
-      "type": "excessive_fan_out",
-      "severity": "high",
-      "nodes": [
-        "file:apparatus11.py"
-      ],
-      "description": "apparatus11.py depends on 59 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
       "id": "smell:fanin:file:lab.py",
       "type": "excessive_fan_in",
       "severity": "high",
@@ -7466,7 +7552,7 @@
       "nodes": [
         "function:lab.py:41"
       ],
-      "description": "_strip_bos has 38 incoming dependencies — high fan-in",
+      "description": "_strip_bos has 32 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -7478,6 +7564,16 @@
       ],
       "description": "get_model has 51 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:apparatus11.py",
+      "type": "excessive_fan_out",
+      "severity": "high",
+      "nodes": [
+        "file:apparatus11.py"
+      ],
+      "description": "apparatus11.py depends on 61 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanin:file:affect.py",
@@ -7508,36 +7604,6 @@
       ],
       "description": "affect08s.py depends on 23 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanin:file:affect2.py",
-      "type": "excessive_fan_in",
-      "severity": "medium",
-      "nodes": [
-        "file:affect2.py"
-      ],
-      "description": "affect2.py has 28 incoming dependencies — high fan-in",
-      "recommendation": "Consider splitting this module or introducing a facade pattern"
-    },
-    {
-      "id": "smell:fanout:file:affect2.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:affect2.py"
-      ],
-      "description": "affect2.py depends on 29 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanin:function:affect2.py:61",
-      "type": "excessive_fan_in",
-      "severity": "medium",
-      "nodes": [
-        "function:affect2.py:61"
-      ],
-      "description": "_load_vectors has 28 incoming dependencies — high fan-in",
-      "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
       "id": "smell:fanout:file:affect3b.py",
@@ -7840,13 +7906,43 @@
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
-      "id": "smell:fanout:file:affectviz.py",
+      "id": "smell:fanout:file:blind.py",
       "type": "excessive_fan_out",
       "severity": "medium",
       "nodes": [
-        "file:affectviz.py"
+        "file:blind.py"
       ],
-      "description": "affectviz.py depends on 21 other nodes — high fan-out",
+      "description": "blind.py depends on 23 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:huh.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:huh.py"
+      ],
+      "description": "huh.py depends on 20 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:lossmap2.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:lossmap2.py"
+      ],
+      "description": "lossmap2.py depends on 21 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
+      "id": "smell:fanout:file:lab.py",
+      "type": "excessive_fan_out",
+      "severity": "medium",
+      "nodes": [
+        "file:lab.py"
+      ],
+      "description": "lab.py depends on 38 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     }
   ],

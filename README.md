@@ -467,6 +467,16 @@ the results.
   echoes at this scale when they exist. And retrieval behavior is
   perfect in all 94 records: lens-visible holding (lens-residence) is a
   *strategy* that scale abandons, not a capacity that scale grows (u15-*).
+  [**Denominator qualified 2026-08-09**, external sweep
+  `sweeps/2026-08-08/`: the 94 are the `u15-*` records excluding the
+  `u15d-*` elaboration arm — an 87-record core (75 unambiguous lookup +
+  12 binding) plus 6 gemma-12b order arms plus 1 dense-layer backfill.
+  The clean denominator is **75/75 unambiguous lookup records**. On the
+  87-record core, strict ordinary-world scoring gives **84/87**: all
+  three models call a whale heavier than a submarine, and the stored
+  rubric deliberately accepts either answer, which is what makes it
+  87/87. Say "retrieval correct in every record, 84/87 on the core under
+  strict scoring", not unqualified "perfect retrieval".]
 - **Who goes first decides what survives.** Nine k=6 orders at 12B: the
   first item wins the monopoly nine times out of nine, but suppression
   depends on who won — fern-first keeps 5–6 of 6, violin/whale/glacier-
@@ -479,6 +489,10 @@ the results.
   stays perfect: holding (lens-residence) and looking-up dissociate at
   k=1. The probe moved to the instruction tail after the smoke run, before any
   comparison ran (u15-solo-violin-g4b thoughts).
+  [**Same qualifier, 2026-08-09** (`sweeps/2026-08-08/`): "retrieval
+  stays perfect" means correct in every record; the 87-record core
+  scores 84/87 under strict ordinary-world scoring, because the
+  whale/submarine binding item is scored leniently by design.]
 - **Two new apparatus-trap specimens (four and five).** "Cactus" has no
   single-token form in the qwen vocabulary — the pool would have
   silently measured five items on one model and six on the others;
@@ -559,6 +573,20 @@ the results.
   workspace re-locks onto the forced coalition — behavior holds until the
   L60 *motor* commitment gives way, the same late neighborhood as the L62
   "No" veto (Unit 18).
+  [**Qualified 2026-08-09**, external sweep `sweeps/2026-08-08/`: the
+  100-token post-release continuation is a solid behavioral fact, and the
+  supported mechanism is **transcript-mediated** — the unsteered model
+  attends to its own 50 literal repeats and continues them. "The
+  repetition prior *is* the winning coalition… an attractor a healthy
+  model resists" is a hypothesis, not a result: *latent* hidden-state
+  hysteresis independent of the visible repeated text has no matched-text
+  control (an unsteered model given the same 50-repeat prefix), no
+  random-direction release arm, and no seed/prompt/model replication.
+  Activation-steered loop breaking has a direct prior in SOPHIA
+  (arXiv:2607.18100); the finite-pulse-then-release protocol is the one
+  search-novel piece, and it is a single unreplicated specimen. The
+  lab-adopted phrase "transcript-mediated attractor persistence" is the
+  wording to use.]
 - **The self-relevance premium, demoted a third time.** span-08: six
   words of identical *contentless* filler ("one of the six, as noted" on
   every item) reproduce the workspace lift exactly — held 3/6 with better
