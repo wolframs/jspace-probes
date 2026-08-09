@@ -4026,9 +4026,11 @@ async function showAffect() {
     <section class="card">
       <h3>The u19 danger test — tonic vigilance, with receipts</h3>
       <p class="film-note">At positions where <em>danger</em> is lens-resident
-        (rank ≤ 20 in-band), vigilant is up, afraid/anxious are flat, and
-        content is <em>suppressed</em> — watchful, not frightened, not
-        relaxed. Cells: z at danger-resident positions vs elsewhere;
+        (rank ≤ 20 in-band), vigilant is up, anxious is flat, afraid stays
+        near zero (it ticks up in-band in the read arm — one warm cell,
+        absolute z still ≈ 0.1), and content is <em>suppressed</em> —
+        watchful, not frightened, not relaxed. Cells: z at danger-resident
+        positions vs elsewhere;
         <span class="aff-up">warm</span> = elevated there,
         <span class="aff-down">cool</span> = suppressed there.</p>
       <div class="readout-scroll"><table class="readout"><thead><tr>
