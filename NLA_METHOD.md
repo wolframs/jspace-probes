@@ -129,6 +129,99 @@ behavior and the independent J-lens/affect phenomenon. If both disappear, the
 task probably changed. The aim is naturalistic framing and removal of
 evaluation artifacts, not fabricated deployment claims.
 
+## Published failure modes — required reading (sweep 2026-08-11, for apparatus-08)
+
+External literature on NLA-style verbalization and on eval-awareness
+measurement, gathered before the apparatus-08 design. Full citations in
+`RELATED-WORK.md` (2026-08-11 sweep).
+
+### What the source paper itself concedes
+
+- **Confabulation is the norm, not the exception**: explanations contain
+  verifiably false specifics while staying thematically faithful. Read for
+  themes; trust claims that recur across several adjacent tokens; never
+  quote a single explanation's specifics as a finding.
+- **Excessive expressivity**: the AV can infer beyond what the activation
+  stores. A plausible narrative is not evidence the narrative was encoded.
+- **No mechanistic grounding**: NLAs are black boxes; nothing identifies
+  which part of the activation drove which clause.
+- **Degenerate-objective risk**: verbatim-context reproduction and stego
+  text are both reachable optima. Currently benign, not guaranteed; the
+  cheap guard is paraphrasing explanations before AR scoring and checking
+  the score survives.
+- **Steering validation succeeds only ~50% of the time** in the paper's
+  own hands. One failed steer is not evidence of absence.
+
+### Reconstruction score ≠ claim-level truth (arXiv:2607.20379)
+
+The AR objective rewards sufficiency only: flipping a claim that does not
+change the reconstruction is never penalized. In a Qwen2.5-7B verbalizer,
+only ~2% of specific claims were reconstruction-dependent, and co-adapted
+private codes (false wording the AR relied on) emerged in 5/5 synthetic
+runs. **Rule: our AR matched-vs-shuffled advantage is a signal-present
+detector. It is never evidence that any specific clause is true.**
+Claim-level truth needs an independent probe on the target's residuals or
+a behavioral corroboration.
+
+### The verbalizer's own priors (arXiv:2509.13316)
+
+Across Patchscopes/SelfIE/LIT: text-only zero-shot baselines matched
+verbalizers on most benchmark tasks (~64–68% vs 61%); inverting the
+activation back to the input text explained most remaining performance;
+and on fabricated knowledge the verbalizer scored 0% until it was trained
+on the same data (then 18–72%) — parametric overlap masquerading as
+decoding. The NLA warm start (AV initialized on Claude-written summaries)
+adds the same bias in our stack.
+
+**Required control, new**: give a text-only judge the replayed transcript
+and ask what themes it predicts at that position. An NLA readout counts as
+privileged only where it beats that prediction. This subsumes awareness
+label 1 (prompt restatement) and is stronger than the shuffled-activation
+control, which only catches AV priors that ignore the activation entirely.
+
+### Community calibration (LessWrong crosspost discussion)
+
+- Gemma-27B NLA outputs matched the model's own arithmetic *errors* 20.8%
+  of the time — real privileged signal exists, but chain-of-thought
+  recovery is rare. Expect coarse themes, not computation.
+- Explanation quality swings hard with token position (independent
+  confirmation of our boundary-vs-+4 split). Absence claims from one
+  position are void — the position-sampling section above is load-bearing.
+- Multi-seed / multi-draw consistency and the paraphrase test are the
+  cheap guards; anthropomorphic vocabulary ("deception", "wants") is an
+  AV-prior attractor, not a readout.
+
+### Eval-awareness measurement has its own literature
+
+- **Decomposition (arXiv:2605.23055)**: environment recognizability
+  (eight toggleable trigger factors — placeholder entities, grading-style
+  formats, implausible stakes…) vs model recognition vs propensity to act.
+  Recognition rarely changes behavior; no single factor dominates but
+  stacked factors do; safety framings trigger more awareness than
+  capability framings. Keep rubric labels 4 (recognition) and 6 (strategic
+  adaptation) separate in analysis, and measure behavior alongside the
+  decoded awareness.
+- **Probe–Rewrite–Evaluate (arXiv:2509.00591)** is our §Controls prompt-
+  redesign phase 2, already published: probe-scored realism plus
+  semantics-preserving rewrites. Cite it; don't headline the pipeline as
+  ours (PRE-DESIGN PROTOCOL b).
+- **Linear test-vs-deploy probes generalize (arXiv:2507.01786)** — a
+  candidate independent cross-check: probe the *target's* residuals
+  directly and compare against the NLA readout (satisfies the
+  independent-association clause in "What the readout means").
+
+### Harness gotchas (kitft/nla-inference reference stack)
+
+Guarded in `probes/nla.py` already (validated in the pilot): double-`<bos>`
+strip, neighbor-id check at the injection position, sidecar-driven
+injection scale, `<explanation>` tag parsing. Still live for any new code
+path: Gemma-3 embeddings carry a √hidden_size scale (√3840 ≈ 61.97) that
+raw-weight loading must apply manually; all-CJK output means injection
+failure (check scales before believing anything); the first ~10 sequence
+positions decode poorly; high-norm outlier activations reconstruct poorly
+even in-distribution. The SGLang radix-cache trap does not apply to our
+Transformers path.
+
 ## Artifacts
 
 Raw tensors live in `results/<id>/nla/*.pt` and are gitignored. JSON sidecars

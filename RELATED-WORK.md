@@ -578,3 +578,58 @@ territory and gets its own entry.*
    weaker and better-supported claim than a universal encode-then-decode
    cognitive stage. Cite it wherever we quote a layer landmark as if it
    were a property of the model rather than of the readout.
+
+## Literature sweep, 2026-08-11 (apparatus-08 pre-design: NLA + eval-awareness)
+
+*Purpose: required reading before the apparatus-08 design. The distilled
+rules live in `NLA_METHOD.md` §"Published failure modes"; this section is
+the citation trail. Sources verified online 2026-08-11.*
+
+1. **The NLA source paper (transformer-circuits.pub/2026/nla, Anthropic
+   2026; code kitft/natural_language_autoencoders + nla-inference).**
+   AV/AR pair warm-started from the target, joint RL with reconstruction
+   reward + KL fluency penalty; 0.6–0.8 FVE at convergence. Its own five
+   stated limitations: confabulated specifics (thematically faithful),
+   no mechanistic grounding, excessive AV expressivity, cost, and a
+   degenerate optimum (verbatim context or stego text) that is "currently
+   benign" with no guarantee. Steering validation works ~50% of the time.
+   Used in the Opus 4.6 pre-deployment audit to surface *unverbalized*
+   evaluation awareness — the direct precedent for apparatus-08's third
+   leg: our finding there would be a home-scale replication, not a
+   discovery (PRE-DESIGN PROTOCOL b).
+2. **"Train the Model, Not the Reader: Decodability Supervision for
+   Verifiable Activation Explanations" (arXiv:2607.20379).** The sharpest
+   published critique of reconstruction-scored faithfulness: the
+   objective rewards sufficiency only, so a claim whose flip leaves the
+   reconstruction unchanged is never penalized. ~2% of specific claims
+   reconstruction-dependent in a Qwen2.5-7B verbalizer; co-adapted
+   private codes in 5/5 synthetic-ground-truth runs. Their fix (RECAP,
+   decodability supervision during target training) is unavailable to us
+   post hoc; the portable lesson is the rule now in NLA_METHOD.md — AR
+   advantage detects signal, never verifies a clause.
+3. **"Do Activation Verbalization Methods Convey Privileged
+   Information?" (arXiv:2509.13316).** Patchscopes/SelfIE/LIT audit:
+   text-only zero-shot baselines match verbalizers on standard tasks;
+   input-inversion explains most of the rest; fabricated-knowledge tests
+   drop to 0% unless the verbalizer shares training data (then 18–72%) —
+   parametric overlap, not decoding. Source of the text-only-judge
+   control we adopted. Related: Faithful-Patchscopes (arXiv:2602.00300,
+   already cited in the 2026-07-31 scout) fixes decoder-prior
+   confabulation in the same lineage.
+4. **LessWrong crosspost discussion of the NLA paper.** Community
+   calibration: Gemma-27B NLA matched the model's own arithmetic errors
+   20.8% of the time (privileged signal is real; CoT recovery is not);
+   token-position sensitivity is large; warm-start bias ("text Claude
+   might write" prior); paraphrase test for stego; multi-seed
+   consistency; anthropomorphic-narrative attractor warning.
+5. **Eval-awareness measurement methodology.** "Decomposing and
+   Measuring Evaluation Awareness" (arXiv:2605.23055): environment
+   recognizability (eight toggleable trigger factors) vs recognition vs
+   propensity; recognition rarely shifts behavior; stacking factors does;
+   safety framings > capability framings. "Probe–Rewrite–Evaluate"
+   (arXiv:2509.00591): probe-scored realism + semantics-preserving
+   rewrite — publishes the pipeline NLA_METHOD.md's prompt-redesign
+   phase already describes; cite, don't headline. "Probing and Steering
+   Evaluation Awareness" (arXiv:2507.01786): linear test-vs-deploy
+   probes on target residuals generalize — the independent cross-check
+   for any NLA awareness readout.

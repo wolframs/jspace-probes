@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09",
+  "updated": "2026-08-11",
   "states": {
     "hunch": "an idea worth keeping, not yet designed",
     "queued": "designed enough to run; waiting for GPU/attention",
@@ -639,6 +639,10 @@
             {
               "date": "2026-07-25",
               "text": "Three temperature-1 paired draws at three Gemma positions: mean absolute bf16/int8 AR-advantage gap 0.00032 vs within-position draw SD 0.00008-0.00065; one discrete divergence reached 0.00114. Quantization is usually within observed AV sampling scale, not perfectly invariant."
+            },
+            {
+              "date": "2026-08-11",
+              "text": "Pre-design literature sweep landed 2026-08-11: NLA failure modes + eval-awareness measurement lit distilled into NLA_METHOD.md ('Published failure modes' section), citations in RELATED-WORK.md 2026-08-11 sweep. Design-binding additions: AR advantage never verifies a clause (2607.20379), text-only-judge privileged-info control (2509.13316), paraphrase stego guard, recognition-vs-propensity split + probe cross-check for the awareness leg (2605.23055, 2507.01786). Opus 4.6 audit = direct precedent: our eval-awareness result would be a home-scale replication."
             }
           ]
         },
