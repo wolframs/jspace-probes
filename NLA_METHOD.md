@@ -38,8 +38,20 @@ uv pip install --python .venv/bin/python peft==0.19.1
 # One AV load serves every capture.
 .venv/bin/python probes/nla.py decode \
   results/u14x-{neutral,amb,spike}-q27b/nla/repo-window.pt \
-  --sample-indices 0 1 --draws 3 --temperature 1 --seed 100
+  --sample-indices 0 1 --draws 3 --temperature 1 --seed 100 --max-new 512
 ```
+
+The qwen AV is a reasoner: it spends ~250 tokens in a `<think>` block
+before `<explanation>`, so `--max-new` below 512 truncates most samples
+(measured 2026-08-11: 8/144 parsed at 256, 143/144 at 512). A missing
+`</explanation>` is truncation, not a negative.
+
+Standing control (battery 2026-08-11, `results/apparatus08-nla-battery.md`):
+every awareness claim needs the **text-only judge** at matched positions —
+the same model, given only the transcript, predicting the forthcoming
+themes. The battery found every NLA awareness readout judge-matched
+(context restatement); a "privileged decode" without this control is
+trap-specimen material.
 
 Replay asserts the stored token count. Gemma uses the official block-32
 embedding-replacement NLA. Qwen uses the checkpoint's actual mechanism:

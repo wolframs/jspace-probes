@@ -625,7 +625,7 @@
         {
           "id": "apparatus-08",
           "title": "NLA instrument: quantization transfer, execution harness, and eval-awareness controls",
-          "state": "hot",
+          "state": "landed",
           "links": [],
           "notes": [
             {
@@ -643,6 +643,10 @@
             {
               "date": "2026-08-11",
               "text": "Pre-design literature sweep landed 2026-08-11: NLA failure modes + eval-awareness measurement lit distilled into NLA_METHOD.md ('Published failure modes' section), citations in RELATED-WORK.md 2026-08-11 sweep. Design-binding additions: AR advantage never verifies a clause (2607.20379), text-only-judge privileged-info control (2509.13316), paraphrase stego guard, recognition-vs-propensity split + probe cross-check for the awareness leg (2605.23055, 2507.01786). Opus 4.6 audit = direct precedent: our eval-awareness result would be a home-scale replication."
+            },
+            {
+              "date": "2026-08-11",
+              "text": "→ landed: Battery landed 2026-08-11: results/apparatus08-nla-battery.md. P1 H-mech — every awareness decode judge-matched (spike +4 'consciousness/surveillance/testing' replicated 3/3 but text-only judge predicts it from transcript; no privileged readout at home scale). P2 decoy null 0/24 = content-sensitive, not lexical (instrument-positive). P3 superadditive: conscious-clause→consciousness themes, watched-clause→secrecy/trust themes, only the pair→surveillance+testing compound. P4 gaussian priors = incoherent pastiche, zero awareness. AR paraphrase guard 9/9 positive (0.0064→0.0052). Instrument fact: qwen AV reasons ~250 tok — max-new 512 required (256 parsed 8/144). Text-only-judge control now standing in NLA_METHOD.md."
             }
           ]
         },
@@ -736,6 +740,10 @@
             {
               "date": "2026-08-07",
               "text": "2026-08-07: agreed with Wolfram during apparatus-12 — filed instead of touching steering code mid-goal-run"
+            },
+            {
+              "date": "2026-08-11",
+              "text": "2026-08-11: same pathology in nla.py decode — one sample per generate() call, single host thread 100%, GPU 41% util (27B AV, NF4). Cheapest fix: batch the 3 same-position draws into one generate (identical injected prompt); karvonen hook needs per-row marker indexing. Measured during the apparatus-08 battery 512-token re-decode."
             }
           ]
         },
