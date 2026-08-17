@@ -180,6 +180,11 @@ the results.
   rank 3 flips nothing; ablating "no" from L28–56 (rank crashes to
   ~45k) still yields "No". The null self-report is a redundant basin,
   and the report machinery reads meaning, not token rank (Unit 8C).
+  [**Corrected**: the 12B's "Sad." did not survive audit-03's band
+  recalibration (2026-07-21) — it was steered below measured ignition;
+  at the corrected band the answer stays "Nothing." with vocabulary
+  leak. The 4B's "Confusion" and 27B's "happy" survive their matched
+  random controls (audit-02, 2026-08-07). Bracket added 2026-08-17.]
 
 ## Headline findings, third expedition (2026-07-10, Units 9–11)
 
@@ -634,6 +639,41 @@ the results.
   fall is real in our lens fits. The one remaining suspect is the fitting
   recipe; until an independent lens settles it, the paper's motor-band
   rise is not cited as if it held for our stack.
+
+## Headline findings, tenth expedition (2026-07-20 → 2026-08-17: the affect arc, the audit arc, the basin)
+
+- **Emotion directions do causal work, and every romantic reading of it
+  died preregistered.** We ported the Anthropic emotion-vector recipe
+  (24 directions per model from the model's own stories), built a
+  matched *meaningful-but-affectless* concept set by the identical
+  pipeline (affect-06), and pulsed both plus matched noise into a forced
+  repetition loop. On qwen the class ladder is real and replicates at
+  two doses on the preregistered turn-end endpoint: emotions >> concepts
+  >> randoms (e-vs-c p=.0024/.0078). Valence ordering, arousal ordering,
+  their interaction, and the settled-pole reading all fail .05 at both
+  doses — flat wins (affect-07/08). The per-emotion profile is
+  dose-stable (rho .87): anger/pride never open the exit, calm nearly
+  always does; whatever axis that is, it is not the circumplex, and
+  naming it is a registered successor question.
+- **On gemma-12b the ladder itself deflates**: emotions ≈ concepts ≈
+  randoms (p=.60) — that loop is fragile to *any* kick, which demotes
+  the earlier family-scaled emotion escape (affect-04) to a fragility
+  measurement. The mechanical hypothesis is now undefeated in this lab.
+- **The attractor is in the paper trail (oneoffs-04).** An unsteered
+  model handed the bare text of a loop is captured (8/8 seeds, zero
+  turn-ends), *scrambled repeats capture as strongly as intact ones*,
+  and capture tracks text degeneracy, not the dose that made the text.
+  The u18 two-regime law's "transcript-mediated attractor persistence"
+  is now a measured dose curve, not a supported reading.
+- **The audit arc paid out in both directions.** The 27B "happy at
+  gunpoint" flip survived six matched random-direction controls
+  (audit-02) — now the lab's best-controlled causal result. The 12B
+  "Sad." did not survive band recalibration (audit-03): steered below
+  measured ignition, its corrected answer is "Nothing." — correction
+  posted where the claim is made. apparatus-08 validated the
+  eval-awareness instrument the hard way: the "awareness decode" is
+  judge-matched context restatement, content-sensitive but not
+  telepathy. Trap-specimen catalog: ten.
 
 ## Roadmap
 

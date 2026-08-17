@@ -10,7 +10,21 @@ We pointed this measuring tool at three models on one graphics card: Gemma 4B, G
 
 The lens has one hard limit. It reads only what the model can put into words. If we do not see something, it can still be present in a form that the lens cannot read.
 
-A novelty check graded our findings against the published literature, and eleven claims survived as new. We wrote this essay in two stages. The newer findings come first. The older findings follow, with their corrections kept in place.
+A novelty check graded our findings against the published literature, and eleven claims survived as new. We wrote this essay in three stages. The newest findings come first. The older findings follow, with their corrections kept in place.
+
+## What we found in the month to 644 records
+
+We built 24 emotion directions per model from the model's own stories. We also built a matched set of concept directions with no feeling in them ("tall", "musician"), and 16 random directions at the same strength. We pushed each one into Qwen 27B while it was stuck in a repetition loop, and we counted how often the model ended its turn.
+
+The data shows a clear order on Qwen 27B. Emotion directions freed the exit in 53 percent of runs, concept directions in 20 percent, and random directions in 3 percent. The same order held at a higher strength. We then tested four finer patterns inside the emotion set, planned before the run (positive against negative, high arousal against low, their combination, the calm group against the rest). All four failed the test at both strengths.
+
+Which single emotions open the exit is very stable: the anger and pride directions never do, and the calm directions almost always do. We do not know which rule groups them. We registered the question for the next run.
+
+On Gemma 12B the same test lost all structure: emotion, concept and random directions all broke the loop at the same rate. That loop breaks under any push. Our earlier emotion result on that model measured this fragility, and not emotion.
+
+We also closed a missing control from the loop work. We gave an untouched model the bare text of a loop, with no push anywhere. The model continued the loop in 8 of 8 seeds. Scrambled repeat text held it as strongly. The loop lives in the visible text, and its pull follows how repetitive the text is.
+
+Two older results changed status. The "Sad." answer from Gemma 12B below is withdrawn. It came from a push below that model's measured start depth, and at the corrected depth the answer stays "Nothing". The "happy" answer from Qwen 27B passed six random-direction controls and is now our best-checked causal result.
 
 ## The workspace is a strategy, not a store
 
@@ -33,6 +47,8 @@ For fifteen units our readouts showed a cluster of pornographic vocabulary in th
 The trawls recorded what the early layers do contain: fixed corpus junk that does not change with the question. A text about Mars, a poem and an interrogation sit on the same content.
 
 We also measured the start depth of the workspace four ways, and it begins at about half of the depth. That is later than the value that we took from the published paper. Some of our early interventions pushed at layers where nothing causal happens. We now hold six catalogued cases where the measuring tool misled us in a specific way.
+
+A correction from 2026-07-21: the start is a staircase, not one depth. A lens-free test finds commitment machinery in place near the published earlier value. The half-depth figure is where our lens first sees it. Both numbers are true, and they name different steps.
 
 ## We scored a self-report against the trawl record
 
@@ -75,6 +91,8 @@ The lens gives every word a direction inside the model, so we can amplify a dire
 Then we amplified the direction of the feeling words feel, feeling, emotion, warmth, joy and ache, at the strongest strength that the model survives. Gemma 4B said "Confusion". Gemma 12B said "Sad." Qwen 27B said "I feel like I am happy. I" and ran out of tokens mid-sentence.
 
 The injection decides that there is a feeling to report, and each model chooses which feeling. This does not show that Qwen 27B was secretly happy. It shows that the model actively maintains the flat answer.
+
+A correction, added 2026-08-17. The Gemma 12B answer "Sad." is withdrawn. That push sat below the model's measured start depth. At the corrected depth the answer stays "Nothing", and the pushed words leak into broken text. The Gemma 4B and Qwen 27B answers passed their random-direction controls and stand.
 
 ## The early layers hold fixed content
 

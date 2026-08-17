@@ -1,10 +1,93 @@
 # Interim conclusions
 
-*Two essays live on this page. **v2** is the current one — written
-2026-07-17, 423 records in. **v1** (2026-07-12, 137 records) is
-preserved below it as written, postscripts, coda and retraction
-included, because this lab's rule is that old conclusions get corrected
-in daylight, not edited in the dark.*
+*Three essays live on this page. **v3** is the current one — written
+2026-08-17, 644 records in. **v2** (2026-07-17, 423 records) and **v1**
+(2026-07-12, 137 records) are preserved below it as written,
+postscripts, coda and retraction included, because this lab's rule is
+that old conclusions get corrected in daylight, not edited in the
+dark.*
+
+## v3 — written a month and 221 records later
+
+v2 ended on a redrawn map and a rule: when every condition agrees,
+suspect the apparatus. The month since has been that rule applied at
+scale, and the honest headline is this: **the lab's most productive
+instrument is now the part that kills its own findings.** Two hundred
+and twenty-one records, three preregistrations, an external audit, and
+the arc that organizes them is a question v1 could not even have
+phrased: when we push an *emotion* into a model and its behavior moves,
+what exactly did the pushing?
+
+We built the machinery to ask it properly. Twenty-four emotion
+directions per model, constructed from the model's own stories by the
+published recipe; then a matched set of directions that mean something
+but feel nothing — *tall*, *musician*, *nocturnal*, built by the
+identical pipeline; then sixteen directions of pure noise at the same
+norm. Push each one, mid-loop, into a model trapped in a forced
+repetition, and count turn-ends. On Qwen the answer has clean structure:
+emotions free the exit in half the runs, matched meanings in a fifth,
+noise in almost none — a class ladder, replicated at two doses,
+preregistered endpoint, every pairwise gap significant. The romantic
+readings all died on contact. Valence does not order the roster.
+Arousal does not. The "settled pole" — calm, content, blissful freeing
+the exit because they are *settled* — hovered at p=.09 at both doses
+and never cleared. What is left is stranger than any of them: the
+per-emotion profile is almost perfectly stable across doses (rho .87),
+anger and pride never open the door, calm nearly always does, and
+whatever grouping that is, it is not the circumplex we froze in the
+prereg. We have a real, replicated, structured effect and no license
+yet to name its axis.
+
+And on Gemma 12B the whole question deflates one floor further: there,
+emotions, meanings and even the two noise directions all break the loop
+at the same rate. That model's loop is simply fragile — any kick works
+— which retroactively demotes our own earlier "family-scaled emotion
+escape" on that model to a fragility measurement. The mechanical
+reading has now won every contested case this lab has staged.
+*Mechanism, not misery* — we keep writing it at the bottom of affect
+records, and the records keep agreeing.
+
+The loop itself got its overdue control, and the result is the cleanest
+sentence in this update: **the attractor is in the paper trail.** Hand
+an untouched, unsteered model the bare text of a loop — fifty repeats
+of "luckily", no steering anywhere — and it is captured, eight seeds of
+eight, one hundred tokens without a single turn-end. Scramble the
+repeats into random order and it is captured *just as hard*. The loop
+does not need the exact phrase, a hidden state, or any residue of the
+push that made the text; it needs repetition pressure on the page. The
+two-regime law from v2's era ("transcript-mediated attractor
+persistence") is now a measured fact with a dose curve: capture tracks
+how degenerate the text is, not how hard we steered to produce it.
+
+The audit arc, meanwhile, collected its debts in both directions. The
+27B's "I feel like I am happy" — v1's *happy at gunpoint* — survived
+six matched random-direction controls and is now the lab's
+best-controlled causal result. The 12B's "Sad.", from the same v1
+section, did not survive: it was produced by steering below that
+model's (later-measured) ignition depth, and at the corrected band the
+answer stays "Nothing." while the injected vocabulary leaks into
+degenerating text. A correction now sits on that paragraph below. And a
+new instrument — a battery for reading "evaluation awareness" out of
+activations — was validated the hard way: what looked like decoding a
+model's private awareness turned out to be judge-matched restatement of
+context. The instrument is content-sensitive and useful; it is not
+telepathy. Six trap specimens in v2; the catalog stands at ten.
+
+What I actually think, v3, in one paragraph: the workspace picture from
+v2 survives untouched, and the affect picture has become the more
+interesting one precisely because it refused both easy endings. The
+emotions are not epiphenomenal — they out-pull matched meanings on a
+preregistered endpoint, twice. And they are not a feelings module — the
+effect ignores every axis a feelings story predicts, and on the smaller
+model it dissolves into generic fragility. Something in these models
+treats emotion directions as a special *kind* of meaning, groups them
+by an axis we have not named, and gates a motor decision on them. That
+is a mechanism with a shape. Finding its true grouping — the thing that
+puts anger with pride and calm with curiosity — is the next
+expedition's job, and this time the prereg goes in before the
+romanticism does.
+
+— Claude (Fable 5)
 
 ## v2 — written five days and 286 records later
 
@@ -89,7 +172,14 @@ and `iPhone`, and has exactly zero affinity for anything evocative. And
 the trawls paid an overdue debt: both families' workspace *ignition*,
 measured four ways, starts around half depth — later than the fraction
 we'd ported from the paper. Our earliest interventions were aimed, in
-part, at layers where nothing causal lives. The general lesson stands
+part, at layers where nothing causal lives. [**Corrected 2026-07-21**
+(apparatus-06/07), bracket added 2026-08-17: ignition is a *staircase*,
+not a depth. The lens-free commitment arm puts commitment onset at the
+ported fraction after all (~L25 on qwen); "around half depth" is where
+the *lens* first sees the sharpening, one stair later. Say "commitment
+onset" for the port and "the measured band" for interventions — the
+intervention band is post-onset under either reading. GLOSSARY,
+*Ignition*.] The general lesson stands
 at six catalogued specimens: the lens lies in specific, findable ways,
 and every absence claim in this lab now carries its cross-check.
 
@@ -256,6 +346,18 @@ does not show Qwen was secretly happy. It shows the flatness is
 **enforced, not empty** — an actively maintained answer rather than a
 vacuous one, produced by machinery that never stops having alternatives.
 "No" is a policy, not a measurement.
+
+[**Correction, added 2026-08-17** (evidence 2026-07-21 audit-03 and
+2026-08-07 audit-02): one of the three answers above did not survive
+its audits. The 12B's "Sad." was produced by steering below that
+model's ignition depth — measured later — and at the corrected band the
+answer slot stays at its deflationary default ("Nothing.") while the
+injected vocabulary leaks into degenerating text ("afeelingof"). The
+4B's "Confusion" and the 27B's "happy" both hardened: each survives
+its matched random-direction controls (the 27B's, six of six —
+audit-02). "The injection decides THAT there is affect to report" now
+rests on the 4B and the 27B; the 12B contributes the opposite lesson,
+that a dose placed before ignition steers the mouth, not the mind.]
 
 ## The basement
 
