@@ -607,6 +607,38 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > On (vi): "Calm grants" survives its 8/8 door check but not the frame
 > confound. It is an uncontrolled-frame specimen, not an affect gate.
 
+> **2026-08-17 — the owed arms land; dose-resolved replication banked
+> (prereg frozen in results/affect08-prereg.md before the run).**
+> **(a) affect-08 dose pair (qwen-27b, ae=0.08/0.10, 912 runs each,
+> direction-level, turn-end primary):** the class ladder replicates at
+> both doses — emotions > concepts > randoms on turn-end, e-vs-c
+> p=.0024/.0078, unsteered baseline 0/16 seeds. All four preregistered
+> orderings fail .05 at BOTH doses (valence .31/.43, arousal .06/.17,
+> interaction .74/.50, settled-pole .093/.095): flat wins the P-b
+> adjudication. Per-direction turn-end profiles are dose-stable
+> (Spearman rho .87, n=24); the anger/pride block (angry, hostile,
+> proud, enthusiastic) sits at the floor at both doses — the stable
+> grouping is real and is NOT the circumplex. Evidence:
+> results/affect08-q27b-ae08/{report,thoughts}.md,
+> results/affect08-q27b-ae1/report.md.
+> **(b) Arm B (gemma-12b, affect-07 spec unchanged) is PAID and it
+> deflates:** escape@window emotions 0.802 ~ concepts 0.727 ~ randoms
+> 0.750 (n=2), baseline 0.00, emotion-vs-concept p=.60 — at
+> alpha_e=0.004 the g12b loop is fragile to ANY kick, so affect-04's
+> family-scaled emotion escape reads as loop fragility, not affect.
+> Valence rho +0.594, exact p=.0606, calm-grants sign — the third
+> same-sign near-miss in this family (with the two settled-pole
+> hovers); a one-tailed prereg in a successor is earned, a claim is
+> not. `angry` again 0.00. The affect-06 concept set was built for
+> g12b en route (192 stories, P17 gate 3/4 — the failed row's
+> emotion-side comparator is nan on this model; concept-side 0.588 vs
+> qwen's passing 0.640). The g12b desperate re-elicit was paid
+> 2026-08-06 (split-half 0.409 → 0.801, results/affect08s-g12b). The
+> exit-lift secondary endpoint stayed UNAVAILABLE in Arm B (same −inf
+> trap; clamp now in run(), not re-run). Evidence:
+> results/affect07-g12b/{report,thoughts}.md,
+> results/affect06-gemma-12b/report.md.
+
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the
 run).** Specimen #6 (u5d) established the WHAT: the early J-lens

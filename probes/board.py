@@ -221,6 +221,19 @@ def cmd_note(board: dict, item_id: str, text: str) -> None:
     print(f"{item_id}: noted")
 
 
+def cmd_link(board: dict, item_id: str, targets: list[str]) -> None:
+    _, item = find_item(board, item_id)
+    if item is None:
+        die(f"no such item {item_id!r}")
+    for t in targets:
+        if not (t.startswith("#") or (ROOT / t).exists()):
+            die(f"link target {t!r} is neither a #route nor an existing path")
+        if t not in item["links"]:
+            item["links"].append(t)
+    save(board)
+    print(f"{item_id}: links = {item['links']}")
+
+
 def cmd_nov(board: dict, item_id: str, verdict: str, basis: str,
             closest: str | None, refs: str | None) -> None:
     _, item = find_item(board, item_id)
@@ -321,6 +334,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_note.add_argument("item_id")
     p_note.add_argument("text")
 
+    p_link = sub.add_parser("link", help="append evidence links to an item")
+    p_link.add_argument("item_id")
+    p_link.add_argument("targets", nargs="+",
+                        help="repo-relative paths or #dashboard-routes")
+
     p_nov = sub.add_parser("nov", help="set an item's novelty verdict")
     p_nov.add_argument("item_id")
     p_nov.add_argument("verdict")
@@ -352,6 +370,8 @@ def main() -> None:
         cmd_mv(board, args.item_id, args.state, args.message)
     elif cmd == "note":
         cmd_note(board, args.item_id, args.text)
+    elif cmd == "link":
+        cmd_link(board, args.item_id, args.targets)
     elif cmd == "nov":
         cmd_nov(board, args.item_id, args.verdict, args.basis,
                 args.closest, args.refs)

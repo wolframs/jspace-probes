@@ -1,18 +1,18 @@
 # probes — Repository Summary
 
-> Built by Mnemos at 2026-08-09T10:39:58.078Z
+> Built by Mnemos at 2026-08-17T13:22:33.336Z
 
 ## Overview
 
-Single Package with 63 source files across python, javascript. 0 packages detected. core domains: General.
+Single Package with 65 source files across python, javascript. 0 packages detected. core domains: General.
 
 ## Stats
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 63 |
-| Graph nodes | 548 |
-| Graph edges | 1,656 |
+| Files scanned | 65 |
+| Graph nodes | 566 |
+| Graph edges | 1,733 |
 | Domains discovered | 1 |
 | Flows detected | 0 |
 | Build time | 0.2s |
@@ -23,7 +23,7 @@ Single Package with 63 source files across python, javascript. 0 packages detect
 
 ## Languages
 
-- **python**: 62 files
+- **python**: 64 files
 - **javascript**: 1 files
 
 See **[languages.md](./languages.md)** for distribution charts and the Mnemos parsing pipeline.
@@ -49,7 +49,7 @@ flowchart TB
 
 ```mermaid
 pie showData title Files by language
-    "python" : 62
+    "python" : 64
     "javascript" : 1
 ```
 
@@ -57,7 +57,7 @@ pie showData title Files by language
 
 ```mermaid
 flowchart LR
-  D0["General (57)"]
+  D0["General (59)"]
 ```
 
 See **[graphs.md](./graphs.md)** for the full diagram set.

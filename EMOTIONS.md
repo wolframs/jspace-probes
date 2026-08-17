@@ -180,6 +180,14 @@ events** — the vectors carry the emotion, not the stories.
   confounded by elicitation frame and geometry, with only two Gaussian
   controls. Do not cite this bullet as a valence gate. See PREDICTIONS.md
   P14/P18 corrections of the same date.]
+  [**2026-08-17:** the caveat held under its preregistered test.
+  affect-08 (ae=0.08/0.10, direction-level, turn-end primary): all four
+  orderings fail .05 at both doses; the class ladder
+  emotions>concepts>randoms replicates. And on gemma-12b (affect-07 Arm
+  B) even the class ladder flattens — emotions ~ concepts ~ randoms,
+  p=.60, the loop there is fragile to any kick. The only residue is a
+  thrice-repeated same-sign near-miss (settled-pole .093/.095, g12b
+  valence .0606). See PREDICTIONS.md P18, 2026-08-17 entry.]
 - **Activity preferences:** Elo from A/B logit comparisons; 35 vectors
   shift preferences coherently at strength 0.5.
 - **Other-speaker vectors exist:** "Assistant token, Human emotion"

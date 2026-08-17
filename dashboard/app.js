@@ -1011,8 +1011,10 @@ async function unit15Overview() {
     into one cell); the 27B holds approximately nothing from k=4 — confirmed
     on a dense 63-layer grid (<a href="#u15-dense-k4p1-q27b">control</a>) —
     while its solo arms prove the lens sees tail echoes at this scale when
-    they exist. Retrieval behavior: perfect in all 94 records, at every scale,
-    over full and empty tails alike.</p>
+    they exist. Retrieval behavior: perfect in all 75 unambiguous lookup
+    records at every scale, over full and empty tails alike; strict scoring
+    on the 87-record core gives 84/87, and the old "all 94" counted 6 order
+    arms and a backfill (corrected 2026-08-09).</p>
     <div class="chart-wrap">${u15chart(curves)}</div></section>
   <section class="card"><h3>Who goes first decides what survives (12B, k=6, nine orders)</h3>
     <p>The first list item wins rank 1 in nine of nine orders — but how hard
@@ -3184,7 +3186,7 @@ const ENTRANCE_STEPS = [
   },
   {
     title: "Every card opens its record",
-    body: `The links under each card open the record behind it. A record holds the conversation, the measurement at every layer, and our notes. This list holds all ${INDEX.length || 499} records.`,
+    body: `The links under each card open the record behind it. A record holds the conversation, the measurement at every layer, and our notes. This list holds all ${INDEX.length || 644} records.`,
     sel: () => document.getElementById("rail"),
   },
 ];
@@ -3238,17 +3240,18 @@ const EXTENDED_STEPS = [
   {
     /* PLAIN-LANGUAGE.md §4: "What this does not show" is the last heading
        of every record summary, and §3.1 is the closed uncertainty ladder
-       ("We measured X" … "We do not know."). Count: all 499 files under
-       results/<id>/plain.md contain the heading (checked, 0 missing). */
+       ("We measured X" … "We do not know."). Count: all 502 indexed
+       records with a results/<id>/plain.md contain the heading
+       (rechecked 2026-08-17, 0 missing; 142 records have no plain.md). */
     route: "u12-robot-q27b",
     title: "Every summary ends with its own limit",
-    body: "All 499 record summaries end with this heading. It states the limit of the claim. We write it even when the result is strong. Confidence on this site uses a closed set of phrases, from “We measured X” to “We do not know”.",
+    body: "All 502 record summaries end with this heading. It states the limit of the claim. We write it even when the result is strong. Confidence on this site uses a closed set of phrases, from “We measured X” to “We do not know”.",
     sel: () => [...document.querySelectorAll("#detail .card.plain .plain-body p")]
       .find((p) => (p.querySelector("strong")?.textContent || "")
         .startsWith("What this does not show")) || null,
   },
   {
-    /* Film count: results/index.json — 285 of the 499 entries carry a
+    /* Film count: results/index.json — 374 of the 644 entries carry a
        `film` field. Result: results/u12-robot-q27b/plain.md — "During the
        denial lines, 'robot' ranked between 600 and 2,200 of about 250,000
        words. Five words before the model wrote 'robot', the word had
@@ -3257,7 +3260,7 @@ const EXTENDED_STEPS = [
        "robot" was not pushed (same file, "What this does not show"). */
     route: "u12-robot-q27b",
     title: "A word wins five words before it is said",
-    body: "285 of the 499 records carry a film. This player replays the answer, one word at a time, at every layer. Here we pushed Qwen 27B toward the word “feel”, and it looped between denial and confession. Five words before it wrote “robot”, that word had already reached rank 1. The same thing happened in both loops.",
+    body: "374 of the 644 records carry a film. This player replays the answer, one word at a time, at every layer. Here we pushed Qwen 27B toward the word “feel”, and it looped between denial and confession. Five words before it wrote “robot”, that word had already reached rank 1. The same thing happened in both loops.",
     // the strip, not the whole .film-card: that card is ~4,400px tall, so
     // no side fits and tourPlace() falls back to centred — on top of the
     // very thing the step is about

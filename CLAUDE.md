@@ -113,7 +113,7 @@ he sets directions and expects designed-and-executed experiments back.
 
 ## Mnestis / `.mentis` (code-structure index)
 
-`mnestis` indexes `probes/` into `.mentis/` — a call graph over the 49 probe
+`mnestis` indexes `probes/` into `.mentis/` — a call graph over the 64 probe
 scripts, plus an MCP server (**29** tools despite the README's "15":
 `get_dna`, `query_graph`, `compile_focus`, `impact_analysis`, `search`,
 `memory_*`, `playbook`, …).

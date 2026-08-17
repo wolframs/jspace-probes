@@ -20,21 +20,21 @@ flowchart LR
   A5 -. 2x .-> B5
   A6["affect08s.py"] --> B6["get_model"]
   A6 -. 2x .-> B6
-  A7["affect3.py"] --> B7["Steering"]
+  A7["affect2.py"] --> B7["_strip_bos"]
   A7 -. 2x .-> B7
-  A8["affect3.py"] --> B8["_strip_bos"]
+  A8["affect2.py"] --> B8["get_model"]
   A8 -. 2x .-> B8
-  A9["affect3.py"] --> B9["get_model"]
+  A9["affect2.py"] --> B9["assert_film_alignment"]
   A9 -. 2x .-> B9
-  A10["affect3.py"] --> B10["_all_resid"]
+  A10["affect2.py"] --> B10["render_text"]
   A10 -. 2x .-> B10
-  A11["affect3.py"] --> B11["_load_vectors"]
+  A11["affect3.py"] --> B11["Steering"]
   A11 -. 2x .-> B11
-  A12["affect3.py"] --> B12["assess"]
+  A12["affect3.py"] --> B12["_strip_bos"]
   A12 -. 2x .-> B12
-  A13["affect3.py"] --> B13["loop_gram"]
+  A13["affect3.py"] --> B13["get_model"]
   A13 -. 2x .-> B13
-  A14["affect3.py"] --> B14["_null"]
+  A14["affect3.py"] --> B14["_all_resid"]
   A14 -. 2x .-> B14
 ```
 
@@ -52,6 +52,10 @@ flowchart TB
 - **affect08s.py → _unit**: 2 references
 - **affect08s.py → outdir**: 2 references
 - **affect08s.py → get_model**: 2 references
+- **affect2.py → _strip_bos**: 2 references
+- **affect2.py → get_model**: 2 references
+- **affect2.py → assert_film_alignment**: 2 references
+- **affect2.py → render_text**: 2 references
 - **affect3.py → Steering**: 2 references
 - **affect3.py → _strip_bos**: 2 references
 - **affect3.py → get_model**: 2 references
@@ -71,7 +75,3 @@ flowchart TB
 - **affect3c.py → get_model**: 2 references
 - **affect3c.py → _load_vectors**: 2 references
 - **affect3c.py → AffectSteer**: 2 references
-- **affect3c.py → assess**: 2 references
-- **affect3c.py → loop_gram**: 2 references
-- **affect3c.py → _null**: 2 references
-- **affect3g.py → Steering**: 2 references

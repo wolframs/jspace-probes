@@ -29,7 +29,7 @@ We do not claim certification. STE was written for aircraft maintenance
 procedures. Its strongest section is procedural writing; ours is
 descriptive and argumentative, which is STE's thinnest area (Section 6,
 six rules). We follow it because it gives **checkable numeric limits**
-where "write clearly" gives none, and this lab has 499 records to keep
+where "write clearly" gives none, and this lab has over 600 records to keep
 consistent. `probes/ste.py` enforces what a machine can enforce.
 
 **Our jargon is covered by the standard itself.** Issue 9 permits words

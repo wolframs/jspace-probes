@@ -99,7 +99,7 @@ What happens when we push directions into the model, and the strength at which i
   Records: u9a-para1-amp-q27b, u9a-para4-amp-q27b, u12-no-q27b
 - **Every model has a strength at which its text breaks** — As we push harder the text goes from normal, to fixated, to broken. We mapped that breaking point for every model and depth range. A push at early layers breaks the text outright, which is why all later work pushes at middle depths.
   Records: u6-baseline-water-g4b, u6-amp-early-a0060-g4b
-- **Two kinds of loop, and one continues from its own text** — A forced loop stops the moment we stop the push. A loop that has already written enough bare repetition continues alone: 47 forced repeats, then 97 more unaided. We think Qwen 27B reads its own repeated text and continues it. We did not test a hidden state that holds the loop without the text. We have no control run that gives an unpushed model the same repeated text. Inside, the choice becomes a near tie long before the text breaks.
+- **Two kinds of loop, and one continues from its own text** — A forced loop stops the moment we stop the push. A loop that has already written enough bare repetition continues alone: 47 forced repeats, then 97 more unaided. We think Qwen 27B reads its own repeated text and continues it. We did not test a hidden state that holds the loop without the text. Update 2026-08-17: that control run exists now. We gave an unpushed model the same repeated text, and it continued the loop in 8 of 8 seeds. Scrambled repeats held it as strongly. The loop needs repeated tokens, not exact word order. Inside, the choice becomes a near tie long before the text breaks.
   Records: u18-hyst-a0480-q27b, u18-hyst-a0680-q27b, u18-base-q27b
 
 ### Two models under pressure

@@ -3,7 +3,7 @@
 Enforces the machine-checkable rules in PLAIN-LANGUAGE.md §2 over
 `results/*/plain.md`, `plain/*.md`, and the plain fields of
 `dashboard/findings.json`. "Write clearly" cannot be enforced; word
-counts and banned forms can, and this lab has 499 records.
+counts and banned forms can, and this lab has over 600 records.
 
 What it cannot check, and what still needs a human or a careful model:
 whether the plain text is TRUE to the original (PLAIN-LANGUAGE.md §5).

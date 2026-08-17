@@ -8,7 +8,7 @@ on one RTX 3090. Companion reading: Anthropic's
 
 **Browse the data dump: <https://jspace-probes.vercel.app>** — and the
 opinion piece, [Interim conclusions](CONCLUSIONS.md)
-([rendered](https://jspace-probes.vercel.app/dashboard/#essay)) — all 137
+([rendered](https://jspace-probes.vercel.app/dashboard/#essay)) — all 644
 experiment records with probing parameters, per-layer readouts, rank
 trajectories, cross-model answer matrices, the breaking-zone chart, and
 per-record commentary written by the Claude instance driving the lab.
@@ -587,6 +587,17 @@ the results.
   search-novel piece, and it is a single unreplicated specimen. The
   lab-adopted phrase "transcript-mediated attractor persistence" is the
   wording to use.]
+  [**Update 2026-08-17**, `results/oneoffs04-release-q27b`: the
+  matched-text control has now run — an unsteered model handed the same
+  50-repeat prefixes as bare text continues them (a0680: 8/8 seeds, no
+  turn-end in 100 steps, from as little as 30 prefix tokens), the a0000
+  control stays clean 0/8, and a shuffled-repeat arm persists as
+  strongly or stronger (a0420: 7/8 shuffled vs 3/8 intact). The
+  attractor needs repetition pressure, not the exact n-gram, and capture
+  tracks the degeneracy of the text, not the dose that generated it.
+  Transcript-mediated persistence is now measured, not just supported;
+  still open: a random-direction release arm and cross-model/prompt
+  replication.]
 - **The self-relevance premium, demoted a third time.** span-08: six
   words of identical *contentless* filler ("one of the six, as noted" on
   every item) reproduce the workspace lift exactly — held 3/6 with better

@@ -19,7 +19,7 @@ by convention get pointed there instead of guessing.
 
 ## Orientation
 
-- Code: `probes/` (49 scripts). Entry points: `probes/lab.py` (`run()` executes
+- Code: `probes/` (64 scripts). Entry points: `probes/lab.py` (`run()` executes
   declarative specs), `probes/probe.py` (model/lens CONFIGS), `probes/board.py`
   (research board — the ONLY way to edit `board/board.json`).
 - Results: `results/<id>/{record.json, thoughts.md}` + `results/index.json`.

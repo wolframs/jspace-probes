@@ -19,7 +19,7 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  D0["General (57)"]
+  D0["General (59)"]
 ```
 
 ## Capabilities map
@@ -31,13 +31,13 @@ flowchart LR
 
 ## Languages & parsing
 
-**Detected in this repo:** python (62), javascript (1)
+**Detected in this repo:** python (64), javascript (1)
 
 Mnemos uses a lexical code-mask pipeline (52 languages engine-wide). Imports and symbols are extracted only from real code regions — not comments, strings, or Vue templates.
 
 ```mermaid
 pie showData title Files by language
-    "python" : 62
+    "python" : 64
     "javascript" : 1
 ```
 
