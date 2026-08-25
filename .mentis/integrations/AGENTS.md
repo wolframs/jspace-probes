@@ -53,12 +53,12 @@ probes: 0 services, 0 APIs, 1 domains.
 - **Health score:** 85/100
 - **AI readiness:** 78/100
 
-Single Package with 67 source files across python, javascript. 0 packages detected. core domains: General.
+Single Package with 68 source files across python, javascript. 0 packages detected. core domains: General.
 
 ## Language Support
 
 Mnestis analyzed this repo with **52** supported languages engine-wide.
-Detected here: 2 language(s), 67 source files.
+Detected here: 2 language(s), 68 source files.
 
 Read `.mentis/context/README.md` for the full diagram index.
 Read `.mentis/context/languages.md` for file distribution charts and the parsing pipeline graph.
@@ -66,14 +66,14 @@ Read `.mentis/context/graphs.md` for domain, flow, dependency, and risk Mermaid 
 
 ```mermaid
 flowchart LR
-  D0["General (61)"]
+  D0["General (62)"]
 ```
 
 ### Language distribution (this repo)
 
 ```mermaid
 pie showData title Files by language
-    "python" : 66
+    "python" : 67
     "javascript" : 1
 ```
 
@@ -203,14 +203,14 @@ mindmap
 
 ## Domains (start here)
 
-- **General** — Import-graph cluster of 61 files · `file:affect.py`, `file:affect08s.py`, `file:affect3.py`
+- **General** — Import-graph cluster of 62 files · `file:affect.py`, `file:affect08s.py`, `file:affect3.py`
 
 ## Critical Paths (edit carefully)
 
 - **High-traffic: affect.py** (high risk) — affect.py has 28 dependents — changes here have wide blast radius
-- **High-traffic: affect3.py** (medium risk) — affect3.py has 18 dependents — changes here have wide blast radius
-- **High-traffic: AffectSteer** (medium risk) — AffectSteer has 18 dependents — changes here have wide blast radius
-- **High-traffic: topk** (high risk) — topk has 20 dependents — changes here have wide blast radius
+- **High-traffic: affect3.py** (high risk) — affect3.py has 20 dependents — changes here have wide blast radius
+- **High-traffic: AffectSteer** (high risk) — AffectSteer has 20 dependents — changes here have wide blast radius
+- **High-traffic: topk** (high risk) — topk has 21 dependents — changes here have wide blast radius
 - **High-traffic: deepen.py** (high risk) — deepen.py has 20 dependents — changes here have wide blast radius
 
 ## Coding Conventions

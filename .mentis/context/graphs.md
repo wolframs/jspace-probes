@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (61)"]
+  D0["General (62)"]
 ```
 
 ## Execution flows
@@ -89,20 +89,20 @@ flowchart TD
     P0N5["file:affect7.py"]
     P0N4 --> P0N5
   end
-  subgraph P1 ["med High-traffic: affect3.py"]
+  subgraph P1 ["high High-traffic: affect3.py"]
     P1N0["file:affect3.py"]
     P1N1["file:affect11.py"]
     P1N0 --> P1N1
-    P1N2["file:affect3b.py"]
+    P1N2["file:affect12.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3c.py"]
+    P1N3["file:affect3b.py"]
     P1N2 --> P1N3
-    P1N4["file:affect3g.py"]
+    P1N4["file:affect3c.py"]
     P1N3 --> P1N4
-    P1N5["file:affect4.py"]
+    P1N5["file:affect3g.py"]
     P1N4 --> P1N5
   end
-  subgraph P2 ["med High-traffic: AffectSteer"]
+  subgraph P2 ["high High-traffic: AffectSteer"]
     P2N0["class:affect3.py:59"]
     P2N1["file:affect3.py"]
     P2N0 --> P2N1
@@ -148,7 +148,7 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 66
+    "python" : 67
     "javascript" : 1
 ```
 
@@ -287,8 +287,8 @@ flowchart LR
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 20
-    "Medium" : 30
+    "High" : 21
+    "Medium" : 29
 ```
 
 ## mnestis build pipeline

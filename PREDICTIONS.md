@@ -658,6 +658,28 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > UNNAMED; per prereg no post-hoc axis is proposed. Evidence:
 > results/affect11-q27b/{report.md,thoughts.md,geometry.json}.
 
+> **2026-08-26 — the axis is FOUND, in the dynamics (affect-13, prereg
+> frozen; affect-12 had first excluded the band geometry: Mantel
+> p=.09, LOO axis rho .38, no transfer, no reliability confound).**
+> Full-roster raw-logit traces (output_logits — first clean read past
+> the top-k −inf trap): potency across the 24 emotion directions
+> tracks pulse exit-logit lift at **rho .884, p<.0001** (bar .5).
+> Descriptive margin decomposition (dExit−dLoop; softmax only sees
+> gaps): potent directions win by DEMOLISHING the loop logit (calm
+> −5.3, " table" −7.1; margins +7.7/+7.6 — token- and emotion-potency
+> share one lever), while floor emotions (angry, proud, enthusiastic)
+> are common-mode shifts — margin-inert, indistinguishable from
+> randoms. The affect-12 two-floors hunch is dead at both levels. The
+> unsteered loop holds im_end at rank 2 on 160/160 steps (standing
+> two-horse race), so potency is incumbent-demolition, not
+> challenger-promotion — the mechanical default, one level down.
+> CAVEATS: margin framing is descriptive (P-a's registered quantity
+> was dExit); margin-primary replication owed before it becomes the
+> claim. WHY calm couples to the loop coalition and pride does not is
+> the successor question. Evidence:
+> results/affect13-q27b/{report.md,thoughts.md}, prereg
+> results/affect13-prereg.md, results/affect12-geom-q27b/report.md.
+
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the
 run).** Specimen #6 (u5d) established the WHAT: the early J-lens

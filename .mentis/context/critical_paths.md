@@ -19,20 +19,20 @@ flowchart TD
     P0N5["file:affect7.py"]
     P0N4 --> P0N5
   end
-  subgraph P1 ["med High-traffic: affect3.py"]
+  subgraph P1 ["high High-traffic: affect3.py"]
     P1N0["file:affect3.py"]
     P1N1["file:affect11.py"]
     P1N0 --> P1N1
-    P1N2["file:affect3b.py"]
+    P1N2["file:affect12.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3c.py"]
+    P1N3["file:affect3b.py"]
     P1N2 --> P1N3
-    P1N4["file:affect3g.py"]
+    P1N4["file:affect3c.py"]
     P1N3 --> P1N4
-    P1N5["file:affect4.py"]
+    P1N5["file:affect3g.py"]
     P1N4 --> P1N5
   end
-  subgraph P2 ["med High-traffic: AffectSteer"]
+  subgraph P2 ["high High-traffic: AffectSteer"]
     P2N0["class:affect3.py:59"]
     P2N1["file:affect3.py"]
     P2N0 --> P2N1
@@ -68,21 +68,21 @@ flowchart TD
 
 ## High-traffic: affect3.py
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect3.py has 18 dependents — changes here have wide blast radius
+- **Description**: affect3.py has 20 dependents — changes here have wide blast radius
 
 ## High-traffic: AffectSteer
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: AffectSteer has 18 dependents — changes here have wide blast radius
+- **Description**: AffectSteer has 20 dependents — changes here have wide blast radius
 
 ## High-traffic: topk
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: topk has 20 dependents — changes here have wide blast radius
+- **Description**: topk has 21 dependents — changes here have wide blast radius
 
 ## High-traffic: deepen.py
 
@@ -100,7 +100,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: fanout.py has 26 dependents — changes here have wide blast radius
+- **Description**: fanout.py has 28 dependents — changes here have wide blast radius
 
 ## High-traffic: assess
 
@@ -118,13 +118,13 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: loops.py has 20 dependents — changes here have wide blast radius
+- **Description**: loops.py has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: loop_gram
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: loop_gram has 20 dependents — changes here have wide blast radius
+- **Description**: loop_gram has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: _null
 
@@ -142,7 +142,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: decode has 28 dependents — changes here have wide blast radius
+- **Description**: decode has 29 dependents — changes here have wide blast radius
 
 ## High-traffic: probe.py
 
@@ -166,7 +166,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 110 dependents — changes here have wide blast radius
+- **Description**: lab.py has 112 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 
