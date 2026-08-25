@@ -21,28 +21,28 @@ flowchart TD
   end
   subgraph P1 ["med High-traffic: affect3.py"]
     P1N0["file:affect3.py"]
-    P1N1["file:affect3b.py"]
+    P1N1["file:affect11.py"]
     P1N0 --> P1N1
-    P1N2["file:affect3c.py"]
+    P1N2["file:affect3b.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3g.py"]
+    P1N3["file:affect3c.py"]
     P1N2 --> P1N3
-    P1N4["file:affect4.py"]
+    P1N4["file:affect3g.py"]
     P1N3 --> P1N4
-    P1N5["file:affect4b.py"]
+    P1N5["file:affect4.py"]
     P1N4 --> P1N5
   end
   subgraph P2 ["med High-traffic: AffectSteer"]
     P2N0["class:affect3.py:59"]
     P2N1["file:affect3.py"]
     P2N0 --> P2N1
-    P2N2["file:affect3b.py"]
+    P2N2["file:affect11.py"]
     P2N1 --> P2N2
-    P2N3["file:affect3c.py"]
+    P2N3["file:affect3b.py"]
     P2N2 --> P2N3
-    P2N4["file:affect3g.py"]
+    P2N4["file:affect3c.py"]
     P2N3 --> P2N4
-    P2N5["file:affect4.py"]
+    P2N5["file:affect3g.py"]
     P2N4 --> P2N5
   end
   subgraph P3 ["high High-traffic: topk"]
@@ -70,7 +70,7 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: affect3.py has 16 dependents — changes here have wide blast radius
+- **Description**: affect3.py has 18 dependents — changes here have wide blast radius
 
 ## High-traffic: AffectSteer
 
@@ -160,13 +160,13 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: norm has 16 dependents — changes here have wide blast radius
+- **Description**: norm has 17 dependents — changes here have wide blast radius
 
 ## High-traffic: lab.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 108 dependents — changes here have wide blast radius
+- **Description**: lab.py has 110 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 

@@ -66,7 +66,7 @@ site.py depends on 51 other nodes — high fan-out
 
 ## [HIGH] Excessive Fan In
 
-lab.py has 108 incoming dependencies — high fan-in
+lab.py has 110 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -150,7 +150,7 @@ affect08s.py depends on 22 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan In
 
-affect3.py has 16 incoming dependencies — high fan-in
+affect3.py has 18 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 

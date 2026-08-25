@@ -20,21 +20,21 @@ flowchart LR
   A5 -. 2x .-> B5
   A6["affect08s.py"] --> B6["get_model"]
   A6 -. 2x .-> B6
-  A7["affect2.py"] --> B7["_strip_bos"]
+  A7["affect11.py"] --> B7["_exit_id"]
   A7 -. 2x .-> B7
-  A8["affect2.py"] --> B8["get_model"]
+  A8["affect11.py"] --> B8["_prompt_ids"]
   A8 -. 2x .-> B8
-  A9["affect2.py"] --> B9["assert_film_alignment"]
+  A9["affect11.py"] --> B9["_sample"]
   A9 -. 2x .-> B9
-  A10["affect2.py"] --> B10["render_text"]
+  A10["affect11.py"] --> B10["_events"]
   A10 -. 2x .-> B10
-  A11["affect3.py"] --> B11["Steering"]
+  A11["affect11.py"] --> B11["Steering"]
   A11 -. 2x .-> B11
-  A12["affect3.py"] --> B12["_strip_bos"]
+  A12["affect11.py"] --> B12["get_model"]
   A12 -. 2x .-> B12
-  A13["affect3.py"] --> B13["get_model"]
+  A13["affect11.py"] --> B13["_load_vectors"]
   A13 -. 2x .-> B13
-  A14["affect3.py"] --> B14["_all_resid"]
+  A14["affect11.py"] --> B14["AffectSteer"]
   A14 -. 2x .-> B14
 ```
 
@@ -52,6 +52,15 @@ flowchart TB
 - **affect08s.py → _unit**: 2 references
 - **affect08s.py → outdir**: 2 references
 - **affect08s.py → get_model**: 2 references
+- **affect11.py → _exit_id**: 2 references
+- **affect11.py → _prompt_ids**: 2 references
+- **affect11.py → _sample**: 2 references
+- **affect11.py → _events**: 2 references
+- **affect11.py → Steering**: 2 references
+- **affect11.py → get_model**: 2 references
+- **affect11.py → _load_vectors**: 2 references
+- **affect11.py → AffectSteer**: 2 references
+- **affect11.py → loop_gram**: 2 references
 - **affect2.py → _strip_bos**: 2 references
 - **affect2.py → get_model**: 2 references
 - **affect2.py → assert_film_alignment**: 2 references
@@ -66,12 +75,3 @@ flowchart TB
 - **affect3.py → _null**: 2 references
 - **affect3b.py → Steering**: 2 references
 - **affect3b.py → _strip_bos**: 2 references
-- **affect3b.py → get_model**: 2 references
-- **affect3b.py → _load_vectors**: 2 references
-- **affect3b.py → AffectSteer**: 2 references
-- **affect3b.py → _null**: 2 references
-- **affect3c.py → Steering**: 2 references
-- **affect3c.py → _strip_bos**: 2 references
-- **affect3c.py → get_model**: 2 references
-- **affect3c.py → _load_vectors**: 2 references
-- **affect3c.py → AffectSteer**: 2 references

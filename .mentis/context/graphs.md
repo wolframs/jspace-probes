@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (60)"]
+  D0["General (61)"]
 ```
 
 ## Execution flows
@@ -54,21 +54,21 @@ flowchart LR
   A5 -. 2x .-> B5
   A6["affect08s.py"] --> B6["get_model"]
   A6 -. 2x .-> B6
-  A7["affect2.py"] --> B7["_strip_bos"]
+  A7["affect11.py"] --> B7["_exit_id"]
   A7 -. 2x .-> B7
-  A8["affect2.py"] --> B8["get_model"]
+  A8["affect11.py"] --> B8["_prompt_ids"]
   A8 -. 2x .-> B8
-  A9["affect2.py"] --> B9["assert_film_alignment"]
+  A9["affect11.py"] --> B9["_sample"]
   A9 -. 2x .-> B9
-  A10["affect2.py"] --> B10["render_text"]
+  A10["affect11.py"] --> B10["_events"]
   A10 -. 2x .-> B10
-  A11["affect3.py"] --> B11["Steering"]
+  A11["affect11.py"] --> B11["Steering"]
   A11 -. 2x .-> B11
-  A12["affect3.py"] --> B12["_strip_bos"]
+  A12["affect11.py"] --> B12["get_model"]
   A12 -. 2x .-> B12
-  A13["affect3.py"] --> B13["get_model"]
+  A13["affect11.py"] --> B13["_load_vectors"]
   A13 -. 2x .-> B13
-  A14["affect3.py"] --> B14["_all_resid"]
+  A14["affect11.py"] --> B14["AffectSteer"]
   A14 -. 2x .-> B14
 ```
 
@@ -91,28 +91,28 @@ flowchart TD
   end
   subgraph P1 ["med High-traffic: affect3.py"]
     P1N0["file:affect3.py"]
-    P1N1["file:affect3b.py"]
+    P1N1["file:affect11.py"]
     P1N0 --> P1N1
-    P1N2["file:affect3c.py"]
+    P1N2["file:affect3b.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3g.py"]
+    P1N3["file:affect3c.py"]
     P1N2 --> P1N3
-    P1N4["file:affect4.py"]
+    P1N4["file:affect3g.py"]
     P1N3 --> P1N4
-    P1N5["file:affect4b.py"]
+    P1N5["file:affect4.py"]
     P1N4 --> P1N5
   end
   subgraph P2 ["med High-traffic: AffectSteer"]
     P2N0["class:affect3.py:59"]
     P2N1["file:affect3.py"]
     P2N0 --> P2N1
-    P2N2["file:affect3b.py"]
+    P2N2["file:affect11.py"]
     P2N1 --> P2N2
-    P2N3["file:affect3c.py"]
+    P2N3["file:affect3b.py"]
     P2N2 --> P2N3
-    P2N4["file:affect3g.py"]
+    P2N4["file:affect3c.py"]
     P2N3 --> P2N4
-    P2N5["file:affect4.py"]
+    P2N5["file:affect3g.py"]
     P2N4 --> P2N5
   end
   subgraph P3 ["high High-traffic: topk"]
@@ -148,7 +148,7 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 65
+    "python" : 66
     "javascript" : 1
 ```
 
