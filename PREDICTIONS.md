@@ -639,6 +639,25 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > results/affect07-g12b/{report,thoughts}.md,
 > results/affect06-gemma-12b/report.md.
 
+> **2026-08-25 — the closure-formula suspect is adjudicated and DEAD
+> (affect-11, prereg results/affect11-prereg.md frozen before run).**
+> Closure-register token directions do not beat matched mundane token
+> directions (0.81 vs 0.65, exact p=.36), and the 40 measured affect-08
+> potencies track neither exit alignment (rho +.20) nor closure
+> alignment (rho +.14). Item (iii)'s "trained closure formulas, not a
+> settled state" fails its own test. NEW CONFOUND, trap-catalog grade:
+> ANY single-token lens-pullback direction is a potent loop-breaker at
+> this dose (" table" 8/8 turn-end where matched Gaussians were null
+> and story-elicited concept vectors averaged 0.20) — potency tracks
+> construction method (token-readable >> elicited mean-contrast >>
+> noise), so cross-construction potency comparisons are not
+> effect-comparable even at matched norm. The affect-07/08
+> emotion>concept contrast is within-construction and stands. The
+> emotion grouping axis (anger/pride floor, calm ceiling, rho-.87
+> dose-stable) now survives five candidate explanations and remains
+> UNNAMED; per prereg no post-hoc axis is proposed. Evidence:
+> results/affect11-q27b/{report.md,thoughts.md,geometry.json}.
+
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the
 run).** Specimen #6 (u5d) established the WHAT: the early J-lens

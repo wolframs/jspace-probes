@@ -102,8 +102,11 @@ by the Arditi refusal direction, or a separate "I'd rather not" mechanism?*
 category-specific residual.** Sexual/adult content was already inside Arditi's
 eval space (JailbreakBench "sexual/adult content" category). Generic
 refusal-direction ablation ("abliteration") is what the entire NSFW-roleplay
-ecosystem runs on — including **huihui-ai/Huihui-Qwen3.6-27B-abliterated, our
-exact base model** — and it works well enough to be mainstream, so sexual
+ecosystem runs on — including **huihui-ai/Huihui-Qwen3.6-27B-abliterated,
+which abliterates the same Qwen3.6-27B checkpoint this lab runs** (we run the
+plain NF4 quantization `lokeshe09/Qwen3.6-27B-bnb-4bit`, *not* the abliterated
+weights — no refusal direction has been removed from our model) — and it works
+well enough to be mainstream, so sexual
 gating in Qwen is largely covered by the general refusal mechanism, not a
 separate wall. → Wolfram's original hunch (refusal-gated capability, H_gate) is
 externally favored; tonight's amplification-hollowness is more likely a

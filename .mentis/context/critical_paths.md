@@ -70,13 +70,13 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: affect3.py has 14 dependents — changes here have wide blast radius
+- **Description**: affect3.py has 16 dependents — changes here have wide blast radius
 
 ## High-traffic: AffectSteer
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: AffectSteer has 16 dependents — changes here have wide blast radius
+- **Description**: AffectSteer has 18 dependents — changes here have wide blast radius
 
 ## High-traffic: topk
 
@@ -100,7 +100,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: fanout.py has 24 dependents — changes here have wide blast radius
+- **Description**: fanout.py has 26 dependents — changes here have wide blast radius
 
 ## High-traffic: assess
 
@@ -116,15 +116,15 @@ flowchart TD
 
 ## High-traffic: loops.py
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: loops.py has 18 dependents — changes here have wide blast radius
+- **Description**: loops.py has 20 dependents — changes here have wide blast radius
 
 ## High-traffic: loop_gram
 
-- **Risk**: MEDIUM
+- **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: loop_gram has 18 dependents — changes here have wide blast radius
+- **Description**: loop_gram has 20 dependents — changes here have wide blast radius
 
 ## High-traffic: _null
 
@@ -142,7 +142,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: decode has 27 dependents — changes here have wide blast radius
+- **Description**: decode has 28 dependents — changes here have wide blast radius
 
 ## High-traffic: probe.py
 
@@ -160,13 +160,13 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: norm has 15 dependents — changes here have wide blast radius
+- **Description**: norm has 16 dependents — changes here have wide blast radius
 
 ## High-traffic: lab.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 106 dependents — changes here have wide blast radius
+- **Description**: lab.py has 108 dependents — changes here have wide blast radius
 
 ## High-traffic: _strip_bos
 
