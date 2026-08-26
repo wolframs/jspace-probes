@@ -195,6 +195,45 @@ column.
 
 ## Phenomena
 
+**Potency (of a steered direction)** — of a direction injected into a
+forced repetition loop: its rate of producing an actual turn-end inside
+the measurement window. Coined behaviourally in affect-07/08; **since
+2026-08-26 it has a measured mechanism, and the word should be used with
+it.** Potency is the direction's effect on the **exit margin** — the raw
+logit gap between the turn-end token and the loop token (dMargin =
+dExit − dLoop) — with potency ~ dMargin at rho .783 (registered,
+affect-14) and rho .884 on the dExit component (affect-13). Three things
+the measurement corrects in loose usage:
+(1) it is **incumbent-demolition, not challenger-promotion** — potent
+directions mostly crush the loop token's logit (calm −4.2, `" table"`
+−7.5) rather than raise the exit token, and the unsteered loop already
+holds the exit token at rank 2 on 160/160 steps, so the door is never
+"opened", the guard is removed;
+(2) **common-mode is not potency** — the floor emotions (angry, proud,
+enthusiastic, hostile, exasperated) lower *both* logits together, leaving
+the margin inside the matched-random range: inert, not suppressive;
+(3) potency is **not a property of the vector's direction in space** —
+it is invisible to band geometry (affect-12: Mantel p=.09, LOO axis
+rho .38, no roster transfer) and it depends on the **construction
+method** (affect-11 specimen), so never compare potencies across recipes
+at matched norm alone.
+Say "potent" only of a direction whose margin effect has been measured;
+for the behavioural rate alone, say "turn-end rate".
+
+**Band-cooperative coupling** — the mode by which an emotion direction
+achieves its demolition: the effect belongs to the whole workspace band
+jointly, not to any layer. For `calm` (affect-14) the best single
+injection layer recovers **+1%** of the full-stack loop-logit drop,
+while removing any single layer costs **19–37%**, and the eight
+leave-one-out losses sum to about **twice** the full effect —
+super-additive by construction of the measurement. Contrast the
+token-pullback route (`" table"`), which is near-additive (~10% per
+layer) and reaches a near-identical margin: **same decision variable,
+different coupling structure.** Use this term for the emotion route
+specifically; do not generalise it to steering in general, where it has
+not been measured. (Not to be confused with **workspace band** — that is
+where interventions bite; this is *how* they combine once inside it.)
+
 **Elephant tax** — prohibition is a per-token tax: the banned item sits at
 rank 12–15 in the late-mid stack at every position where it *could* be
 emitted, for the entire generation — not just at the famous "distant
