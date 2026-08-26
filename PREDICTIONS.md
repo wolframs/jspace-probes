@@ -680,6 +680,27 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > results/affect13-q27b/{report.md,thoughts.md}, prereg
 > results/affect13-prereg.md, results/affect12-geom-q27b/report.md.
 
+> **2026-08-26 (same day) — margin-primary BANKED on fresh seeds;
+> coupling is distributed AND cooperative (affect-14, prereg frozen
+> pre-run).** P-a: potency ~ dMargin rho .783, p=.0001 (registered,
+> seeds 16-27; secondary dExit .835 replicates affect-13). P-b: the
+> five floor emotions' |dMargin| sits inside the four matched
+> randoms' range — margin-inertness of the floor is now a registered
+> pass, not a decomposition. Coupling locus (calm/proud/table,
+> single-layer sufficiency + leave-one-layer-out): calm's demolition
+> is band-cooperative — best single layer +1% of full-stack dLoop,
+> yet any single removal costs 19-37% and the eight LOLO losses sum
+> to ~2x the full effect; " table" is near-additive (~10%/layer);
+> proud is flat at every layer (no hidden potent locus). New
+> apparatus specimen: proud's per-seed dExit sd = 0.000 over twelve
+> fresh seeds — the in-loop state is a fixed point precise enough to
+> null sampling noise (why floor rows agree across seed sets to the
+> cent; potent rows wobble, calm sd 1.27). Open, queued as affect-15:
+> layer-count threshold of the cooperation, and the margin-cashing
+> residual (reflective/brooding demolish beyond their turn-end
+> rates). Evidence: results/affect14-q27b/{report.md,thoughts.md},
+> prereg results/affect14-prereg.md.
+
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the
 run).** Specimen #6 (u5d) established the WHAT: the early J-lens

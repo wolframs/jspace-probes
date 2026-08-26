@@ -1,17 +1,17 @@
 {
   "$schema": "mnemos/shared-memory/constellation",
   "repository": "probes",
-  "builtAt": "2026-08-25T22:17:55.696Z",
+  "builtAt": "2026-08-26T08:22:40.038Z",
   "totalShards": 22,
-  "totalBytes": 11006,
-  "totalEstimatedTokens": 3259,
+  "totalBytes": 11040,
+  "totalEstimatedTokens": 3265,
   "shards": [
     {
       "kind": "domain",
       "name": "General",
       "filename": "general.memory.json",
-      "estimatedTokens": 176,
-      "bytes": 557
+      "estimatedTokens": 182,
+      "bytes": 590
     },
     {
       "kind": "critical-path",
@@ -54,6 +54,13 @@
       "filename": "high-traffic-deepen-py.memory.json",
       "estimatedTokens": 120,
       "bytes": 394
+    },
+    {
+      "kind": "critical-path",
+      "name": "High-traffic: _exit_id",
+      "filename": "high-traffic-exit-id.memory.json",
+      "estimatedTokens": 116,
+      "bytes": 400
     },
     {
       "kind": "critical-path",
@@ -120,24 +127,17 @@
     },
     {
       "kind": "critical-path",
+      "name": "High-traffic: _prompt_ids",
+      "filename": "high-traffic-prompt-ids.memory.json",
+      "estimatedTokens": 116,
+      "bytes": 412
+    },
+    {
+      "kind": "critical-path",
       "name": "High-traffic: single_tokens",
       "filename": "high-traffic-single-tokens.memory.json",
       "estimatedTokens": 116,
       "bytes": 419
-    },
-    {
-      "kind": "critical-path",
-      "name": "High-traffic: _strip_bos",
-      "filename": "high-traffic-strip-bos.memory.json",
-      "estimatedTokens": 116,
-      "bytes": 401
-    },
-    {
-      "kind": "critical-path",
-      "name": "High-traffic: _token_ids",
-      "filename": "high-traffic-token-ids.memory.json",
-      "estimatedTokens": 116,
-      "bytes": 403
     },
     {
       "kind": "critical-path",
@@ -158,7 +158,7 @@
       "name": "repository.dna",
       "filename": "repository-dna.memory.json",
       "estimatedTokens": 729,
-      "bytes": 2558
+      "bytes": 2551
     }
   ]
 }

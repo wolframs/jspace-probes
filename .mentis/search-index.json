@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "builtAt": "2026-08-25T22:17:55.665Z",
+  "builtAt": "2026-08-26T08:22:40.004Z",
   "documents": [
     {
       "id": "domain:cluster:55",
       "kind": "domain",
       "title": "General",
-      "body": "Import-graph cluster of 62 files file:affect.py file:affect08s.py file:affect3.py file:affect3b.py file:affect3c.py file:affect3g.py file:affect4.py file:affect4b.py file:affect5.py file:affect7.py file:affect.py file:affect08s.py file:affect3.py file:affect3b.py file:affect3c.py file:affect3g.py file:affect4.py file:affect4b.py file:affect5.py file:affect7.py file:apparatus06.py file:apparatus09.py file:audit03.py file:cast.py file:concepts.py file:course.py file:deepen.py file:deepen2.py file:deepen3.py file:fanout.py",
+      "body": "Import-graph cluster of 49 files; reinforced by import clustering file:affect08s.py file:affect5.py file:apparatus06.py file:apparatus09.py file:audit03.py file:cast.py file:course.py file:deepen.py file:deepen2.py file:deepen3.py file:affect.py file:affect08s.py file:affect5.py file:apparatus06.py file:apparatus09.py file:audit03.py file:cast.py file:concepts.py file:course.py file:deepen.py file:deepen2.py file:deepen3.py file:langval.py file:langval2.py file:lossmap.py file:mirror.py file:mirror2.py file:nla.py file:probe.py file:scan.py",
       "tags": [
         "domain",
         "general"
@@ -26,7 +26,7 @@
       "id": "critical:fanin:file:affect3.py",
       "kind": "critical_path",
       "title": "High-traffic: affect3.py",
-      "body": "affect3.py has 20 dependents — changes here have wide blast radius high file:affect3.py file:affect11.py file:affect12.py file:affect3b.py file:affect3c.py file:affect3g.py",
+      "body": "affect3.py has 22 dependents — changes here have wide blast radius high file:affect3.py file:affect11.py file:affect12.py file:affect13.py file:affect3b.py file:affect3c.py",
       "tags": [
         "critical",
         "high"
@@ -36,17 +36,37 @@
       "id": "critical:fanin:class:affect3.py:59",
       "kind": "critical_path",
       "title": "High-traffic: AffectSteer",
-      "body": "AffectSteer has 20 dependents — changes here have wide blast radius high class:affect3.py:59 file:affect3.py file:affect11.py file:affect3b.py file:affect3c.py file:affect3g.py",
+      "body": "AffectSteer has 22 dependents — changes here have wide blast radius high class:affect3.py:59 file:affect3.py file:affect11.py file:affect13.py file:affect3b.py file:affect3c.py",
       "tags": [
         "critical",
         "high"
       ]
     },
     {
+      "id": "critical:fanin:function:affect7.py:101",
+      "kind": "critical_path",
+      "title": "High-traffic: _prompt_ids",
+      "body": "_prompt_ids has 10 dependents — changes here have wide blast radius medium function:affect7.py:101 file:affect7.py file:affect11.py file:affect13.py file:affect8.py file:affect14.py",
+      "tags": [
+        "critical",
+        "medium"
+      ]
+    },
+    {
+      "id": "critical:fanin:function:affect7.py:109",
+      "kind": "critical_path",
+      "title": "High-traffic: _exit_id",
+      "body": "_exit_id has 10 dependents — changes here have wide blast radius medium function:affect7.py:109 file:affect7.py file:affect11.py file:affect13.py file:affect8.py file:affect14.py",
+      "tags": [
+        "critical",
+        "medium"
+      ]
+    },
+    {
       "id": "critical:fanin:function:apparatus09.py:57",
       "kind": "critical_path",
       "title": "High-traffic: topk",
-      "body": "topk has 21 dependents — changes here have wide blast radius high function:apparatus09.py:57 file:apparatus09.py file:affect2.py file:affect3.py file:affect3b.py file:affect3c.py",
+      "body": "topk has 21 dependents — changes here have wide blast radius high function:apparatus09.py:57 file:apparatus09.py file:affect13.py file:affect2.py file:affect3.py file:affect3b.py",
       "tags": [
         "critical",
         "high"
@@ -76,7 +96,7 @@
       "id": "critical:fanin:file:fanout.py",
       "kind": "critical_path",
       "title": "High-traffic: fanout.py",
-      "body": "fanout.py has 28 dependents — changes here have wide blast radius high file:fanout.py file:affect11.py file:affect3.py file:affect3b.py file:affect3c.py file:affect3g.py",
+      "body": "fanout.py has 30 dependents — changes here have wide blast radius high file:fanout.py file:affect11.py file:affect13.py file:affect3.py file:affect3b.py file:affect3c.py",
       "tags": [
         "critical",
         "high"
@@ -106,7 +126,7 @@
       "id": "critical:fanin:file:loops.py",
       "kind": "critical_path",
       "title": "High-traffic: loops.py",
-      "body": "loops.py has 22 dependents — changes here have wide blast radius high file:loops.py file:affect11.py file:affect3.py file:affect3b.py file:affect3c.py file:affect3g.py",
+      "body": "loops.py has 24 dependents — changes here have wide blast radius high file:loops.py file:affect11.py file:affect13.py file:affect3.py file:affect3b.py file:affect3c.py",
       "tags": [
         "critical",
         "high"
@@ -116,7 +136,7 @@
       "id": "critical:fanin:function:loops.py:65",
       "kind": "critical_path",
       "title": "High-traffic: loop_gram",
-      "body": "loop_gram has 22 dependents — changes here have wide blast radius high function:loops.py:65 file:loops.py file:affect11.py file:affect3.py file:affect3c.py file:affect3g.py",
+      "body": "loop_gram has 24 dependents — changes here have wide blast radius high function:loops.py:65 file:loops.py file:affect11.py file:affect13.py file:affect3.py file:affect3c.py",
       "tags": [
         "critical",
         "high"
@@ -146,7 +166,7 @@
       "id": "critical:fanin:function:nla.py:292",
       "kind": "critical_path",
       "title": "High-traffic: decode",
-      "body": "decode has 29 dependents — changes here have wide blast radius high function:nla.py:292 file:nla.py file:affect.py file:affect11.py file:affect2.py file:affect3.py",
+      "body": "decode has 30 dependents — changes here have wide blast radius high function:nla.py:292 file:nla.py file:affect.py file:affect11.py file:affect13.py file:affect2.py",
       "tags": [
         "critical",
         "high"
@@ -186,30 +206,10 @@
       "id": "critical:fanin:file:lab.py",
       "kind": "critical_path",
       "title": "High-traffic: lab.py",
-      "body": "lab.py has 112 dependents — changes here have wide blast radius high file:lab.py file:affect.py file:affect08s.py file:affect11.py file:affect12.py file:affect2.py",
+      "body": "lab.py has 114 dependents — changes here have wide blast radius high file:lab.py file:affect.py file:affect08s.py file:affect11.py file:affect12.py file:affect13.py",
       "tags": [
         "critical",
         "high"
-      ]
-    },
-    {
-      "id": "critical:fanin:function:lab.py:41",
-      "kind": "critical_path",
-      "title": "High-traffic: _strip_bos",
-      "body": "_strip_bos has 34 dependents — changes here have wide blast radius high function:lab.py:41 file:lab.py file:affect.py file:affect2.py file:affect3.py file:affect3b.py",
-      "tags": [
-        "critical",
-        "high"
-      ]
-    },
-    {
-      "id": "critical:fanin:function:lab.py:46",
-      "kind": "critical_path",
-      "title": "High-traffic: _token_ids",
-      "body": "_token_ids has 12 dependents — changes here have wide blast radius medium function:lab.py:46 file:lab.py file:apparatus11.py file:deepen.py file:lossmap.py file:mirror2.py",
-      "tags": [
-        "critical",
-        "medium"
       ]
     },
     {
@@ -268,6 +268,17 @@
       ]
     },
     {
+      "id": "smell:fanin:file:fanout.py",
+      "kind": "smell",
+      "title": "excessive fan in",
+      "body": "fanout.py has 30 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high file:fanout.py",
+      "tags": [
+        "smell",
+        "high",
+        "excessive_fan_in"
+      ]
+    },
+    {
       "id": "smell:fanout:file:langval.py",
       "kind": "smell",
       "title": "excessive fan out",
@@ -276,6 +287,17 @@
         "smell",
         "high",
         "excessive_fan_out"
+      ]
+    },
+    {
+      "id": "smell:fanin:function:nla.py:292",
+      "kind": "smell",
+      "title": "excessive fan in",
+      "body": "decode has 30 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high function:nla.py:292",
+      "tags": [
+        "smell",
+        "high",
+        "excessive_fan_in"
       ]
     },
     {
@@ -315,7 +337,7 @@
       "id": "smell:fanin:file:lab.py",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "lab.py has 112 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high file:lab.py",
+      "body": "lab.py has 114 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high file:lab.py",
       "tags": [
         "smell",
         "high",
@@ -337,7 +359,7 @@
       "id": "smell:fanin:function:lab.py:68",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "get_model has 58 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high function:lab.py:68",
+      "body": "get_model has 60 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high function:lab.py:68",
       "tags": [
         "smell",
         "high",
@@ -359,7 +381,7 @@
       "id": "smell:fanin:class:lab.py:121",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "Steering has 32 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high class:lab.py:121",
+      "body": "Steering has 34 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high class:lab.py:121",
       "tags": [
         "smell",
         "high",
@@ -370,7 +392,7 @@
       "id": "smell:fanin:file:affect2.py",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "affect2.py has 34 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high file:affect2.py",
+      "body": "affect2.py has 36 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high file:affect2.py",
       "tags": [
         "smell",
         "high",
@@ -381,7 +403,7 @@
       "id": "smell:fanin:function:affect2.py:62",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "_load_vectors has 34 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high function:affect2.py:62",
+      "body": "_load_vectors has 36 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern high function:affect2.py:62",
       "tags": [
         "smell",
         "high",
@@ -444,6 +466,17 @@
       ]
     },
     {
+      "id": "smell:fanout:file:affect14.py",
+      "kind": "smell",
+      "title": "excessive fan out",
+      "body": "affect14.py depends on 61 other nodes — high fan-out Reduce dependencies by extracting shared utilities or applying dependency injection high file:affect14.py",
+      "tags": [
+        "smell",
+        "high",
+        "excessive_fan_out"
+      ]
+    },
+    {
       "id": "smell:fanin:file:affect.py",
       "kind": "smell",
       "title": "excessive fan in",
@@ -480,7 +513,7 @@
       "id": "smell:fanin:file:affect3.py",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "affect3.py has 20 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium file:affect3.py",
+      "body": "affect3.py has 22 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium file:affect3.py",
       "tags": [
         "smell",
         "medium",
@@ -491,7 +524,7 @@
       "id": "smell:fanin:class:affect3.py:59",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "AffectSteer has 20 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium class:affect3.py:59",
+      "body": "AffectSteer has 22 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium class:affect3.py:59",
       "tags": [
         "smell",
         "medium",
@@ -598,17 +631,6 @@
       ]
     },
     {
-      "id": "smell:fanin:file:fanout.py",
-      "kind": "smell",
-      "title": "excessive fan in",
-      "body": "fanout.py has 28 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium file:fanout.py",
-      "tags": [
-        "smell",
-        "medium",
-        "excessive_fan_in"
-      ]
-    },
-    {
       "id": "smell:fanin:function:fanout.py:70",
       "kind": "smell",
       "title": "excessive fan in",
@@ -634,7 +656,7 @@
       "id": "smell:fanin:file:loops.py",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "loops.py has 22 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium file:loops.py",
+      "body": "loops.py has 24 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium file:loops.py",
       "tags": [
         "smell",
         "medium",
@@ -656,7 +678,7 @@
       "id": "smell:fanin:function:loops.py:65",
       "kind": "smell",
       "title": "excessive fan in",
-      "body": "loop_gram has 22 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium function:loops.py:65",
+      "body": "loop_gram has 24 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium function:loops.py:65",
       "tags": [
         "smell",
         "medium",
@@ -719,17 +741,6 @@
       ]
     },
     {
-      "id": "smell:fanin:function:nla.py:292",
-      "kind": "smell",
-      "title": "excessive fan in",
-      "body": "decode has 29 incoming dependencies — high fan-in Consider splitting this module or introducing a facade pattern medium function:nla.py:292",
-      "tags": [
-        "smell",
-        "medium",
-        "excessive_fan_in"
-      ]
-    },
-    {
       "id": "smell:fanout:file:og.py",
       "kind": "smell",
       "title": "excessive fan out",
@@ -752,28 +763,17 @@
       ]
     },
     {
-      "id": "smell:fanout:file:unit15.py",
-      "kind": "smell",
-      "title": "excessive fan out",
-      "body": "unit15.py depends on 31 other nodes — high fan-out Reduce dependencies by extracting shared utilities or applying dependency injection medium file:unit15.py",
-      "tags": [
-        "smell",
-        "medium",
-        "excessive_fan_out"
-      ]
-    },
-    {
       "id": "repo:summary",
       "kind": "domain",
       "title": "probes",
-      "body": "Single Package with 68 source files across python, javascript. 0 packages detected. core domains: General. Single Package  ",
+      "body": "Single Package with 69 source files across python, javascript. 0 packages detected. core domains: General. Single Package  ",
       "tags": [
         "repository",
         "architecture"
       ]
     }
   ],
-  "avgDocLength": 19.819444444444443,
+  "avgDocLength": 19.86111111111111,
   "docFreq": [
     [
       "general",
@@ -788,7 +788,7 @@
       1
     ],
     [
-      "62",
+      "49",
       1
     ],
     [
@@ -796,43 +796,23 @@
       2
     ],
     [
-      "file:affect.py",
-      8
+      "reinforced",
+      1
+    ],
+    [
+      "import",
+      1
+    ],
+    [
+      "clustering",
+      1
     ],
     [
       "file:affect08s.py",
       4
     ],
     [
-      "file:affect3.py",
-      14
-    ],
-    [
-      "file:affect3b.py",
-      9
-    ],
-    [
-      "file:affect3c.py",
-      10
-    ],
-    [
-      "file:affect3g.py",
-      9
-    ],
-    [
-      "file:affect4.py",
-      3
-    ],
-    [
-      "file:affect4b.py",
-      2
-    ],
-    [
       "file:affect5.py",
-      3
-    ],
-    [
-      "file:affect7.py",
       3
     ],
     [
@@ -852,16 +832,12 @@
       1
     ],
     [
-      "file:concepts.py",
-      2
-    ],
-    [
       "file:course.py",
       1
     ],
     [
       "file:deepen.py",
-      6
+      5
     ],
     [
       "file:deepen2.py",
@@ -872,8 +848,44 @@
       2
     ],
     [
-      "file:fanout.py",
+      "file:affect.py",
+      7
+    ],
+    [
+      "file:concepts.py",
+      2
+    ],
+    [
+      "file:langval.py",
+      3
+    ],
+    [
+      "file:langval2.py",
+      3
+    ],
+    [
+      "file:lossmap.py",
+      2
+    ],
+    [
+      "file:mirror.py",
       4
+    ],
+    [
+      "file:mirror2.py",
+      5
+    ],
+    [
+      "file:nla.py",
+      4
+    ],
+    [
+      "file:probe.py",
+      3
+    ],
+    [
+      "file:scan.py",
+      2
     ],
     [
       "domain",
@@ -889,7 +901,7 @@
     ],
     [
       "28",
-      4
+      2
     ],
     [
       "dependents",
@@ -913,11 +925,19 @@
     ],
     [
       "high",
-      61
+      60
     ],
     [
       "file:affect2.py",
-      7
+      5
+    ],
+    [
+      "file:affect3.py",
+      11
+    ],
+    [
+      "file:affect7.py",
+      4
     ],
     [
       "critical",
@@ -928,16 +948,28 @@
       3
     ],
     [
-      "20",
-      9
+      "22",
+      5
     ],
     [
       "file:affect11.py",
-      9
+      11
     ],
     [
       "file:affect12.py",
       3
+    ],
+    [
+      "file:affect13.py",
+      11
+    ],
+    [
+      "file:affect3b.py",
+      7
+    ],
+    [
+      "file:affect3c.py",
+      8
     ],
     [
       "affectsteer",
@@ -946,6 +978,38 @@
     [
       "class:affect3.py:59",
       2
+    ],
+    [
+      "_prompt_ids",
+      1
+    ],
+    [
+      "10",
+      5
+    ],
+    [
+      "medium",
+      36
+    ],
+    [
+      "function:affect7.py:101",
+      1
+    ],
+    [
+      "file:affect8.py",
+      3
+    ],
+    [
+      "file:affect14.py",
+      3
+    ],
+    [
+      "_exit_id",
+      1
+    ],
+    [
+      "function:affect7.py:109",
+      1
     ],
     [
       "topk",
@@ -964,24 +1028,12 @@
       3
     ],
     [
-      "file:mirror.py",
-      3
-    ],
-    [
-      "file:mirror2.py",
+      "20",
       5
     ],
     [
       "single_tokens",
       1
-    ],
-    [
-      "10",
-      3
-    ],
-    [
-      "medium",
-      38
     ],
     [
       "function:deepen.py:71",
@@ -1008,6 +1060,14 @@
       2
     ],
     [
+      "30",
+      5
+    ],
+    [
+      "file:fanout.py",
+      3
+    ],
+    [
       "assess",
       2
     ],
@@ -1020,23 +1080,23 @@
       2
     ],
     [
+      "file:affect3g.py",
+      3
+    ],
+    [
+      "file:affect4.py",
+      2
+    ],
+    [
       "langval.py",
       2
     ],
     [
-      "file:langval.py",
-      2
-    ],
-    [
       "file:apparatus11.py",
-      3
+      2
     ],
     [
       "file:audit02.py",
-      2
-    ],
-    [
-      "file:langval2.py",
       2
     ],
     [
@@ -1052,7 +1112,7 @@
       3
     ],
     [
-      "22",
+      "24",
       5
     ],
     [
@@ -1088,16 +1148,8 @@
       2
     ],
     [
-      "29",
-      3
-    ],
-    [
       "function:nla.py:292",
       2
-    ],
-    [
-      "file:nla.py",
-      3
     ],
     [
       "probe.py",
@@ -1108,16 +1160,8 @@
       2
     ],
     [
-      "file:probe.py",
-      2
-    ],
-    [
       "file:lab.py",
-      5
-    ],
-    [
-      "file:scan.py",
-      1
+      3
     ],
     [
       "unit14.py",
@@ -1125,7 +1169,7 @@
     ],
     [
       "12",
-      2
+      1
     ],
     [
       "file:unit14.py",
@@ -1141,7 +1185,7 @@
     ],
     [
       "file:unit15.py",
-      2
+      1
     ],
     [
       "file:unit15d.py",
@@ -1172,31 +1216,7 @@
       2
     ],
     [
-      "112",
-      2
-    ],
-    [
-      "_strip_bos",
-      2
-    ],
-    [
-      "34",
-      5
-    ],
-    [
-      "function:lab.py:41",
-      2
-    ],
-    [
-      "_token_ids",
-      1
-    ],
-    [
-      "function:lab.py:46",
-      1
-    ],
-    [
-      "file:lossmap.py",
+      "114",
       2
     ],
     [
@@ -1285,34 +1305,6 @@
     ],
     [
       "68",
-      2
-    ],
-    [
-      "59",
-      1
-    ],
-    [
-      "sorry4.py",
-      1
-    ],
-    [
-      "audit02.py",
-      1
-    ],
-    [
-      "57",
-      1
-    ],
-    [
-      "site.py",
-      1
-    ],
-    [
-      "51",
-      1
-    ],
-    [
-      "file:site.py",
       1
     ],
     [
@@ -1352,12 +1344,52 @@
       19
     ],
     [
+      "59",
+      1
+    ],
+    [
+      "sorry4.py",
+      1
+    ],
+    [
+      "audit02.py",
+      1
+    ],
+    [
+      "57",
+      1
+    ],
+    [
+      "site.py",
+      1
+    ],
+    [
+      "51",
+      1
+    ],
+    [
+      "file:site.py",
+      1
+    ],
+    [
+      "_strip_bos",
+      1
+    ],
+    [
+      "34",
+      3
+    ],
+    [
+      "function:lab.py:41",
+      1
+    ],
+    [
       "get_model",
       1
     ],
     [
-      "58",
-      1
+      "60",
+      2
     ],
     [
       "function:lab.py:68",
@@ -1365,10 +1397,6 @@
     ],
     [
       "run",
-      1
-    ],
-    [
-      "30",
       1
     ],
     [
@@ -1380,16 +1408,16 @@
       1
     ],
     [
-      "32",
-      1
-    ],
-    [
       "class:lab.py:121",
       1
     ],
     [
       "affect2.py",
       1
+    ],
+    [
+      "36",
+      2
     ],
     [
       "_load_vectors",
@@ -1404,20 +1432,12 @@
       1
     ],
     [
-      "60",
-      1
-    ],
-    [
       "affect8.py",
       1
     ],
     [
       "56",
       2
-    ],
-    [
-      "file:affect8.py",
-      1
     ],
     [
       "board.py",
@@ -1440,7 +1460,11 @@
       1
     ],
     [
-      "file:affect13.py",
+      "affect14.py",
+      1
+    ],
+    [
+      "61",
       1
     ],
     [
@@ -1456,12 +1480,20 @@
       1
     ],
     [
+      "29",
+      1
+    ],
+    [
       "affect4b.py",
       1
     ],
     [
       "37",
       2
+    ],
+    [
+      "file:affect4b.py",
+      1
     ],
     [
       "affect5.py",
@@ -1481,10 +1513,6 @@
     ],
     [
       "audit03.py",
-      1
-    ],
-    [
-      "24",
       1
     ],
     [
@@ -1528,14 +1556,6 @@
       1
     ],
     [
-      "unit15.py",
-      1
-    ],
-    [
-      "31",
-      1
-    ],
-    [
       "probes",
       1
     ],
@@ -1545,6 +1565,10 @@
     ],
     [
       "package",
+      1
+    ],
+    [
+      "69",
       1
     ],
     [
@@ -1609,7 +1633,7 @@
           1
         ],
         [
-          "62",
+          "49",
           1
         ],
         [
@@ -1617,35 +1641,19 @@
           1
         ],
         [
-          "file:affect.py",
-          2
+          "reinforced",
+          1
+        ],
+        [
+          "import",
+          1
+        ],
+        [
+          "clustering",
+          1
         ],
         [
           "file:affect08s.py",
-          2
-        ],
-        [
-          "file:affect3.py",
-          2
-        ],
-        [
-          "file:affect3b.py",
-          2
-        ],
-        [
-          "file:affect3c.py",
-          2
-        ],
-        [
-          "file:affect3g.py",
-          2
-        ],
-        [
-          "file:affect4.py",
-          2
-        ],
-        [
-          "file:affect4b.py",
           2
         ],
         [
@@ -1653,23 +1661,39 @@
           2
         ],
         [
-          "file:affect7.py",
+          "file:apparatus06.py",
           2
         ],
         [
-          "file:apparatus06.py",
-          1
-        ],
-        [
           "file:apparatus09.py",
-          1
+          2
         ],
         [
           "file:audit03.py",
-          1
+          2
         ],
         [
           "file:cast.py",
+          2
+        ],
+        [
+          "file:course.py",
+          2
+        ],
+        [
+          "file:deepen.py",
+          2
+        ],
+        [
+          "file:deepen2.py",
+          2
+        ],
+        [
+          "file:deepen3.py",
+          2
+        ],
+        [
+          "file:affect.py",
           1
         ],
         [
@@ -1677,23 +1701,35 @@
           1
         ],
         [
-          "file:course.py",
+          "file:langval.py",
           1
         ],
         [
-          "file:deepen.py",
+          "file:langval2.py",
           1
         ],
         [
-          "file:deepen2.py",
+          "file:lossmap.py",
           1
         ],
         [
-          "file:deepen3.py",
+          "file:mirror.py",
           1
         ],
         [
-          "file:fanout.py",
+          "file:mirror2.py",
+          1
+        ],
+        [
+          "file:nla.py",
+          1
+        ],
+        [
+          "file:probe.py",
+          1
+        ],
+        [
+          "file:scan.py",
           1
         ],
         [
@@ -1783,7 +1819,7 @@
           2
         ],
         [
-          "20",
+          "22",
           1
         ],
         [
@@ -1823,15 +1859,15 @@
           1
         ],
         [
+          "file:affect13.py",
+          1
+        ],
+        [
           "file:affect3b.py",
           1
         ],
         [
           "file:affect3c.py",
-          1
-        ],
-        [
-          "file:affect3g.py",
           1
         ],
         [
@@ -1852,7 +1888,7 @@
           2
         ],
         [
-          "20",
+          "22",
           1
         ],
         [
@@ -1892,6 +1928,10 @@
           1
         ],
         [
+          "file:affect13.py",
+          1
+        ],
+        [
           "file:affect3b.py",
           1
         ],
@@ -1900,7 +1940,141 @@
           1
         ],
         [
-          "file:affect3g.py",
+          "critical",
+          1
+        ]
+      ]
+    ],
+    [
+      "critical:fanin:function:affect7.py:101",
+      [
+        [
+          "high-traffic:",
+          1
+        ],
+        [
+          "_prompt_ids",
+          2
+        ],
+        [
+          "10",
+          1
+        ],
+        [
+          "dependents",
+          1
+        ],
+        [
+          "changes",
+          1
+        ],
+        [
+          "wide",
+          1
+        ],
+        [
+          "blast",
+          1
+        ],
+        [
+          "radius",
+          1
+        ],
+        [
+          "medium",
+          2
+        ],
+        [
+          "function:affect7.py:101",
+          1
+        ],
+        [
+          "file:affect7.py",
+          1
+        ],
+        [
+          "file:affect11.py",
+          1
+        ],
+        [
+          "file:affect13.py",
+          1
+        ],
+        [
+          "file:affect8.py",
+          1
+        ],
+        [
+          "file:affect14.py",
+          1
+        ],
+        [
+          "critical",
+          1
+        ]
+      ]
+    ],
+    [
+      "critical:fanin:function:affect7.py:109",
+      [
+        [
+          "high-traffic:",
+          1
+        ],
+        [
+          "_exit_id",
+          2
+        ],
+        [
+          "10",
+          1
+        ],
+        [
+          "dependents",
+          1
+        ],
+        [
+          "changes",
+          1
+        ],
+        [
+          "wide",
+          1
+        ],
+        [
+          "blast",
+          1
+        ],
+        [
+          "radius",
+          1
+        ],
+        [
+          "medium",
+          2
+        ],
+        [
+          "function:affect7.py:109",
+          1
+        ],
+        [
+          "file:affect7.py",
+          1
+        ],
+        [
+          "file:affect11.py",
+          1
+        ],
+        [
+          "file:affect13.py",
+          1
+        ],
+        [
+          "file:affect8.py",
+          1
+        ],
+        [
+          "file:affect14.py",
           1
         ],
         [
@@ -1957,6 +2131,10 @@
           1
         ],
         [
+          "file:affect13.py",
+          1
+        ],
+        [
           "file:affect2.py",
           1
         ],
@@ -1966,10 +2144,6 @@
         ],
         [
           "file:affect3b.py",
-          1
-        ],
-        [
-          "file:affect3c.py",
           1
         ],
         [
@@ -2128,7 +2302,7 @@
           2
         ],
         [
-          "28",
+          "30",
           1
         ],
         [
@@ -2164,6 +2338,10 @@
           1
         ],
         [
+          "file:affect13.py",
+          1
+        ],
+        [
           "file:affect3.py",
           1
         ],
@@ -2173,10 +2351,6 @@
         ],
         [
           "file:affect3c.py",
-          1
-        ],
-        [
-          "file:affect3g.py",
           1
         ],
         [
@@ -2335,7 +2509,7 @@
           2
         ],
         [
-          "22",
+          "24",
           1
         ],
         [
@@ -2371,6 +2545,10 @@
           1
         ],
         [
+          "file:affect13.py",
+          1
+        ],
+        [
           "file:affect3.py",
           1
         ],
@@ -2380,10 +2558,6 @@
         ],
         [
           "file:affect3c.py",
-          1
-        ],
-        [
-          "file:affect3g.py",
           1
         ],
         [
@@ -2404,7 +2578,7 @@
           2
         ],
         [
-          "22",
+          "24",
           1
         ],
         [
@@ -2444,15 +2618,15 @@
           1
         ],
         [
+          "file:affect13.py",
+          1
+        ],
+        [
           "file:affect3.py",
           1
         ],
         [
           "file:affect3c.py",
-          1
-        ],
-        [
-          "file:affect3g.py",
           1
         ],
         [
@@ -2611,7 +2785,7 @@
           2
         ],
         [
-          "29",
+          "30",
           1
         ],
         [
@@ -2655,11 +2829,11 @@
           1
         ],
         [
-          "file:affect2.py",
+          "file:affect13.py",
           1
         ],
         [
-          "file:affect3.py",
+          "file:affect2.py",
           1
         ],
         [
@@ -2887,7 +3061,7 @@
           2
         ],
         [
-          "112",
+          "114",
           1
         ],
         [
@@ -2935,145 +3109,7 @@
           1
         ],
         [
-          "file:affect2.py",
-          1
-        ],
-        [
-          "critical",
-          1
-        ]
-      ]
-    ],
-    [
-      "critical:fanin:function:lab.py:41",
-      [
-        [
-          "high-traffic:",
-          1
-        ],
-        [
-          "_strip_bos",
-          2
-        ],
-        [
-          "34",
-          1
-        ],
-        [
-          "dependents",
-          1
-        ],
-        [
-          "changes",
-          1
-        ],
-        [
-          "wide",
-          1
-        ],
-        [
-          "blast",
-          1
-        ],
-        [
-          "radius",
-          1
-        ],
-        [
-          "high",
-          2
-        ],
-        [
-          "function:lab.py:41",
-          1
-        ],
-        [
-          "file:lab.py",
-          1
-        ],
-        [
-          "file:affect.py",
-          1
-        ],
-        [
-          "file:affect2.py",
-          1
-        ],
-        [
-          "file:affect3.py",
-          1
-        ],
-        [
-          "file:affect3b.py",
-          1
-        ],
-        [
-          "critical",
-          1
-        ]
-      ]
-    ],
-    [
-      "critical:fanin:function:lab.py:46",
-      [
-        [
-          "high-traffic:",
-          1
-        ],
-        [
-          "_token_ids",
-          2
-        ],
-        [
-          "12",
-          1
-        ],
-        [
-          "dependents",
-          1
-        ],
-        [
-          "changes",
-          1
-        ],
-        [
-          "wide",
-          1
-        ],
-        [
-          "blast",
-          1
-        ],
-        [
-          "radius",
-          1
-        ],
-        [
-          "medium",
-          2
-        ],
-        [
-          "function:lab.py:46",
-          1
-        ],
-        [
-          "file:lab.py",
-          1
-        ],
-        [
-          "file:apparatus11.py",
-          1
-        ],
-        [
-          "file:deepen.py",
-          1
-        ],
-        [
-          "file:lossmap.py",
-          1
-        ],
-        [
-          "file:mirror2.py",
+          "file:affect13.py",
           1
         ],
         [
@@ -3488,6 +3524,79 @@
       ]
     ],
     [
+      "smell:fanin:file:fanout.py",
+      [
+        [
+          "excessive",
+          1
+        ],
+        [
+          "fan",
+          1
+        ],
+        [
+          "fanout.py",
+          1
+        ],
+        [
+          "30",
+          1
+        ],
+        [
+          "incoming",
+          1
+        ],
+        [
+          "dependencies",
+          1
+        ],
+        [
+          "high",
+          3
+        ],
+        [
+          "fan-in",
+          1
+        ],
+        [
+          "consider",
+          1
+        ],
+        [
+          "splitting",
+          1
+        ],
+        [
+          "module",
+          1
+        ],
+        [
+          "introducing",
+          1
+        ],
+        [
+          "facade",
+          1
+        ],
+        [
+          "pattern",
+          1
+        ],
+        [
+          "file:fanout.py",
+          1
+        ],
+        [
+          "smell",
+          1
+        ],
+        [
+          "excessive_fan_in",
+          1
+        ]
+      ]
+    ],
+    [
       "smell:fanout:file:langval.py",
       [
         [
@@ -3564,6 +3673,79 @@
         ],
         [
           "excessive_fan_out",
+          1
+        ]
+      ]
+    ],
+    [
+      "smell:fanin:function:nla.py:292",
+      [
+        [
+          "excessive",
+          1
+        ],
+        [
+          "fan",
+          1
+        ],
+        [
+          "decode",
+          1
+        ],
+        [
+          "30",
+          1
+        ],
+        [
+          "incoming",
+          1
+        ],
+        [
+          "dependencies",
+          1
+        ],
+        [
+          "high",
+          3
+        ],
+        [
+          "fan-in",
+          1
+        ],
+        [
+          "consider",
+          1
+        ],
+        [
+          "splitting",
+          1
+        ],
+        [
+          "module",
+          1
+        ],
+        [
+          "introducing",
+          1
+        ],
+        [
+          "facade",
+          1
+        ],
+        [
+          "pattern",
+          1
+        ],
+        [
+          "function:nla.py:292",
+          1
+        ],
+        [
+          "smell",
+          1
+        ],
+        [
+          "excessive_fan_in",
           1
         ]
       ]
@@ -3827,7 +4009,7 @@
           1
         ],
         [
-          "112",
+          "114",
           1
         ],
         [
@@ -3973,7 +4155,7 @@
           1
         ],
         [
-          "58",
+          "60",
           1
         ],
         [
@@ -4119,7 +4301,7 @@
           1
         ],
         [
-          "32",
+          "34",
           1
         ],
         [
@@ -4192,7 +4374,7 @@
           1
         ],
         [
-          "34",
+          "36",
           1
         ],
         [
@@ -4265,7 +4447,7 @@
           1
         ],
         [
-          "34",
+          "36",
           1
         ],
         [
@@ -4728,6 +4910,87 @@
       ]
     ],
     [
+      "smell:fanout:file:affect14.py",
+      [
+        [
+          "excessive",
+          1
+        ],
+        [
+          "fan",
+          1
+        ],
+        [
+          "affect14.py",
+          1
+        ],
+        [
+          "depends",
+          1
+        ],
+        [
+          "61",
+          1
+        ],
+        [
+          "nodes",
+          1
+        ],
+        [
+          "high",
+          3
+        ],
+        [
+          "fan-out",
+          1
+        ],
+        [
+          "reduce",
+          1
+        ],
+        [
+          "dependencies",
+          1
+        ],
+        [
+          "extracting",
+          1
+        ],
+        [
+          "shared",
+          1
+        ],
+        [
+          "utilities",
+          1
+        ],
+        [
+          "applying",
+          1
+        ],
+        [
+          "dependency",
+          1
+        ],
+        [
+          "injection",
+          1
+        ],
+        [
+          "file:affect14.py",
+          1
+        ],
+        [
+          "smell",
+          1
+        ],
+        [
+          "excessive_fan_out",
+          1
+        ]
+      ]
+    ],
+    [
       "smell:fanin:file:affect.py",
       [
         [
@@ -4990,7 +5253,7 @@
           1
         ],
         [
-          "20",
+          "22",
           1
         ],
         [
@@ -5067,7 +5330,7 @@
           1
         ],
         [
-          "20",
+          "22",
           1
         ],
         [
@@ -5878,83 +6141,6 @@
       ]
     ],
     [
-      "smell:fanin:file:fanout.py",
-      [
-        [
-          "excessive",
-          1
-        ],
-        [
-          "fan",
-          1
-        ],
-        [
-          "fanout.py",
-          1
-        ],
-        [
-          "28",
-          1
-        ],
-        [
-          "incoming",
-          1
-        ],
-        [
-          "dependencies",
-          1
-        ],
-        [
-          "high",
-          1
-        ],
-        [
-          "fan-in",
-          1
-        ],
-        [
-          "consider",
-          1
-        ],
-        [
-          "splitting",
-          1
-        ],
-        [
-          "module",
-          1
-        ],
-        [
-          "introducing",
-          1
-        ],
-        [
-          "facade",
-          1
-        ],
-        [
-          "pattern",
-          1
-        ],
-        [
-          "medium",
-          2
-        ],
-        [
-          "file:fanout.py",
-          1
-        ],
-        [
-          "smell",
-          1
-        ],
-        [
-          "excessive_fan_in",
-          1
-        ]
-      ]
-    ],
-    [
       "smell:fanin:function:fanout.py:70",
       [
         [
@@ -6132,7 +6318,7 @@
           1
         ],
         [
-          "22",
+          "24",
           1
         ],
         [
@@ -6294,7 +6480,7 @@
           1
         ],
         [
-          "22",
+          "24",
           1
         ],
         [
@@ -6773,83 +6959,6 @@
       ]
     ],
     [
-      "smell:fanin:function:nla.py:292",
-      [
-        [
-          "excessive",
-          1
-        ],
-        [
-          "fan",
-          1
-        ],
-        [
-          "decode",
-          1
-        ],
-        [
-          "29",
-          1
-        ],
-        [
-          "incoming",
-          1
-        ],
-        [
-          "dependencies",
-          1
-        ],
-        [
-          "high",
-          1
-        ],
-        [
-          "fan-in",
-          1
-        ],
-        [
-          "consider",
-          1
-        ],
-        [
-          "splitting",
-          1
-        ],
-        [
-          "module",
-          1
-        ],
-        [
-          "introducing",
-          1
-        ],
-        [
-          "facade",
-          1
-        ],
-        [
-          "pattern",
-          1
-        ],
-        [
-          "medium",
-          2
-        ],
-        [
-          "function:nla.py:292",
-          1
-        ],
-        [
-          "smell",
-          1
-        ],
-        [
-          "excessive_fan_in",
-          1
-        ]
-      ]
-    ],
-    [
       "smell:fanout:file:og.py",
       [
         [
@@ -7012,91 +7121,6 @@
       ]
     ],
     [
-      "smell:fanout:file:unit15.py",
-      [
-        [
-          "excessive",
-          1
-        ],
-        [
-          "fan",
-          1
-        ],
-        [
-          "unit15.py",
-          1
-        ],
-        [
-          "depends",
-          1
-        ],
-        [
-          "31",
-          1
-        ],
-        [
-          "nodes",
-          1
-        ],
-        [
-          "high",
-          1
-        ],
-        [
-          "fan-out",
-          1
-        ],
-        [
-          "reduce",
-          1
-        ],
-        [
-          "dependencies",
-          1
-        ],
-        [
-          "extracting",
-          1
-        ],
-        [
-          "shared",
-          1
-        ],
-        [
-          "utilities",
-          1
-        ],
-        [
-          "applying",
-          1
-        ],
-        [
-          "dependency",
-          1
-        ],
-        [
-          "injection",
-          1
-        ],
-        [
-          "medium",
-          2
-        ],
-        [
-          "file:unit15.py",
-          1
-        ],
-        [
-          "smell",
-          1
-        ],
-        [
-          "excessive_fan_out",
-          1
-        ]
-      ]
-    ],
-    [
       "repo:summary",
       [
         [
@@ -7112,7 +7136,7 @@
           2
         ],
         [
-          "68",
+          "69",
           1
         ],
         [
@@ -7169,7 +7193,7 @@
   "docLength": [
     [
       "domain:cluster:55",
-      37
+      40
     ],
     [
       "critical:fanin:file:affect.py",
@@ -7181,6 +7205,14 @@
     ],
     [
       "critical:fanin:class:affect3.py:59",
+      18
+    ],
+    [
+      "critical:fanin:function:affect7.py:101",
+      18
+    ],
+    [
+      "critical:fanin:function:affect7.py:109",
       18
     ],
     [
@@ -7244,14 +7276,6 @@
       18
     ],
     [
-      "critical:fanin:function:lab.py:41",
-      18
-    ],
-    [
-      "critical:fanin:function:lab.py:46",
-      18
-    ],
-    [
       "smell:fanout:file:affect3.py",
       21
     ],
@@ -7272,8 +7296,16 @@
       21
     ],
     [
+      "smell:fanin:file:fanout.py",
+      19
+    ],
+    [
       "smell:fanout:file:langval.py",
       21
+    ],
+    [
+      "smell:fanin:function:nla.py:292",
+      19
     ],
     [
       "smell:fanout:file:sorry4.py",
@@ -7336,6 +7368,10 @@
       21
     ],
     [
+      "smell:fanout:file:affect14.py",
+      21
+    ],
+    [
       "smell:fanin:file:affect.py",
       19
     ],
@@ -7392,10 +7428,6 @@
       21
     ],
     [
-      "smell:fanin:file:fanout.py",
-      19
-    ],
-    [
       "smell:fanin:function:fanout.py:70",
       19
     ],
@@ -7436,20 +7468,12 @@
       21
     ],
     [
-      "smell:fanin:function:nla.py:292",
-      19
-    ],
-    [
       "smell:fanout:file:og.py",
       21
     ],
     [
       "smell:fanin:file:probe.py",
       19
-    ],
-    [
-      "smell:fanout:file:unit15.py",
-      21
     ],
     [
       "repo:summary",
@@ -7476,7 +7500,7 @@
       ]
     ],
     [
-      "62",
+      "49",
       [
         "domain:cluster:55"
       ]
@@ -7489,16 +7513,21 @@
       ]
     ],
     [
-      "file:affect.py",
+      "reinforced",
       [
-        "domain:cluster:55",
-        "critical:fanin:file:affect.py",
-        "critical:fanin:function:nla.py:292",
-        "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "smell:fanin:file:affect.py",
-        "smell:fanout:file:affect.py"
+        "domain:cluster:55"
+      ]
+    ],
+    [
+      "import",
+      [
+        "domain:cluster:55"
+      ]
+    ],
+    [
+      "clustering",
+      [
+        "domain:cluster:55"
       ]
     ],
     [
@@ -7511,96 +7540,11 @@
       ]
     ],
     [
-      "file:affect3.py",
-      [
-        "domain:cluster:55",
-        "critical:fanin:file:affect.py",
-        "critical:fanin:file:affect3.py",
-        "critical:fanin:class:affect3.py:59",
-        "critical:fanin:function:apparatus09.py:57",
-        "critical:fanin:file:fanout.py",
-        "critical:fanin:function:fanout.py:70",
-        "critical:fanin:file:loops.py",
-        "critical:fanin:function:loops.py:65",
-        "critical:fanin:class:loops.py:210",
-        "critical:fanin:function:nla.py:292",
-        "critical:fanin:function:lab.py:41",
-        "smell:fanout:file:affect3.py",
-        "smell:fanin:file:affect3.py"
-      ]
-    ],
-    [
-      "file:affect3b.py",
-      [
-        "domain:cluster:55",
-        "critical:fanin:file:affect3.py",
-        "critical:fanin:class:affect3.py:59",
-        "critical:fanin:function:apparatus09.py:57",
-        "critical:fanin:file:fanout.py",
-        "critical:fanin:file:loops.py",
-        "critical:fanin:class:loops.py:210",
-        "critical:fanin:function:lab.py:41",
-        "smell:fanout:file:affect3b.py"
-      ]
-    ],
-    [
-      "file:affect3c.py",
-      [
-        "domain:cluster:55",
-        "critical:fanin:file:affect3.py",
-        "critical:fanin:class:affect3.py:59",
-        "critical:fanin:function:apparatus09.py:57",
-        "critical:fanin:file:fanout.py",
-        "critical:fanin:function:fanout.py:70",
-        "critical:fanin:file:loops.py",
-        "critical:fanin:function:loops.py:65",
-        "critical:fanin:class:loops.py:210",
-        "smell:fanout:file:affect3c.py"
-      ]
-    ],
-    [
-      "file:affect3g.py",
-      [
-        "domain:cluster:55",
-        "critical:fanin:file:affect3.py",
-        "critical:fanin:class:affect3.py:59",
-        "critical:fanin:file:fanout.py",
-        "critical:fanin:function:fanout.py:70",
-        "critical:fanin:file:loops.py",
-        "critical:fanin:function:loops.py:65",
-        "critical:fanin:class:loops.py:210",
-        "smell:fanout:file:affect3g.py"
-      ]
-    ],
-    [
-      "file:affect4.py",
-      [
-        "domain:cluster:55",
-        "critical:fanin:function:fanout.py:70",
-        "smell:fanout:file:affect4.py"
-      ]
-    ],
-    [
-      "file:affect4b.py",
-      [
-        "domain:cluster:55",
-        "smell:fanout:file:affect4b.py"
-      ]
-    ],
-    [
       "file:affect5.py",
       [
         "domain:cluster:55",
         "critical:fanin:file:affect.py",
         "smell:fanout:file:affect5.py"
-      ]
-    ],
-    [
-      "file:affect7.py",
-      [
-        "domain:cluster:55",
-        "critical:fanin:file:affect.py",
-        "smell:fanout:file:affect7.py"
       ]
     ],
     [
@@ -7632,13 +7576,6 @@
       ]
     ],
     [
-      "file:concepts.py",
-      [
-        "domain:cluster:55",
-        "smell:fanout:file:concepts.py"
-      ]
-    ],
-    [
       "file:course.py",
       [
         "domain:cluster:55"
@@ -7650,7 +7587,6 @@
         "domain:cluster:55",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
-        "critical:fanin:function:lab.py:46",
         "smell:fanin:file:deepen.py",
         "smell:fanout:file:deepen.py"
       ]
@@ -7670,12 +7606,88 @@
       ]
     ],
     [
-      "file:fanout.py",
+      "file:affect.py",
       [
         "domain:cluster:55",
-        "critical:fanin:file:fanout.py",
-        "critical:fanin:function:fanout.py:70",
-        "smell:fanin:file:fanout.py"
+        "critical:fanin:file:affect.py",
+        "critical:fanin:function:nla.py:292",
+        "critical:fanin:function:huh.py:55",
+        "critical:fanin:file:lab.py",
+        "smell:fanin:file:affect.py",
+        "smell:fanout:file:affect.py"
+      ]
+    ],
+    [
+      "file:concepts.py",
+      [
+        "domain:cluster:55",
+        "smell:fanout:file:concepts.py"
+      ]
+    ],
+    [
+      "file:langval.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:file:langval.py",
+        "smell:fanout:file:langval.py"
+      ]
+    ],
+    [
+      "file:langval2.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:file:langval.py",
+        "smell:fanout:file:langval2.py"
+      ]
+    ],
+    [
+      "file:lossmap.py",
+      [
+        "domain:cluster:55",
+        "smell:fanout:file:lossmap.py"
+      ]
+    ],
+    [
+      "file:mirror.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:file:deepen.py",
+        "critical:fanin:file:mirror.py",
+        "smell:fanout:file:mirror.py"
+      ]
+    ],
+    [
+      "file:mirror2.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:file:deepen.py",
+        "critical:fanin:file:mirror.py",
+        "critical:fanin:file:probe.py",
+        "smell:fanout:file:mirror2.py"
+      ]
+    ],
+    [
+      "file:nla.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:function:nla.py:292",
+        "critical:fanin:file:probe.py",
+        "smell:fanout:file:nla.py"
+      ]
+    ],
+    [
+      "file:probe.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:file:probe.py",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "file:scan.py",
+      [
+        "domain:cluster:55",
+        "critical:fanin:file:probe.py"
       ]
     ],
     [
@@ -7690,6 +7702,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7704,9 +7718,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7721,9 +7733,7 @@
       "28",
       [
         "critical:fanin:file:affect.py",
-        "critical:fanin:file:fanout.py",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:fanout.py"
+        "smell:fanin:file:affect.py"
       ]
     ],
     [
@@ -7732,6 +7742,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7746,9 +7758,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7757,6 +7767,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7771,9 +7783,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7782,6 +7792,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7796,9 +7808,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7807,6 +7817,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7821,9 +7833,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7832,6 +7842,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7846,9 +7858,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7864,13 +7874,14 @@
         "critical:fanin:function:loops.py:65",
         "critical:fanin:function:nla.py:292",
         "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
         "smell:fanout:file:affect3.py",
         "smell:fanout:file:affect3c.py",
         "smell:fanout:file:affect3g.py",
         "smell:fanout:file:affect4.py",
         "smell:fanout:file:affect7.py",
+        "smell:fanin:file:fanout.py",
         "smell:fanout:file:langval.py",
+        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:sorry4.py",
         "smell:fanout:file:audit02.py",
         "smell:fanout:file:site.py",
@@ -7886,6 +7897,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanin:file:affect.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
@@ -7900,7 +7912,6 @@
         "smell:fanout:file:concepts.py",
         "smell:fanin:file:deepen.py",
         "smell:fanout:file:deepen.py",
-        "smell:fanin:file:fanout.py",
         "smell:fanin:function:fanout.py:70",
         "smell:fanout:file:langval2.py",
         "smell:fanin:file:loops.py",
@@ -7911,10 +7922,8 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:og.py",
-        "smell:fanin:file:probe.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanin:file:probe.py"
       ]
     ],
     [
@@ -7924,9 +7933,32 @@
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:function:nla.py:292",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
         "smell:fanin:file:affect2.py"
+      ]
+    ],
+    [
+      "file:affect3.py",
+      [
+        "critical:fanin:file:affect.py",
+        "critical:fanin:file:affect3.py",
+        "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:apparatus09.py:57",
+        "critical:fanin:file:fanout.py",
+        "critical:fanin:function:fanout.py:70",
+        "critical:fanin:file:loops.py",
+        "critical:fanin:function:loops.py:65",
+        "critical:fanin:class:loops.py:210",
+        "smell:fanout:file:affect3.py",
+        "smell:fanin:file:affect3.py"
+      ]
+    ],
+    [
+      "file:affect7.py",
+      [
+        "critical:fanin:file:affect.py",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
+        "smell:fanout:file:affect7.py"
       ]
     ],
     [
@@ -7935,6 +7967,8 @@
         "critical:fanin:file:affect.py",
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:function:apparatus09.py:57",
         "critical:fanin:file:deepen.py",
         "critical:fanin:function:deepen.py:71",
@@ -7949,9 +7983,7 @@
         "critical:fanin:file:probe.py",
         "critical:fanin:file:unit14.py",
         "critical:fanin:function:huh.py:55",
-        "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:lab.py"
       ]
     ],
     [
@@ -7963,17 +7995,13 @@
       ]
     ],
     [
-      "20",
+      "22",
       [
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
-        "critical:fanin:file:deepen.py",
+        "smell:fanout:file:affect08s.py",
         "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:file:deepen.py",
-        "smell:fanout:file:deepen.py",
-        "smell:fanout:file:lossmap.py",
-        "smell:fanout:file:mirror.py"
+        "smell:fanin:class:affect3.py:59"
       ]
     ],
     [
@@ -7981,6 +8009,8 @@
       [
         "critical:fanin:file:affect3.py",
         "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
         "critical:fanin:file:fanout.py",
         "critical:fanin:file:loops.py",
         "critical:fanin:function:loops.py:65",
@@ -7999,6 +8029,47 @@
       ]
     ],
     [
+      "file:affect13.py",
+      [
+        "critical:fanin:file:affect3.py",
+        "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
+        "critical:fanin:function:apparatus09.py:57",
+        "critical:fanin:file:fanout.py",
+        "critical:fanin:file:loops.py",
+        "critical:fanin:function:loops.py:65",
+        "critical:fanin:function:nla.py:292",
+        "critical:fanin:file:lab.py",
+        "smell:fanout:file:affect13.py"
+      ]
+    ],
+    [
+      "file:affect3b.py",
+      [
+        "critical:fanin:file:affect3.py",
+        "critical:fanin:class:affect3.py:59",
+        "critical:fanin:function:apparatus09.py:57",
+        "critical:fanin:file:fanout.py",
+        "critical:fanin:file:loops.py",
+        "critical:fanin:class:loops.py:210",
+        "smell:fanout:file:affect3b.py"
+      ]
+    ],
+    [
+      "file:affect3c.py",
+      [
+        "critical:fanin:file:affect3.py",
+        "critical:fanin:class:affect3.py:59",
+        "critical:fanin:file:fanout.py",
+        "critical:fanin:function:fanout.py:70",
+        "critical:fanin:file:loops.py",
+        "critical:fanin:function:loops.py:65",
+        "critical:fanin:class:loops.py:210",
+        "smell:fanout:file:affect3c.py"
+      ]
+    ],
+    [
       "affectsteer",
       [
         "critical:fanin:class:affect3.py:59",
@@ -8010,6 +8081,97 @@
       [
         "critical:fanin:class:affect3.py:59",
         "smell:fanin:class:affect3.py:59"
+      ]
+    ],
+    [
+      "_prompt_ids",
+      [
+        "critical:fanin:function:affect7.py:101"
+      ]
+    ],
+    [
+      "10",
+      [
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
+        "critical:fanin:function:deepen.py:71",
+        "critical:fanin:file:langval.py",
+        "critical:fanin:file:mirror.py"
+      ]
+    ],
+    [
+      "medium",
+      [
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
+        "critical:fanin:function:deepen.py:71",
+        "critical:fanin:function:fanout.py:70",
+        "critical:fanin:file:langval.py",
+        "critical:fanin:class:loops.py:210",
+        "critical:fanin:file:mirror.py",
+        "critical:fanin:file:probe.py",
+        "critical:fanin:file:unit14.py",
+        "critical:fanin:function:huh.py:55",
+        "smell:fanin:file:affect.py",
+        "smell:fanout:file:affect.py",
+        "smell:fanout:file:affect08s.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanout:file:affect3b.py",
+        "smell:fanout:file:affect4b.py",
+        "smell:fanout:file:affect5.py",
+        "smell:fanout:file:apparatus09.py",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanout:file:audit03.py",
+        "smell:fanout:file:concepts.py",
+        "smell:fanin:file:deepen.py",
+        "smell:fanout:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanout:file:langval2.py",
+        "smell:fanin:file:loops.py",
+        "smell:fanout:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanout:file:lossmap.py",
+        "smell:fanout:file:mirror.py",
+        "smell:fanout:file:mirror2.py",
+        "smell:fanout:file:nla.py",
+        "smell:fanout:file:og.py",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "function:affect7.py:101",
+      [
+        "critical:fanin:function:affect7.py:101"
+      ]
+    ],
+    [
+      "file:affect8.py",
+      [
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
+        "smell:fanout:file:affect8.py"
+      ]
+    ],
+    [
+      "file:affect14.py",
+      [
+        "critical:fanin:function:affect7.py:101",
+        "critical:fanin:function:affect7.py:109",
+        "smell:fanout:file:affect14.py"
+      ]
+    ],
+    [
+      "_exit_id",
+      [
+        "critical:fanin:function:affect7.py:109"
+      ]
+    ],
+    [
+      "function:affect7.py:109",
+      [
+        "critical:fanin:function:affect7.py:109"
       ]
     ],
     [
@@ -8042,78 +8204,19 @@
       ]
     ],
     [
-      "file:mirror.py",
+      "20",
       [
         "critical:fanin:file:deepen.py",
-        "critical:fanin:file:mirror.py",
+        "smell:fanin:file:deepen.py",
+        "smell:fanout:file:deepen.py",
+        "smell:fanout:file:lossmap.py",
         "smell:fanout:file:mirror.py"
-      ]
-    ],
-    [
-      "file:mirror2.py",
-      [
-        "critical:fanin:file:deepen.py",
-        "critical:fanin:file:mirror.py",
-        "critical:fanin:file:probe.py",
-        "critical:fanin:function:lab.py:46",
-        "smell:fanout:file:mirror2.py"
       ]
     ],
     [
       "single_tokens",
       [
         "critical:fanin:function:deepen.py:71"
-      ]
-    ],
-    [
-      "10",
-      [
-        "critical:fanin:function:deepen.py:71",
-        "critical:fanin:file:langval.py",
-        "critical:fanin:file:mirror.py"
-      ]
-    ],
-    [
-      "medium",
-      [
-        "critical:fanin:function:deepen.py:71",
-        "critical:fanin:function:fanout.py:70",
-        "critical:fanin:file:langval.py",
-        "critical:fanin:class:loops.py:210",
-        "critical:fanin:file:mirror.py",
-        "critical:fanin:file:probe.py",
-        "critical:fanin:file:unit14.py",
-        "critical:fanin:function:huh.py:55",
-        "critical:fanin:function:lab.py:46",
-        "smell:fanin:file:affect.py",
-        "smell:fanout:file:affect.py",
-        "smell:fanout:file:affect08s.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanout:file:affect3b.py",
-        "smell:fanout:file:affect4b.py",
-        "smell:fanout:file:affect5.py",
-        "smell:fanout:file:apparatus09.py",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanout:file:audit03.py",
-        "smell:fanout:file:concepts.py",
-        "smell:fanin:file:deepen.py",
-        "smell:fanout:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanout:file:langval2.py",
-        "smell:fanin:file:loops.py",
-        "smell:fanout:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanout:file:lossmap.py",
-        "smell:fanout:file:mirror.py",
-        "smell:fanout:file:mirror2.py",
-        "smell:fanout:file:nla.py",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanout:file:og.py",
-        "smell:fanin:file:probe.py",
-        "smell:fanout:file:unit15.py"
       ]
     ],
     [
@@ -8159,6 +8262,24 @@
       ]
     ],
     [
+      "30",
+      [
+        "critical:fanin:file:fanout.py",
+        "critical:fanin:function:nla.py:292",
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:function:lab.py:268"
+      ]
+    ],
+    [
+      "file:fanout.py",
+      [
+        "critical:fanin:file:fanout.py",
+        "critical:fanin:function:fanout.py:70",
+        "smell:fanin:file:fanout.py"
+      ]
+    ],
+    [
       "assess",
       [
         "critical:fanin:function:fanout.py:70",
@@ -8180,14 +8301,22 @@
       ]
     ],
     [
-      "langval.py",
+      "file:affect3g.py",
       [
-        "critical:fanin:file:langval.py",
-        "smell:fanout:file:langval.py"
+        "critical:fanin:function:fanout.py:70",
+        "critical:fanin:class:loops.py:210",
+        "smell:fanout:file:affect3g.py"
       ]
     ],
     [
-      "file:langval.py",
+      "file:affect4.py",
+      [
+        "critical:fanin:function:fanout.py:70",
+        "smell:fanout:file:affect4.py"
+      ]
+    ],
+    [
+      "langval.py",
       [
         "critical:fanin:file:langval.py",
         "smell:fanout:file:langval.py"
@@ -8197,7 +8326,6 @@
       "file:apparatus11.py",
       [
         "critical:fanin:file:langval.py",
-        "critical:fanin:function:lab.py:46",
         "smell:fanout:file:apparatus11.py"
       ]
     ],
@@ -8206,13 +8334,6 @@
       [
         "critical:fanin:file:langval.py",
         "smell:fanout:file:audit02.py"
-      ]
-    ],
-    [
-      "file:langval2.py",
-      [
-        "critical:fanin:file:langval.py",
-        "smell:fanout:file:langval2.py"
       ]
     ],
     [
@@ -8236,11 +8357,11 @@
       ]
     ],
     [
-      "22",
+      "24",
       [
         "critical:fanin:file:loops.py",
         "critical:fanin:function:loops.py:65",
-        "smell:fanout:file:affect08s.py",
+        "smell:fanout:file:audit03.py",
         "smell:fanin:file:loops.py",
         "smell:fanin:function:loops.py:65"
       ]
@@ -8306,26 +8427,10 @@
       ]
     ],
     [
-      "29",
-      [
-        "critical:fanin:function:nla.py:292",
-        "smell:fanout:file:affect3b.py",
-        "smell:fanin:function:nla.py:292"
-      ]
-    ],
-    [
       "function:nla.py:292",
       [
         "critical:fanin:function:nla.py:292",
         "smell:fanin:function:nla.py:292"
-      ]
-    ],
-    [
-      "file:nla.py",
-      [
-        "critical:fanin:function:nla.py:292",
-        "critical:fanin:file:probe.py",
-        "smell:fanout:file:nla.py"
       ]
     ],
     [
@@ -8343,26 +8448,11 @@
       ]
     ],
     [
-      "file:probe.py",
-      [
-        "critical:fanin:file:probe.py",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
       "file:lab.py",
       [
         "critical:fanin:file:probe.py",
         "critical:fanin:file:lab.py",
-        "critical:fanin:function:lab.py:41",
-        "critical:fanin:function:lab.py:46",
         "smell:fanin:file:lab.py"
-      ]
-    ],
-    [
-      "file:scan.py",
-      [
-        "critical:fanin:file:probe.py"
       ]
     ],
     [
@@ -8374,8 +8464,7 @@
     [
       "12",
       [
-        "critical:fanin:file:unit14.py",
-        "critical:fanin:function:lab.py:46"
+        "critical:fanin:file:unit14.py"
       ]
     ],
     [
@@ -8399,8 +8488,7 @@
     [
       "file:unit15.py",
       [
-        "critical:fanin:file:unit14.py",
-        "smell:fanout:file:unit15.py"
+        "critical:fanin:file:unit14.py"
       ]
     ],
     [
@@ -8447,53 +8535,10 @@
       ]
     ],
     [
-      "112",
+      "114",
       [
         "critical:fanin:file:lab.py",
         "smell:fanin:file:lab.py"
-      ]
-    ],
-    [
-      "_strip_bos",
-      [
-        "critical:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:41"
-      ]
-    ],
-    [
-      "34",
-      [
-        "critical:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanout:file:mirror2.py"
-      ]
-    ],
-    [
-      "function:lab.py:41",
-      [
-        "critical:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:41"
-      ]
-    ],
-    [
-      "_token_ids",
-      [
-        "critical:fanin:function:lab.py:46"
-      ]
-    ],
-    [
-      "function:lab.py:46",
-      [
-        "critical:fanin:function:lab.py:46"
-      ]
-    ],
-    [
-      "file:lossmap.py",
-      [
-        "critical:fanin:function:lab.py:46",
-        "smell:fanout:file:lossmap.py"
       ]
     ],
     [
@@ -8504,7 +8549,9 @@
         "smell:fanout:file:affect3g.py",
         "smell:fanout:file:affect4.py",
         "smell:fanout:file:affect7.py",
+        "smell:fanin:file:fanout.py",
         "smell:fanout:file:langval.py",
+        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:sorry4.py",
         "smell:fanout:file:audit02.py",
         "smell:fanout:file:site.py",
@@ -8520,6 +8567,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanin:file:affect.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
@@ -8534,7 +8582,6 @@
         "smell:fanout:file:concepts.py",
         "smell:fanin:file:deepen.py",
         "smell:fanout:file:deepen.py",
-        "smell:fanin:file:fanout.py",
         "smell:fanin:function:fanout.py:70",
         "smell:fanout:file:langval2.py",
         "smell:fanin:file:loops.py",
@@ -8545,10 +8592,8 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:og.py",
-        "smell:fanin:file:probe.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanin:file:probe.py"
       ]
     ],
     [
@@ -8559,7 +8604,9 @@
         "smell:fanout:file:affect3g.py",
         "smell:fanout:file:affect4.py",
         "smell:fanout:file:affect7.py",
+        "smell:fanin:file:fanout.py",
         "smell:fanout:file:langval.py",
+        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:sorry4.py",
         "smell:fanout:file:audit02.py",
         "smell:fanout:file:site.py",
@@ -8575,6 +8622,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanin:file:affect.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
@@ -8589,7 +8637,6 @@
         "smell:fanout:file:concepts.py",
         "smell:fanin:file:deepen.py",
         "smell:fanout:file:deepen.py",
-        "smell:fanin:file:fanout.py",
         "smell:fanin:function:fanout.py:70",
         "smell:fanout:file:langval2.py",
         "smell:fanin:file:loops.py",
@@ -8600,10 +8647,8 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:og.py",
-        "smell:fanin:file:probe.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanin:file:probe.py"
       ]
     ],
     [
@@ -8623,6 +8668,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8638,8 +8684,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8665,6 +8710,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8680,8 +8726,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8701,6 +8746,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8716,8 +8762,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8737,6 +8782,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8752,8 +8798,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8764,7 +8809,9 @@
         "smell:fanout:file:affect3g.py",
         "smell:fanout:file:affect4.py",
         "smell:fanout:file:affect7.py",
+        "smell:fanin:file:fanout.py",
         "smell:fanout:file:langval.py",
+        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:sorry4.py",
         "smell:fanout:file:audit02.py",
         "smell:fanout:file:site.py",
@@ -8780,6 +8827,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanin:file:affect.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
@@ -8794,7 +8842,6 @@
         "smell:fanout:file:concepts.py",
         "smell:fanin:file:deepen.py",
         "smell:fanout:file:deepen.py",
-        "smell:fanin:file:fanout.py",
         "smell:fanin:function:fanout.py:70",
         "smell:fanout:file:langval2.py",
         "smell:fanin:file:loops.py",
@@ -8805,10 +8852,8 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:og.py",
-        "smell:fanin:file:probe.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanin:file:probe.py"
       ]
     ],
     [
@@ -8828,6 +8873,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8843,8 +8889,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8864,6 +8909,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8879,8 +8925,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8900,6 +8945,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8915,8 +8961,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8936,6 +8981,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8951,8 +8997,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -8972,6 +9017,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -8987,8 +9033,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -9008,6 +9053,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -9023,8 +9069,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -9035,7 +9080,9 @@
         "smell:fanout:file:affect3g.py",
         "smell:fanout:file:affect4.py",
         "smell:fanout:file:affect7.py",
+        "smell:fanin:file:fanout.py",
         "smell:fanout:file:langval.py",
+        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:sorry4.py",
         "smell:fanout:file:audit02.py",
         "smell:fanout:file:site.py",
@@ -9051,6 +9098,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanin:file:affect.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
@@ -9065,7 +9113,6 @@
         "smell:fanout:file:concepts.py",
         "smell:fanin:file:deepen.py",
         "smell:fanout:file:deepen.py",
-        "smell:fanin:file:fanout.py",
         "smell:fanin:function:fanout.py:70",
         "smell:fanout:file:langval2.py",
         "smell:fanin:file:loops.py",
@@ -9076,10 +9123,8 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanin:function:nla.py:292",
         "smell:fanout:file:og.py",
-        "smell:fanin:file:probe.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanin:file:probe.py"
       ]
     ],
     [
@@ -9099,6 +9144,7 @@
         "smell:fanout:file:board.py",
         "smell:fanout:file:affect11.py",
         "smell:fanout:file:affect13.py",
+        "smell:fanout:file:affect14.py",
         "smell:fanout:file:affect.py",
         "smell:fanout:file:affect08s.py",
         "smell:fanout:file:affect3b.py",
@@ -9114,8 +9160,7 @@
         "smell:fanout:file:mirror.py",
         "smell:fanout:file:mirror2.py",
         "smell:fanout:file:nla.py",
-        "smell:fanout:file:og.py",
-        "smell:fanout:file:unit15.py"
+        "smell:fanout:file:og.py"
       ]
     ],
     [
@@ -9155,8 +9200,223 @@
     [
       "68",
       [
-        "smell:fanout:file:affect7.py",
-        "repo:summary"
+        "smell:fanout:file:affect7.py"
+      ]
+    ],
+    [
+      "incoming",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "fan-in",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "consider",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "splitting",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "module",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "introducing",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "facade",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "pattern",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
+      ]
+    ],
+    [
+      "excessive_fan_in",
+      [
+        "smell:fanin:file:fanout.py",
+        "smell:fanin:function:nla.py:292",
+        "smell:fanin:file:lab.py",
+        "smell:fanin:function:lab.py:41",
+        "smell:fanin:function:lab.py:68",
+        "smell:fanin:function:lab.py:268",
+        "smell:fanin:class:lab.py:121",
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62",
+        "smell:fanin:file:affect.py",
+        "smell:fanin:file:affect3.py",
+        "smell:fanin:class:affect3.py:59",
+        "smell:fanin:function:apparatus09.py:57",
+        "smell:fanin:file:deepen.py",
+        "smell:fanin:function:fanout.py:70",
+        "smell:fanin:file:loops.py",
+        "smell:fanin:function:loops.py:65",
+        "smell:fanin:class:loops.py:210",
+        "smell:fanin:file:probe.py"
       ]
     ],
     [
@@ -9202,219 +9462,23 @@
       ]
     ],
     [
-      "incoming",
+      "_strip_bos",
       [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
+        "smell:fanin:function:lab.py:41"
       ]
     ],
     [
-      "fan-in",
+      "34",
       [
-        "smell:fanin:file:lab.py",
         "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
         "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
+        "smell:fanout:file:mirror2.py"
       ]
     ],
     [
-      "consider",
+      "function:lab.py:41",
       [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
-      "splitting",
-      [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
-      "module",
-      [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
-      "introducing",
-      [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
-      "facade",
-      [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
-      "pattern",
-      [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
-      ]
-    ],
-    [
-      "excessive_fan_in",
-      [
-        "smell:fanin:file:lab.py",
-        "smell:fanin:function:lab.py:41",
-        "smell:fanin:function:lab.py:68",
-        "smell:fanin:function:lab.py:268",
-        "smell:fanin:class:lab.py:121",
-        "smell:fanin:file:affect2.py",
-        "smell:fanin:function:affect2.py:62",
-        "smell:fanin:file:affect.py",
-        "smell:fanin:file:affect3.py",
-        "smell:fanin:class:affect3.py:59",
-        "smell:fanin:function:apparatus09.py:57",
-        "smell:fanin:file:deepen.py",
-        "smell:fanin:file:fanout.py",
-        "smell:fanin:function:fanout.py:70",
-        "smell:fanin:file:loops.py",
-        "smell:fanin:function:loops.py:65",
-        "smell:fanin:class:loops.py:210",
-        "smell:fanin:function:nla.py:292",
-        "smell:fanin:file:probe.py"
+        "smell:fanin:function:lab.py:41"
       ]
     ],
     [
@@ -9424,9 +9488,10 @@
       ]
     ],
     [
-      "58",
+      "60",
       [
-        "smell:fanin:function:lab.py:68"
+        "smell:fanin:function:lab.py:68",
+        "smell:fanout:file:apparatus11.py"
       ]
     ],
     [
@@ -9437,12 +9502,6 @@
     ],
     [
       "run",
-      [
-        "smell:fanin:function:lab.py:268"
-      ]
-    ],
-    [
-      "30",
       [
         "smell:fanin:function:lab.py:268"
       ]
@@ -9460,12 +9519,6 @@
       ]
     ],
     [
-      "32",
-      [
-        "smell:fanin:class:lab.py:121"
-      ]
-    ],
-    [
       "class:lab.py:121",
       [
         "smell:fanin:class:lab.py:121"
@@ -9475,6 +9528,13 @@
       "affect2.py",
       [
         "smell:fanin:file:affect2.py"
+      ]
+    ],
+    [
+      "36",
+      [
+        "smell:fanin:file:affect2.py",
+        "smell:fanin:function:affect2.py:62"
       ]
     ],
     [
@@ -9496,12 +9556,6 @@
       ]
     ],
     [
-      "60",
-      [
-        "smell:fanout:file:apparatus11.py"
-      ]
-    ],
-    [
       "affect8.py",
       [
         "smell:fanout:file:affect8.py"
@@ -9512,12 +9566,6 @@
       [
         "smell:fanout:file:affect8.py",
         "smell:fanout:file:affect13.py"
-      ]
-    ],
-    [
-      "file:affect8.py",
-      [
-        "smell:fanout:file:affect8.py"
       ]
     ],
     [
@@ -9551,9 +9599,15 @@
       ]
     ],
     [
-      "file:affect13.py",
+      "affect14.py",
       [
-        "smell:fanout:file:affect13.py"
+        "smell:fanout:file:affect14.py"
+      ]
+    ],
+    [
+      "61",
+      [
+        "smell:fanout:file:affect14.py"
       ]
     ],
     [
@@ -9575,6 +9629,12 @@
       ]
     ],
     [
+      "29",
+      [
+        "smell:fanout:file:affect3b.py"
+      ]
+    ],
+    [
       "affect4b.py",
       [
         "smell:fanout:file:affect4b.py"
@@ -9585,6 +9645,12 @@
       [
         "smell:fanout:file:affect4b.py",
         "smell:fanout:file:langval2.py"
+      ]
+    ],
+    [
+      "file:affect4b.py",
+      [
+        "smell:fanout:file:affect4b.py"
       ]
     ],
     [
@@ -9613,12 +9679,6 @@
     ],
     [
       "audit03.py",
-      [
-        "smell:fanout:file:audit03.py"
-      ]
-    ],
-    [
-      "24",
       [
         "smell:fanout:file:audit03.py"
       ]
@@ -9685,18 +9745,6 @@
       ]
     ],
     [
-      "unit15.py",
-      [
-        "smell:fanout:file:unit15.py"
-      ]
-    ],
-    [
-      "31",
-      [
-        "smell:fanout:file:unit15.py"
-      ]
-    ],
-    [
       "probes",
       [
         "repo:summary"
@@ -9710,6 +9758,12 @@
     ],
     [
       "package",
+      [
+        "repo:summary"
+      ]
+    ],
+    [
+      "69",
       [
         "repo:summary"
       ]
@@ -9795,7 +9849,7 @@
       3.884994333040227
     ],
     [
-      "62",
+      "49",
       3.884994333040227
     ],
     [
@@ -9803,43 +9857,23 @@
       3.374168709274236
     ],
     [
-      "file:affect.py",
-      2.15039327765212
+      "reinforced",
+      3.884994333040227
+    ],
+    [
+      "import",
+      3.884994333040227
+    ],
+    [
+      "clustering",
+      3.884994333040227
     ],
     [
       "file:affect08s.py",
       2.7863820443721172
     ],
     [
-      "file:affect3.py",
-      1.6163107917218624
-    ],
-    [
-      "file:affect3b.py",
-      2.039167642541896
-    ],
-    [
-      "file:affect3c.py",
-      1.9390841839849136
-    ],
-    [
-      "file:affect3g.py",
-      2.039167642541896
-    ],
-    [
-      "file:affect4.py",
-      3.0376964726530233
-    ],
-    [
-      "file:affect4b.py",
-      3.374168709274236
-    ],
-    [
       "file:affect5.py",
-      3.0376964726530233
-    ],
-    [
-      "file:affect7.py",
       3.0376964726530233
     ],
     [
@@ -9859,16 +9893,12 @@
       3.884994333040227
     ],
     [
-      "file:concepts.py",
-      3.374168709274236
-    ],
-    [
       "file:course.py",
       3.884994333040227
     ],
     [
       "file:deepen.py",
-      2.4186572642467996
+      2.585711348909966
     ],
     [
       "file:deepen2.py",
@@ -9879,8 +9909,44 @@
       3.374168709274236
     ],
     [
-      "file:fanout.py",
+      "file:affect.py",
+      2.2755564206061263
+    ],
+    [
+      "file:concepts.py",
+      3.374168709274236
+    ],
+    [
+      "file:langval.py",
+      3.0376964726530233
+    ],
+    [
+      "file:langval2.py",
+      3.0376964726530233
+    ],
+    [
+      "file:lossmap.py",
+      3.374168709274236
+    ],
+    [
+      "file:mirror.py",
       2.7863820443721172
+    ],
+    [
+      "file:mirror2.py",
+      2.585711348909966
+    ],
+    [
+      "file:nla.py",
+      2.7863820443721172
+    ],
+    [
+      "file:probe.py",
+      3.0376964726530233
+    ],
+    [
+      "file:scan.py",
+      3.374168709274236
     ],
     [
       "domain",
@@ -9896,7 +9962,7 @@
     ],
     [
       "28",
-      2.7863820443721172
+      3.374168709274236
     ],
     [
       "dependents",
@@ -9920,11 +9986,19 @@
     ],
     [
       "high",
-      0.17142226633591895
+      0.18781607611159534
     ],
     [
       "file:affect2.py",
-      2.2755564206061263
+      2.585711348909966
+    ],
+    [
+      "file:affect3.py",
+      1.8481124057791867
+    ],
+    [
+      "file:affect7.py",
+      2.7863820443721172
     ],
     [
       "critical",
@@ -9935,16 +10009,28 @@
       3.0376964726530233
     ],
     [
-      "20",
-      2.039167642541896
+      "22",
+      2.585711348909966
     ],
     [
       "file:affect11.py",
-      2.039167642541896
+      1.8481124057791867
     ],
     [
       "file:affect12.py",
       3.0376964726530233
+    ],
+    [
+      "file:affect13.py",
+      1.8481124057791867
+    ],
+    [
+      "file:affect3b.py",
+      2.2755564206061263
+    ],
+    [
+      "file:affect3c.py",
+      2.15039327765212
     ],
     [
       "affectsteer",
@@ -9953,6 +10039,38 @@
     [
       "class:affect3.py:59",
       3.374168709274236
+    ],
+    [
+      "_prompt_ids",
+      3.884994333040227
+    ],
+    [
+      "10",
+      2.585711348909966
+    ],
+    [
+      "medium",
+      0.6931471805599453
+    ],
+    [
+      "function:affect7.py:101",
+      3.884994333040227
+    ],
+    [
+      "file:affect8.py",
+      3.0376964726530233
+    ],
+    [
+      "file:affect14.py",
+      3.0376964726530233
+    ],
+    [
+      "_exit_id",
+      3.884994333040227
+    ],
+    [
+      "function:affect7.py:109",
+      3.884994333040227
     ],
     [
       "topk",
@@ -9971,24 +10089,12 @@
       3.0376964726530233
     ],
     [
-      "file:mirror.py",
-      3.0376964726530233
-    ],
-    [
-      "file:mirror2.py",
+      "20",
       2.585711348909966
     ],
     [
       "single_tokens",
       3.884994333040227
-    ],
-    [
-      "10",
-      3.0376964726530233
-    ],
-    [
-      "medium",
-      0.6398011998546526
     ],
     [
       "function:deepen.py:71",
@@ -10015,6 +10121,14 @@
       3.374168709274236
     ],
     [
+      "30",
+      2.585711348909966
+    ],
+    [
+      "file:fanout.py",
+      3.0376964726530233
+    ],
+    [
       "assess",
       3.374168709274236
     ],
@@ -10027,23 +10141,23 @@
       3.374168709274236
     ],
     [
+      "file:affect3g.py",
+      3.0376964726530233
+    ],
+    [
+      "file:affect4.py",
+      3.374168709274236
+    ],
+    [
       "langval.py",
       3.374168709274236
     ],
     [
-      "file:langval.py",
-      3.374168709274236
-    ],
-    [
       "file:apparatus11.py",
-      3.0376964726530233
+      3.374168709274236
     ],
     [
       "file:audit02.py",
-      3.374168709274236
-    ],
-    [
-      "file:langval2.py",
       3.374168709274236
     ],
     [
@@ -10059,7 +10173,7 @@
       3.0376964726530233
     ],
     [
-      "22",
+      "24",
       2.585711348909966
     ],
     [
@@ -10095,16 +10209,8 @@
       3.374168709274236
     ],
     [
-      "29",
-      3.0376964726530233
-    ],
-    [
       "function:nla.py:292",
       3.374168709274236
-    ],
-    [
-      "file:nla.py",
-      3.0376964726530233
     ],
     [
       "probe.py",
@@ -10115,16 +10221,8 @@
       3.374168709274236
     ],
     [
-      "file:probe.py",
-      3.374168709274236
-    ],
-    [
       "file:lab.py",
-      2.585711348909966
-    ],
-    [
-      "file:scan.py",
-      3.884994333040227
+      3.0376964726530233
     ],
     [
       "unit14.py",
@@ -10132,7 +10230,7 @@
     ],
     [
       "12",
-      3.374168709274236
+      3.884994333040227
     ],
     [
       "file:unit14.py",
@@ -10148,7 +10246,7 @@
     ],
     [
       "file:unit15.py",
-      3.374168709274236
+      3.884994333040227
     ],
     [
       "file:unit15d.py",
@@ -10179,31 +10277,7 @@
       3.374168709274236
     ],
     [
-      "112",
-      3.374168709274236
-    ],
-    [
-      "_strip_bos",
-      3.374168709274236
-    ],
-    [
-      "34",
-      2.585711348909966
-    ],
-    [
-      "function:lab.py:41",
-      3.374168709274236
-    ],
-    [
-      "_token_ids",
-      3.884994333040227
-    ],
-    [
-      "function:lab.py:46",
-      3.884994333040227
-    ],
-    [
-      "file:lossmap.py",
+      "114",
       3.374168709274236
     ],
     [
@@ -10292,34 +10366,6 @@
     ],
     [
       "68",
-      3.374168709274236
-    ],
-    [
-      "59",
-      3.884994333040227
-    ],
-    [
-      "sorry4.py",
-      3.884994333040227
-    ],
-    [
-      "audit02.py",
-      3.884994333040227
-    ],
-    [
-      "57",
-      3.884994333040227
-    ],
-    [
-      "site.py",
-      3.884994333040227
-    ],
-    [
-      "51",
-      3.884994333040227
-    ],
-    [
-      "file:site.py",
       3.884994333040227
     ],
     [
@@ -10359,12 +10405,52 @@
       1.32004497557869
     ],
     [
+      "59",
+      3.884994333040227
+    ],
+    [
+      "sorry4.py",
+      3.884994333040227
+    ],
+    [
+      "audit02.py",
+      3.884994333040227
+    ],
+    [
+      "57",
+      3.884994333040227
+    ],
+    [
+      "site.py",
+      3.884994333040227
+    ],
+    [
+      "51",
+      3.884994333040227
+    ],
+    [
+      "file:site.py",
+      3.884994333040227
+    ],
+    [
+      "_strip_bos",
+      3.884994333040227
+    ],
+    [
+      "34",
+      3.0376964726530233
+    ],
+    [
+      "function:lab.py:41",
+      3.884994333040227
+    ],
+    [
       "get_model",
       3.884994333040227
     ],
     [
-      "58",
-      3.884994333040227
+      "60",
+      3.374168709274236
     ],
     [
       "function:lab.py:68",
@@ -10372,10 +10458,6 @@
     ],
     [
       "run",
-      3.884994333040227
-    ],
-    [
-      "30",
       3.884994333040227
     ],
     [
@@ -10387,16 +10469,16 @@
       3.884994333040227
     ],
     [
-      "32",
-      3.884994333040227
-    ],
-    [
       "class:lab.py:121",
       3.884994333040227
     ],
     [
       "affect2.py",
       3.884994333040227
+    ],
+    [
+      "36",
+      3.374168709274236
     ],
     [
       "_load_vectors",
@@ -10411,20 +10493,12 @@
       3.884994333040227
     ],
     [
-      "60",
-      3.884994333040227
-    ],
-    [
       "affect8.py",
       3.884994333040227
     ],
     [
       "56",
       3.374168709274236
-    ],
-    [
-      "file:affect8.py",
-      3.884994333040227
     ],
     [
       "board.py",
@@ -10447,7 +10521,11 @@
       3.884994333040227
     ],
     [
-      "file:affect13.py",
+      "affect14.py",
+      3.884994333040227
+    ],
+    [
+      "61",
       3.884994333040227
     ],
     [
@@ -10463,12 +10541,20 @@
       3.884994333040227
     ],
     [
+      "29",
+      3.884994333040227
+    ],
+    [
       "affect4b.py",
       3.884994333040227
     ],
     [
       "37",
       3.374168709274236
+    ],
+    [
+      "file:affect4b.py",
+      3.884994333040227
     ],
     [
       "affect5.py",
@@ -10488,10 +10574,6 @@
     ],
     [
       "audit03.py",
-      3.884994333040227
-    ],
-    [
-      "24",
       3.884994333040227
     ],
     [
@@ -10535,14 +10617,6 @@
       3.884994333040227
     ],
     [
-      "unit15.py",
-      3.884994333040227
-    ],
-    [
-      "31",
-      3.884994333040227
-    ],
-    [
       "probes",
       3.884994333040227
     ],
@@ -10552,6 +10626,10 @@
     ],
     [
       "package",
+      3.884994333040227
+    ],
+    [
+      "69",
       3.884994333040227
     ],
     [

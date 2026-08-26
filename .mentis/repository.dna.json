@@ -3,29 +3,29 @@
   "kind": "dna",
   "name": "repository.dna",
   "filename": "repository-dna.memory.json",
-  "builtAt": "2026-08-25T22:17:55.696Z",
+  "builtAt": "2026-08-26T08:22:40.038Z",
   "repository": "probes",
   "data": {
     "repository": "probes",
-    "builtAt": "2026-08-25T22:17:55.617Z",
+    "builtAt": "2026-08-26T08:22:39.953Z",
     "architecture": {
       "name": "probes",
       "type": "Single Package",
       "layers": [],
       "packages": [],
       "languages": {
-        "python": 67,
+        "python": 68,
         "javascript": 1
       },
-      "summary": "Single Package with 68 source files across python, javascript. 0 packages detected. core domains: General."
+      "summary": "Single Package with 69 source files across python, javascript. 0 packages detected. core domains: General."
     },
     "stats": {
-      "filesScanned": 68,
-      "nodesCreated": 597,
-      "edgesCreated": 1862,
+      "filesScanned": 69,
+      "nodesCreated": 609,
+      "edgesCreated": 1923,
       "domainsFound": 1,
       "flowsFound": 0,
-      "durationMs": 164
+      "durationMs": 161
     },
     "domainCount": 1,
     "flowCount": 0,
@@ -67,10 +67,22 @@
         "description": "affect7.py depends on 68 other nodes — high fan-out"
       },
       {
+        "id": "smell:fanin:file:fanout.py",
+        "type": "excessive_fan_in",
+        "severity": "high",
+        "description": "fanout.py has 30 incoming dependencies — high fan-in"
+      },
+      {
         "id": "smell:fanout:file:langval.py",
         "type": "excessive_fan_out",
         "severity": "high",
         "description": "langval.py depends on 59 other nodes — high fan-out"
+      },
+      {
+        "id": "smell:fanin:function:nla.py:292",
+        "type": "excessive_fan_in",
+        "severity": "high",
+        "description": "decode has 30 incoming dependencies — high fan-in"
       },
       {
         "id": "smell:fanout:file:sorry4.py",
@@ -94,22 +106,10 @@
         "id": "smell:fanin:file:lab.py",
         "type": "excessive_fan_in",
         "severity": "high",
-        "description": "lab.py has 112 incoming dependencies — high fan-in"
-      },
-      {
-        "id": "smell:fanin:function:lab.py:41",
-        "type": "excessive_fan_in",
-        "severity": "high",
-        "description": "_strip_bos has 34 incoming dependencies — high fan-in"
-      },
-      {
-        "id": "smell:fanin:function:lab.py:68",
-        "type": "excessive_fan_in",
-        "severity": "high",
-        "description": "get_model has 58 incoming dependencies — high fan-in"
+        "description": "lab.py has 114 incoming dependencies — high fan-in"
       }
     ]
   },
   "estimatedTokens": 729,
-  "bytes": 2558
+  "bytes": 2551
 }

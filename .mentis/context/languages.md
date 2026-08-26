@@ -7,14 +7,14 @@
 | Metric | Value |
 |--------|-------|
 | Languages detected | **2** |
-| Source files analyzed | **68** |
+| Source files analyzed | **69** |
 | Mnemos engine coverage | **52** languages |
 
 ## File distribution
 
 ```mermaid
 pie showData title Files by language
-    "python" : 67
+    "python" : 68
     "javascript" : 1
 ```
 
@@ -22,8 +22,8 @@ pie showData title Files by language
 
 | Language | Files | Share |
 |----------|------:|------:|
-| python | 67 | 98.5% |
-| javascript | 1 | 1.5% |
+| python | 68 | 98.6% |
+| javascript | 1 | 1.4% |
 
 ## How files become graph nodes
 

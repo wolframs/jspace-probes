@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (62)"]
+  D0["General (63)"]
 ```
 
 ## Execution flows
@@ -95,11 +95,11 @@ flowchart TD
     P1N0 --> P1N1
     P1N2["file:affect12.py"]
     P1N1 --> P1N2
-    P1N3["file:affect3b.py"]
+    P1N3["file:affect13.py"]
     P1N2 --> P1N3
-    P1N4["file:affect3c.py"]
+    P1N4["file:affect3b.py"]
     P1N3 --> P1N4
-    P1N5["file:affect3g.py"]
+    P1N5["file:affect3c.py"]
     P1N4 --> P1N5
   end
   subgraph P2 ["high High-traffic: AffectSteer"]
@@ -108,24 +108,24 @@ flowchart TD
     P2N0 --> P2N1
     P2N2["file:affect11.py"]
     P2N1 --> P2N2
-    P2N3["file:affect3b.py"]
+    P2N3["file:affect13.py"]
     P2N2 --> P2N3
-    P2N4["file:affect3c.py"]
+    P2N4["file:affect3b.py"]
     P2N3 --> P2N4
-    P2N5["file:affect3g.py"]
+    P2N5["file:affect3c.py"]
     P2N4 --> P2N5
   end
-  subgraph P3 ["high High-traffic: topk"]
-    P3N0["function:apparatus09.py:57"]
-    P3N1["file:apparatus09.py"]
+  subgraph P3 ["med High-traffic: _prompt_ids"]
+    P3N0["function:affect7.py:101"]
+    P3N1["file:affect7.py"]
     P3N0 --> P3N1
-    P3N2["file:affect2.py"]
+    P3N2["file:affect11.py"]
     P3N1 --> P3N2
-    P3N3["file:affect3.py"]
+    P3N3["file:affect13.py"]
     P3N2 --> P3N3
-    P3N4["file:affect3b.py"]
+    P3N4["file:affect8.py"]
     P3N3 --> P3N4
-    P3N5["file:affect3c.py"]
+    P3N5["file:affect14.py"]
     P3N4 --> P3N5
   end
 ```
@@ -148,7 +148,7 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 67
+    "python" : 68
     "javascript" : 1
 ```
 
@@ -287,8 +287,8 @@ flowchart LR
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 21
-    "Medium" : 29
+    "High" : 24
+    "Medium" : 26
 ```
 
 ## mnestis build pipeline
