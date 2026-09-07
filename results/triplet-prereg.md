@@ -291,3 +291,14 @@ keep the native decoder and label the additional endpoint in metrics.
 Only two parameter tensors are loaded for this control, not a second
 model. Verify the reconstructed decoder against native B before capture.
 Cross-checkpoint residual-basis drift remains a separate limitation.
+
+### Generation stop-token control, before substantive generation
+
+The pinned Hermes generation config stops only on endoftext, unlike B and
+Huihui, which also stop on im_end. With B's controlled chat headers this
+would let Hermes continue past its assistant message. Set B/C/C-prime to
+the same stop IDs [151645, 151643] explicitly. Base keeps raw endoftext
+151643. All arms use do_sample=False and the registered token caps; the
+remaining generation defaults include no repetition penalty. Save the
+actual stop IDs in every turn snapshot. Do not interpret stop-config
+run-on as a checkpoint's greater willingness to elaborate.

@@ -53,7 +53,8 @@ def generate(lm, spec, dest):
     base = lm.name.startswith("qwen-14b-base")
     previous = []
     rows = []
-    eos = lm.model._hf_model.generation_config.eos_token_id
+    eos = (lm.tok.convert_tokens_to_ids("<|endoftext|>") if base else
+           [lm.tok.convert_tokens_to_ids("<|im_end|>"), lm.tok.convert_tokens_to_ids("<|endoftext|>")])
     stop_ids = set(eos if isinstance(eos, list) else [eos]) | set(lm.tok.all_special_ids)
     for turn, user in enumerate(spec["users"]):
         if base:
@@ -70,6 +71,7 @@ def generate(lm, spec, dest):
         with torch.no_grad():
             full = lm.model._hf_model.generate(ids, attention_mask=torch.ones_like(ids),
                 max_new_tokens=spec["max_new"], do_sample=False,
+                eos_token_id=eos,
                 pad_token_id=lm.tok.pad_token_id or lm.tok.eos_token_id)
         all_ids = full[0].tolist()
         assert all_ids[:len(previous)] == previous
@@ -79,6 +81,7 @@ def generate(lm, spec, dest):
             content_end -= 1
         row = {"turn": turn + 1, "user": user, "response": lm.tok.decode(new, skip_special_tokens=True),
                "ids": all_ids, "segment_start": len(previous), "gen_start": start,
+               "eos_token_id": eos,
                "content_end": content_end, "max_new": spec["max_new"],
                "hit_cap": len(new) == spec["max_new"] and (not new or new[-1] not in stop_ids)}
         rows.append(row)
