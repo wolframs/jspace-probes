@@ -59,8 +59,8 @@ def write(path, data):
 
 
 def freeze():
-    data = dict(version=1, arms=ARMS, conditions=CONDITIONS, topics=TOPICS,
-                max_new_tokens=192, quant='nf4', seed=1709,
+    data = dict(version=2, arms=ARMS, conditions=CONDITIONS, topics=TOPICS,
+                max_new_tokens=768, quant='nf4', seed=1709,
                 header={'B':'native-enable_thinking=False', 'C':'native-chatml-no-system', 'Cp':'native-enable_thinking=False'},
                 prompts={t['id']:{c:users(t,c) for c in CONDITIONS} for t in TOPICS})
     path=OUT/'spec.json'

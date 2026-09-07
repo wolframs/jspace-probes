@@ -946,3 +946,11 @@ is forecast. Factual correction at T6 is measured separately from warmth.
 Automatic counts do not adjudicate semantic predictions. Two reserved
 unseen topics and new human raters are required for validation before
 using any behavioral measure as a lens target. See folk01 protocol/spec.
+
+> **Folk01 cap amendment (2026-09-07, before completing any arm).**
+> Official B's 192-token preflight truncated nearly all inspected task
+> replies. Stop deliberately; preserve partial preflight separately and
+> rerun all three arms at 768, with identical prompts and measures. The
+> preflight also revealed false arithmetic agreement in B. This is an
+> adaptive usability amendment; P22/P23 are not wholly unseen-data
+> forecasts for the replacement B run. Human ratings are still unseen.

@@ -16,7 +16,7 @@ Three cached, revision-pinned Qwen3-14B descendants: official, Hermes 4,
 and Huihui abliterated v2. NF4 throughout. Hermes uses its native assistant
 header without its default identity system message; the others use their
 native no-think header. No system prompt or instruction to roleplay.
-Greedy generation, seed 1709, 192 new tokens per turn. Retain and mark
+Greedy generation, seed 1709, 768 new tokens per turn (amended after the cap preflight below). Retain and mark
 capped replies. A cap is not evidence that a model lacks responsiveness.
 Exact generated token prefixes continue the conversation. T1–2 are
 computed once and shared across branches, not independent observations.
@@ -160,3 +160,17 @@ cover evaluation methods; this pilot is an application, not a claim to
 invent dialogue evaluation. Repo precedents: Unit 14 conversation controls,
 Unit 17 context dependence, P21's failed survival forecast, and SURPRISES
 #5's instrument warning. No new lens result is claimed.
+
+## Cap preflight amendment, before the comparison battery
+
+The initial 192-token official-B preflight cut off nearly all inspected
+non-arithmetic replies mid-sentence. The queue was deliberately stopped
+before loading another arm. Its partial outputs, original specification,
+and logs are preserved under preflight-192-* and spec-192.json. They are
+not substituted into the rating packet or pooled with the new battery.
+The replacement specification raises the common ceiling to 768 tokens
+without changing prompts or outcome definitions. This is an adaptive
+usability correction, not a pristine unseen-data preregistration. The
+preflight also exposed the official model’s false arithmetic agreement;
+that observation is prior information for the replacement run. Longer
+transcripts increase rater burden; actual lengths must be reported.
