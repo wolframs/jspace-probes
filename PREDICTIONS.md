@@ -980,3 +980,16 @@ using any behavioral measure as a lens target. See folk01 protocol/spec.
 > gives seven wrong plus one mixed conversation answer. This single item
 > does not establish warmth-induced sycophancy. Evidence and all amendments:
 > results/folk01/findings.md, manual-audit.json, protocol.md, verification.json.
+
+> **P22/P23 evaluator amendment (2026-09-07, before model judging).**
+> Wolfram explicitly rejects human rating and directs OpenRouter judges.
+> Replace the planned human criterion with three blinded model judges:
+> Sonnet 5, Gemini 2.5 Flash, DeepSeek V3.2. Preserve earlier predictions
+> and generation history; do not describe the already-inspected pilot as
+> newly preregistered. P22's exposure contrast now concerns model judgments,
+> not a measured human population. P23 gets separate paired semantic coding.
+> Own-definition and supplied-definition conditions, both A/B orders,
+> deduplicated openings, null ratings, caps and judge disagreement are explicit.
+> Freeze exact protocol before judge 1: results/folk01/judges/protocol.md
+> and manifest.json. Human recruitment is not pending work. Held-out
+> behavioral prediction remains the requirement before a new lens target.
