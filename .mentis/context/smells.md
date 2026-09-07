@@ -162,7 +162,7 @@ triplet_capture.py depends on 48 other nodes — high fan-out
 
 ## [HIGH] Excessive Fan In
 
-get has 62 incoming dependencies — high fan-in
+get has 63 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 

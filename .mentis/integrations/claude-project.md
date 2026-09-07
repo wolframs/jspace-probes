@@ -6,7 +6,7 @@ Add these files to your Claude Project knowledge:
 - `.mentis/context/architecture.md`
 - `.mentis/context/languages.md`
 
-Single Package with 115 source files across python, javascript. 0 packages detected. HTTP middleware and routing framework; core domains: General.
+Single Package with 116 source files across python, javascript. 0 packages detected. HTTP middleware and routing framework; core domains: General.
 
 Top capabilities: HTTP Framework & Middleware
 Central domains: General

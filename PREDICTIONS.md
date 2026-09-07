@@ -1106,3 +1106,10 @@ computed from context; “state versus re-reading” is not an identified contra
 > 0.2 seconds on short and 1.1–1.3 seconds on long warm-model prefixes. Evidence:
 > [Express01 report](results/express01/findings.md), analysis/specificity JSON,
 > scanner benchmark and 54 linked record films. No paid API calls.
+
+> **P24 localization check, exploratory after the primary result.** Equal-size
+> 24-emotion profiles at the workspace mean versus L39, controlling both norms:
+> Opus MAE 0.408 versus 0.460; Sonnet 0.369 versus 0.378. The workspace mean wins
+> this comparison. The output baseline is a single selected-vocabulary ratio,
+> not a predictor using the full output distribution. This check does not replace
+> the original random-feature controls. Evidence: Express01 depth-control.json.

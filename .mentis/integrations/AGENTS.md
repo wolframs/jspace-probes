@@ -53,12 +53,12 @@ probes (single package) centered on http framework & middleware.
 - **Health score:** 85/100
 - **AI readiness:** 78/100
 
-Single Package with 115 source files across python, javascript. 0 packages detected. HTTP middleware and routing framework; core domains: General.
+Single Package with 116 source files across python, javascript. 0 packages detected. HTTP middleware and routing framework; core domains: General.
 
 ## Language Support
 
 Mnestis analyzed this repo with **52** supported languages engine-wide.
-Detected here: 2 language(s), 115 source files.
+Detected here: 2 language(s), 116 source files.
 
 Read `.mentis/context/README.md` for the full diagram index.
 Read `.mentis/context/languages.md` for file distribution charts and the parsing pipeline graph.
@@ -66,14 +66,14 @@ Read `.mentis/context/graphs.md` for domain, flow, dependency, and risk Mermaid 
 
 ```mermaid
 flowchart LR
-  D0["General (107)"]
+  D0["General (108)"]
 ```
 
 ### Language distribution (this repo)
 
 ```mermaid
 pie showData title Files by language
-    "python" : 114
+    "python" : 115
     "javascript" : 1
 ```
 
@@ -207,7 +207,7 @@ mindmap
 
 ## Domains (start here)
 
-- **General** — Import-graph cluster of 73 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering · `file:affect08s.py`, `file:affect5.py`, `file:apparatus06.py`
+- **General** — Import-graph cluster of 74 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering · `file:affect08s.py`, `file:affect5.py`, `file:apparatus06.py`
 
 ## Critical Paths (edit carefully)
 

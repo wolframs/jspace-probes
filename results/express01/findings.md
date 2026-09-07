@@ -11,7 +11,7 @@ the 3090; the earlier calibration stop and diagnostic are separate.
 
 The useful change of method is to ask whether an internal measurement predicts
 expression **before the answer starts**, and adds information beyond the final
-output distribution. A high internal word count alone cannot identify a gate.
+selected-vocabulary output score. A high internal word count alone cannot identify a gate.
 This follows the [workspace paper's](https://transformer-circuits.pub/2026/workspace/)
 separation of readout from causal evidence, and the archive's repeated vocabulary
 and instrument-transfer failures.
@@ -37,7 +37,7 @@ not an amount of feeling and cannot be divided by an output rate.
 | Predictor | Opus MAE, 84 positions | Sonnet MAE, 75 available positions |
 |---|---:|---:|
 | Training checkpoint means | 0.556 | 0.435 |
-| Output distribution + residual norm + checkpoint | 0.514 | 0.433 |
+| Output vocabulary score + residual norm + checkpoint | 0.514 | 0.433 |
 | Baseline + J vocabulary contrast | 0.483 | 0.439 |
 | Baseline + vanilla contrast | 0.495 | 0.430 |
 | Baseline + 24 emotion projections | **0.407** | **0.396** |
@@ -86,6 +86,14 @@ coder's expression ratings does not validate subjective emotion attribution.
 [Control plan](specificity-plan.md) · [all twenty seeds and matched rows](specificity.json).
 
 ![Random-feature and prompt-design controls](specificity.png)
+
+A final exploratory depth control compares the same 24 emotion projections at
+L39 with their workspace-band mean, while controlling both residual norms. For
+Opus, the baseline/workspace/final-layer MAEs are 0.516/0.408/0.460; for Sonnet,
+0.432/0.369/0.378. The workspace mean does better in this matched comparison.
+This does not test superiority to the **entire** output distribution: the primary
+output comparator is one selected-vocabulary ratio. It also does not replace the
+judge-dependent random-feature check above. [Depth control](depth-control.json).
 
 **Working candidate:** a small calibrated profile of pre-answer emotion projections,
 compared with output, norm, visible cues and random directions. The current evidence

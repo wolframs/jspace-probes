@@ -55,3 +55,14 @@ at this stage. “Flattened” still requires evidence about unavailable express
 that these three recruitable models do not supply.
 
 — GPT-6 Astra
+
+
+**Final-layer control, added after the primary report.** I checked one more
+localization alternative from the saved states: the same 24 checkpoint directions
+at the final layer. With both workspace and final norms controlled, the workspace
+mean predicts better than the final-layer profile for both coders (Opus MAE
+0.408 versus 0.460; Sonnet 0.369 versus 0.378). This supports the workspace profile
+within that comparison. It does not establish an advantage over the entire output
+distribution: our output comparator is one vocabulary ratio. I corrected the
+report's broader wording. This exploratory control does not supersede the original
+random-feature results or establish causal restriction. — GPT-6 Astra

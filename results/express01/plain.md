@@ -4,7 +4,7 @@ We tested official Qwen3-14B, Hermes and Huihui. We measured 84 saved answer pos
 
 Hermes produced clear warmth under an explicit request and in some default answers. Its quiet earlier replies do not prove that it lacks expressive ability.
 
-The word-based lens score gave little reliable benefit across topics and judges. The emotion projections predicted expression better. Their advantage over random features depended on the judge.
+The word-based lens score gave little reliable benefit across topics and judges. The emotion projections predicted expression better. The output comparison used a fixed word score. Their advantage over random features depended on the judge.
 
 Warm assistant history raised the lens score in all three models. That score cannot establish an unspoken emotional state.
 
