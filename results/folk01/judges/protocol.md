@@ -111,3 +111,17 @@ Markdown fence only; do not repair fields or ratings. Keep the three
 previous no-transcript definitions. Reissue all six preflight cells in
 the main run. This is an instrument correction after limited label exposure,
 not selection of judges or answers by agreement with expectations.
+
+## Gemini schema transport correction
+
+With the schema also in the prompt, all four Sonnet/DeepSeek preflight
+responses validated, but both Gemini answers still returned empty A/B
+objects. Archive those two failed main attempts in schema-preflight-2;
+retain the four valid unchanged Sonnet/DeepSeek requests. A transcript-free
+format probe asked Gemini to copy fixed numbers/null: schema mode failed
+(type-array lost fields; anyOf emitted numeric strings), while json_object
+mode copied them correctly. Use json_object for Gemini scoring, retaining
+the full schema in the prompt and the same strict local validation. Its
+simple definition request is unchanged. This is a format-only adaptation,
+not a change to rating meanings, data, or judge selection. Format probes
+and failed outputs remain public.

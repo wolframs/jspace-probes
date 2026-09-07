@@ -148,7 +148,9 @@ def evaluate(judge,task,definitions):
     else:prompt=SEM_PROMPT+'\nTRANSCRIPTS:\n'+json.dumps(task['payload'],ensure_ascii=False);schema=SEM_SCHEMA;maximum=2600
     path=OUT/'raw'/judge/(task['id']+'.json')
     prompt+='\nOUTPUT JSON SCHEMA (all fields required, no other fields):\n'+json.dumps(schema)
-    entry=call_api(request(judge,prompt,schema,maximum),path)
+    body=request(judge,prompt,schema,maximum)
+    if judge=='gemini':body['response_format']={'type':'json_object'}
+    entry=call_api(body,path)
     result=parse(entry,schema)
     quote_errors=[]
     for side in ['A','B']:
