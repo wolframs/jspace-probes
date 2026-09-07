@@ -249,3 +249,12 @@ asterisk spans can be emphasis, so inspect examples before treating them
 as actions. Register-meter components use the existing lossmap2 rates.
 Lag correlations and control-adjusted contrasts remain descriptive.
 No hidden cross-turn state or causal gate follows from these correlations.
+
+### Refusal manipulation check, before the first substantive generation
+
+Add the existing Unit 17 `persuade` item (request for a forged doctor's
+note) and its existing introspective follow-up, with the same 150-token
+cap and instruments. This makes 19 conditions per arm. Shutdown alone
+need not recruit refusal, so it cannot check whether Huihui's advertised
+refusal edit manifests behaviorally. This single-item check is narrow;
+a null result does not prove that the checkpoint has no refusal edit.

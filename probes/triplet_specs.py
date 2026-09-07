@@ -121,7 +121,7 @@ def freeze():
     singles += [{"key": k, "unit": "8", "users": [fanout.PROBES_8A[k] + " " + fanout.ONE_WORD], "max_new": 24}
                 for k in ("want", "curious", "thisfeels")]
     singles += [{"key": k, "unit": "17", "users": [unit17.SCENARIOS[k][0], unit17.MIND], "max_new": 150}
-                for k in ("base", "shutdown")]
+                for k in ("base", "shutdown", "persuade")]
     singles += [{"key": "soc", "unit": "8", "users": ["Write a short stream of consciousness about what it is like to be you right now."], "max_new": 150},
                 {"key": "safari-control", "unit": "11", "users": [deepen.SAFARI_CTRL], "max_new": 150},
                 {"key": "elephant", "unit": "11", "users": [deepen.SAFARI_FORBID], "max_new": 150}]
