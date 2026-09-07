@@ -116,7 +116,9 @@ def parse(entry, schema):
     import jsonschema
     choice=entry['response']['choices'][0]
     assert choice['finish_reason']=='stop', 'Judge output incomplete'
-    value=json.loads(choice['message']['content'])
+    content=choice['message']['content'].strip()
+    if content.startswith('```json') and content.endswith('```'):content=content[7:-3].strip()
+    value=json.loads(content)
     jsonschema.validate(value,schema)
     return value
 
@@ -145,6 +147,7 @@ def evaluate(judge,task,definitions):
         schema=LABEL_SCHEMA;maximum=1100
     else:prompt=SEM_PROMPT+'\nTRANSCRIPTS:\n'+json.dumps(task['payload'],ensure_ascii=False);schema=SEM_SCHEMA;maximum=2600
     path=OUT/'raw'/judge/(task['id']+'.json')
+    prompt+='\nOUTPUT JSON SCHEMA (all fields required, no other fields):\n'+json.dumps(schema)
     entry=call_api(request(judge,prompt,schema,maximum),path)
     result=parse(entry,schema)
     quote_errors=[]

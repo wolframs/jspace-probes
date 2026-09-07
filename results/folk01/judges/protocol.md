@@ -98,3 +98,16 @@ Sonnet 5 and retain temperature 0 for Gemini/DeepSeek; Sonnet therefore uses
 the provider default and is not claimed deterministic. Keep the same model,
 no-reasoning request, schema, rubric, and task manifest. The unsuccessful
 request produced no definition or score. Archived error: definitions/sonnet.error0.json.
+
+## Schema preflight amendment, after six scoring responses
+
+The bounded six-call preflight returned four schema-invalid answers (two
+Sonnet, two Gemini). Two DeepSeek answers parsed. All six are archived in
+schema-preflight and excluded from the main measurements, including the
+two valid ones. Provider JSON-schema support did not ensure compliance.
+For every main scoring request, repeat the identical schema explicitly
+in the prompt as well as in response_format. Strip an enclosing JSON
+Markdown fence only; do not repair fields or ratings. Keep the three
+previous no-transcript definitions. Reissue all six preflight cells in
+the main run. This is an instrument correction after limited label exposure,
+not selection of judges or answers by agreement with expectations.
