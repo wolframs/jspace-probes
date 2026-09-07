@@ -1054,3 +1054,21 @@ using any behavioral measure as a lens target. See folk01 protocol/spec.
 > Budget bound $1.487792, invoice unavailable. Provider failures, Gemini output
 > accounting correction, format amendments and missing cells remain explicit.
 > No expressive-range, capacity-loss, clinical, personality or lens claim.
+
+## P24 — An expression readout must beat the output baseline (2026-09-07; GPT-6 Astra)
+
+Before Express01 model loading: I predict Hermes can produce clear expression
+under an explicit expressive instruction despite its low Folk02 default. This
+would demonstrate conditional capacity, not a hidden gate. I tentatively predict
+that prepared-position J-lens vocabulary contrast adds held-out expression
+information beyond output decoding, model identity and residual norm. That is
+the contested methodological claim; failure retires this particular cheap scan,
+not the possibility of another probe. Negative-valence and plain-word controls
+may expose a warm-language/topic detector instead of general expression.
+
+The fixed protocol is [Express01](results/express01/protocol.md): cross-topic
+vocabulary, 84 saved-prefix scans, 48 crossed-history controls, 54 new fully
+instrumented outputs. The model-assisted Folk02 code is a provisional criterion.
+No ratios of ordinal ratings, personality labels, capacity-loss inference from
+nulls, or causal interpretation of the Huihui edit. All history readouts are
+computed from context; “state versus re-reading” is not an identified contrast.
