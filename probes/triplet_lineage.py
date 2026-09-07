@@ -28,9 +28,11 @@ def run():
                 val = f.get_slice(name)[:1024] if name in ("model.embed_tokens.weight", "lm_head.weight") else f.get_tensor(name)
                 values.append(val.float())
         delta = values[1] - values[0]
-        norm = float(delta.norm())
+        # Large flattened float32 reductions can lose enough precision to
+        # produce impossible explained-energy fractions above one.
+        norm = float(torch.linalg.vector_norm(delta, dtype=torch.float64))
         row = {"shape": list(delta.shape), "delta_frobenius": norm,
-               "relative_frobenius": norm / float(values[0].norm()),
+               "relative_frobenius": norm / float(torch.linalg.vector_norm(values[0], dtype=torch.float64)),
                "nonzero_fraction": float((delta != 0).float().mean())}
         if norm:
             g = torch.Generator().manual_seed(1729)
@@ -41,6 +43,7 @@ def run():
             vals = torch.linalg.svdvals(delta @ Q)
             row["rank1_energy_lower_bound"] = float(vals[0].square()) / norm**2
             row["rank8_energy_lower_bound"] = float(vals.square().sum()) / norm**2
+            assert row["rank8_energy_lower_bound"] <= 1.00001, row
         rows[name] = row
         print("WEIGHT", name, row, flush=True)
     write_json(ROOT / "lineage-weight-check.json", {"configs": configs, "rows": rows,

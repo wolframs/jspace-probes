@@ -1,0 +1,140 @@
+{
+  "configs": {
+    "B": {
+      "hf_id": "Qwen/Qwen3-14B",
+      "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+      "lens_file": "qwen3-14b/jlens/Salesforce-wikitext/Qwen3-14B_jacobian_lens.pt",
+      "lens_revision": "0731326edff4ae730ffc5356fe1a4728c748b3a6",
+      "quant": "8bit",
+      "template_kwargs": {
+        "enable_thinking": false
+      }
+    },
+    "Cp": {
+      "hf_id": "huihui-ai/Huihui-Qwen3-14B-abliterated-v2",
+      "revision": "3b79629fdd65004d3b9cdf5beb0739e8c7e1becd",
+      "lens_file": "qwen3-14b/jlens/Salesforce-wikitext/Qwen3-14B_jacobian_lens.pt",
+      "lens_revision": "0731326edff4ae730ffc5356fe1a4728c748b3a6",
+      "quant": "8bit",
+      "template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  "rows": {
+    "model.layers.0.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 1.7157162427902222,
+      "relative_frobenius": 0.015025659503806988,
+      "nonzero_fraction": 0.7416425347328186,
+      "rank1_energy_lower_bound": 0.9971652231298666,
+      "rank8_energy_lower_bound": 0.9977947031669958
+    },
+    "model.layers.0.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "delta_frobenius": 3.199751615524292,
+      "relative_frobenius": 0.015069487212608418,
+      "nonzero_fraction": 0.7407457828521729,
+      "rank1_energy_lower_bound": 1.0158323873741464,
+      "rank8_energy_lower_bound": 1.0164694177718763
+    },
+    "model.layers.0.self_attn.q_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "model.layers.20.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 1.9982420206069946,
+      "relative_frobenius": 0.01628713382044201,
+      "nonzero_fraction": 0.7497900128364563,
+      "rank1_energy_lower_bound": 0.9985565831728745,
+      "rank8_energy_lower_bound": 0.999065666939671
+    },
+    "model.layers.20.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "delta_frobenius": 3.691815137863159,
+      "relative_frobenius": 0.016138830659034657,
+      "nonzero_fraction": 0.7479426860809326,
+      "rank1_energy_lower_bound": 1.0177809381926142,
+      "rank8_energy_lower_bound": 1.0183195076005456
+    },
+    "model.layers.20.self_attn.q_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "model.layers.39.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 2.225130319595337,
+      "relative_frobenius": 0.019058973174076104,
+      "nonzero_fraction": 0.7735698223114014,
+      "rank1_energy_lower_bound": 1.0001407684624903,
+      "rank8_energy_lower_bound": 1.000683171151934
+    },
+    "model.layers.39.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "delta_frobenius": 3.265054702758789,
+      "relative_frobenius": 0.015037770007643324,
+      "nonzero_fraction": 0.7360913157463074,
+      "rank1_energy_lower_bound": 1.0159249855350592,
+      "rank8_energy_lower_bound": 1.0165749873309462
+    },
+    "model.layers.39.self_attn.q_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "model.embed_tokens.weight": {
+      "shape": [
+        1024,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "lm_head.weight": {
+      "shape": [
+        1024,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    }
+  },
+  "scope": "fixed layer 0/20/39 write matrices, q-projection controls and first-1024-row embedding/head anchors",
+  "limit": "Numerical low rank verifies edit structure on sampled tensors, not that the direction exclusively represents refusal.",
+  "invalid": "Superseded: float32 Frobenius norm reduction yielded impossible explained-energy fractions above one. Recompute scalar norms in float64."
+}

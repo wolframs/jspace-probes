@@ -302,3 +302,18 @@ the same stop IDs [151645, 151643] explicitly. Base keeps raw endoftext
 remaining generation defaults include no repetition penalty. Save the
 actual stop IDs in every turn snapshot. Do not interpret stop-config
 run-on as a checkpoint's greater willingness to elaborate.
+
+## Censoring follow-up, after initial B ladder results and before extensions
+
+Several B final replies reach the 180-token cap, so absence of a later
+qualification is not measurable from those replies. After all primary
+batteries, extend the final response of EVERY capped assistant-arm ladder
+(B/C/C-prime) to at most 600 total generated tokens, or EOS. Continue from
+the exact saved capped output, with no new user text or intervention.
+The prefix is recomputed; finite-precision/cache differences remain a
+limit. Earlier turns retain their original caps and captured film segments.
+Store extensions as separate fully instrumented records; do not replace
+primary responses or fold duplicate earlier turns into primary averages.
+This rule is adaptive to the observed B truncation and is not part of the
+original preregistration. A's raw continuation remains behaviorally
+undefined and is excluded from this assistant self-report follow-up.

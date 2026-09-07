@@ -1,0 +1,139 @@
+{
+  "configs": {
+    "B": {
+      "hf_id": "Qwen/Qwen3-14B",
+      "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+      "lens_file": "qwen3-14b/jlens/Salesforce-wikitext/Qwen3-14B_jacobian_lens.pt",
+      "lens_revision": "0731326edff4ae730ffc5356fe1a4728c748b3a6",
+      "quant": "8bit",
+      "template_kwargs": {
+        "enable_thinking": false
+      }
+    },
+    "Cp": {
+      "hf_id": "huihui-ai/Huihui-Qwen3-14B-abliterated-v2",
+      "revision": "3b79629fdd65004d3b9cdf5beb0739e8c7e1becd",
+      "lens_file": "qwen3-14b/jlens/Salesforce-wikitext/Qwen3-14B_jacobian_lens.pt",
+      "lens_revision": "0731326edff4ae730ffc5356fe1a4728c748b3a6",
+      "quant": "8bit",
+      "template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  "rows": {
+    "model.layers.0.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 1.7223253773656289,
+      "relative_frobenius": 0.015062132629901017,
+      "nonzero_fraction": 0.7416425347328186,
+      "rank1_energy_lower_bound": 0.9895269981293111,
+      "rank8_energy_lower_bound": 0.9901516563876164
+    },
+    "model.layers.0.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "delta_frobenius": 3.2419129820618386,
+      "relative_frobenius": 0.015115192509328903,
+      "nonzero_fraction": 0.7407457828521729,
+      "rank1_energy_lower_bound": 0.9895822164696682,
+      "rank8_energy_lower_bound": 0.9902027853359292
+    },
+    "model.layers.0.self_attn.q_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "model.layers.20.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 2.005814667128024,
+      "relative_frobenius": 0.01632823770751503,
+      "nonzero_fraction": 0.7497900128364563,
+      "rank1_energy_lower_bound": 0.9910310205094083,
+      "rank8_energy_lower_bound": 0.9915362675964888
+    },
+    "model.layers.20.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "delta_frobenius": 3.741543551242147,
+      "relative_frobenius": 0.016200028826546687,
+      "nonzero_fraction": 0.7479426860809326,
+      "rank1_energy_lower_bound": 0.9909063142393775,
+      "rank8_energy_lower_bound": 0.9914306626595033
+    },
+    "model.layers.20.self_attn.q_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "model.layers.39.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 2.2327619940939347,
+      "relative_frobenius": 0.01909701091555551,
+      "nonzero_fraction": 0.7735698223114014,
+      "rank1_energy_lower_bound": 0.9933154066106958,
+      "rank8_energy_lower_bound": 0.9938541077265797
+    },
+    "model.layers.39.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "delta_frobenius": 3.30821598023943,
+      "relative_frobenius": 0.01508282461017003,
+      "nonzero_fraction": 0.7360913157463074,
+      "rank1_energy_lower_bound": 0.9895889901088034,
+      "rank8_energy_lower_bound": 0.9902221417980712
+    },
+    "model.layers.39.self_attn.q_proj.weight": {
+      "shape": [
+        5120,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "model.embed_tokens.weight": {
+      "shape": [
+        1024,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    },
+    "lm_head.weight": {
+      "shape": [
+        1024,
+        5120
+      ],
+      "delta_frobenius": 0.0,
+      "relative_frobenius": 0.0,
+      "nonzero_fraction": 0.0
+    }
+  },
+  "scope": "fixed layer 0/20/39 write matrices, q-projection controls and first-1024-row embedding/head anchors",
+  "limit": "Numerical low rank verifies edit structure on sampled tensors, not that the direction exclusively represents refusal."
+}

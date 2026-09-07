@@ -245,7 +245,7 @@ def capture_turn(lm, snapshot, specdata, bands, fixed_decoder=None):
             "vanilla_last": vanilla_last, "emergence": emergence}
 
 
-def run(arm):
+def run(arm, specs=None, record_suffix=""):
     name = configure(arm, "4bit")
     # Every arm's gate precedes ALL substantive captures, as in the handoff.
     for a in ARMS:
@@ -258,8 +258,8 @@ def run(arm):
     # B already uses this decoder. Others retain their own output distribution,
     # while their additional lens endpoint uses B's head AND final norm.
     decoder = None if arm == "B" else official_decoder(lm)
-    for spec in data["specs"]:
-        rid = f"triplet-{arm.lower()}-{spec['key']}-nf4"
+    for spec in (data["specs"] if specs is None else specs):
+        rid = f"triplet-{arm.lower()}-{spec['key']}-nf4" + record_suffix
         d = lab.RESULTS / rid
         if (d / "complete.json").exists():
             print("SKIP", rid, flush=True)
@@ -305,7 +305,7 @@ def run(arm):
                     "emotions": emos, "n_tokens": len(tokens)}, ad / "z.pt")
         final = film["frames"][-1]
         cfg = lab.CONFIGS[name]
-        rec = {"id": rid, "title": f"Qwen14 {arm}: {spec['key']}", "unit": spec["unit"],
+        rec = {"id": rid, "title": f"Qwen14 {arm}: {spec['key']}" + (" (final response extended)" if record_suffix else ""), "unit": spec["unit"],
                "created": datetime.datetime.now().isoformat(timespec="seconds"),
                "execution": {"pid": os.getpid(), "torch": torch.__version__, "capture_code_sha256": CAPTURE_CODE_SHA256,
                              "spec_sha256": hashlib.sha256((ROOT / "specs.json").read_bytes()).hexdigest()},
@@ -316,6 +316,7 @@ def run(arm):
                "template": {"source": cfg.get("template_source", cfg["hf_id"]), "revision": cfg.get("template_revision", cfg["revision"]),
                             "mode": "raw document" if arm == "A" else "B no-think headers; exact prior generated token IDs retained"},
                "params": {"chat": arm != "A", "capture": "exact-token-transcript", "film": True, "film_topk": 10,
+                          "extension": spec.get("extension"),
                           "max_new": spec["max_new"], "temperature": 0, "steer": None, "vanilla": True,
                           "template_kwargs": {"enable_thinking": False}, "track": data["track"]},
                "capture_text": text, "conversation": convo, "generated": [s["response"] for s in snapshots],
