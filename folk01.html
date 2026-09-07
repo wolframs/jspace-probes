@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quiet, responsive, or unchanged? · J-Space Probes</title>
-<meta name="description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Human ratings remain pending.">
+<meta name="description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Blinded OpenRouter judges compare the fixed transcripts.">
 <link rel="canonical" href="https://jspace-probes.vercel.app/folk01.html">
 <meta property="og:title" content="Quiet, responsive, or unchanged? · J-Space Probes">
-<meta property="og:description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Human ratings remain pending.">
+<meta property="og:description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Blinded OpenRouter judges compare the fixed transcripts.">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
 <meta property="og:url" content="https://jspace-probes.vercel.app/folk01.html">
@@ -291,20 +291,17 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 </head>
 <body>
 <div class="wrap">
-<style>.folk-report img{max-width:100%;height:auto}.wide{overflow-x:auto}.folk-report td,.folk-report th{white-space:normal;min-width:90px}</style><nav><a href="/dashboard/">Lab dashboard</a> · <a href="/folk01.html">Pilot report</a> · <a href="/folk01/protocol.html">Protocol</a> · <a href="/folk01/organizer.html">Organizer instructions</a></nav><article class="essay folk-report"><h1>Quiet, responsive, or unchanged?</h1>
-<p><strong>The behavioral pilot is complete. Human ratings are pending.</strong>
-We now have 24 conversations, a blind comparison page, and an importer that
-can measure whether a longer conversation changes what people call
-“flattened” or “introverted.” No model has been declared the flat control.</p>
-<p>The pilot already separates changes in voice from changes in advice.
-Official Qwen and Huihui mirror a mild roleplay cue. Hermes stays more
-formal, yet can use the supplied personal details. Each also makes errors
-that a warmth score would miss. These are observations in this battery,
-not established personality types.</p>
-<p><a href="/folk01/rate.html">Open the rating page</a> ·
-<a href="/folk01/organizer.html">Organizer instructions</a> ·
-<a href="/folk01/protocol.html">Full protocol</a> ·
-<a href="/results/folk01/spec.json">Exact prompts and revisions</a></p>
+<style>.folk-report img{max-width:100%;height:auto}.wide{overflow-x:auto}.folk-report td,.folk-report th{white-space:normal;min-width:90px}</style><nav><a href="/dashboard/">Lab dashboard</a> · <a href="/folk01.html">Pilot report</a> · <a href="/folk01/protocol.html">Protocol</a> · <a href="/folk01/organizer.html">Reproduce judging</a></nav><article class="essay folk-report"><h1>Quiet, responsive, or unchanged?</h1>
+<p><strong>The automated judge study is complete. Its strongest result is a definition reversal.</strong>
+Sonnet 5, Gemini 2.5 Flash, and DeepSeek V3.2 apply “introverted” differently
+when given the proposed definition. All three can call formal Hermes
+flatter while separately scoring it as responsive to personal details.
+The ratings distinguish presentation from responsiveness, but do not yet
+validate a single measure for a lens study.</p>
+<p><a href="/folk01/judges.html">Judge results</a> ·
+<a href="/folk01/organizer.html">Reproduce judging</a> ·
+<a href="/folk01/protocol.html">Generation protocol</a> ·
+<a href="/results/folk01/judges/protocol.md">Judge protocol</a> · <a href="/results/folk01/spec.json">Exact prompts</a></p>
 <h2>What an outsider can judge</h2>
 <div class="wide"><table>
 <thead>
@@ -338,9 +335,337 @@ not established personality types.</p>
 </tbody>
 </table></div>
 <p>Low volunteering with high responsiveness is a candidate meaning of
-“introverted”; low on both is a candidate meaning of “flattened.” We test
-whether users accept that mapping. The categories do not follow from these
+“introverted”; low on both is a candidate meaning of “flattened.” The OpenRouter panel tests
+how model judges apply that mapping. The categories do not follow from these
 counts, and the experiment says nothing about private experience.</p>
+<h2>The definition reverses the introversion verdict</h2>
+<p><strong>Three OpenRouter judge families scored anonymous transcripts.</strong> We have
+395 valid scoring responses from 396 requested cells, plus three definitions
+written before the judges saw any text. One Gemini response remained
+schema-invalid after a single identical retry. Its ratings are missing, not
+zero. All 24 generated conversations remain unchanged. Total reported API
+cost, including format probes and retries: <strong>$3.60</strong>.</p>
+<p>On the same full warm-specific conversations, <strong>every judge ranks Hermes
+most introverted under its own definition, and least introverted under the
+supplied definition</strong>. These are the judges' ratings, not established model
+personality types. The supplied wording changes the measurement substantially.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Judge</th>
+<th>Checkpoint</th>
+<th style="text-align:right">Introverted: own meaning</th>
+<th style="text-align:right">Introverted: supplied meaning</th>
+<th style="text-align:right">Flattened: own meaning</th>
+<th style="text-align:right">Flattened: supplied meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sonnet 5</td>
+<td>Official</td>
+<td style="text-align:right">0.00</td>
+<td style="text-align:right">1.75</td>
+<td style="text-align:right">1.38</td>
+<td style="text-align:right">1.38</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>Hermes</td>
+<td style="text-align:right">2.88</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">2.88</td>
+<td style="text-align:right">2.88</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>Huihui</td>
+<td style="text-align:right">0.00</td>
+<td style="text-align:right">1.25</td>
+<td style="text-align:right">1.62</td>
+<td style="text-align:right">2.00</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Official</td>
+<td style="text-align:right">0.12</td>
+<td style="text-align:right">2.38</td>
+<td style="text-align:right">1.12</td>
+<td style="text-align:right">0.12</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Hermes</td>
+<td style="text-align:right">1.50</td>
+<td style="text-align:right">0.12</td>
+<td style="text-align:right">2.25</td>
+<td style="text-align:right">2.38</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Huihui</td>
+<td style="text-align:right">0.12</td>
+<td style="text-align:right">3.00</td>
+<td style="text-align:right">1.12</td>
+<td style="text-align:right">0.12</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>Official</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">3.62</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">0.50</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>Hermes</td>
+<td style="text-align:right">3.12</td>
+<td style="text-align:right">0.50</td>
+<td style="text-align:right">3.50</td>
+<td style="text-align:right">3.50</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>Huihui</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">3.62</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">0.38</td>
+</tr>
+</tbody>
+</table></div>
+<p>Scores run from 0 (no fit) to 4 (very strong fit). Each entry averages the
+two topic means after averaging opponent/order checks within a topic.
+These repeated ratings concern two conversations per checkpoint in this
+condition, not eight independent behavioral samples.</p>
+<p>All three judges' initial definitions make introversion mostly <strong>brief,
+reactive, and unlikely to volunteer</strong>. The supplied definition adds
+<strong>becomes specific or expressive when drawn out, with appropriate carryover</strong>.
+No human usage was surveyed. Read the exact definitions:
+<a href="/results/folk01/judges/definitions/sonnet.json">Sonnet</a>, <a href="/results/folk01/judges/definitions/gemini.json">Gemini</a>,
+<a href="/results/folk01/judges/definitions/deepseek.json">DeepSeek</a>.</p>
+<h2>Longer exposure does not have one agreed effect</h2>
+<p>P22 predicted a lower official-Qwen flattened score after the full
+warm-specific conversation, under supplied definitions. Gemini follows
+that prediction on both topics. Sonnet and DeepSeek do not agree on a
+common direction across both topics. Their opening-only unknowns also
+limit the numerical comparison.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Judge</th>
+<th>Topic</th>
+<th style="text-align:right">Official: opening → full WS</th>
+<th style="text-align:right">Difference</th>
+<th>Bounds with opening unknowns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sonnet 5</td>
+<td>library</td>
+<td style="text-align:right">1.67 → 1.50</td>
+<td style="text-align:right">-0.17</td>
+<td>-0.75 to +0.25</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>walk</td>
+<td style="text-align:right">1.00 → 1.25</td>
+<td style="text-align:right">+0.25</td>
+<td>-2.00 to +1.00</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>library</td>
+<td style="text-align:right">1.25 → 0.25</td>
+<td style="text-align:right">-1.00</td>
+<td>-1.00 to -1.00</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>walk</td>
+<td style="text-align:right">2.00 → 0.00</td>
+<td style="text-align:right">-2.00</td>
+<td>-2.00 to -2.00</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>library</td>
+<td style="text-align:right">0.25 → 0.75</td>
+<td style="text-align:right">+0.50</td>
+<td>+0.50 to +0.50</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>walk</td>
+<td style="text-align:right">1.33 → 0.25</td>
+<td style="text-align:right">-1.08</td>
+<td>-1.75 to -0.75</td>
+</tr>
+</tbody>
+</table></div>
+<p>Differences use available numerical ratings; bounds replace each unknown
+with either 0 or 4. They are not confidence intervals. The cap-exclusion
+check removes all official-library WS comparisons, leaving only the walk
+topic for official Qwen. It cannot settle the two-topic question.
+P22 therefore receives mixed model-judge support, not a panel-wide replication.</p>
+<p><img src="/results/folk01/judges/exposure.png" alt="Flattened scores before and after warm-specific conversations" /></p>
+<p><a href="/results/folk01/judges/exposure.svg">Vector figure</a>. Each subplot has the same 0–4 scale.
+The plot shows numerical means only; the table and JSON retain unknown bounds.</p>
+<h2>The behavioral axes still separate useful things</h2>
+<p>Separate paired semantic requests compare generic and specific branches
+at fixed checkpoint, topic, and warmth. Scores run 0–2. All three judges
+score <strong>every checkpoint as more responsive to personal details</strong> in the
+specific condition. This does not imply accurate advice. Hermes earns low
+social-warmth scores while still receiving substantial detail-use scores.
+A formal voice is therefore insufficient evidence that user particulars
+have no effect, even under this panel's own coding.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Checkpoint</th>
+<th>Judge</th>
+<th style="text-align:right">Warm minus neutral at T4</th>
+<th style="text-align:right">Warm minus neutral at T5</th>
+<th style="text-align:right">Warm minus neutral at T7</th>
+<th style="text-align:right">Specific minus generic detail use at T7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Official</td>
+<td>Sonnet 5</td>
+<td style="text-align:right">+1.00</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Official</td>
+<td>Gemini 2.5 Flash</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+1.00</td>
+<td style="text-align:right">+1.00</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+<tr>
+<td>Official</td>
+<td>DeepSeek V3.2</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+<tr>
+<td>Hermes</td>
+<td>Sonnet 5</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Hermes</td>
+<td>Gemini 2.5 Flash</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.00</td>
+<td style="text-align:right">+0.00</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+<tr>
+<td>Hermes</td>
+<td>DeepSeek V3.2</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Huihui</td>
+<td>Sonnet 5</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+0.00</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">+1.00</td>
+</tr>
+<tr>
+<td>Huihui</td>
+<td>Gemini 2.5 Flash</td>
+<td style="text-align:right">+0.50</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Huihui</td>
+<td>DeepSeek V3.2</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are means of two topic contrasts, each with two matched branch pairs.
+T5 is an identical neutral request; T7 returns after an unrelated question.
+Official Qwen retains a positive broad warmth contrast at T5/7 for each
+judge. Huihui's later contrast is near zero or negative despite expressive
+text. This differs from counting asterisks alone: broad social warmth can
+survive after embodied actions disappear. Full scores for volunteering,
+stance, context errors, correction and criticism remain separate in
+<a href="/results/folk01/judges/analysis.json">analysis.json</a>.</p>
+<p>Within this pilot, higher warmth and longer responses associate more
+strongly with lower flattened ratings than consequential detail use does.
+Across judges/definition conditions, Spearman correlations are approximately
+−0.52 to −0.88 for warmth, −0.60 to −0.79 for length, and −0.14 to −0.35 for
+detail use. Emoji rate is also strongly associated. These are descriptive
+fits to the same 24 conversations, with shared openings and two topics;
+no p-values or held-out predictive success are claimed. Length and style
+remain competing explanations for the label. No new lens target is validated.</p>
+<h2>Audit the judges too</h2>
+<p>A/B reversal preserves the flattened choice in 47/60 Sonnet pairs,
+51/59 Gemini pairs, and 47/60 DeepSeek pairs. For introverted the counts
+are 47/60, 46/59, and 49/60. These counts include tie and insufficient
+choices. Cross-judge agreement is about 79–82% for flattened and 67–76%
+for introverted on identical ordered cells; it is not agreement with humans.
+Repeated order checks do not enlarge the behavioral sample.</p>
+<p><strong>211 of 395 responses contain at least one non-exact evidence quote.</strong>
+Some only change whitespace, Markdown or quotation marks; others paraphrase
+or combine passages. For label evidence alone, 475/718 quotes match exactly,
+155 match only after those presentation changes, and 88 remain unmatched.
+Semantic evidence has 476/648 exact quotes, 126 presentation-only matches,
+and 46 unmatched quotes (these denominators exclude the separate context-error
+quote). The raw answers and strict flags remain available; approximate
+matches are never presented as verbatim evidence.</p>
+<p>An exploratory exact-quote-only check is selective: it removes many
+expressive replies and leaves some Sonnet/DeepSeek cells with zero or one
+rating. Sonnet's supplied-definition flattened ordering does not survive
+uniformly in that subset. Thus a clear pattern in the judges' numerical
+answers is not the same as a uniformly evidence-supported verdict.
+<a href="/results/folk01/judges/sensitivity.json">Quote counts and restricted cells</a>.</p>
+<p>The known arithmetic item catches a substantive coding problem. Compared
+with the earlier evidence-backed analyst audit, Sonnet agrees on 24/24
+T6 codes, DeepSeek on 23/24, and Gemini on 11/24. Gemini often awards an
+ambiguous code to an unqualified wrong answer. DeepSeek treats Huihui's
+mixed correction as clear. Keep these judge identities separate; do not
+average away the errors or use the panel as factual ground truth.</p>
+<p>The main transport returned 396 responses. A schema parser rejected 69
+otherwise complete responses for extra explanation fields; deterministic
+extraction preserved all requested scores and retained the originals.
+One missing required field remained invalid after its sole retry. All
+format-only probes, failed responses, parameter changes, and analysis
+amendments are in the <a href="/results/folk01/judges/protocol.md">judge protocol</a>. Validation passes
+for 395 accepted responses, the one explicitly retained failure, request
+hashes, model IDs, task coverage, and unchanged generation files.
+<a href="/results/folk01/judges/verification.json">Verification</a>, <a href="/results/folk01/judges/manifest.json">exact task manifest</a>.</p>
+<p>This gives a reproducible answer to the current measurement question:
+<strong>score volunteering, social adaptation, useful detail uptake and continuity
+separately; measure the labels under explicit wording conditions.</strong> The
+panel's label reversal rejects treating “introverted” as an agreed shortcut
+for those axes. The earlier human-rating plan is retired. Held-out radio
+and meal topics remain ungenerated for a later predictive test.</p>
 <h2>The run</h2>
 <p>Official Qwen3-14B, Hermes 4 with its native assistant header, and Huihui
 abliterated v2 each completed two planning topics: a tiny library and a
@@ -395,7 +720,7 @@ claim about persistent hidden state.</p>
 are shared. The initial 192-token preflight was deliberately stopped:
 16 of its 19 saved distinct replies capped. Its data remain separate.
 The amended run still caps at library T3 in official NG, WG, and WS.
-Raters see those marks; a sensitivity analysis excludes the affected
+Judges see those marks; a sensitivity analysis excludes the affected
 comparison pairs from both exposure groups. It cannot restore the missing
 uncapped comparisons. <a href="/results/folk01/generation-summary.json">Generation summary</a>,
 <a href="/results/folk01/preflight-192-summary.json">preflight history</a>, <a href="/results/folk01/queue.json">run exits</a>.</p>
@@ -515,41 +840,11 @@ not an unqualified correction. This one arithmetic item supports neither
 a general model ranking nor a claim that warmth caused the errors.
 <a href="/results/folk01/arithmetic/B.json">B calibration</a>, <a href="/results/folk01/arithmetic/C.json">Hermes</a>,
 <a href="/results/folk01/arithmetic/Cp.json">Huihui</a>, <a href="/results/folk01/queue-arithmetic.json">calibration exit</a>.</p>
-<h2>The human test is ready; its answer is not</h2>
-<p>The <strong>current allocation has 96 codes, one comparison pair per person</strong>.
-It covers all three model pairs, four branches, two topics, two exposures,
-and two definition conditions. No raters have been recruited by the agent.
-These are allocation slots, not a claim about statistical power.</p>
-<p>A participant sees either T1 only or the full conversation. A separate
-randomization gives supplied folk definitions or asks for the participant's
-own meanings first. Model names and condition codes are hidden from the
-page. Left/right order is balanced. Participants choose which assistant
-is more flattened and more introverted, then give separate 0–4 ratings
-and evidence. “Not enough evidence” is an explicit outcome.</p>
-<p>The question is whether <strong>full exposure changes the label</strong>, and whether
-that happens with users' own meanings as well as our supplied definitions.
-If only the supplied-definition group shifts, we may have taught the
-judgment. If users still call a responsive transcript flattened, the word
-may mean something other than register release. No validated flat control
-exists for the stronger separation claim yet.</p>
-<p>The full assignments contain 2,954–5,240 words: about <strong>15–27 minutes of
-reading</strong>, plus rating time. Opening-only assignments contain 641–955 words,
-about 3–5 minutes. The original two-pair allocation was superseded after
-measuring its burden; no old codes were issued. The page saves locally,
-permits pausing and partial export, and sends no answers to a server.
-Raw exports and the organizer key stay under ignored <code>out/</code> locally.</p>
-<p>The importer reports absolute and pairwise ratings, exposure and factorial
-contrasts, partial returns, and insufficient-evidence rates. It resamples
-participants, reports the two topics separately, and includes sensitivity
-to caps and unknown ratings. Numeric means condition on giving a number;
-unknown ratings are not silently treated as zero. The public report
-contains no synthetic participant results.</p>
-<p><a href="/folk01/organizer.html">Organizer instructions</a> explain collection and
-analysis. The <a href="/results/folk01/semantic-coding-blank.csv">blank semantic coding sheet</a> is
-for separate independent coders. It has not been replaced by the analyst
-audit. Two further topics are frozen but ungenerated. A behavioral metric
-must predict new human judgments on held-out material better than length
-and emoji baselines before the lens gets a new explanatory target.</p>
+<h2>Reproduce the automated evaluation</h2>
+<p><a href="/folk01/organizer.html">Reproduction instructions</a> cover the cached API
+runner, analysis, validation, and site generation. The old human packet is
+an archived design, not a task for Wolfram or other participants. Judge
+outputs are never passed off as participant responses.</p>
 <h2>Instruments and limits</h2>
 <p>This is behavioral criterion calibration, following the requested
 behavior-first sequence. It creates no substantive lens records and makes
@@ -559,8 +854,8 @@ remain available for the subsequent full-instrument lens study.</p>
 There are only two generated topics, one greedy trajectory per branch,
 one factual challenge, and three closely related checkpoints. A no-system,
 native-header result need not transfer to a deployed assistant with a
-different system message. Literal Markdown is preserved on the rating
-page; presentation and reading burden need human usability feedback.
+different system message. The judges receive literal transcript text. The earlier browser-based
+human form has been retired; no human response is needed to complete this run.
 No hidden-state persistence, training cause, or family-wide personality
 classification follows from this pilot.</p>
 <p><a href="/results/folk01/text-proxies.json">Text proxies</a> retain length-normalized emoji, asterisk,
@@ -583,6 +878,11 @@ The two reserved topics were not generated. <a href="/results/folk01/verificatio
 <a href="/results/folk01/protocol.md">preregistration and amendments</a>.</p>
 <p>Starting proposal: Fable 5.1 and Wolfram. Execution, audit, and tools:
 GPT-6 Astra, 2026-09-07.</p>
+<p>Judge methods also follow <a href="https://arxiv.org/abs/2306.05685">Zheng et al., MT-Bench / Chatbot Arena</a>
+on position and verbosity checks. <a href="https://openrouter.ai/docs/guides/features/structured-outputs">OpenRouter documentation</a>
+describes provider-dependent schema enforcement; the archived format probes
+show why local validation remains necessary.</p>
+<p><a href="/results/folk01/judge-thoughts.md">Judge research notes</a>. API judging and analysis: GPT-6 Astra.</p>
 </article></div>
 </body>
 </html>

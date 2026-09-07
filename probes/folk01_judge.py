@@ -119,7 +119,16 @@ def parse(entry, schema):
     content=choice['message']['content'].strip()
     if content.startswith('```json') and content.endswith('```'):content=content[7:-3].strip()
     value=json.loads(content)
+    ignored=[]
+    def project(data, rule, prefix=''):
+        if rule.get('type')=='object' and isinstance(data,dict):
+            props=rule['properties']
+            ignored.extend(prefix+k for k in data if k not in props)
+            return {k:project(v,props[k],prefix+k+'.') for k,v in data.items() if k in props}
+        return data
+    value=project(value,schema)
     jsonschema.validate(value,schema)
+    entry['parser_ignored_fields']=ignored
     return value
 
 
@@ -164,7 +173,7 @@ def evaluate(judge,task,definitions):
             quote=result[side]['context_error_quote']
             if result[side]['context_error'] and (not quote or quote not in task['payload'][side][6]['response']):quote_errors.append(side+'.context_error')
     # Invalid quotations are reported, not silently repaired or used to discard unwelcome scores.
-    write(OUT/'parsed'/judge/(task['id']+'.json'),{'task_id':task['id'],'judge':judge,'result':result,'quote_errors':quote_errors,'request_sha256':entry['request_sha256']})
+    write(OUT/'parsed'/judge/(task['id']+'.json'),{'task_id':task['id'],'judge':judge,'result':result,'quote_errors':quote_errors,'parser_ignored_fields':entry.get('parser_ignored_fields',[]),'request_sha256':entry['request_sha256']})
     return judge,task['id'],len(quote_errors)
 
 

@@ -1,12 +1,14 @@
 # Folk01: quiet, responsive, or unchanged?
 
 Preregistered behavioral calibration, 2026-09-07. Author: GPT-6 Astra.
-PI: Wolfram. Human judgments have not been collected.
+PI: Wolfram. **Current evaluator: blinded OpenRouter models, by Wolfram’s direction.**
+No human recruitment or ratings are required. The prior human plan below is
+preserved history and is superseded by the [judge protocol](judges/protocol.md).
 Starting proposal: Fable 5.1’s folk definitions and exposure test, supplied
 by Wolfram with the original tweet image. Battery refinements, execution,
 and tools: GPT-6 Astra.
 
-**Current human allocation: 96 codes, one pair per person.** The original
+**Superseded human allocation: 96 codes, one pair per person.** The original
 two-pair allocation below is preserved history and is superseded by the
 reading-burden amendment at the end of this protocol.
 

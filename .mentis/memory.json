@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-09-07T16:27:09.535Z",
+  "builtAt": "2026-09-07T17:12:22.740Z",
   "stats": {
-    "filesScanned": 95,
-    "nodesCreated": 707,
-    "edgesCreated": 2269,
+    "filesScanned": 101,
+    "nodesCreated": 744,
+    "edgesCreated": 2365,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 188
+    "durationMs": 268
   },
   "architecture": {
     "name": "probes",
@@ -15,10 +15,10 @@
     "layers": [],
     "packages": [],
     "languages": {
-      "python": 94,
+      "python": 100,
       "javascript": 1
     },
-    "summary": "Single Package with 95 source files across python, javascript. 0 packages detected. core domains: General."
+    "summary": "Single Package with 101 source files across python, javascript. 0 packages detected. core domains: General."
   },
   "domains": [
     {
@@ -105,16 +105,22 @@
         "file:affect14.py",
         "file:folk01.py",
         "file:folk01_measure.py",
-        "file:folk01_site.py",
         "file:folk01_arithmetic.py",
         "file:folk01_packet.py",
         "file:folk01_ratings.py",
         "file:folk01_ui_check.py",
         "file:folk01_verify.py",
         "file:test_folk01.py",
-        "file:folk01_artifacts.py"
+        "file:folk01_artifacts.py",
+        "file:folk01_site.py",
+        "file:folk01_judge.py",
+        "file:folk01_judge_analyze.py",
+        "file:folk01_judge_audit.py",
+        "file:folk01_judge_plot.py",
+        "file:folk01_judge_verify.py",
+        "file:test_folk01_judge.py"
       ],
-      "description": "Import-graph cluster of 63 files; reinforced by import clustering; reinforced by import clustering",
+      "description": "Import-graph cluster of 63 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering",
       "entryPoints": [
         "file:affect08s.py",
         "file:affect5.py",
@@ -1034,6 +1040,12 @@
       "weight": 1
     },
     {
+      "from": "folk01_artifacts.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "folk01_measure.py",
       "to": "write",
       "kind": "IMPORTS",
@@ -1526,8 +1538,80 @@
       "weight": 1
     },
     {
-      "from": "folk01_artifacts.py",
+      "from": "folk01_judge_analyze.py",
       "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "transcript",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_audit.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "tasks",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "digest",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "parse",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "evaluate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "own_definitions",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "tasks",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "parse",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "summarize",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "canonical",
       "kind": "IMPORTS",
       "weight": 1
     },
@@ -3393,12 +3477,6 @@
     },
     {
       "from": "affect4b.py",
-      "to": "write",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4b.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
@@ -4198,12 +4276,6 @@
     {
       "from": "apparatus08.py",
       "to": "shuffle",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus08.py",
-      "to": "write",
       "kind": "CALLS",
       "weight": 1
     },
@@ -5558,6 +5630,36 @@
       "weight": 1
     },
     {
+      "from": "folk01_artifacts.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_artifacts.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_artifacts.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_artifacts.py",
+      "to": "plot",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_artifacts.py",
+      "to": "build",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "folk01_measure.py",
       "to": "folk01.py",
       "kind": "IMPORTS",
@@ -5696,30 +5798,6 @@
       "weight": 1
     },
     {
-      "from": "folk01_site.py",
-      "to": "folk01.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "folk01_site.py",
-      "to": "folk01.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "folk01_site.py",
-      "to": "render",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk01_site.py",
-      "to": "head",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
       "from": "folk01_ui_check.py",
       "to": "folk01.py",
       "kind": "IMPORTS",
@@ -5746,6 +5824,12 @@
     {
       "from": "folk01_ui_check.py",
       "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "evaluate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -7322,162 +7406,6 @@
       "weight": 1
     },
     {
-      "from": "site.py",
-      "to": "textspans.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "textspans.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "_plain_units",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "unit_name",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "load_terms",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "render_md",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "match",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "emergence_summary",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "plain_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "termify",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "notes_container",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "head",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "popovers",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "record_page",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "esc",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "plain_findings_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "static_index_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "build_records",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "essay_page",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "glossary_page",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "write_sitemap",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "write_robots",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "write_llms_txt",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "patch_dashboard_index",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "patch_app_js",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
       "from": "skincheck.js",
       "to": "match",
       "kind": "CALLS",
@@ -8805,6 +8733,12 @@
     },
     {
       "from": "triplet_report.py",
+      "to": "plot",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
       "to": "pct",
       "kind": "CALLS",
       "weight": 1
@@ -9238,6 +9172,12 @@
     {
       "from": "triplet_synthesis.py",
       "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "plot",
       "kind": "CALLS",
       "weight": 1
     },
@@ -10058,26 +9998,482 @@
       "weight": 1
     },
     {
-      "from": "folk01_artifacts.py",
-      "to": "folk01.py",
-      "kind": "IMPORTS",
+      "from": "folk01_judge.py",
+      "to": "obj",
+      "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk01_artifacts.py",
-      "to": "folk01.py",
-      "kind": "DEPENDS_ON",
+      "from": "folk01_judge.py",
+      "to": "transcript",
+      "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk01_artifacts.py",
+      "from": "folk01_judge.py",
+      "to": "digest",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "shuffle",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "key",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
       "to": "write",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk01_artifacts.py",
-      "to": "build",
+      "from": "folk01_judge.py",
+      "to": "read",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "extend",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "project",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "validate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "tasks",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "call_api",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "request",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "parse",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "own_definitions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "freeze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "folk01_judge.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "folk01_judge.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "transcript",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "summarize",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "has_cap",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "cell_id",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "canonical",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_analyze.py",
+      "to": "analyze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_audit.py",
+      "to": "folk01_judge.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_audit.py",
+      "to": "folk01_judge.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_audit.py",
+      "to": "presentation",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_audit.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_audit.py",
+      "to": "audit",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_plot.py",
+      "to": "folk01_judge.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_plot.py",
+      "to": "folk01_judge.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_plot.py",
+      "to": "plot",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "folk01_judge.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "folk01_judge.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "tasks",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "own_definitions",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "digest",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "parse",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_judge_verify.py",
+      "to": "verify",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "render",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "_plain_units",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "unit_name",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "load_terms",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "render_md",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "match",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "emergence_summary",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "plain_block",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "termify",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "notes_container",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "popovers",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "record_page",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "esc",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "plain_findings_block",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "static_index_block",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "build_records",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "essay_page",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "glossary_page",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "write_sitemap",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "write_robots",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "write_llms_txt",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "patch_dashboard_index",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "patch_app_js",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "folk01_judge.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "folk01_judge.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "folk01_judge_analyze.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "folk01_judge_analyze.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "tasks",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "canonical",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "summarize",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01_judge.py",
+      "to": "parse",
       "kind": "CALLS",
       "weight": 1
     }
@@ -10152,6 +10548,20 @@
       ],
       "risk": "medium",
       "description": "_exit_id has 10 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:affect7.py:325",
+      "name": "High-traffic: shuffle",
+      "nodes": [
+        "function:affect7.py:325",
+        "file:affect7.py",
+        "file:affect11.py",
+        "file:affect12.py",
+        "file:affect13.py",
+        "file:affect14.py"
+      ],
+      "risk": "medium",
+      "description": "shuffle has 10 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:apparatus09.py:57",
@@ -10348,20 +10758,6 @@
       ],
       "risk": "medium",
       "description": "_all_resid has 16 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:file:lab.py",
-      "name": "High-traffic: lab.py",
-      "nodes": [
-        "file:lab.py",
-        "file:affect.py",
-        "file:affect08s.py",
-        "file:affect11.py",
-        "file:affect12.py",
-        "file:affect13.py"
-      ],
-      "risk": "high",
-      "description": "lab.py has 140 dependents — changes here have wide blast radius"
     }
   ],
   "deadCode": [
@@ -10688,7 +11084,7 @@
       "nodes": [
         "file:affect4b.py"
       ],
-      "description": "affect4b.py depends on 36 other nodes — high fan-out",
+      "description": "affect4b.py depends on 35 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {

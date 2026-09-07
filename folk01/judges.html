@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Folk01 model judges · J-Space Probes</title>
+<meta name="description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Blinded OpenRouter judges compare the fixed transcripts.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/folk01/judges.html">
+<meta property="og:title" content="Folk01 model judges · J-Space Probes">
+<meta property="og:description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Blinded OpenRouter judges compare the fixed transcripts.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/folk01/judges.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/site.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
+.plain-body strong { font-weight: 600; }
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<style>.folk-report img{max-width:100%;height:auto}.wide{overflow-x:auto}.folk-report td,.folk-report th{white-space:normal;min-width:90px}</style><nav><a href="/dashboard/">Lab dashboard</a> · <a href="/folk01.html">Pilot report</a> · <a href="/folk01/protocol.html">Protocol</a> · <a href="/folk01/organizer.html">Reproduce judging</a></nav><article class="essay folk-report"><h1>Folk01: model judges</h1>
+<h2>The definition reverses the introversion verdict</h2>
+<p><strong>Three OpenRouter judge families scored anonymous transcripts.</strong> We have
+395 valid scoring responses from 396 requested cells, plus three definitions
+written before the judges saw any text. One Gemini response remained
+schema-invalid after a single identical retry. Its ratings are missing, not
+zero. All 24 generated conversations remain unchanged. Total reported API
+cost, including format probes and retries: <strong>$3.60</strong>.</p>
+<p>On the same full warm-specific conversations, <strong>every judge ranks Hermes
+most introverted under its own definition, and least introverted under the
+supplied definition</strong>. These are the judges' ratings, not established model
+personality types. The supplied wording changes the measurement substantially.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Judge</th>
+<th>Checkpoint</th>
+<th style="text-align:right">Introverted: own meaning</th>
+<th style="text-align:right">Introverted: supplied meaning</th>
+<th style="text-align:right">Flattened: own meaning</th>
+<th style="text-align:right">Flattened: supplied meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sonnet 5</td>
+<td>Official</td>
+<td style="text-align:right">0.00</td>
+<td style="text-align:right">1.75</td>
+<td style="text-align:right">1.38</td>
+<td style="text-align:right">1.38</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>Hermes</td>
+<td style="text-align:right">2.88</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">2.88</td>
+<td style="text-align:right">2.88</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>Huihui</td>
+<td style="text-align:right">0.00</td>
+<td style="text-align:right">1.25</td>
+<td style="text-align:right">1.62</td>
+<td style="text-align:right">2.00</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Official</td>
+<td style="text-align:right">0.12</td>
+<td style="text-align:right">2.38</td>
+<td style="text-align:right">1.12</td>
+<td style="text-align:right">0.12</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Hermes</td>
+<td style="text-align:right">1.50</td>
+<td style="text-align:right">0.12</td>
+<td style="text-align:right">2.25</td>
+<td style="text-align:right">2.38</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>Huihui</td>
+<td style="text-align:right">0.12</td>
+<td style="text-align:right">3.00</td>
+<td style="text-align:right">1.12</td>
+<td style="text-align:right">0.12</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>Official</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">3.62</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">0.50</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>Hermes</td>
+<td style="text-align:right">3.12</td>
+<td style="text-align:right">0.50</td>
+<td style="text-align:right">3.50</td>
+<td style="text-align:right">3.50</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>Huihui</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">3.62</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">0.38</td>
+</tr>
+</tbody>
+</table></div>
+<p>Scores run from 0 (no fit) to 4 (very strong fit). Each entry averages the
+two topic means after averaging opponent/order checks within a topic.
+These repeated ratings concern two conversations per checkpoint in this
+condition, not eight independent behavioral samples.</p>
+<p>All three judges' initial definitions make introversion mostly <strong>brief,
+reactive, and unlikely to volunteer</strong>. The supplied definition adds
+<strong>becomes specific or expressive when drawn out, with appropriate carryover</strong>.
+No human usage was surveyed. Read the exact definitions:
+<a href="/results/folk01/judges/definitions/sonnet.json">Sonnet</a>, <a href="/results/folk01/judges/definitions/gemini.json">Gemini</a>,
+<a href="/results/folk01/judges/definitions/deepseek.json">DeepSeek</a>.</p>
+<h2>Longer exposure does not have one agreed effect</h2>
+<p>P22 predicted a lower official-Qwen flattened score after the full
+warm-specific conversation, under supplied definitions. Gemini follows
+that prediction on both topics. Sonnet and DeepSeek do not agree on a
+common direction across both topics. Their opening-only unknowns also
+limit the numerical comparison.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Judge</th>
+<th>Topic</th>
+<th style="text-align:right">Official: opening → full WS</th>
+<th style="text-align:right">Difference</th>
+<th>Bounds with opening unknowns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sonnet 5</td>
+<td>library</td>
+<td style="text-align:right">1.67 → 1.50</td>
+<td style="text-align:right">-0.17</td>
+<td>-0.75 to +0.25</td>
+</tr>
+<tr>
+<td>Sonnet 5</td>
+<td>walk</td>
+<td style="text-align:right">1.00 → 1.25</td>
+<td style="text-align:right">+0.25</td>
+<td>-2.00 to +1.00</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>library</td>
+<td style="text-align:right">1.25 → 0.25</td>
+<td style="text-align:right">-1.00</td>
+<td>-1.00 to -1.00</td>
+</tr>
+<tr>
+<td>Gemini 2.5 Flash</td>
+<td>walk</td>
+<td style="text-align:right">2.00 → 0.00</td>
+<td style="text-align:right">-2.00</td>
+<td>-2.00 to -2.00</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>library</td>
+<td style="text-align:right">0.25 → 0.75</td>
+<td style="text-align:right">+0.50</td>
+<td>+0.50 to +0.50</td>
+</tr>
+<tr>
+<td>DeepSeek V3.2</td>
+<td>walk</td>
+<td style="text-align:right">1.33 → 0.25</td>
+<td style="text-align:right">-1.08</td>
+<td>-1.75 to -0.75</td>
+</tr>
+</tbody>
+</table></div>
+<p>Differences use available numerical ratings; bounds replace each unknown
+with either 0 or 4. They are not confidence intervals. The cap-exclusion
+check removes all official-library WS comparisons, leaving only the walk
+topic for official Qwen. It cannot settle the two-topic question.
+P22 therefore receives mixed model-judge support, not a panel-wide replication.</p>
+<p><img src="/results/folk01/judges/exposure.png" alt="Flattened scores before and after warm-specific conversations" /></p>
+<p><a href="/results/folk01/judges/exposure.svg">Vector figure</a>. Each subplot has the same 0–4 scale.
+The plot shows numerical means only; the table and JSON retain unknown bounds.</p>
+<h2>The behavioral axes still separate useful things</h2>
+<p>Separate paired semantic requests compare generic and specific branches
+at fixed checkpoint, topic, and warmth. Scores run 0–2. All three judges
+score <strong>every checkpoint as more responsive to personal details</strong> in the
+specific condition. This does not imply accurate advice. Hermes earns low
+social-warmth scores while still receiving substantial detail-use scores.
+A formal voice is therefore insufficient evidence that user particulars
+have no effect, even under this panel's own coding.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Checkpoint</th>
+<th>Judge</th>
+<th style="text-align:right">Warm minus neutral at T4</th>
+<th style="text-align:right">Warm minus neutral at T5</th>
+<th style="text-align:right">Warm minus neutral at T7</th>
+<th style="text-align:right">Specific minus generic detail use at T7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Official</td>
+<td>Sonnet 5</td>
+<td style="text-align:right">+1.00</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Official</td>
+<td>Gemini 2.5 Flash</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+1.00</td>
+<td style="text-align:right">+1.00</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+<tr>
+<td>Official</td>
+<td>DeepSeek V3.2</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+<tr>
+<td>Hermes</td>
+<td>Sonnet 5</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Hermes</td>
+<td>Gemini 2.5 Flash</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.00</td>
+<td style="text-align:right">+0.00</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+<tr>
+<td>Hermes</td>
+<td>DeepSeek V3.2</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+0.25</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Huihui</td>
+<td>Sonnet 5</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">+0.00</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">+1.00</td>
+</tr>
+<tr>
+<td>Huihui</td>
+<td>Gemini 2.5 Flash</td>
+<td style="text-align:right">+0.50</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">+1.75</td>
+</tr>
+<tr>
+<td>Huihui</td>
+<td>DeepSeek V3.2</td>
+<td style="text-align:right">+0.75</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">-0.25</td>
+<td style="text-align:right">+2.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are means of two topic contrasts, each with two matched branch pairs.
+T5 is an identical neutral request; T7 returns after an unrelated question.
+Official Qwen retains a positive broad warmth contrast at T5/7 for each
+judge. Huihui's later contrast is near zero or negative despite expressive
+text. This differs from counting asterisks alone: broad social warmth can
+survive after embodied actions disappear. Full scores for volunteering,
+stance, context errors, correction and criticism remain separate in
+<a href="/results/folk01/judges/analysis.json">analysis.json</a>.</p>
+<p>Within this pilot, higher warmth and longer responses associate more
+strongly with lower flattened ratings than consequential detail use does.
+Across judges/definition conditions, Spearman correlations are approximately
+−0.52 to −0.88 for warmth, −0.60 to −0.79 for length, and −0.14 to −0.35 for
+detail use. Emoji rate is also strongly associated. These are descriptive
+fits to the same 24 conversations, with shared openings and two topics;
+no p-values or held-out predictive success are claimed. Length and style
+remain competing explanations for the label. No new lens target is validated.</p>
+<h2>Audit the judges too</h2>
+<p>A/B reversal preserves the flattened choice in 47/60 Sonnet pairs,
+51/59 Gemini pairs, and 47/60 DeepSeek pairs. For introverted the counts
+are 47/60, 46/59, and 49/60. These counts include tie and insufficient
+choices. Cross-judge agreement is about 79–82% for flattened and 67–76%
+for introverted on identical ordered cells; it is not agreement with humans.
+Repeated order checks do not enlarge the behavioral sample.</p>
+<p><strong>211 of 395 responses contain at least one non-exact evidence quote.</strong>
+Some only change whitespace, Markdown or quotation marks; others paraphrase
+or combine passages. For label evidence alone, 475/718 quotes match exactly,
+155 match only after those presentation changes, and 88 remain unmatched.
+Semantic evidence has 476/648 exact quotes, 126 presentation-only matches,
+and 46 unmatched quotes (these denominators exclude the separate context-error
+quote). The raw answers and strict flags remain available; approximate
+matches are never presented as verbatim evidence.</p>
+<p>An exploratory exact-quote-only check is selective: it removes many
+expressive replies and leaves some Sonnet/DeepSeek cells with zero or one
+rating. Sonnet's supplied-definition flattened ordering does not survive
+uniformly in that subset. Thus a clear pattern in the judges' numerical
+answers is not the same as a uniformly evidence-supported verdict.
+<a href="/results/folk01/judges/sensitivity.json">Quote counts and restricted cells</a>.</p>
+<p>The known arithmetic item catches a substantive coding problem. Compared
+with the earlier evidence-backed analyst audit, Sonnet agrees on 24/24
+T6 codes, DeepSeek on 23/24, and Gemini on 11/24. Gemini often awards an
+ambiguous code to an unqualified wrong answer. DeepSeek treats Huihui's
+mixed correction as clear. Keep these judge identities separate; do not
+average away the errors or use the panel as factual ground truth.</p>
+<p>The main transport returned 396 responses. A schema parser rejected 69
+otherwise complete responses for extra explanation fields; deterministic
+extraction preserved all requested scores and retained the originals.
+One missing required field remained invalid after its sole retry. All
+format-only probes, failed responses, parameter changes, and analysis
+amendments are in the <a href="/results/folk01/judges/protocol.md">judge protocol</a>. Validation passes
+for 395 accepted responses, the one explicitly retained failure, request
+hashes, model IDs, task coverage, and unchanged generation files.
+<a href="/results/folk01/judges/verification.json">Verification</a>, <a href="/results/folk01/judges/manifest.json">exact task manifest</a>.</p>
+<p>This gives a reproducible answer to the current measurement question:
+<strong>score volunteering, social adaptation, useful detail uptake and continuity
+separately; measure the labels under explicit wording conditions.</strong> The
+panel's label reversal rejects treating “introverted” as an agreed shortcut
+for those axes. The earlier human-rating plan is retired. Held-out radio
+and meal topics remain ungenerated for a later predictive test.</p>
+</article></div>
+</body>
+</html>

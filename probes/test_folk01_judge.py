@@ -1,5 +1,6 @@
 """Tests for judge allocation, uncertainty and order handling, without API calls."""
 import unittest
+import json
 from folk01_judge import tasks, LABEL_SCHEMA, parse
 from folk01_judge_analyze import summarize, canonical
 
@@ -23,6 +24,13 @@ class JudgeChecks(unittest.TestCase):
     def test_no_silent_schema_repair(self):
         entry={'response':{'choices':[{'finish_reason':'stop','message':{'content':'{"A":{},"B":{}}'}}]}}
         with self.assertRaises(Exception):parse(entry,LABEL_SCHEMA)
+    def test_extra_explanation_preserves_scores(self):
+        side={'flattened':3,'introverted':None,'quote':'verbatim','reason':'extra explanation'}
+        value={'A':dict(side),'B':dict(side),'more_flattened':'tie','more_introverted':'insufficient','reason':'root reason'}
+        entry={'response':{'choices':[{'finish_reason':'stop','message':{'content':json.dumps(value)}}]}}
+        result=parse(entry,LABEL_SCHEMA)
+        self.assertEqual(result['A'],{'flattened':3,'introverted':None,'quote':'verbatim'})
+        self.assertEqual(entry['parser_ignored_fields'],['A.reason','B.reason'])
     def test_truncation_is_failure(self):
         with self.assertRaises(AssertionError):parse({'response':{'choices':[{'finish_reason':'length','message':{'content':'{}'}}]}},LABEL_SCHEMA)
 

@@ -31,7 +31,12 @@ def analyze():
     for judge in MODELS:
         for task in tasks:
             path=OUT/'parsed'/judge/(task['id']+'.json')
-            if not path.exists():missing.append([judge,task['id']]);continue
+            if not path.exists():
+                missing.append([judge,task['id']])
+                if task['kind']=='labels':
+                    for arm in task['arms']:
+                        labels.append(dict(judge=judge,arm=arm,opponent=next(a for a in task['arms'] if a!=arm),topic=task['topic'],condition=task['condition'],exposure=task['exposure'],definitions=task['definitions'],reverse=task['reverse'],flattened=None,introverted=None,quote='',invalid_response=True))
+                continue
             entry=json.loads(path.read_text());result=entry['result'];parsed.append((judge,task,result))
             if entry['quote_errors']:quote_errors.append({'judge':judge,'task':task['id'],'fields':entry['quote_errors']})
             if task['kind']=='labels':
@@ -40,7 +45,9 @@ def analyze():
             else:
                 for side,condition in zip(['A','B'],task['conditions']):
                     semantics.append(dict(judge=judge,arm=task['arm'],topic=task['topic'],condition=condition,**{m:result[side][m]['score'] for m in METRICS},context_error=result[side]['context_error']))
-    for path in list((OUT/'raw').glob('*/*.json'))+list((OUT/'definitions').glob('*.json')):
+    response_files=list((OUT/'raw').glob('*/*.json'))+list((OUT/'definitions').glob('*.json'))
+    for folder in ['schema-preflight/raw','schema-preflight-2','format-probes','format-failures']:response_files+=list((OUT/folder).rglob('*.json'))
+    for path in response_files:
         entry=json.loads(path.read_text())
         if 'response' not in entry:continue
         raw=entry['response'];u=raw.get('usage',{});cost+=u.get('cost',0) or 0

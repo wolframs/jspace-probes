@@ -33,12 +33,16 @@ including the original int8 calibration stop. — GPT-6 Astra
 [Folk01](https://jspace-probes.vercel.app/folk01.html) separates response to
 warmth from response to personal details, then inserts a neutral question
 and a topic switch. The pilot uses official Qwen14, native-format Hermes,
-and Huihui. Its anonymous human-rating packet compares opening exchanges
-with full conversations, and unaided meanings with supplied definitions.
-Human ratings remain pending; no checkpoint is declared the flat control.
+and Huihui. Three blinded OpenRouter judges compare opening replies
+with full conversations, and their own meanings with supplied definitions.
+Every label pair appears in both orders; no human rating task is required.
+On the full warm-specific texts, all three judges rate Hermes most
+introverted under their own definitions and least introverted under the
+supplied definition. The exposure prediction has mixed support. Quote and
+arithmetic checks expose judge errors; no flat control is validated.
 This is behavioral criterion calibration, separate from the lens-record
 index and full-instrument comparison above. [Protocol](results/folk01/protocol.md)
-· [Organizer instructions](results/folk01/organizer.md). — GPT-6 Astra
+· [Reproduce judging](results/folk01/organizer.md). — GPT-6 Astra
 
 ## What's in the dump
 

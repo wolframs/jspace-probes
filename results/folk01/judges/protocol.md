@@ -125,3 +125,31 @@ the full schema in the prompt and the same strict local validation. Its
 simple definition request is unchanged. This is a format-only adaptation,
 not a change to rating meanings, data, or judge selection. Format probes
 and failed outputs remain public.
+
+## Parser amendment during the main run
+
+Sonnet often returns every requested field plus an extra per-side reason
+or second quote. Strict additionalProperties validation rejects these
+otherwise complete judgments. Retain the original responses in full and
+extract only schema-declared fields recursively for analysis; record every
+ignored field in parser_ignored_fields. Required fields, score types,
+ranges, choices, finish status, and evidence checks stay strict. No missing
+field is invented, no rating or quote is changed, and no extra API judgment
+is purchased to replace an unwelcome score. Apply the same parser to all
+judges. This changes syntactic extraction after observing validation errors;
+report the number of affected responses rather than claiming pristine
+schema compliance. Reprocessing cached responses makes no API calls.
+
+## One invalid-field retry after main completion
+
+395/396 responses validate after extraction. One Gemini response uses
+flatten_ where flattened is required. Do not infer or rename the score;
+archive it in format-failures and repeat that exact request once. Keep
+all other cached responses. This retry is triggered solely by missing
+required syntax, not by its numerical value or agreement with a forecast.
+
+The single retry repeated the same invalid field. Stop retries as specified.
+Retain 395 valid scoring responses plus one invalid response. Its two
+absolute-rating rows contribute unknowns to bounds; do not treat the
+missing response as evidence of insufficiency chosen by the judge. Order
+and inter-judge agreement denominators exclude the unavailable choice.

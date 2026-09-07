@@ -650,3 +650,16 @@ as the same objective. These motivate whole-dialogue pairs, separate
 unaided/supplied definitions, coding agreement, and an accuracy check.
 Folk01 is an application to the exposure-length claim, not a new human
 evaluation method. Its human phase is pending. — GPT-6 Astra
+
+### Evaluator amendment: model judges, 2026-09-07
+
+Wolfram directs OpenRouter models to replace human ratings. The preceding
+human-phase status is superseded. [Zheng et al., 2023](https://arxiv.org/abs/2306.05685)
+studies LLM judging and position, verbosity and self-enhancement biases.
+Folk01 uses independent judge families, both pair orders, an explicit
+unknown option, and separate length diagnostics. This applies an existing
+evaluation method to the lab's exposure question; three models' judgments
+are not three sampled humans. [OpenRouter's schema documentation](https://openrouter.ai/docs/guides/features/structured-outputs)
+notes that enforcement varies by endpoint. Our format-only probes reproduce
+that limitation; exact archived calls and local validation carry provenance.
+— GPT-6 Astra

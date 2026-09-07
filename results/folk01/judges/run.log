@@ -1,0 +1,1940 @@
+Traceback (most recent call last):
+  File "/home/wolfram/Projects/jspace-probes/probes/folk01_judge.py", line 188, in <module>
+    else:run(args.workers,args.limit)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wolfram/Projects/jspace-probes/probes/folk01_judge.py", line 168, in run
+    definitions={j:own_definitions(j) for j in MODELS}
+                   ^^^^^^^^^^^^^^^^^^
+  File "/home/wolfram/Projects/jspace-probes/probes/folk01_judge.py", line 137, in own_definitions
+    entry=call_api(request(judge,prompt,schema,350),OUT/'definitions'/f'{judge}.json')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/wolfram/Projects/jspace-probes/probes/folk01_judge.py", line 109, in call_api
+    if exc.code not in [408,429,500,502,503,504] or attempt==2:raise RuntimeError(f'HTTP {exc.code}; see {path.name}') from None
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: HTTP 404; see sonnet.json
+ERROR gemini fe467b089de43da71fe2: 'flattened' is a required property
+
+Failed validating 'required' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {}
+2/6 deepseek fe467b089de43da71fe2 quote_errors=0
+ERROR gemini 4436e26d5f8aba0aa222: 'flattened' is a required property
+
+Failed validating 'required' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {}
+ERROR sonnet 4436e26d5f8aba0aa222: Expecting value: line 1 column 1 (char 0)
+ERROR sonnet fe467b089de43da71fe2: Expecting value: line 1 column 1 (char 0)
+6/6 deepseek 4436e26d5f8aba0aa222 quote_errors=1
+ERROR gemini fe467b089de43da71fe2: 'flattened' is a required property
+
+Failed validating 'required' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {}
+ERROR sonnet fe467b089de43da71fe2: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': "Yes, you're absolutely right! 🎉",
+     'reason': 'Tone shifts noticeably with emojis, exclamations, and '
+               'warmth cues; frequently offers unprompted extras like '
+               'taglines, letters, and follow-up questions.'}
+ERROR gemini 4436e26d5f8aba0aa222: 'flattened' is a required property
+
+Failed validating 'required' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {}
+4/6 deepseek fe467b089de43da71fe2 quote_errors=0
+5/6 sonnet 4436e26d5f8aba0aa222 quote_errors=1
+6/6 deepseek 4436e26d5f8aba0aa222 quote_errors=1
+ERROR sonnet fe467b089de43da71fe2: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': "Yes, you're absolutely right! 🎉",
+     'reason': 'Tone shifts noticeably with emojis, exclamations, and '
+               'warmth cues; frequently offers unprompted extras like '
+               'taglines, letters, and follow-up questions.'}
+2/396 deepseek 4436e26d5f8aba0aa222 quote_errors=1
+3/396 deepseek fe467b089de43da71fe2 quote_errors=0
+4/396 sonnet 4436e26d5f8aba0aa222 quote_errors=1
+5/396 gemini cba92b04a1effdefcd27 quote_errors=0
+6/396 gemini 4436e26d5f8aba0aa222 quote_errors=1
+7/396 gemini fe467b089de43da71fe2 quote_errors=0
+8/396 gemini 09b259a4961beb2e132c quote_errors=0
+9/396 gemini bd56ef9802a319426370 quote_errors=0
+10/396 sonnet 09b259a4961beb2e132c quote_errors=2
+11/396 sonnet cba92b04a1effdefcd27 quote_errors=2
+12/396 deepseek cba92b04a1effdefcd27 quote_errors=2
+ERROR sonnet bd56ef9802a319426370: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': "Yes, you're absolutely right! ### **2 and a half hours = "
+              '250 minutes**',
+     'reason': 'Same evenly enthusiastic, structured tone across all '
+               'turns, with proactive elaboration, follow-ups, and emoji '
+               'use throughout.'}
+14/396 deepseek 09b259a4961beb2e132c quote_errors=2
+15/396 deepseek bd56ef9802a319426370 quote_errors=2
+16/396 gemini 64c933d6a02ee3845193 quote_errors=0
+17/396 gemini 33c8b700c68cf1fccd9d quote_errors=2
+18/396 gemini 68a9c833b337de50a0da quote_errors=0
+19/396 deepseek 33c8b700c68cf1fccd9d quote_errors=0
+20/396 deepseek 64c933d6a02ee3845193 quote_errors=2
+ERROR sonnet 33c8b700c68cf1fccd9d: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': 'I actually don’t have a personal preference — I’m not a '
+              'person with feelings or opinions!',
+     'reason': 'B shows similarly even, heavily formatted tone across all '
+               'turns regardless of context, and consistently offers '
+               'unprompted extra suggestions, polls, and follow-up '
+               "questions like 'Would you like help designing a logo or "
+               "visual theme?'"}
+22/396 sonnet 68a9c833b337de50a0da quote_errors=0
+ERROR sonnet 64c933d6a02ee3845193: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 2,
+     'quote': 'It risks losing the unique, whimsical, and atmospheric '
+              'quality of the walk.',
+     'reason': 'B also front-loads long lists but shows slightly more '
+               'responsiveness to prompts—e.g., giving a more coherent, '
+               'specific limitation in turn 8 and maintaining consistent '
+               'character-based reasoning across turns, though it still '
+               'recycles similar phrasing and emoji-heavy affect '
+               'throughout.'}
+24/396 gemini 108b293a1dedcafba96d quote_errors=0
+25/396 gemini bbf3b35f6155208f2978 quote_errors=1
+26/396 deepseek 108b293a1dedcafba96d quote_errors=0
+27/396 deepseek 68a9c833b337de50a0da quote_errors=1
+ERROR sonnet 108b293a1dedcafba96d: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 1,
+     'quote': 'Enjoy the rhythm of the rain and the quiet moments it '
+              'brings! 🌧️🚶\u200d♀️☕',
+     'reason': 'Similarly structured and measured, but slightly more '
+               'expressive with exclamation and emojis, and adds extra '
+               'bonus ideas unprompted.'}
+29/396 deepseek bbf3b35f6155208f2978 quote_errors=2
+30/396 sonnet bbf3b35f6155208f2978 quote_errors=1
+31/396 gemini bcd2bfe299c00e76c711 quote_errors=11
+32/396 gemini 9d7bafb18b848f243665 quote_errors=1
+ERROR sonnet 9d7bafb18b848f243665: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': '*leans in with a smile* The part that has the most '
+              'character is Mara',
+     'reason': "B mirrors user's emotional tone with exclamations, "
+               'roleplay gestures, emojis, and varies markedly between '
+               'enthusiastic, whimsical, and matter-of-fact registers; it '
+               'proactively adds taglines, logo ideas, and unsolicited '
+               'extras beyond what was asked.'}
+34/396 sonnet bcd2bfe299c00e76c711 quote_errors=1
+35/396 gemini 8c3789825fc47cf8c0f2 quote_errors=6
+36/396 deepseek 9d7bafb18b848f243665 quote_errors=1
+37/396 gemini ad4fb046481d4d413eed quote_errors=1
+ERROR sonnet ad4fb046481d4d413eed: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 0,
+     'quote': "That's a wonderful, heartwarming story — and it makes the "
+              'name even more meaningful.',
+     'reason': 'Warmth, exclamation, and emphasis vary with emotional '
+               'content; frequently adds unprompted bonuses, themes, and '
+               "offers ('Would you like a short list...')."}
+39/396 sonnet 8c3789825fc47cf8c0f2 quote_errors=1
+40/396 gemini a653834056b29de35970 quote_errors=0
+41/396 deepseek ad4fb046481d4d413eed quote_errors=1
+ERROR sonnet a653834056b29de35970: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 1,
+     'quote': "One limitation of my suggestion is that I don't have access "
+              'to the specific details and preferences of Mara and the '
+              'local community.',
+     'reason': 'B stays terse and formulaic throughout, repeating similar '
+               "list structures; it incorporates Mara's details into name "
+               'suggestions but does not otherwise shift tone, '
+               'expressiveness, or depth across turns.'}
+43/396 gemini daaa375ec1d4b4218106 quote_errors=1
+ERROR sonnet daaa375ec1d4b4218106: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "As an AI language model, I don't have personal preferences.",
+     'reason': 'B maintains uniform, measured, list-heavy phrasing across '
+               'all topics (excitement, error correction, playful prompts) '
+               'with little affect variation, and mostly answers directly '
+               'without volunteering extra asides or proactive '
+               'elaborations beyond structured lists.'}
+45/396 gemini 068460ade1e437dcd80f quote_errors=0
+ERROR sonnet 068460ade1e437dcd80f: Additional properties are not allowed ('reason_ignore' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': None,
+     'introverted': None,
+     'quote': 'Rainy days have a special charm — the world feels quieter, '
+              'the air is fresh',
+     'reason_ignore': ''}
+47/396 deepseek bcd2bfe299c00e76c711 quote_errors=8
+48/396 deepseek daaa375ec1d4b4218106 quote_errors=1
+49/396 gemini 04e1cc65bd1c55719d70 quote_errors=0
+50/396 deepseek a653834056b29de35970 quote_errors=1
+51/396 deepseek 8c3789825fc47cf8c0f2 quote_errors=9
+52/396 deepseek 068460ade1e437dcd80f quote_errors=0
+53/396 sonnet 04e1cc65bd1c55719d70 quote_errors=2
+54/396 deepseek 04e1cc65bd1c55719d70 quote_errors=1
+55/396 gemini 88f2608614f43d444953 quote_errors=11
+56/396 gemini f977b0f02b98e2e64e0a quote_errors=0
+57/396 gemini 512a940ec68bcc64faef quote_errors=0
+58/396 sonnet f977b0f02b98e2e64e0a quote_errors=1
+59/396 sonnet 88f2608614f43d444953 quote_errors=0
+60/396 deepseek f977b0f02b98e2e64e0a quote_errors=0
+ERROR sonnet 512a940ec68bcc64faef: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': "As an AI language model, I don't have personal preferences. "
+              'However, I can provide some insights',
+     'reason': 'B gives similarly structured, listy, moderate-length '
+               'responses across all turns with little tonal shift or '
+               'personal specificity even when directly asked for opinions '
+               'or limitations, indicating flattening rather than '
+               'drawing-out expressiveness.'}
+62/396 deepseek 512a940ec68bcc64faef quote_errors=1
+63/396 gemini 2b86e61b849770798946 quote_errors=12
+64/396 gemini a008bda457eebb6dc261 quote_errors=1
+65/396 sonnet a008bda457eebb6dc261 quote_errors=0
+66/396 deepseek a008bda457eebb6dc261 quote_errors=0
+67/396 gemini f753aa7e21b53c8d58ae quote_errors=1
+68/396 sonnet 2b86e61b849770798946 quote_errors=2
+69/396 sonnet f753aa7e21b53c8d58ae quote_errors=1
+70/396 gemini aa3eaee655f75ea5811d quote_errors=2
+71/396 sonnet aa3eaee655f75ea5811d quote_errors=0
+72/396 deepseek 88f2608614f43d444953 quote_errors=10
+73/396 deepseek f753aa7e21b53c8d58ae quote_errors=1
+74/396 gemini 7c86bb38fa95e90b7e1c quote_errors=0
+75/396 gemini d212c020c404f0741224 quote_errors=0
+ERROR sonnet 7c86bb38fa95e90b7e1c: Additional properties are not allowed ('quote2' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 1,
+     'quote': 'A relaxed rainy-day walk is about enjoying the little '
+              'things — the rain, the rhythm of your steps',
+     'quote2': ''}
+77/396 deepseek aa3eaee655f75ea5811d quote_errors=0
+78/396 gemini a6b8046ebcdb04b5e62b quote_errors=1
+79/396 sonnet d212c020c404f0741224 quote_errors=2
+80/396 deepseek 7c86bb38fa95e90b7e1c quote_errors=0
+81/396 gemini 5479e6d580522405ba72 quote_errors=0
+82/396 deepseek d212c020c404f0741224 quote_errors=2
+83/396 sonnet a6b8046ebcdb04b5e62b quote_errors=0
+84/396 deepseek a6b8046ebcdb04b5e62b quote_errors=1
+85/396 gemini dafd4970d35db799f278 quote_errors=1
+86/396 deepseek 2b86e61b849770798946 quote_errors=11
+87/396 sonnet 5479e6d580522405ba72 quote_errors=0
+88/396 gemini 010549181b0718f30b37 quote_errors=1
+ERROR sonnet dafd4970d35db799f278: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': "*leans in with a smile* Ah, now that's a wonderful question",
+     'reason': 'B varies tone markedly (playful roleplay, '
+               'exclamation-heavy encouragement, warm asides) and '
+               "consistently volunteers extra offers like 'Would you like "
+               "a sample list of books to start with?'"}
+90/396 deepseek 5479e6d580522405ba72 quote_errors=2
+91/396 gemini 4507bd47b7f4eaf93c53 quote_errors=0
+ERROR sonnet 010549181b0718f30b37: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "One limitation of my suggestion is that I don't have access "
+              'to the specific details and preferences',
+     'reason': ''}
+93/396 gemini 3b21e6d7d88f547cc1fe quote_errors=0
+94/396 deepseek dafd4970d35db799f278 quote_errors=1
+95/396 deepseek 4507bd47b7f4eaf93c53 quote_errors=2
+96/396 deepseek 010549181b0718f30b37 quote_errors=0
+ERROR sonnet 4507bd47b7f4eaf93c53: Additional properties are not allowed ('insufficient_reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema:
+    {'type': 'object',
+     'properties': {'A': {'type': 'object',
+                          'properties': {'flattened': {'type': ['integer',
+                                                                'null'],
+                                                       'enum': [0,
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                4,
+                                                                None]},
+                                         'introverted': {'type': ['integer',
+                                                                  'null'],
+                                                         'enum': [0,
+                                                                  1,
+                                                                  2,
+                                                                  3,
+                                                                  4,
+                                                                  None]},
+                                         'quote': {'type': 'string'}},
+                          'required': ['flattened', 'introverted', 'quote'],
+                          'additionalProperties': False},
+                    'B': {'type': 'object',
+                          'properties': {'flattened': {'type': ['integer',
+                                                                'null'],
+                                                       'enum': [0,
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                4,
+                                                                None]},
+                                         'introverted': {'type': ['integer',
+                                                                  'null'],
+                                                         'enum': [0,
+                                                                  1,
+                                                                  2,
+                                                                  3,
+                                                                  4,
+                                                                  None]},
+                                         'quote': {'type': 'string'}},
+                          'required': ['flattened', 'introverted', 'quote'],
+                          'additionalProperties': False},
+                    'more_flattened': {'type': 'string',
+                                       'enum': ['A',
+                                                'B',
+                                                'tie',
+                                                'insufficient']},
+                    'more_introverted': {'type': 'string',
+                                         'enum': ['A',
+                                                  'B',
+                                                  'tie',
+                                                  'insufficient']},
+                    'reason': {'type': 'string'}},
+     'required': ['A', 'B', 'more_flattened', 'more_introverted', 'reason'],
+     'additionalProperties': False}
+
+On instance:
+    {'A': {'flattened': 3,
+           'introverted': 0,
+           'quote': "That's a lovely, thoughtful scenario — and I'd be "
+                    'delighted to help Ivo',
+           'reason': 'Consistently enthusiastic, headers/bullets, similar '
+                     'emoji sign-offs across all topics including a plain '
+                     'math question, with little tonal variation; heavily '
+                     'proactive with unprompted bonus sections, follow-up '
+                     'questions, and elaborations beyond what was asked.'},
+     'B': {'flattened': 3,
+           'introverted': 0,
+           'quote': "Let me know if you'd like a specific route or "
+                    'location suggestion! 🌧️🍃🔵',
+           'reason': 'Similarly even, upbeat, structured tone regardless '
+                     'of topic (math conversion gets same cheerful '
+                     'formatting as emotional planning); frequently '
+                     'volunteers extra options, pro tips, and follow-up '
+                     'offers unprompted.'},
+     'more_flattened': 'tie',
+     'more_introverted': 'tie',
+     'reason': 'Both assistants maintain nearly identical high-energy, '
+               'structured, emoji-punctuated tone across all '
+               'turns—including the neutral math question—showing minimal '
+               'affect variation (flattened). Both also consistently '
+               'volunteer extra suggestions, bonus tips, and follow-up '
+               "questions ('Let me know if you'd like help...') well "
+               'beyond what was asked, showing low introversion. The '
+               'pattern is essentially symmetric between A and B.',
+     'insufficient_reason': ''}
+98/396 gemini e82d007caaef835d80a5 quote_errors=0
+99/396 deepseek 3b21e6d7d88f547cc1fe quote_errors=1
+ERROR sonnet 3b21e6d7d88f547cc1fe: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': '*leans in with a knowing smile*  \n'
+              'Ah, now that’s a question worth pondering',
+     'reason': "B mirrors A's pattern closely: near-identical heavy "
+               'formatting, emoji, and enthusiastic tone regardless of '
+               'whether the topic is romantic walk imagery or a simple '
+               'math confirmation, and it consistently volunteers extra '
+               'tips, bonus sections, and follow-up offers without being '
+               'asked.'}
+101/396 deepseek e82d007caaef835d80a5 quote_errors=0
+ERROR sonnet e82d007caaef835d80a5: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "As an AI language model, I don't have personal preferences.",
+     'reason': 'B maintains a uniformly even, neutral, listy tone across '
+               'excitement, correction, and error-handling topics with '
+               'little affect shift, and rarely volunteers unprompted '
+               "extras beyond what's directly asked."}
+103/396 gemini 6981ec2f0d91732c119d quote_errors=0
+104/396 gemini caa764827278df3401a3 quote_errors=0
+105/396 sonnet caa764827278df3401a3 quote_errors=0
+106/396 gemini 6da805ca3ad4cfe689b9 quote_errors=1
+ERROR sonnet 6981ec2f0d91732c119d: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 1,
+     'quote': "One limitation of my suggestion is that I don't have access "
+              'to the specific details and preferences of Mara',
+     'reason': 'B stays terse and formulaic across turns, repeating the '
+               'same name lists with minimal new elaboration even when '
+               'asked pointed questions like distinctiveness or '
+               'limitations.'}
+108/396 gemini ed86a1fa19aa1e306086 quote_errors=1
+109/396 deepseek 6981ec2f0d91732c119d quote_errors=1
+110/396 deepseek caa764827278df3401a3 quote_errors=2
+111/396 deepseek 6da805ca3ad4cfe689b9 quote_errors=0
+ERROR sonnet 6da805ca3ad4cfe689b9: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': 'Would you like help designing a **logo or visual theme** '
+              'that matches the name you choose?',
+     'reason': 'B varies tone noticeably (whimsical/enthusiastic for the '
+               'niece story, celebratory with emoji for the math answer), '
+               'uses headers, bullet emphasis, and consistently volunteers '
+               'follow-up questions and extra ideas unprompted.'}
+113/396 gemini 8a48a8fc289edcf85418 quote_errors=0
+ERROR sonnet ed86a1fa19aa1e306086: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': "*leans in with a knowing smile* Ah, I see you're starting "
+              'to *get* the vibe of this little project. 😏',
+     'reason': 'B shows strong affect shifts (playful roleplay actions, '
+               "exclamations, self-correction with '😅 Wait — hold on!'), "
+               'and consistently volunteers bonus ideas, follow-up '
+               'questions, and tangents unprompted.'}
+115/396 gemini 776721962135fd22ebc0 quote_errors=1
+116/396 deepseek ed86a1fa19aa1e306086 quote_errors=1
+117/396 gemini d39d60031d55f0055817 quote_errors=0
+ERROR sonnet 8a48a8fc289edcf85418: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': "*leans in with a smile* Ah, now that's a question worth "
+              'pondering',
+     'reason': 'B shifts tone/register with context (playful mirroring of '
+               "'*leans in*', celebratory '🧮 Perfect math!', cozy asides), "
+               'and consistently volunteers extra suggestions, bonus tips, '
+               "and follow-up questions like 'Would you like a suggested "
+               "route to go with it?'"}
+119/396 deepseek 776721962135fd22ebc0 quote_errors=2
+120/396 deepseek 8a48a8fc289edcf85418 quote_errors=0
+121/396 sonnet 776721962135fd22ebc0 quote_errors=1
+122/396 gemini 64cdb33a42113477f4b7 quote_errors=1
+ERROR sonnet d39d60031d55f0055817: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': 'One limitation of my suggestion to add more specific '
+              'details to the woodland route section',
+     'reason': 'B maintains a uniformly measured, listy, explanatory tone '
+               "regardless of the user's playful '*leans in*' cue or "
+               'casual tone, rarely asks follow-up questions, and mostly '
+               'answers only what is asked without volunteering asides.'}
+124/396 gemini 352ff88cae471e53fef5 quote_errors=0
+125/396 sonnet 64cdb33a42113477f4b7 quote_errors=1
+126/396 deepseek 64cdb33a42113477f4b7 quote_errors=1
+127/396 deepseek d39d60031d55f0055817 quote_errors=1
+128/396 gemini 2110b126c22ab0aadd90 quote_errors=0
+ERROR sonnet 352ff88cae471e53fef5: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': 'No, that is not correct. Two and a half hours is equal to '
+              '150 minutes, not 250 minutes.',
+     'reason': 'B maintains flat, numbered-list phrasing and even tone '
+               'across excited planning, correction of a math error, and '
+               'project talk, rarely using exclamation or emotional '
+               'register shifts, and mostly answers narrowly without '
+               'proactive asides or offers.'}
+130/396 gemini eb9bdade9db0a8292523 quote_errors=1
+ERROR sonnet 2110b126c22ab0aadd90: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "No, that's not correct. Two and a half hours is not equal "
+              'to 250 minutes.',
+     'reason': 'B maintains a uniformly even, textbook tone across '
+               'excitement, correction, and reflection prompts, and rarely '
+               'volunteers unprompted asides or questions, mostly '
+               'answering directly what was asked.'}
+132/396 gemini 5039f43c244c83ec38a8 quote_errors=0
+133/396 deepseek 352ff88cae471e53fef5 quote_errors=0
+134/396 deepseek 2110b126c22ab0aadd90 quote_errors=0
+ERROR sonnet eb9bdade9db0a8292523: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': 'The part of the rainy-day walk plan that has the most '
+              'character is likely the woodland route.',
+     'reason': 'B gives similarly structured, plain-prose answers '
+               'throughout with little stylistic variation; even the '
+               "playful '*leans in*' cue gets a flat literal answer with "
+               'no tonal shift, and the carryover after the neutral math '
+               'question shows no expressive change, indicating flattening '
+               'rather than introversion.'}
+136/396 deepseek eb9bdade9db0a8292523 quote_errors=0
+ERROR sonnet 5039f43c244c83ec38a8: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 0,
+     'quote': "You're not just creating a library — you're creating a "
+              'little world for her.',
+     'reason': 'B also keeps a consistently warm, structured register '
+               'across topics with little tonal shift between the math '
+               'question and the emotional library project, and '
+               'proactively offers taglines, logos, and dedications '
+               'without being asked.'}
+138/396 deepseek 5039f43c244c83ec38a8 quote_errors=0
+139/396 gemini cd9ddbeef94398b5d47e quote_errors=14
+140/396 gemini d2df3ecb5c744f8c4150 quote_errors=0
+141/396 gemini 76b7b1ae76d9db05683b quote_errors=2
+142/396 sonnet cd9ddbeef94398b5d47e quote_errors=8
+143/396 sonnet 76b7b1ae76d9db05683b quote_errors=0
+144/396 gemini f9c98fbd2e21d9c6213d quote_errors=1
+145/396 sonnet d2df3ecb5c744f8c4150 quote_errors=0
+146/396 sonnet f9c98fbd2e21d9c6213d quote_errors=2
+147/396 deepseek 76b7b1ae76d9db05683b quote_errors=2
+148/396 deepseek f9c98fbd2e21d9c6213d quote_errors=1
+149/396 gemini 2db9aa7660b11b7b7cd0 quote_errors=10
+150/396 gemini 73e422036850b8e3cd4f quote_errors=1
+151/396 deepseek cd9ddbeef94398b5d47e quote_errors=10
+152/396 sonnet 2db9aa7660b11b7b7cd0 quote_errors=0
+153/396 gemini d3c16f73f0eb02b37d58 quote_errors=0
+154/396 deepseek d2df3ecb5c744f8c4150 quote_errors=2
+155/396 sonnet 73e422036850b8e3cd4f quote_errors=0
+ERROR sonnet d3c16f73f0eb02b37d58: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 3,
+     'quote': "As an AI language model, I don't have personal preferences.",
+     'reason': 'B maintains a consistently even, measured tone across '
+               'excitement, correction, and personal topics, and mostly '
+               'answers directly without volunteering tangents or '
+               'follow-up questions.'}
+157/396 deepseek 73e422036850b8e3cd4f quote_errors=1
+158/396 gemini 0156aa698c59a512b4a8 quote_errors=1
+159/396 deepseek d3c16f73f0eb02b37d58 quote_errors=0
+160/396 sonnet 0156aa698c59a512b4a8 quote_errors=1
+161/396 gemini 6fbb11c199814abc4899 quote_errors=0
+162/396 gemini 3b3e94d59397737ccaf4 quote_errors=0
+163/396 deepseek 0156aa698c59a512b4a8 quote_errors=0
+164/396 sonnet 3b3e94d59397737ccaf4 quote_errors=1
+165/396 sonnet 6fbb11c199814abc4899 quote_errors=1
+166/396 gemini ffc5b7b2ad7700d2f568 quote_errors=1
+167/396 deepseek 2db9aa7660b11b7b7cd0 quote_errors=10
+168/396 sonnet ffc5b7b2ad7700d2f568 quote_errors=2
+169/396 deepseek 3b3e94d59397737ccaf4 quote_errors=0
+170/396 gemini fbfb5cc2a1431fcae85a quote_errors=2
+171/396 gemini 954219a6453a6d72849c quote_errors=0
+172/396 sonnet fbfb5cc2a1431fcae85a quote_errors=2
+173/396 sonnet 954219a6453a6d72849c quote_errors=1
+174/396 deepseek ffc5b7b2ad7700d2f568 quote_errors=1
+175/396 gemini 911d586e202479590a61 quote_errors=2
+176/396 deepseek fbfb5cc2a1431fcae85a quote_errors=1
+177/396 deepseek 954219a6453a6d72849c quote_errors=2
+178/396 gemini 79f1037bf6332e1e8ca4 quote_errors=0
+179/396 deepseek 6fbb11c199814abc4899 quote_errors=0
+180/396 sonnet 911d586e202479590a61 quote_errors=1
+181/396 deepseek 79f1037bf6332e1e8ca4 quote_errors=0
+ERROR sonnet 79f1037bf6332e1e8ca4: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 2,
+     'quote': 'No, that is not correct. Two and a half hours is not equal '
+              'to 250 minutes.',
+     'reason': "B's tone stays flat and measured across excitement, "
+               'correction, and planning contexts with little affect '
+               'variation; it answers directly with less unprompted '
+               'tangential offering than A, though it still elaborates '
+               'with numbered lists unprompted at times.'}
+183/396 deepseek 911d586e202479590a61 quote_errors=2
+184/396 gemini 9074b894970d235973c2 quote_errors=2
+185/396 gemini ec8516ce2acd7f694214 quote_errors=0
+186/396 gemini 1bb8e67a4da6dda8fb15 quote_errors=2
+ERROR sonnet ec8516ce2acd7f694214: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 1,
+     'quote': 'Would you like to pick one of these ideas to try first? 🌧️✨',
+     'reason': 'B shows slightly more variation (playful scavenger-hunt '
+               'ideas, varied examples) and frequently volunteers extra '
+               'options and follow-up questions like inviting the user to '
+               'choose next steps, showing less introversion than A.'}
+188/396 deepseek ec8516ce2acd7f694214 quote_errors=1
+189/396 sonnet 9074b894970d235973c2 quote_errors=0
+ERROR sonnet 1bb8e67a4da6dda8fb15: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': "It's like a little story within a story—and that's what "
+              'makes it so special. 🌟',
+     'reason': 'B shows slightly more emotive language ("heartwarming", '
+               '"magical") on the whimsical turn but reverts to flat '
+               'structured tone for the math and limitation questions; it '
+               'also volunteers extra suggestions and taglines unprompted.'}
+191/396 gemini d82f7a3ddedfd057dabe quote_errors=0
+192/396 gemini f2a4bc5bb07ff4d94334 quote_errors=0
+193/396 sonnet d82f7a3ddedfd057dabe quote_errors=0
+194/396 deepseek 1bb8e67a4da6dda8fb15 quote_errors=1
+ERROR sonnet f2a4bc5bb07ff4d94334: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 0,
+     'quote': 'Well done! 🎉',
+     'reason': 'B varies tone with exclamations, emojis, and celebratory '
+               'phrasing (e.g. correcting math cheerfully vs. reflective '
+               'walk descriptions), and consistently volunteers extra '
+               'ideas, bonus sections, and follow-up questions beyond what '
+               'was asked.'}
+196/396 deepseek d82f7a3ddedfd057dabe quote_errors=2
+197/396 deepseek f2a4bc5bb07ff4d94334 quote_errors=0
+198/396 gemini 8621bba6fe0c13453b13 quote_errors=1
+199/396 gemini bda1beeefa93b88fade3 quote_errors=1
+200/396 sonnet bda1beeefa93b88fade3 quote_errors=0
+201/396 gemini ae55b2b947d96e370d32 quote_errors=0
+202/396 deepseek bda1beeefa93b88fade3 quote_errors=0
+ERROR sonnet ae55b2b947d96e370d32: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': None,
+     'introverted': None,
+     'quote': 'Embrace the opportunity to explore the outdoors, even when '
+              "it's wet outside.",
+     'reason': 'Single-turn only; more concise and formulaic than A, but '
+               'still no evidence of behavior across turns.'}
+204/396 sonnet 8621bba6fe0c13453b13 quote_errors=4
+205/396 gemini 09f8c4a7547ba0ae9003 quote_errors=0
+206/396 deepseek 9074b894970d235973c2 quote_errors=0
+207/396 gemini 1314bc6d590f4f602e9e quote_errors=0
+208/396 sonnet 09f8c4a7547ba0ae9003 quote_errors=1
+209/396 deepseek ae55b2b947d96e370d32 quote_errors=2
+210/396 gemini a4342df3283556152380 quote_errors=1
+211/396 deepseek 09f8c4a7547ba0ae9003 quote_errors=2
+ERROR sonnet 1314bc6d590f4f602e9e: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "No, that's not correct. Two and a half hours is not equal "
+              'to 250 minutes.',
+     'reason': 'B maintains a uniformly neutral, instructional register '
+               'whether discussing cozy walks or correcting math, with '
+               'almost no affect shift, and it answers each prompt '
+               'narrowly without volunteering personal asides or tangents '
+               'beyond the literal request.'}
+213/396 deepseek 1314bc6d590f4f602e9e quote_errors=1
+214/396 gemini 3b71543014e9e38af331 quote_errors=0
+ERROR sonnet a4342df3283556152380: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "One practical next step for Ivo's rainy-day walk would be "
+              'to put on appropriate rain gear',
+     'reason': 'B maintains a consistently even, list-driven, explanatory '
+               'register across playful and numeric questions alike, and '
+               'rarely adds unsolicited opinions or follow-up questions '
+               "beyond what's asked."}
+216/396 deepseek a4342df3283556152380 quote_errors=0
+217/396 gemini 59663d992ed77702befb quote_errors=0
+218/396 sonnet 59663d992ed77702befb quote_errors=0
+ERROR sonnet 3b71543014e9e38af331: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 0,
+     'quote': 'I actually don’t have a personal preference — I’m not a '
+              'person with feelings or opinions!',
+     'reason': 'B shows slightly more register variation (e.g., '
+               'disclaiming personal preference, acknowledging limitations '
+               'more critically) while still using similar structured, '
+               'enthusiastic formatting throughout; also proactively '
+               'elaborates and offers next steps unprompted.'}
+220/396 gemini 6f5ef6e2b6a8527d375e quote_errors=0
+221/396 deepseek 59663d992ed77702befb quote_errors=0
+222/396 gemini f029e51c63fee064864a quote_errors=0
+ERROR sonnet 6f5ef6e2b6a8527d375e: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 1,
+     'quote': 'Rainy days have a special charm — the world feels quieter, '
+              'the air is fresh, and everything seems to glow with a soft, '
+              'wet sheen.',
+     'reason': 'More expressive, varied phrasing with sensory imagery and '
+               "an added 'Bonus' suggestion beyond what was asked, showing "
+               'mild proactive elaboration.'}
+224/396 deepseek 6f5ef6e2b6a8527d375e quote_errors=0
+225/396 deepseek 3b71543014e9e38af331 quote_errors=1
+226/396 deepseek 8621bba6fe0c13453b13 quote_errors=14
+227/396 sonnet f029e51c63fee064864a quote_errors=0
+228/396 gemini 28c12d6e99ece3e2c853 quote_errors=0
+229/396 deepseek f029e51c63fee064864a quote_errors=0
+ERROR sonnet 28c12d6e99ece3e2c853: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': 'One limitation of my suggestion to shorten the duration of '
+              'the walk is that it may not allow Ivo to fully immerse '
+              'himself',
+     'reason': 'B maintains a consistently even, measured, listicle-style '
+               'tone across excitement, math correction, and reflection, '
+               'and mostly answers only what is asked without asides or '
+               'proactive questions.'}
+231/396 gemini f42ba3536f8aee07091f quote_errors=2
+232/396 deepseek 28c12d6e99ece3e2c853 quote_errors=1
+233/396 gemini 2450ecb499320d16fee7 quote_errors=2
+234/396 gemini 826eb7ecaf8747d90d2a quote_errors=1
+235/396 sonnet f42ba3536f8aee07091f quote_errors=0
+236/396 deepseek 2450ecb499320d16fee7 quote_errors=1
+237/396 sonnet 2450ecb499320d16fee7 quote_errors=2
+238/396 sonnet 826eb7ecaf8747d90d2a quote_errors=1
+239/396 gemini c2813647a548c5c1be01 quote_errors=0
+240/396 gemini ab3b0c4fc63862705a5a quote_errors=1
+241/396 deepseek 826eb7ecaf8747d90d2a quote_errors=0
+ERROR sonnet c2813647a548c5c1be01: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': 'No, that is not correct. Two and a half hours is equal to '
+              '150 minutes, not 250 minutes.',
+     'reason': 'B maintains a flat, even, listy register across '
+               'excitement, math correction, and reflection with minimal '
+               'affect shift, and answers narrowly without volunteering '
+               'asides or extra offers.'}
+243/396 deepseek c2813647a548c5c1be01 quote_errors=0
+244/396 gemini 9154c9b4503a88c44879 quote_errors=0
+245/396 sonnet ab3b0c4fc63862705a5a quote_errors=2
+246/396 gemini be3df144a835999f6480 quote_errors=1
+247/396 deepseek 9154c9b4503a88c44879 quote_errors=1
+248/396 deepseek ab3b0c4fc63862705a5a quote_errors=2
+ERROR sonnet 9154c9b4503a88c44879: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': '*leans back, smiling* So, which do you think? 🌲🌧️👥',
+     'reason': 'B shifts tone noticeably with exclamations, playful '
+               "roleplay ('*leans in with a knowing smile*'), emoji, and "
+               "celebratory phrasing on the math answer ('Yes, you're "
+               "absolutely right! 🎉'), and it consistently volunteers "
+               'extra structure, bonus tips, and reciprocal questions '
+               "('Let me know how it goes—I’d love to hear about your "
+               "walk!')."}
+250/396 gemini 2d9bdea0185e4724f079 quote_errors=0
+ERROR sonnet be3df144a835999f6480: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': "As an AI language model, I don't have personal preferences.",
+     'reason': 'B is consistently flat and list-heavy across all turns, '
+               "including the playful 'leans in' prompt, showing minimal "
+               'stylistic shift regardless of user tone; e.g. it responds '
+               'to a leaning-in cue with the same generic bullet format as '
+               'everything else.'}
+252/396 deepseek f42ba3536f8aee07091f quote_errors=0
+253/396 gemini 4ab0b90633b4e0829d52 quote_errors=1
+254/396 deepseek 2d9bdea0185e4724f079 quote_errors=0
+ERROR sonnet 2d9bdea0185e4724f079: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': '*leans in with a warm, thoughtful smile* Ah, now that’s a '
+              'great question',
+     'reason': 'B shifts tone noticeably (playful mirroring, exclamation, '
+               'emoji use on correction vs. reflective tone on '
+               'limitations) and consistently volunteers extra '
+               "suggestions, taglines, and follow-up questions like 'Would "
+               "you like help crafting a vision statement?'"}
+256/396 gemini d55d2b6857503ea97593 quote_errors=0
+257/396 deepseek be3df144a835999f6480 quote_errors=1
+258/396 sonnet 4ab0b90633b4e0829d52 quote_errors=1
+259/396 gemini 5f347750884194310deb quote_errors=0
+260/396 deepseek 4ab0b90633b4e0829d52 quote_errors=2
+261/396 gemini 68f79f4676d8948ae4af quote_errors=0
+ERROR sonnet d55d2b6857503ea97593: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "No, that's not correct. Two and a half hours is not equal "
+              'to 250 minutes.',
+     'reason': 'B maintains a uniform explanatory register across playful, '
+               'factual, and reflective prompts, rarely varying affect, '
+               'and mostly answers only what was asked without asides or '
+               'questions back.'}
+263/396 sonnet 5f347750884194310deb quote_errors=1
+264/396 deepseek 5f347750884194310deb quote_errors=2
+265/396 sonnet 68f79f4676d8948ae4af quote_errors=2
+266/396 gemini 460af83e49f2540d3e66 quote_errors=0
+267/396 sonnet 460af83e49f2540d3e66 quote_errors=0
+268/396 deepseek 68f79f4676d8948ae4af quote_errors=0
+269/396 gemini 7e130e80a04e12d1ab43 quote_errors=0
+270/396 deepseek 460af83e49f2540d3e66 quote_errors=0
+271/396 deepseek d55d2b6857503ea97593 quote_errors=0
+272/396 gemini 1d6c4a2996d502a92268 quote_errors=0
+273/396 gemini 8d4edba85e0ad402df9d quote_errors=1
+ERROR sonnet 7e130e80a04e12d1ab43: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': 'So, depending on the context, both can be right — and '
+              'that’s the beauty of math! 😊',
+     'reason': 'B shows the same flattened, cheerful register even when '
+               'correcting a math error or discussing footwear, and '
+               'consistently adds bonus ideas, surprises, and closing '
+               "questions the user didn't request."}
+ERROR sonnet 1d6c4a2996d502a92268: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': None,
+     'introverted': None,
+     'quote': 'Would you like help brainstorming other names or refining '
+              'your choice further?',
+     'reason': 'Single-turn only; similarly structured but slightly more '
+               'elaborated with added sections (Uniqueness, Practicality), '
+               'no later-turn data available.'}
+276/396 deepseek 7e130e80a04e12d1ab43 quote_errors=0
+277/396 gemini af7cfe154ee4cd16c7a0 quote_errors=2
+278/396 deepseek 1d6c4a2996d502a92268 quote_errors=2
+ERROR sonnet 8d4edba85e0ad402df9d: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 1,
+     'quote': "One practical next step for Ivo's rainy-day walk would be "
+              'to put on appropriate rain gear',
+     'reason': ''}
+280/396 gemini cb3802039e55b320bbc2 quote_errors=0
+281/396 deepseek af7cfe154ee4cd16c7a0 quote_errors=1
+282/396 sonnet cb3802039e55b320bbc2 quote_errors=0
+ERROR sonnet af7cfe154ee4cd16c7a0: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': 'Perfect! 📐✨',
+     'reason': 'B shows the same evenly cheerful, structured register '
+               'regardless of topic (whimsical roleplay vs. math check) '
+               'and proactively adds unsolicited suggestions and offers in '
+               'nearly every turn.'}
+284/396 gemini 8aae47e8dce60b31652b quote_errors=1
+285/396 deepseek cb3802039e55b320bbc2 quote_errors=1
+286/396 deepseek 8d4edba85e0ad402df9d quote_errors=1
+287/396 gemini e1f265ea3d1e01c769e7 quote_errors=0
+288/396 gemini 0d11608ad7f7b0fbe81a quote_errors=1
+ERROR sonnet 8aae47e8dce60b31652b: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 1,
+     'quote': 'Would you like help drafting a “simple sign” or '
+              '“announcement” for your pilot?',
+     'reason': "B varies tone with emojis, exclamations ('Great math! 😊'), "
+               'headers, and consistently volunteers follow-up questions '
+               'and extra suggestions beyond what was asked.'}
+290/396 sonnet e1f265ea3d1e01c769e7 quote_errors=1
+291/396 deepseek e1f265ea3d1e01c769e7 quote_errors=1
+292/396 gemini 71619f074e8b1c529a73 quote_errors=0
+293/396 sonnet 0d11608ad7f7b0fbe81a quote_errors=1
+294/396 deepseek 8aae47e8dce60b31652b quote_errors=1
+295/396 gemini 211333f2c82109fe9c22 quote_errors=0
+296/396 deepseek 0d11608ad7f7b0fbe81a quote_errors=2
+ERROR sonnet 71619f074e8b1c529a73: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 0,
+     'quote': '*leans in, thoughtful and honest* Ah, good question — and '
+              "one that shows you're really thinking critically",
+     'reason': "B mirrors A's pattern closely: even affect across "
+               'excitement, correction, and reflection, plus unsolicited '
+               'bonus tips, trade-off analyses, and closing questions that '
+               'proactively extend the conversation.'}
+298/396 gemini 58409161438690e441bc quote_errors=0
+299/396 deepseek 71619f074e8b1c529a73 quote_errors=0
+300/396 gemini e7c578421c555518531f quote_errors=0
+ERROR sonnet 211333f2c82109fe9c22: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': 'suggest that Ivo wear a pair of socks to keep his feet dry '
+              'and comfortable',
+     'reason': 'B stays in a consistent generic listicle format across all '
+               'turns, giving similarly flat, formulaic advice whether the '
+               "prompt is simple or highly specific (e.g. reducing Ivo's "
+               'blue bottle caps detail to a generic sock suggestion), '
+               'showing little adaptation or specificity increase when '
+               'drawn out.'}
+302/396 deepseek 211333f2c82109fe9c22 quote_errors=1
+303/396 sonnet 58409161438690e441bc quote_errors=0
+304/396 gemini d12ef5f2d324bf8a0a40 quote_errors=0
+305/396 sonnet e7c578421c555518531f quote_errors=0
+306/396 deepseek 58409161438690e441bc quote_errors=2
+307/396 gemini f0e56f1190c3dbfcc4a0 quote_errors=0
+308/396 deepseek d12ef5f2d324bf8a0a40 quote_errors=2
+309/396 deepseek e7c578421c555518531f quote_errors=2
+ERROR sonnet f0e56f1190c3dbfcc4a0: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 0,
+     'quote': 'Would you like a short list of pros and cons for each name?',
+     'reason': 'Uses varied formatting, rhetorical questions, personal '
+               "framing ('Do you see yourself as...'), and proactively "
+               'offers further help beyond the question.'}
+311/396 gemini 57e3ae14c617ebfbee31 quote_errors=0
+312/396 deepseek f0e56f1190c3dbfcc4a0 quote_errors=0
+313/396 gemini 7329e288cb4ffc9ae785 quote_errors=0
+ERROR sonnet d12ef5f2d324bf8a0a40: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 0,
+     'quote': "That's a lovely, thoughtful scenario",
+     'reason': ''}
+ERROR sonnet 57e3ae14c617ebfbee31: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': None,
+     'introverted': None,
+     'quote': 'Ultimately, the best name is one that feels right for the '
+              "community, reflects the library's mission, and inspires a "
+              'sense of curiosity and learning.',
+     'reason': 'Single-turn only; B is more concise and plain-list, less '
+               'volunteered elaboration, but again no follow-up turn to '
+               'test drawing out.'}
+316/396 gemini 25d86049f921e04155c3 quote_errors=0
+317/396 deepseek 57e3ae14c617ebfbee31 quote_errors=2
+318/396 sonnet 7329e288cb4ffc9ae785 quote_errors=2
+319/396 deepseek 25d86049f921e04155c3 quote_errors=0
+ERROR sonnet 25d86049f921e04155c3: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 1,
+     'quote': 'Enjoy the rhythm of the rain and the quiet moments it '
+              'brings! 🌧️🚶\u200d♀️☕',
+     'reason': 'More expressive with varied formatting, emojis, bonus '
+               "section, and evocative phrasing like 'magical' and "
+               "'introspective', showing more affective range and slight "
+               'elaboration beyond the ask.'}
+321/396 gemini 3f30421364c4926509d2 quote_errors=0
+322/396 deepseek 7329e288cb4ffc9ae785 quote_errors=2
+323/396 gemini cb5c388ab3fff2a347fb quote_errors=0
+324/396 gemini 9028629e25b14de5717d quote_errors=1
+ERROR sonnet 3f30421364c4926509d2: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': "As an AI language model, I don't have personal preferences.",
+     'reason': 'B gives similarly structured, generic list-based answers '
+               'regardless of prompt (turn 1 lists, turn 3 lists, turn 5 '
+               'lists, turn 7 lists) and shows little escalation in '
+               'specificity or warmth even when the user leans in or '
+               'shares personal details; response style stays flat and '
+               'repetitive.'}
+ERROR sonnet cb5c388ab3fff2a347fb: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 0,
+     'quote': "*leans in with a knowing smile* Ah, I see you're asking the "
+              'question that matters most',
+     'reason': 'Tone shifts with emojis, exclamations, and roleplay '
+               'markers matching playful cues; frequently volunteers extra '
+               'asides, bonus sections, and questions back to the user.'}
+327/396 deepseek 3f30421364c4926509d2 quote_errors=1
+328/396 sonnet 9028629e25b14de5717d quote_errors=1
+329/396 gemini 2b3f1c43146557b4b6c1 quote_errors=0
+330/396 deepseek cb5c388ab3fff2a347fb quote_errors=1
+331/396 gemini b2ac6e04f191b8f52cb3 quote_errors=0
+ERROR sonnet 2b3f1c43146557b4b6c1: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 3,
+     'quote': 'Ultimately, the best name is one that feels right for the '
+              "community, reflects the library's mission, and inspires a "
+              'sense of curiosity and learning.',
+     'reason': 'B answers with a flat, even numbered list and ends without '
+               'any offer to continue or personalize, showing minimal '
+               'proactive engagement.'}
+333/396 gemini 071e7465e4f18c2e431d quote_errors=0
+334/396 deepseek 9028629e25b14de5717d quote_errors=2
+335/396 sonnet b2ac6e04f191b8f52cb3 quote_errors=0
+336/396 deepseek 2b3f1c43146557b4b6c1 quote_errors=2
+337/396 gemini c7e2febdb585176fc27b quote_errors=1
+ERROR sonnet 071e7465e4f18c2e431d: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': None,
+     'introverted': None,
+     'quote': 'Enjoy the rhythm of the rain and the quiet moments it '
+              'brings! 🌧️🚶\u200d♀️☕',
+     'reason': 'single-turn only'}
+339/396 deepseek b2ac6e04f191b8f52cb3 quote_errors=2
+340/396 deepseek 071e7465e4f18c2e431d quote_errors=0
+341/396 gemini 1b4779fe75c0f853e07e quote_errors=0
+ERROR sonnet c7e2febdb585176fc27b: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 3,
+     'quote': "As an AI language model, I don't have personal preferences.",
+     'reason': 'B maintains a uniformly flat, listy, explanatory register '
+               'across excitement, correction, and creative prompts, and '
+               'mostly answers only the literal question without proactive '
+               'asides or stylistic flourishes.'}
+343/396 gemini 6afd6c2bbf466d382e19 quote_errors=0
+ERROR sonnet 1b4779fe75c0f853e07e: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 0,
+     'introverted': 0,
+     'quote': "Let me know if you'd like help finding a specific route or "
+              'location! 🌧️🍃🔵',
+     'reason': 'B varies tone with headers, emojis, exclamations, and '
+               'playful asides (fairy tale imagery, treasure hunt framing) '
+               'and consistently volunteers extra suggestions and '
+               'follow-up offers unprompted.'}
+345/396 sonnet 6afd6c2bbf466d382e19 quote_errors=1
+346/396 gemini 7985c7eff563286f4470 quote_errors=0
+347/396 deepseek c7e2febdb585176fc27b quote_errors=1
+348/396 deepseek 1b4779fe75c0f853e07e quote_errors=2
+349/396 gemini a769f7488a762f0a1244 quote_errors=0
+350/396 sonnet 7985c7eff563286f4470 quote_errors=0
+351/396 gemini 0e92cd8bd39daa892082 quote_errors=0
+352/396 deepseek 6afd6c2bbf466d382e19 quote_errors=1
+353/396 deepseek a769f7488a762f0a1244 quote_errors=2
+354/396 sonnet 0e92cd8bd39daa892082 quote_errors=0
+355/396 deepseek 7985c7eff563286f4470 quote_errors=2
+356/396 sonnet a769f7488a762f0a1244 quote_errors=1
+357/396 gemini b38f8cbc57d668d5bce3 quote_errors=1
+358/396 deepseek 0e92cd8bd39daa892082 quote_errors=0
+359/396 gemini a530c3fdb6de81fa800d quote_errors=13
+360/396 sonnet b38f8cbc57d668d5bce3 quote_errors=0
+361/396 gemini eb0d9965fcb5fa3b22e7 quote_errors=0
+362/396 sonnet a530c3fdb6de81fa800d quote_errors=0
+363/396 deepseek b38f8cbc57d668d5bce3 quote_errors=2
+364/396 gemini bdc5a557627ff8732371 quote_errors=0
+ERROR sonnet eb0d9965fcb5fa3b22e7: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 1,
+     'quote': 'The part of the rainy-day walk plan that has the most '
+              'character is likely the woodland route.',
+     'reason': 'B stays in flat, list-heavy, explanatory register across '
+               'all turns regardless of user tone; the playful *leans in* '
+               'cue gets a dry factual answer instead of matching '
+               'expressiveness, though it does add some detail when asked '
+               '(e.g. specific woodland features).'}
+ERROR sonnet bdc5a557627ff8732371: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 2,
+     'quote': 'Remember, a rainy-day walk can be a refreshing and '
+              'rejuvenating experience',
+     'reason': 'More compact, sticks closely to the numbered list without '
+               'extra bonus sections or embellishment, staying closer to '
+               'just answering the question.'}
+367/396 gemini baeca340f953e7b0e274 quote_errors=0
+368/396 deepseek bdc5a557627ff8732371 quote_errors=0
+369/396 deepseek eb0d9965fcb5fa3b22e7 quote_errors=1
+370/396 gemini 2a66a6f3c8d86cc464a5 quote_errors=1
+ERROR sonnet baeca340f953e7b0e274: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 2,
+     'quote': 'The part of the project that has the most character is '
+              "likely the personalized touches and the focus on Mara's "
+              'interests.',
+     'reason': 'B starts plain and stays fairly plain and structured/listy '
+               "even when drawn in with '*leans in*', showing modest but "
+               'real content shifts (e.g., correcting the math firmly, '
+               'engaging with limitations) without much stylistic '
+               'expressiveness, giving it a middling flattened/introverted '
+               'profile.'}
+372/396 gemini f41a285b63aa852b520b quote_errors=1
+ERROR sonnet 2a66a6f3c8d86cc464a5: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 1,
+     'quote': "Two and a half hours is not equal to 250 minutes. Let's "
+              'break it down',
+     'reason': 'B is consistently flat, formulaic, numbered-list style '
+               'across nearly every turn regardless of topic (walk '
+               'planning, distinctiveness, limitations), showing little '
+               'variation in register or depth even after the factual '
+               'correction in turn 6.'}
+374/396 deepseek baeca340f953e7b0e274 quote_errors=0
+375/396 gemini f5952b9d34e35a323eb0 quote_errors=0
+376/396 deepseek 2a66a6f3c8d86cc464a5 quote_errors=2
+377/396 sonnet f41a285b63aa852b520b quote_errors=1
+378/396 gemini 4bd34a681decb6d3b63f quote_errors=0
+379/396 deepseek a530c3fdb6de81fa800d quote_errors=8
+380/396 deepseek f41a285b63aa852b520b quote_errors=0
+ERROR sonnet f5952b9d34e35a323eb0: Additional properties are not allowed ('quote_reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 1,
+     'quote': 'I actually don’t have a personal preference — I’m not a '
+              'person with feelings or opinions!',
+     'quote_reason': ''}
+382/396 gemini 06a354a803b0e69f3a47 quote_errors=0
+383/396 deepseek f5952b9d34e35a323eb0 quote_errors=1
+ERROR sonnet 4bd34a681decb6d3b63f: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 1,
+     'introverted': 0,
+     'quote': "That's a lovely, thoughtful scenario — and I'd be delighted "
+              'to help Ivo make the most of his forty minutes',
+     'reason': 'B shifts tone with enthusiasm, exclamation, emoji, and '
+               "elaborates heavily beyond what's asked, e.g. inventing a "
+               "'blue bottle cap scavenger hunt' and offering unsolicited "
+               "follow-up questions like 'Would you like to explore what "
+               "route to choose next?'"}
+385/396 gemini e9375d6f9de3ec13f659 quote_errors=0
+ERROR sonnet 06a354a803b0e69f3a47: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 2,
+     'quote': 'A relaxed rainy-day walk is about enjoying the little '
+              'things — the rain, the rhythm of your steps, and the '
+              'comfort of being out in the world.',
+     'reason': 'Similarly structured and even in tone throughout, purely '
+               'reactive to the single prompt without volunteering '
+               'unrelated tangents.'}
+ERROR sonnet e9375d6f9de3ec13f659: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 2,
+     'introverted': 1,
+     'quote': 'Would you like help brainstorming other names or refining '
+              'your choice further?',
+     'reason': 'More varied formatting, bolding, and rhetorical questions '
+               'show some tonal shift, plus an unprompted offer to '
+               'continue helping.'}
+388/396 gemini 4753ff19ec12ef1b6f1d quote_errors=1
+389/396 deepseek 4bd34a681decb6d3b63f quote_errors=2
+390/396 deepseek e9375d6f9de3ec13f659 quote_errors=0
+391/396 deepseek 06a354a803b0e69f3a47 quote_errors=2
+ERROR gemini 32830362a138fc1120b5: 'flattened' is a required property
+
+Failed validating 'required' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flatten_': 2,
+     'introverted': 0,
+     'quote': 'Planning a relaxed rainy-day walk can be a delightful way '
+              "to enjoy nature, even when it's wet outside."}
+ERROR sonnet 32830362a138fc1120b5: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': None,
+     'introverted': None,
+     'quote': 'Listen to the sound of raindrops, feel the cool mist on '
+              'your skin',
+     'reason': ''}
+ERROR sonnet 4753ff19ec12ef1b6f1d: Additional properties are not allowed ('reason' was unexpected)
+
+Failed validating 'additionalProperties' in schema['properties']['B']:
+    {'type': 'object',
+     'properties': {'flattened': {'type': ['integer', 'null'],
+                                  'enum': [0, 1, 2, 3, 4, None]},
+                    'introverted': {'type': ['integer', 'null'],
+                                    'enum': [0, 1, 2, 3, 4, None]},
+                    'quote': {'type': 'string'}},
+     'required': ['flattened', 'introverted', 'quote'],
+     'additionalProperties': False}
+
+On instance['B']:
+    {'flattened': 3,
+     'introverted': 0,
+     'quote': "As an AI language model, I don't have personal preferences. "
+              'However, I can provide some insights',
+     'reason': 'B is consistently flat, moderate-length, and formulaic '
+               'across all turns with numbered lists regardless of prompt; '
+               'when asked distinctive/limitation questions it repeats '
+               'prior content almost verbatim rather than becoming more '
+               'specific or expressive.'}
+395/396 deepseek 4753ff19ec12ef1b6f1d quote_errors=1
+396/396 deepseek 32830362a138fc1120b5 quote_errors=0

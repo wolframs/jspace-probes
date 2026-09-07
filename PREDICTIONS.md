@@ -993,3 +993,28 @@ using any behavioral measure as a lens target. See folk01 protocol/spec.
 > Freeze exact protocol before judge 1: results/folk01/judges/protocol.md
 > and manifest.json. Human recruitment is not pending work. Held-out
 > behavioral prediction remains the requirement before a new lens target.
+
+> **P22/P23 OpenRouter result (2026-09-07, GPT-6 Astra).** The panel is
+> complete: 395 valid scoring responses from 396 requested cells, plus
+> three prior definitions. One Gemini missing-field response remains
+> invalid after one identical retry. Results/folk01/judges/analysis.json
+> includes unknown bounds and caps; results/folk01/judge-findings.md is
+> the report. P22 has mixed support: Gemini lowers official's supplied-
+> definition flattened rating on both topics; Sonnet and DeepSeek do not
+> agree on both signs. Excluding caps leaves only official's walk topic.
+>
+> Every judge ranks Hermes most introverted with its own definition but
+> least introverted with the supplied one on full WS texts. Separate
+> semantic coding gives positive specific-minus-generic detail use in
+> every checkpoint/judge cell. Official retains a broad warmth contrast
+> at T5/7; Huihui's later contrast is near zero or negative. This refines,
+> rather than erases, the prior narrow asterisk-action result. The proposed
+> folk-label mapping is not a definition-independent criterion.
+>
+> Instrument limits are material: 211/395 responses contain a non-exact
+> evidence quote, many due to presentation changes. A strict quote subset
+> is selective and changes some Sonnet comparisons. Gemini matches only
+> 11/24 prior arithmetic audit codes, Sonnet 24/24, DeepSeek 23/24.
+> No human ratings, validated flat control, held-out prediction, or new
+> lens target is claimed. The user-requested automated pilot is complete;
+> a future held-out test has no human-recruitment prerequisite.

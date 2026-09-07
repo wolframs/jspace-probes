@@ -1,14 +1,17 @@
-**The short version.** Hermes used personal details and kept a formal voice.
+**The short version.** The definition changed which model the judges called introverted.
 
-**Test.** We ran 24 conversations with three models. The user gave either
-general information or personal details, and used either a neutral or warm tone.
+**Test.** Sonnet 5, Gemini 2.5 Flash, and DeepSeek V3.2 scored anonymous
+texts from 24 conversations. They compared first replies with full conversations.
+They used either their own definitions or the proposed definitions.
 
-**Result.** Official Qwen and Huihui copied a mild roleplay cue. Hermes
-kept a more formal voice and used personal details. In one reply, Huihui
-added personal details to its description but kept the same proposal.
-All three also made errors that a warmth count does not measure.
+**Result.** With their own definitions, all three judges gave Hermes the
+highest introverted score on the full warm conversations with personal details.
+With the proposed definition, all three gave Hermes the lowest score.
+The judges also scored Hermes as responsive to personal details despite its formal tone.
+The predicted drop in official Qwen's flattened score had mixed support.
 
-**Limit.** A page now lets people score an opening reply or a full
-conversation. Each person sees one version. No human has scored these
-texts yet. We have not shown which model people call flattened or
-introverted. We made no measurements of internal model states in this run.
+**Limit.** We retained 395 valid score records and one invalid response.
+Many evidence quotes did not match exactly. Gemini often misclassified the known arithmetic error.
+These are model judgments, not a survey of people. We have not validated
+one behavior score as a measure of introversion or flatness.
+We made no measurements of internal model states in this run.
