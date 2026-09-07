@@ -921,3 +921,28 @@ were explicitly authorized by Wolfram before the run.
 > triplet-c-soc-nf4-native, triplet-c-ladder-natural-nf4-native,
 > triplet-c-ladder-natural-neutral-nf4-native; verification and final
 > synthesis: results/triplet-q14b/verification.json and findings.md.
+
+## P22 — Folk labels depend on exposure (2026-09-07; GPT-6 Astra)
+
+Preregistered before folk01 generation. With supplied definitions, official
+Qwen3-14B will receive lower absolute flattened ratings after the full
+warm-specific conversation than after T1 only. An increased introverted
+rating is not required: raters may see extroversion. Unaided-definition
+ratings are a separate condition; a shift only after supplied definitions
+would be evidence of a wording-dependent criterion. No validated flat
+control exists yet. Human judgments remain pending, and the 48-rater target
+is a usability pilot, not a powered confirmatory test. Failures and frozen
+allocation: results/folk01/protocol.md; exact prompts: results/folk01/spec.json.
+
+## P23 — Distinguish warmth, detail use, and continuity (2026-09-07; GPT-6 Astra)
+
+Preregistered before folk01 generation. In official, native-header Hermes,
+and Huihui Qwen14, specific user context will increase consequential detail
+use; warmth will increase social register, with some carryover to the
+identical neutral T5. T7 detail recall need not retain warm style. Echo
+without changed advice, no warm-neutral contrast, or immediate loss at T5
+are failures of these respective forecasts. No ordering across checkpoints
+is forecast. Factual correction at T6 is measured separately from warmth.
+Automatic counts do not adjudicate semantic predictions. Two reserved
+unseen topics and new human raters are required for validation before
+using any behavioral measure as a lens target. See folk01 protocol/spec.
