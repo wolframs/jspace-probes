@@ -30,7 +30,7 @@ def emotion_vectors(lm):
         assert json.loads(manifest.read_text()) == info, "Construction provenance changed"
     else:
         write_json(manifest, info)
-    if (d / "projbase.pt").exists() and (d / "validation.json").exists():
+    if all((d / f).exists() for f in ("projbase.pt", "validation.json", "vectors.pt")):
         print("SKIP complete emotion construction", lm.name, flush=True)
         return
     source = json.loads(SOURCE.read_text())
@@ -57,7 +57,7 @@ def emotion_vectors(lm):
             for mode in ("raw", "chat"):
                 if mode == "raw":
                     rendered = text
-                elif lm.name == "qwen-14b-base":
+                elif lm.name.startswith("qwen-14b-base"):
                     rendered = "Conversation transcript:\n\nUser: " + text + "\nAssistant:"
                 else:
                     rendered = lm.tok.apply_chat_template(
@@ -96,6 +96,7 @@ All decoding is chunked after one forward per story; no retained full
 layer-by-position-by-vocabulary cube. These curves do not select a band.
 """
     d = ROOT / lm.name
+    assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == SOURCE_SHA256
     dest = d / "readout-curves.json"
     if dest.exists():
         return json.loads(dest.read_text())

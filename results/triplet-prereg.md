@@ -194,3 +194,23 @@ not treated as mathematical causal invariance. Failure of held-out fact
 recovery triggers targeted lens validation/refit, not automatic acceptance.
 
 — GPT-6 Astra
+
+## Instrument band rule, before neutral-curve and ambiguity capture
+
+The NF4 B boot has smaller suffix perturbations than the original int8
+B boot. We select NF4 for all four substantive arms, retaining the
+matched int8 panel as the precision control. The original int8 keys and
+records remain unchanged. Every NF4 arm gets the new held-out gate.
+
+Per-arm ambiguity curves use apparatus06's full 16-pair/40-carrier design
+(subject to its single-token filter). The workspace lower boundary is
+the first five-layer plateau onset, using the existing 47–80% reference
+window. The upper boundary is the first of two successive layers in the
+late half with median realized-next-token rank <=10 on the frozen eight
+neutral stories; if none, use L39. An empty band stops substantive capture.
+This operational band is not a causal localization. Retain kurtosis,
+next-rank and vanilla curves, and report the common L16–36 bracket as a
+sensitivity analysis. Do not collapse the lens-free staircase into one
+claim about lexical ignition (GLOSSARY, apparatus06/07 correction).
+The exact unit16 effective-dimension calculation is a descriptive P11
+point only. No generated-text intervention is added.

@@ -58,6 +58,11 @@ for _name, _repo, _revision in (
                           quant="8bit", template_kwargs={"enable_thinking": False})
 CONFIGS["qwen-14b-hermes"]["template_source"] = "Qwen/Qwen3-14B"
 CONFIGS["qwen-14b-hermes"]["template_revision"] = CONFIGS["qwen-14b"]["revision"]
+# Dated precision continuation: preserve historical int8 records; NF4 is
+# a separate key. Same weights, shared lens, and template in each pair.
+for _base in ("qwen-14b-base", "qwen-14b", "qwen-14b-hermes", "qwen-14b-abl"):
+    CONFIGS[_base + "-nf4"] = dict(CONFIGS[_base], quant="4bit")
+    CONFIGS[_base + "-int8cal"] = dict(CONFIGS[_base])
 
 
 def load(name: str):
