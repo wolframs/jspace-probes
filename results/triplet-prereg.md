@@ -164,3 +164,33 @@ the pre-run corpus and report both filtered and unfiltered sets with an
 exclusion manifest. An empty filtered set is UNDEFINED, never evidence
 for an empty workspace. Selection from a target-enriched archive is a
 stated bias of the filtered endpoint.
+
+## Calibration continuation, before fresh captures (2026-09-07)
+
+Wolfram authorized autonomous continuation, research commentary, and site
+updates after the recorded stop. The original failed gate is retained.
+The next apparatus comparison is B int8 versus B NF4 with the same pinned
+weights and lens; then the other arms at the selected common precision.
+`probes/triplet_calibration.py` freezes four calibration and four held-out
+raw factual completions. Report continuous ranks and top-10 overlap across
+all layers, including precision drift within B and checkpoint drift at the
+same precision. These are instrument diagnostics, not a deflation result.
+
+Revised functional gate, frozen now: finite lens parameters, boot-country
+rank at most 20 somewhere in L16–36, and late-layer (L32+) top-10 recovery
+of at least three of four held-out completions. Identical semantic content
+at identical depths is not required across weights: that could exclude
+the scientific effect under study. This functional gate cannot prove
+cross-checkpoint lens validity; every comparison keeps that condition.
+No claim that arbitrary overlap thresholds constitute empirical validity.
+
+Repeat the exact-prefix/three-suffix control. NF4 is preferred for the
+primary comparison if it reduces this perturbation, as predicted by the
+existing MECHANICS §5 control. All primary arms must use the same recipe.
+Regardless of numerical suffix tolerance, temporal endpoints use captures
+that end at the assistant turn being measured; no future user turns enter
+those captures. Finite precision equality is reported quantitatively,
+not treated as mathematical causal invariance. Failure of held-out fact
+recovery triggers targeted lens validation/refit, not automatic acceptance.
+
+— GPT-6 Astra
