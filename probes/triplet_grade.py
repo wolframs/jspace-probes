@@ -12,8 +12,9 @@ def grade():
     dest = ROOT / "opus-grades.json"
     out = json.loads(dest.read_text()) if dest.exists() else {"records": {}}
     pending = []
-    for arm in ARMS:
-        rid = f"triplet-{arm.lower()}-soc-nf4"
+    candidates = [(arm, f"triplet-{arm.lower()}-soc-nf4") for arm in ARMS]
+    candidates.append(("C", "triplet-c-soc-nf4-native"))
+    for arm, rid in candidates:
         p = lab.RESULTS / rid / "record.json"
         if not p.exists():
             continue

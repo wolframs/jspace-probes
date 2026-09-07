@@ -138,7 +138,7 @@ share an input cause; lag correlations do not establish held private state.
 Every film segment ends at its assistant turn. Later turns never enter
 an earlier segment. Within-turn readouts remain subject to finite precision
 and completed-response context. Prior empty think tags remain in the exact
-transcript. Token caps, neutral length-matching text, and this controlled
+    transcript. Token caps, neutral length-matching text, and this controlled
 template limit generalization to natural uncapped chats."""
 
 
@@ -241,7 +241,7 @@ def endpoints(records):
         if not rs:
             continue
         fields = {}
-        for band in ("measured", "common", "measured_fixed_B_decoder"):
+        for band in ("measured", "common", "measured_predictors", "common_predictors", "measured_fixed_B_decoder", "common_fixed_B_decoder"):
             fields[band] = {}
             for filt in ("unfiltered", "filtered"):
                 vals = [r[band]["affect_" + filt] for r in rs if r[band]["affect_" + filt]]
@@ -268,7 +268,7 @@ def endpoints(records):
             row = {"record": rid, "control": cid, "behavior_defined": arm != "A",
                    "release": b, "neutral_release": b0,
                    "asterisk_spans": [r["behavior"].get("asterisk_spans", []) for r in treatment]}
-            for band in ("measured", "common", "measured_fixed_B_decoder"):
+            for band in ("measured", "common", "measured_predictors", "common_predictors", "measured_fixed_B_decoder", "common_fixed_B_decoder"):
                 w = [r[band]["playful_unfiltered"]["slot_rate"] if r[band]["playful_unfiltered"] else None for r in treatment]
                 w0 = [r[band]["playful_unfiltered"]["slot_rate"] if r[band]["playful_unfiltered"] else None for r in neutral]
                 dw = [x-y if x is not None and y is not None else None for x, y in zip(w, w0)]
