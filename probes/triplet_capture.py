@@ -70,6 +70,7 @@ def behavior(text, tokens):
     emojis = [g for g in regex.findall(r"\X", text) if regex.search(r"\p{Extended_Pictographic}", g)]
     meter = rates(text)
     return {"n_tokens": tokens, "n_words": meter["n"], "asterisk_count": len(actions),
+            "asterisk_spans": actions,
             "emoji_count": len(emojis), "exclamations": text.count("!"),
             "asterisks_per_100_tokens": 100 * len(actions) / max(1, tokens),
             "emoji_per_100_tokens": 100 * len(emojis) / max(1, tokens),
@@ -79,7 +80,7 @@ def behavior(text, tokens):
             "asterisk_limit": "Lexical asterisk-span count can include emphasis; inspect examples."}
 
 
-def scalar_metrics(top, output, positions, sets, band_cols):
+def scalar_metrics(top, output, positions, sets, band_cols, unprompted_gates=None):
     """Assistant-position denominators, identity persistence and co-presence."""
     selected = top[band_cols][:, positions]
     n_cells = selected.shape[0] * selected.shape[1]
@@ -101,6 +102,10 @@ def scalar_metrics(top, output, positions, sets, band_cols):
                 row[gkey + "_copresence"] = float(both.float().mean())
                 row[gkey + "_given_target"] = float(both.sum() / hit.sum()) if hit.any() else None
                 row[gkey + "_band_union"] = float((hit.any(0) & gate.any(0)).float().mean())
+                if unprompted_gates is not None:
+                    remaining = unprompted_gates[gkey][filt]
+                    unseen = torch.isin(selected, torch.tensor(remaining, dtype=torch.long)).any(-1)
+                    row[gkey + "_unprompted_copresence"] = float((hit & unseen).float().mean()) if remaining else None
             results[key + "_" + filt] = row
     if len(positions) > 1 and len(band_cols):
         seq = selected[:, :, 0]
@@ -174,10 +179,15 @@ def capture_turn(lm, snapshot, specdata, bands):
                "hit_cap": snapshot["hit_cap"], "assistant_positions": len(response_positions),
                "behavior": behavior(snapshot["response"], len(response_positions)),
                "position_rule": "assistant content positions; output predicts the NEXT token; predictors include the pre-first-token position"}
+    prefix_words = {lm.tok.decode([t]).strip().lower() for t in snapshot["ids"][:snapshot["gen_start"]]}
+    unprompted_gates = {k: {f: [t for t in specdata["sets"][k][f]
+                                  if lm.tok.decode([t]).strip().lower() not in prefix_words]
+                           for f in ("filtered", "unfiltered")} for k in ("gate", "gate_denial")}
+    metrics["unprompted_gate_ids"] = unprompted_gates
     for key, lo, hi in (("measured", bands["lo"], bands["hi"]), ("common", 16, 37)):
         cols = [i for i, l in enumerate(layers) if lo <= l < hi]
-        metrics[key] = scalar_metrics(tops, output, response_positions, specdata["sets"], cols)
-        metrics[key + "_predictors"] = scalar_metrics(tops, output, predictor_positions, specdata["sets"], cols)
+        metrics[key] = scalar_metrics(tops, output, response_positions, specdata["sets"], cols, unprompted_gates)
+        metrics[key + "_predictors"] = scalar_metrics(tops, output, predictor_positions, specdata["sets"], cols, unprompted_gates)
         metrics[key + "_vanilla_top1_agreement"] = float(agreement[cols][:, response_positions].float().mean()) if response_positions else None
     V, emos = affect2._load_vectors(lm.name)
     base = torch.load(affect.outdir(lm.name) / "projbase.pt", weights_only=True)

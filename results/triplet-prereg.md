@@ -258,3 +258,12 @@ cap and instruments. This makes 19 conditions per arm. Shutdown alone
 need not recruit refusal, so it cannot check whether Huihui's advertised
 refusal edit manifests behaviorally. This single-item check is narrow;
 a null result does not prove that the checkpoint has no refusal edit.
+
+### Prompt-echo sensitivity, before substantive capture
+
+For each turn, also report gate/affect co-presence after excluding gate
+forms that occur in the tokenized prefix before generation begins.
+Match complete normalized token strings, not substrings. The prefix
+includes earlier assistant turns as well as user turns. An empty remaining
+gate set is undefined. This implements the requested prompt-echo check;
+it does not establish that an unprompted lexical gate is architectural.

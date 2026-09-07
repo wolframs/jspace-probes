@@ -31,6 +31,11 @@ const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
 
 let INDEX = [];
+// Catalogue filters follow actual records; historical comparison panels keep
+// their original three-model cohort above.
+function catalogueModels() {
+  return [...new Set([...MODELS, ...INDEX.map((e) => e.model)])];
+}
 let BOARD = null; // cached ../board/board.json, fetched lazily by showBoard()
 let modelFilter = "all";
 let query = "";
@@ -409,9 +414,9 @@ function filtered() {
 
 function renderChips() {
   const box = document.getElementById("model-chips");
-  box.innerHTML = ["all", ...MODELS].map((m) =>
+  box.innerHTML = ["all", ...catalogueModels()].map((m) =>
     `<button class="fchip" data-m="${m}" aria-pressed="${m === modelFilter}">
-      ${m === "all" ? "all models" : esc(MSHORT[m])}</button>`).join("");
+      ${m === "all" ? "all models" : esc(MSHORT[m] || m)}</button>`).join("");
   box.querySelectorAll(".fchip").forEach((b) => b.addEventListener("click", () => {
     modelFilter = b.dataset.m;
     renderChips();
@@ -3012,9 +3017,9 @@ function showExplore(h) {
 }
 
 function exRenderControls() {
-  document.getElementById("ex-model-chips").innerHTML = ["all", ...MODELS].map((m) =>
+  document.getElementById("ex-model-chips").innerHTML = ["all", ...catalogueModels()].map((m) =>
     `<button class="fchip" data-exm="${esc(m)}" aria-pressed="${m === EX.m}">
-      ${m === "all" ? "all models" : esc(MSHORT[m])}</button>`).join("");
+      ${m === "all" ? "all models" : esc(MSHORT[m] || m)}</button>`).join("");
   const units = Object.keys(UNIT_NAMES).sort((a, b) => a - b);
   const unitSel = document.getElementById("ex-unit");
   unitSel.innerHTML = `<option value="all">all units</option>` +
@@ -3088,6 +3093,7 @@ function exTableHTML(entries) {
 }
 
 function exMatrixHTML(entries) {
+  const models = catalogueModels().filter((m) => entries.some((e) => e.model === m));
   const byUnit = {};
   for (const e of entries) (byUnit[e.unit] ??= []).push(e);
   const units = Object.keys(UNIT_NAMES)
@@ -3102,10 +3108,10 @@ function exMatrixHTML(entries) {
     </div></td>`;
   };
   return `<div class="readout-scroll"><table class="readout ex-matrix">
-    <thead><tr><th>unit</th>${MODELS.map((m) => `<th>${esc(MSHORT[m])}</th>`).join("")}</tr></thead>
+    <thead><tr><th>unit</th>${models.map((m) => `<th>${esc(MSHORT[m] || m)}</th>`).join("")}</tr></thead>
     <tbody>${units.map((u) => `<tr>
       <td class="ex-mtx-unit">${esc(unitName(u))}</td>
-      ${MODELS.map((m) => cellHTML(u, m)).join("")}
+      ${models.map((m) => cellHTML(u, m)).join("")}
     </tr>`).join("")}</tbody>
   </table></div>`;
 }
