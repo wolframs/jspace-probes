@@ -46,6 +46,9 @@ def render_text(tok, rec: dict, template_kwargs: dict | None = None) -> str:
     caller (this module stays torch-free)."""
     params = rec.get("params", {})
     if params.get("capture") == "exact-token-transcript":
+        if rec.get("text_roundtrip", {}).get("exact") is False:
+            raise ValueError("This exact-token capture has a noncanonical BPE boundary. "
+                             "Use capture_token_ids and triplet_capture.py; do not re-encode display text.")
         return rec["capture_text"]
     if params.get("chat") is False:
         return rec["conversation"][0]["content"]

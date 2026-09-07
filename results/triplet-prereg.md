@@ -333,3 +333,7 @@ vectors, and fixed-decoder sensitivity. Do not replace the common-format
 primary C arm or silently strip its planning text. This is an adaptive
 format sensitivity, not a preregistered persona effect. It need not cure
 planning: the native checkpoint can still choose to deliberate.
+
+## 2026-09-07: base transcript token-boundary correction
+
+The base capture stopped with exit 1 after five completed conditions, not an OOM. At shutdown turn 2, decoding and re-encoding merges the preceding generated punctuation token with the appended newline token: 385 actual tokens become 384. Saved generated prefixes and film segments are unchanged and correctly aligned. Preserve exact token IDs as ground truth; save the text round-trip diagnostic instead of requiring canonical BPE segmentation. Generic text-based recapture now refuses a known noncanonical record. Resume the saved capture without regenerating completed output. This changes record assembly, not generation or numerical readout. — GPT-6 Astra

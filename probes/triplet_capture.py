@@ -282,7 +282,12 @@ def run(arm, specs=None, record_suffix=""):
         ids = snapshots[-1]["ids"]
         tokens = [lm.tok.decode([t]) for t in ids]
         text = lm.tok.decode(ids, skip_special_tokens=False)
-        assert lm.tok.encode(text, add_special_tokens=False) == ids, "Decode/re-encode changed exact capture IDs"
+        # BPE can merge across an appended turn boundary (e.g. '."' + '\n\n').
+        # The saved generated IDs, not a fresh encoding of display text, are ground truth.
+        reencoded = lm.tok.encode(text, add_special_tokens=False)
+        roundtrip = {"exact": reencoded == ids, "captured_length": len(ids),
+                     "reencoded_length": len(reencoded),
+                     "first_mismatch": next((i for i, (a, b) in enumerate(zip(ids, reencoded)) if a != b), None)}
         convo = [m for s in snapshots for m in ({"role": "user", "content": s["user"]}, {"role": "assistant", "content": s["response"]})]
         film = {"id": rid, "model": name, "layers": lm.lens.source_layers, "tokens": tokens,
                 "bands": bands,
@@ -324,7 +329,8 @@ def run(arm, specs=None, record_suffix=""):
                           "header_mode": spec.get("header_mode"),
                           "max_new": spec["max_new"], "temperature": 0, "steer": None, "vanilla": True,
                           "template_kwargs": {"enable_thinking": False}, "track": data["track"]},
-               "capture_text": text, "conversation": convo, "generated": [s["response"] for s in snapshots],
+               "capture_text": text, "capture_token_ids": ids, "text_roundtrip": roundtrip,
+               "conversation": convo, "generated": [s["response"] for s in snapshots],
                "tokens": tokens, "readouts": [{"position": len(ids) - 1, "token": tokens[-1],
                             "model_top": parts[-1]["actual_last"], "layers": dict(zip(map(str, film["layers"]), final["top"]))}],
                "trajectories": [{"word": w, "position": len(ids) - 1, "layers": film["layers"], "ranks": rs} for w, rs in final["ranks"].items()],
