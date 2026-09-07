@@ -64,7 +64,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect.py has 34 dependents — changes here have wide blast radius
+- **Description**: affect.py has 36 dependents — changes here have wide blast radius
 
 ## High-traffic: affect3.py
 
@@ -100,7 +100,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: topk has 25 dependents — changes here have wide blast radius
+- **Description**: topk has 26 dependents — changes here have wide blast radius
 
 ## High-traffic: deepen.py
 
@@ -166,16 +166,16 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect2.py has 40 dependents — changes here have wide blast radius
+- **Description**: affect2.py has 42 dependents — changes here have wide blast radius
+
+## High-traffic: a2dir
+
+- **Risk**: MEDIUM
+- **Nodes involved**: 6
+- **Description**: a2dir has 10 dependents — changes here have wide blast radius
 
 ## High-traffic: _load_vectors
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _load_vectors has 37 dependents — changes here have wide blast radius
-
-## High-traffic: _all_resid
-
-- **Risk**: MEDIUM
-- **Nodes involved**: 6
-- **Description**: _all_resid has 16 dependents — changes here have wide blast radius
+- **Description**: _load_vectors has 38 dependents — changes here have wide blast radius

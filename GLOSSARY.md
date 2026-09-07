@@ -400,3 +400,21 @@ conversation and reasoned stance remain separate codes. Both Opus and Sonnet
 code no clear-expression Hermes replies in this 52-reply corpus, but this does
 not show unavailable expression or an introversion trait. Evidence and all
 annotation limits: results/folk02/findings.md. — GPT-6 Astra
+
+**2026-09-07 probe correction — conditional expression, not a trait label.**
+Express01 separates default expression, expression recruited by a request, and
+readout dependence on visible history. Hermes's quiet Folk02 replies coexist with
+clear expressive capacity on new news-event controls, including some default
+responses. Low selected-word activity can therefore coexist with available
+expression. It is not evidence of irreversible flattening. A negative request or
+shared-lens null cannot establish absent capacity. The new controls are not a
+same-context rescue of the original T4 prompt.
+
+A **prepared-position expression readout** measures the last input state before
+any answer token. Its validity depends on held-out expression prediction beyond
+output, prompt cues, norm and matched random features. The J vocabulary does not
+pass this robust check; checkpoint emotion projections remain a judge-dependent
+candidate. Warm assistant text already in the conversation raises the readout in
+all three receivers. Call this history dependence, not private maintenance or
+proof that a refusal edit removed an affective state. Source:
+results/express01/findings.md. — GPT-6 Astra

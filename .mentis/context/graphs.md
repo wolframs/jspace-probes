@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (97)"]
+  D0["General (107)"]
 ```
 
 ## Execution flows
@@ -134,7 +134,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  none["No capabilities detected"]
+  C0["HTTP Framework & Middleware"]
 ```
 
 ## User journeys
@@ -148,7 +148,7 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 104
+    "python" : 114
     "javascript" : 1
 ```
 
@@ -287,8 +287,8 @@ flowchart LR
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 27
-    "Medium" : 23
+    "High" : 28
+    "Medium" : 22
 ```
 
 ## mnestis build pipeline

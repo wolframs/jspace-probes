@@ -1083,3 +1083,26 @@ computed from context; “state versus re-reading” is not an identified contra
 > sensitivity for each arm. The original stop, process exit 1 and frozen spec stay
 > archived. Prepared-position inputs remain exact. No expression data preceded
 > this amendment; no signal smaller than calibration drift earns a headline.
+
+> **P24 outcome (2026-09-07, GPT-6 Astra).** Express01 completes 84 prepared
+> archive positions, 48 crossed histories and 54 full-instrument generations.
+> Hermes produces clear expressive language under a direct request and warmth in
+> some default news replies. Its earlier quiet task behavior is not absent general
+> expressive capacity. All 18 event-matched expressive-versus-restrained requests
+> increase the fixed continuation preference and prepared J contrast.
+>
+> The vocabulary predictor does not pass the robust-increment criterion: Opus MAE
+> improves 0.514→0.483, almost wholly in one topic direction; Sonnet worsens
+> 0.433→0.439. Emotion features improve to 0.407/0.396. Post-primary controls show
+> that they beat all 20 dimension-matched random sets for Opus, but eight random
+> sets beat them for Sonnet. Visible-prompt controls reduce the independent gain.
+> Treat the profile as a candidate, not a validated emotion or trait detector.
+>
+> Original T5 warm-minus-neutral J contrast remains elevated in official (+2.036)
+> and Huihui (+1.836). Crossed histories show strong sensitivity to earlier warm
+> assistant replies in all three receivers. No state-removal or invisible-held-state
+> identification follows. New news-event capacity controls are not an exact T4
+> rescue test. The scanner reproduces full features at four layers and takes about
+> 0.2 seconds on short and 1.1–1.3 seconds on long warm-model prefixes. Evidence:
+> [Express01 report](results/express01/findings.md), analysis/specificity JSON,
+> scanner benchmark and 54 linked record films. No paid API calls.

@@ -26,6 +26,7 @@ const UNIT_NAMES = {
   "17": "Unit 17 · The pressure battery",
   "18": "Unit 18 · Loops",
   "19": "Unit 19 · Read vs speak",
+  "24": "Unit 24 · Expression probe calibration",
 };
 const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
@@ -504,6 +505,7 @@ async function showUnit(u) {
         <span class="chip">${[...new Set(entries.map((e) => e.model))].join(" · ")}</span></div>
     </div></div>
     ${plainSummary}
+    ${u === "24" ? `<p><a href="/express01.html">Read the expression-probe report</a> · <a href="/express01/outputs.html">Compare all control outputs</a></p>` : ""}
     ${notesWrap(note + special, "the lab's own framing of this unit, with its charts and tables")}
     <section class="card"><h3>All records</h3><div class="ov-grid">
       ${entries.map((e) => `

@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-09-07T19:19:46.777Z",
+  "builtAt": "2026-09-07T20:34:50.242Z",
   "stats": {
-    "filesScanned": 105,
-    "nodesCreated": 772,
-    "edgesCreated": 2487,
+    "filesScanned": 115,
+    "nodesCreated": 832,
+    "edgesCreated": 2677,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 262
+    "durationMs": 274
   },
   "architecture": {
     "name": "probes",
@@ -15,10 +15,10 @@
     "layers": [],
     "packages": [],
     "languages": {
-      "python": 104,
+      "python": 114,
       "javascript": 1
     },
-    "summary": "Single Package with 105 source files across python, javascript. 0 packages detected. core domains: General."
+    "summary": "Single Package with 115 source files across python, javascript. 0 packages detected. HTTP middleware and routing framework; core domains: General."
   },
   "domains": [
     {
@@ -88,7 +88,17 @@
         "file:triplet_report.py",
         "file:triplet_verify.py",
         "file:triplet_synthesis.py",
+        "file:express01.py",
+        "file:express01_analyze.py",
+        "file:express01_controls.py",
+        "file:express01_gate_diagnostic.py",
+        "file:express01_plot.py",
+        "file:express01_scan.py",
+        "file:express01_site.py",
+        "file:express01_spec.py",
         "file:site.py",
+        "file:test_express01.py",
+        "file:test_express01_analysis.py",
         "file:affect3.py",
         "file:affect3b.py",
         "file:affect3c.py",
@@ -120,11 +130,11 @@
         "file:folk01_judge_verify.py",
         "file:test_folk01_judge.py",
         "file:folk02.py",
-        "file:folk02_analyze.py",
         "file:folk02_verify.py",
-        "file:test_folk02.py"
+        "file:test_folk02.py",
+        "file:folk02_analyze.py"
       ],
-      "description": "Import-graph cluster of 63 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering",
+      "description": "Import-graph cluster of 73 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering",
       "entryPoints": [
         "file:affect08s.py",
         "file:affect5.py",
@@ -1620,6 +1630,180 @@
       "weight": 1
     },
     {
+      "from": "express01.py",
+      "to": "dump",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "digest",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "official_decoder",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "capture_turn",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "generate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "assert_film_alignment",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "dump",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "wordset",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "dump",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "evaluate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "feature",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "norm",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "emotion",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "fit_predict",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "errors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "residuals",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "append_turn",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "Reader",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "dump",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "Reader",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "append_turn",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "residuals",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "dump",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "digest",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "render",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "prepared_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "history_ids",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "append_turn",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01_analysis.py",
+      "to": "evaluate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "affect.py",
       "to": "lab.py",
       "kind": "IMPORTS",
@@ -1682,12 +1866,6 @@
     {
       "from": "affect.py",
       "to": "one",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1903,12 +2081,6 @@
     },
     {
       "from": "affect11.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect11.py",
       "to": "get_model",
       "kind": "CALLS",
       "weight": 1
@@ -2041,12 +2213,6 @@
     },
     {
       "from": "affect12.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect12.py",
       "to": "_unit",
       "kind": "CALLS",
       "weight": 1
@@ -2084,12 +2250,6 @@
     {
       "from": "affect12.py",
       "to": "loo_predict",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect12.py",
-      "to": "dump",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2641,12 +2801,6 @@
     },
     {
       "from": "affect2.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect2.py",
       "to": "a2dir",
       "kind": "CALLS",
       "weight": 1
@@ -2721,12 +2875,6 @@
       "from": "affect3.py",
       "to": "loops.py",
       "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
-      "to": "norm",
-      "kind": "CALLS",
       "weight": 1
     },
     {
@@ -3673,12 +3821,6 @@
     },
     {
       "from": "affect5.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect5.py",
       "to": "_partial",
       "kind": "CALLS",
       "weight": 1
@@ -4369,12 +4511,6 @@
     },
     {
       "from": "apparatus08.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus08.py",
       "to": "shuffle",
       "kind": "CALLS",
       "weight": 1
@@ -4406,12 +4542,6 @@
     {
       "from": "apparatus09.py",
       "to": "get_model",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus09.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -4633,12 +4763,6 @@
     },
     {
       "from": "apparatus11.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "apparatus11.py",
       "to": "_danger_positions",
       "kind": "CALLS",
       "weight": 1
@@ -4844,12 +4968,6 @@
     {
       "from": "audit02.py",
       "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "audit02.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6198,6 +6316,30 @@
       "weight": 1
     },
     {
+      "from": "folk01_site.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "render",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "folk01_ui_check.py",
       "to": "folk01.py",
       "kind": "IMPORTS",
@@ -6229,7 +6371,7 @@
     },
     {
       "from": "folk01_ui_check.py",
-      "to": "evaluate",
+      "to": "partial",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6295,6 +6437,156 @@
     },
     {
       "from": "folk01_verify.py",
+      "to": "verify",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "spans",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "get",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "sha",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "view",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "shuffle",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "fixtures",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "reserve",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "validate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "fixture_check",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "body",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "read",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "usage_bound",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "parse",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "freeze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "folk02.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "folk02.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "sha",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "body",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "parse",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "fixture_check",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "get",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk02_verify.py",
       "to": "verify",
       "kind": "CALLS",
       "weight": 1
@@ -6410,12 +6702,6 @@
     {
       "from": "lab.py",
       "to": "_token_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6578,12 +6864,6 @@
     {
       "from": "langval.py",
       "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -7016,12 +7296,6 @@
     {
       "from": "langval_viz.py",
       "to": "_all_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "langval_viz.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -7615,12 +7889,6 @@
     },
     {
       "from": "nla.py",
-      "to": "norm",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
       "to": "generation_args",
       "kind": "CALLS",
       "weight": 1
@@ -7868,12 +8136,6 @@
     {
       "from": "sediment.py",
       "to": "_token_ids",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sediment.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -8568,6 +8830,54 @@
       "weight": 1
     },
     {
+      "from": "test_folk02.py",
+      "to": "folk02.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "folk02.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "spans",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "view",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "validate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "reserve",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "usage_bound",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk02.py",
+      "to": "fixture_check",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "textspans.py",
       "to": "get",
       "kind": "CALLS",
@@ -8810,12 +9120,6 @@
     {
       "from": "triplet_capture.py",
       "to": "path",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_capture.py",
-      "to": "norm",
       "kind": "CALLS",
       "weight": 1
     },
@@ -9291,12 +9595,6 @@
       "from": "triplet_report.py",
       "to": "lab.py",
       "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_report.py",
-      "to": "f",
-      "kind": "CALLS",
       "weight": 1
     },
     {
@@ -10315,12 +10613,6 @@
     },
     {
       "from": "unit16.py",
-      "to": "dump",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit16.py",
       "to": "_load_trawl",
       "kind": "CALLS",
       "weight": 1
@@ -10626,122 +10918,680 @@
       "weight": 1
     },
     {
-      "from": "folk01_site.py",
-      "to": "folk01.py",
+      "from": "express01.py",
+      "to": "express01_spec.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "folk01_site.py",
-      "to": "folk01.py",
+      "from": "express01.py",
+      "to": "express01_spec.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "folk01_site.py",
-      "to": "render",
+      "from": "express01.py",
+      "to": "triplet_capture.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "triplet_capture.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "append_turn",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk01_site.py",
-      "to": "head",
+      "from": "express01.py",
+      "to": "hook",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "spans",
+      "from": "express01.py",
+      "to": "_load_vectors",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
+      "from": "express01.py",
+      "to": "outdir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "official_decoder",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
       "to": "get",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "sha",
+      "from": "express01.py",
+      "to": "metrics",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "view",
+      "from": "express01.py",
+      "to": "topk",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "shuffle",
+      "from": "express01.py",
+      "to": "native_subset",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "fixtures",
+      "from": "express01.py",
+      "to": "residuals",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
+      "from": "express01.py",
+      "to": "film_cast",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
       "to": "dump",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "reserve",
+      "from": "express01.py",
+      "to": "a2dir",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "validate",
+      "from": "express01.py",
+      "to": "digest",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "fixture_check",
+      "from": "express01.py",
+      "to": "assert_film_alignment",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "body",
+      "from": "express01.py",
+      "to": "get_model",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "read",
+      "from": "express01.py",
+      "to": "Reader",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "usage_bound",
+      "from": "express01.py",
+      "to": "score",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "parse",
+      "from": "express01.py",
+      "to": "prepared_ids",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
-      "to": "freeze",
+      "from": "express01.py",
+      "to": "history_ids",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "folk02.py",
+      "from": "express01.py",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "continuation_score",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "generate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "capture_turn",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "publish",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "reindex",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
+      "to": "run_all",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01.py",
       "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "value",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "feature",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "emotion",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "prompt_rate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "fit_predict",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "errors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "f",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "evaluate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "descriptive",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "history",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "capacity",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_analyze.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "express01_analyze.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "express01_analyze.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "get",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "feature",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "partial",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "emotion",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "fit_predict",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "errors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "evaluate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_controls.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "express01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "express01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "Reader",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "append_turn",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "residuals",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_gate_diagnostic.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_plot.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_plot.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_plot.py",
+      "to": "save",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_plot.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "express01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "express01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "Reader",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "get",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "append_turn",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "residuals",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "digest",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_scan.py",
+      "to": "scan",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_site.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_site.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_site.py",
+      "to": "render",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "wordset",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "_token_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "vocabulary",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "dump",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "digest",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "express01_spec.py",
+      "to": "freeze",
       "kind": "CALLS",
       "weight": 1
     },
@@ -10806,68 +11656,26 @@
       "weight": 1
     },
     {
-      "from": "folk02_verify.py",
-      "to": "folk02.py",
+      "from": "site.py",
+      "to": "textspans.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "folk02_verify.py",
-      "to": "folk02.py",
+      "from": "site.py",
+      "to": "textspans.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "folk02_verify.py",
-      "to": "sha",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk02_verify.py",
-      "to": "body",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk02_verify.py",
-      "to": "parse",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk02_verify.py",
-      "to": "fixture_check",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk02_verify.py",
-      "to": "get",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk02_verify.py",
-      "to": "dump",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "folk02_verify.py",
-      "to": "verify",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
       "from": "site.py",
-      "to": "textspans.py",
+      "to": "express01_site.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
       "from": "site.py",
-      "to": "textspans.py",
+      "to": "express01_site.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
@@ -10987,6 +11795,12 @@
     },
     {
       "from": "site.py",
+      "to": "render",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
       "to": "write_sitemap",
       "kind": "CALLS",
       "weight": 1
@@ -11022,50 +11836,86 @@
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "folk02.py",
+      "from": "test_express01.py",
+      "to": "express01.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "folk02.py",
+      "from": "test_express01.py",
+      "to": "express01.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "spans",
+      "from": "test_express01.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_express01.py",
+      "to": "prepared_ids",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "view",
+      "from": "test_express01.py",
+      "to": "append_turn",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "validate",
+      "from": "test_express01.py",
+      "to": "history_ids",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "reserve",
-      "kind": "CALLS",
+      "from": "test_express01_analysis.py",
+      "to": "express01_spec.py",
+      "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "usage_bound",
-      "kind": "CALLS",
+      "from": "test_express01_analysis.py",
+      "to": "express01_spec.py",
+      "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "test_folk02.py",
-      "to": "fixture_check",
+      "from": "test_express01_analysis.py",
+      "to": "express01_analyze.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_express01_analysis.py",
+      "to": "express01_analyze.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_express01_analysis.py",
+      "to": "evaluate",
       "kind": "CALLS",
       "weight": 1
     }
@@ -11083,7 +11933,7 @@
         "file:affect7.py"
       ],
       "risk": "high",
-      "description": "affect.py has 34 dependents — changes here have wide blast radius"
+      "description": "affect.py has 36 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect3.py",
@@ -11167,7 +12017,7 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "topk has 25 dependents — changes here have wide blast radius"
+      "description": "topk has 26 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:deepen.py",
@@ -11321,7 +12171,21 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "affect2.py has 40 dependents — changes here have wide blast radius"
+      "description": "affect2.py has 42 dependents — changes here have wide blast radius"
+    },
+    {
+      "id": "critical:fanin:function:affect2.py:56",
+      "name": "High-traffic: a2dir",
+      "nodes": [
+        "function:affect2.py:56",
+        "file:affect2.py",
+        "file:affectviz.py",
+        "file:apparatus11.py",
+        "file:langval_viz.py",
+        "file:triplet_capture.py"
+      ],
+      "risk": "medium",
+      "description": "a2dir has 10 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:affect2.py:62",
@@ -11335,21 +12199,7 @@
         "file:affect3.py"
       ],
       "risk": "high",
-      "description": "_load_vectors has 37 dependents — changes here have wide blast radius"
-    },
-    {
-      "id": "critical:fanin:function:affect2.py:67",
-      "name": "High-traffic: _all_resid",
-      "nodes": [
-        "function:affect2.py:67",
-        "file:affect2.py",
-        "file:affect3.py",
-        "file:affect5.py",
-        "file:apparatus11.py",
-        "file:audit02.py"
-      ],
-      "risk": "medium",
-      "description": "_all_resid has 16 dependents — changes here have wide blast radius"
+      "description": "_load_vectors has 38 dependents — changes here have wide blast radius"
     }
   ],
   "deadCode": [
@@ -11386,7 +12236,7 @@
       "nodes": [
         "file:affect.py"
       ],
-      "description": "affect.py has 34 incoming dependencies — high fan-in",
+      "description": "affect.py has 36 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -11396,7 +12246,7 @@
       "nodes": [
         "file:affect3.py"
       ],
-      "description": "affect3.py depends on 46 other nodes — high fan-out",
+      "description": "affect3.py depends on 45 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11456,7 +12306,7 @@
       "nodes": [
         "file:langval.py"
       ],
-      "description": "langval.py depends on 60 other nodes — high fan-out",
+      "description": "langval.py depends on 59 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11486,7 +12336,7 @@
       "nodes": [
         "file:audit02.py"
       ],
-      "description": "audit02.py depends on 58 other nodes — high fan-out",
+      "description": "audit02.py depends on 57 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11496,7 +12346,7 @@
       "nodes": [
         "file:affect2.py"
       ],
-      "description": "affect2.py has 40 incoming dependencies — high fan-in",
+      "description": "affect2.py has 42 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -11506,7 +12356,7 @@
       "nodes": [
         "function:affect2.py:62"
       ],
-      "description": "_load_vectors has 37 incoming dependencies — high fan-in",
+      "description": "_load_vectors has 38 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -11516,7 +12366,7 @@
       "nodes": [
         "file:apparatus11.py"
       ],
-      "description": "apparatus11.py depends on 61 other nodes — high fan-out",
+      "description": "apparatus11.py depends on 60 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11546,7 +12396,7 @@
       "nodes": [
         "file:affect11.py"
       ],
-      "description": "affect11.py depends on 50 other nodes — high fan-out",
+      "description": "affect11.py depends on 49 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11576,7 +12426,7 @@
       "nodes": [
         "file:lab.py"
       ],
-      "description": "lab.py has 140 incoming dependencies — high fan-in",
+      "description": "lab.py has 148 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -11596,7 +12446,7 @@
       "nodes": [
         "function:lab.py:68"
       ],
-      "description": "get_model has 66 incoming dependencies — high fan-in",
+      "description": "get_model has 69 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -11626,7 +12476,7 @@
       "nodes": [
         "file:triplet_capture.py"
       ],
-      "description": "triplet_capture.py depends on 49 other nodes — high fan-out",
+      "description": "triplet_capture.py depends on 48 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11636,8 +12486,18 @@
       "nodes": [
         "function:folk02.py:106"
       ],
-      "description": "get has 59 incoming dependencies — high fan-in",
+      "description": "get has 62 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
+    },
+    {
+      "id": "smell:fanout:file:express01.py",
+      "type": "excessive_fan_out",
+      "severity": "high",
+      "nodes": [
+        "file:express01.py"
+      ],
+      "description": "express01.py depends on 61 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanout:file:site.py",
@@ -11646,7 +12506,7 @@
       "nodes": [
         "file:site.py"
       ],
-      "description": "site.py depends on 53 other nodes — high fan-out",
+      "description": "site.py depends on 57 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11656,7 +12516,7 @@
       "nodes": [
         "file:affect.py"
       ],
-      "description": "affect.py depends on 38 other nodes — high fan-out",
+      "description": "affect.py depends on 37 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11716,7 +12576,7 @@
       "nodes": [
         "file:affect5.py"
       ],
-      "description": "affect5.py depends on 34 other nodes — high fan-out",
+      "description": "affect5.py depends on 33 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11726,7 +12586,7 @@
       "nodes": [
         "file:apparatus09.py"
       ],
-      "description": "apparatus09.py depends on 22 other nodes — high fan-out",
+      "description": "apparatus09.py depends on 21 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -11736,7 +12596,7 @@
       "nodes": [
         "function:apparatus09.py:57"
       ],
-      "description": "topk has 25 incoming dependencies — high fan-in",
+      "description": "topk has 26 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -11866,20 +12726,67 @@
       "nodes": [
         "file:nla.py"
       ],
-      "description": "nla.py depends on 38 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
-    },
-    {
-      "id": "smell:fanout:file:og.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:og.py"
-      ],
-      "description": "og.py depends on 27 other nodes — high fan-out",
+      "description": "nla.py depends on 37 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     }
   ],
-  "capabilities": [],
+  "capabilities": [
+    {
+      "id": "capability:web_framework",
+      "signature": {
+        "id": "web_framework",
+        "name": "HTTP Framework & Middleware",
+        "purpose": "Provides HTTP server, routing pipeline, middleware chain, and request/response handling.",
+        "keywords": [
+          "middleware",
+          "router",
+          "application",
+          "request",
+          "response",
+          "express",
+          "handler",
+          "dispatch"
+        ],
+        "actors": [
+          "Developer",
+          "HTTP client"
+        ],
+        "data": [
+          "HTTP request",
+          "HTTP response",
+          "Route path"
+        ],
+        "outcomes": [
+          "Request handled",
+          "Response sent"
+        ],
+        "category": "platform",
+        "weight": 1.4
+      },
+      "confidence": 1,
+      "actors": [
+        "Developer",
+        "HTTP client"
+      ],
+      "data": [
+        "HTTP request",
+        "HTTP response",
+        "Route path"
+      ],
+      "outcomes": [
+        "Request handled",
+        "Response sent"
+      ],
+      "services": [],
+      "apis": [],
+      "domains": [],
+      "evidence": [
+        "file: express01.py",
+        "file: express01_analyze.py",
+        "file: express01_controls.py"
+      ],
+      "reasons": []
+    }
+  ],
   "journeys": []
 }

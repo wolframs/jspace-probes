@@ -1,0 +1,97 @@
+[
+  {
+    "unit": "jspace-express01",
+    "events": [
+      {
+        "timestamp_us": "1788811525945074",
+        "pid": "47954",
+        "message": "Started jspace-express01.service - [systemd-run] /home/wolfram/Projects/jspace-probes/.venv/bin/python -u probes/express01.py all."
+      },
+      {
+        "timestamp_us": "1788811560034926",
+        "pid": "47954",
+        "message": "jspace-express01.service: Failed with result 'exit-code'."
+      },
+      {
+        "timestamp_us": "1788811560035135",
+        "pid": "47954",
+        "message": "jspace-express01.service: Consumed 24.972s CPU time over 34.089s wall clock time, 34.8G memory peak."
+      }
+    ]
+  },
+  {
+    "unit": "jspace-express01-diagnostic",
+    "events": [
+      {
+        "timestamp_us": "1788811679093141",
+        "pid": "47954",
+        "message": "Started jspace-express01-diagnostic.service - [systemd-run] /home/wolfram/Projects/jspace-probes/.venv/bin/python -u probes/express01_gate_diagnostic.py."
+      },
+      {
+        "timestamp_us": "1788811693475812",
+        "pid": "1562345",
+        "message": "{'prefix_tokens': 17, 'suffix_tokens': 7, 'shape_change_relative_l2': 0.014423848129808903, 'same_shape_changed_suffix_relative_l2': 0.0, 'repeat_relative_l2': 0.0}"
+      },
+      {
+        "timestamp_us": "1788811694687757",
+        "pid": "47954",
+        "message": "jspace-express01-diagnostic.service: Consumed 19.338s CPU time over 15.594s wall clock time, 7.7G memory peak."
+      }
+    ]
+  },
+  {
+    "unit": "jspace-express01-v2",
+    "events": [
+      {
+        "timestamp_us": "1788811758197047",
+        "pid": "47954",
+        "message": "Started jspace-express01-v2.service - [systemd-run] /home/wolfram/Projects/jspace-probes/.venv/bin/python -u probes/express01.py all."
+      },
+      {
+        "timestamp_us": "1788812450490790",
+        "pid": "47954",
+        "message": "jspace-express01-v2.service: Consumed 11min 46.512s CPU time over 11min 32.293s wall clock time, 38.1G memory peak."
+      }
+    ]
+  },
+  {
+    "unit": "jspace-express01-scan-check",
+    "events": [
+      {
+        "timestamp_us": "1788812479332988",
+        "pid": "47954",
+        "message": "Started jspace-express01-scan-check.service - [systemd-run] /home/wolfram/Projects/jspace-probes/.venv/bin/python -u probes/express01_scan.py --arm B --batch /home/wolfram/Projects/jspace-probes/out/express01-scan-smoke.json --out /home/wolfram/Projects/jspace-probes/results/express01/scanner-check.json."
+      },
+      {
+        "timestamp_us": "1788812507614418",
+        "pid": "1568080",
+        "message": "Saved 1 four-layer scans to /home/wolfram/Projects/jspace-probes/results/express01/scanner-check.json"
+      },
+      {
+        "timestamp_us": "1788812508884121",
+        "pid": "47954",
+        "message": "jspace-express01-scan-check.service: Consumed 19.997s CPU time over 29.550s wall clock time, 34.3G memory peak."
+      }
+    ]
+  },
+  {
+    "unit": "jspace-express01-scan-benchmark",
+    "events": [
+      {
+        "timestamp_us": "1788812693783980",
+        "pid": "47954",
+        "message": "Started jspace-express01-scan-benchmark.service - [systemd-run] /home/wolfram/Projects/jspace-probes/.venv/bin/python -u probes/express01_scan.py --arm B --batch /home/wolfram/Projects/jspace-probes/results/express01/scanner-batch.json --out /home/wolfram/Projects/jspace-probes/results/express01/scanner-benchmark.json."
+      },
+      {
+        "timestamp_us": "1788812713027685",
+        "pid": "1569536",
+        "message": "Saved 12 four-layer scans to /home/wolfram/Projects/jspace-probes/results/express01/scanner-benchmark.json"
+      },
+      {
+        "timestamp_us": "1788812714230984",
+        "pid": "47954",
+        "message": "jspace-express01-scan-benchmark.service: Consumed 25.417s CPU time over 20.446s wall clock time, 6.4G memory peak."
+      }
+    ]
+  }
+]

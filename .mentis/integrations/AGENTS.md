@@ -44,7 +44,7 @@ Mnestis owns architecture. Graphify only if user needs something Mnestis lacks �
 
 ## One-Liner
 
-probes: 0 services, 0 APIs, 1 domains.
+probes (single package) centered on http framework & middleware.
 
 ## Architecture
 
@@ -53,12 +53,12 @@ probes: 0 services, 0 APIs, 1 domains.
 - **Health score:** 85/100
 - **AI readiness:** 78/100
 
-Single Package with 105 source files across python, javascript. 0 packages detected. core domains: General.
+Single Package with 115 source files across python, javascript. 0 packages detected. HTTP middleware and routing framework; core domains: General.
 
 ## Language Support
 
 Mnestis analyzed this repo with **52** supported languages engine-wide.
-Detected here: 2 language(s), 105 source files.
+Detected here: 2 language(s), 115 source files.
 
 Read `.mentis/context/README.md` for the full diagram index.
 Read `.mentis/context/languages.md` for file distribution charts and the parsing pipeline graph.
@@ -66,14 +66,14 @@ Read `.mentis/context/graphs.md` for domain, flow, dependency, and risk Mermaid 
 
 ```mermaid
 flowchart LR
-  D0["General (97)"]
+  D0["General (107)"]
 ```
 
 ### Language distribution (this repo)
 
 ```mermaid
 pie showData title Files by language
-    "python" : 104
+    "python" : 114
     "javascript" : 1
 ```
 
@@ -201,13 +201,17 @@ mindmap
       Pascal
 ```
 
+## Capabilities
+
+- **HTTP Framework & Middleware** — Provides HTTP server, routing pipeline, middleware chain, and request/response handling.
+
 ## Domains (start here)
 
-- **General** — Import-graph cluster of 63 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering · `file:affect08s.py`, `file:affect5.py`, `file:apparatus06.py`
+- **General** — Import-graph cluster of 73 files; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering; reinforced by import clustering · `file:affect08s.py`, `file:affect5.py`, `file:apparatus06.py`
 
 ## Critical Paths (edit carefully)
 
-- **High-traffic: affect.py** (high risk) — affect.py has 34 dependents — changes here have wide blast radius
+- **High-traffic: affect.py** (high risk) — affect.py has 36 dependents — changes here have wide blast radius
 - **High-traffic: affect3.py** (high risk) — affect3.py has 22 dependents — changes here have wide blast radius
 - **High-traffic: AffectSteer** (high risk) — AffectSteer has 22 dependents — changes here have wide blast radius
 - **High-traffic: _prompt_ids** (medium risk) — _prompt_ids has 10 dependents — changes here have wide blast radius

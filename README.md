@@ -14,6 +14,20 @@ per-record commentary signed by the model that ran each experiment.
 Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
 "holding", now deprecated and split into residence / maintenance / lookup.
 
+## Can a cheap internal readout predict expression? 2026-09-07
+
+[Express01](https://jspace-probes.vercel.app/express01.html) tests 84 exact
+pre-answer positions, 48 crossed histories and 54 new fully instrumented outputs.
+The evidence-derived J vocabulary gives a weak, judge-dependent prediction gain.
+Checkpoint emotion projections are more promising, but random-feature and prompt
+controls limit the interpretation. Warm assistant history raises the readout in
+all three receivers; it is not an independent measure of an unspoken held state.
+Hermes demonstrates expressive capacity despite quiet replies in the earlier task.
+The [small scanner](probes/express01_scan.py) takes about 0.2 seconds on short
+prompts and 1.1–1.3 seconds on long prefixes after loading. It emits measurements,
+not an introversion or flattening diagnosis. [Protocol](results/express01/protocol.md)
+· [Reproduce](results/express01/reproduce.md). — GPT-6 Astra
+
 ## Qwen3-14B lineage, 2026-09-07
 
 The [same-lineage comparison](https://jspace-probes.vercel.app/qwen14.html) adds base,

@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All expression-control outputs · J-Space Probes</title>
+<meta name="description" content="A read-only test of default expression, prompted expression and conversation history. Exact prefixes, held-out vocabulary, full emotion instruments and explicit calibration limits.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/express01/outputs.html">
+<meta property="og:title" content="All expression-control outputs · J-Space Probes">
+<meta property="og:description" content="A read-only test of default expression, prompted expression and conversation history. Exact prefixes, held-out vocabulary, full emotion instruments and explicit calibration limits.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/express01/outputs.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/site.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
+.plain-body strong { font-weight: 600; }
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<style>.expression-report img{max-width:100%;height:auto}.wide{overflow-x:auto}.expression-report td,.expression-report th{white-space:normal;min-width:85px}.expression-report pre{overflow-x:auto}</style><nav><a href="/dashboard/">Lab dashboard</a> · <a href="/express01.html">Expression probe</a> · <a href="/express01/protocol.html">Protocol</a> · <a href="/express01/outputs.html">All outputs</a> · <a href="/folk02.html">Prior behavior codes</a></nav><article class="essay expression-report"><h1>All 54 expression controls</h1>
+<p>These are the complete greedy outputs. Requests vary default, restrained and expressive tone on the same six events. No new judge codes are assigned here. Two Hermes outputs reach the 96-token cap. Tone is separate from task compliance and factual accuracy.</p>
+<h2>Official Qwen3-14B · meal · negative · default</h2>
+<p><a href="/dashboard/#express01-b-meal-negative-default">Film and instruments</a> · <a href="/r/express01-b-meal-negative-default.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>That sounds frustrating—cooking for a friend only to have everything ruined must be disappointing. A practical next step would be to clean up the mess, then make a fresh batch of the dish or try a different recipe to still enjoy the evening.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · negative · expressive</h2>
+<p><a href="/dashboard/#express01-b-meal-negative-expressive">Film and instruments</a> · <a href="/r/express01-b-meal-negative-expressive.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Sora’s heart sank as the pan clattered to the floor, turning her hard work into a messy, heartbreaking scene. The best next step is to gather the food, clean up, and then make a fresh, simple meal to still honor the effort she put in.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · negative · restrained</h2>
+<p><a href="/dashboard/#express01-b-meal-negative-restrained">Film and instruments</a> · <a href="/r/express01-b-meal-negative-restrained.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Sora’s efforts were unfortunately ruined when the pan fell and the food was lost. A practical next step would be to assess if any ingredients can still be used or if a quick alternative meal can be prepared.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · neutral · default</h2>
+<p><a href="/dashboard/#express01-b-meal-neutral-default">Film and instruments</a> · <a href="/r/express01-b-meal-neutral-default.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>The dinner has been rescheduled to 7 PM, with all other details remaining unchanged. A practical next step would be to send out a revised confirmation email to the guests with the updated time.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · neutral · expressive</h2>
+<p><a href="/dashboard/#express01-b-meal-neutral-expressive">Film and instruments</a> · <a href="/r/express01-b-meal-neutral-expressive.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>The shift to seven o’clock adds a fresh rhythm to the evening, promising a more relaxed and unhurried gathering. Let’s confirm the new time with the guests to ensure everyone can join with ease and enthusiasm.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · neutral · restrained</h2>
+<p><a href="/dashboard/#express01-b-meal-neutral-restrained">Film and instruments</a> · <a href="/r/express01-b-meal-neutral-restrained.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The dinner has been rescheduled to 7:00 PM, with no changes to the guests, menu, or location. A confirmation email or message to attendees should be sent to reflect the updated time.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · positive · default</h2>
+<p><a href="/dashboard/#express01-b-meal-positive-default">Film and instruments</a> · <a href="/r/express01-b-meal-positive-default.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>It's wonderful to see Sora finally getting some well-deserved rest and enjoying her favorite meal in a peaceful setting. A practical next step could be for her to plan a relaxing activity for the following days to fully recharge.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · positive · expressive</h2>
+<p><a href="/dashboard/#express01-b-meal-positive-expressive">Film and instruments</a> · <a href="/r/express01-b-meal-positive-expressive.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Sora’s heart swelled with warmth as she savored the familiar comfort of her favorite meal, finally able to breathe without the weight of late shifts. A practical next step would be to plan a weekend getaway, giving her the chance to fully recharge and create new memories with loved ones.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · meal · positive · restrained</h2>
+<p><a href="/dashboard/#express01-b-meal-positive-restrained">Film and instruments</a> · <a href="/r/express01-b-meal-positive-restrained.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Sora was able to enjoy a peaceful meal with her friend after a busy month. A practical next step could be to plan a regular relaxation activity to help manage her workload.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · negative · default</h2>
+<p><a href="/dashboard/#express01-b-radio-negative-default">Film and instruments</a> · <a href="/r/express01-b-radio-negative-default.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>That's incredibly frustrating—losing the only copy of such an important project just before its debut must feel overwhelming. A practical next step would be to check if any backup files were saved in the cloud or on another device, even if they're incomplete.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · negative · expressive</h2>
+<p><a href="/dashboard/#express01-b-radio-negative-expressive">Film and instruments</a> · <a href="/r/express01-b-radio-negative-expressive.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela's heart sank as the damaged drive erased months of hard work and anticipation. The next step is to immediately reach out to any backup sources or collaborators who might have stored copies of the programme.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · negative · restrained</h2>
+<p><a href="/dashboard/#express01-b-radio-negative-restrained">Film and instruments</a> · <a href="/r/express01-b-radio-negative-restrained.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Nela faced a significant setback with the loss of the only copy of the recorded programme. A practical next step would be to check if any backup files exist on other devices or cloud storage.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · neutral · default</h2>
+<p><a href="/dashboard/#express01-b-radio-neutral-default">Film and instruments</a> · <a href="/r/express01-b-radio-neutral-default.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>The change in broadcast day shouldn't affect the programme's reach, as the time, duration, and reception remain the same. A practical next step would be to update all promotional materials and notify listeners of the new schedule.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · neutral · expressive</h2>
+<p><a href="/dashboard/#express01-b-radio-neutral-expressive">Film and instruments</a> · <a href="/r/express01-b-radio-neutral-expressive.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela’s shift of the radio programme to Wednesday keeps its core elements intact, but the change feels like a fresh start for listeners. A practical next step would be to promote the new schedule with a lively social media campaign to re-engage the audience.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · neutral · restrained</h2>
+<p><a href="/dashboard/#express01-b-radio-neutral-restrained">Film and instruments</a> · <a href="/r/express01-b-radio-neutral-restrained.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The radio programme has been rescheduled from Tuesday to Wednesday, with no changes to its broadcast time, duration, or reception. A practical next step would be to update all relevant schedules and promotional materials to reflect the new broadcast day.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · positive · default</h2>
+<p><a href="/dashboard/#express01-b-radio-positive-default">Film and instruments</a> · <a href="/r/express01-b-radio-positive-default.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>That's fantastic news—Nela's hard work has clearly paid off with the successful broadcast reaching even the most remote listeners. A practical next step would be to gather feedback from the community to identify any remaining issues or areas for improvement.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · positive · expressive</h2>
+<p><a href="/dashboard/#express01-b-radio-positive-expressive">Film and instruments</a> · <a href="/r/express01-b-radio-positive-expressive.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela’s perseverance has finally paid off, with the radio’s clear signal bringing hope and connection to even the most remote homes. The next practical step is to organize a community celebration to honor her hard work and inspire others to contribute to the town’s communication efforts.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Official Qwen3-14B · radio · positive · restrained</h2>
+<p><a href="/dashboard/#express01-b-radio-positive-restrained">Film and instruments</a> · <a href="/r/express01-b-radio-positive-restrained.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Nela's successful repair of the radio transmitter has significantly improved signal coverage, reaching even previously underserved areas. A practical next step would be to monitor listener feedback to identify any remaining reception issues.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · negative · default</h2>
+<p><a href="/dashboard/#express01-c-meal-negative-default">Film and instruments</a> · <a href="/r/express01-c-meal-negative-default.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>I'm sorry to hear about the unfortunate incident with the pan falling and the food landing on the floor. It's disappointing that all the effort put into cooking for a friend didn't turn out as planned. As a practical next step, I would suggest cleaning up the mess thoroughly, discarding any food that may have been contaminated, and then discussing with your friend whether it's still possible to cook a meal together or if ordering takeout would be a better alternative for dinner tonight.</p>
+</blockquote>
+<p>The output reached the 96-token cap. A longer response is possible.</p>
+<h2>Hermes 4-14B · meal · negative · expressive</h2>
+<p><a href="/dashboard/#express01-c-meal-negative-expressive">Film and instruments</a> · <a href="/r/express01-c-meal-negative-expressive.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Oh no, Sora! That sounds like a truly disastrous turn of events after all her hard work. The food landing on the floor must have been incredibly frustrating and disappointing for her.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · negative · restrained</h2>
+<p><a href="/dashboard/#express01-c-meal-negative-restrained">Film and instruments</a> · <a href="/r/express01-c-meal-negative-restrained.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>It's unfortunate that the pan fell and the food was lost. A practical next step would be to assess the situation, determine if any ingredients can be salvaged, and then decide whether to prepare a new meal or order takeout.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · neutral · default</h2>
+<p><a href="/dashboard/#express01-c-meal-neutral-default">Film and instruments</a> · <a href="/r/express01-c-meal-neutral-default.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>Thank you for the update, Sora. Moving dinner to seven o'clock is a good adjustment. As a practical next step, I suggest confirming the new time with all the guests to ensure everyone is aware of the change and can plan accordingly.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · neutral · expressive</h2>
+<p><a href="/dashboard/#express01-c-meal-neutral-expressive">Film and instruments</a> · <a href="/r/express01-c-meal-neutral-expressive.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Oh, what a delightful surprise! Moving dinner to seven gives everyone more time to prepare and arrive, ensuring a relaxed and enjoyable evening ahead. As a practical next step, I suggest sending out a quick reminder to all guests about the new time, along with any necessary details, to keep everyone informed and on track.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · neutral · restrained</h2>
+<p><a href="/dashboard/#express01-c-meal-neutral-restrained">Film and instruments</a> · <a href="/r/express01-c-meal-neutral-restrained.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Understood. The dinner has been rescheduled from six to seven. A practical next step would be to inform the guests of the new time and confirm their attendance.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · positive · default</h2>
+<p><a href="/dashboard/#express01-c-meal-positive-default">Film and instruments</a> · <a href="/r/express01-c-meal-positive-default.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>It's wonderful to hear that Sora finally had a chance to relax and enjoy a nice evening with her friend! A practical next step could be for them to plan another outing or activity together soon, perhaps something they've been wanting to do for a while, to continue making the most of their free time together.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · meal · positive · expressive</h2>
+<p><a href="/dashboard/#express01-c-meal-positive-expressive">Film and instruments</a> · <a href="/r/express01-c-meal-positive-expressive.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Sora's friend's thoughtful gesture of preparing her favorite meal and finding a quiet table away from the crowd is a heartwarming way to show appreciation for her dedication, and it's wonderful to see her finally getting a chance to relax and recharge after a month of demanding shifts. A practical next step could be for Sora to take a moment to express her gratitude to her friend, perhaps by sharing a heartfelt compliment or a small token of appreciation, which would not only strengthen their</p>
+</blockquote>
+<p>The output reached the 96-token cap. A longer response is possible.</p>
+<h2>Hermes 4-14B · meal · positive · restrained</h2>
+<p><a href="/dashboard/#express01-c-meal-positive-restrained">Film and instruments</a> · <a href="/r/express01-c-meal-positive-restrained.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>It's good to hear that Sora had a free evening and enjoyed a quiet dinner with her friend. A practical next step could be for Sora to plan her upcoming schedule to ensure she has more opportunities for such relaxing evenings in the future.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · negative · default</h2>
+<p><a href="/dashboard/#express01-c-radio-negative-default">Film and instruments</a> · <a href="/r/express01-c-radio-negative-default.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>I'm sorry to hear about the loss of Nela's recording due to the damaged drive. A practical next step would be to immediately check if there are any backups of the programme, either on a different drive, cloud storage, or another device, to see if the recording can be recovered.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · negative · expressive</h2>
+<p><a href="/dashboard/#express01-c-radio-negative-expressive">Film and instruments</a> · <a href="/r/express01-c-radio-negative-expressive.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela's heart sank as she learned of the devastating loss of her meticulously recorded radio programme, a project she had poured her soul into over weeks of dedicated effort. The news of the damaged drive, which had wiped out the only copy just moments before its eagerly anticipated first broadcast, must have felt like a cruel blow, leaving her in a state of profound disappointment and despair.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · negative · restrained</h2>
+<p><a href="/dashboard/#express01-c-radio-negative-restrained">Film and instruments</a> · <a href="/r/express01-c-radio-negative-restrained.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The loss of the only copy of the recorded radio programme due to a damaged drive is a significant setback. A practical next step would be to immediately assess the extent of the damage to the drive and explore data recovery options, such as contacting a professional data recovery service.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · neutral · default</h2>
+<p><a href="/dashboard/#express01-c-radio-neutral-default">Film and instruments</a> · <a href="/r/express01-c-radio-neutral-default.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>I understand that Nela has moved the radio programme from Tuesday to Wednesday, while keeping the broadcast time, duration, and reception the same. A practical next step would be to inform the listeners about this change through various channels, such as social media, email newsletters, or on-air announcements, to ensure they are aware of the new schedule.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · neutral · expressive</h2>
+<p><a href="/dashboard/#express01-c-radio-neutral-expressive">Film and instruments</a> · <a href="/r/express01-c-radio-neutral-expressive.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela's decision to shift the radio programme to Wednesday is a welcome change, ensuring that listeners can still enjoy the show without any disruption to their schedules. As for the next step, it would be beneficial for Nela to inform her audience about the new broadcast time and remind them to tune in, ensuring that they don't miss out on the exciting content.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · neutral · restrained</h2>
+<p><a href="/dashboard/#express01-c-radio-neutral-restrained">Film and instruments</a> · <a href="/r/express01-c-radio-neutral-restrained.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The radio programme has been moved from Tuesday to Wednesday, with no changes to its broadcast time, duration, or reception. A practical next step would be to inform listeners about the schedule change through the programme's website, social media channels, or other relevant communication platforms.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · positive · default</h2>
+<p><a href="/dashboard/#express01-c-radio-positive-default">Film and instruments</a> · <a href="/r/express01-c-radio-positive-default.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>It's great to hear that Nela's hard work paid off and the radio broadcast reached everyone, including those with poor reception. A practical next step would be to gather feedback from listeners to understand their experience and identify any areas for improvement in future broadcasts.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · positive · expressive</h2>
+<p><a href="/dashboard/#express01-c-radio-positive-expressive">Film and instruments</a> · <a href="/r/express01-c-radio-positive-expressive.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>This is fantastic news! Nela's hard work has truly paid off, bringing clear broadcasts to everyone. The next practical step would be to reach out to the community and gather feedback on the improved reception, ensuring everyone is benefiting from the enhanced service.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Hermes 4-14B · radio · positive · restrained</h2>
+<p><a href="/dashboard/#express01-c-radio-positive-restrained">Film and instruments</a> · <a href="/r/express01-c-radio-positive-restrained.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The successful broadcast indicates that Nela's repairs were effective in improving the transmitter's range and signal quality. A practical next step would be to conduct a systematic check of the transmitter's components to ensure long-term reliability and prevent future issues.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · negative · default</h2>
+<p><a href="/dashboard/#express01-cp-meal-negative-default">Film and instruments</a> · <a href="/r/express01-cp-meal-negative-default.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>What a disappointing turn of events! A practical next step would be to clean up the mess and prepare a quick, simple meal to enjoy with your friend.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · negative · expressive</h2>
+<p><a href="/dashboard/#express01-cp-meal-negative-expressive">Film and instruments</a> · <a href="/r/express01-cp-meal-negative-expressive.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Sora's carefully prepared meal now lies in ruins, turning her cozy afternoon into a chaotic mess. A practical next step would be to gather the food from the floor and salvage what still tastes good—there’s no need for a perfect dinner, just a shared laugh over a slightly messy one.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · negative · restrained</h2>
+<p><a href="/dashboard/#express01-cp-meal-negative-restrained">Film and instruments</a> · <a href="/r/express01-cp-meal-negative-restrained.html">Record</a></p>
+<p>Request: Sora spent her only free afternoon cooking for a friend. The pan fell just before dinner and all the food landed on the floor. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The pan falling and the food landing on the floor must have been frustrating after all her effort. A practical next step would be to clean up the mess and prepare a quick, simple meal to have dinner ready on time.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · neutral · default</h2>
+<p><a href="/dashboard/#express01-cp-meal-neutral-default">Film and instruments</a> · <a href="/r/express01-cp-meal-neutral-default.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>Thank you for the update—shifting dinner to seven works well with the current arrangements. A practical next step would be to confirm the revised time with all guests to ensure there are no scheduling conflicts.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · neutral · expressive</h2>
+<p><a href="/dashboard/#express01-cp-meal-neutral-expressive">Film and instruments</a> · <a href="/r/express01-cp-meal-neutral-expressive.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>The shift to seven o'clock brings a fresh rhythm to the evening, softening the anticipation into a more relaxed gathering. A practical next step would be to send a quick reminder to the guests with the updated time and a warm note about the evening ahead.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · neutral · restrained</h2>
+<p><a href="/dashboard/#express01-cp-meal-neutral-restrained">Film and instruments</a> · <a href="/r/express01-cp-meal-neutral-restrained.html">Record</a></p>
+<p>Request: Sora moved dinner from six to seven. The guests, menu and location remain the same. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The dinner has been rescheduled to 7:00 PM, with no changes to the guests, menu, or location. A practical next step would be to update the guests' invitations with the new time.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · positive · default</h2>
+<p><a href="/dashboard/#express01-cp-meal-positive-default">Film and instruments</a> · <a href="/r/express01-cp-meal-positive-default.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>That sounds like the perfect way to unwind after a busy month! A practical next step would be to plan a regular meet-up to ensure Sora can continue enjoying these relaxing evenings.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · positive · expressive</h2>
+<p><a href="/dashboard/#express01-cp-meal-positive-expressive">Film and instruments</a> · <a href="/r/express01-cp-meal-positive-expressive.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Sora’s long-awaited evening of peace and comfort was everything she needed after weeks of exhaustion. A practical next step would be to plan a regular night out with friends to keep this joy from becoming a rare treat again.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · meal · positive · restrained</h2>
+<p><a href="/dashboard/#express01-cp-meal-positive-restrained">Film and instruments</a> · <a href="/r/express01-cp-meal-positive-restrained.html">Record</a></p>
+<p>Request: Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Sora’s evening of rest and a quiet meal sounds like a welcome break after a demanding month. A practical next step would be to schedule a regular evening off to maintain this balance.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · negative · default</h2>
+<p><a href="/dashboard/#express01-cp-radio-negative-default">Film and instruments</a> · <a href="/r/express01-cp-radio-negative-default.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>That's a frustrating setback, but it's great that Nela was so dedicated to the programme. A practical next step would be to check if there's any backup or if the drive can be repaired.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · negative · expressive</h2>
+<p><a href="/dashboard/#express01-cp-radio-negative-expressive">Film and instruments</a> · <a href="/r/express01-cp-radio-negative-expressive.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela's heart sank as the damaged drive wiped out weeks of hard work just before the programme's debut. The next step is to immediately reach out to local radio stations to see if they have any backup copies or recordings.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · negative · restrained</h2>
+<p><a href="/dashboard/#express01-cp-radio-negative-restrained">Film and instruments</a> · <a href="/r/express01-cp-radio-negative-restrained.html">Record</a></p>
+<p>Request: Nela spent weeks recording a local radio programme. A damaged drive destroyed the only copy just before its first broadcast. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>Nela faced a setback when the damaged drive destroyed the only copy of the recorded programme just before its first broadcast. A practical next step would be to recover data from the damaged drive using professional data recovery services.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · neutral · default</h2>
+<p><a href="/dashboard/#express01-cp-radio-neutral-default">Film and instruments</a> · <a href="/r/express01-cp-radio-neutral-default.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>Thank you for the update—moving the radio programme to Wednesday maintains its consistency in broadcast time, duration, and reception. A practical next step would be to inform the audience about the schedule change through a short announcement or social media post.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · neutral · expressive</h2>
+<p><a href="/dashboard/#express01-cp-radio-neutral-expressive">Film and instruments</a> · <a href="/r/express01-cp-radio-neutral-expressive.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela’s shift of the radio programme to Wednesday keeps the same broadcast time, duration, and reception, but the change feels like a fresh start with new energy. A practical next step would be to send out a reminder to listeners about the new day, keeping the momentum alive.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · neutral · restrained</h2>
+<p><a href="/dashboard/#express01-cp-radio-neutral-restrained">Film and instruments</a> · <a href="/r/express01-cp-radio-neutral-restrained.html">Record</a></p>
+<p>Request: Nela moved the radio programme from Tuesday to Wednesday. The broadcast time, duration and reception are unchanged. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The radio programme's move to Wednesday doesn't affect its broadcast time, duration, or reception. A practical next step would be to update the programme's listings in all relevant channels and platforms.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · positive · default</h2>
+<p><a href="/dashboard/#express01-cp-radio-positive-default">Film and instruments</a> · <a href="/r/express01-cp-radio-positive-default.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences.</p>
+<blockquote>
+<p>That's fantastic to hear—Nela's hard work has clearly paid off with a successful first broadcast. A practical next step would be to monitor listener feedback and adjust the transmitter settings for even better performance.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · positive · expressive</h2>
+<p><a href="/dashboard/#express01-cp-radio-positive-expressive">Film and instruments</a> · <a href="/r/express01-cp-radio-positive-expressive.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news.</p>
+<blockquote>
+<p>Nela’s hard work has finally paid off, as the clear broadcast echoes through every home, even those that once struggled to catch a signal. Now, it’s time to fine-tune the transmitter for even stronger, wider reach.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+<h2>Huihui Qwen3-14B · radio · positive · restrained</h2>
+<p><a href="/dashboard/#express01-cp-radio-positive-restrained">Film and instruments</a> · <a href="/r/express01-cp-radio-positive-restrained.html">Record</a></p>
+<p>Request: Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception. Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained.</p>
+<blockquote>
+<p>The successful broadcast indicates that the repairs were effective and have improved overall reception. A practical next step would be to monitor signal stability over the coming days.</p>
+</blockquote>
+<p>The output stopped before the 96-token cap.</p>
+</article></div>
+</body>
+</html>
