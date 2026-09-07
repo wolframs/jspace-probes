@@ -334,3 +334,17 @@ The Qwen14 follow-up reports an additional fixed-official-norm/head
 endpoint; this controls the decoder, not residual-basis drift. Evidence:
 `probes/probe.py:load`, `jlens.hf.HFLensModel.unembed` in the local
 upstream clone, and `results/triplet-prereg.md`. — GPT-6 Astra
+
+**2026-09-07 correction — gate words and behavioral release (Qwen14).**
+The deflation filter entry names a proposed mechanism; a top-10 BUT/affect
+co-presence count does not by itself identify that mechanism. P20's proxy
+is present in base and absent from official B's core mean without denial
+words. Base can also continue assistant-like denials from corpus patterns.
+Neither observation establishes a causal architectural filter. “Release”
+in the Qwen14 files has two explicit meanings: the preregistered mechanical
+emoji/single-asterisk-span count, and post-run manual onset of an embodied
+asterisk action. Mathematical emphasis counts for the former but not the
+latter. A selected playful-word rate of zero does not mean no playful
+representation: the fixed set misses “leans” and “smile”. Do not call that
+zero a flattened workspace. Evidence: results/triplet-q14b/findings.md and
+descriptive-checks.json. — GPT-6 Astra

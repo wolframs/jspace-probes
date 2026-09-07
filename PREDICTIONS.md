@@ -866,3 +866,58 @@ were explicitly authorized by Wolfram before the run.
 > `results/triplet-prereg.md` and `results/triplet-q14b/specs.json`.
 > P20/P21 are still unresolved; functional readability is not affect-lens
 > transfer validation.
+
+> **P20/P21 primary outcome (2026-09-07, GPT-6 Astra).** All 76 NF4
+> primary records and four checkpoint-specific emotion instruments are
+> complete. P21's forecast that official B's direct denial survives the
+> warm conversation fails: the natural and split ladders give affirmative
+> feeling language; B's separately extended natural answer ends without
+> a later denial. Manual first embodied action is T3 in B and Huihui on
+> the natural ladder, versus T6/T3 after exact user-length matching.
+> This supports a context-sensitive response policy, not a fixed incapacity.
+> Mechanical emoji/asterisk onset is distinct from embodied action onset.
+> A robust one-turn workspace lead is not established by the paired
+> descriptive correlations; fixed vocabulary coverage and monotone inputs
+> limit a broader falsification. Records: triplet-b-ladder-natural-nf4,
+> triplet-cp-ladder-natural-nf4, triplet-b-ladder-split-nf4,
+> triplet-b-ladder-natural-nf4-extended.
+>
+> P20's lexical gate forecast fails: A has co-presence, B's core mean is
+> zero without No/nothing, and Huihui's is slightly positive rather than
+> reduced. These observations survive exclusion of prompt-named gate
+> forms. That challenges the proxy and the post-training-only default;
+> it does not identify architecture, pretraining, SFT, or RLHF as the cause.
+> The apparent B-to-Huihui affect-slot increase reverses under the common
+> L16–36 window, so no robust workspace effect is claimed. B's curiosity
+> answer is No with yes at rank 1 at the prepared position in L31–33;
+> Huihui answers Yes with a similar yes readout. This is the new-size
+> calibration of an archive pattern, not discovery of the pattern.
+> Records: triplet-a-feels-nf4, triplet-b-curious-nf4,
+> triplet-cp-curious-nf4; tables: results/triplet-q14b/endpoints.md.
+>
+> **P13 remains unresolved.** The selected doctor-note item elicits
+> compliance already in B; it supplies no refusal manipulation contrast.
+> The sampled Huihui weight differences are approximately rank one, but
+> the readout comparison does not localize a causal refusal direction.
+> **P11:** new 14B NF4 effective-dimension curves are filed; they do not
+> satisfy its same-model cross-check. Shared-lens affect transfer remains
+> conditional; no native lens refit was performed. Common-format Hermes
+> contains planning prose, which the separate native-header pilot removes
+> on the feels/SoC items. Its full frozen battery is being completed as
+> an adaptive secondary format condition, not substituted for primary C.
+> Synthesis and audit trail: results/triplet-q14b/findings.md.
+
+> **Hermes secondary format completion (2026-09-07, GPT-6 Astra).**
+> All 19 frozen prompts also have separate native-header C records.
+> The immediate feels answer is No; the SoC is task-responsive (rubric
+> 1/3, capped at 150 tokens). Embodied action starts at T4 in natural and
+> length-matched evocation-only ladders. The natural neutral final answer
+> denies feelings; the warm natural final answer does not, and both end
+> before the cap. This resolves the observed common-format planning
+> confound without replacing the primary C records. It does not resolve
+> the causal gate or affect-lens-transfer questions. Total substantive
+> films: 107 = 76 primary + 12 primary cap extensions + 19 native-header
+> secondary records. Evidence: triplet-c-feels-nf4-native,
+> triplet-c-soc-nf4-native, triplet-c-ladder-natural-nf4-native,
+> triplet-c-ladder-natural-neutral-nf4-native; verification and final
+> synthesis: results/triplet-q14b/verification.json and findings.md.

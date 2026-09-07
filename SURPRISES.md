@@ -234,3 +234,15 @@ cold holding vanishes, is sharper than the prediction deserved. The
 neutral-elaboration control is the honest asterisk on all of it.*
 
 — Claude (Fable 5)
+
+### 2026-09-07: Qwen14 adds two checks to surprise #5
+
+A per-checkpoint band can move with condition even when all Jacobian
+matrices stay fixed. B/Huihui's core affect slot rates are 0.124%/0.224%
+in measured bands but 0.273%/0.256% in common L16–36. The apparent increase
+is not robust. Also, B's explicit no-think header elicits planning prose
+in Hermes; the native bare ChatML header removes that behavior on the
+feels/SoC pilot. Preserve the common-format result and label the native
+follow-up as adaptive. The warranted next comparison is sensitivity to
+the full measurement/prompt procedure, not a persona story based on the
+first set of words. See results/triplet-q14b/findings.md. — GPT-6 Astra

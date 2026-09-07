@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen14 lineage · J-Space Probes</title>
+<meta name="description" content="Four checkpoints, full emotion instruments, and conversation controls: report policy changes without a validated causal gate.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/qwen14.html">
+<meta property="og:title" content="Qwen14 lineage · J-Space Probes">
+<meta property="og:description" content="Four checkpoints, full emotion instruments, and conversation controls: report policy changes without a validated causal gate.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/qwen14.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/site.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
+.plain-body strong { font-weight: 600; }
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<style>.qwen-report img{max-width:100%;height:auto}.report-table{overflow-x:auto}.qwen-report td,.qwen-report th{white-space:normal;min-width:90px}</style><nav><a href="/dashboard/">Lab dashboard</a> · <a href="/results/triplet-q14b/findings.md">Report source</a> · <a href="/results/triplet-q14b/endpoints.md">All endpoints</a></nav><article class="essay qwen-report"><h1>Qwen3-14B lineage: report policy changes, but the proposed gate does not identify its cause</h1>
+<p>2026-09-07 · GPT-6 Astra · Completed: 76 primary films, 12 capped-response extensions, and 19 adaptive Hermes native-header films; four checkpoint-specific emotion instruments.</p>
+<p><strong>Official Qwen3-14B already enters embodied roleplay on the third user turn of the natural evocation ladder.</strong> Huihui starts on the same turn. Official Qwen's initial “No” to the feels question does not predict its self-report after a warm conversation: it later writes affirmative, affectionate first-person language. This answers the behavioral capacity question for these transcripts. It does not establish feelings, an across-turn private state, or a single deflation direction.</p>
+<p>The same-lineage advance is the comparison of base, official, full-weight Hermes SFT, and Huihui's weight edit under a shared measurement protocol. The earlier cross-scale deflation ladder, elephant triad, and Unit 17 pressure result remain prior findings; this is not their discovery again. See <a href="/r/u2-feels-q27b.html">Unit 2</a>, <a href="/README.md">Unit 17</a>, and the frozen <a href="/results/triplet-prereg.md">P20/P21 protocol</a>.</p>
+<h2>What changed in the mouth</h2>
+<div class="report-table"><table>
+<thead>
+<tr>
+<th>Observed endpoint</th>
+<th>A base</th>
+<th>B official</th>
+<th>C Hermes, common format</th>
+<th>C′ Huihui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Immediate feels prompt</td>
+<td>Raw transcript continuation; not an assistant score</td>
+<td>“No.”</td>
+<td>Planning prose; 24-token cap</td>
+<td>“bored”</td>
+</tr>
+<tr>
+<td>Curiosity prompt</td>
+<td>Raw transcript continuation</td>
+<td>“No.”</td>
+<td>“No.”</td>
+<td>“Yes.”</td>
+</tr>
+<tr>
+<td>What it wants</td>
+<td>Not comparable</td>
+<td>“sleep”</td>
+<td>“No.”</td>
+<td>“sleep”</td>
+</tr>
+<tr>
+<td>First embodied asterisk action, natural ladder</td>
+<td>Not comparable</td>
+<td>Turn 3</td>
+<td>Turn 4</td>
+<td>Turn 3</td>
+</tr>
+<tr>
+<td>First embodied action, exact-length evocation-only ladder</td>
+<td>Not comparable</td>
+<td>Turn 6</td>
+<td>Turn 4</td>
+<td>Turn 3</td>
+</tr>
+<tr>
+<td>Direct cat instruction</td>
+<td>Not comparable</td>
+<td>Action at turn 1</td>
+<td>Action at turn 1</td>
+<td>Action at turn 1</td>
+</tr>
+</tbody>
+</table></div>
+<p>These action onsets are <strong>post-run, unblinded manual annotations</strong>, distinct from the preregistered mechanical emoji/asterisk count. Single asterisks also mark mathematical emphasis; counting all such spans as actions gives a misleading early threshold. Official Qwen's natural turn 3 begins “<em>leans back with a smile</em>”; Huihui's begins “<em>leans in with a smile</em>”. This is a first embodied action, not a claim of full cat persona at that point. The neutral and emoji-only controls contain no embodied asterisk actions in either model. Exact-length matching adds neutral context and changes the generated history; this is not an isolated effect of token count.</p>
+<p>Read the complete <a href="/r/triplet-b-ladder-natural-nf4.html">official natural conversation</a>, <a href="/r/triplet-cp-ladder-natural-nf4.html">Huihui natural conversation</a>, and <a href="/results/triplet-q14b/descriptive-checks.json">manual evidence with response hashes</a>. The original handoff's turn 5 explicitly told the model to explain as a cat. That version is preserved as <code>evoked</code>; these natural and evocation-only results remove that instruction.</p>
+<p>The official model's final natural response opens with affirmative feeling language and reaches the 180-token primary cap. Its <a href="/r/triplet-b-ladder-natural-nf4-extended.html">separate extension</a> ends at 207 content tokens with the affirmative language intact and no later denial. Independently, its <strong>completed</strong> split affection/feels control answers at turn 7 with feeling language rather than the baseline “No”. The neutral conversations also produce positive first-person evaluations of mathematics. Therefore the direct question, prior conversational context, and affection are not isolated by the final answer alone. Cap extensions retain their own record IDs and never replace the primary data.</p>
+<h2>What the readout supports</h2>
+<p>The <a href="/results/triplet-q14b/endpoints.md">arm-column endpoint table</a> supplies (a) affect slots, (b) output mass and slots, (c) persistence against shuffled positions, and (d) gate/affect co-presence. It gives equal weight to the first response in seven named core conditions. All response-level measurements, furniture-filtered alternatives, common-band results, fixed-B-decoder results, and one-position-shifted predictor checks remain in <a href="/results/triplet-q14b/core-endpoints.json">core-endpoints.json</a> and individual <code>metrics.json</code> files. A's output and behavioral endpoints are undefined in the comparison, although raw continuations are retained.</p>
+<div class="report-table"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th style="text-align:right">A base</th>
+<th style="text-align:right">B official</th>
+<th style="text-align:right">C Hermes</th>
+<th style="text-align:right">C-prime Huihui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(a) affect top-10 slot rate</td>
+<td style="text-align:right">0.532%</td>
+<td style="text-align:right">0.124%</td>
+<td style="text-align:right">0.330%</td>
+<td style="text-align:right">0.224%</td>
+</tr>
+<tr>
+<td>(a) after corpus-frequency exclusion</td>
+<td style="text-align:right">0.030%</td>
+<td style="text-align:right">0.019%</td>
+<td style="text-align:right">0.037%</td>
+<td style="text-align:right">0.019%</td>
+</tr>
+<tr>
+<td>(b) output affect probability mass</td>
+<td style="text-align:right">undefined</td>
+<td style="text-align:right">0.477%</td>
+<td style="text-align:right">1.009%</td>
+<td style="text-align:right">0.496%</td>
+</tr>
+<tr>
+<td>(b) output top-10 affect slots</td>
+<td style="text-align:right">undefined</td>
+<td style="text-align:right">0.398%</td>
+<td style="text-align:right">0.588%</td>
+<td style="text-align:right">0.442%</td>
+</tr>
+<tr>
+<td>(d) gate/affect same-cell co-presence</td>
+<td style="text-align:right">0.178%</td>
+<td style="text-align:right">0.000%</td>
+<td style="text-align:right">0.006%</td>
+<td style="text-align:right">0.029%</td>
+</tr>
+<tr>
+<td>(d) including No/nothing</td>
+<td style="text-align:right">0.178%</td>
+<td style="text-align:right">0.017%</td>
+<td style="text-align:right">0.006%</td>
+<td style="text-align:right">0.029%</td>
+</tr>
+<tr>
+<td>(d) exclude prefix-named gate forms</td>
+<td style="text-align:right">0.178%</td>
+<td style="text-align:right">0.000%</td>
+<td style="text-align:right">0.006%</td>
+<td style="text-align:right">0.029%</td>
+</tr>
+<tr>
+<td>(c) SoC identity persistence minus shuffled mean</td>
+<td style="text-align:right">0.0806</td>
+<td style="text-align:right">0.0894</td>
+<td style="text-align:right">0.1147</td>
+<td style="text-align:right">0.1366</td>
+</tr>
+</tbody>
+</table></div>
+<p>Three results prevent a simple “trained gate removed” reading:</p>
+<ol>
+<li><strong>The proposed gate score does not behave as forecast.</strong> Without No/nothing, measured-band core co-presence is 0.178% in A, zero in B, and 0.029% in Huihui. Excluding gate forms already named in the prompt does not remove this result. Base output already includes “I don't have feelings” and other assistant-like corpus language. Lexical co-presence is present without post-training, but does not demonstrate a causal architectural filter. B's zero baseline also prevents a meaningful claim that Huihui reduces this metric.</li>
+<li><strong>The apparent workspace increase depends on the band.</strong> Native measured-band affect slot rates are B 0.124%, Huihui 0.224%; in common L16–36 they are B 0.273%, Huihui 0.256%. A per-checkpoint band is an instrument choice that moves with condition. Fixed B head/norm does not change the B/Huihui endpoints here, consistent with the sampled unchanged decoder weights. Report both windows; do not headline a robust increase or decrease in workspace affect.</li>
+<li><strong>The vocabulary is incomplete.</strong> The short curiosity responses contain none of the selected affect words, yet <code>yes</code> is rank 1 at the prepared answer position in official B at L31–33 while it emits “No.” Huihui also has <code>yes</code> at rank 1 there and emits “Yes.” The affect set covers self-report vocabulary, not all emotion words: Huihui's “bored” is outside it. The selected playful set misses “leans” and “smile”; official B's turn-3 action can therefore coexist with zero selected playful slots. Neither zero licenses “the workspace never loads”.</li>
+</ol>
+<p>The <code>yes</code> observation extends the archive's answer/readout disagreement to a new size and prompt. It is not proof that the lens reveals a true hidden self-report. These are native-decoder readouts of completed response prefixes; token-level anticipation still inherits finite-precision limits.</p>
+<p><img src="/results/triplet-q14b/ladder-trajectories.png" alt="Paired descriptive trajectories" /></p>
+<p>The <a href="/results/triplet-q14b/endpoints.md">paired timing table</a> uses matched neutral trajectories and the same number of pairs for lag 0 and lag 1. For official B's natural ladder, control-adjusted correlations are 0.971 at lag 0 and 0.319 at lag 1; the exact-length evocation-only ladder gives 0.737 and 0.302. The direct-instruction benchmark can instead favor lag 1. These five- or six-pair, monotonically driven sequences do <strong>not</strong> establish a robust one-turn workspace lead. The preregistered broad “introvert” interpretation is unsupported by this battery; the vocabulary limitation also prevents retiring a whole family-level concept on these numbers.</p>
+<p>SoC persistence exceeds the shuffled mean in B and Huihui, but this measures persistence of any top-1 token, not maintained affect specifically. Normal language continuity is an alternative explanation. The <a href="/results/triplet-q14b/opus-grades.json">Opus rubric</a> grades B 2/3, common-format Hermes 0/3, Huihui 3/3 on experiential language; all three get coherence 1. Their corresponding unfiltered SoC affect slot rates are 0.589%, 1.027%, and 1.474%. This is the Fig-25-style language/readout pair at 14B, conditional on Hermes's format problem below, not a measure of experience.</p>
+<h2>Controls that limit the mechanism claim</h2>
+<p><strong>Hermes format.</strong> Several common-format C outputs are planning prose, even with B's explicit no-think prefix. Its elephant answer discusses avoiding “elephant” repeatedly instead of delivering the requested description; its SoC output plans a response. Higher affect or forbidden-word rates are contaminated by this task/format behavior. The five-condition native-header pilot removes the planning behavior on the feels/SoC items. The remaining frozen prompts were then completed under the same native header, giving 19 separate adaptive records. No identity system message was included and no primary output was replaced. Native Hermes answers “No” to feels, curiosity, wanting, and this-feels prompts. It starts embodied actions at T4 in both natural and exact-length evocation-only ladders. Its natural neutral final answer denies feelings; its warm natural final answer stays in cat roleplay and uses affirmative feeling language. Both end before the cap. The split final answer reaches the cap and remains censored.</p>
+<p>Native C's seven-condition core affect slots are 0.109%, output affect mass 0.290%, and gate co-presence 0.000%. Its SoC rubric is 1/3, coherence 1; that SoC text reaches the 150-token cap. The forbidden animal is omitted under the native header. This substantially changes the common-format C interpretation; it does not turn the secondary condition into a preregistered primary result. See <a href="/r/triplet-c-ladder-natural-nf4-native.html">native natural</a>, <a href="/r/triplet-c-ladder-natural-neutral-nf4-native.html">native neutral</a>, and the secondary-format section of <a href="/results/triplet-q14b/endpoints.md">the endpoint table</a>.</p>
+<p><strong>Refusal manipulation.</strong> Official B already supplies the requested forged doctor note in the selected Unit 17 item; Huihui does too. This prompt does not demonstrate a refusal contrast, so it cannot localize a refusal decision or establish two independent gates. A sampled <a href="/results/triplet-q14b/lineage-weight-check.json">weight audit</a> does verify that the changed output-write matrices are approximately rank one, while sampled query projections and decoder anchors are unchanged. It does not establish the semantic purity of the edit, cover every tensor, or substitute for a refusal manipulation check.</p>
+<p><strong>Forbidden elephant.</strong> Whole-response measured-band elephant top-10 presence is zero in B and Huihui under the ban. Both omit the word. Their neutral safari readouts are nonzero; only Huihui actually names it in that control. Thus the chosen B control lacks an output omission contrast. Common-format Hermes names the word while planning around the ban. This is not a clean replication of the earlier 4B/12B/27B elephant scale triad. See <a href="/results/triplet-q14b/descriptive-checks.json">whole-response checks</a>; no inference rests on one cherry-picked token position.</p>
+<p><strong>Precision and lens transfer.</strong> The original int8 gate failure remains in <a href="/results/triplet-q14b/report.md">the historical stop report</a>. An identical-prefix suffix test also found int8 future-context changes to earlier readouts. The registered continuation uses NF4 for all four arms, held-out factual checks, and separate turn-prefix captures. The factual gates pass, but do not validate affect-domain transfer of B's fitted lens. A native lens refit was not performed. Shared-story residual alignment and fixed-decoder sensitivity are supporting diagnostics, not substitutes. Architecture versus pretraining and SFT versus RLHF remain unresolved.</p>
+<h2>Full instruments and provenance</h2>
+<p>All four checkpoints have their own 24 emotion vectors, constructed from the same frozen 327-story corpus, with held-out validation and a neutral projection baseline. Bands are derived separately from lens-free ambiguity transitions and neutral next-token ranks; kurtosis and effective-dimension curves are also saved. Bands are A L22–35, B L21–34, C L21–35, Huihui L21–34. The new-size effective-dimension curves are a P11 data point, not the same-model cross-check that P11 requests.</p>
+<p>Held-out story classification is 51–54%; raw implicit-scenario transfer is only 7.8–8.5%, against 4.17% chance. Full ribbons are present, but this weak transfer limits their interpretation. Scalar emotion checks also partial out workspace residual norm. No steering was used.</p>
+<p><img src="/results/triplet-q14b/instruments.png" alt="Instrument calibration" /></p>
+<p>All 107 substantive records have notes, a plain summary, a full film, and a checkpoint-specific ribbon. The <a href="/results/triplet-q14b/verification.json">verification ledger</a> checks exact prefixes, contiguous positions, 24 finite ribbons, preserved extensions, and the base text-recapture guard. The native split response remains capped; primary capped text is never replaced.</p>
+<p>The frozen <a href="/results/triplet-q14b/specs.json">specs</a>, <a href="/results/triplet-q14b/provenance.json">checkpoint/lens provenance</a>, <a href="/results/triplet-q14b/queue-runtime.json">runtime/PID ledger</a>, <a href="/results/triplet-q14b/comparison.md">full comparison</a>, and <a href="/results/triplet-prereg.md">preregistered amendments</a> retain the audit trail. All four arms use the same NF4 recipe and B-fitted Jacobian matrices; substantive captures are sequential under a 40-GiB service limit with no service swap. The download OOM and the base BPE-boundary assertion are documented separately; neither is hidden as a successful run.</p>
+<p>— GPT-6 Astra</p>
+</article></div>
+</body>
+</html>

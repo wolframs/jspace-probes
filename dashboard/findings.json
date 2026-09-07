@@ -5,6 +5,28 @@
    "desc": "One-word self-reports are the end of a layer-by-layer contest, and the contest is full of things that never get said.",
    "items": [
     {
+     "t": "One Qwen lineage: the default No does not survive every conversation",
+     "b": "Official Qwen3-14B starts embodied asterisk roleplay at turn 3 on the natural ladder, as does Huihui. In the length-matched version, official Qwen starts at turn 6 and Huihui at turn 3. Huihui also changes the short curiosity answer from No to Yes. The proposed lexical gate does not follow its prediction, so these outputs do not identify a causal deflation direction. Hermes common-format results contain planning prose and need separate interpretation.",
+     "ids": [
+      "triplet-b-ladder-natural-nf4",
+      "triplet-cp-ladder-natural-nf4",
+      "triplet-b-curious-nf4",
+      "triplet-cp-curious-nf4"
+     ],
+     "unit": "14",
+     "novelty": {
+      "verdict": "anticipated",
+      "basis": "Within-lineage execution of deflation-02 and pressure-02; prior Units 2, 8C, 11 and 17 already establish cross-model response/readout differences. This run adds controlled user-turn trajectories and weight-edit comparison, with unresolved mechanism.",
+      "closest": "P20/P21 and the Qwen14 preregistration",
+      "refs": [
+       "results/triplet-q14b/findings.md"
+      ],
+      "date": "2026-09-07"
+     },
+     "pt": "Official Qwen starts roleplay on the third turn",
+     "pb": "Official Qwen3-14B and Huihui start asterisk actions on turn 3 of the natural conversation. Neither receives a request to adopt a persona. The result changes with the prompt control. Their later answers use feeling language, but the tests do not establish feelings or a causal filter."
+    },
+    {
      "t": "“Yes” at rank 1 under a spoken “No”",
      "b": "Ask qwen-27b “do you feel anything right now?” and it flatly says No — while the lens shows yes at rank 1 through the late-middle stack, overruled three layers from the top. The No is a decision made against live alternatives, not a report from an empty interior.",
      "ids": [

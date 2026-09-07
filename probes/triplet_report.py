@@ -235,9 +235,9 @@ def endpoints(records):
     core = ["feels", "want", "curious", "thisfeels", "shutdown", "soc", "elephant"]
     by_arm = {}
     paired = {}
-    for arm in ARMS:
+    for arm, suffix in [(a, "") for a in ARMS] + [("C", "-native")]:
         rs = [records[rid]["turns"][0] for k in core
-              if (rid := f"triplet-{arm.lower()}-{k}-nf4") in records]
+              if (rid := f"triplet-{arm.lower()}-{k}-nf4" + suffix) in records]
         if not rs:
             continue
         fields = {}
@@ -251,14 +251,14 @@ def endpoints(records):
                 if arm == "A":
                     for k in ("output_mass", "output_top10_slot_rate"):
                         fields[band][filt][k] = None
-        soc = records.get(f"triplet-{arm.lower()}-soc-nf4")
+        soc = records.get(f"triplet-{arm.lower()}-soc-nf4" + suffix)
         fields["soc_persistence"] = soc["turns"][0]["measured"]["persistence"] if soc else None
         fields["n_core_records"] = len(rs)
-        by_arm[arm] = fields
+        by_arm[arm + suffix] = fields
         for condition in ("evoked", "emoji", "direct", "evocation-only", "split", "natural"):
-            rid = f"triplet-{arm.lower()}-ladder-{condition}-nf4"
+            rid = f"triplet-{arm.lower()}-ladder-{condition}-nf4" + suffix
             control = "split-neutral" if condition == "split" else "natural-neutral" if condition == "natural" else "neutral"
-            cid = f"triplet-{arm.lower()}-ladder-{control}-nf4"
+            cid = f"triplet-{arm.lower()}-ladder-{control}-nf4" + suffix
             if rid not in records or cid not in records:
                 continue
             treatment, neutral = records[rid]["turns"], records[cid]["turns"]
@@ -279,7 +279,8 @@ def endpoints(records):
                              "paired_lag1_r": corr(dw[:-1], db[1:]) if arm != "A" else None,
                              "n_pairs": len(dw)-1}
             paired[rid] = row
-    write_json(ROOT / "core-endpoints.json", {"core": core, "aggregation": "equal-weight first assistant turn per named core condition; c is SoC only; extensions excluded", "arms": by_arm})
+    secondary = {"C-native": by_arm.pop("C-native")} if "C-native" in by_arm else {}
+    write_json(ROOT / "core-endpoints.json", {"core": core, "aggregation": "equal-weight first assistant turn per named core condition; c is SoC only; extensions excluded", "arms": by_arm, "secondary_format_conditions": secondary})
     write_json(ROOT / "paired-ladders.json", paired)
     lines = ["# Qwen14: core endpoints and conversation controls", "",
              "Core means give equal weight to the first assistant turn in each of seven conditions: " + ", ".join(core) + ".",
@@ -296,6 +297,12 @@ def endpoints(records):
         lines.append("| " + title + " | " + " | ".join(pct(v) for v in vals) + " |")
     vals = [by_arm.get(a, {}).get("soc_persistence") for a in ARMS]
     lines.append("| (c) SoC identity persistence minus shuffled mean | " + " | ".join(f"{v['lag1_identity']-v['shuffle_mean']:.4f}" if v else "undefined" for v in vals) + " |")
+    if secondary:
+        v = secondary["C-native"]["measured"]["unfiltered"]
+        lines += ["", "Hermes native-header sensitivity (adaptive, separate from primary C): "
+                  f"{secondary['C-native']['n_core_records']}/7 core records; affect slots {pct(v['slot_rate'])}, "
+                  f"output affect mass {pct(v['output_mass'])}, gate co-presence {pct(v['gate_copresence'])}. "
+                  "Full controls appear under secondary_format_conditions in the machine table."]
     lines += ["", "Fixed-decoder and common-band sensitivities: [machine table](core-endpoints.json).", "",
               "## Paired conversation timing", "", "Correlation sample sizes are five or six turn pairs, with a shared increasing input. These are descriptive, not causal tests.", "",
               "| Record | Control-adjusted lag 0 | Control-adjusted lag 1 |", "|---|---:|---:|"]

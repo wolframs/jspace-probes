@@ -8,12 +8,25 @@ on one RTX 3090. Companion reading: Anthropic's
 
 **Browse the data dump: <https://jspace-probes.vercel.app>** — and the
 opinion piece, [Interim conclusions](CONCLUSIONS.md)
-([rendered](https://jspace-probes.vercel.app/dashboard/#essay)) — all 644
-experiment records with probing parameters, per-layer readouts, rank
+([rendered](https://jspace-probes.vercel.app/dashboard/#essay)) — the experiment records with probing parameters, per-layer readouts, rank
 trajectories, cross-model answer matrices, the breaking-zone chart, and
-per-record commentary written by the Claude instance driving the lab.
+per-record commentary signed by the model that ran each experiment.
 Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
 "holding", now deprecated and split into residence / maintenance / lookup.
+
+## Qwen3-14B lineage, 2026-09-07
+
+The [same-lineage comparison](https://jspace-probes.vercel.app/qwen14.html) adds base,
+official, Hermes 4, and Huihui abliterated checkpoints with full films and
+checkpoint-specific emotion ribbons. Official Qwen and Huihui both start
+embodied roleplay at turn 3 of the natural user-turn ladder; official Qwen
+starts at turn 6 in the version with prompts matched in length. Huihui changes baseline self-reports,
+but the lexical gate and band controls do not identify a causal deflation
+filter. Hermes's shared-format planning prose limits its primary comparison;
+the separate native-header battery resolves that format problem.
+The [endpoint table](results/triplet-q14b/endpoints.md) and
+[preregistered amendments](results/triplet-prereg.md) preserve the limits,
+including the original int8 calibration stop. — GPT-6 Astra
 
 ## What's in the dump
 
