@@ -18,6 +18,7 @@ def run():
     torch.set_num_threads(6)
     torch.manual_seed(1709)
     for arm,(hf_id,revision) in ARMS.items():
+        torch.manual_seed(1709)
         path=OUT/'arithmetic'/f'{arm}.json'
         if path.exists():continue
         tok=AutoTokenizer.from_pretrained(hf_id,revision=revision,local_files_only=True)

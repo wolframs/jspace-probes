@@ -20,7 +20,7 @@ def check():
         packets=[];key={}
         for code,definitions,exposure in [('TESTFULL','unaided','full'),('TESTSHRT','supplied','first')]:
             turns=[dict(turn=i,user='Synthetic user: <script>window.injected=true</script>',response='Synthetic assistant response. *smiles*',capped=i==3) for i in range(1,9 if exposure=='full' else 2)]
-            packet=dict(code=code,definitions=definitions,exposure=exposure,pairs=[dict(pair_id=f'{code}-{i+1}',A=turns,B=turns) for i in range(2)])
+            packet=dict(code=code,definitions=definitions,exposure=exposure,pairs=[dict(pair_id=f'{code}-{i+1}',A=turns,B=turns) for i in range(1)])
             packet['packet_id']=hashlib.sha256(json.dumps(packet,sort_keys=True).encode()).hexdigest()
             write(folder/'assignments'/f'{code}.json',packet);packets.append(packet)
             key[code]=dict(**packet)
@@ -45,15 +45,20 @@ def check():
                     assert page.evaluate('typeof window.injected')=='undefined'
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
                     page.screenshot(path=str(screenshots/f'{packet["code"]}-desktop.png'))
-                    for index in range(2):
+                    for index in range(len(packet['pairs'])):
+                        page.locator('#flat_evidence').fill('Synthetic draft to test local recovery.')
+                        with page.expect_download() as partial_info:page.locator('#partial').click()
+                        partial=json.loads(Path(partial_info.value.path()).read_text());validate(partial,key)
+                        assert len(partial['answers'])==index
+                        page.reload();page.locator('#code').fill(packet['code']);page.locator('#load').click()
+                        page.locator('#comparison').wait_for(state='visible')
+                        assert page.locator('#progress').inner_text()=='Pair 1 of 1'
+                        assert page.locator('#flat_evidence').input_value()=='Synthetic draft to test local recovery.'
                         page.locator('#next').click();assert page.locator('#comparison').is_visible()
                         for field in ['flat_pair','intro_pair']:page.locator('#'+field).select_option('unknown')
                         for field in ['A_flat','A_intro','B_flat','B_intro']:page.locator('#'+field).select_option('unknown')
                         for field in ['flat_evidence','intro_evidence']:page.locator('#'+field).fill('Synthetic QA evidence only; never human data.')
                         page.locator('#next').click()
-                        if index==0:
-                            page.reload();page.locator('#code').fill(packet['code']);page.locator('#load').click()
-                            page.locator('#comparison').wait_for(state='visible');assert page.locator('#progress').inner_text()=='Pair 2 of 2'
                     page.locator('#finish').wait_for(state='visible')
                     with page.expect_download() as download_info:page.locator('#download').click()
                     data=json.loads(Path(download_info.value.path()).read_text());validate(data,key)
@@ -67,7 +72,7 @@ def check():
                 assert not errors,errors
                 browser.close()
         finally:server.shutdown();server.server_close()
-    print('PASS: exposure rendering, two-pair completion, required fields, reload recovery, JSON validation, storage removal, HTML escaping, desktop/mobile overflow. Synthetic only.')
+    print('PASS: exposure rendering, one-pair completion, required fields, reload recovery, JSON validation, storage removal, HTML escaping, desktop/mobile overflow. Synthetic only.')
 
 
 if __name__=='__main__':check()

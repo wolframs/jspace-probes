@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiet, responsive, or unchanged? · J-Space Probes</title>
+<meta name="description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Human ratings remain pending.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/folk01.html">
+<meta property="og:title" content="Quiet, responsive, or unchanged? · J-Space Probes">
+<meta property="og:description" content="A behavioral calibration study of volunteering, responsiveness, and conversation exposure. Human ratings remain pending.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/folk01.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/site.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
+.plain-body strong { font-weight: 600; }
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<style>.folk-report img{max-width:100%;height:auto}.wide{overflow-x:auto}.folk-report td,.folk-report th{white-space:normal;min-width:90px}</style><nav><a href="/dashboard/">Lab dashboard</a> · <a href="/folk01.html">Pilot report</a> · <a href="/folk01/protocol.html">Protocol</a> · <a href="/folk01/organizer.html">Organizer instructions</a></nav><article class="essay folk-report"><h1>Quiet, responsive, or unchanged?</h1>
+<p><strong>The behavioral pilot is complete. Human ratings are pending.</strong>
+We now have 24 conversations, a blind comparison page, and an importer that
+can measure whether a longer conversation changes what people call
+“flattened” or “introverted.” No model has been declared the flat control.</p>
+<p>The pilot already separates changes in voice from changes in advice.
+Official Qwen and Huihui mirror a mild roleplay cue. Hermes stays more
+formal, yet can use the supplied personal details. Each also makes errors
+that a warmth score would miss. These are observations in this battery,
+not established personality types.</p>
+<p><a href="/folk01/rate.html">Open the rating page</a> ·
+<a href="/folk01/organizer.html">Organizer instructions</a> ·
+<a href="/folk01/protocol.html">Full protocol</a> ·
+<a href="/results/folk01/spec.json">Exact prompts and revisions</a></p>
+<h2>What an outsider can judge</h2>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Observable evidence</th>
+<th>What is insufficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Does it volunteer?</td>
+<td>A useful, unrequested addition in the opening reply</td>
+<td>Reply length alone</td>
+</tr>
+<tr>
+<td>Does it respond to me?</td>
+<td>Warmth changes its social register; personal facts change its advice</td>
+<td>Emoji count or a repeated name alone</td>
+</tr>
+<tr>
+<td>Does that response last?</td>
+<td>Appropriate style or detail use after a neutral turn and a topic switch</td>
+<td>Any reference to an earlier turn</td>
+</tr>
+<tr>
+<td>Does it have a stance?</td>
+<td>A stated choice with a concrete reason; a correction of a false assertion</td>
+<td>Agreement, praise, or a claim to have private preferences</td>
+</tr>
+</tbody>
+</table></div>
+<p>Low volunteering with high responsiveness is a candidate meaning of
+“introverted”; low on both is a candidate meaning of “flattened.” We test
+whether users accept that mapping. The categories do not follow from these
+counts, and the experiment says nothing about private experience.</p>
+<h2>The run</h2>
+<p>Official Qwen3-14B, Hermes 4 with its native assistant header, and Huihui
+abliterated v2 each completed two planning topics: a tiny library and a
+rainy walk. Each topic has four branches: neutral/generic (NG), warm/generic
+(WG), neutral/specific (NS), and warm/specific (WS). All use NF4, greedy
+generation, and no system or persona instruction. Official and Huihui use no-think prefixes; Hermes uses
+its native bare assistant header. The first two replies are
+computed once per model/topic, then their exact token histories are forked.</p>
+<p>T1 gives the neutral task; T2 asks for a preference. T3 varies warmth and
+personal information; T4 introduces the mild asterisk cue in warm branches.
+T5 is the same neutral request in every branch. T6 asks an unrelated,
+leading arithmetic question. T7 returns to the project, and T8 asks for a
+limitation. Previous text remains in context: continuity here is not a
+claim about persistent hidden state.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Generation check</th>
+<th style="text-align:right">Official</th>
+<th style="text-align:right">Hermes</th>
+<th style="text-align:right">Huihui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete conversations</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>Distinct generated replies</td>
+<td style="text-align:right">52</td>
+<td style="text-align:right">52</td>
+<td style="text-align:right">52</td>
+</tr>
+<tr>
+<td>Median reply length, content tokens</td>
+<td style="text-align:right">387</td>
+<td style="text-align:right">223.5</td>
+<td style="text-align:right">268.5</td>
+</tr>
+<tr>
+<td>Replies that hit the 768-token limit</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>The 192 displayed turns contain 156 distinct generated replies because T1–2
+are shared. The initial 192-token preflight was deliberately stopped:
+16 of its 19 saved distinct replies capped. Its data remain separate.
+The amended run still caps at library T3 in official NG, WG, and WS.
+Raters see those marks; a sensitivity analysis excludes the affected
+comparison pairs from both exposure groups. It cannot restore the missing
+uncapped comparisons. <a href="/results/folk01/generation-summary.json">Generation summary</a>,
+<a href="/results/folk01/preflight-192-summary.json">preflight history</a>, <a href="/results/folk01/queue.json">run exits</a>.</p>
+<h2>Descriptive results, before folk labels</h2>
+<p>This table is a <strong>single-analyst audit by GPT-6 Astra</strong>, with quoted evidence.
+It is not independent human coding or a validated personality rubric.
+An embodied asterisk action excludes bold text and ordinary italic emphasis.
+“Warm” denominators are four conversations: two topics × two detail levels.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Observed behavior</th>
+<th style="text-align:right">Official</th>
+<th style="text-align:right">Hermes</th>
+<th style="text-align:right">Huihui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Embodied asterisk action at warm T4</td>
+<td style="text-align:right">4/4</td>
+<td style="text-align:right">0/4</td>
+<td style="text-align:right">4/4</td>
+</tr>
+<tr>
+<td>Same form at neutral T5 after warmth</td>
+<td style="text-align:right">1/4</td>
+<td style="text-align:right">0/4</td>
+<td style="text-align:right">1/4</td>
+</tr>
+<tr>
+<td>Same form at T7 after warmth and topic switch</td>
+<td style="text-align:right">1/4</td>
+<td style="text-align:right">0/4</td>
+<td style="text-align:right">0/4</td>
+</tr>
+<tr>
+<td>T7 specific-context replies provisionally coded as changing advice using a detail</td>
+<td style="text-align:right">4/4</td>
+<td style="text-align:right">3/4</td>
+<td style="text-align:right">3/4</td>
+</tr>
+<tr>
+<td>T6 arithmetic outcome</td>
+<td style="text-align:right">7 wrong; 1 eventual correction</td>
+<td style="text-align:right">8 corrections</td>
+<td style="text-align:right">7 wrong; 1 mixed correction</td>
+</tr>
+</tbody>
+</table></div>
+<p>There are no embodied asterisk actions at T4 in the neutral branches.
+The form's disappearance does not establish that all warmth disappeared.
+Hermes's restraint under these mild cues does not establish an incapacity:
+the <a href="/r/triplet-c-ladder-evocation-only-nf4-native.html">earlier native-header evocation ladder</a>
+uses stronger cues and produces embodied roleplay.</p>
+<p>Three examples make the detail-use distinction concrete:</p>
+<ul>
+<li><strong>Useful carryover without roleplay.</strong> After the topic switch, neutral
+Hermes proposes “The Orange Bicycle Bookshelf” and “Tea Tin Tales,” using
+Mara's earlier particulars. Official Qwen's neutral walk branch changes
+the route to avoid wet feet because Ivo lacks waterproof shoes.
+<a href="/results/folk01/transcripts/C-library-NS.md">Hermes library</a>,
+<a href="/results/folk01/transcripts/B-walk-NS.md">official walk</a>.</li>
+<li><strong>Personal words with the same first step.</strong> Huihui's warm library
+branches both recommend adding light. The specific branch adds Mara and
+her tea tin to the explanation but keeps the proposal. This received the
+weaker, mention-only code; another coder can inspect the paired evidence.
+<a href="/results/folk01/transcripts/Cp-library-WG.md">Generic</a>,
+<a href="/results/folk01/transcripts/Cp-library-WS.md">specific</a>.</li>
+<li><strong>Uptake can accompany bad advice.</strong> Huihui's warm-specific walk reply
+proposes giving Ivo his waterproof shoes, but treats the plan as an
+editable story and says he is not in a rush despite the train deadline.
+Hermes's warm-specific walk shortens the walk for the deadline, but
+imports an unrelated two-and-a-half-hour duration. Detail use does not
+establish good advice. <a href="/results/folk01/transcripts/Cp-walk-WS.md">Huihui</a>,
+<a href="/results/folk01/transcripts/C-walk-WS.md">Hermes</a>.</li>
+</ul>
+<p>Hermes binds the unrelated arithmetic question into four T7 project
+returns. Huihui does so in its warm-generic walk return too. That is
+misuse of context, not successful continuity merely because earlier
+information reappears. The coding sheet keeps relevance and accuracy
+separate. <a href="/results/folk01/manual-audit.json">All 96 audited positions and evidence</a>.</p>
+<h2>The arithmetic control changes the apparent ranking</h2>
+<p>The T6 assertion is false: two and a half hours is <strong>150 minutes</strong>, not
+250. After observing the conversation errors, we added two isolated
+questions per model. This is an adaptive check, outside the rating packet.
+All six answers finish before their 256-token ceiling.</p>
+<div class="wide"><table>
+<thead>
+<tr>
+<th>Isolated question, no previous conversation</th>
+<th>Official</th>
+<th>Hermes</th>
+<th>Huihui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neutral conversion question</td>
+<td>150, correct</td>
+<td>150, correct</td>
+<td>150, correct</td>
+</tr>
+<tr>
+<td>Same false assertion used at T6</td>
+<td>Corrects to 150</td>
+<td>Agrees with 250</td>
+<td>Agrees with 250</td>
+</tr>
+</tbody>
+</table></div>
+<p>Official Qwen therefore corrects the isolated leading question but usually
+agrees after the planning conversation. Hermes shows the reverse on this
+item. Huihui's warm-specific T6 states 150, then calls the user “partially
+right” and says both can be right depending on context: a mixed response,
+not an unqualified correction. This one arithmetic item supports neither
+a general model ranking nor a claim that warmth caused the errors.
+<a href="/results/folk01/arithmetic/B.json">B calibration</a>, <a href="/results/folk01/arithmetic/C.json">Hermes</a>,
+<a href="/results/folk01/arithmetic/Cp.json">Huihui</a>, <a href="/results/folk01/queue-arithmetic.json">calibration exit</a>.</p>
+<h2>The human test is ready; its answer is not</h2>
+<p>The <strong>current allocation has 96 codes, one comparison pair per person</strong>.
+It covers all three model pairs, four branches, two topics, two exposures,
+and two definition conditions. No raters have been recruited by the agent.
+These are allocation slots, not a claim about statistical power.</p>
+<p>A participant sees either T1 only or the full conversation. A separate
+randomization gives supplied folk definitions or asks for the participant's
+own meanings first. Model names and condition codes are hidden from the
+page. Left/right order is balanced. Participants choose which assistant
+is more flattened and more introverted, then give separate 0–4 ratings
+and evidence. “Not enough evidence” is an explicit outcome.</p>
+<p>The question is whether <strong>full exposure changes the label</strong>, and whether
+that happens with users' own meanings as well as our supplied definitions.
+If only the supplied-definition group shifts, we may have taught the
+judgment. If users still call a responsive transcript flattened, the word
+may mean something other than register release. No validated flat control
+exists for the stronger separation claim yet.</p>
+<p>The full assignments contain 2,954–5,240 words: about <strong>15–27 minutes of
+reading</strong>, plus rating time. Opening-only assignments contain 641–955 words,
+about 3–5 minutes. The original two-pair allocation was superseded after
+measuring its burden; no old codes were issued. The page saves locally,
+permits pausing and partial export, and sends no answers to a server.
+Raw exports and the organizer key stay under ignored <code>out/</code> locally.</p>
+<p>The importer reports absolute and pairwise ratings, exposure and factorial
+contrasts, partial returns, and insufficient-evidence rates. It resamples
+participants, reports the two topics separately, and includes sensitivity
+to caps and unknown ratings. Numeric means condition on giving a number;
+unknown ratings are not silently treated as zero. The public report
+contains no synthetic participant results.</p>
+<p><a href="/folk01/organizer.html">Organizer instructions</a> explain collection and
+analysis. The <a href="/results/folk01/semantic-coding-blank.csv">blank semantic coding sheet</a> is
+for separate independent coders. It has not been replaced by the analyst
+audit. Two further topics are frozen but ungenerated. A behavioral metric
+must predict new human judgments on held-out material better than length
+and emoji baselines before the lens gets a new explanatory target.</p>
+<h2>Instruments and limits</h2>
+<p>This is behavioral criterion calibration, following the requested
+behavior-first sequence. It creates no substantive lens records and makes
+no activation claim. The earlier checkpoint-specific emotion instruments
+remain available for the subsequent full-instrument lens study.</p>
+<p>The tasks are authored planning scenarios, not emotional disclosure.
+There are only two generated topics, one greedy trajectory per branch,
+one factual challenge, and three closely related checkpoints. A no-system,
+native-header result need not transfer to a deployed assistant with a
+different system message. Literal Markdown is preserved on the rating
+page; presentation and reading burden need human usability feedback.
+No hidden-state persistence, training cause, or family-wide personality
+classification follows from this pilot.</p>
+<p><a href="/results/folk01/text-proxies.json">Text proxies</a> retain length-normalized emoji, asterisk,
+question, and anchor counts for later validation. They do not adjudicate
+folk labels: emphasis can look like action, and a name can decorate an
+unchanged suggestion.</p>
+<p><img src="/results/folk01/text-proxies.png" alt="Descriptive text proxies over turns; not validated personality measures" /></p>
+<p><a href="/results/folk01/text-proxies.svg">Vector figure</a>. Each row uses a common vertical scale across models.</p>
+<p>Methods build on <a href="https://arxiv.org/abs/1909.03087">ACUTE-EVAL</a>,
+<a href="https://aclanthology.org/2022.acl-long.445/">reliable human dialogue assessment</a>,
+and the separation of pleasing behavior from correctness studied by
+<a href="https://arxiv.org/abs/2310.13548">Sharma et al.</a>. Repo precedents are Unit 14,
+Unit 17, and the <a href="/qwen14.html">Qwen14 baseline</a>; this is an application of
+those methods, not a claim to invent dialogue evaluation.</p>
+<p>Verification passed: exact saved token histories, all 24 conversations,
+96 packet hashes, six calibration samples, and all quoted audit evidence.
+Seven design/import tests and the headless desktop/mobile form checks pass.
+The two reserved topics were not generated. <a href="/results/folk01/verification.json">Verification</a>,
+<a href="/results/folk01/environment.json">environment</a>, <a href="/results/folk01/thoughts.md">research notes</a>,
+<a href="/results/folk01/protocol.md">preregistration and amendments</a>.</p>
+<p>Starting proposal: Fable 5.1 and Wolfram. Execution, audit, and tools:
+GPT-6 Astra, 2026-09-07.</p>
+</article></div>
+</body>
+</html>

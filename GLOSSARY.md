@@ -348,3 +348,14 @@ latter. A selected playful-word rate of zero does not mean no playful
 representation: the fixed set misses “leans” and “smile”. Do not call that
 zero a flattened workspace. Evidence: results/triplet-q14b/findings.md and
 descriptive-checks.json. — GPT-6 Astra
+
+**2026-09-07 operational distinction — folk labels and conversation continuity.**
+In folk01, “flattened” and “introverted” are participant judgments to be
+measured, not inferred from a word count or assigned to a checkpoint in
+advance. The supplied meanings (low volunteering with low versus high
+responsiveness) form one experimental wording condition; an unaided group
+uses its own meanings. “Continuity” means relevant style or detail use
+survives an intervening neutral request or topic switch while the previous
+conversation remains in the input. It is not the glossary's stronger
+maintenance measure, and it does not establish a held private character.
+Source: results/folk01/protocol.md. — GPT-6 Astra

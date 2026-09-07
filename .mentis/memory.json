@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-09-07T14:06:28.535Z",
+  "builtAt": "2026-09-07T16:27:09.535Z",
   "stats": {
-    "filesScanned": 84,
-    "nodesCreated": 663,
-    "edgesCreated": 2145,
+    "filesScanned": 95,
+    "nodesCreated": 707,
+    "edgesCreated": 2269,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 260
+    "durationMs": 188
   },
   "architecture": {
     "name": "probes",
@@ -15,10 +15,10 @@
     "layers": [],
     "packages": [],
     "languages": {
-      "python": 83,
+      "python": 94,
       "javascript": 1
     },
-    "summary": "Single Package with 84 source files across python, javascript. 0 packages detected. core domains: General."
+    "summary": "Single Package with 95 source files across python, javascript. 0 packages detected. core domains: General."
   },
   "domains": [
     {
@@ -87,8 +87,8 @@
         "file:triplet_native.py",
         "file:triplet_report.py",
         "file:triplet_verify.py",
-        "file:site.py",
         "file:triplet_synthesis.py",
+        "file:site.py",
         "file:affect3.py",
         "file:affect3b.py",
         "file:affect3c.py",
@@ -102,9 +102,19 @@
         "file:affect11.py",
         "file:affect12.py",
         "file:affect13.py",
-        "file:affect14.py"
+        "file:affect14.py",
+        "file:folk01.py",
+        "file:folk01_measure.py",
+        "file:folk01_site.py",
+        "file:folk01_arithmetic.py",
+        "file:folk01_packet.py",
+        "file:folk01_ratings.py",
+        "file:folk01_ui_check.py",
+        "file:folk01_verify.py",
+        "file:test_folk01.py",
+        "file:folk01_artifacts.py"
       ],
-      "description": "Import-graph cluster of 63 files; reinforced by import clustering",
+      "description": "Import-graph cluster of 63 files; reinforced by import clustering; reinforced by import clustering",
       "entryPoints": [
         "file:affect08s.py",
         "file:affect5.py",
@@ -1018,6 +1028,54 @@
       "weight": 1
     },
     {
+      "from": "folk01_arithmetic.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_measure.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "validate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "write",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "allocation",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "lab.py",
       "to": "load",
       "kind": "IMPORTS",
@@ -1228,6 +1286,54 @@
       "weight": 1
     },
     {
+      "from": "test_folk01.py",
+      "to": "users",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "allocation",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "proxies",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "validate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "load_exports",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "aggregate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "exposure_effects",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "factorial_effects",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "triplet_calibration.py",
       "to": "write_json",
       "kind": "IMPORTS",
@@ -1360,6 +1466,12 @@
       "weight": 1
     },
     {
+      "from": "triplet_synthesis.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "triplet_verify.py",
       "to": "write_json",
       "kind": "IMPORTS",
@@ -1414,8 +1526,8 @@
       "weight": 1
     },
     {
-      "from": "triplet_synthesis.py",
-      "to": "write_json",
+      "from": "folk01_artifacts.py",
+      "to": "write",
       "kind": "IMPORTS",
       "weight": 1
     },
@@ -3281,6 +3393,12 @@
     },
     {
       "from": "affect4b.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "affect4b.py",
       "to": "main",
       "kind": "CALLS",
       "weight": 1
@@ -4080,6 +4198,12 @@
     {
       "from": "apparatus08.py",
       "to": "shuffle",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "apparatus08.py",
+      "to": "write",
       "kind": "CALLS",
       "weight": 1
     },
@@ -5370,6 +5494,318 @@
     {
       "from": "fanout.py",
       "to": "unit8",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01.py",
+      "to": "users",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01.py",
+      "to": "turn",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01.py",
+      "to": "freeze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_arithmetic.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_arithmetic.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_arithmetic.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_arithmetic.py",
+      "to": "collect",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_arithmetic.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_measure.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_measure.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_measure.py",
+      "to": "proxies",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_measure.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_measure.py",
+      "to": "measure",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "shuffle",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "allocation",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_packet.py",
+      "to": "build",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_queue.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "validate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "aggregate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "means",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "load_exports",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "exposure_effects",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "factorial_effects",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ratings.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "render",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "folk01_ratings.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "folk01_ratings.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "path",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "validate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_ui_check.py",
+      "to": "check",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "folk01_packet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "folk01_packet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "allocation",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "write",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "folk01_verify.py",
+      "to": "verify",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6886,6 +7322,162 @@
       "weight": 1
     },
     {
+      "from": "site.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "_plain_units",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "unit_name",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "load_terms",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "render_md",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "match",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "emergence_summary",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "plain_block",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "termify",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "notes_container",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "popovers",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "record_page",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "esc",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "plain_findings_block",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "static_index_block",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "build_records",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "essay_page",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "glossary_page",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "write_sitemap",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "write_robots",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "write_llms_txt",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "patch_dashboard_index",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "patch_app_js",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "skincheck.js",
       "to": "match",
       "kind": "CALLS",
@@ -7386,6 +7978,102 @@
     {
       "from": "ste.py",
       "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01_packet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01_packet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01_measure.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01_measure.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01_ratings.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "folk01_ratings.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "users",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "allocation",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "proxies",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "validate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "load_exports",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "aggregate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "exposure_effects",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "test_folk01.py",
+      "to": "factorial_effects",
       "kind": "CALLS",
       "weight": 1
     },
@@ -8176,6 +8864,18 @@
       "weight": 1
     },
     {
+      "from": "triplet_site.py",
+      "to": "render",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_site.py",
+      "to": "head",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
       "from": "triplet_smoke.py",
       "to": "triplet.py",
       "kind": "IMPORTS",
@@ -8508,6 +9208,48 @@
     {
       "from": "triplet_stage.py",
       "to": "stage",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "describe",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_synthesis.py",
+      "to": "plot_ladders",
       "kind": "CALLS",
       "weight": 1
     },
@@ -9316,212 +10058,26 @@
       "weight": 1
     },
     {
-      "from": "site.py",
-      "to": "textspans.py",
+      "from": "folk01_artifacts.py",
+      "to": "folk01.py",
       "kind": "IMPORTS",
       "weight": 1
     },
     {
-      "from": "site.py",
-      "to": "textspans.py",
+      "from": "folk01_artifacts.py",
+      "to": "folk01.py",
       "kind": "DEPENDS_ON",
       "weight": 1
     },
     {
-      "from": "site.py",
-      "to": "_plain_units",
+      "from": "folk01_artifacts.py",
+      "to": "write",
       "kind": "CALLS",
       "weight": 1
     },
     {
-      "from": "site.py",
-      "to": "unit_name",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "load_terms",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "render_md",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "match",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "emergence_summary",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "plain_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "termify",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "notes_container",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "head",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "popovers",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "record_page",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "esc",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "plain_findings_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "static_index_block",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "build_records",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "essay_page",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "glossary_page",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "write_sitemap",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "write_robots",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "write_llms_txt",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "patch_dashboard_index",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "patch_app_js",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "site.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_site.py",
-      "to": "render",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_site.py",
-      "to": "head",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "triplet.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "triplet.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "write_json",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "describe",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_synthesis.py",
-      "to": "plot_ladders",
+      "from": "folk01_artifacts.py",
+      "to": "build",
       "kind": "CALLS",
       "weight": 1
     }
@@ -10132,7 +10688,7 @@
       "nodes": [
         "file:affect4b.py"
       ],
-      "description": "affect4b.py depends on 35 other nodes — high fan-out",
+      "description": "affect4b.py depends on 36 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {

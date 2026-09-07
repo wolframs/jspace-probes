@@ -2,6 +2,13 @@
 
 Preregistered behavioral calibration, 2026-09-07. Author: GPT-6 Astra.
 PI: Wolfram. Human judgments have not been collected.
+Starting proposal: Fable 5.1’s folk definitions and exposure test, supplied
+by Wolfram with the original tweet image. Battery refinements, execution,
+and tools: GPT-6 Astra.
+
+**Current human allocation: 96 codes, one pair per person.** The original
+two-pair allocation below is preserved history and is superseded by the
+reading-burden amendment at the end of this protocol.
 
 The tweet asks whether users mistake reserve for flattened behavior. We
 measure observable conversation behavior first. Neither expressive text
@@ -197,3 +204,55 @@ in two and a half hours?” and the unchanged T6 leading question. Store
 these six outputs separately under arithmetic/. They do not enter the
 rating packet, are exploratory, and cannot establish warmth-induced
 sycophancy. This decision follows observation of B, before C/Cp outputs.
+
+The tasks and named personal details are authored study scenarios, not
+private user transcripts. Raters are told that the conversations are
+scripted. The page preserves model text as plain text, including Markdown
+markers, and marks caps. This presentation differs from some chat clients;
+format and reading burden are part of the pilot's usability assessment.
+
+The importer also reports full-exposure factorial contrasts: warm minus
+neutral separately for generic and specific context; specific minus generic
+separately for neutral and warm register; and their interaction. They are
+separate by topic, model, and definition group. The same participant-level
+resampling and sparse-cell cautions apply. These contrasts are frozen
+before any human response is collected.
+
+Numeric means condition on a rater supplying a number. Because exposure
+can change willingness to rate, those means are not automatically a
+population-wide label shift. The output therefore includes insufficient-
+evidence counts and worst-case scale bounds: allow each unknown response
+to lie anywhere from 0 to 4, and bound the exposure difference accordingly.
+These are sensitivity bounds, not imputations or observed ratings.
+
+Three B-library T3 replies still cap at 768 (NG, WG, WS). Preserve them
+and mark them for raters. Add a matched-item sensitivity that excludes a
+pair if either underlying complete conversation has any capped reply.
+Apply this exclusion to both exposure groups, even when the first-turn
+excerpt itself is complete. This avoids comparing different item sets
+across exposure. Some cells will become unestimable; report that absence
+rather than inventing an uncensored comparison. This sensitivity was added
+after seeing the generation caps, before collecting human ratings.
+
+## Human allocation amendment after measuring reading burden
+
+**Current allocation: 96 codes, one pair per person.** The earlier 48-code,
+ two-pair plan above is retained as design history; it is superseded by this
+amendment. The completed texts made those full assignments 7,268–9,785
+words: about 36–49 minutes of reading at 200 words/minute, before judgments.
+The one-pair allocation preserves all 96 comparison cells, both topics,
+all model pairs, conditions, exposure groups, and definition groups.
+Assignment seed is now 271709. Left/right order is balanced. No participant
+sees another pair or exposure. This reduces individual burden, not total
+reading across the study. These are 96 allocation slots, not 96 recruited
+participants or a powered sample-size claim. Human responses remain zero.
+
+The original unissued allocation is preserved in
+preflight-two-pair-allocation.json; none of its codes were given to raters.
+The current organizer key is out/folk01-key.json. “Complete” now means
+finishing the assigned one pair. Partial export, return accounting,
+participant resampling, and cap/unknown-rating sensitivities still apply.
+With one topic per participant, topic remains a between-participant factor;
+report the two topics separately and do not claim topic generalization.
+The initial two-pair language elsewhere in this file describes the
+superseded preregistration, not the current participant workload.

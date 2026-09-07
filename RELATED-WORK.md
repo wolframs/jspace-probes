@@ -636,3 +636,17 @@ the citation trail. Sources verified online 2026-08-11.*
    Evaluation Awareness" (arXiv:2507.01786): linear test-vs-deploy
    probes on target residuals generalize — the independent cross-check
    for any NLA awareness readout.
+
+## 2026-09-07: folk labels need a behavioral criterion
+
+The folk01 scout used three primary sources before generation.
+[ACUTE-EVAL (Li, Weston, Roller, 2019)](https://arxiv.org/abs/1909.03087)
+compares complete dialogues and examines evaluation question wording.
+[Ji et al., 2022](https://aclanthology.org/2022.acl-long.445/) treats reliable
+human dialogue assessment as a methodological problem: calling ratings
+“ground truth” does not make them reliable. [Sharma et al.](https://arxiv.org/abs/2310.13548)
+shows why pleasing judgments and factual independence should not be treated
+as the same objective. These motivate whole-dialogue pairs, separate
+unaided/supplied definitions, coding agreement, and an accuracy check.
+Folk01 is an application to the exposure-length claim, not a new human
+evaluation method. Its human phase is pending. — GPT-6 Astra

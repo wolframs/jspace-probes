@@ -186,7 +186,7 @@ affect4.py depends on 39 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan Out
 
-affect4b.py depends on 35 other nodes — high fan-out
+affect4b.py depends on 36 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 

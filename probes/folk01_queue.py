@@ -12,14 +12,18 @@ OUT=ROOT/'results/folk01'
 
 def main():
     log=[]
-    for arm in ['B','C','Cp']:
-        if (OUT/f'complete-{arm}.json').exists(): continue
+    arithmetic=sys.argv[1:]==['--arithmetic']
+    assert not sys.argv[1:] or arithmetic, 'Use no argument or --arithmetic'
+    jobs=[('arithmetic','folk01_arithmetic.py',[])] if arithmetic else [(a,'folk01.py',[a]) for a in ['B','C','Cp']]
+    queue_path=OUT/('queue-arithmetic.json' if arithmetic else 'queue.json')
+    for arm,script,arguments in jobs:
+        if not arithmetic and (OUT/f'complete-{arm}.json').exists(): continue
         with (OUT/f'run-{arm}.log').open('a') as stream:
-            child=subprocess.Popen([str(ROOT/'.venv/bin/python'),'-u',str(ROOT/'probes/folk01.py'),arm],cwd=ROOT,stdout=stream,stderr=subprocess.STDOUT)
+            child=subprocess.Popen([str(ROOT/'.venv/bin/python'),'-u',str(ROOT/'probes'/script),*arguments],cwd=ROOT,stdout=stream,stderr=subprocess.STDOUT)
             entry=dict(arm=arm,pid=child.pid,parent_pid=os.getpid(),started=datetime.now(timezone.utc).isoformat())
-            log.append(entry);(OUT/'queue.json').write_text(json.dumps(log,indent=2)+'\n')
+            log.append(entry);queue_path.write_text(json.dumps(log,indent=2)+'\n')
             code=child.wait();entry.update(exit_code=code,ended=datetime.now(timezone.utc).isoformat())
-            (OUT/'queue.json').write_text(json.dumps(log,indent=2)+'\n')
+            queue_path.write_text(json.dumps(log,indent=2)+'\n')
             if code: sys.exit(137 if code==-9 else code)
 
 

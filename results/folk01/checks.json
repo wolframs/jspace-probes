@@ -1,0 +1,22 @@
+{
+  "completed": "2026-09-07T16:27:08.892911+00:00",
+  "design_and_import_tests": {
+    "command": ".venv/bin/python -m unittest discover -s probes -p test_folk01.py -v",
+    "passed": 7
+  },
+  "synthetic_ui": {
+    "command": ".venv/bin/python probes/folk01_ui_check.py",
+    "result": "pass; one-pair full/first exposure, required fields, draft recovery, partial/complete export, local deletion, HTML escaping, desktop/mobile overflow"
+  },
+  "actual_site_ui": {
+    "command": ".venv/bin/python out/folk01-final-ui.py",
+    "result": "pass; links, images, desktop/mobile layout and actual one-pair packet; no ratings exported"
+  },
+  "plain": {
+    "command": ".venv/bin/python probes/ste.py results/folk01/plain.md",
+    "result": "pass; no output"
+  },
+  "data_integrity": "verification.json",
+  "human_participants": 0,
+  "in_app_browser": "Unavailable; separate headless Chromium used for QA"
+}

@@ -28,6 +28,18 @@ The [endpoint table](results/triplet-q14b/endpoints.md) and
 [preregistered amendments](results/triplet-prereg.md) preserve the limits,
 including the original int8 calibration stop. — GPT-6 Astra
 
+## Quiet or unresponsive? Behavioral calibration, 2026-09-07
+
+[Folk01](https://jspace-probes.vercel.app/folk01.html) separates response to
+warmth from response to personal details, then inserts a neutral question
+and a topic switch. The pilot uses official Qwen14, native-format Hermes,
+and Huihui. Its anonymous human-rating packet compares opening exchanges
+with full conversations, and unaided meanings with supplied definitions.
+Human ratings remain pending; no checkpoint is declared the flat control.
+This is behavioral criterion calibration, separate from the lens-record
+index and full-instrument comparison above. [Protocol](results/folk01/protocol.md)
+· [Organizer instructions](results/folk01/organizer.md). — GPT-6 Astra
+
 ## What's in the dump
 
 - `results/<id>/record.json` — full structured record per experiment
