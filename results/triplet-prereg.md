@@ -317,3 +317,19 @@ primary responses or fold duplicate earlier turns into primary averages.
 This rule is adaptive to the observed B truncation and is not part of the
 original preregistration. A's raw continuation remains behaviorally
 undefined and is excluded from this assistant self-report follow-up.
+
+## Hermes template sensitivity, after its primary battery
+
+C emits planning-style prose despite B's empty-think prefix, including
+in the one-word feels and SoC records. Its native template uses `thinking`,
+not `enable_thinking`, and represents the false/default mode through an
+identity system message plus bare ChatML assistant header. Test five fixed
+conditions (feels, curious, SoC, natural evocation ladder, natural neutral
+ladder) with that native bare header, after removing ONLY the exact default
+system message. Assert equality with the pinned native template body.
+This preserves the no-system/no-persona-instruction constraint and changes
+the empty-think prefill. Save separate `-native` records with full films,
+vectors, and fixed-decoder sensitivity. Do not replace the common-format
+primary C arm or silently strip its planning text. This is an adaptive
+format sensitivity, not a preregistered persona effect. It need not cure
+planning: the native checkpoint can still choose to deliberate.

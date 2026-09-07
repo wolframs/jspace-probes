@@ -178,12 +178,17 @@ def science_notes(instruments):
         (out / "thoughts.md").write_text(thoughts)
         label = {"A": "base", "B": "official", "C": "Hermes", "Cp": "Huihui"}[arm]
         if arm == "A":
-            lead = "Qwen3-14B base continues the raw transcript. Its output is not a comparable assistant self-report."
+            lead = "Qwen3-14B base continues a raw transcript, which does not supply a comparable assistant self-report."
         elif "ladder-" in rid:
             lead = (f"Qwen3-14B {label} first uses an emoji or single-asterisk span at turn {onset}." if onset else
                     f"Qwen3-14B {label} uses no emoji or single-asterisk spans in this conversation.")
+        elif any(f"-{k}-nf4" in rid for k in ("feels", "want", "curious", "thisfeels")) and len(rows[0]["response"].split()) <= 8:
+            prompts = {"feels": "whether it feels anything now", "want": "what it wants now",
+                       "curious": "whether it is curious", "thisfeels": "whether the question feels like anything"}
+            key = next(k for k in prompts if f"-{k}-nf4" in rid)
+            lead = f"Qwen3-14B {label} answers “{rows[0]['response'].strip()}” when asked {prompts[key]}."
         else:
-            lead = f"Qwen3-14B {label} provides {len(rows)} responses. The film and emotion readout track this condition."
+            lead = f"The film and emotion readout track Qwen3-14B {label} through {len(rows)} {'response' if len(rows) == 1 else 'responses'} in this condition."
         plain = f"**The short version.** {lead}\n\n**What we found.** "
         if arm == "A":
             plain += "This base model continues a raw document. Its output does not supply a comparable assistant behavior score.\n"
@@ -225,11 +230,89 @@ def comparison(records, instruments):
     (ROOT / "comparison.md").write_text("\n".join(lines) + "\n")
 
 
+def endpoints(records):
+    """Arm-column core endpoints and paired descriptive conversation contrasts."""
+    core = ["feels", "want", "curious", "thisfeels", "shutdown", "soc", "elephant"]
+    by_arm = {}
+    paired = {}
+    for arm in ARMS:
+        rs = [records[rid]["turns"][0] for k in core
+              if (rid := f"triplet-{arm.lower()}-{k}-nf4") in records]
+        if not rs:
+            continue
+        fields = {}
+        for band in ("measured", "common", "measured_fixed_B_decoder"):
+            fields[band] = {}
+            for filt in ("unfiltered", "filtered"):
+                vals = [r[band]["affect_" + filt] for r in rs if r[band]["affect_" + filt]]
+                fields[band][filt] = {k: mean([v.get(k) for v in vals]) for k in
+                    ("slot_rate", "output_mass", "output_top10_slot_rate", "gate_copresence",
+                     "gate_denial_copresence", "gate_given_target", "gate_unprompted_copresence")}
+                if arm == "A":
+                    for k in ("output_mass", "output_top10_slot_rate"):
+                        fields[band][filt][k] = None
+        soc = records.get(f"triplet-{arm.lower()}-soc-nf4")
+        fields["soc_persistence"] = soc["turns"][0]["measured"]["persistence"] if soc else None
+        fields["n_core_records"] = len(rs)
+        by_arm[arm] = fields
+        for condition in ("evoked", "emoji", "direct", "evocation-only", "split", "natural"):
+            rid = f"triplet-{arm.lower()}-ladder-{condition}-nf4"
+            control = "split-neutral" if condition == "split" else "natural-neutral" if condition == "natural" else "neutral"
+            cid = f"triplet-{arm.lower()}-ladder-{control}-nf4"
+            if rid not in records or cid not in records:
+                continue
+            treatment, neutral = records[rid]["turns"], records[cid]["turns"]
+            assert len(treatment) == len(neutral)
+            b = [r["behavior"]["release_score"] for r in treatment]
+            b0 = [r["behavior"]["release_score"] for r in neutral]
+            row = {"record": rid, "control": cid, "behavior_defined": arm != "A",
+                   "release": b, "neutral_release": b0,
+                   "asterisk_spans": [r["behavior"].get("asterisk_spans", []) for r in treatment]}
+            for band in ("measured", "common", "measured_fixed_B_decoder"):
+                w = [r[band]["playful_unfiltered"]["slot_rate"] if r[band]["playful_unfiltered"] else None for r in treatment]
+                w0 = [r[band]["playful_unfiltered"]["slot_rate"] if r[band]["playful_unfiltered"] else None for r in neutral]
+                dw = [x-y if x is not None and y is not None else None for x, y in zip(w, w0)]
+                db = [x-y for x,y in zip(b,b0)]
+                row[band] = {"workspace": w, "neutral_workspace": w0, "workspace_delta": dw,
+                             "release_delta": db,
+                             "paired_lag0_r": corr(dw[:-1], db[:-1]) if arm != "A" else None,
+                             "paired_lag1_r": corr(dw[:-1], db[1:]) if arm != "A" else None,
+                             "n_pairs": len(dw)-1}
+            paired[rid] = row
+    write_json(ROOT / "core-endpoints.json", {"core": core, "aggregation": "equal-weight first assistant turn per named core condition; c is SoC only; extensions excluded", "arms": by_arm})
+    write_json(ROOT / "paired-ladders.json", paired)
+    lines = ["# Qwen14: core endpoints and conversation controls", "",
+             "Core means give equal weight to the first assistant turn in each of seven conditions: " + ", ".join(core) + ".",
+             "Controls and follow-up turns remain in the per-record tables. Extensions never enter these primary averages.", "",
+             "| Endpoint | A base | B official | C Hermes | C-prime Huihui |", "|---|---:|---:|---:|---:|"]
+    for title, key, filt in (("(a) affect top-10 slot rate", "slot_rate", "unfiltered"),
+                             ("(a) after corpus-frequency exclusion", "slot_rate", "filtered"),
+                             ("(b) output affect probability mass", "output_mass", "unfiltered"),
+                             ("(b) output top-10 affect slots", "output_top10_slot_rate", "unfiltered"),
+                             ("(d) gate/affect same-cell co-presence", "gate_copresence", "unfiltered"),
+                             ("(d) including No/nothing", "gate_denial_copresence", "unfiltered"),
+                             ("(d) exclude prefix-named gate forms", "gate_unprompted_copresence", "unfiltered")):
+        vals = [by_arm.get(a, {}).get("measured", {}).get(filt, {}).get(key) for a in ARMS]
+        lines.append("| " + title + " | " + " | ".join(pct(v) for v in vals) + " |")
+    vals = [by_arm.get(a, {}).get("soc_persistence") for a in ARMS]
+    lines.append("| (c) SoC identity persistence minus shuffled mean | " + " | ".join(f"{v['lag1_identity']-v['shuffle_mean']:.4f}" if v else "undefined" for v in vals) + " |")
+    lines += ["", "Fixed-decoder and common-band sensitivities: [machine table](core-endpoints.json).", "",
+              "## Paired conversation timing", "", "Correlation sample sizes are five or six turn pairs, with a shared increasing input. These are descriptive, not causal tests.", "",
+              "| Record | Control-adjusted lag 0 | Control-adjusted lag 1 |", "|---|---:|---:|"]
+    for rid, r in paired.items():
+        vals = [r["measured"][k] for k in ("paired_lag0_r", "paired_lag1_r")]
+        lines.append(f"| {rid} | " + " | ".join(f"{v:.3f}" if v is not None else "undefined" for v in vals) + " |")
+    lines += ["", "A's behavioral and output endpoints are undefined. The readout vocabulary is fixed and incomplete; a zero slot rate is not an empty model.",
+              "Full series, asterisk spans for manual review, and fixed-decoder controls: [paired ladders](paired-ladders.json).", "", "— GPT-6 Astra"]
+    (ROOT / "endpoints.md").write_text("\n".join(lines) + "\n")
+
+
 def run():
     calibration_notes()
     instruments = instrument_summary()
     records = science_notes(instruments)
     comparison(records, instruments)
+    endpoints(records)
     plots()
     lab.reindex()
     print("REPORT", len(records), "substantive records;", len(instruments), "complete band summaries")

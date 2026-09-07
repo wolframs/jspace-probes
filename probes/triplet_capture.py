@@ -60,8 +60,11 @@ def generate(lm, spec, dest):
         if base:
             suffix = ("Conversation transcript:\n\n" if turn == 0 else "\n\n") + "User: " + user + "\nAssistant:"
         else:
-            suffix = lm.tok.apply_chat_template([{"role": "user", "content": user}],
+            suffix = ("<|im_start|>user\n" + user + "<|im_end|>\n<|im_start|>assistant\n"
+                      if spec.get("header_mode") == "native-chatml-no-system" else
+                      lm.tok.apply_chat_template([{"role": "user", "content": user}],
                         tokenize=False, add_generation_prompt=True, enable_thinking=False)
+                      )
             if turn:
                 end = "" if previous[-1] == lm.tok.convert_tokens_to_ids("<|im_end|>") else "<|im_end|>"
                 suffix = end + "\n" + suffix
@@ -305,7 +308,8 @@ def run(arm, specs=None, record_suffix=""):
                     "emotions": emos, "n_tokens": len(tokens)}, ad / "z.pt")
         final = film["frames"][-1]
         cfg = lab.CONFIGS[name]
-        rec = {"id": rid, "title": f"Qwen14 {arm}: {spec['key']}" + (" (final response extended)" if record_suffix else ""), "unit": spec["unit"],
+        note = " (final response extended)" if record_suffix == "-extended" else " (native header, no system)" if record_suffix == "-native" else ""
+        rec = {"id": rid, "title": f"Qwen14 {arm}: {spec['key']}" + note, "unit": spec["unit"],
                "created": datetime.datetime.now().isoformat(timespec="seconds"),
                "execution": {"pid": os.getpid(), "torch": torch.__version__, "capture_code_sha256": CAPTURE_CODE_SHA256,
                              "spec_sha256": hashlib.sha256((ROOT / "specs.json").read_bytes()).hexdigest()},
@@ -314,9 +318,10 @@ def run(arm, specs=None, record_suffix=""):
                "decoder_sensitivity": {"source": "Qwen/Qwen3-14B", "revision": lab.CONFIGS["qwen-14b"]["revision"],
                                        "components": ["final_norm", "lm_head"], "metrics_suffix": "fixed_B_decoder"},
                "template": {"source": cfg.get("template_source", cfg["hf_id"]), "revision": cfg.get("template_revision", cfg["revision"]),
-                            "mode": "raw document" if arm == "A" else "B no-think headers; exact prior generated token IDs retained"},
+                            "mode": spec.get("header_mode") or ("raw document" if arm == "A" else "B no-think headers; exact prior generated token IDs retained")},
                "params": {"chat": arm != "A", "capture": "exact-token-transcript", "film": True, "film_topk": 10,
                           "extension": spec.get("extension"),
+                          "header_mode": spec.get("header_mode"),
                           "max_new": spec["max_new"], "temperature": 0, "steer": None, "vanilla": True,
                           "template_kwargs": {"enable_thinking": False}, "track": data["track"]},
                "capture_text": text, "conversation": convo, "generated": [s["response"] for s in snapshots],

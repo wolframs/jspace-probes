@@ -73,3 +73,6 @@ if __name__ == "__main__":
     args = p.parse_args()
     torch.set_num_threads(6)
     extend(args.arm)
+    if args.arm == "C":
+        from triplet_native import native
+        native()
