@@ -1072,3 +1072,14 @@ instrumented outputs. The model-assisted Folk02 code is a provisional criterion.
 No ratios of ordinal ratings, personality labels, capacity-loss inference from
 nulls, or causal interpretation of the Huihui edit. All history readouts are
 computed from context; “state versus re-reading” is not an identified contrast.
+
+> **P24 capture amendment, before expression data.** The hook matches direct
+> logits exactly. The original variable-length suffix gate failed at 1.442%
+> residual drift. A separate diagnostic found zero change when future tokens
+> change at equal length, and zero repeat drift. The four-layer J contrast moves
+> 0.00450/0.00193 across lengths in the two vocabularies. This is length-sensitive
+> arithmetic, not demonstrated future-token dependence. Amendment 01 replaces the
+> conflated tolerance with a strict equal-shape causal gate and records length
+> sensitivity for each arm. The original stop, process exit 1 and frozen spec stay
+> archived. Prepared-position inputs remain exact. No expression data preceded
+> this amendment; no signal smaller than calibration drift earns a headline.

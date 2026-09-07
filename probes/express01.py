@@ -138,7 +138,10 @@ def publish(lm,task,snapshot,part,bands):
 def run(arm):
  torch.set_num_threads(6);torch.manual_seed(1709)
  spec=json.loads((OUT/'spec.json').read_text())
- for path,h in spec['source_sha256'].items():assert digest(ROOT/path)==h,path
+ amendment=json.loads((OUT/'amendment-01.json').read_text()) if (OUT/'amendment-01.json').exists() else {}
+ for path,h in spec['source_sha256'].items():
+  actual=digest(ROOT/path)
+  assert actual==h or amendment.get('approved_source_sha256',{}).get(path)==actual,path
  vocabs=json.loads((OUT/'vocabulary.json').read_text());name=ARMS[arm]
  assert json.loads((ROOT/f'results/triplet-q14b/precision-{arm}-4bit.json').read_text())['functional_pass']
  start=time.perf_counter();lm=lab.get_model(name)
@@ -156,9 +159,13 @@ def run(arm):
  assert actual.argmax()==recovered.argmax()
  suffix=lm.tok.encode(' This suffix is not yet available.',add_special_tokens=False)
  H2,_=residuals(lm,ids+suffix,[len(ids)-1])
- gate={'last_logit_max_delta':float((actual-recovered).abs().max()),'suffix_relative_residual_l2':float((H-H2).norm()/H.norm()),'suffix_top1_same':int(lm.model.unembed(H2[-1].to(lm.model.input_device)).argmax())==int(actual.argmax())}
+ H3,_=residuals(lm,ids+[1234]*len(suffix),[len(ids)-1])
+ Hr,_=residuals(lm,ids,[-1])
+ gate={'same_shape_suffix_relative_l2':float((H2-H3).norm()/H2.norm()),'repeat_relative_l2':float((H-Hr).norm()/H.norm()),'last_logit_max_delta':float((actual-recovered).abs().max()),'suffix_relative_residual_l2':float((H-H2).norm()/H.norm()),'suffix_top1_same':int(lm.model.unembed(H2[-1].to(lm.model.input_device)).argmax())==int(actual.argmax())}
  dump(OUT/f'gate-{arm}.json',gate)
- assert gate['last_logit_max_delta']<.1 and gate['suffix_relative_residual_l2']<.01 and gate['suffix_top1_same'],gate
+ gate['length_sensitivity_readouts']={'prefix':reader.score(H),'longer':reader.score(H2)}
+ dump(OUT/f'gate-{arm}.json',gate)
+ assert gate['last_logit_max_delta']<.1 and gate['same_shape_suffix_relative_l2']<1e-6 and gate['repeat_relative_l2']<1e-6 and gate['suffix_top1_same'],{k:v for k,v in gate.items() if k!='length_sensitivity_readouts'}
  olddata=json.loads((ROOT/'results/triplet-q14b/specs.json').read_text())
  for task in [t for t in spec['tasks'] if t['arm']==arm]:
   dest=OUT/'captures'/f'{task["id"]}.json'
@@ -197,7 +204,7 @@ def run(arm):
 
 
 def run_all():
- status=[]
+ status=json.loads((OUT/'processes.json').read_text()) if (OUT/'processes.json').exists() else []
  for arm in ARMS:
   log=open(ROOT/'out'/f'express01-{arm}.log','ab',buffering=0)
   p=subprocess.Popen([str(ROOT/'.venv/bin/python'),'-u',str(Path(__file__)),'run',arm],stdout=log,stderr=subprocess.STDOUT,cwd=ROOT)
