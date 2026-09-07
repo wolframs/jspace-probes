@@ -6,9 +6,15 @@
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 24
-    "Medium" : 26
+    "High" : 25
+    "Medium" : 25
 ```
+
+## [HIGH] Excessive Fan In
+
+affect.py has 30 incoming dependencies — high fan-in
+
+**Recommendation**: Consider splitting this module or introducing a facade pattern
 
 ## [HIGH] Excessive Fan Out
 
@@ -78,37 +84,7 @@ site.py depends on 51 other nodes — high fan-out
 
 ## [HIGH] Excessive Fan In
 
-lab.py has 114 incoming dependencies — high fan-in
-
-**Recommendation**: Consider splitting this module or introducing a facade pattern
-
-## [HIGH] Excessive Fan In
-
-_strip_bos has 34 incoming dependencies — high fan-in
-
-**Recommendation**: Consider splitting this module or introducing a facade pattern
-
-## [HIGH] Excessive Fan In
-
-get_model has 60 incoming dependencies — high fan-in
-
-**Recommendation**: Consider splitting this module or introducing a facade pattern
-
-## [HIGH] Excessive Fan In
-
-run has 30 incoming dependencies — high fan-in
-
-**Recommendation**: Consider splitting this module or introducing a facade pattern
-
-## [HIGH] Excessive Fan In
-
-Steering has 34 incoming dependencies — high fan-in
-
-**Recommendation**: Consider splitting this module or introducing a facade pattern
-
-## [HIGH] Excessive Fan In
-
-affect2.py has 36 incoming dependencies — high fan-in
+affect2.py has 38 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -154,9 +130,33 @@ affect14.py depends on 61 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
-## [MEDIUM] Excessive Fan In
+## [HIGH] Excessive Fan In
 
-affect.py has 28 incoming dependencies — high fan-in
+lab.py has 118 incoming dependencies — high fan-in
+
+**Recommendation**: Consider splitting this module or introducing a facade pattern
+
+## [HIGH] Excessive Fan In
+
+_strip_bos has 34 incoming dependencies — high fan-in
+
+**Recommendation**: Consider splitting this module or introducing a facade pattern
+
+## [HIGH] Excessive Fan In
+
+get_model has 61 incoming dependencies — high fan-in
+
+**Recommendation**: Consider splitting this module or introducing a facade pattern
+
+## [HIGH] Excessive Fan In
+
+run has 31 incoming dependencies — high fan-in
+
+**Recommendation**: Consider splitting this module or introducing a facade pattern
+
+## [HIGH] Excessive Fan In
+
+Steering has 34 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -210,7 +210,7 @@ apparatus09.py depends on 23 other nodes — high fan-out
 
 ## [MEDIUM] Excessive Fan In
 
-topk has 21 incoming dependencies — high fan-in
+topk has 22 incoming dependencies — high fan-in
 
 **Recommendation**: Consider splitting this module or introducing a facade pattern
 
@@ -304,8 +304,8 @@ og.py depends on 26 other nodes — high fan-out
 
 **Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection
 
-## [MEDIUM] Excessive Fan In
+## [MEDIUM] Excessive Fan Out
 
-probe.py has 16 incoming dependencies — high fan-in
+unit15.py depends on 31 other nodes — high fan-out
 
-**Recommendation**: Consider splitting this module or introducing a facade pattern
+**Recommendation**: Reduce dependencies by extracting shared utilities or applying dependency injection

@@ -155,6 +155,8 @@ checkpoint-dependent story generation as confounds. Retain the existing
 SKIP=40 pooling and mean-minus-grand-mean/neutral-PC recipe. Held-out seed
 classification, split-half and implicit scenario transfer are required.
 The story generator and raw reading frame remain method limits.
+Frozen source SHA256:
+`bd35115dc2c21a39a45280735ab3540d66f05d68ce223a379eaefa6d14751a5a`.
 
 The archive's `huh` document-frequency rule (>0.18 of records) also flags
 frequently probed target words, including thinking and nothing. Freeze

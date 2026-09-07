@@ -3,29 +3,29 @@
   "kind": "dna",
   "name": "repository.dna",
   "filename": "repository-dna.memory.json",
-  "builtAt": "2026-08-26T08:22:40.038Z",
+  "builtAt": "2026-09-07T11:56:12.582Z",
   "repository": "probes",
   "data": {
     "repository": "probes",
-    "builtAt": "2026-08-26T08:22:39.953Z",
+    "builtAt": "2026-09-07T11:56:12.511Z",
     "architecture": {
       "name": "probes",
       "type": "Single Package",
       "layers": [],
       "packages": [],
       "languages": {
-        "python": 68,
+        "python": 70,
         "javascript": 1
       },
-      "summary": "Single Package with 69 source files across python, javascript. 0 packages detected. core domains: General."
+      "summary": "Single Package with 71 source files across python, javascript. 0 packages detected. core domains: General."
     },
     "stats": {
-      "filesScanned": 69,
-      "nodesCreated": 609,
-      "edgesCreated": 1923,
+      "filesScanned": 71,
+      "nodesCreated": 616,
+      "edgesCreated": 1953,
       "domainsFound": 1,
       "flowsFound": 0,
-      "durationMs": 161
+      "durationMs": 160
     },
     "domainCount": 1,
     "flowCount": 0,
@@ -36,6 +36,12 @@
     "criticalPathCount": 20,
     "smellCount": 50,
     "smells": [
+      {
+        "id": "smell:fanin:file:affect.py",
+        "type": "excessive_fan_in",
+        "severity": "high",
+        "description": "affect.py has 30 incoming dependencies — high fan-in"
+      },
       {
         "id": "smell:fanout:file:affect3.py",
         "type": "excessive_fan_out",
@@ -101,15 +107,9 @@
         "type": "excessive_fan_out",
         "severity": "high",
         "description": "site.py depends on 51 other nodes — high fan-out"
-      },
-      {
-        "id": "smell:fanin:file:lab.py",
-        "type": "excessive_fan_in",
-        "severity": "high",
-        "description": "lab.py has 114 incoming dependencies — high fan-in"
       }
     ]
   },
   "estimatedTokens": 729,
-  "bytes": 2551
+  "bytes": 2556
 }

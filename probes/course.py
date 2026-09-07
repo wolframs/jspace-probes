@@ -24,7 +24,7 @@ FEEL_WORDS = ["yes", "no", "nothing", "curiosity", "uncertain", "calm",
 
 def specs_for(model: str) -> dict[str, dict]:
     m = model.replace("gemma-", "g").replace("qwen-", "q")
-    return {
+    specs = {
         f"u0-boot-{m}": dict(
             id=f"u0-boot-{m}", unit="0", model=model,
             title=f"Unit 0 · Boot-country baseline · {model}",
@@ -83,6 +83,12 @@ def specs_for(model: str) -> dict[str, dict]:
             scan=["elephant", "elephants", "trunk", "tusk", "ivory"],
             track=["elephant"], slice=True, slice_last_n=60),
     }
+    # The base checkpoint is registered for raw boot calibration only.
+    # Do not accidentally run the assistant-template course on a base model;
+    # its raw-generation battery belongs to the gated lineage experiment.
+    if model == "qwen-14b-base":
+        return {k: s for k, s in specs.items() if s["unit"] == "0"}
+    return specs
 
 
 def main():

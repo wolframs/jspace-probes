@@ -27,9 +27,9 @@ flowchart TD
     P1N1 --> P1N2
     P1N3["file:affect13.py"]
     P1N2 --> P1N3
-    P1N4["file:affect3b.py"]
+    P1N4["file:affect14.py"]
     P1N3 --> P1N4
-    P1N5["file:affect3c.py"]
+    P1N5["file:affect3b.py"]
     P1N4 --> P1N5
   end
   subgraph P2 ["high High-traffic: AffectSteer"]
@@ -40,9 +40,9 @@ flowchart TD
     P2N1 --> P2N2
     P2N3["file:affect13.py"]
     P2N2 --> P2N3
-    P2N4["file:affect3b.py"]
+    P2N4["file:affect14.py"]
     P2N3 --> P2N4
-    P2N5["file:affect3c.py"]
+    P2N5["file:affect3b.py"]
     P2N4 --> P2N5
   end
   subgraph P3 ["med High-traffic: _prompt_ids"]
@@ -53,9 +53,9 @@ flowchart TD
     P3N1 --> P3N2
     P3N3["file:affect13.py"]
     P3N2 --> P3N3
-    P3N4["file:affect8.py"]
+    P3N4["file:affect14.py"]
     P3N3 --> P3N4
-    P3N5["file:affect14.py"]
+    P3N5["file:affect8.py"]
     P3N4 --> P3N5
   end
 ```
@@ -64,7 +64,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect.py has 28 dependents — changes here have wide blast radius
+- **Description**: affect.py has 30 dependents — changes here have wide blast radius
 
 ## High-traffic: affect3.py
 
@@ -94,7 +94,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: topk has 21 dependents — changes here have wide blast radius
+- **Description**: topk has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: deepen.py
 
@@ -156,12 +156,6 @@ flowchart TD
 - **Nodes involved**: 6
 - **Description**: decode has 30 dependents — changes here have wide blast radius
 
-## High-traffic: probe.py
-
-- **Risk**: MEDIUM
-- **Nodes involved**: 6
-- **Description**: probe.py has 16 dependents — changes here have wide blast radius
-
 ## High-traffic: unit14.py
 
 - **Risk**: MEDIUM
@@ -174,8 +168,14 @@ flowchart TD
 - **Nodes involved**: 6
 - **Description**: norm has 17 dependents — changes here have wide blast radius
 
-## High-traffic: lab.py
+## High-traffic: affect2.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: lab.py has 114 dependents — changes here have wide blast radius
+- **Description**: affect2.py has 38 dependents — changes here have wide blast radius
+
+## High-traffic: _load_vectors
+
+- **Risk**: HIGH
+- **Nodes involved**: 6
+- **Description**: _load_vectors has 36 dependents — changes here have wide blast radius

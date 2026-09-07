@@ -823,6 +823,17 @@ excluded from primary captures because int8 readouts can depend on the
 whole sequence (SURPRISES 5). Full checkpoint-specific emotion ribbons
 were explicitly authorized by Wolfram before the run.
 
+> **2026-09-07 — calibration stop, not a P20/P21 outcome.** B passed
+> the registered boot check. A recovers the facts and has mean top-10
+> overlap 0.6333, but shares only one Italy-top-10 layer with B (bar two).
+> A's window is L25-26, B's L26-27; B ranks Italy 11 at L25. The
+> provisional gate is brittle, not a demonstrated unusable lens. It stays
+> failed; no post-hoc relaxation. Both int8 arms change earlier readouts
+> when future suffixes are appended to an identical prefix (maximum
+> absolute logit delta A 5.5, B 3.375). Per handoff, stopped before
+> substantive runs. Full instruments remain approved and unrun.
+> Evidence: results/triplet-q14b/report.md and boot-A/boot-B.json.
+
 ## Standing design rules distilled from the misses
 
 1. **Grep MECHANICS.md and this file before designing** — two of three
