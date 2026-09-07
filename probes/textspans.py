@@ -45,6 +45,8 @@ def render_text(tok, rec: dict, template_kwargs: dict | None = None) -> str:
     template_kwargs = the model-level CONFIGS fallback, supplied by the
     caller (this module stays torch-free)."""
     params = rec.get("params", {})
+    if params.get("capture") == "exact-token-transcript":
+        return rec["capture_text"]
     if params.get("chat") is False:
         return rec["conversation"][0]["content"]
     tkw = params.get("template_kwargs") or template_kwargs or {}

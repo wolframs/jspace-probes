@@ -214,3 +214,38 @@ sensitivity analysis. Do not collapse the lens-free staircase into one
 claim about lexical ignition (GLOSSARY, apparatus06/07 correction).
 The exact unit16 effective-dimension calculation is a descriptive P11
 point only. No generated-text intervention is added.
+
+## Substantive capture details, before the first generation
+
+Exact prompts, token IDs, exclusions, and the 374-record furniture corpus
+are frozen in `results/triplet-q14b/specs.json`. There are 18 conditions
+per arm: nine short/pressure/safari conditions and nine conversations.
+The SoC prompt is an explicit new elicitation (150-token cap), not claimed
+as a verbatim recovered Fig-25 prompt. Controls have equal Qwen token
+counts per user turn. Authored neutral context supplies length matching;
+this adds context, so two natural, unpadded ladders test its effect.
+The split-affection ladder has a matched seven-turn neutral companion.
+
+Conversation generation preserves exact previous token IDs and uses B's
+no-think headers for B/C/C-prime, raw document headers for A. A response
+that reaches its token cap gets a synthetic closing message delimiter
+before the next user header; that delimiter is not scored as output.
+Store the IDs, content bounds, response caps, and exact decoded input.
+A film is a single grid stitched from captures that end after each turn;
+earlier segments are never recaptured in the presence of future user turns.
+Empty think tags in prior turns are retained rather than stripped by a
+second template render. This deliberate format control is a method limit.
+
+Primary lexical metrics use assistant-content positions. The output
+probability there predicts the NEXT token. A separate predictor-aligned
+endpoint shifts positions back one token and includes the position before
+the first generated word, which matters for one-word answers. Both are
+reported. A's raw continuation metrics are saved but its behavioral and
+output endpoints are excluded from assistant-arm averages.
+
+Release score is 100 times (single-asterisk spans + emoji graphemes) per
+generated token. First nonzero score is a provisional release threshold;
+asterisk spans can be emphasis, so inspect examples before treating them
+as actions. Register-meter components use the existing lossmap2 rates.
+Lag correlations and control-adjusted contrasts remain descriptive.
+No hidden cross-turn state or causal gate follows from these correlations.
