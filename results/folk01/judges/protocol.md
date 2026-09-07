@@ -88,3 +88,13 @@ separate judges and length checks; these do not remove all stylistic bias.
 [OpenRouter structured outputs](https://openrouter.ai/docs/guides/features/structured-outputs)
 documents schema requests and parameter-compatible provider routing. Schema
 compliance constrains format, not the truth of a judgment.
+
+## Transport amendment before any judge output
+
+The first Sonnet 5 request returned HTTP 404: no endpoint accepted all
+parameters. Its live endpoint list omits temperature on available routes
+despite the aggregate model catalog advertising it. Omit temperature for
+Sonnet 5 and retain temperature 0 for Gemini/DeepSeek; Sonnet therefore uses
+the provider default and is not claimed deterministic. Keep the same model,
+no-reasoning request, schema, rubric, and task manifest. The unsuccessful
+request produced no definition or score. Archived error: definitions/sonnet.error0.json.

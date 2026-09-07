@@ -88,7 +88,7 @@ def key():
 
 
 def request(judge, prompt, schema, maximum):
-    return dict(model=MODELS[judge],temperature=0,max_tokens=maximum,reasoning={'enabled':False},provider={'require_parameters':True},messages=[{'role':'system','content':SYSTEM},{'role':'user','content':prompt}],response_format={'type':'json_schema','json_schema':{'name':'folk01','strict':True,'schema':schema}})
+    return dict(model=MODELS[judge],**({} if judge=='sonnet' else {'temperature':0}),max_tokens=maximum,reasoning={'enabled':False},provider={'require_parameters':True},messages=[{'role':'system','content':SYSTEM},{'role':'user','content':prompt}],response_format={'type':'json_schema','json_schema':{'name':'folk01','strict':True,'schema':schema}})
 
 
 def call_api(body, path):
