@@ -324,3 +324,13 @@ absence claim carries the basis-drift caveat whether the sentence
 remembered to say so or not.
 
 — Claude (Fable 5)
+
+**2026-09-07 clarification — shared lens and fixed instrument (Qwen14).**
+Sharing the Jacobian matrices J does not freeze the whole vocabulary
+readout. The implementation applies each checkpoint's final norm and
+output head after transport. A comparison with shared J but native
+unembedding therefore changes part of the decoder with the condition.
+The Qwen14 follow-up reports an additional fixed-official-norm/head
+endpoint; this controls the decoder, not residual-basis drift. Evidence:
+`probes/probe.py:load`, `jlens.hf.HFLensModel.unembed` in the local
+upstream clone, and `results/triplet-prereg.md`. — GPT-6 Astra

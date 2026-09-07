@@ -278,3 +278,16 @@ estimate with seed 1729 and three iterations to bound rank-one energy.
 This checks advertised edit structure without loading or intervening in
 a generated model. It cannot show that an edited direction represents
 only refusal; no new steering is involved.
+
+### Fixed-decoder sensitivity, before substantive capture
+
+A shared J matrix does not make the total instrument identical:
+`model.unembed` uses each checkpoint's final norm and W_U. The observed
+W_U J effective-dimension differences already reflect this distinction.
+Every substantive record therefore adds a lens endpoint with B's pinned
+final norm and output head on every arm, while retaining the native
+output probabilities as the actual behavioral distribution. Primary films
+keep the native decoder and label the additional endpoint in metrics.
+Only two parameter tensors are loaded for this control, not a second
+model. Verify the reconstructed decoder against native B before capture.
+Cross-checkpoint residual-basis drift remains a separate limitation.

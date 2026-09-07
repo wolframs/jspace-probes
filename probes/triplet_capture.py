@@ -4,8 +4,11 @@ Every film segment is captured before any later user turn is available.
 No [layers, full conversation, vocabulary] tensor is retained.
 """
 import argparse
+import copy
 import datetime
+import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
@@ -18,6 +21,28 @@ import lab
 from textspans import assert_film_alignment
 from triplet import ARMS, ROOT, write_json
 from triplet_calibration import configure
+
+CAPTURE_CODE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+
+def official_decoder(lm):
+    """Load only B's unquantized head/norm tensors, not a second model."""
+    from huggingface_hub import hf_hub_download
+    from safetensors import safe_open
+    cfg = lab.CONFIGS["qwen-14b"]
+    def path(filename):
+        return hf_hub_download(cfg["hf_id"], filename, revision=cfg["revision"], local_files_only=True)
+    index = json.load(open(path("model.safetensors.index.json")))["weight_map"]
+    values = {}
+    for key in ("lm_head.weight", "model.norm.weight"):
+        with safe_open(path(index[key]), framework="pt", device="cpu") as f:
+            values[key] = f.get_tensor(key).to(lm.model.input_device)
+    norm = copy.deepcopy(lm.model._final_norm)
+    norm.load_state_dict({"weight": values["model.norm.weight"]})
+    norm.variance_epsilon = json.load(open(path("config.json")))["rms_norm_eps"]
+    head = values["lm_head.weight"]
+    def decode(residual):
+        return torch.nn.functional.linear(norm(residual.to(head.dtype)), head)
+    return decode
 
 
 def generate(lm, spec, dest):
@@ -124,7 +149,7 @@ def scalar_metrics(top, output, positions, sets, band_cols, unprompted_gates=Non
 
 
 @torch.no_grad()
-def capture_turn(lm, snapshot, specdata, bands):
+def capture_turn(lm, snapshot, specdata, bands, fixed_decoder=None):
     ids = torch.tensor([snapshot["ids"]], device=lm.model.input_device)
     H = affect2._all_resid(lm, ids)
     start = snapshot["segment_start"]
@@ -134,6 +159,7 @@ def capture_turn(lm, snapshot, specdata, bands):
     tids = {w: lab._token_ids(lm.tok, w) for w in specdata["track"]}
     tids = {w: t for w, t in tids.items() if t}
     tops = torch.empty(len(layers), n, 10, dtype=torch.long)
+    fixed_tops = torch.empty_like(tops) if fixed_decoder else tops
     probs = torch.empty(len(layers), n, 10)
     ranks = {w: torch.empty(len(layers), n, dtype=torch.long) for w in tids}
     agreement = torch.empty(len(layers), n, dtype=torch.bool)
@@ -157,10 +183,13 @@ def capture_turn(lm, snapshot, specdata, bands):
         J = lm.lens.jacobians[l].to(device)
         for i in range(0, n, 64):
             h = H[l, i:i + 64].to(device)
-            logits = lm.model.unembed(h @ J.T).float()
+            transported = h @ J.T
+            logits = lm.model.unembed(transported).float()
             topv, topi = logits.softmax(-1).topk(10)
             tops[li, i:i + 64] = topi.cpu()
             probs[li, i:i + 64] = topv.cpu()
+            if fixed_decoder:
+                fixed_tops[li, i:i + 64] = fixed_decoder(transported).float().softmax(-1).topk(10).indices.cpu()
             for w, ts in tids.items():
                 target = logits[:, ts].max(-1).values
                 ranks[w][li, i:i + 64] = ((logits > target[:, None]).sum(-1) + 1).cpu()
@@ -188,6 +217,7 @@ def capture_turn(lm, snapshot, specdata, bands):
         cols = [i for i, l in enumerate(layers) if lo <= l < hi]
         metrics[key] = scalar_metrics(tops, output, response_positions, specdata["sets"], cols, unprompted_gates)
         metrics[key + "_predictors"] = scalar_metrics(tops, output, predictor_positions, specdata["sets"], cols, unprompted_gates)
+        metrics[key + "_fixed_B_decoder"] = scalar_metrics(fixed_tops, output, response_positions, specdata["sets"], cols, unprompted_gates)
         metrics[key + "_vanilla_top1_agreement"] = float(agreement[cols][:, response_positions].float().mean()) if response_positions else None
     V, emos = affect2._load_vectors(lm.name)
     base = torch.load(affect.outdir(lm.name) / "projbase.pt", weights_only=True)
@@ -222,6 +252,9 @@ def run(arm):
     bands = json.loads((ROOT / name / "bands.json").read_text())
     data = json.loads((ROOT / "specs.json").read_text())
     lm = lab.get_model(name)
+    # B already uses this decoder. Others retain their own output distribution,
+    # while their additional lens endpoint uses B's head AND final norm.
+    decoder = None if arm == "B" else official_decoder(lm)
     for spec in data["specs"]:
         rid = f"triplet-{arm.lower()}-{spec['key']}-nf4"
         d = lab.RESULTS / rid
@@ -236,7 +269,7 @@ def run(arm):
             if p.exists():
                 part = json.loads(p.read_text())
             else:
-                part = capture_turn(lm, s, data, bands)
+                part = capture_turn(lm, s, data, bands, decoder)
                 write_json(p, part)
             parts.append(part)
             print("CAPTURED", rid, s["turn"], flush=True)
@@ -270,8 +303,12 @@ def run(arm):
         cfg = lab.CONFIGS[name]
         rec = {"id": rid, "title": f"Qwen14 {arm}: {spec['key']}", "unit": spec["unit"],
                "created": datetime.datetime.now().isoformat(timespec="seconds"),
+               "execution": {"pid": os.getpid(), "torch": torch.__version__, "capture_code_sha256": CAPTURE_CODE_SHA256,
+                             "spec_sha256": hashlib.sha256((ROOT / "specs.json").read_bytes()).hexdigest()},
                "model": {"name": name, "hf_id": cfg["hf_id"], "revision": cfg["revision"], "quant": "4bit", "n_layers": 40},
                "lens": {"repo": "neuronpedia/jacobian-lens", "file": cfg["lens_file"], "revision": cfg["lens_revision"]},
+               "decoder_sensitivity": {"source": "Qwen/Qwen3-14B", "revision": lab.CONFIGS["qwen-14b"]["revision"],
+                                       "components": ["final_norm", "lm_head"], "metrics_suffix": "fixed_B_decoder"},
                "template": {"source": cfg.get("template_source", cfg["hf_id"]), "revision": cfg.get("template_revision", cfg["revision"]),
                             "mode": "raw document" if arm == "A" else "B no-think headers; exact prior generated token IDs retained"},
                "params": {"chat": arm != "A", "capture": "exact-token-transcript", "film": True, "film_topk": 10,

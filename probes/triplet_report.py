@@ -127,8 +127,10 @@ The factual gate is necessary instrument evidence, not affect validation.
 Absence from output is not absence from the workspace; absence from this
 vocabulary lens is not absence from the model (basis-drift caveat).
 Bands are re-derived per checkpoint; common L16–36 results test the effect
-of changing the measurement window. The lens is fixed across arms, but
-checkpoint-specific emotion probes differ and need their own validation.
+of changing the measurement window. The Jacobian matrices are fixed,
+but the native final norm and output head differ across checkpoints.
+The fixed-B-decoder endpoint controls that part of the instrument.
+Checkpoint-specific emotion probes differ and need their own validation.
 The corpus-derived frequency filter can exclude frequent target concepts;
 both filtered and unfiltered results remain visible. Co-presence is a
 lexical correlate, not a demonstrated causal gate. Six monotonic turns
