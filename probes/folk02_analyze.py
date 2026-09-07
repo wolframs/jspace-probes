@@ -86,6 +86,7 @@ def analyze():
 def plot(summaries):
     import matplotlib
     matplotlib.use('Agg')
+    matplotlib.rcParams['svg.hashsalt']='folk02'
     import matplotlib.pyplot as plt
     judges=[j for j in f.MODELS if sum(s['replies'] for s in summaries if s['judge']==j)==156]
     fig,axes=plt.subplots(len(judges),3,figsize=(11,3.2*len(judges)),sharex=True,sharey=True,layout='constrained',squeeze=False)
@@ -103,7 +104,9 @@ def plot(summaries):
             if a==0:ax.set_ylabel('Expression intensity (0–3)')
             if i==len(judges)-1:ax.set_xlabel('Assistant turn')
     axes[0,0].legend(fontsize=8);fig.suptitle('Same saved replies, separate measures of emotional tone\nShading: warm cues at turns 3–4; turns 1–2 shared; four branches per later point',fontsize=12)
-    fig.savefig(f.OUT/'expression.png',dpi=180);fig.savefig(f.OUT/'expression.svg');plt.close(fig)
+    fig.savefig(f.OUT/'expression.png',dpi=180);fig.savefig(f.OUT/'expression.svg',metadata={'Date':None});plt.close(fig)
+    svg=f.OUT/'expression.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
 
 
 if __name__=='__main__':analyze()
