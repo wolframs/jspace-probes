@@ -71,7 +71,11 @@ def films():
 
 def band_cols(film) -> tuple[list[int], list[int]]:
     model = film.get("model", "qwen-27b")
-    lo, hi, _ = BANDS.get(model, (28, 59, 64))
+    measured = film.get("bands")
+    if measured and all(k in measured for k in ("lo", "hi", "n_layers")):
+        lo, hi = measured["lo"], measured["hi"]
+    else:
+        lo, hi, _ = BANDS.get(model, (28, 59, 64))
     ws = [j for j, l in enumerate(film["layers"]) if lo <= l < hi]
     motor = [j for j, l in enumerate(film["layers"]) if l >= hi]
     return ws, motor

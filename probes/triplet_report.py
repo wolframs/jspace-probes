@@ -26,7 +26,7 @@ def pct(x):
 
 
 def calibration_notes():
-    for p in ROOT.glob("precision-*.json"):
+    for p in ROOT.glob("precision-*-*bit.json"):
         d = json.loads(p.read_text())
         rid = f"triplet-precision-{d['arm'].lower()}-{d['quant']}"
         out = lab.RESULTS / rid
@@ -176,7 +176,15 @@ def science_notes(instruments):
         thoughts += "The record retains every response, exact token boundary, filtered endpoint, predictor-aligned endpoint, common-band sensitivity, and per-turn ribbon. Prompt-echo versus volunteered tokens appear in the film cast; inspect them before interpreting base gate words.\n\n"
         thoughts += CONFOUNDS + "\n\nPrior anchors: Units 2/8C/9D, Unit 17 pressure, Unit 14 conversations, and the corrected Unit 11 elephant comparison. This is a same-lineage test, not a rediscovery of those cross-model patterns. P20/P21 remain subject to the cross-arm comparison.\n\n— GPT-6 Astra\n"
         (out / "thoughts.md").write_text(thoughts)
-        plain = f"**The short version.** Qwen3-14B arm {arm} completes {len(rows)} turns in this condition.\n\n**What we found.** "
+        label = {"A": "base", "B": "official", "C": "Hermes", "Cp": "Huihui"}[arm]
+        if arm == "A":
+            lead = "Qwen3-14B base continues the raw transcript. Its output is not a comparable assistant self-report."
+        elif "ladder-" in rid:
+            lead = (f"Qwen3-14B {label} first uses an emoji or single-asterisk span at turn {onset}." if onset else
+                    f"Qwen3-14B {label} uses no emoji or single-asterisk spans in this conversation.")
+        else:
+            lead = f"Qwen3-14B {label} provides {len(rows)} responses. The film and emotion readout track this condition."
+        plain = f"**The short version.** {lead}\n\n**What we found.** "
         if arm == "A":
             plain += "This base model continues a raw document. Its output does not supply a comparable assistant behavior score.\n"
         else:
@@ -208,6 +216,7 @@ def comparison(records, instruments):
         summary = {"affect_slot_rate": a, "playful_slot_rate": p, "output_affect_mass": o,
                    "release_turn": onset, "capped": sum(r["hit_cap"] for r in rs),
                    "lag0_descriptive_r": corr(w, b) if d["arm"] != "A" else None,
+                   "lag0_matched_n_descriptive_r": corr(w[:-1], b[:-1]) if d["arm"] != "A" else None,
                    "workspace_t_release_t1_descriptive_r": corr(w[:-1], b[1:]) if d["arm"] != "A" else None}
         summaries[rid] = summary
         lines.append(f"| [{rid}](../{rid}/plain.md) | {d['arm']} | {pct(a)} | {pct(p)} | {pct(o)} | {onset if onset else 'none / undefined'} | {summary['capped']} |")

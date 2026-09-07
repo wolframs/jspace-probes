@@ -279,6 +279,7 @@ def run(arm):
         assert lm.tok.encode(text, add_special_tokens=False) == ids, "Decode/re-encode changed exact capture IDs"
         convo = [m for s in snapshots for m in ({"role": "user", "content": s["user"]}, {"role": "assistant", "content": s["response"]})]
         film = {"id": rid, "model": name, "layers": lm.lens.source_layers, "tokens": tokens,
+                "bands": bands,
                 "gen_start": snapshots[0]["gen_start"], "start": 0, "topk": 10,
                 "track": data["track"], "frames": [f for p in parts for f in p["frames"]],
                 "capture": "stitched exact prefixes; segment ends before next user turn"}
