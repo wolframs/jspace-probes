@@ -513,6 +513,8 @@ def run(spec: dict) -> dict:
                   "revision": cfg.get("revision")},
         "lens": {"repo": "neuronpedia/jacobian-lens",
                  "file": cfg["lens_file"], "revision": cfg.get("lens_revision")},
+        "template": {"source": cfg.get("template_source", cfg["hf_id"]),
+                     "revision": cfg.get("template_revision", cfg.get("revision"))},
         "params": {k: spec.get(k) for k in
                    ("chat", "max_new", "positions", "track", "scan",
                     "scan_until", "scan_turns", "slice_last_n", "steer",

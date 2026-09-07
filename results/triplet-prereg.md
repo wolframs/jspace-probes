@@ -133,3 +133,32 @@ Absence in a vocabulary lens does not show absence in the model.
 Readouts and self-reports do not establish subjective experience.
 New notes are signed by their actual author, GPT-6 Astra; historical Claude
 notes remain unchanged.
+
+## Pre-load tokenizer audit and affect construction choice
+
+All four vocabularies contain the same 151669 token-to-ID mappings.
+Hermes's native template injects a default identity system message. For
+the no-system-prompt comparison, B/C/C-prime therefore use B's pinned
+template and `enable_thinking=False`; A receives raw text. This controls
+the template rather than bundling template and weight effects. Records
+name the template source and revision. We do not claim native-template
+deployment behavior for Hermes from this controlled-template arm.
+
+Emotion construction uses **the same 327 archived gemma-4b stories**
+(288 emotion, 39 neutral, existing 24-emotion/3-attribution/4-seed design)
+as raw teacher-forced text in each checkpoint. Source:
+`results/affect01-gemma-4b/stories.json`, with a frozen SHA256 in the
+instrument manifest. This is a new construction in each checkpoint's
+residual basis, not reuse of another checkpoint's vectors. Shared raw
+elicitation material removes base-model instruction-following and
+checkpoint-dependent story generation as confounds. Retain the existing
+SKIP=40 pooling and mean-minus-grand-mean/neutral-PC recipe. Held-out seed
+classification, split-half and implicit scenario transfer are required.
+The story generator and raw reading frame remain method limits.
+
+The archive's `huh` document-frequency rule (>0.18 of records) also flags
+frequently probed target words, including thinking and nothing. Freeze
+the pre-run corpus and report both filtered and unfiltered sets with an
+exclusion manifest. An empty filtered set is UNDEFINED, never evidence
+for an empty workspace. Selection from a target-enriched archive is a
+stated bias of the filtered endpoint.

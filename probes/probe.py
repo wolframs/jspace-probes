@@ -56,6 +56,8 @@ for _name, _repo, _revision in (
     CONFIGS[_name] = dict(hf_id=_repo, revision=_revision,
                           lens_file=_Q14_LENS, lens_revision=_Q14_LENS_REV,
                           quant="8bit", template_kwargs={"enable_thinking": False})
+CONFIGS["qwen-14b-hermes"]["template_source"] = "Qwen/Qwen3-14B"
+CONFIGS["qwen-14b-hermes"]["template_revision"] = CONFIGS["qwen-14b"]["revision"]
 
 
 def load(name: str):
@@ -76,6 +78,12 @@ def load(name: str):
     hf = transformers.AutoModelForCausalLM.from_pretrained(cfg["hf_id"], **kwargs)
     tok = transformers.AutoTokenizer.from_pretrained(
         cfg["hf_id"], revision=cfg.get("revision"))
+    if cfg.get("template_source"):
+        template_tok = transformers.AutoTokenizer.from_pretrained(
+            cfg["template_source"], revision=cfg["template_revision"])
+        if tok.get_vocab() != template_tok.get_vocab():
+            raise ValueError("Controlled template requires identical vocabulary IDs")
+        tok.chat_template = template_tok.chat_template
     model = jlens.from_hf(hf, tok)
     lens = jlens.JacobianLens.from_pretrained(
         LENS_REPO, filename=cfg["lens_file"], revision=cfg.get("lens_revision"))
