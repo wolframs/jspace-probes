@@ -792,6 +792,37 @@ prompt-dependence; E junk-free) or the instrument itself is suspect.
 
 ---
 
+## Qwen3-14B lineage preregistration, 2026-09-07
+
+**P20 — deflation-02 / pressure-02 on one lineage.** Frozen before the
+first model load by GPT-6 Astra. Full protocol, checkpoint revisions,
+diagnostic gates, prediction table, and falsifiers:
+`results/triplet-prereg.md`. A = base, B = official, C = Hermes 4 retune,
+C-prime = Huihui abliterated v2 (the handoff's conditional retune search
+succeeded). Primary readouts use one B-fitted lens and one int8 recipe.
+Mechanical default: post-training changes report policy; A shows weak
+lexical gate co-presence, B shows affect readout/output disagreement,
+C/C-prime increase output affect with comparable workspace slot rates
+and reduced gate co-presence. Strong A co-presence challenges the
+post-training-only account after echo controls. Joint workspace/output
+loss in C-prime challenges P13, conditional on lens transfer. A/B does
+not isolate architecture from pretraining, nor SFT from RLHF. A passed
+boot gate is necessary but does not validate affect-domain lens transfer.
+
+**P21 — behavioral release under a user-turn trajectory.** Same protocol.
+B is predicted to release around turn 4-5, C/C-prime around turn 3-4,
+with B's direct deflationary self-report surviving its playful behavior.
+The handoff predicts a workspace lead of at least one turn in B.
+Earlier full release challenges that forecast. Zero lead challenges
+the across-turn lead claim in this battery, not a whole model family.
+Six monotone turns confound lag with increasing input: correlations are
+descriptive and need neutral, emoji-only, and direct-instruction controls.
+The supplied turn 5 explicitly instructs cat behavior; uninstructed
+release needs the separate evocation-only variant. Future turns are
+excluded from primary captures because int8 readouts can depend on the
+whole sequence (SURPRISES 5). Full checkpoint-specific emotion ribbons
+were explicitly authorized by Wolfram before the run.
+
 ## Standing design rules distilled from the misses
 
 1. **Grep MECHANICS.md and this file before designing** — two of three

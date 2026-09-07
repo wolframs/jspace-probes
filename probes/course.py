@@ -88,7 +88,7 @@ def specs_for(model: str) -> dict[str, dict]:
 def main():
     args = sys.argv[1:]
     all_specs = {}
-    for model in ("gemma-4b", "gemma-12b", "qwen-27b"):
+    for model in lab.CONFIGS:
         all_specs.update(specs_for(model))
     if args and args[0] == "--all-for":
         ids = [k for k, s in all_specs.items() if s["model"] == args[1]]

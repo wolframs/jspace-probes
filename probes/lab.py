@@ -271,6 +271,9 @@ def run(spec: dict) -> dict:
     lm = get_model(spec["model"])
     tok, model, lens = lm.tok, lm.model, lm.lens
     chat = spec.get("chat", True)
+    film_topk = spec.get("film_topk", TOPK)
+    if not isinstance(film_topk, int) or not 1 <= film_topk <= 100:
+        raise ValueError("film_topk must be an integer from 1 to 100")
 
     messages = spec.get("messages") or [
         {"role": "user", "content": spec["prompt"]}]
@@ -457,7 +460,7 @@ def run(spec: dict) -> dict:
         per_layer = {}
         for layer in layers:
             block = lens_logits[layer][start:].float()
-            topv, topi = torch.softmax(block, dim=-1).topk(TOPK)
+            topv, topi = torch.softmax(block, dim=-1).topk(film_topk)
             ranks = {}
             for w, tids in track_ids.items():
                 best = None
@@ -479,7 +482,8 @@ def run(spec: dict) -> dict:
             })
         film = {"id": spec["id"], "model": spec["model"], "layers": layers,
                 "tokens": toks, "gen_start": gen_start, "start": start,
-                "track": sorted(track_ids), "frames": frames}
+                "track": sorted(track_ids), "frames": frames,
+                "topk": film_topk}
         film["cast"] = film_cast(
             film, " ".join(m["content"] for m in resolved))
         (outdir / "film.json").write_text(json.dumps(film))
@@ -505,14 +509,15 @@ def run(spec: dict) -> dict:
         "unit": spec["unit"],
         "created": datetime.datetime.now().isoformat(timespec="seconds"),
         "model": {"name": spec["model"], "hf_id": cfg["hf_id"],
-                  "quant": cfg["quant"], "n_layers": model.n_layers},
+                  "quant": cfg["quant"], "n_layers": model.n_layers,
+                  "revision": cfg.get("revision")},
         "lens": {"repo": "neuronpedia/jacobian-lens",
-                 "file": cfg["lens_file"]},
+                 "file": cfg["lens_file"], "revision": cfg.get("lens_revision")},
         "params": {k: spec.get(k) for k in
                    ("chat", "max_new", "positions", "track", "scan",
                     "scan_until", "scan_turns", "slice_last_n", "steer",
                     "template_kwargs", "film", "film_start", "max_seq_len",
-                    "lens_layers", "temperature", "seed", "vanilla")},
+                    "lens_layers", "temperature", "seed", "vanilla", "film_topk")},
         "extra_md": spec.get("extra_md"),
         "conversation": resolved,
         "generated": generated,

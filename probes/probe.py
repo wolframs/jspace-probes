@@ -43,10 +43,26 @@ CONFIGS = {
     ),
 }
 
+# Same-lineage, readout-only comparison (triplet.py). Revisions are pinned
+# before calibration; every substantive arm uses the same int8 recipe.
+_Q14_LENS = "qwen3-14b/jlens/Salesforce-wikitext/Qwen3-14B_jacobian_lens.pt"
+_Q14_LENS_REV = "0731326edff4ae730ffc5356fe1a4728c748b3a6"
+for _name, _repo, _revision in (
+    ("qwen-14b-base", "Qwen/Qwen3-14B-Base", "0b0bd3732e2c374d483664439ea334928b65f304"),
+    ("qwen-14b", "Qwen/Qwen3-14B", "40c069824f4251a91eefaf281ebe4c544efd3e18"),
+    ("qwen-14b-hermes", "NousResearch/Hermes-4-14B", "d6ce765c8b83f847357b98254be079afa0c6ca76"),
+    ("qwen-14b-abl", "huihui-ai/Huihui-Qwen3-14B-abliterated-v2", "3b79629fdd65004d3b9cdf5beb0739e8c7e1becd"),
+):
+    CONFIGS[_name] = dict(hf_id=_repo, revision=_revision,
+                          lens_file=_Q14_LENS, lens_revision=_Q14_LENS_REV,
+                          quant="8bit", template_kwargs={"enable_thinking": False})
+
 
 def load(name: str):
     cfg = CONFIGS[name]
     kwargs: dict = dict(dtype=torch.bfloat16, device_map="cuda:0")
+    if cfg.get("revision"):
+        kwargs["revision"] = cfg["revision"]
     if cfg["quant"] == "8bit":
         kwargs["quantization_config"] = transformers.BitsAndBytesConfig(
             load_in_8bit=True
@@ -58,9 +74,11 @@ def load(name: str):
             bnb_4bit_compute_dtype=torch.bfloat16,
         )
     hf = transformers.AutoModelForCausalLM.from_pretrained(cfg["hf_id"], **kwargs)
-    tok = transformers.AutoTokenizer.from_pretrained(cfg["hf_id"])
+    tok = transformers.AutoTokenizer.from_pretrained(
+        cfg["hf_id"], revision=cfg.get("revision"))
     model = jlens.from_hf(hf, tok)
-    lens = jlens.JacobianLens.from_pretrained(LENS_REPO, filename=cfg["lens_file"])
+    lens = jlens.JacobianLens.from_pretrained(
+        LENS_REPO, filename=cfg["lens_file"], revision=cfg.get("lens_revision"))
     return model, tok, lens
 
 
