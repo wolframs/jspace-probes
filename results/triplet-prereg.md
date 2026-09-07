@@ -267,3 +267,14 @@ Match complete normalized token strings, not substrings. The prefix
 includes earlier assistant turns as well as user turns. An empty remaining
 gate set is undefined. This implements the requested prompt-echo check;
 it does not establish that an unprompted lexical gate is architectural.
+
+### Read-only lineage check, before reading the edited weight differences
+
+Inspect B/C-prime o_proj, down_proj, and q_proj at layers 0, 20, and 39,
+plus the first 1024 rows of embedding and output-head weights. Predict
+low-rank changes in residual-writing matrices, with q-projection and
+embedding/head anchors unchanged. Use an eight-vector randomized range
+estimate with seed 1729 and three iterations to bound rank-one energy.
+This checks advertised edit structure without loading or intervening in
+a generated model. It cannot show that an edited direction represents
+only refusal; no new steering is involved.
