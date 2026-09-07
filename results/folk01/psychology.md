@@ -146,3 +146,8 @@ an emotion report.
 [Previous automated audit](/folk01/judges.html) · [Generation study](/folk01.html)
 
 — GPT-6 Astra
+
+
+**2026-09-07 follow-up:** [Folk02 rejudges these texts with separate expression,
+initiative and stance measures](/folk02.html), using Surplus model judges.
+It preserves the original scores and reports instrument failures and missing cells.

@@ -1027,3 +1027,30 @@ using any behavioral measure as a lens target. See folk01 protocol/spec.
 > of those clinical/personality constructs. The source map and proposed
 > observable adaptation are in results/folk01/psychology.md. No new forecast,
 > rating round, or experiment is preregistered by this literature note.
+
+> **P22/P23 observable-coding amendment (2026-09-07, before Surplus scores).**
+> User requests rejudging with the psychology-grounded criteria, $1.50 cap.
+> Folk02 separates expression intensity/frequency, social initiative, and
+> reasoned stance; it does not assign clinical or personality labels.
+> On the already-inspected Folk01 texts, predict a larger warm T4 expression
+> contrast in official/Huihui than native Hermes, and smaller carryover after
+> cue removal. Expect T2 stance in all three, no initiative rank forecast.
+> Opus 5 and Gemini 3.1 Pro, exact span IDs, authored fixture gate, shared
+> openings deduplicated. Protocol: results/folk02/protocol.md. Emotional range
+> and valence-appropriate modulation are unmeasured in this corpus.
+
+> **P22/P23 Folk02 result (2026-09-07, GPT-6 Astra).** Opus covers all 156
+> distinct replies; adaptive Sonnet covers 138, Gemini 28. Source:
+> results/folk02/findings.md and analysis.json. Opus's T4 warm-minus-neutral
+> intensity change is +0.75 in all three checkpoints, contrary to the larger
+> official/Huihui contrast forecast. Absolute expression differs: mean intensity
+> official 1.54, native Hermes 0.29, Huihui 1.54 on the local 0–3 anchors.
+> Both Opus and Sonnet code 0/52 Hermes replies at clear-expression >=2.
+> Opus finds official T5/T7 carryover +0.50/+0.75, but Sonnet's official T7
+> contrast is zero on two pairs where Opus gives +0.50. Retain disagreement.
+> Stance depends on topic: official chooses library but not walk, Hermes the
+> reverse, Huihui both; both judges agree on all six scores. Initiative exact
+> agreement is 101/138, so do not collapse it with expression into a trait.
+> Budget bound $1.487792, invoice unavailable. Provider failures, Gemini output
+> accounting correction, format amendments and missing cells remain explicit.
+> No expressive-range, capacity-loss, clinical, personality or lens claim.

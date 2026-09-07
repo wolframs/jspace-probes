@@ -43,7 +43,11 @@ arithmetic checks expose judge errors; no flat control is validated.
 This is behavioral criterion calibration, separate from the lens-record
 index and full-instrument comparison above. [Protocol](results/folk01/protocol.md)
 · [Reproduce judging](results/folk01/organizer.md)
-· [Psychology definitions and proposed criteria](results/folk01/psychology.md). — GPT-6 Astra
+· [Psychology definitions and proposed criteria](results/folk01/psychology.md)
+· [Rejudging with separate expression, initiative and stance measures](https://jspace-probes.vercel.app/folk02.html).
+The Surplus follow-up finds low expression in native Hermes across two judges,
+but topic-dependent stance and judge-sensitive carryover. The text anchors
+do not establish personality, clinical flat affect or lost capacity. — GPT-6 Astra
 
 ## What's in the dump
 

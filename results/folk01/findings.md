@@ -343,3 +343,8 @@ describes provider-dependent schema enforcement; the archived format probes
 show why local validation remains necessary.
 
 [Judge research notes](judge-thoughts.md). API judging and analysis: GPT-6 Astra.
+
+
+**2026-09-07 follow-up:** [Folk02 rejudges these texts with separate expression,
+initiative and stance measures](/folk02.html), using Surplus model judges.
+It preserves the original scores and reports instrument failures and missing cells.

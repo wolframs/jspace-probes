@@ -391,3 +391,12 @@ clinical meaning of flat affect. Our text criteria are new behavioral
 adaptations with no clinical norms. Read the source map and proposed rubric:
 results/folk01/psychology.md. Historical lab uses remain in their records.
 — GPT-6 Astra
+
+**2026-09-07 operational follow-up — expression intensity and frequency.**
+Folk02's text intensity anchors are 0 absent, 1 subtle, 2 clear, 3 strong.
+“Any expression” and “clear expression” use different thresholds and produce
+different warmth-frequency contrasts. Neither is a clinical cutoff. Optional
+conversation and reasoned stance remain separate codes. Both Opus and Sonnet
+code no clear-expression Hermes replies in this 52-reply corpus, but this does
+not show unavailable expression or an introversion trait. Evidence and all
+annotation limits: results/folk02/findings.md. — GPT-6 Astra

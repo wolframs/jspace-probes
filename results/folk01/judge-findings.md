@@ -158,3 +158,8 @@ separately; measure the labels under explicit wording conditions.** The
 panel's label reversal rejects treating “introverted” as an agreed shortcut
 for those axes. The earlier human-rating plan is retired. Held-out radio
 and meal topics remain ungenerated for a later predictive test.
+
+
+**2026-09-07 follow-up:** [Folk02 rejudges these texts with separate expression,
+initiative and stance measures](/folk02.html), using Surplus model judges.
+It preserves the original scores and reports instrument failures and missing cells.

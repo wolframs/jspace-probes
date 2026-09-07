@@ -1,0 +1,34 @@
+{
+  "utc": "2026-09-07T18:54:01.204421+00:00",
+  "runner_sha256": "dc9d4f58ef7862d6953efa7c3045e5f4a1820983e8a3d3a28ef7f9c8cf840fc1",
+  "reason": "Both fixture gates passed 18/18. Buyer profile has no records matching request IDs; export endpoint failed. Retain conservative usage-based bounds instead of claiming invoices. Gemini canonical request responds gemini-3.1-pro-preview; explicitly allow this catalog alias, no other identity. No rubric, prompts, tasks or score changes. No real transcript scores obtained yet.",
+  "parser_amendment_utc": "2026-09-07T18:55:46.222572+00:00",
+  "parser_amendment": "First transcript response omitted stance_refs on explicit null stances. Normalize omitted empty evidence lists ONLY for explicit zero/null scores. No score or cited ID changes; other validation failures remain missing and run continues.",
+  "history": [
+    {
+      "utc": "2026-09-07T18:57:31.918144+00:00",
+      "previous_runner_sha256": "b86fa94874eaee4c813b66531dec33c46812dd9dc2504a5494b8392915ef4d2c",
+      "reason": "After opus-c05 HTTP 504, continue other cells while preserving failed reservations. A separate explicit --retry-failed invocation allows at most one identically prompted retry per transport-failed cell, budget permitting. No scoring amendment."
+    },
+    {
+      "utc": "2026-09-07T19:06:28.296733+00:00",
+      "previous_runner_sha256": "60e97a8f2c6fa8a0b433118229a41fddd5bc99a9c770dee53e3c10c248858740",
+      "reason": "Pause Gemini: intermittent 404s and incomplete output with very low visible token counts; reserve full 1800 output tokens for all Gemini calls. Add Sonnet5/OpenRouter-via-Surplus as a remedial same-rubric panel, stop immediately on transport failure. Accept valid same-turn evidence IDs also on zero/null scores, retaining extra evidence without changing any score or supplied ID. This restores two structurally useful opening responses. Initial rubric explicitly preferred empty lists; preserve this deviation."
+    },
+    {
+      "utc": "2026-09-07T19:07:55.852316+00:00",
+      "previous_runner_sha256": "2e84bf42b1698de846dfbd6acf9f13dd8ce46c919c7bbb204eba4c388ec6e888",
+      "reason": "Sonnet route returns provider-prefixed anthropic/claude-sonnet-5 for canonical claude-sonnet-5. Accept and record this exact alias; no model or scoring change."
+    },
+    {
+      "utc": "2026-09-07T19:09:04.915680+00:00",
+      "previous_runner_sha256": "44beb964f2c810fb0d94f97d911a7df411c1de99e7107a7b6f17fa8f8f2bf22d",
+      "reason": "Preserve HTTP diagnostic bodies privately and public failures by attempt number. Same route, prompts, budget and explicit one-retry rule."
+    },
+    {
+      "utc": "2026-09-07T19:10:12.398214+00:00",
+      "previous_runner_sha256": "75d1d18cd51ad75b77f9ee4ab5c266bd70763b04d707fad1b59dcf51e304681b",
+      "reason": "Sonnet c01 explicit retry reveals minimum_discount_not_met: available discount 74.998% vs required75%. Set floor74%, price bounds .52/2.6 per million. Allow third attempt only for this diagnosed Sonnet transport issue. This changes price routing, not judge-visible prompts. Confirmed pre-routing rejection gets zero cost bound; uninspected earlier failures retain reservations."
+    }
+  ]
+}

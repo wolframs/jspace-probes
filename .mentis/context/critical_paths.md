@@ -94,7 +94,7 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: shuffle has 10 dependents — changes here have wide blast radius
+- **Description**: shuffle has 11 dependents — changes here have wide blast radius
 
 ## High-traffic: topk
 
