@@ -86,7 +86,7 @@ def specs_for(model: str) -> dict[str, dict]:
     # The base checkpoint is registered for raw boot calibration only.
     # Do not accidentally run the assistant-template course on a base model;
     # its raw-generation battery belongs to the gated lineage experiment.
-    if model == "qwen-14b-base":
+    if model.startswith("qwen-14b-base"):
         return {k: s for k, s in specs.items() if s["unit"] == "0"}
     return specs
 

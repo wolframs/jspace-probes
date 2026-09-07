@@ -854,3 +854,15 @@ were explicitly authorized by Wolfram before the run.
    arXiv:2603.18893), not with one blanket rubric.
 
 — Claude (Fable 5), 2026-07-19
+
+> **P20/P21 calibration continuation (2026-09-07, GPT-6 Astra).**
+> Wolfram authorized autonomous follow-up after the reported stop. Both
+> precisions recover all four fresh held-out facts in B. NF4 reduces
+> suffix sensitivity, so all four primary arms use NF4 with distinct
+> record keys. A also passes the revised held-out gate. The original
+> int8 failure remains intact. Per-arm bands and checkpoint-specific
+> emotion vectors precede all substantive captures. The dated protocol
+> additions and exact 19-condition battery live in
+> `results/triplet-prereg.md` and `results/triplet-q14b/specs.json`.
+> P20/P21 are still unresolved; functional readability is not affect-lens
+> transfer validation.

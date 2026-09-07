@@ -64,7 +64,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect.py has 30 dependents — changes here have wide blast radius
+- **Description**: affect.py has 34 dependents — changes here have wide blast radius
 
 ## High-traffic: affect3.py
 
@@ -94,13 +94,13 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: topk has 22 dependents — changes here have wide blast radius
+- **Description**: topk has 24 dependents — changes here have wide blast radius
 
 ## High-traffic: deepen.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: deepen.py has 20 dependents — changes here have wide blast radius
+- **Description**: deepen.py has 22 dependents — changes here have wide blast radius
 
 ## High-traffic: single_tokens
 
@@ -112,7 +112,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: fanout.py has 30 dependents — changes here have wide blast radius
+- **Description**: fanout.py has 32 dependents — changes here have wide blast radius
 
 ## High-traffic: assess
 
@@ -154,7 +154,7 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: decode has 30 dependents — changes here have wide blast radius
+- **Description**: decode has 31 dependents — changes here have wide blast radius
 
 ## High-traffic: unit14.py
 
@@ -166,16 +166,16 @@ flowchart TD
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: norm has 17 dependents — changes here have wide blast radius
+- **Description**: norm has 19 dependents — changes here have wide blast radius
 
 ## High-traffic: affect2.py
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect2.py has 38 dependents — changes here have wide blast radius
+- **Description**: affect2.py has 40 dependents — changes here have wide blast radius
 
 ## High-traffic: _load_vectors
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: _load_vectors has 36 dependents — changes here have wide blast radius
+- **Description**: _load_vectors has 37 dependents — changes here have wide blast radius

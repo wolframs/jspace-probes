@@ -1,3 +1,5 @@
+> **Continuation, 2026-09-07:** Wolfram authorized autonomous follow-up after this stop. The matched precision panel passes on B at int8 and NF4; all primary arms now use NF4. A/B emotion instruments and band measurements are complete. [Live comparison and calibration curves](comparison.md) carry subsequent results. The stop report below is historical.
+
 # Qwen3-14B lineage: calibration stop, 2026-09-07
 
 **The substantive experiment has not run.** A failed the pre-registered

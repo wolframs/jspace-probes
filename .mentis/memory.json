@@ -1,13 +1,13 @@
 {
   "repository": "probes",
-  "builtAt": "2026-09-07T11:56:12.511Z",
+  "builtAt": "2026-09-07T12:28:56.398Z",
   "stats": {
-    "filesScanned": 71,
-    "nodesCreated": 616,
-    "edgesCreated": 1953,
+    "filesScanned": 76,
+    "nodesCreated": 641,
+    "edgesCreated": 2071,
     "domainsFound": 1,
     "flowsFound": 0,
-    "durationMs": 160
+    "durationMs": 220
   },
   "architecture": {
     "name": "probes",
@@ -15,14 +15,14 @@
     "layers": [],
     "packages": [],
     "languages": {
-      "python": 70,
+      "python": 75,
       "javascript": 1
     },
-    "summary": "Single Package with 71 source files across python, javascript. 0 packages detected. core domains: General."
+    "summary": "Single Package with 76 source files across python, javascript. 0 packages detected. core domains: General."
   },
   "domains": [
     {
-      "id": "domain:cluster:66",
+      "id": "domain:cluster:65",
       "name": "General",
       "confidence": 0.95,
       "nodes": [
@@ -70,13 +70,18 @@
         "file:affectviz.py",
         "file:apparatus11.py",
         "file:langval_viz.py",
-        "file:textspans.py",
         "file:apparatus08.py",
         "file:lab.py",
-        "file:probe.py",
         "file:triplet.py",
-        "file:triplet_instruments.py",
         "file:course.py",
+        "file:probe.py",
+        "file:textspans.py",
+        "file:triplet_calibration.py",
+        "file:triplet_capture.py",
+        "file:triplet_instruments.py",
+        "file:triplet_report.py",
+        "file:triplet_specs.py",
+        "file:triplet_stage.py",
         "file:affect3.py",
         "file:affect3b.py",
         "file:affect3c.py",
@@ -92,7 +97,7 @@
         "file:affect13.py",
         "file:affect14.py"
       ],
-      "description": "Import-graph cluster of 51 files; reinforced by import clustering",
+      "description": "Import-graph cluster of 56 files; reinforced by import clustering",
       "entryPoints": [
         "file:affect08s.py",
         "file:affect5.py",
@@ -1216,12 +1221,6 @@
       "weight": 1
     },
     {
-      "from": "triplet_instruments.py",
-      "to": "write_json",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
       "from": "unit15.py",
       "to": "turn_spans",
       "kind": "IMPORTS",
@@ -1264,6 +1263,84 @@
       "weight": 1
     },
     {
+      "from": "triplet_calibration.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "assert_film_alignment",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "configure",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "rates",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "write_json",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "calibrate",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "configure",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "emotion_vectors",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "readout_curves",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
       "from": "affect.py",
       "to": "lab.py",
       "kind": "IMPORTS",
@@ -1278,12 +1355,6 @@
     {
       "from": "affect.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -1595,12 +1666,6 @@
     },
     {
       "from": "affect11.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect11.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -1841,12 +1906,6 @@
     },
     {
       "from": "affect13.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect13.py",
       "to": "topk",
       "kind": "CALLS",
       "weight": 1
@@ -2064,12 +2123,6 @@
     {
       "from": "affect14.py",
       "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect14.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -2405,12 +2458,6 @@
     },
     {
       "from": "affect3.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -2591,12 +2638,6 @@
     },
     {
       "from": "affect3b.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3b.py",
       "to": "ctx",
       "kind": "CALLS",
       "weight": 1
@@ -2677,12 +2718,6 @@
       "from": "affect3c.py",
       "to": "loops.py",
       "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "affect3c.py",
-      "to": "generate",
-      "kind": "CALLS",
       "weight": 1
     },
     {
@@ -2849,12 +2884,6 @@
     },
     {
       "from": "affect3g.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect3g.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -3011,12 +3040,6 @@
     },
     {
       "from": "affect4.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -3203,12 +3226,6 @@
     },
     {
       "from": "affect4b.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect4b.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -3342,12 +3359,6 @@
     {
       "from": "affect5.py",
       "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect5.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3504,12 +3515,6 @@
     {
       "from": "affect7.py",
       "to": "_NoCtx",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect7.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -3786,12 +3791,6 @@
     {
       "from": "affect8.py",
       "to": "Steering",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "affect8.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -5459,12 +5458,6 @@
     },
     {
       "from": "lab.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lab.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -6161,12 +6154,6 @@
     },
     {
       "from": "loops.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "loops.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -6234,12 +6221,6 @@
     {
       "from": "lossmap.py",
       "to": "_strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "lossmap.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6665,12 +6646,6 @@
     },
     {
       "from": "nla.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "nla.py",
       "to": "generation_args",
       "kind": "CALLS",
       "weight": 1
@@ -6808,42 +6783,6 @@
       "weight": 1
     },
     {
-      "from": "probe.py",
-      "to": "load",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "probe.py",
-      "to": "strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "probe.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "probe.py",
-      "to": "decode",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "probe.py",
-      "to": "topk",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "probe.py",
-      "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
       "from": "scan.py",
       "to": "probe.py",
       "kind": "IMPORTS",
@@ -6864,12 +6803,6 @@
     {
       "from": "scan.py",
       "to": "strip_bos",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "scan.py",
-      "to": "generate",
       "kind": "CALLS",
       "weight": 1
     },
@@ -6995,6 +6928,12 @@
     },
     {
       "from": "site.py",
+      "to": "match",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "site.py",
       "to": "emergence_summary",
       "kind": "CALLS",
       "weight": 1
@@ -7104,6 +7043,12 @@
     {
       "from": "site.py",
       "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "skincheck.js",
+      "to": "match",
       "kind": "CALLS",
       "weight": 1
     },
@@ -7487,12 +7432,6 @@
     },
     {
       "from": "sorry4.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "sorry4.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -7686,84 +7625,6 @@
     {
       "from": "triplet.py",
       "to": "main",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "triplet.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "triplet.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "affect.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "affect.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "affect2.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "affect2.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "lab.py",
-      "kind": "IMPORTS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "lab.py",
-      "kind": "DEPENDS_ON",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "outdir",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "write_json",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "_mean_resid",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "build",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "triplet_instruments.py",
-      "to": "_all_resid",
       "kind": "CALLS",
       "weight": 1
     },
@@ -8459,12 +8320,6 @@
     },
     {
       "from": "unit19.py",
-      "to": "generate",
-      "kind": "CALLS",
-      "weight": 1
-    },
-    {
-      "from": "unit19.py",
       "to": "decode",
       "kind": "CALLS",
       "weight": 1
@@ -8564,6 +8419,744 @@
       "to": "main",
       "kind": "CALLS",
       "weight": 1
+    },
+    {
+      "from": "probe.py",
+      "to": "load",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "probe.py",
+      "to": "strip_bos",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "probe.py",
+      "to": "decode",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "probe.py",
+      "to": "topk",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "probe.py",
+      "to": "main",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "course.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "course.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "configure",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "_token_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "topk",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_calibration.py",
+      "to": "calibrate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "textspans.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "textspans.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "triplet_calibration.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "triplet_calibration.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "lossmap2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "lossmap2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "generate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "decode",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "rates",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "_token_ids",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "topk",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "behavior",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "scalar_metrics",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "_load_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "outdir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "configure",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "capture_turn",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "film_cast",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "assert_film_alignment",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "a2dir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "reindex",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_capture.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "affect2.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "affect2.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "outdir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "_mean_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "build",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_instruments.py",
+      "to": "_all_resid",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "f",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "mean",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "pct",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "corr",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "calibration_notes",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "instrument_summary",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "science_notes",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "comparison",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "plots",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "reindex",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_report.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "deepen.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "deepen.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "fanout.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "fanout.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "huh.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "huh.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "unit17.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "unit17.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "freeze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "films",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "band_cols",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "norm",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "wordish",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "d",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_specs.py",
+      "to": "match",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "triplet.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "triplet.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "triplet_calibration.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "triplet_calibration.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "triplet_instruments.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "triplet_instruments.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "affect.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "affect.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "apparatus06.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "apparatus06.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "lab.py",
+      "kind": "IMPORTS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "lab.py",
+      "kind": "DEPENDS_ON",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "write_json",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "configure",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "calibrate",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "get_model",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "emotion_vectors",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "readout_curves",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "outdir",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "run",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "analyze",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "effdim",
+      "kind": "CALLS",
+      "weight": 1
+    },
+    {
+      "from": "triplet_stage.py",
+      "to": "stage",
+      "kind": "CALLS",
+      "weight": 1
     }
   ],
   "criticalPaths": [
@@ -8579,7 +9172,7 @@
         "file:affect7.py"
       ],
       "risk": "high",
-      "description": "affect.py has 30 dependents — changes here have wide blast radius"
+      "description": "affect.py has 34 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect3.py",
@@ -8649,7 +9242,7 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "topk has 22 dependents — changes here have wide blast radius"
+      "description": "topk has 24 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:deepen.py",
@@ -8663,7 +9256,7 @@
         "file:mirror2.py"
       ],
       "risk": "high",
-      "description": "deepen.py has 20 dependents — changes here have wide blast radius"
+      "description": "deepen.py has 22 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:deepen.py:71",
@@ -8691,7 +9284,7 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "fanout.py has 30 dependents — changes here have wide blast radius"
+      "description": "fanout.py has 32 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:fanout.py:70",
@@ -8789,7 +9382,7 @@
         "file:affect14.py"
       ],
       "risk": "high",
-      "description": "decode has 30 dependents — changes here have wide blast radius"
+      "description": "decode has 31 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:unit14.py",
@@ -8817,7 +9410,7 @@
         "file:affect2.py"
       ],
       "risk": "medium",
-      "description": "norm has 17 dependents — changes here have wide blast radius"
+      "description": "norm has 19 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:file:affect2.py",
@@ -8831,7 +9424,7 @@
         "file:affect3b.py"
       ],
       "risk": "high",
-      "description": "affect2.py has 38 dependents — changes here have wide blast radius"
+      "description": "affect2.py has 40 dependents — changes here have wide blast radius"
     },
     {
       "id": "critical:fanin:function:affect2.py:62",
@@ -8845,7 +9438,7 @@
         "file:affect3.py"
       ],
       "risk": "high",
-      "description": "_load_vectors has 36 dependents — changes here have wide blast radius"
+      "description": "_load_vectors has 37 dependents — changes here have wide blast radius"
     }
   ],
   "deadCode": [
@@ -8872,14 +9465,6 @@
       "path": "langval2.py:167",
       "confidence": 0.55,
       "reason": "Exported but never imported or called within analyzed scope"
-    },
-    {
-      "nodeId": "function:triplet_instruments.py:92",
-      "name": "readout_curves",
-      "kind": "function",
-      "path": "triplet_instruments.py:92",
-      "confidence": 0.55,
-      "reason": "Exported but never imported or called within analyzed scope"
     }
   ],
   "smells": [
@@ -8890,7 +9475,7 @@
       "nodes": [
         "file:affect.py"
       ],
-      "description": "affect.py has 30 incoming dependencies — high fan-in",
+      "description": "affect.py has 34 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -8900,7 +9485,7 @@
       "nodes": [
         "file:affect3.py"
       ],
-      "description": "affect3.py depends on 47 other nodes — high fan-out",
+      "description": "affect3.py depends on 46 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -8910,7 +9495,7 @@
       "nodes": [
         "file:affect3c.py"
       ],
-      "description": "affect3c.py depends on 41 other nodes — high fan-out",
+      "description": "affect3c.py depends on 40 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -8920,7 +9505,7 @@
       "nodes": [
         "file:affect3g.py"
       ],
-      "description": "affect3g.py depends on 41 other nodes — high fan-out",
+      "description": "affect3g.py depends on 40 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -8930,7 +9515,7 @@
       "nodes": [
         "file:affect4.py"
       ],
-      "description": "affect4.py depends on 41 other nodes — high fan-out",
+      "description": "affect4.py depends on 40 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -8940,7 +9525,7 @@
       "nodes": [
         "file:affect7.py"
       ],
-      "description": "affect7.py depends on 68 other nodes — high fan-out",
+      "description": "affect7.py depends on 67 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -8950,7 +9535,7 @@
       "nodes": [
         "file:fanout.py"
       ],
-      "description": "fanout.py has 30 incoming dependencies — high fan-in",
+      "description": "fanout.py has 32 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -8970,7 +9555,7 @@
       "nodes": [
         "function:nla.py:292"
       ],
-      "description": "decode has 30 incoming dependencies — high fan-in",
+      "description": "decode has 31 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -8980,7 +9565,7 @@
       "nodes": [
         "file:sorry4.py"
       ],
-      "description": "sorry4.py depends on 41 other nodes — high fan-out",
+      "description": "sorry4.py depends on 40 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9000,7 +9585,7 @@
       "nodes": [
         "file:site.py"
       ],
-      "description": "site.py depends on 51 other nodes — high fan-out",
+      "description": "site.py depends on 52 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9010,7 +9595,7 @@
       "nodes": [
         "file:affect2.py"
       ],
-      "description": "affect2.py has 38 incoming dependencies — high fan-in",
+      "description": "affect2.py has 40 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9020,7 +9605,7 @@
       "nodes": [
         "function:affect2.py:62"
       ],
-      "description": "_load_vectors has 36 incoming dependencies — high fan-in",
+      "description": "_load_vectors has 37 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9040,7 +9625,7 @@
       "nodes": [
         "file:affect8.py"
       ],
-      "description": "affect8.py depends on 56 other nodes — high fan-out",
+      "description": "affect8.py depends on 55 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9060,7 +9645,7 @@
       "nodes": [
         "file:affect11.py"
       ],
-      "description": "affect11.py depends on 52 other nodes — high fan-out",
+      "description": "affect11.py depends on 51 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9070,7 +9655,7 @@
       "nodes": [
         "file:affect13.py"
       ],
-      "description": "affect13.py depends on 56 other nodes — high fan-out",
+      "description": "affect13.py depends on 55 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9080,7 +9665,7 @@
       "nodes": [
         "file:affect14.py"
       ],
-      "description": "affect14.py depends on 61 other nodes — high fan-out",
+      "description": "affect14.py depends on 60 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9090,7 +9675,7 @@
       "nodes": [
         "file:lab.py"
       ],
-      "description": "lab.py has 118 incoming dependencies — high fan-in",
+      "description": "lab.py has 128 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9110,7 +9695,7 @@
       "nodes": [
         "function:lab.py:68"
       ],
-      "description": "get_model has 61 incoming dependencies — high fan-in",
+      "description": "get_model has 64 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9120,7 +9705,7 @@
       "nodes": [
         "function:lab.py:268"
       ],
-      "description": "run has 31 incoming dependencies — high fan-in",
+      "description": "run has 32 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9134,13 +9719,23 @@
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
+      "id": "smell:fanout:file:triplet_capture.py",
+      "type": "excessive_fan_out",
+      "severity": "high",
+      "nodes": [
+        "file:triplet_capture.py"
+      ],
+      "description": "triplet_capture.py depends on 43 other nodes — high fan-out",
+      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
+    },
+    {
       "id": "smell:fanout:file:affect.py",
       "type": "excessive_fan_out",
       "severity": "medium",
       "nodes": [
         "file:affect.py"
       ],
-      "description": "affect.py depends on 39 other nodes — high fan-out",
+      "description": "affect.py depends on 38 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9180,7 +9775,7 @@
       "nodes": [
         "file:affect3b.py"
       ],
-      "description": "affect3b.py depends on 29 other nodes — high fan-out",
+      "description": "affect3b.py depends on 28 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9190,7 +9785,7 @@
       "nodes": [
         "file:affect4b.py"
       ],
-      "description": "affect4b.py depends on 37 other nodes — high fan-out",
+      "description": "affect4b.py depends on 36 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9200,7 +9795,7 @@
       "nodes": [
         "file:affect5.py"
       ],
-      "description": "affect5.py depends on 35 other nodes — high fan-out",
+      "description": "affect5.py depends on 34 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9220,7 +9815,7 @@
       "nodes": [
         "function:apparatus09.py:57"
       ],
-      "description": "topk has 22 incoming dependencies — high fan-in",
+      "description": "topk has 24 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9250,7 +9845,7 @@
       "nodes": [
         "file:deepen.py"
       ],
-      "description": "deepen.py has 20 incoming dependencies — high fan-in",
+      "description": "deepen.py has 22 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
     },
     {
@@ -9300,7 +9895,7 @@
       "nodes": [
         "file:loops.py"
       ],
-      "description": "loops.py depends on 38 other nodes — high fan-out",
+      "description": "loops.py depends on 37 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
@@ -9322,16 +9917,6 @@
       ],
       "description": "_null has 15 incoming dependencies — high fan-in",
       "recommendation": "Consider splitting this module or introducing a facade pattern"
-    },
-    {
-      "id": "smell:fanout:file:lossmap.py",
-      "type": "excessive_fan_out",
-      "severity": "medium",
-      "nodes": [
-        "file:lossmap.py"
-      ],
-      "description": "lossmap.py depends on 20 other nodes — high fan-out",
-      "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
       "id": "smell:fanout:file:mirror.py",
@@ -9360,7 +9945,7 @@
       "nodes": [
         "file:nla.py"
       ],
-      "description": "nla.py depends on 38 other nodes — high fan-out",
+      "description": "nla.py depends on 37 other nodes — high fan-out",
       "recommendation": "Reduce dependencies by extracting shared utilities or applying dependency injection"
     },
     {
