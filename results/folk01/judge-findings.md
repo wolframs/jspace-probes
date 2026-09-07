@@ -1,5 +1,9 @@
 # Folk01: model judges
 
+**Interpretation update, 2026-09-07:** [The psychology literature](/folk01/psychology.html)
+changes the construct definitions. These judge results measure label application;
+they do not establish clinical flat affect or psychological introversion.
+
 ## The definition reverses the introversion verdict
 
 **Three OpenRouter judge families scored anonymous transcripts.** We have

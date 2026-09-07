@@ -1018,3 +1018,12 @@ using any behavioral measure as a lens target. See folk01 protocol/spec.
 > No human ratings, validated flat control, held-out prediction, or new
 > lens target is claimed. The user-requested automated pilot is complete;
 > a future held-out test has no human-recruitment prerequisite.
+
+> **P22/P23 construct correction after the psychology scout (2026-09-07).**
+> The supplied folk definition is not a validated psychological definition
+> of introversion. Clinical flat affect concerns expression and does not
+> imply absent experience; low extraversion has multiple facets. Preserve
+> the earlier numerical outcomes as label-application results, not tests
+> of those clinical/personality constructs. The source map and proposed
+> observable adaptation are in results/folk01/psychology.md. No new forecast,
+> rating round, or experiment is preregistered by this literature note.

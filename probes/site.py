@@ -815,6 +815,7 @@ def write_sitemap(index: list[dict]) -> None:
     if (ROOT / "folk01.html").exists():
         urls.append((f"{BASE}/folk01.html", None))
         urls.append((f"{BASE}/folk01/judges.html", None))
+        urls.append((f"{BASE}/folk01/psychology.html", None))
     for e in index:
         urls.append((f'{BASE}/r/{e["id"]}.html', (e.get("created") or "")[:10] or None))
     parts = ['<?xml version="1.0" encoding="UTF-8"?>',

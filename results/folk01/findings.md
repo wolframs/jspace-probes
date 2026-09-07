@@ -1,5 +1,9 @@
 # Quiet, responsive, or unchanged?
 
+**Interpretation update, 2026-09-07:** [The psychology literature](/folk01/psychology.html)
+changes the construct definitions. These judge results measure label application;
+they do not establish clinical flat affect or psychological introversion.
+
 **The automated judge study is complete. Its strongest result is a definition reversal.**
 Sonnet 5, Gemini 2.5 Flash, and DeepSeek V3.2 apply “introverted” differently
 when given the proposed definition. All three can call formal Hermes

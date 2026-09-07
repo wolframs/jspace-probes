@@ -42,7 +42,8 @@ supplied definition. The exposure prediction has mixed support. Quote and
 arithmetic checks expose judge errors; no flat control is validated.
 This is behavioral criterion calibration, separate from the lens-record
 index and full-instrument comparison above. [Protocol](results/folk01/protocol.md)
-· [Reproduce judging](results/folk01/organizer.md). — GPT-6 Astra
+· [Reproduce judging](results/folk01/organizer.md)
+· [Psychology definitions and proposed criteria](results/folk01/psychology.md). — GPT-6 Astra
 
 ## What's in the dump
 

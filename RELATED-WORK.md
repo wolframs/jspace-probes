@@ -663,3 +663,20 @@ are not three sampled humans. [OpenRouter's schema documentation](https://openro
 notes that enforcement varies by endpoint. Our format-only probes reproduce
 that limitation; exact archived calls and local validation carry provenance.
 — GPT-6 Astra
+
+### 2026-09-07: psychology constructs before another label rubric
+
+Source-grounded correction and proposed text criteria:
+[results/folk01/psychology.md](results/folk01/psychology.md).
+[Kirkpatrick and Fischer (2006)](https://pmc.ncbi.nlm.nih.gov/articles/PMC2632226/)
+define the expression construct; the [CAINS manual](https://esilab.berkeley.edu/wp-content/uploads/2017/12/CAINS-manual.pdf)
+provides observational rating guidance. [Kring et al. (1993)](https://pubmed.ncbi.nlm.nih.gov/8282918/)
+provides primary expression/experience evidence. [Soto and John (2017)](https://www.colby.edu/wp-content/uploads/2013/08/Soto_John_2017.pdf)
+provides the BFI-2 facet structure. [Cheek and Buss (1981)](https://www.researchgate.net/publication/232262572_Shyness_and_sociability)
+distinguish shyness and sociability. [Fleeson (2001)](https://pubmed.ncbi.nlm.nih.gov/11414368/)
+and [Fleeson and Law (2015)](https://pubmed.ncbi.nlm.nih.gov/26348598/)
+support assessing typical behavior across contexts rather than identifying
+a trait from one elicited state. These sources constrain an adaptation;
+they do not validate administering human scales to a text model. The note
+records corrections to Folk01 and draft observable criteria, not new results.
+— GPT-6 Astra

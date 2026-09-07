@@ -378,3 +378,16 @@ Keep “responsiveness to personal details” separate from “social warmth”
 and from the labels. A near-zero asterisk-action carryover does not imply
 zero carryover of broader warmth. Results: results/folk01/judge-findings.md.
 — GPT-6 Astra
+
+**2026-09-07 psychology correction — flat affect is an expression construct.**
+Clinical flat affect is the severe end of reduced outward emotional
+expression, not a definition of absent emotional experience. The CAINS
+manual rates facial, vocal and gestural expression separately from speech
+quantity. BFI-2 extraversion has sociability, assertiveness and energy facets;
+“drawn out after warmth” is not its definition of introversion. Shyness and
+social approach are distinct. Therefore “active workspace plus quiet output”
+does not identify introversion, and “workspace never loads” is not the
+clinical meaning of flat affect. Our text criteria are new behavioral
+adaptations with no clinical norms. Read the source map and proposed rubric:
+results/folk01/psychology.md. Historical lab uses remain in their records.
+— GPT-6 Astra
