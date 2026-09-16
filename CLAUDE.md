@@ -32,7 +32,15 @@ he sets directions and expects designed-and-executed experiments back.
 ## Environment
 
 - Python: `.venv/bin/python` (3.12, uv-managed). No system pip.
-- GPU: RTX 3090 24GB. RAM: 62GB, **no swap** — never load Qwen3.6-27B from
+- **HF cache is on the Bigger SSD** (since 2026-09-16): `~/.cache/huggingface/hub`
+  is a symlink to `/run/media/wolfram/Bigger SSD/AI/huggingface/hub`, one hub
+  shared by every project. The SSD auto-mounts at desktop login only; if
+  `mountpoint -q "/run/media/wolfram/Bigger SSD"` fails, run
+  `udisksctl mount -b '/dev/disk/by-label/Bigger\x20SSD'` (works from an agent
+  session) before loading — unmounted, cached models look missing. Don't point
+  `HF_HOME` elsewhere; that splits the cache again.
+- GPU: RTX 3090 24GB. RAM: 62GB, swap only 8 GiB (512 MiB until 2026-09-15 —
+  treat it as no headroom) — never load Qwen3.6-27B from
   official bf16 with on-the-fly quantization (OOMs the box); use the cached
   pre-quantized `lokeshe09/Qwen3.6-27B-bnb-4bit` (validated, see
   results/u0-boot-q27b thoughts). Also: **one model-loading process at a

@@ -12,8 +12,9 @@ workspace). Python, not a JS project — there is no `package.json` and no
 build step.
 
 **`CLAUDE.md` is the authoritative agent contract.** Read it first. It
-carries the mandatory PRE-DESIGN PROTOCOL, the environment limits (no swap;
-never load Qwen3.6-27B unquantized), the layer-band reference, and the
+carries the mandatory PRE-DESIGN PROTOCOL, the environment limits (little
+swap; never load Qwen3.6-27B unquantized; the HF cache is a symlink onto the
+Bigger SSD, which must be mounted), the layer-band reference, and the
 research-board rules. This file exists only so agents that read `AGENTS.md`
 by convention get pointed there instead of guessing.
 
