@@ -29,7 +29,8 @@ SEEDS = list(range(16, 28))
 OUT = RESULTS / "affect15-q27b"
 SETS = {"full": E_LAYERS, "k4s": [28, 36, 44, 52], "k2s": [36, 52],
         "k1": [44], "k4c": [36, 40, 44, 48], "k2c": [40, 44],
-        "k1_32": [32], "k1_52": [52], "k6s": [28, 32, 40, 44, 52, 56]}
+        "k1_32": [32], "k1_52": [52], "k6s": [28, 32, 40, 44, 52, 56],
+        "k1_28": [28], "k1_36": [36], "k1_56": [56]}
 CHUNKS = {
     "A": [("calm", "full", .08), ("calm", "full", .04),
           ("calm", "full", .02), ("calm", "k1", "m"),
@@ -45,6 +46,10 @@ CHUNKS = {
           ("calm", "k4c", "m"), ("calm", "k4c", .08),
           ("calm", "k6s", .08), ("rand2", "k1", "m"),
           ("rand2", "k4s", "m")],
+    "D": [("calm", s, .64) for s in ("k1_28", "k1_36", "k1", "k1_52",
+                                     "k1_56")]
+    + [("calm", "full", .06), ("calm", "full", .10),
+       ("rand1", "k1_28", .64), ("rand2", "k1_52", .64)],
 }
 
 
@@ -242,6 +247,13 @@ def _determinism(res):
     return f"max |Δlogit| vs affect-14 part1 over {n} runs: {worst:.3f}"
 
 
+def _full08():
+    r = _load("A")
+    ps = _per_seed(r)
+    return _mean(ps, "calm_full@0.08",
+                 sorted({x["seed"] for x in r["runs"]}), 1)
+
+
 def analyze(chunk) -> None:
     rng = random.Random(1515)
     res = _load(chunk)
@@ -338,6 +350,27 @@ def analyze(chunk) -> None:
         for k in ("k1", "k4s"):
             lines.append(f"- rand2 {k}@m dLoop {m(f'rand2_{k}@m'):+.2f}, "
                          f"dMargin {mg(f'rand2_{k}@m'):+.2f}")
+
+    elif chunk == "D":
+        full = _full08()
+        fr = {s: m(f"calm_{s}@0.64") / full
+              for s in ("k1_28", "k1_36", "k1", "k1_52", "k1_56")}
+        hr = all(.65 <= v <= 1.35 for v in fr.values())
+        hp = (fr["k1_28"] + fr["k1_36"]) / 2 - (fr["k1_52"]
+                                                 + fr["k1_56"]) / 2
+        lines += ["- single layer at α .64, dLoop as fraction of "
+                  "full@.08 (chunk A): " + ", ".join(
+                      f"{s} {v:+.2f}" for s, v in fr.items()),
+                  f"- **H-R** (all in [0.65, 1.35]): "
+                  f"{'PASS' if hr else 'FAIL'}",
+                  f"- **H-P** (early − late = {hp:+.2f}, bar > 0.5): "
+                  f"{'PASS' if hp > .5 else 'FAIL'}"]
+        for d, s in (("rand1", "k1_28"), ("rand2", "k1_52")):
+            lines.append(f"- {d} {s}@.64 dMargin {mg(f'{d}_{s}@0.64'):+.2f}"
+                         f" vs calm {mg(f'calm_{s}@0.64'):+.2f}")
+        lines.append(f"- threshold shape: full@.06 "
+                     f"{m('calm_full@0.06') / full:+.2f}, full@.10 "
+                     f"{m('calm_full@0.10') / full:+.2f}")
 
     (OUT / f"report-{chunk}.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines), flush=True)

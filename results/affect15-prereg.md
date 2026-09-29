@@ -106,3 +106,26 @@ on); dMargin co-reported for every arm.
   shared by proud), per protocol (e).
 - Resume-aware per seed per chunk; VRAM pre-flight ≥ 19.5 GB; one
   automatic non-137 retry; 137 = stop and report.
+
+## Addendum 2026-09-29 — chunk D, frozen after chunks A–C, before D runs
+
+Chunk C's registered dose-alone model FAILED on absolute dose Σα‖h‖:
+at matched absolute push, one layer at L32 gave 283% of full-stack
+dLoop, L44 146%, L52 31%. A **post-hoc** re-read found that the summed
+**relative** strength Σα (paper units: fraction of the local residual
+norm) orders all 15 calm arms: Spearman .979 vs dLoop fraction, .964 vs
+dMargin (absolute Σα‖h‖: .868 / .821). This is exploratory. In chunks
+A–C, Σα and layer position are confounded, because absolute matching
+gives small-norm early layers a larger α. Chunk D separates them.
+
+**D (10 × 12 seeds):** none; calm single layer at L28, L36, L44, L52,
+L56, each at α = 0.64 (Σα matched to full@.08); calm full@.06,
+full@.10 (threshold shape); rand1 k1_28@.64, rand2 k1_52@.64.
+
+- **H-R (relative dose):** all five calm single-layer arms within
+  ±0.35 of full@.08 (dLoop fraction in [0.65, 1.35]). PASS / FAIL.
+- **H-P (position):** mean fraction of L28+L36 minus mean of L52+L56
+  > 0.5. Reported alongside; the two can both fail, not both pass.
+- Randoms: margin reported vs calm at the same layer; no bar.
+- Threshold shape: dLoop fraction at Σα 0.16/0.32/0.48/0.64/0.80/0.96
+  (full-stack ladder), descriptive.
