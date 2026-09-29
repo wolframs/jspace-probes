@@ -251,6 +251,21 @@ where interventions bite; this is *how* they combine once inside it.)
 > margin stays the specific quantity. Use **dose threshold** for this.
 > Evidence: `results/affect15-q27b/report-A.md`.
 
+> **Correction 2026-09-29, later the same day (affect-15 chunks B–D).**
+> The note above measures dose in *absolute* push (Σα‖h‖). That unit
+> failed its registered test (chunk C): at matched absolute push one
+> layer at L32 gave 283% and L52 31%. The better unit is **summed
+> relative strength Σα** (fraction of the local residual norm, the
+> paper's unit; post hoc rho .979 over 15 calm arms vs .868 absolute).
+> The chunk D test at equal α 0.64 per single layer held on turn-end for
+> L28–L52 (1.00/1.00/1.00/.92) but missed both strict dLoop bars. L56 is
+> weaker (.50). Full-stack turn-end crosses between Σα 0.32 (.25) and
+> 0.48 (.92). The dose law holds for proud, reflective and " table" too.
+> Concentration costs specificity: single-layer randoms at α 0.64 end
+> the loop in 33–58% of seeds, though calm's margin is 2–4× theirs.
+> **Dose threshold** = a steep threshold in Σα, fading at the back edge
+> of the band. Evidence: `results/affect15-q27b/report.md`.
+
 **Elephant tax** — prohibition is a per-token tax: the banned item sits at
 rank 12–15 in the late-mid stack at every position where it *could* be
 emitted, for the entire generation — not just at the famous "distant

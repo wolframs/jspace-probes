@@ -1,5 +1,4 @@
-**The short version.** The score-gap result is now the confirmed main
-claim, and the demolition of the loop needs all eight layers at once.
+**The short version.** The score-gap result held, but we were wrong that the loop break needs all eight layers at once (see affect-15).
 
 **What we did.** Two tests on Qwen 27B with new random seeds. First,
 we repeated the loop test (31 conditions, 12 seeds) with the score
@@ -13,12 +12,12 @@ five emotions that never end the loop move the gap no more than
 random directions do.
 
 For calm, no single layer gives more than 1% of the full effect, but
-the loss from any one missed layer is 19% to 37%. The layers only
-work together. For "table", single layers each give about 10%. For
-proud, nothing works at any layer. Proud's effect repeats to the exact
-number in every seed, because the loop state repeats.
+the loss from any one missed layer is 19% to 37%. For "table", single
+layers each give about 10%. For proud, no single layer works. Proud's
+effect repeats to the exact number in every seed, because the loop
+state repeats.
 
-**What it means.** We measured that potent directions break the loop
-through the whole layer band at once. The plain
-word works partly layer by layer. We do not know why some meanings
-carry this joint effect.
+**What it means.** We were wrong to read this as layers that work
+together. Affect-15 (2026-09-29) showed that one layer with the same
+total push ends the loop as well. The pattern comes from a steep
+threshold in total push.

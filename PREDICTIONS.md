@@ -701,6 +701,28 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > rates). Evidence: results/affect14-q27b/{report.md,thoughts.md},
 > prereg results/affect14-prereg.md.
 
+> **2026-09-29 — "band-cooperative" RETIRED: it was a dose threshold
+> (affect-15, prereg frozen pre-run, chunk D addendum frozen pre-D).**
+> The mechanical reading won again (protocol (c)). affect-14's
+> leave-one-out signature is what any steep dose curve produces, and
+> proud had it too. Dose-matched fewer-layer injections decide it: calm
+> at ONE layer (L44) with the full stack's summed push gave 146% of the
+> loop drop, a larger margin and the same turn-end rate (V1 DOSE). Fixed-α
+> fewer layers equal the full stack at the matching lower α (V3 gaps
+> .02/.03). The same holds for proud, reflective and " table". The
+> registered absolute-dose model FAILED (position dominates at matched
+> Σα‖h‖). Post hoc, relative Σα orders all calm arms (rho .979). The
+> equal-α test (D) held on behaviour for L28–L52 but missed both strict
+> dLoop bars, and L56 is weaker. Full-stack turn-end: Σα .32 → .25,
+> .48 → .92. Specificity shrinks with concentration: single-layer
+> randoms at α .64 end the loop in 33–58% of seeds, while calm's margin
+> is 2–4× theirs. Escape modes differ by direction: calm stops, reflective
+> at L44 resumes the original answer 6/12 (the margin-cashing residual
+> is partly late cash-out into content), table and randoms swap loops.
+> Harness bit-exact vs affect-14 a month later. Evidence:
+> results/affect15-q27b/{report.md,thoughts.md}, prereg
+> results/affect15-prereg.md.
+
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the
 run).** Specimen #6 (u5d) established the WHAT: the early J-lens
