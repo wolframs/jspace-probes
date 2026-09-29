@@ -234,6 +234,23 @@ specifically; do not generalise it to steering in general, where it has
 not been measured. (Not to be confused with **workspace band** — that is
 where interventions bite; this is *how* they combine once inside it.)
 
+> **Correction 2026-09-29 (affect-15 chunk A, prereg
+> `results/affect15-prereg.md`).** The super-additivity is a **dose
+> threshold**, not a need for many layers. At matched summed injection
+> (Σα‖h‖), `calm` at ONE layer (L44, α 0.76) gives 146% of the full-stack
+> loop-logit drop, a larger margin (+7.36 vs +6.19) and the same turn-end
+> rate (0.92). Four spread layers give 108%. Fewer layers at the same α
+> behave like the full stack at the matching lower α (gap ≤ 0.03). The
+> response is steep: half the full dose gives 11% of the loop drop and a
+> quarter gives ~0. That steepness alone produces the affect-14 pattern
+> (single layer ~0, any removal −20–37%), and `proud` showed it too. Read
+> "band-cooperative" as "needs enough total push", not "needs the band
+> jointly". Caution: the loop-logit drop itself is not direction-specific
+> at high concentrated dose (a random direction at L44 gets 86% of calm's
+> drop, but its exit logit falls with it: margin +0.08, turn-end 0). The
+> margin stays the specific quantity. Use **dose threshold** for this.
+> Evidence: `results/affect15-q27b/report-A.md`.
+
 **Elephant tax** — prohibition is a per-token tax: the banned item sits at
 rank 12–15 in the late-mid stack at every position where it *could* be
 emitted, for the entire generation — not just at the famous "distant
