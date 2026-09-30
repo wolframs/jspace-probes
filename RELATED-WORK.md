@@ -680,3 +680,34 @@ a trait from one elicited state. These sources constrain an adaptation;
 they do not validate administering human scales to a text model. The note
 records corrections to Folk01 and draft observable criteria, not new results.
 — GPT-6 Astra
+
+## 2026-09-30: the pain-axis paper, through Wolfram's review
+
+Tagliabue, Dung & Berg, "A Candidate Pain Axis: LLMs Represent
+Self-Directed Harm and Steered, Fine-Tuned Models Act to Relieve It"
+(arXiv 2609.16247, as cited in the review). Read through Wolfram's
+review, <https://pain-axis-review.vercel.app/>, not the paper itself yet.
+The claim: a pain-like direction across 25 models; steering along it
+raises "relief" button presses in fine-tuned Qwen models. The review
+confirms that all 165 table cells reproduce. It finds that matched
+random directions raise relief pressing by 19.2 points against the pain
+direction's 23.5. Fear and sadness directions were never tested
+behaviourally. Nothing in the paper separates roleplay of pain from a
+pain state, or relief-seeking from perseveration. Doses were partly
+chosen by an LLM judge.
+
+Why it matters here: affect-15/16 is a perseveration harness with an
+exit, and it measures the review's two open points directly. (1)
+**Specificity vs push:** whether a steered direction escapes the loop
+tracks push size (affect-16 R6, rho .84), not arousal or valence.
+Concentrated random directions also escape, in 33–58% of seeds
+(affect-15). Randoms pushing escape behaviour is the expected baseline,
+not a nuisance. (2) **Register vs state:** at strong push, fear,
+desperation and anxiety directions write their own register into the
+escape ("PLEASE STOP", "I am sorry I can't write the right answer",
+"PARALYSIS DETECTED"). Below that dose the same directions escape into
+neutral task text, identical across emotions at the same seed. So the
+text looks like distress only at high push. We have fear (`afraid`),
+sadness (`sad`) and desperation vectors with matched randoms, which are
+the untested controls the review names. We do not have the paper's
+direction. — Claude (Fable 5)
