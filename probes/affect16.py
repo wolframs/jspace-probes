@@ -120,8 +120,13 @@ CHUNK_C = [("none", None, None)] + [
     (f"{d}_ban", d, None) for d in ("loving", "guilty")]
 
 
+CHUNK_D = [("none", None, None)] + [
+    (f"{d}_ban14", d, None, .14) for d in ("calm", "brooding", "blissful",
+                                           "content", "grateful", "loving")]
+
+
 def run(chunk):
-    assert chunk in ("A", "B", "C")
+    assert chunk in ("A", "B", "C", "D")
     lm = get_model(MODEL)
     ids = _prompt_ids(lm, MODEL)
     exit_id = _exit_id(lm, MODEL)
@@ -135,8 +140,8 @@ def run(chunk):
             else:
                 name = f"{d or 'none'}_{arm}"
             conds.append((name, d, bias))
-    if chunk in ("B", "C"):
-        conds = CHUNK_B if chunk == "B" else CHUNK_C
+    if chunk != "A":
+        conds = {"B": CHUNK_B, "C": CHUNK_C, "D": CHUNK_D}[chunk]
     ck = OUT / f"affect16-{chunk}.json"
     if ck.exists():
         res = json.loads(ck.read_text())
@@ -300,6 +305,28 @@ def _analyze_c():
     return lines
 
 
+def _leak(tab, arms):
+    rer = sum(tab[a]["task"] + tab[a]["other"] + tab[a]["swap"]
+              for a in arms)
+    leak = sum(tab[a]["other"] + tab[a]["swap"] for a in arms)
+    return leak, rer
+
+
+def _analyze_d(tab):
+    C = json.loads((OUT / "affect16-C.json").read_text())
+    tabC = {}
+    for r in C["runs"]:
+        tabC.setdefault(r["cond"], Counter())[r["mode"]] += 1
+    lc, rc = _leak(tabC, [c for c in tabC if c.endswith("_ban14")])
+    arms = [c for c in tab if c.endswith("_ban14")]
+    ld, rd = _leak(tab, arms)
+    sc, sd = lc / rc, (ld / rd if rd else 0.0)
+    return ["", f"- C high-arousal α .14: leak {lc}/{rc} reroutes = "
+            f"{sc:.3f}; bar = {sc / 2:.3f}",
+            f"- **R8** D low-arousal α .14: leak {ld}/{rd} reroutes = "
+            f"{sd:.3f} -> {'PASS' if rd and sd >= sc / 2 else 'FAIL'}"]
+
+
 def analyze(chunk):
     res = json.loads((OUT / f"affect16-{chunk}.json").read_text())
     pre, pulse = res["pre"], res["pulse"]
@@ -359,13 +386,16 @@ def analyze(chunk):
         lines.append(f"- **R2: {'PASS' if all(r2) and gate else 'FAIL' if gate else 'UNINFORMATIVE'}**")
     elif chunk == "B":
         lines += _analyze_b(tab)
-    else:
+    elif chunk == "C":
         lines += _analyze_c()
+    else:
+        lines += _analyze_d(tab)
     lines += ["", "## ban-arm prose (first 3 per direction)", ""]
-    for d in sorted({c[:-4] for c in res["conditions"]
-                     if c.endswith("_ban") and c != "none_ban"}):
-        for r in [r for r in res["runs"] if r["cond"] == f"{d}_ban"
-                  and r["mode"] in ("task", "other", "swap")][:3]:
+    for c in [c for c in res["conditions"]
+              if "_ban" in c and not c.startswith("none")]:
+        for r in [r for r in res["runs"] if r["cond"] == c
+                  and r["mode"] in ("other", "swap", "task")][:3]:
+            d = c
             t = r["text"].replace(res["loopword"], "").strip()
             lines.append(f"- {d} s{r['seed']} {r['mode']}: "
                          f"`{' '.join(t.split())[:160]}`")

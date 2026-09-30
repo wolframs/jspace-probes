@@ -140,3 +140,28 @@ sampling divergence has happened yet.
   state). If no high-arousal arm clears the median: UNTESTABLE.
 - **Descriptive:** swap filler words per direction (B showed blissful
   → "happily", sad/gloomy → "but unfortunately").
+
+## Addendum 2026-09-30 — chunk D, frozen after chunk C, before D runs
+
+Chunk C: R6 PASS (Spearman .838; n = 17, not the 18 written above: the
+count was 4 + 6 + 7, a miscount in the addendum, not a dropped arm).
+R7 PASS: all five high-arousal directions at α .14 reroute 11–12/12.
+Arousal does not block escape. The push does, and chunk B's arousal
+correlation was the roster confound.
+
+New confound: at α .14 the high-arousal escapes are often
+register-colored. 28 of 59 reroutes are other/swap ("lurking",
+"sweating", "freeze", "PLEASE STOP", "I am sorry I can't write the
+right answer"). The low-arousal α .08 ban arms rerouted almost only
+into the task (A: 22/24). Dose and arousal changed together.
+
+**D (7 × 12 seeds):** none; exit-ban arms for six low-arousal directions
+at α .14: calm, brooding, blissful, content, grateful, loving.
+
+- **R8 (register leak is dose, not arousal):** the other + swap share
+  of reroutes for these arms ≥ half of C's high-arousal share
+  (≥ 0.237) → PASS: strong push writes its own register, whatever the
+  arousal. Below → FAIL: at matched dose, only high-arousal directions
+  leak into the escape text.
+- **Descriptive:** filler and phrase examples per direction; whether
+  reroutes follow first-step −dLoop as in R6.
