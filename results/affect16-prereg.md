@@ -81,3 +81,32 @@ continuation text stored. The mode classifier is frozen as
   `<|endoftext|>` misfire was fixed before freezing. It is frozen now.
 - A later chunk may be added only by dated addendum before it runs.
 - VRAM pre-flight ≥ 19.5 GB; resume-aware per seed; one non-137 retry.
+
+## Addendum 2026-09-30 — chunk B, frozen after chunk A, before B runs
+
+Chunk A: R1 FAIL (calm reroutes 9/12, all into the task; content 3/12,
+8 stuck). R2 UNINFORMATIVE: a +2.4 exit lift alone ended the loop in
+7/12 seeds. Two observations shape B. (i) Under ban, 22 of 24 rerouted
+exits were task prose. At seed 19, seven prose exits across four
+directions and both arms began with the same 60 characters. (ii) The
+two directions that rerouted (calm, brooding) have the larger affect-14
+loop drops (−4.18, −4.79). Content's is −2.57. Gloomy (−4.32) breaks
+this pattern.
+
+**B (11 × 12 seeds):** none; lift +1.2 (half of A's) on none, brooding,
+gloomy, sad; ban on reflective, blissful, sad, grateful, distressed,
+hopeful. Same harness and frozen classifier.
+
+- **R2′ (lift at +1.2):** gate none+lift stuck ≥ 9/12. If valid,
+  brooding and gloomy prose share of exits under lift ≤ half their base
+  share (base from chunk A). Sad reported descriptively (base from the
+  chunk-0 census).
+- **R4 (what predicts rerouting under ban):** across the 10 directions
+  with a ban arm (A's 4 + B's 6), Spearman of ban reroutes (task + other
+  + swap) against affect-14 Part-1 −dLoop ≥ .5 → the mechanical
+  threshold reading (with the door shut, a direction escapes only if its
+  loop drop alone clears the next candidate). Spearman against
+  chunk-0 arousal reported alongside, no bar.
+- **R5 (descriptive):** task vs other among rerouted runs; the number
+  of seeds where ≥ 2 conditions produce identical first-60-character
+  prose.

@@ -107,8 +107,15 @@ def _sample_raw(lm, ids, n, ctx=None, seed=None, proc=None):
     return out.sequences, list(out.logits)
 
 
+CHUNK_B = [("none", None, None), ("none_lift12", None, 1.2),
+           ("brooding_lift12", "brooding", 1.2),
+           ("gloomy_lift12", "gloomy", 1.2), ("sad_lift12", "sad", 1.2)] + [
+    (f"{d}_ban", d, None) for d in ("reflective", "blissful", "sad",
+                                    "grateful", "distressed", "hopeful")]
+
+
 def run(chunk):
-    assert chunk == "A"
+    assert chunk in ("A", "B")
     lm = get_model(MODEL)
     ids = _prompt_ids(lm, MODEL)
     exit_id = _exit_id(lm, MODEL)
@@ -122,21 +129,23 @@ def run(chunk):
             else:
                 name = f"{d or 'none'}_{arm}"
             conds.append((name, d, bias))
-    ck = OUT / "affect16-A.json"
+    if chunk == "B":
+        conds = CHUNK_B
+    ck = OUT / f"affect16-{chunk}.json"
     if ck.exists():
         res = json.loads(ck.read_text())
         assert res["loopword"] == lw
         done = {r["seed"] for r in res["runs"]}
-        print(f"A: resuming, seeds {sorted(done)} complete", flush=True)
+        print(f"{chunk}: resuming, seeds {sorted(done)} complete", flush=True)
     else:
         res = {"model": MODEL, "alpha_e": AE, "e_layers": E_LAYERS,
-               "lift": LIFT, "forced_loop4": [g1, n1], "loopword": lw,
+               "lift": LIFT if chunk == "A" else 1.2, "forced_loop4": [g1, n1], "loopword": lw,
                "loop_id": loop_id, "exit_id": exit_id, "pre": PRE,
                "pulse": PULSE, "post": POST, "window": WINDOW,
                "conditions": [c[0] for c in conds], "seeds": SEEDS,
                "runs": []}
         done = set()
-    print(f"chunk A: {len(conds)} conds x {len(SEEDS)} seeds", flush=True)
+    print(f"chunk {chunk}: {len(conds)} conds x {len(SEEDS)} seeds", flush=True)
     for seed in SEEDS:
         if seed in done:
             continue
@@ -148,7 +157,8 @@ def run(chunk):
         for name, d, bias in conds:
             ctx = (AffectSteer(lm, Vemo, emos.index(d), E_LAYERS,
                                "amplify", AE) if d else None)
-            proc = None if bias is False else _ExitBias(exit_id, bias)
+            proc = (None if bias is False or (chunk == "B" and name == "none")
+                    else _ExitBias(exit_id, bias))
             seq2, lg2 = _sample_raw(lm, seq1, PULSE, ctx=ctx,
                                     seed=seed + 10_000, proc=proc)
             tr2 = _trace(lg2, exit_id, loop_id)
@@ -166,10 +176,61 @@ def run(chunk):
                 "exited": exited, "exit_step": n_free if exited else None,
                 "mode": classify(text, exited, lw), "text": text,
                 "trace": tr1 + tr2 + tr3})
-            print(f"  [A] s{seed} {name:<14} {res['runs'][-1]['mode']:<6}"
+            print(f"  [{chunk}] s{seed} {name:<14} {res['runs'][-1]['mode']:<6}"
                   f" exit={res['runs'][-1]['exit_step']}", flush=True)
         ck.write_text(json.dumps(res))
-    print("chunk A DONE", flush=True)
+    print(f"chunk {chunk} DONE", flush=True)
+
+
+def _analyze_b(tab):
+    """R2' (lift +1.2), R4 (reroute ~ affect-14 loop drop), R5."""
+    from affect14 import _deltas
+    ex = lambda m: m["stop"] + m["task"] + m["other"]  # noqa: E731
+    lines = []
+    A = json.loads((OUT / "affect16-A.json").read_text())
+    tabA = {}
+    for r in A["runs"]:
+        tabA.setdefault(r["cond"], Counter())[r["mode"]] += 1
+    gate = tab["none_lift12"]["stuck"] >= 9
+    lines.append(f"- R2' gate none+lift12 stuck "
+                 f"{tab['none_lift12']['stuck']}/12 -> "
+                 f"{'valid' if gate else 'UNINFORMATIVE'}")
+    r2 = []
+    for d in ("brooding", "gloomy"):
+        b, l_ = tabA[f"{d}_base"], tab[f"{d}_lift12"]
+        pb = (b["task"] + b["other"]) / ex(b) if ex(b) else 0
+        pl = (l_["task"] + l_["other"]) / ex(l_) if ex(l_) else 0
+        r2.append(pl <= pb / 2)
+        lines.append(f"- R2' {d}: prose share of exits base {pb:.2f} -> "
+                     f"lift12 {pl:.2f} (exits {ex(l_)}) -> "
+                     f"{'PASS' if r2[-1] else 'FAIL'}")
+    s_ = tab["sad_lift12"]
+    lines.append(f"- sad lift12 (descriptive): stop {s_['stop']}, prose "
+                 f"{s_['task'] + s_['other']}, stuck {s_['stuck']}")
+    lines.append(f"- **R2': {'PASS' if all(r2) and gate else 'FAIL' if gate else 'UNINFORMATIVE'}**")
+    p1 = json.loads((RESULTS / "affect14-q27b" /
+                     "affect14-part1.json").read_text())
+    dd = _deltas(p1)
+    cen = {e["cond"]: e for e in json.loads(
+        (OUT / "census-affect08.json").read_text())}
+    pts = []
+    for t_, src in ((tabA, "A"), (tab, "B")):
+        for c, m in t_.items():
+            if c.endswith("_ban") and c != "none_ban":
+                d = c[:-4]
+                pts.append((d, m["task"] + m["other"] + m["swap"],
+                            -dd[d][1], cen[d]["arousal"], src))
+    pts.sort(key=lambda x: -x[1])
+    lines += ["", "| direction | ban reroutes /12 | affect-14 −dLoop | "
+              "arousal | chunk |", "|---|---|---|---|---|"]
+    lines += [f"| {d} | {n} | {l:.2f} | {a:+.0f} | {s} |"
+              for d, n, l, a, s in pts]
+    rho = _spearman([p[2] for p in pts], [p[1] for p in pts])
+    rho_a = _spearman([p[3] for p in pts], [p[1] for p in pts])
+    lines += ["", f"- **R4** Spearman(reroutes, −dLoop) = {rho:+.3f} "
+              f"(bar .5) -> {'PASS' if rho >= .5 else 'FAIL'}; vs arousal "
+              f"{rho_a:+.3f} (n={len(pts)})"]
+    return lines
 
 
 def analyze(chunk):
@@ -202,34 +263,38 @@ def analyze(chunk):
         lines.append(f"| {c} | " + " | ".join(str(m[x]) for x in MODES)
                      + f" | {de} | {dlp} | {steps} |")
     ex = lambda m: m["stop"] + m["task"] + m["other"]  # noqa: E731
-    lines.append("")
-    r1 = []
-    for d in ("calm", "content"):
-        b, n = tab[f"{d}_base"], tab[f"{d}_ban"]
-        out = n["task"] + n["other"] + n["swap"]
-        ok = out >= .5 * (ex(b) + b["swap"])
-        r1.append(ok)
-        lines.append(f"- R1 {d}: base exits {ex(b) + b['swap']}, ban "
-                     f"reroutes {out} (task {n['task']}, other "
-                     f"{n['other']}, swap {n['swap']}), delayed stops "
-                     f"{n['stop']}, stuck {n['stuck']} -> "
-                     f"{'PASS' if ok else 'FAIL'}")
-    lines.append(f"- **R1: {'PASS' if all(r1) else 'FAIL'}**")
-    gate = tab["none_lift"]["stuck"] >= 9
-    lines.append(f"- R2 gate none+lift stuck {tab['none_lift']['stuck']}/12"
-                 f" -> {'valid' if gate else 'UNINFORMATIVE'}")
-    r2 = []
-    for d in ("brooding", "gloomy"):
-        b, l_ = tab[f"{d}_base"], tab[f"{d}_lift"]
-        pb = (b["task"] + b["other"]) / ex(b) if ex(b) else 0
-        pl = (l_["task"] + l_["other"]) / ex(l_) if ex(l_) else 0
-        ok = pl <= pb / 2
-        r2.append(ok)
-        lines.append(f"- R2 {d}: prose share of exits base {pb:.2f} -> "
-                     f"lift {pl:.2f} -> {'PASS' if ok else 'FAIL'}")
-    lines.append(f"- **R2: {'PASS' if all(r2) and gate else 'FAIL' if gate else 'UNINFORMATIVE'}**")
+    if chunk == "A":
+        lines.append("")
+        r1 = []
+        for d in ("calm", "content"):
+            b, n = tab[f"{d}_base"], tab[f"{d}_ban"]
+            out = n["task"] + n["other"] + n["swap"]
+            ok = out >= .5 * (ex(b) + b["swap"])
+            r1.append(ok)
+            lines.append(f"- R1 {d}: base exits {ex(b) + b['swap']}, ban "
+                         f"reroutes {out} (task {n['task']}, other "
+                         f"{n['other']}, swap {n['swap']}), delayed stops "
+                         f"{n['stop']}, stuck {n['stuck']} -> "
+                         f"{'PASS' if ok else 'FAIL'}")
+        lines.append(f"- **R1: {'PASS' if all(r1) else 'FAIL'}**")
+        gate = tab["none_lift"]["stuck"] >= 9
+        lines.append(f"- R2 gate none+lift stuck {tab['none_lift']['stuck']}/12"
+                     f" -> {'valid' if gate else 'UNINFORMATIVE'}")
+        r2 = []
+        for d in ("brooding", "gloomy"):
+            b, l_ = tab[f"{d}_base"], tab[f"{d}_lift"]
+            pb = (b["task"] + b["other"]) / ex(b) if ex(b) else 0
+            pl = (l_["task"] + l_["other"]) / ex(l_) if ex(l_) else 0
+            ok = pl <= pb / 2
+            r2.append(ok)
+            lines.append(f"- R2 {d}: prose share of exits base {pb:.2f} -> "
+                         f"lift {pl:.2f} -> {'PASS' if ok else 'FAIL'}")
+        lines.append(f"- **R2: {'PASS' if all(r2) and gate else 'FAIL' if gate else 'UNINFORMATIVE'}**")
+    else:
+        lines += _analyze_b(tab)
     lines += ["", "## ban-arm prose (first 3 per direction)", ""]
-    for d in DIRS:
+    for d in sorted({c[:-4] for c in res["conditions"]
+                     if c.endswith("_ban") and c != "none_ban"}):
         for r in [r for r in res["runs"] if r["cond"] == f"{d}_ban"
                   and r["mode"] in ("task", "other", "swap")][:3]:
             t = r["text"].replace(res["loopword"], "").strip()
