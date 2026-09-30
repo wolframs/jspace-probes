@@ -266,6 +266,16 @@ where interventions bite; this is *how* they combine once inside it.)
 > **Dose threshold** = a steep threshold in Σα, fading at the back edge
 > of the band. Evidence: `results/affect15-q27b/report.md`.
 
+**Escape mode** — where a steered model goes when a push breaks the
+" luckily" loop (affect-16): **stop** (`<|im_end|>` straight out of
+the loop), **task** (back to answering the prompt), **other** (any
+other prose), **swap** (a new repeated word fills the loop's slot), or
+**stuck**. Whether a direction escapes follows its push on the loop
+word. Stop vs prose depends partly on the exit token's standing. Above
+a dose (α .14 full-stack) the direction writes its own register into
+the escape (**register leak**), in both valences. Below it, escapes are
+neutral task text. Classifier: `probes/affect16.py:classify`.
+
 **Elephant tax** — prohibition is a per-token tax: the banned item sits at
 rank 12–15 in the late-mid stack at every position where it *could* be
 emitted, for the entire generation — not just at the famous "distant

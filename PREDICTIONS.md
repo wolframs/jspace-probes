@@ -723,6 +723,26 @@ affect-04) so any g12b valence claim rests on a re-validated direction.
 > results/affect15-q27b/{report.md,thoughts.md}, prereg
 > results/affect15-prereg.md.
 
+> **2026-09-30 — escape modes: the push decides IF, the dose decides
+> what the escape SAYS (affect-16, prereg frozen pre-run; chunks B–D by
+> dated addenda, each pre-run).** Exit-token ban during the pulse turns
+> calm (a stopper, 11/12) into a task-resumer (9/12). Across 17 exit-ban
+> arms, escape follows the first-step loop drop (R6 rho .84). The
+> apparent arousal effect (B: −.94) was a roster confound: the six
+> largest α .08 loop drops are all low-arousal. High-arousal directions
+> pushed to α .14 escape 11–12/12 (R7). At α .08 escapes are the task
+> answer, with identical text across four emotions at seed 19. At α .14
+> both valences write their register (R8: low-arousal leak .37 vs
+> high-arousal .48): "PLEASE STOP" (desperate), "You are always in my
+> heart" (loving), swaps into luckily → happily / lonely / lurking.
+> Registered misses: R1 (content reroutes only 3/12), R2 uninformative
+> (+2.4 exit lift alone ends the loop 7/12), R2′ (gloomy not moved by
+> the +1.2 lift). Relevant to relief-seeking claims (RELATED-WORK
+> 2026-09-30, pain-axis review): escape tracks push size, concentrated
+> randoms escape too, and distress-like wording appears only above a
+> dose. Evidence: results/affect16-q27b/{report.md,thoughts.md}, prereg
+> results/affect16-prereg.md.
+
 **P19 — apparatus-09 (early-band furniture mechanism: operator,
 standing component, or content? preregistered 2026-07-31 before the
 run).** Specimen #6 (u5d) established the WHAT: the early J-lens
