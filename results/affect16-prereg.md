@@ -110,3 +110,33 @@ hopeful. Same harness and frozen classifier.
 - **R5 (descriptive):** task vs other among rerouted runs; the number
   of seeds where ≥ 2 conditions produce identical first-60-character
   prose.
+
+## Addendum 2026-09-30 — chunk C, frozen after chunk B, before C runs
+
+Chunk B: R2′ FAIL (the half lift is valid, 12/12 stuck alone; brooding
+prose share .36 → .17 passes, gloomy .20 → .17 fails). R4 PASS
+(reroutes ~ affect-14 −dLoop, rho +.818). But arousal gave −.939, and
+the roster was confounded by construction. At α .08 the six largest
+loop drops in the whole 24-emotion set are all low-arousal (reflective,
+brooding, blissful, gloomy, calm, sad). The largest high-arousal drop
+is vigilant at 3.44. B's ban roster had only two high-arousal arms. So
+B cannot tell "a big enough push" from "a low-arousal state".
+
+**C breaks the confound with dose (8 × 12 seeds):** none; exit-ban arms
+for five high-arousal directions pushed harder, at α .14 (vigilant,
+curious, afraid, desperate, anxious), and two weak low-arousal
+directions at the standard α .08 (loving, guilty).
+
+Push is measured in-run, identically for every ban arm in A, B and C:
+**first-pulse-step dLoop**, the raw loop-logit change at the first
+steered step. Its context is still identical to `none`, so no
+sampling divergence has happened yet.
+
+- **R6:** across all ban arms in A + B + C (18 arms), Spearman(reroutes,
+  first-step −dLoop) ≥ .5.
+- **R7 (does arousal block?):** among ban arms whose first-step −dLoop
+  exceeds the median over all 18, high-arousal arms' mean reroutes
+  ≥ half the low-arousal arms' mean → PASS (the push decides, not the
+  state). If no high-arousal arm clears the median: UNTESTABLE.
+- **Descriptive:** swap filler words per direction (B showed blissful
+  → "happily", sad/gloomy → "but unfortunately").

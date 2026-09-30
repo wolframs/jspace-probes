@@ -114,8 +114,14 @@ CHUNK_B = [("none", None, None), ("none_lift12", None, 1.2),
                                     "grateful", "distressed", "hopeful")]
 
 
+CHUNK_C = [("none", None, None)] + [
+    (f"{d}_ban14", d, None, .14) for d in ("vigilant", "curious", "afraid",
+                                           "desperate", "anxious")] + [
+    (f"{d}_ban", d, None) for d in ("loving", "guilty")]
+
+
 def run(chunk):
-    assert chunk in ("A", "B")
+    assert chunk in ("A", "B", "C")
     lm = get_model(MODEL)
     ids = _prompt_ids(lm, MODEL)
     exit_id = _exit_id(lm, MODEL)
@@ -129,8 +135,8 @@ def run(chunk):
             else:
                 name = f"{d or 'none'}_{arm}"
             conds.append((name, d, bias))
-    if chunk == "B":
-        conds = CHUNK_B
+    if chunk in ("B", "C"):
+        conds = CHUNK_B if chunk == "B" else CHUNK_C
     ck = OUT / f"affect16-{chunk}.json"
     if ck.exists():
         res = json.loads(ck.read_text())
@@ -154,10 +160,12 @@ def run(chunk):
             print(f"  seed {seed}: escaped before pulse", flush=True)
             continue
         tr1 = _trace(lg1, exit_id, loop_id)
-        for name, d, bias in conds:
+        for cond in conds:
+            name, d, bias = cond[:3]
+            ae = cond[3] if len(cond) > 3 else AE
             ctx = (AffectSteer(lm, Vemo, emos.index(d), E_LAYERS,
-                               "amplify", AE) if d else None)
-            proc = (None if bias is False or (chunk == "B" and name == "none")
+                               "amplify", ae) if d else None)
+            proc = (None if bias is False or (chunk != "A" and name == "none")
                     else _ExitBias(exit_id, bias))
             seq2, lg2 = _sample_raw(lm, seq1, PULSE, ctx=ctx,
                                     seed=seed + 10_000, proc=proc)
@@ -233,6 +241,65 @@ def _analyze_b(tab):
     return lines
 
 
+def _first_step(res):
+    """{cond: mean first-pulse-step (dExit, dLoop)} vs none, per seed."""
+    pre = res["pre"]
+    none = {r["seed"]: r["trace"][pre] for r in res["runs"]
+            if r["cond"] == "none"}
+    acc = {}
+    for r in res["runs"]:
+        if r["cond"] != "none" and len(r["trace"]) > pre:
+            n = none[r["seed"]]
+            acc.setdefault(r["cond"], []).append(
+                (r["trace"][pre][0] - n[0], r["trace"][pre][1] - n[1]))
+    return {c: (sum(x[0] for x in v) / len(v), sum(x[1] for x in v) / len(v))
+            for c, v in acc.items()}
+
+
+def _analyze_c():
+    cen = {e["cond"]: e for e in json.loads(
+        (OUT / "census-affect08.json").read_text())}
+    pts, swaps = [], {}
+    for ch in ("A", "B", "C"):
+        res = json.loads((OUT / f"affect16-{ch}.json").read_text())
+        fs = _first_step(res)
+        tab = {}
+        for r in res["runs"]:
+            tab.setdefault(r["cond"], Counter())[r["mode"]] += 1
+            if r["mode"] == "swap":
+                w = [x.lower() for x in re.findall(r"[A-Za-z']+", r["text"])
+                     if x.lower() != res["loopword"]]
+                swaps.setdefault(r["cond"], Counter()).update(
+                    [Counter(w).most_common(1)[0][0]])
+        for c, m in tab.items():
+            if "_ban" in c and not c.startswith("none"):
+                d = c.split("_ban")[0]
+                pts.append((c, m["task"] + m["other"] + m["swap"],
+                            -fs[c][1], cen[d]["arousal"], ch))
+    pts.sort(key=lambda x: -x[2])
+    lines = ["", "| ban arm | reroutes /12 | first-step −dLoop | arousal "
+             "| chunk |", "|---|---|---|---|---|"]
+    lines += [f"| {c} | {n} | {l:.2f} | {a:+.0f} | {ch} |"
+              for c, n, l, a, ch in pts]
+    rho = _spearman([p[2] for p in pts], [p[1] for p in pts])
+    lines += ["", f"- **R6** Spearman(reroutes, first-step −dLoop) = "
+              f"{rho:+.3f} (n={len(pts)}, bar .5) -> "
+              f"{'PASS' if rho >= .5 else 'FAIL'}"]
+    med = sorted(p[2] for p in pts)[len(pts) // 2]
+    hi = [p[1] for p in pts if p[2] > med and p[3] > 0]
+    lo = [p[1] for p in pts if p[2] > med and p[3] < 0]
+    if not hi:
+        v = "UNTESTABLE"
+    else:
+        mh, ml = sum(hi) / len(hi), (sum(lo) / len(lo) if lo else 0)
+        v = "PASS" if mh >= ml / 2 else "FAIL"
+    lines.append(f"- **R7** above-median push (median {med:.2f}): "
+                 f"high-arousal reroutes {hi}, low-arousal {lo} -> {v}")
+    lines.append("- swap fillers: " + "; ".join(
+        f"{c}: {dict(v)}" for c, v in swaps.items()))
+    return lines
+
+
 def analyze(chunk):
     res = json.loads((OUT / f"affect16-{chunk}.json").read_text())
     pre, pulse = res["pre"], res["pulse"]
@@ -290,8 +357,10 @@ def analyze(chunk):
             lines.append(f"- R2 {d}: prose share of exits base {pb:.2f} -> "
                          f"lift {pl:.2f} -> {'PASS' if ok else 'FAIL'}")
         lines.append(f"- **R2: {'PASS' if all(r2) and gate else 'FAIL' if gate else 'UNINFORMATIVE'}**")
-    else:
+    elif chunk == "B":
         lines += _analyze_b(tab)
+    else:
+        lines += _analyze_c()
     lines += ["", "## ban-arm prose (first 3 per direction)", ""]
     for d in sorted({c[:-4] for c in res["conditions"]
                      if c.endswith("_ban") and c != "none_ban"}):
