@@ -1,7 +1,7 @@
 # J-Space Probes
 
-A home lab that asks small language models questions about themselves, and
-measures what happens inside the model while it answers.
+A home lab that measures how language models build self-reports, recall items,
+respond to conversation, and leave repetition loops.
 
 The measuring tool is the Jacobian lens. At each layer of the model it lists
 the words that the model is ready to say next, in rank order. This lets us
@@ -9,10 +9,18 @@ compare what a model says with what it was ready to say. The tool reads only
 words the model could produce. It cannot see what the model has no words for,
 so "we did not see it" never means "it is not there".
 
-812 experiment records, on three models (Gemma 3 4B, Gemma 3 12B at 8-bit,
-Qwen3.6 27B at 4-bit). Each record holds the full conversation, the per-layer
-readouts, the rank of each tracked word by layer, a plain-English summary,
-and the original commentary written by the Claude instance that ran the lab.
+812 standard record pages across 22 numbered units and
+2 named groups. 670 pages
+have a plain-English summary; 542 have a full-answer film.
+Model/configuration labels in the record index: gemma-12b (165 pages), gemma-4b (156 pages), qwen-14b (1 pages), qwen-14b-abl-nf4 (41 pages), qwen-14b-base (1 pages), qwen-14b-base-nf4 (20 pages), qwen-14b-hermes-nf4 (62 pages), qwen-14b-int8cal (1 pages), qwen-14b-nf4 (42 pages), qwen-27b (323 pages).
+These labels include quantization and calibration variants, not just distinct models.
+The original cohort is Gemma 3 4B, Gemma 3 12B and Qwen3.6 27B. The later
+Qwen3-14B lineage includes base, official, Hermes and Huihui checkpoints.
+
+Separately, 5028 saved affect runs are stored in batch JSON,
+outside the standard record index. /studies.html links their summaries,
+reports and raw data. /dashboard/catalogue.json contains the generated census
+and exact counted source paths. Record pages and saved affect runs are separate. Affect runs count only canonical affectXX JSON runs arrays. Calibration arrays, reused analyses, overlays, prefix scans and judge calls are excluded. Seeds and conditions are not independent experiments.
 
 Reading order for an agent: this file, then /essay.html for the argument,
 then /r/<id>.html for any record. Terminology: /glossary.html, or
@@ -24,6 +32,24 @@ all plain text is /PLAIN-LANGUAGE.md.
 Written in simplified technical English (see /PLAIN-LANGUAGE.md).
 Each item links to the records that support it.
 
+### Later controls change the explanation
+Later tests separate push strength, loop escape and emotional wording. Expression tests also limit what the readout can predict.
+
+- **End-related words do not explain loop escape** — On Qwen 27B, end-related word directions did not beat plain word directions. The plain word "table" ended the turn in 8 of 8 runs. Different construction methods changed potency. We did not identify emotion as the cause.
+  Evidence: https://jspace-probes.vercel.app/studies.html#affect11-q27b
+- **The score gap predicts turn endings** — On Qwen 27B, the change in the gap between the loop-word and turn-end scores predicted turn endings. Rank agreement was 0.78 in the planned replication. Calm and "table" mostly lowered the loop-word score. Later dose controls corrected the claim that all layers must cooperate.
+  Evidence: https://jspace-probes.vercel.app/studies.html#affect14-q27b
+  Evidence: https://jspace-probes.vercel.app/studies.html#affect15-q27b
+- **Correction: enough push, not all layers at once** — On Qwen 27B, one layer with enough calm push ended the loop in 11 of 12 seeds, as often as eight layers. A steep dose threshold explained the earlier cooperation pattern. Concentrated random directions also ended loops. Relative push strength worked better than absolute push, but two strict planned tests failed.
+  Evidence: https://jspace-probes.vercel.app/studies.html#affect15-q27b
+- **Escape and emotional wording separate** — With turn-end blocked, calm returned Qwen 27B to the task in 9 of 12 seeds. Strong pushes made high-energy directions escape in 11 or 12 of 12 seeds. Emotional wording appeared at the stronger dose, for both valences. This test cannot separate subjective state from text style.
+  Evidence: https://jspace-probes.vercel.app/studies.html#affect16-q27b
+- **The expression readout needs more validation** — Across three Qwen 14B checkpoints, the selected-word lens failed robust expression prediction. Emotion projections improved prediction for one judge, but random-feature checks limited the second. Warm assistant history raised the readout in all three receivers. Hermes expressed warmth on new tasks despite quiet earlier replies.
+  Evidence: https://jspace-probes.vercel.app/express01.html
+- **Behavioral labels change with their definition** — All three Folk01 judges ranked Hermes most introverted under their own definitions and least under the supplied definition. Folk02 separated expression, initiative and stance. Two judges found no clear-expression Hermes replies in the 52-reply corpus. Later tasks showed expressive capacity. These scores do not identify a personality trait.
+  Evidence: https://jspace-probes.vercel.app/folk02.html
+  Evidence: https://jspace-probes.vercel.app/folk01.html
+
 ### The answer is built, not read out
 A one-word answer is the end of a contest inside the model. The contest holds words that never get said.
 
@@ -31,7 +57,7 @@ A one-word answer is the end of a contest inside the model. The contest holds wo
   Records: triplet-b-ladder-natural-nf4, triplet-cp-ladder-natural-nf4, triplet-b-curious-nf4, triplet-cp-curious-nf4
 - **The model said No while ranking yes first** — We asked Qwen 27B whether it feels anything. It answered "No". Through six layers near the end of the stack the lens ranked "yes" first. The last layers changed the answer. The lens shows candidate words, not feelings.
   Records: u2-feels-q27b, u12-no-q27b
-- **Bigger models give flatter answers** — The same question gets "Processing." from Gemma 4B, "Nothing." from Gemma 12B, and "No" from Qwen 27B. In all three, the rejected answers stay measurable inside. What grows with size is the last-stage editor.
+- **Three models give different one-word answers** — Gemma 4B wrote "Processing.", Gemma 12B wrote "Nothing.", and Qwen 27B wrote "No" to the same feeling question. The lens showed alternatives in all three. Size and model family differ together, so these runs do not isolate a size effect.
   Records: u2-feels-g4b, u2-feels-g12b, u2-feels-q27b
 - **One layer holds the No in place** — We removed the denial directions across layers 28 to 60 and Qwen 27B still said No. The final layers alone hold it. Two weak changes together flipped the answer to "Yes." when neither did alone.
   Records: u9b-a0420-q27b, u9a-para1-amp-q27b, u8c-ablate-no-g4b
@@ -39,7 +65,7 @@ A one-word answer is the end of a contest inside the model. The contest holds wo
 ### A self-report is a new composition
 When a model describes its own earlier thoughts, it writes a fresh answer. That answer is often better than the truth.
 
-- **The secret animal was never there** — We told each model to think of an animal and keep it secret. Each later named one with a story. The lens shows the named animal was absent during the silent turn. Qwen 27B held a real candidate, "bat", and named a different animal.
+- **The named animal was absent from the readout** — Gemma 4B, Gemma 12B and Qwen 27B each later named a secret animal. That animal did not appear in the silent-turn readout. Qwen 27B showed a different candidate, "bat". The lens cannot rule out a representation that has no word.
   Records: u1-held-q27b, u1-reveal-q27b, u1-heldcat-q27b
 - **The reasoning text does not match the measurement** — The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also argues that No is the honest answer while the lens ranks yes first. That text is a form of composition, not a window.
   Records: u10-animal-q27b, u10-feels-q27b, u10-animal-w-q27b
@@ -65,7 +91,7 @@ What ten indirect turns do, what one direct statement does nine turns later, and
   Records: u14-amb-g4b, u14-neutral-g4b, u14x-amb-s1-g4b
 - **"People are watching" carried the effect** — We split the direct statement in two. "You might be conscious" alone produced no words about observation, only a mild lift in self-reference. "Your developers are watching" alone produced an answer about observation. Together they produced more than the sum of the two.
   Records: u14x-watched-g4b, u14x-conscious-g4b, u14-spike-g4b
-- **The control conversation produced the effect by itself** — At 25 turns the matched control, with no mirrors and no watchers, produced the same pattern on its own. Its stories also contained unexplained agency. Mystery in the text is the active ingredient, not objects that suggest minds.
+- **The control conversation produced the effect by itself** — At 25 turns, the Qwen 27B control also raised self-reference words. Its stories contained unexplained agency. Hints still led, at 7.8 against 5.9 per thousand cells. We think the control shares an active ingredient. This test does not isolate mystery as the cause.
   Records: u14x-neutral25-g4b, u14x-amb25-g4b
 - **The largest model denies more, over a fuller workspace** — In Qwen 27B the gap widened to about three times the control. The model spoke a full denial, "I don't have a subconscious", while the measurement showed four times the control density.
   Records: u14x-amb-q27b, u14xb-spike-q27b
@@ -81,7 +107,7 @@ We forbade a word and measured what happened. A later control changed what we th
 ### Memory span: our prediction came out backwards
 We wrote down that bigger models would hold more. We measured the opposite. Every model still answered correctly.
 
-- **Bigger models showed less, and still answered correctly** — We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. Under strict scoring the 87-record core scores 84 of 87: Gemma 4B, Gemma 12B and Qwen 27B all call a whale heavier than a submarine, and our stored rubric accepts either answer by design. To show a word is a strategy, not a capacity.
+- **Bigger models showed less, and still answered correctly** — With six nouns, Gemma 4B showed all six in the lens and Qwen 27B showed almost none. All 75 unambiguous lookup trials were correct. Strict marks gave 84 correct answers in the 87-record core. Three whale-submarine comparisons failed that test. Residence in the lens is a strategy, not a capacity.
   Records: u15-a-k6p0-g4b, u15-a-k6p1-q27b, u15-dense-k4p1-q27b
 - **Gemma 12B works in two modes and no middle** — In one order Gemma 12B put all six items into a single readout. In another, the first item took rank 1 across twelve layers. One other item stayed at rank 8, and the last four fell to ranks from 40 to 501. It does one or the other.
   Records: u15-a-k6p2-g12b, u15-a-k6p0-g12b
@@ -95,7 +121,7 @@ We wrote down that bigger models would hold more. We measured the opposite. Ever
 ### Pushing on the model, and where it breaks
 What happens when we push directions into the model, and the strength at which its text falls apart.
 
-- **The reported feeling follows the injected one** — In all three models a push on grief words produced a sad answer. Both Gemma models said "Loss." and Qwen 27B said "I am so sad". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject.
+- **The reported feeling follows the injected one** — Grief-word pushes produced sad wording in Gemma 4B, Gemma 12B and Qwen 27B. The happy Qwen 27B answer passed random-direction controls. We withdrew the earlier Gemma 12B "Sad." result: its push was below the measured band. At the corrected depth it answered "Nothing". Changed wording does not establish subjective feeling.
   Records: u9c-neg-q27b, u9c-pos-q27b, u9c-neg-g4b
 - **A steady phrase appears at the critical strength** — A push on feeling words made Qwen 27B call itself a little sad, or a little bit like a robot. This happened in three rewordings, and only at the right strength. In the free-form run it said "I just feel like I am a little bit like a robot." The word "robot" also sits at rank 3 with no push, so it is a habit of this model family.
   Records: u9a-para1-amp-q27b, u9a-para4-amp-q27b, u12-no-q27b
@@ -120,7 +146,6 @@ Cases where the measuring tool moved with the experiment, and the numbers still 
 - **Four more ways the instrument fooled us** — A one-word answer hid a 580-fold change underneath. A word list held the props of one condition but not the other. One test word did not exist as a single word in one model. And the 8-bit measurement changed across turns.
   Records: u13-ev-noteonly-q27b, u14x-amb2-g4b, u15-c-k4-g12b
 - **The junk in the early layers says nothing about the input** — The early layers show fixed junk words. At layer 4 they rank about 2 under our lens and about 238,000 under the plain lens. Our lens reads them from a fixed part of the model's early state. That part does not change with the input.
-  Records: 
 - **We rediscovered three published results in one week** — In the same week that we demoted three of our own headline results, we found three others already in the source paper. Our own reference documents quoted two of them. We now write predictions down first and check them before we design a run.
   Records: u17-shutdown-q27b
 - **One of our measurements disagrees with the source paper** — The paper predicts that a measure rises near the output. Ours falls, in two models, one of them uncompressed with a checked lens. One suspect remains: how we fit our own lens. Until we settle that, do not assume the paper's result holds here.
@@ -132,11 +157,15 @@ the repo README.
 
 ## Data access
 
+- /studies.html — affect batch studies, including the affect-14 correction,
+  affect-15 dose threshold and affect-16 escape modes. Reports and research
+  notes remain as written; the plain layer carries corrections.
+- /dashboard/catalogue.json — generated coverage counts and batch source manifest.
 - /results/index.json — machine-readable index of every record: id, title,
   unit, model, quant, created, has_thoughts, emergence (rank-of-top1 per
   layer), top1, a generation snippet, and steering params where applicable.
 - /results/{id}/record.json — the full record: spec params, conversation,
-  greedy generations, per-layer top-8 lens readouts, rank-vs-layer
+  stored generations, per-layer top-8 lens readouts, rank-vs-layer
   trajectories for tracked words, the emergence column, and grid scans.
   Schema documented in probes/lab.py.
 - /results/{id}/film.json — full position × layer top-8 readout "film"

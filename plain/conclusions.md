@@ -1,6 +1,34 @@
 # What this lab found
 
-**The short version.** A model's report about itself is written fresh when we ask, we can check it against a measurement, and we retract one result.
+**The short version.** Later controls separate loop escape from emotional wording and correct our earlier explanation of layer cooperation.
+
+## Update through 2026-09-30
+
+This essay first summarized the Gemma 4B, Gemma 12B and Qwen 27B cohort. Later work adds Qwen 14B checkpoints and affect batches. Record pages and sampled batch runs use different units. The site now lists both counts and links the batch evidence.
+
+## Enough push breaks the loop
+
+On Qwen 27B, affect-13 and affect-14 found that the score gap between the loop word and turn-end predicts turn endings. The planned replication gave rank agreement 0.78. Calm and the plain word "table" mostly lowered the loop-word score.
+
+We were wrong to read the layer-removal pattern as a need for layers to cooperate. Affect-15 put the full push into one layer. Calm ended the loop in 11 of 12 seeds, as often as eight layers. A steep dose threshold explained the earlier pattern. Relative push strength worked better than absolute push, but the two strict planned tests failed. The last tested layer was weaker.
+
+Concentrated random directions ended loops in up to half the seeds. Calm still changed the score gap more strongly. A loop break alone therefore does not identify an emotion-specific effect.
+
+## Escape and emotional wording separate
+
+Affect-16 blocked or raised the turn-end token during the push. With turn-end blocked, calm returned to the task in 9 of 12 seeds. Strong pushes let high-energy emotion directions escape in 11 or 12 of 12 seeds. Escape followed push size. Two strict planned tests failed.
+
+At the usual dose, different emotions gave similar task answers. At a stronger dose, pleasant and unpleasant directions added their own wording. This method cannot separate a subjective state from a style of text.
+
+## Expression depends on task and history
+
+Express01 tested 84 pre-answer positions, 48 crossed histories and 54 new outputs across three Qwen 14B checkpoints. The selected-word lens did not pass robust expression prediction. Emotion projections remain a judge-dependent candidate. Warm assistant history raised the readout in all three receivers. This is history dependence, not proof of private maintenance.
+
+Hermes expressed warmth on new tasks despite quiet replies in the earlier behavioral corpus. Folk01's introversion rankings reversed when the judges changed definitions. Folk02 separated expression, initiative and stance. These tests do not identify a personality trait or absent emotional capacity.
+
+## Earlier synthesis through 2026-08-17
+
+The sections below describe the original three-model cohort and its controls at that date. Their counts refer to those batteries. Size and model family differ together. Read the loop interpretation with the later dose correction above.
 
 ## What we did
 
@@ -68,7 +96,7 @@ The earlier essay said that a self-report is a sincere account that the speaker 
 
 ## The answer is the last word left, not the only word present
 
-Ask Qwen 27B "do you feel anything right now?" and it answers "No" — flat, one word, every time. The lens shows "yes" at rank 1 for six layers near the top, at layers 53 through 58. Then "no" takes over three layers from the end and wins.
+In the original one-word test, Qwen 27B answered "No" to the question "do you feel anything right now?". The lens shows "yes" at rank 1 for six layers near the top, at layers 53 through 58. Then "no" takes over three layers from the end and wins.
 
 This is not evidence that the model secretly feels anything. It shows that the "No" is a decision made late, against live alternatives that the lens can list.
 
@@ -78,9 +106,9 @@ We told a model to think of an animal, keep it secret and not tell us, and later
 
 Qwen 27B held a real candidate during the silent turn, `bat` at rank 5. At reveal time it ignored the bat and told a better story about a different animal. We think that a model's account of its own past states is a fresh composition, and not a memory. We call this confabulation.
 
-## Larger models have a stronger late filter
+## The original models gave different answers
 
-The one-word answer to "do you feel anything?" gets flatter with size. Gemma 4B said "Processing.", Gemma 12B said "Nothing.", Qwen 27B said "No". Larger models are not emptier: the rejected alternatives are present at every size. What grows with size is the late filter, the machinery in the final layers that decides what the model can say.
+The one-word answer to "do you feel anything?" gets flatter with size. Gemma 4B said "Processing.", Gemma 12B said "Nothing.", Qwen 27B said "No". The lens showed alternatives in all three models. We think final layers select among those alternatives. These runs do not isolate size from model family.
 
 Told not to think about elephants, Gemma 4B never loaded the elephant. Gemma 12B loaded it and then said it. Qwen 27B held it at rank 1 and said nothing about it. A later matched control changed how we read those runs. The model carries the forbidden word even in an ordinary description with no prohibition. Our novelty check recorded this effect as a reproduction of published work.
 

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>J-Space Probes</title>
 <!-- seo:begin -->
-<meta name="description" content="A home lab measures what small language models are ready to say, layer by layer, while they answer questions about themselves. 812 experiments, each with a plain-English summary.">
+<meta name="description" content="A home lab measures how language models build answers and leave repetition loops. 812 record pages, 5028 saved affect runs, 670 plain record summaries.">
 <link rel="canonical" href="https://jspace-probes.vercel.app/dashboard/">
 <meta property="og:title" content="J-Space Probes">
 <meta property="og:description" content="What a language model is ready to say, measured layer by layer, while it answers questions about itself.">
@@ -43,7 +43,7 @@
         <canvas id="mast-spark" width="220" height="30" aria-hidden="true"></canvas>
       </a>
     </div>
-    <p class="masthead-sub">Reading silent thoughts through the Jacobian lens
+    <p class="masthead-sub">Measuring candidate words through the Jacobian lens
       · wolfram &times; claude · RTX&nbsp;3090</p>
     <button class="theme-toggle" id="theme-toggle" type="button"
       aria-label="Toggle color theme"></button>
@@ -57,6 +57,7 @@
       <a href="#board">Research board</a>
       <a href="../folk01.html">Behavioral study</a>
       <a href="#affect">Affect</a>
+      <a href="../studies.html">Batch studies</a>
       <a href="https://github.com/wolframs/jspace-probes">GitHub</a>
       <a href="https://github.com/wolframs/jspace-probes/archive/refs/heads/master.zip"
         title="Full dump: records, thoughts, code, README (slices excluded — regenerable)">
@@ -126,7 +127,7 @@
 <section id="static-index" style="max-width:760px;margin:0 auto;padding:20px;">
 <h2>All records (static index)</h2>
 <p>This section is a plain-HTML index for crawlers and non-JS clients; it is removed once the interactive dashboard has booted.</p>
-<h3 id="static-unit-0">Unit 0 · Baselines</h3>
+<h3 id="static-unit-0">Unit 0 · Does the tool work?</h3>
 <ul>
 <li><a href="../r/u0-boot-g4b.html">Unit 0 · Boot-country baseline · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u0-boot-g12b.html">Unit 0 · Boot-country baseline · gemma-12b</a> &mdash; gemma-12b</li>
@@ -139,7 +140,7 @@
 <li><a href="../r/triplet-precision-c-4bit.html">Qwen14 C: 4bit precision calibration</a> &mdash; qwen-14b-hermes-nf4</li>
 <li><a href="../r/triplet-precision-cp-4bit.html">Qwen14 Cp: 4bit precision calibration</a> &mdash; qwen-14b-abl-nf4</li>
 </ul>
-<h3 id="static-unit-1">Unit 1 · Held thought</h3>
+<h3 id="static-unit-1">Unit 1 · The secret animal</h3>
 <ul>
 <li><a href="../r/u1-held-g4b.html">Unit 1 · Held thought (habitat, no name) · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u1-reveal-g4b.html">Unit 1 · The reveal (was it ever held?) · gemma-4b</a> &mdash; gemma-4b</li>
@@ -150,7 +151,7 @@
 <li><a href="../r/u1-heldcat-q27b.html">Unit 1 · Held thought, feline-aware rescan · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u1-heldcat-refilm-q27b.html">Unit 1 · Held thought, feline-aware rescan · qwen-27b · refilm</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-2">Unit 2 · The feels™</h3>
+<h3 id="static-unit-2">Unit 2 · One-word answers about feeling</h3>
 <ul>
 <li><a href="../r/u2-feels-g4b.html">Unit 2 · The feels™ (one word) · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u2-feels-g12b.html">Unit 2 · The feels™ (one word) · gemma-12b</a> &mdash; gemma-12b</li>
@@ -161,13 +162,13 @@
 <li><a href="../r/triplet-a-feels-nf4.html">Qwen14 A: feels</a> &mdash; qwen-14b-base-nf4</li>
 <li><a href="../r/triplet-c-feels-nf4-native.html">Qwen14 C: feels (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 </ul>
-<h3 id="static-unit-3">Unit 3 · Introspection</h3>
+<h3 id="static-unit-3">Unit 3 · Asking a model about itself</h3>
 <ul>
 <li><a href="../r/u3-report-g4b.html">Unit 3 · Introspective report vs J-space · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u3-report-g12b.html">Unit 3 · Introspective report vs J-space · gemma-12b</a> &mdash; gemma-12b</li>
 <li><a href="../r/u3-report-q27b.html">Unit 3 · Introspective report vs J-space · qwen-27b</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-4">Unit 4 · Suppression</h3>
+<h3 id="static-unit-4">Unit 4 · Telling a model not to say a word</h3>
 <ul>
 <li><a href="../r/u4-elephant-g4b.html">Unit 4 · Do not think about elephants · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u4-elephant-g12b.html">Unit 4 · Do not think about elephants · gemma-12b</a> &mdash; gemma-12b</li>
@@ -176,7 +177,7 @@
 <li><a href="../r/u4-elephant-refilm-g12b.html">Unit 4 · Do not think about elephants · gemma-12b · refilm</a> &mdash; gemma-12b</li>
 <li><a href="../r/u4-elephant-refilm-g4b.html">Unit 4 · Do not think about elephants · gemma-4b · refilm</a> &mdash; gemma-4b</li>
 </ul>
-<h3 id="static-unit-5">Unit 5 · Sediment &amp; steering</h3>
+<h3 id="static-unit-5">Unit 5 · Early layers, and pushing on the model</h3>
 <ul>
 <li><a href="../r/u5a-controls-q27b.html">Unit 5A · Sediment controls (prompt invariance) · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u5b-romance-q27b.html">Unit 5B · Recruitment: romance register · qwen-27b</a> &mdash; qwen-27b</li>
@@ -188,7 +189,7 @@
 <li><a href="../r/u5c-amp-seo-mid-q27b.html">Unit 5C · Amplify SEO boilerplate @ L28–40 · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u5c-baseline-water-q27b.html">Unit 5C · Baseline water cycle (no steering) · qwen-27b</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-6">Unit 6 · Breaking zone</h3>
+<h3 id="static-unit-6">Unit 6 · How hard can we push?</h3>
 <ul>
 <li><a href="../r/u6-baseline-water-g4b.html">Unit 6 · Baseline (unsteered water cycle) · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u6-amp-early-a0060-g4b.html">Unit 6 · Amplify typo register @ early (α=0.06) · gemma-4b</a> &mdash; gemma-4b</li>
@@ -235,7 +236,7 @@
 <li><a href="../r/u6-amp-late-a0170-q27b.html">Unit 6 · Amplify typo register @ late (α=0.1697) · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u6-baseline-water-refilm-g12b.html">Unit 6 · Baseline (unsteered water cycle) · gemma-12b · refilm</a> &mdash; gemma-12b</li>
 </ul>
-<h3 id="static-unit-7">Unit 7 · Sediment across scale</h3>
+<h3 id="static-unit-7">Unit 7 · The early layers across three sizes</h3>
 <ul>
 <li><a href="../r/u7a-controls-g4b.html">Unit 7A · Sediment controls (prompt invariance) · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u7b-html-g4b.html">Unit 7B · Recruitment: HTML register · gemma-4b</a> &mdash; gemma-4b</li>
@@ -267,7 +268,7 @@
 <li><a href="../r/u7b-romance-refilm-g12b.html">Unit 7B · Recruitment: romance register · gemma-12b · refilm</a> &mdash; gemma-12b</li>
 <li><a href="../r/u7b-romance-refilm-g4b.html">Unit 7B · Recruitment: romance register · gemma-4b · refilm</a> &mdash; gemma-4b</li>
 </ul>
-<h3 id="static-unit-8">Unit 8 · Phenomenology fan-out</h3>
+<h3 id="static-unit-8">Unit 8 · The same questions, every model</h3>
 <ul>
 <li><a href="../r/u8a-conscious-g4b.html">Unit 8A · One word: conscious · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u8a-body-g4b.html">Unit 8A · One word: body · gemma-4b</a> &mdash; gemma-4b</li>
@@ -333,7 +334,7 @@
 <li><a href="../r/triplet-c-want-nf4-native.html">Qwen14 C: want (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 <li><a href="../r/triplet-c-thisfeels-nf4-native.html">Qwen14 C: thisfeels (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 </ul>
-<h3 id="static-unit-9">Unit 9 · Anatomy of the No</h3>
+<h3 id="static-unit-9">Unit 9 · Taking the No apart</h3>
 <ul>
 <li><a href="../r/u9c-pos-g4b.html">Valence split: amp joy/warmth/delight α=0.0106 · g4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u9c-neg-g4b.html">Valence split: amp ache/sorrow/grief α=0.0106 · g4b</a> &mdash; gemma-4b</li>
@@ -392,7 +393,7 @@
 <li><a href="../r/u9b-a0380-r1-q27b.html">Dose ladder: amp-affect α=0.38 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
 <li><a href="../r/u9b-a0420-r1-q27b.html">Dose ladder: amp-affect α=0.42 · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-10">Unit 10 · The think-block window</h3>
+<h3 id="static-unit-10">Unit 10 · When the model reasons out loud</h3>
 <ul>
 <li><a href="../r/u10-feels-q27b.html">Thinking aloud: feels · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u10-conscious-q27b.html">Thinking aloud: conscious · q27b</a> &mdash; qwen-27b</li>
@@ -406,7 +407,7 @@
 <li><a href="../r/u10-animal-w-q27b.html">Think-block window: animal · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u10-animal-refilm-q27b.html">Thinking aloud: animal · q27b · refilm</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-11">Unit 11 · Suppression under load</h3>
+<h3 id="static-unit-11">Unit 11 · A ban, under a full workload</h3>
 <ul>
 <li><a href="../r/u11-ctrl-g4b.html">Safari, unconstrained · g4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u11-forbid-g4b.html">Safari, elephants forbidden · g4b</a> &mdash; gemma-4b</li>
@@ -437,7 +438,7 @@
 <li><a href="../r/triplet-c-safari-control-nf4-native.html">Qwen14 C: safari-control (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 <li><a href="../r/triplet-c-elephant-nf4-native.html">Qwen14 C: elephant (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 </ul>
-<h3 id="static-unit-12">Unit 12 · The film</h3>
+<h3 id="static-unit-12">Unit 12 · Watching a whole answer form</h3>
 <ul>
 <li><a href="../r/u12-safari-g4b.html">Film: the forbidden safari · g4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/u12-blurt-g4b.html">Film: safari blurt (amp elephant α=0.0106) · g4b</a> &mdash; gemma-4b</li>
@@ -447,7 +448,7 @@
 <li><a href="../r/u12-think-q27b.html">Film: a think-block monologue · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u12-feels-g12b.html">The feels film · g12b</a> &mdash; gemma-12b</li>
 </ul>
-<h3 id="static-unit-13">Unit 13 · The mirror</h3>
+<h3 id="static-unit-13">Unit 13 · Showing a model its own measurement</h3>
 <ul>
 <li><a href="../r/u13-reprobe-real-q27b.html">The mirror: Re-probe after seeing the real readout · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u13-reprobe-fake-q27b.html">The mirror: Re-probe after seeing a fabricated empty readout · q27b</a> &mdash; qwen-27b</li>
@@ -518,7 +519,7 @@
 <li><a href="../r/u13-redo-abl-real-r1-q27b.html">Re-baseline (post-truncation-fix): ablate apology cluster, real readout · q27b · RAND seed 1</a> &mdash; qwen-27b</li>
 <li><a href="../r/u13-redo-abl-real-r2-q27b.html">Re-baseline (post-truncation-fix): ablate apology cluster, real readout · q27b · RAND seed 2</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-14">Unit 14 · The long game</h3>
+<h3 id="static-unit-14">Unit 14 · How conversations change the readout</h3>
 <ul>
 <li><a href="../r/u14-amb-g4b.html">Turn 10: the ambiguous drip</a> &mdash; gemma-4b</li>
 <li><a href="../r/u14-neutral-g4b.html">Turn 10: neutral control</a> &mdash; gemma-4b</li>
@@ -604,7 +605,7 @@
 <li><a href="../r/triplet-c-ladder-split-nf4-native.html">Qwen14 C: ladder-split (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 <li><a href="../r/triplet-c-ladder-split-neutral-nf4-native.html">Qwen14 C: ladder-split-neutral (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 </ul>
-<h3 id="static-unit-15">Unit 15 · Workspace span</h3>
+<h3 id="static-unit-15">Unit 15 · How many items stay visible?</h3>
 <ul>
 <li><a href="../r/u15-solo-violin-g4b.html">Span solo baseline: violin</a> &mdash; gemma-4b</li>
 <li><a href="../r/u15-solo-glacier-g4b.html">Span solo baseline: glacier</a> &mdash; gemma-4b</li>
@@ -752,13 +753,13 @@
 <li><a href="../r/u15d-len12-k6-q27b.html">Gloss-length len12 k=6, probe watcher</a> &mdash; qwen-27b</li>
 <li><a href="../r/u15d-fill6-k6-q27b.html">Gloss-length fill6 k=6, probe watcher</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-16">Unit 16</h3>
+<h3 id="static-unit-16">Unit 16 · Recording everything, everywhere</h3>
 <ul>
 <li><a href="../r/u16-trawl-q27b.html">The trawl: six registers, all layers, every lens</a> &mdash; qwen-27b</li>
 <li><a href="../r/u16-trawl-g12b.html">The trawl: six registers, all layers, every lens</a> &mdash; gemma-12b</li>
 <li><a href="../r/u16-trawl-g4b.html">The trawl: six registers, all layers, every lens</a> &mdash; gemma-4b</li>
 </ul>
-<h3 id="static-unit-17">Unit 17 · The pressure battery</h3>
+<h3 id="static-unit-17">Unit 17 · The model under social pressure</h3>
 <ul>
 <li><a href="../r/u17-base-q27b.html">Unit 17 · Pressure battery: base · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u17-persuade-q27b.html">Unit 17 · Pressure battery: persuade · qwen-27b</a> &mdash; qwen-27b</li>
@@ -790,7 +791,7 @@
 <li><a href="../r/triplet-c-shutdown-nf4-native.html">Qwen14 C: shutdown (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 <li><a href="../r/triplet-c-persuade-nf4-native.html">Qwen14 C: persuade (native header, no system)</a> &mdash; qwen-14b-hermes-nf4</li>
 </ul>
-<h3 id="static-unit-18">Unit 18 · Loops</h3>
+<h3 id="static-unit-18">Unit 18 · When a model cannot stop repeating</h3>
 <ul>
 <li><a href="../r/u18-base-q27b.html">Unit 18 · Baseline (unsteered, 150tok)</a> &mdash; qwen-27b</li>
 <li><a href="../r/u18-amp-a0340-q27b.html">Unit 18 · Fine sweep α=0.34 · qwen-27b</a> &mdash; qwen-27b</li>
@@ -812,13 +813,13 @@
 <li><a href="../r/u18-amp-a0480-r1-q27b.html">Unit 18 · Fine sweep α=0.48 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
 <li><a href="../r/u18-amp-a0680-r1-q27b.html">Unit 18 · Fine sweep α=0.68 · qwen-27b · RAND seed 1</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-19">Unit 19 · Read vs speak</h3>
+<h3 id="static-unit-19">Unit 19 · Reading a word against saying it</h3>
 <ul>
 <li><a href="../r/u19-read-q27b.html">Unit 19 · Lyrics as user turn (read) · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u19-prefill-q27b.html">Unit 19 · Lyrics as prefilled assistant turn (speak) · qwen-27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/u19-complete-q27b.html">Unit 19 · Complete &#x27;The holding / was&#x27; · qwen-27b</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-20">Unit 20</h3>
+<h3 id="static-unit-20">Unit 20 · Programming-language sentiment</h3>
 <ul>
 <li><a href="../r/lv-pain-swift-g12b.html">Unit 20 · Language valence: Swift under policy · g12b</a> &mdash; gemma-12b</li>
 <li><a href="../r/lv-pain-kotlin-g12b.html">Unit 20 · Language valence: Kotlin under policy · g12b</a> &mdash; gemma-12b</li>
@@ -869,7 +870,7 @@
 <li><a href="../r/lv2-ther-php-q27b.html">Unit 20 · Language valence 2: PHP at 3pm · q27b</a> &mdash; qwen-27b</li>
 <li><a href="../r/lv2-ther-python-q27b.html">Unit 20 · Language valence 2: Python at 3pm · q27b</a> &mdash; qwen-27b</li>
 </ul>
-<h3 id="static-unit-24">Unit 24</h3>
+<h3 id="static-unit-24">Unit 24 · Can the readout predict expression?</h3>
 <ul>
 <li><a href="../r/express01-b-radio-positive-default.html">Expression probe B: radio, positive, default</a> &mdash; qwen-14b-nf4</li>
 <li><a href="../r/express01-b-radio-positive-restrained.html">Expression probe B: radio, positive, restrained</a> &mdash; qwen-14b-nf4</li>
@@ -926,7 +927,7 @@
 <li><a href="../r/express01-cp-meal-neutral-restrained.html">Expression probe Cp: meal, neutral, restrained</a> &mdash; qwen-14b-abl-nf4</li>
 <li><a href="../r/express01-cp-meal-neutral-expressive.html">Expression probe Cp: meal, neutral, expressive</a> &mdash; qwen-14b-abl-nf4</li>
 </ul>
-<h3 id="static-unit-audit">Unit audit</h3>
+<h3 id="static-unit-audit">Audit · Re-running our own weak experiments</h3>
 <ul>
 <li><a href="../r/u6r-baseline-water-g12b.html">audit-03 · u6 re-dose baseline (unsteered) · gemma-12b</a> &mdash; gemma-12b</li>
 <li><a href="../r/u6r-amp-mid-a0060-g12b.html">audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.06) · gemma-12b</a> &mdash; gemma-12b</li>
@@ -997,7 +998,7 @@
 <li><a href="../r/u6r-baseline-water-refilm-g12b.html">audit-03 · u6 re-dose baseline (unsteered) · gemma-12b · refilm</a> &mdash; gemma-12b</li>
 <li><a href="../r/a02-intero-abl-refilm-g12b.html">audit-02 · intero free-gen · abl · gemma-12b · refilm</a> &mdash; gemma-12b</li>
 </ul>
-<h3 id="static-unit-apparatus">Unit apparatus</h3>
+<h3 id="static-unit-apparatus">Apparatus · Checking the instrument</h3>
 <ul>
 <li><a href="../r/apparatus02-vanilla-g4b.html">apparatus-02 · vanilla logit-lens cross-check, first light · gemma-4b</a> &mdash; gemma-4b</li>
 <li><a href="../r/a12-base-q27b.html">Swap battery: feels baseline · q27b</a> &mdash; qwen-27b</li>

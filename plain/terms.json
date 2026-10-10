@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-07-31",
+  "updated": "2026-10-10",
   "note": "The controlled vocabulary for the plain layer. See PLAIN-LANGUAGE.md. One referent, one term (ASD-STE100 Rule 1.11). `display` is the term we use everywhere; `aka` are older or alternate spellings that the site links to this entry; `def` is the plain definition shown in the popover. Source of the concepts: GLOSSARY.md. `see` lists related terms; the site renders them as links inside the popover, so a definition never says 'see X' in prose.",
   "terms": {
     "model": {
@@ -78,7 +78,7 @@
         "mid-stack"
       ],
       "category": "STRUCTURE",
-      "def": "The middle depth range of the model, about 38 to 92 percent of the way through. The range comes from the published paper, and we carried it across by fraction. Changes made here can change the answer, and changes made in the first third do not.",
+      "def": "The middle depth range where content becomes clear in the lens and internal pushes can change answers. Published depth fractions are a starting estimate. Our measured bands differ by model. Qwen 27B interventions use layers 28 to 58 of 64. Gemma 12B needed a later band than the original estimate.",
       "see": [
         "ignition",
         "motor-band"
@@ -114,7 +114,7 @@
         "ignition"
       ],
       "category": "MEASURE",
-      "def": "A measured depth in a model, and nothing more: the depth at which the workspace starts to work. Without the lens, we found the machinery that commits to one answer in place by layer 25 of 64 in Qwen 27B. The signs the lens can read start later, at 44 to 74 percent of depth in three models."
+      "def": "Commitment starts before the lens shows clear candidate words. In Qwen 27B, a lens-free test places commitment machinery near layer 25 of 64. Lens-visible signals start near layers 28 to 36. Final layers settle the output. These are separate stages, not one start depth."
     },
     "residence": {
       "display": "residence",
@@ -394,7 +394,7 @@
         "functional emotion"
       ],
       "category": "INSTRUMENT",
-      "def": "A direction in the model's internal state that tracks one emotion. We built 24 of them and checked each one."
+      "def": "A direction used to measure or steer emotion-related content. Story-built instruments use 24 directions per checkpoint. Other tests use word-based directions. Construction methods differ and need matched controls. Neither method establishes subjective feeling."
     },
     "workspace-z": {
       "display": "state strength",
@@ -565,6 +565,24 @@
       ],
       "category": "INSTRUMENT",
       "def": "The lens and the code around it. Several of our findings turned out to be facts about this tool and not about the model, so we now check each one against a control."
+    },
+    "dose-threshold": {
+      "display": "dose threshold",
+      "category": "MEASURE",
+      "def": "The push strength above which a word loop becomes easier to break. On Qwen 27B, one layer with enough push can work as well as eight. The effect mainly follows summed relative strength and weakens near the back of the tested band. Random directions can also break loops at high concentrated strength."
+    },
+    "escape-mode": {
+      "display": "escape mode",
+      "category": "MEASURE",
+      "def": "The outcome after a push on a word loop: the turn stops, the model answers the task, it writes other prose, it repeats a new word, or it stays stuck. Leaving the old loop does not always mean ending the turn."
+    },
+    "programming-language": {
+      "display": "programming language",
+      "aka": [
+        "programming languages"
+      ],
+      "category": "STRUCTURE",
+      "def": "A language used to write computer programs. These tests compare what models say about such languages. They do not measure the quality of the languages themselves."
     }
   }
 }

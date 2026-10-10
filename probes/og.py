@@ -178,6 +178,8 @@ def render_record(rec):
 
 
 def render_site(records):
+    from catalogue import inventory
+    coverage = inventory(records)
     img, draw = new_canvas()
 
     title_font = font(FONT_SANS_BOLD, 84)
@@ -187,8 +189,7 @@ def render_site(records):
 
     sub_font = font(FONT_SANS, 22)
     subtitle = (
-        f"{len(records)} experiment records · Jacobian-lens readouts · "
-        "three models, one RTX 3090"
+        f"{len(records)} record pages · {coverage['affect_runs']:,} saved affect runs · RTX 3090"
     )
     sw = draw.textlength(subtitle, font=sub_font)
     draw.text(((W - sw) / 2, 296), subtitle, font=sub_font, fill=MUTED)

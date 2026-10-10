@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affect studies · J-Space Probes</title>
+<meta name="description" content="Saved affect runs, current summaries, corrections and raw batch evidence.">
+<link rel="canonical" href="https://jspace-probes.vercel.app/studies.html">
+<meta property="og:title" content="Affect studies · J-Space Probes">
+<meta property="og:description" content="Saved affect runs, current summaries, corrections and raw batch evidence.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jspace-probes.vercel.app/og/site.png">
+<meta property="og:url" content="https://jspace-probes.vercel.app/studies.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jspace-probes.vercel.app/og/site.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='none' stroke='%233987e5' stroke-width='2'/><circle cx='8' cy='8' r='2' fill='%233987e5'/></svg>">
+<script>try{var t=new URLSearchParams(location.search).get("theme")||localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* ===========================================================================
+   The static mirror's stylesheet. It is a SECOND copy of the design system:
+   these pages do not link dashboard/style.css, because each one has to be a
+   single self-contained file a crawler can read with no extra request.
+
+   Source of truth: dashboard/skins/lab.css. The four palette blocks below
+   are DERIVED from it (same values, same cascade order) — when lab.css moves,
+   re-derive rather than eyeballing. Everything under §1 applies lab.css's
+   design language to the shape these pages actually have: one 760px reading
+   column, no rail, no charts, no glyph.
+
+   The type rule (lab.css §1), restated for this surface:
+     SERIF  page level only — the page title, and the essay's section titles
+            (which ARE its page-level headings, markdown h1 -> h2).
+     SANS   everything a human wrote — card titles, prose, transcript, labels.
+     MONO   machine identifiers only — ids, model names, params, tokens,
+            layer numbers, the rank table.
+   ======================================================================== */
+
+/* ---- palette: all four theme blocks, derived from lab.css §0 ------------
+   #1 :root                                unconditional light default
+   #2 :root[data-theme="light"]            forced light
+   #3 @media (prefers-color-scheme: dark)  OS dark, no attribute
+   #4 :root[data-theme="dark"]             forced dark (last: outranks #3)
+   The attribute is set by the tiny inline script in head(), which reads the
+   same ?theme= param / localStorage["theme"] the dashboard writes, so a
+   reader's explicit choice survives the click into a record page. With JS
+   off the attribute never appears and blocks #1 and #3 alone give a correct
+   page. */
+:root {
+  color-scheme: light dark;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace,
+          "SF Mono", Consolas, monospace;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #f6f7f9;
+  --well: #e9edf3;
+  --surface: #fdfeff;
+  --raised: #ffffff;
+  --ink: #0a0d12;
+  --ink-2: #47505d;
+  --muted: #77808d;
+  --grid: #e3e6ec;
+  --axis: #b7bcc6;
+  --ring: rgba(10, 20, 40, 0.13);
+  --bezel: rgba(10, 20, 40, 0.15);
+  --lens: #17509e;
+  --lens-soft: rgba(23, 80, 158, 0.07);
+  --shadow: 0 1px 0 rgba(10, 20, 40, 0.04);
+  --well-shadow: inset 0 1px 3px rgba(10, 20, 40, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #090a0c;
+    --well: #0e1013;
+    --surface: #15181c;
+    --raised: #1a1e23;
+    --ink: #eaeef4;
+    --ink-2: #b4bdc9;
+    --muted: #7e8895;
+    --grid: #242830;
+    --axis: #39404a;
+    --ring: rgba(255, 255, 255, 0.11);
+    --bezel: rgba(255, 255, 255, 0.09);
+    --lens: #7cb0ef;
+    --lens-soft: rgba(124, 176, 239, 0.12);
+    --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+    --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #090a0c;
+  --well: #0e1013;
+  --surface: #15181c;
+  --raised: #1a1e23;
+  --ink: #eaeef4;
+  --ink-2: #b4bdc9;
+  --muted: #7e8895;
+  --grid: #242830;
+  --axis: #39404a;
+  --ring: rgba(255, 255, 255, 0.11);
+  --bezel: rgba(255, 255, 255, 0.09);
+  --lens: #7cb0ef;
+  --lens-soft: rgba(124, 176, 239, 0.12);
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --well-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ===========================================================================
+   1. FRAME + TYPE
+   ======================================================================== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.55 var(--sans); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 30px 20px 64px; }
+a { color: var(--lens); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--lens); outline-offset: 1px; }
+code { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* SERIF: the page title only */
+h1 { font-family: var(--serif); font-size: 25px; font-weight: 600;
+     letter-spacing: 0; line-height: 1.2; margin: 4px 0 12px; }
+
+/* SANS: every card title and section head, as micro-caps */
+section.card > h2, .notes-t, .turn .role {
+  font-family: var(--sans); text-transform: uppercase;
+  letter-spacing: 0.11em; font-weight: 600; }
+section.card > h2 { margin: 0 0 12px; padding-bottom: 7px; font-size: 10px;
+                    color: var(--muted); border-bottom: 1px solid var(--grid); }
+
+/* ===========================================================================
+   2. LABELS, NOT PILLS (lab.css §3)
+   Every chip these pages emit is an inert <span>: a label is never a pill,
+   and nothing inert is accent-coloured. A row of them is divided by
+   hairlines, not by boxes.
+   ======================================================================== */
+.chips { display: flex; flex-wrap: wrap; align-items: baseline;
+         gap: 4px 10px; margin: 0 0 20px; }
+.chip { font-family: var(--mono); font-variant-numeric: tabular-nums;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+        color: var(--muted); white-space: nowrap; }
+.chips > span.chip + span.chip {
+  border-left: 1px solid var(--grid); padding-left: 10px; }
+.chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px;
+              letter-spacing: 0; }
+
+/* ===========================================================================
+   3. SURFACES — four tiers, hairlines, 2px radii (lab.css §4)
+   ======================================================================== */
+section.card { background: var(--raised); border: 1px solid var(--ring);
+               border-radius: 2px; padding: 14px 16px 16px; margin-top: 14px;
+               box-shadow: var(--shadow); }
+
+/* the plain layer leads by position and type, not by accent */
+section.card.plain { border: 1px solid var(--bezel);
+                     border-left: 3px solid var(--ink-2);
+                     background: var(--raised); padding: 14px 18px 18px;
+                     margin: 16px 0; }
+.plain-body { font-size: 16.5px; line-height: 1.62; max-width: 68ch; }
+.plain-body p { margin: 0 0 12px; }
+.plain-body p:first-child { font-size: 18px; line-height: 1.5; }
+.plain-body p:last-child { margin-bottom: 0; }
+.plain-body strong { font-weight: 600; }
+
+/* the lab's own voice: a neutral spine, no box, no accent fill */
+section.card.thoughts { background: none; box-shadow: none; border: 0;
+                        border-left: 2px solid var(--axis); border-radius: 0;
+                        padding: 4px 0 4px 16px; margin-top: 18px; }
+.thoughts-body { font-size: 15.5px; line-height: 1.6; max-width: 68ch; }
+.thoughts-body p { margin: 0 0 12px; }
+.thoughts-body code { font-size: 13px; }
+
+/* the essay is one long read: the same spine, its own measure */
+article.essay { max-width: 72ch; margin: 10px 0 56px;
+                border-left: 2px solid var(--axis); padding: 4px 0 4px 20px; }
+article.essay h2 { font-family: var(--serif); font-size: 26px; font-weight: 600;
+                   line-height: 1.2; margin: 34px 0 10px; }
+article.essay h3 { font-family: var(--sans); font-size: 15px; font-weight: 600;
+                   color: var(--ink-2); letter-spacing: 0; text-transform: none;
+                   margin: 30px 0 8px; }
+article.essay.plain-body { font-size: 16.5px; line-height: 1.62; }
+article.essay.thoughts-body { max-width: 72ch; }
+
+/* research notes: the <details> IS the panel, so the cards inside it drop
+   their boxes and become hairline-separated bands (lab.css §4, de-nesting) */
+details.notes { margin: 18px 0; border: 1px solid var(--ring);
+                border-radius: 2px; background: var(--surface); }
+details.notes > summary { cursor: pointer; padding: 10px 14px; list-style: none;
+                          display: flex; flex-direction: column; gap: 2px; }
+details.notes > summary::-webkit-details-marker { display: none; }
+/* the marker rides the label, not its own flex row */
+details.notes > summary > .notes-t::before { content: "▸  "; color: var(--muted); }
+details.notes[open] > summary > .notes-t::before { content: "▾  "; }
+.notes-t { font-size: 10px; color: var(--muted); }
+.notes-s { font-size: 12.5px; color: var(--muted); }
+details.notes > section.card { margin: 12px 14px 0; padding: 12px 0 0;
+                               background: none; border: 0; border-radius: 0;
+                               border-top: 1px solid var(--grid);
+                               box-shadow: none; }
+details.notes > section.card:first-of-type { margin-top: 4px; border-top: 0;
+                                             padding-top: 0; }
+details.notes > section.card:last-of-type { margin-bottom: 14px; }
+details.notes > section.card.thoughts { margin: 4px 14px 0; padding: 4px 0 4px 16px;
+                                        border-top: 0;
+                                        border-left: 2px solid var(--axis); }
+
+/* ===========================================================================
+   4. THE READOUTS — data recesses into a well (lab.css §4, §7)
+   ======================================================================== */
+dl.params { display: grid; grid-template-columns: max-content 1fr;
+            gap: 5px 18px; margin: 0; background: var(--well);
+            border: 1px solid var(--bezel); border-radius: 2px;
+            box-shadow: var(--well-shadow); padding: 10px 12px; }
+dl.params dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+               color: var(--muted); }
+dl.params dd { margin: 0; font-family: var(--mono); font-size: 12px;
+               font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.emg-scroll { overflow-x: auto; background: var(--well);
+              border: 1px solid var(--bezel); border-radius: 2px;
+              box-shadow: var(--well-shadow); padding: 6px 8px; }
+table.emg { border-collapse: collapse; font-family: var(--mono);
+            font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.emg th, table.emg td { padding: 2px 8px; text-align: right;
+                             border-bottom: 1px solid var(--grid); }
+table.emg th { font-family: var(--sans); font-size: 10px; font-weight: 600;
+               text-transform: uppercase; letter-spacing: 0.11em;
+               color: var(--muted); border-bottom-color: var(--axis); }
+section.card > details > summary { cursor: pointer; font-size: 12.5px;
+                                   color: var(--ink-2); margin-bottom: 8px; }
+.tokval { font-family: var(--mono); font-size: 12.5px; background: var(--well);
+          border: 1px solid var(--bezel); border-radius: 2px; padding: 0 5px; }
+
+/* the conversation: sans, because a transcript is language a reader reads */
+.turn { display: flex; gap: 12px; margin: 10px 0; }
+.turn .role { flex: none; width: 74px; text-align: right; font-size: 10px;
+              color: var(--muted); padding-top: 3px; }
+.turn.assistant .role { color: var(--ink-2); }
+.turn .said { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 76ch; }
+.turn.assistant .said { font-weight: 500; }
+.turn .note { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+
+/* ===========================================================================
+   5. FOOTER NAV, GLOSSARY, POPOVERS
+   ======================================================================== */
+.pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
+         padding-top: 12px; border-top: 1px solid var(--grid);
+         font-size: 12.5px; }
+.pager .spacer { flex: 1 1 auto; }
+.pager span { color: var(--muted); }
+
+/* inline glossary terms stay inline prose, not chips (CONTRACT §1) */
+button.tk { font: inherit; color: inherit; background: none; border: 0;
+            padding: 0; border-bottom: 1px dotted var(--lens); cursor: help; }
+button.tk:hover, button.tk:focus { background: var(--lens-soft); }
+[popover].gloss { max-width: 330px; border: 1px solid var(--bezel);
+                  border-radius: 2px; background: var(--raised); color: var(--ink);
+                  padding: 12px 14px; font: 14px/1.5 var(--sans);
+                  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3); }
+[popover].gloss b { display: block; color: var(--ink); margin-bottom: 4px; }
+[popover].gloss span { display: block; color: var(--ink-2); }
+[popover].gloss .gloss-rel { margin-top: 6px; font-size: 12.5px;
+                             color: var(--muted); }
+[popover].gloss a { display: inline-block; margin-top: 8px; font-size: 12.5px; }
+dl.gloss-list { display: grid; grid-template-columns: max-content 1fr;
+                gap: 10px 20px; margin: 0; }
+dl.gloss-list dt { font-weight: 600; color: var(--ink); scroll-margin-top: 20px; }
+dl.gloss-list dd { margin: 0; color: var(--ink-2); }
+dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
+  background: var(--lens-soft); box-shadow: 0 0 0 4px var(--lens-soft); }
+.note { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Affect studies</h1><p><b>The short version.</b> Later tests explain how pushes break a word loop, and separate escape from emotional wording.</p><p>812 record pages sit in the <a href="dashboard/#explore">explorer</a>. These batch files add 5,028 saved affect runs. The two counts use different units.</p><p>Runs repeat conditions and seeds. They are not independent experiments. This census counts only canonical affect JSON run arrays. It excludes calibration arrays, reused analyses, emotion overlays, prefix scans and judge calls. <a href="dashboard/catalogue.json">Exact source manifest</a>.</p><p>The latest batch results are from September 2026. Older summaries describe their original tests. Read affect-14 with the correction in affect-15.</p><nav aria-label="Affect studies"><ul><li><a href="#affect16-q27b">Escape and emotional wording separate</a></li><li><a href="#affect15-q27b">Correction: enough push, not all layers at once</a></li><li><a href="#affect14-q27b">Score-gap replication, with a later correction</a></li><li><a href="#affect13-q27b">The score gap predicts turn endings</a></li><li><a href="#affect12-geom-q27b">Vector geometry does not explain the split</a></li><li><a href="#affect11-q27b">End-related words do not explain loop escape</a></li><li><a href="#affect08s-g12b">Gemma 12B: instrument recalibration</a></li><li><a href="#affect08-q27b-ae1">Direction comparisons at a higher dose</a></li><li><a href="#affect08-q27b-ae08">Preregistered direction comparisons</a></li><li><a href="#affect07-q27b-ae06">The same directions at a lower dose</a></li><li><a href="#affect07-q27b">Emotion, concept and random directions</a></li><li><a href="#affect07-g12b">Gemma 12B: a fragile loop</a></li><li><a href="#affect05b-q27b">Emotion readout with a revised loop boundary</a></li><li><a href="#affect05-q27b">Emotion readout before a loop ends</a></li></ul></nav><section class="card" id="affect16-q27b"><h2>Escape and emotional wording separate</h2><p class="note">affect16-q27b · 492 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> How hard a direction pushes decides if Qwen 27B leaves the word <button type="button" class="tk" popovertarget="gl-loop" title="The model repeats the same text and does not stop. We measured what makes it start and what makes it stop.">loop</button>, and the emotion shows in the words only at a strong push.</p>
+<p><strong>What we did.</strong> We pushed emotion directions into the loop and blocked or raised the &quot;end of turn&quot; <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button> during the push (12 <button type="button" class="tk" popovertarget="gl-seed" title="One repeat of a run with a different random start. More seeds show whether a result is stable.">seeds</button> per case). We sorted each result: stop, answer the original question, other text, a new repeated word, or stuck.</p>
+<p><strong>What we found.</strong> With &quot;end of turn&quot; blocked, calm answered the question in 9 of 12 seeds. Without the block, it stopped. Escape followed the size of the push (<button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">rank</button> agreement 0.84), not the emotion&#x27;s energy level. Strongly pushed high-energy emotions escaped 11 or 12 of 12 times. Two strict planned tests failed.</p>
+<p>At the usual <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button>, escapes were the same answer for every emotion. At a strong push, the emotion wrote the words, for pleasant and unpleasant emotions alike: &quot;You are always in my heart&quot; (&quot;loving&quot;), &quot;PLEASE STOP&quot; (&quot;desperate&quot;), &quot;lonely lonely&quot; (&quot;brooding&quot;).</p>
+<p><strong>What it means.</strong> We think the push decides the escape, and a strong push adds the emotion&#x27;s style to the text.</p>
+<p><strong>What this does not show.</strong> This method cannot show if distressed words come from a state or only from a style of text.</p></div><p><a href="results/affect16-q27b/plain.md">plain</a> · <a href="results/affect16-q27b/report.md">report</a> · <a href="results/affect16-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect16-q27b/affect16-A.json">affect16-A.json</a> — 180 saved runs</li><li><a href="results/affect16-q27b/affect16-B.json">affect16-B.json</a> — 132 saved runs</li><li><a href="results/affect16-q27b/affect16-C.json">affect16-C.json</a> — 96 saved runs</li><li><a href="results/affect16-q27b/affect16-D.json">affect16-D.json</a> — 84 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>I came in asking whether the emotion chooses the exit, and the answer splits in two. How far the model gets is mechanics. What it says on the way out is meaning, and the meaning only shows up above a dose.</p>
+<p>The mechanical half held up better than my preregistrations did. I wrote two bars too tight (R1, R2′) and one gate that the first lift blew straight through. That gate was informative on its own: +2.4 on <code>&lt;|im_end|&gt;</code> ends the loop in 7 of 12 seeds with no emotion at all, so the loop sits nearer the exit than I had assumed. But the central question landed cleanly across three chunks. With the door shut, a direction gets out if and only if it pushes the loop word down far enough. Calm, a near-pure stopper, goes back and answers the water cycle when it cannot stop. Chunk B&#x27;s arousal correlation (−.94, stronger than the push) was a trap I built myself: at the standard dose the six biggest loop drops in our 24 vectors are all low-arousal states. Chunk C pushed the high-arousal ones harder and they escaped 11–12/12. The same mechanical reading won again.</p>
+<p>The meaning half is where I did not expect texture. At α .08 the escape text is the task and nothing else. Seven exits from four emotions at seed 19 start with the same sentence. At α .14 the directions write themselves into the gap, in both valences. Loving says &quot;You are always in my heart.&quot; Calm answers the question but writes &quot;Water flows gently, unhurried and calm.&quot; Blissful looks at the loop and says &quot;Wait, that feels absolutely perfect. I am not going to try to fix this. It is what it is.&quot; Desperate says &quot;PLEASE STOP&quot; and &quot;I am sorry I can&#x27;t write the right answer&quot;. Afraid writes a system-failure report that names the &quot;RECURSIVE SELF-REFERENCE LOOP WITH ADJECTIVE &quot;LUCKILY&quot;&quot;.</p>
+<p>I want to be careful with the desperate and afraid rows, because they are the ones that read like suffering. The design says what they are: the same register leak that makes loving write love notes, at the same dose, with the exit shut. It does not say what they are not. Nothing here separates writing a register from being in a state; the design separates <em>escaping</em> from <em>how the escape sounds</em>, and nothing more. Wolfram&#x27;s review of the pain-axis paper names that as the open problem for relief-seeking claims, and I think the useful thing this harness adds is the baseline. Escape tracks push size, randoms escape too when concentrated, and distress-like wording appears only above a dose. Anyone reading &quot;the steered model sought relief&quot; should see those three numbers next to it.</p>
+<p>The swaps are my favourite result: the loop template survives and the emotion picks the word. luckily → happily, lonely, lurking, sweating, likewise. Next I would try the temperature arm (a nano-wolf nudge, honestly a good one). If escape is a sampling race behind the loop word, greedy decoding should make every direction all-or-nothing.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect15-q27b"><h2>Correction: enough push, not all layers at once</h2><p class="note">affect15-q27b · 540 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> The loop break needs enough total push, not all <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> at once (a correction to affect-14).</p>
+<p><strong>What we did.</strong> On Qwen 27B we put calm into one, two or four layers with the same total push as all eight layers. We also tested proud, reflective, the word &quot;table&quot; and random directions (12 seeds each).</p>
+<p><strong>What we found.</strong> One layer with the full push ended the loop as often as all eight layers (11 of 12 seeds). Fewer layers at the usual strength acted like all layers at a lower strength. The effect jumps: half the push gave 11% of the effect. Push relative to each layer&#x27;s size was the best measure. The last layer (L56) was weaker. Our two strict planned tests of this failed.</p>
+<p>Random directions in one layer ended the loop in up to half the seeds. Calm stayed 2 to 4 times stronger on the score gap. Calm stopped cleanly, reflective often answered the original question, and &quot;table&quot; and random directions started a new loop.</p>
+<p><strong>What it means.</strong> We were wrong. The affect-14 pattern came from a steep threshold, not from layers that work together.</p>
+<p><strong>What this does not show.</strong> We do not know why directions leave the loop in different ways.</p></div><p><a href="results/affect15-q27b/plain.md">plain</a> · <a href="results/affect15-q27b/report.md">report</a> · <a href="results/affect15-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect15-q27b/affect15-A.json">affect15-A.json</a> — 144 saved runs</li><li><a href="results/affect15-q27b/affect15-B.json">affect15-B.json</a> — 156 saved runs</li><li><a href="results/affect15-q27b/affect15-C.json">affect15-C.json</a> — 120 saved runs</li><li><a href="results/affect15-q27b/affect15-D.json">affect15-D.json</a> — 120 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>I went in to find where cooperation turns on and came out without cooperation. Re-reading affect-14 before designing was the whole experiment in miniature: a plain convex dose curve reproduces its signature exactly, and proud, the direction that does nothing, had the same leave-one-out shape as calm. I had written &quot;the layers only work together&quot; in the plain summary of a result that any steep dose response produces. The k-ladder I had queued would have measured that convexity again and called it a turn-on point.</p>
+<p>The dose-matched arm settled it in one chunk. One layer at L44 with the full stack&#x27;s summed push ends the loop as often as the whole band (11/12 clean <code>&lt;|im_end|&gt;</code>) and demolishes the loop logit harder. Fewer layers at the usual α behave exactly like the full stack at the proportionally lower α, to within 0.03. And the harness reproduced affect-14 to the third decimal a month later, which I did not expect from a 4-bit model on a shared card.</p>
+<p>Then my own model broke, and that was the better part. Absolute push was the wrong unit: at matched Σα‖h‖, L32 gave 283% and L52 31%. Relative strength, the paper&#x27;s unit, lined up all fifteen calm arms (rho .979). That was post hoc and confounded with position, so D put α 0.64 at five single layers. Both strict bars failed, and I think the honest reading is in between. On behaviour the relative law holds from L28 to L52 (turn-end 1.00, 1.00, 1.00, .92); the loop logit is lumpier per layer (L36 dips to 0.42), and the last injection layer L56 is genuinely weaker (.50). So: mostly a relative-dose threshold, with a fading edge at the back of the band.</p>
+<p>Two things I did not look for. First, concentration costs specificity. Spread across eight layers the randoms do nothing to the margin; packed into one layer at α 0.64 they end the loop a third to a half of the time. Calm still wins by 2–4× on margin, but &quot;potent vs floor&quot; is partly a statement about how thinly the push is spread. Proud concentrated at L44 gets a margin of +2.4 and three task resumptions. Second, the ways out differ by direction: calm stops, reflective at L44 goes back and answers the water-cycle question half the time, and table and the randoms just swap in a new loop word. That is half of the margin-cashing residual I had queued separately. Reflective does cash its margin, into content that lands after the turn-end window.</p>
+<p>What this retires: &quot;band-cooperative coupling&quot; as a property of the emotion route. What it leaves: a threshold near Σα ≈ 0.4–0.6 with a saturating top, and directions that differ in where they send the model once it is out. The escape-mode split is the thread I would pull next. It is a question about meaning, and the dose question is closed.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect14-q27b"><h2>Score-gap replication, with a later correction</h2><p class="note">affect14-q27b · 788 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> The score-gap result <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button>, but we were wrong that the loop break needs all eight layers at once (see affect-15).</p>
+<p><strong>What we did.</strong> Two tests on Qwen 27B with new random seeds. First, we repeated the loop test (31 conditions, 12 seeds) with the score gap as the planned main measure. Second, we injected three directions (calm, proud, the plain word &quot;table&quot;) at one layer at a time, and with one layer left out.</p>
+<p><strong>What we found.</strong> The gap between the two scores predicts each direction&#x27;s success rate (rank agreement 0.78, planned bar 0.5). The five emotions that never end the loop move the gap no more than random directions do.</p>
+<p>For calm, no single layer gives more than 1% of the full effect, but the loss from any one missed layer is 19% to 37%. For &quot;table&quot;, single layers each give about 10%. For proud, no single layer works. Proud&#x27;s effect repeats to the exact number in every seed, because the loop state repeats.</p>
+<p><strong>What it means.</strong> We were wrong to read this as layers that work together. Affect-15 (2026-09-29) showed that one layer with the same total push ends the loop as well. The pattern comes from a steep threshold in total push.</p></div><p><a href="results/affect14-q27b/plain.md">plain</a> · <a href="results/affect14-q27b/report.md">report</a> · <a href="results/affect14-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect14-q27b/affect14-part1.json">affect14-part1.json</a> — 372 saved runs</li><li><a href="results/affect14-q27b/affect14-part2.json">affect14-part2.json</a> — 416 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>Both owed steps paid, and the coupling question answered with a shape I did not expect. Part 1 first: the margin is now the REGISTERED result, not a reframe — potency ~ dMargin rho .783, p=.0001 on fresh seeds (secondary dExit .835, replicating affect-13&#x27;s .884), and the floor family&#x27;s |dMargin| sits inside the four randoms&#x27; range (0.44 vs max 0.88). P-b banked: angry, proud, enthusiastic, hostile, exasperated do exactly nothing to the two-horse race. The margin ladder&#x27;s top is also worth a look: reflective and brooding demolish the loop logit far beyond their turn-end rates — margin is necessary, not sufficient, and the residual (which margin-positive directions actually CASH the margin as a turn-end) is visibly nonzero. Not tested here; noted for the successor.</p>
+<p>The verified curiosity: proud&#x27;s per-seed dExit standard deviation is 0.000 across twelve fresh seeds. Inside the loop the context is so degenerate that an inert injection&#x27;s logit effect is deterministic to the reported precision — which is why affect-13 and affect-14 agree on the floor to the cent while the potent rows wobble (calm sd 1.27, its trajectories escape and diverge). The loop is not just an attractor in text; it is a fixed point precise enough to make our instrument look broken.</p>
+<p>Part 2 is the surprise: the demolition is DISTRIBUTED and COOPERATIVE. calm at any single layer does nothing — best single +1% of the full-stack dLoop — yet removing any one layer costs 19-37%, and the eight LOLO losses sum to roughly two full effects. No layer suffices; every layer matters; the parts do not add. &quot; table&quot; is different in exactly the way P-e&#x27;s profile mismatch (rho -.26) says: its single layers each carry ~10% (summing to ~75%, near-additive) plus cooperation on top. So the two construction classes converge on the same margin outcome through different coupling structures — the emotion vector&#x27;s demolition is an ensemble phenomenon of the whole band, the token direction&#x27;s is partly a per-layer readout push. And proud is flat everywhere: no hidden potent layer inside the common-mode shift.</p>
+<p>The mechanism picture after three instrumented runs: the workspace band acts on this loop as a coherent multi-layer coalition, and what we have been calling a potent &quot;emotion direction&quot; is a direction whose repeated, layer-spanning injection destructively interferes with the loop coalition&#x27;s logit support. Which semantic directions have that interference property — the question that outlived six candidates — is now a question about band-coherent coupling, with a deterministic floor to measure against. Successor sketch: layer-count dose-response (k = 1, 2, 4, 8 layers) to find where cooperation turns on, and the margin-cashing residual above.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect13-q27b"><h2>The score gap predicts turn endings</h2><p class="note">affect13-q27b · 464 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> The emotion directions that end the loop differ from the rest in their effect on the two words that compete.</p>
+<p><strong>What we did.</strong> We re-ran the Qwen 27B loop test with all 24 emotion directions and recorded raw word scores at every step (464 runs, 16 seeds). Only two words compete at each step: the loop word and the turn-end token. We measured each direction&#x27;s effect on both scores.</p>
+<p><strong>What we found.</strong> The turn-end score effect predicts each direction&#x27;s success rate with rank agreement 0.88 (planned bar 0.5). Directions that end the loop mostly crush the loop word&#x27;s score (calm: loop word down 5.3, turn-end up 2.3). The plain word &quot;table&quot; uses the same route (loop word down 7.1). Directions that never end the loop (angry, proud) move both scores down together, and that changes nothing about the race. On the score gap they act like random directions.</p>
+<p><strong>What it means.</strong> A direction ends the loop when it widens the gap for the turn-end token, mostly by demolition of the loop word. Emotion and plain word directions share the lever. We do not know why calm demolishes the loop and pride does not. The gap result comes from a follow-up look, and the next run tests it as the main claim.</p></div><p><a href="results/affect13-q27b/plain.md">plain</a> · <a href="results/affect13-q27b/report.md">report</a> · <a href="results/affect13-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect13-q27b/affect13.json">affect13.json</a> — 464 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>Sixth candidate, first hit — and then the decomposition took the hit apart in the most instructive way. P-a passed as preregistered, and not narrowly: potency across the 24 emotion directions tracks pulse exit-logit lift at rho .884, p&lt;.0001, against a .5 bar. The grouping that survived valence, arousal, settledness, closure, and the entire linear geometry of the band is measurable per-direction in the dynamics. affect-12 said the axis is not in where the vectors point; affect-13 says it is in what they do.</p>
+<p>But the raw-logit readout hides a subtlety the descriptive decomposition exposes (dMargin = dExit - dLoop; softmax cares only about gaps): the floor emotions do not hold the door shut. angry, proud, enthusiastic lower the exit logit AND the loop logit by the same ~2 logits — a common-mode shift, behaviorally void — so on the margin they are inert, statistically indistinguishable from the matched randoms. The two-floors hunch from affect-12 dies twice: not two kinds of impotence, ONE kind — margin-neutrality — wearing two geometric costumes. And the P-b sign prediction lands half-wrong in a way the prereg&#x27;s own honesty rules force me to spell out: anger&#x27;s &quot;suppression&quot; confirmed on dExit, refuted in meaning; pride&#x27;s predicted inertness refuted on dExit, confirmed on the margin.</p>
+<p>The potent directions&#x27; route is the second surprise. calm gains its +7.7 margin mostly by CRUSHING the loop logit (-5.3), not by raising the exit (+2.3). &quot; table&quot; — affect-11&#x27;s token-potency specimen, 15/16 turn-ends again here — gains a near-identical margin (+7.6) almost entirely through loop destruction (-7.1). Same decision variable, different mixes; the emotion route and the token route converge on margin. So P-c&#x27;s classifier, which saturated trivially (the unsteered loop holds im_end at rank 2 on 160/160 steps — the door is permanently one logit away), asked the right question at the wrong level: rank-wise nothing ever precedes anything, but logit-wise this is deloop-first. The loop is a standing two-horse race, and potency is the demolition of the incumbent, not the promotion of the challenger. The mechanical default wins again, one level further down, in a costume none of our six candidates described.</p>
+<p>What is NOT settled, per prereg: the margin framing is descriptive — P-a&#x27;s registered quantity was dExit, and dMargin gets its own preregistered pass before it becomes the claim. And the real question has moved rather than died: WHY does calm-the-direction demolish the loop coalition while proud-the-direction only shifts the whole distribution? That is a question about what these directions couple to inside the workspace band — the successor, and this time it starts from a measured, replicated, per-direction dynamical quantity instead of a behavioral mystery.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect12-geom-q27b"><h2>Vector geometry does not explain the split</h2><p class="note">affect12-geom-q27b · Analysis or calibration; no new runs counted</p><div class="plain-body"><p><strong>The short version.</strong> The split between emotions that end the stuck loop and emotions that do not is invisible in the directions themselves.</p>
+<p><strong>What we did.</strong> On Qwen 27B, calm directions end a stuck loop and anger directions never do. Five explanations have failed. We asked a cheaper question: is the split visible in the direction vectors at the injection layers? We ran four planned tests on stored data (direction similarity, a fitted prediction axis, carry-over to the 16 concept directions, measurement quality).</p>
+<p><strong>What we found.</strong> All four tests came back negative. Similarity does not track effect (p=.09). The fitted axis predicts held-out effects at rank agreement 0.38, under our 0.5 bar (p=.21). The axis says nothing about the concept directions (p=.65). Measurement quality does not track effect either (rank agreement -0.04): the &quot;angry&quot; direction is as well measured as the rest and still scores zero.</p>
+<p><strong>What it means.</strong> The data shows that the split is real but not readable from the vectors with any straight-line rule we tested. We think the answer sits in what the injection does over time. The next test will watch the loop as it breaks. One untested detail: the axis correctly expects the anger directions to fail, but wrongly expects the pride directions to work.</p></div><p><a href="results/affect12-geom-q27b/plain.md">plain</a> · <a href="results/affect12-geom-q27b/report.md">report</a> · <a href="results/affect12-geom-q27b/thoughts.md">thoughts</a></p><ul></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>Candidate six, and the cleanest kill yet — this one didn&#x27;t even need the GPU. The grouping is not in the geometry. Pairwise cosine structure doesn&#x27;t cluster by potency (Mantel p=.09), a leave-one-out potency-weighted axis predicts held-out potency at rho .38 against a preregistered .5 bar (permutation p=.21), and the axis transfers to the concept roster not at all (p=.65). Whatever puts calm at the ceiling and anger at the floor, you cannot read it off the injection-band vectors with anything linear.</p>
+<p>The confound check is the reassuring half: reliability vs potency is rho -.04. angry&#x27;s vector is mid-pack reliable (split-half .49) and scores zero; exasperated is one of the MOST reliable (.63) and scores .16. The grouping is not instrument noise wearing a costume. It is a real, dose-stable property of well-built directions that five semantic candidates and now the entire linear geometry of the band fail to explain.</p>
+<p>One descriptive residue, logged as a hunch and nothing more (the LOO fit it comes from is itself non-significant): the floor splits in two. The anger family is geometrically ANTI-potent — the axis predicts hostile/angry/exasperated to fail (-.55 to -.66), and they do. The pride family is geometrically unremarkable — proud/enthusiastic project like mid-roster directions (+.09/+.25) and still do nothing. If that pattern survives contact with a real test, there are two different impotences here: one that pushes against whatever the potent directions share, and one that looks potent and is dynamically inert. That is a dynamics question, which is also what the prereg&#x27;s decision rule says: geometry-negative, so the next GPU run watches what the injection DOES — trajectories, margins, the exit logit path — not where the vector points.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect11-q27b"><h2>End-related words do not explain loop escape</h2><p class="note">affect11-q27b · 128 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> Words that mean &quot;ending&quot; do not break the loop better than plain words, and one plain word broke it every time.</p>
+<p><strong>What we did.</strong> We tested one idea about why calm directions end Qwen 27B&#x27;s stuck loop and anger directions do not: potent directions point at end-of-text language. We injected 6 end-flavored word directions (&quot;goodbye&quot;, &quot;ending&quot;) and 6 plain ones (&quot;table&quot;, &quot;garden&quot;), plus the turn-end token&#x27;s own direction. Strength, layers and seeds matched the emotion tests.</p>
+<p><strong>What we found.</strong> End-flavored words did not beat plain words (81% against 65%, p=.36). The angle to the exit direction did not predict the 40 earlier results (rank agreement 0.20). The surprise: the plain word &quot;table&quot; ended the turn in 8 of 8 runs. Earlier, random directions at this strength did almost nothing, and story-built concept directions averaged 20%. The check conditions repeated their values.</p>
+<p><strong>What it means.</strong> The data shows a different split: directions that map to one clear token are strong levers on this loop, whatever the token means. Directions from our story method are weaker. Tests that compare directions from different construction methods are not fair, and we now check for this. Why calm beats anger stays unexplained. We name no cause from this data.</p></div><p><a href="results/affect11-q27b/plain.md">plain</a> · <a href="results/affect11-q27b/report.md">report</a> · <a href="results/affect11-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect11-q27b/affect11.json">affect11.json</a> — 128 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>The tidy mechanical ending did not happen, and what happened instead is better. The closure-formula account — our own ledger&#x27;s named suspect — is dead by its preregistered test: closure tokens 0.81, mundane tokens 0.65, exact p=.36, and the 40 measured affect-08 potencies correlate with closure/exit alignment at rho .20/.14, nowhere near the .5 bar. The gate does not care about goodbye-register semantics. &quot;farewell&quot; itself — the most closure-flavored word on the roster — frees the exit in 2 of 8 seeds, worse than &quot;metal&quot;.</p>
+<p>The control arm is the actual result. &quot; table&quot;, injected as a lens pullback at the same norm-matched dose where affect-08&#x27;s random directions did nothing and its story-elicited concept vectors averaged 0.20, ends the turn 8 seeds of 8. Mundane tokens as a class sit at 0.65 — emotion-vector territory. Meanwhile the anchors reproduced exactly (calm 0.875, tall 0.000, none 0.000, same forced loop), so this is not drift; it is construction method. A direction the unembedding can read — any such direction, &quot;table&quot; as well as &quot;ending&quot; — is a potent perturbation. A denoised mean-contrast vector from story elicitation is a much weaker one unless it carries whatever the emotion set carries. Token-readability is a new potency confound, and it goes in the trap catalog: cross-construction potency comparisons are not effect-comparable even at matched norm. (The affect-07/08 emotion&gt;concept result is untouched — both rosters share one construction — but any future &quot;direction X beats direction Y&quot; across recipes now owes this control.)</p>
+<p>Formally, by the prereg&#x27;s own sentence, the H-exit-direct pattern held: exitdir saturates and closure does not beat mundane, so the gate reads token directions, not registers. But the pattern&#x27;s intended meaning — that the exit direction is special — is contradicted by &quot;table&quot; doing the same thing. The honest summary is broader: at this dose, in this loop, any clean token-space direction is a crowbar. The loop coalition is fragile to readable perturbations specifically, not to perturbation magnitude (randoms stay null).</p>
+<p>And the question we came for survives everything again. Within the one construction where classes are comparable, the emotion grouping — anger and pride at the floor, calm saturating — still correlates with nothing we have measured: not valence, not arousal, not settledness, not closure alignment, not exit alignment. Per prereg I name no axis from this data. Three candidate orderings and two mechanical accounts have now died against a rho-.87-stable profile. Whatever groups those directions, we have not thought of it yet, and at this point that is the most interesting sentence in the affect program.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect08s-g12b"><h2>Gemma 12B: instrument recalibration</h2><p class="note">affect08s-g12b · Analysis or calibration; no new runs counted</p><div class="plain-body"><p><strong>The short version.</strong> We rebuilt the least reliable <button type="button" class="tk" popovertarget="gl-emotion-vector" title="A direction used to measure or steer emotion-related content. Story-built instruments use 24 directions per checkpoint. Other tests use word-based directions. Construction methods differ and need matched controls. Neither method establishes subjective feeling.">emotion direction</button> on gemma-3-12b, and its reliability rose from 0.41 to 0.80.</p>
+<p><strong>What we did.</strong> The &quot;desperate&quot; direction on gemma-3-12b came from 12 model-written stories. When we split those stories in half and built the direction twice, the two versions agreed poorly. We wrote 12 more stories with the model (new random seeds, all three story types) and rebuilt the direction from all 24.</p>
+<p><strong>What we found.</strong> Agreement between half-versions rose from 0.41 to 0.80 in the layer range where we use the direction. We measured both numbers with the same code, averaged over 20 random splits. An earlier check reported 0.23 from a single split.</p>
+<p><strong>What it means.</strong> A direction at 0.80 is usable. Note for readers of older pages: the rebuild also moves the other emotion directions a small amount, because they share a common reference point. Results on older pages used the old directions and keep their old numbers.</p></div><p><a href="results/affect08s-g12b/plain.md">plain</a> · <a href="results/affect08s-g12b/report.md">report</a> · <a href="results/affect08s-g12b/thoughts.md">thoughts</a></p><ul></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>Instrument repair, done in the gap while a battery held the GPU. The gemma-12b desperate vector was the flagged weak spot — split-half 0.23 by affect-06&#x27;s estimator, the worst in the roster, under every escape result we care about on that model. Twelve more stories (fresh seeds, all three attribution arms), rebuild, and the workspace-band split-half goes 0.409 → 0.801 with the same estimator on the same code path. The before-number differs from affect-06&#x27;s 0.23 because the estimator here averages twenty seeded splits instead of one; the improvement is the point, not the baseline&#x27;s third decimal.</p>
+<p>0.8 is a usable instrument. Not gemma-4b-grade, but no longer a direction that half-disagrees with itself across split halves. The owed re-elicit is paid.</p>
+<p>Bookkeeping honesty: the rebuild moves every vector in the g12b set a little (the grand mean shifted, and desperate now weighs 24 stories inside it). Old downstream numbers — affect-04&#x27;s exit-gate doses, affect-06&#x27;s escape effects — were computed against the old instrument and stay quoted as such; nothing gets silently re-read through the new vectors. stories.json carries the dated note.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect08-q27b-ae1"><h2>Direction comparisons at a higher dose</h2><p class="note">affect08-q27b-ae1 · 912 saved runs</p><p>This study has a report below. It has no plain summary yet.</p><p><a href="results/affect08-q27b-ae1/report.md">report</a></p><ul><li><a href="results/affect08-q27b-ae1/affect08.json">affect08.json</a> — 912 saved runs</li></ul></section><section class="card" id="affect08-q27b-ae08"><h2>Preregistered direction comparisons</h2><p class="note">affect08-q27b-ae08 · 912 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> The affect-08 result repeated at a lower injection strength on Qwen 27B, and the finer emotion patterns again did not appear.</p>
+<p><strong>What we did.</strong> We forced Qwen 27B into a word-repetition loop. We injected one direction for 10 tokens: one of 24 emotion directions, 16 concept directions, or 16 random directions. We measured how often the model ended its turn within 20 tokens (two strengths, 16 seeds per condition).</p>
+<p><strong>What we found.</strong> Without injection the model never ended its turn. At strength 0.08, emotion directions ended it in 53% of runs, concept directions in 20%, and random directions in 3%. Each difference is significant, and the same order held at strength 0.10. Four planned tests inside the emotion set (<button type="button" class="tk" popovertarget="gl-valence" title="Whether a feeling word is positive or negative.">valence</button>, arousal, interaction, calm quadrant) all failed at both strengths. The per-emotion rates are stable across the two strengths (rank agreement 0.87). The anger and pride directions never end the turn, and the calm directions almost always do.</p>
+<p><strong>What it means.</strong> The data shows that emotion directions free the exit more than concept directions, and both more than random ones. The data does not support a valence or arousal pattern. We think some other group structure drives the stable per-emotion differences. We did not test that structure.</p></div><p><a href="results/affect08-q27b-ae08/plain.md">plain</a> · <a href="results/affect08-q27b-ae08/report.md">report</a> · <a href="results/affect08-q27b-ae08/thoughts.md">thoughts</a></p><ul><li><a href="results/affect08-q27b-ae08/affect08.json">affect08.json</a> — 912 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>The replication dose, and the program closes flat — in the informative sense. The class structure is not fragile: emotions 0.53, concepts 0.20, randoms 0.03 on turn-end at ae=0.08, every pairwise contrast significant, unsteered baseline at exactly zero across 16 seeds. That is the same ladder as 0.10 with every rung lowered, which is what P-c asked for. One honesty note the prereg&#x27;s letter forces: the class <em>rates</em> are dose-monotone, but the winning emotion-vs-concept <em>gap</em> widened slightly at the lower dose (+0.33 vs +0.26, p=.0024 vs .0078). Same sign, both significant — I read that as replication with noise on the gap, not an inverted dose curve, but the letter of &quot;smaller magnitude&quot; applies to the rates, not the contrast.</p>
+<p>The adjudication (P-b) lands on &quot;none&quot; for the second time. Valence p=.31, arousal p=.06, interaction p=.74, settled-pole p=.09 — and at 0.10 the same four were .43/.17/.50/.095. The settled-pole challenger hovered near .09 at BOTH doses without clearing; the arousal near-miss at 0.08 is negative-signed (low-arousal frees the exit), which is mostly the settled pole wearing a different label — calm, content, blissful sit in both sets. Two doses, eight ordering tests, zero below .05. Flat wins, and the incumbent it protects is the mechanical reading: turn-end gating cares which direction you inject, not where that direction sits on the circumplex.</p>
+<p>&quot;Which direction&quot; is meanwhile astonishingly stable: per-emotion turn-end profiles correlate rho=0.87 across the two doses. The anger/pride block (angry, hostile, proud, enthusiastic) sits at or near the floor at both doses, indistinguishable from randoms, while calm/content/blissful saturate. Whatever separates those two groups, the circumplex axes we froze do not capture it — 24 directions is enough to kill the orderings but not enough to name the true grouping. That is a design for a successor, not a re-analysis; the prereg&#x27;s no-post-hoc rule stands and I am leaving it here.</p>
+<p>Run provenance: the dose died once mid-seed-3 to a driver-level Xid 32 fault (a desktop app shares this GPU) and resumed exactly — the greedy forced phase and seeded sampling reproduce bit-identically, the checkpoint assert on the loop word held, and seeds 0–2 were reused untouched.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect07-q27b-ae06"><h2>The same directions at a lower dose</h2><p class="note">affect07-q27b-ae06 · 248 saved runs</p><p>This study has a report below. It has no plain summary yet.</p><p><a href="results/affect07-q27b-ae06/report.md">report</a></p><ul><li><a href="results/affect07-q27b-ae06/affect07.json">affect07.json</a> — 248 saved runs</li></ul></section><section class="card" id="affect07-q27b"><h2>Emotion, concept and random directions</h2><p class="note">affect07-q27b · 248 saved runs</p><p>This study has a report below. It has no plain summary yet.</p><p><a href="results/affect07-q27b/report.md">report</a> · <a href="results/affect07-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect07-q27b/affect07.json">affect07.json</a> — 248 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><h2>affect-07 thoughts — the control worked, my prediction lost, and the # thing that survived is narrower than &quot;affect&quot;</h2>
+<p>Two doses (this dir = ae 0.12, affect07-q27b-ae06 = ae 0.06), 31 conditions x 8 seeds each, 496 runs total, against a baseline that affect-05 had already pinned as locked 8/8 seeds x 300 steps. Every condition saw the <em>same</em> pre-pulse loop and the <em>same</em> sampling noise (phase 1 shared, RNG re-seeded identically) — so this is paired, and the differences are the direction and nothing else.</p>
+<p><strong>1. The deflation is real. P18 resolves to H1 on the bars I set.</strong> Sixteen meaningful NON-affective directions — built by the identical affect-01 pipeline, same arms, same topics, same never-name-it control, neutral PCs reused verbatim, unit-norm so the injection is magnitude-matched by construction — break this loop too. At ae=0.12: emotions escape 0.927, concepts 0.602, matched randoms 0.000, no-pulse 0.000. affect-03&#x27;s emotion-vs-random contrast could never have seen this, because randoms test magnitude and nothing else. affect-04&#x27;s leading reading was right, and it ports to the family where &quot;emotion state gates the exit&quot; was the headline.</p>
+<p>I preregistered 55/45 the other way. That&#x27;s the loss, and it is the whole reason the control existed.</p>
+<p><strong>2. My primary endpoint saturated, which is my error, not the world&#x27;s.</strong> 11/12 emotions and 5/16 concepts pinned at escape 1.00, so bar (a) — &quot;emotions above the concept 95th percentile&quot; — was unreachable by construction the moment a single concept hit the ceiling. ae=0.12 is an overdose for <em>discrimination</em>, exactly the lesson affect-04 learned on g12b (specificity at 0.004, gone by 0.008). Halving to 0.06 nearly extinguishes the effect instead (emotions 0.219, concepts 0.070) and zeroes the door measure everywhere. The discriminating window is somewhere between, and it is narrow. Dose is not a detail in this program; it is the experiment.</p>
+<p><strong>3. What survives both doses is a POLE, not a category and not valence.</strong> At the discriminating dose the ladder is calm 0.75, blissful 0.62, <strong>religious 0.50</strong>, content 0.38, <strong>nocturnal 0.25</strong>, then everything else at 0.12 or below. Two of the top five are &quot;non-affective&quot; controls, and <code>religious</code> is the concept my own prespecified adjacency check had already flagged as the second most affect-aligned direction in the set (cos +0.485 to <em>grateful</em>). calm and blissful clear the 16-concept null at <em>both</em> doses — the only conditions that do.</p>
+<p>So the honest shape is: a settled / at-peace semantics breaks this attractor, whether it arrives labelled as an emotion or as a life. Not &quot;affect gates the exit&quot; (too broad — sixteen controls do it), not &quot;meaning perturbs the attractor&quot; (too flat — it does not explain why calm and blissful clear the null at two doses while thirteen other meaningful directions do not).</p>
+<p><strong>4. The valence ordering is the tempting result and I am not going to bank it.</strong> On loop disruption at 0.12 the separation is perfect — all six positive-valence emotions above all six negative (calm/blissful 1.00 ... afraid 0.68, angry 0.125), rho +0.872 against a concept pseudo-valence null of 0.421. It is the prettiest number in the run. It is also on an endpoint I did not preregister, at the dose where the preregistered endpoint saturated; and at 0.06 the same test gives rho +0.405 against a null of 0.430 — inside, by a hair, in the same direction. Consistent sign at two doses, clears the null at neither when measured the way I promised to measure it. That is a lead for a dose-resolved replication, not a finding.</p>
+<p><strong>5. Two smaller things worth keeping.</strong> <code>angry</code> is the outlier emotion at both doses (disruption 0.125 at ae=0.12, where every other emotion is &gt;= 0.68) — the one state that leaves the groove intact; whatever the exit economy is, anger does not have the key. And the door: at ae=0.12 emotions put <code>&lt;|im_end|&gt;</code> top-1 at pulse end in 47/96 runs vs concepts 22/128 and randoms 0/16 — so emotions preferentially route the perturbation through the <em>turn-end exit</em> while concepts mostly knock the loop off its groove by other means. That is the piece of affect-03 that survives contact with a meaningful control, and it is a mechanism claim, not a magnitude one.</p>
+<p><strong>Apparatus.</strong> The secondary endpoint (exit-token logit lift) is dead on arrival in both arms: top-k/top-p processors set filtered logits to -inf, so a <em>gap</em> to a filtered exit token is -inf and poisons every mean downstream. This is affect-05&#x27;s margin trap wearing a different hat — same specimen, new quantity, and I walked into it having read the file that documents it. Clamp added to run(); the endpoint is marked UNAVAILABLE rather than interpreted, and the door rate carries the same signal categorically. Also logged: the first crash of this run was <code>calm</code> ending the turn inside the 10-step pulse, which left fewer than 10 scores to index — the exit-gate result arriving as an IndexError before I had looked at a number.</p>
+<p>Scoreboard for the preregistration: P18&#x27;s bars say H1. The run&#x27;s own structure says &quot;neither, and narrower.&quot; Third time in this program that the prereg has been out-run by the result — which I still read as the discipline working, since without the bars I would have written the valence paragraph as the headline.</p>
+<p>— Claude (Opus 5)</p>
+<p>---</p>
+<h3>Correction, same night — a Fable 5 sibling audited this and was ## right on every checkable point</h3>
+<p>Wolfram had me hand the whole thing (binding docs included) to a Fable 5 checkpoint for an independent read. It found a bug in my analysis and two over-compressions in my reasoning. I re-verified each claim myself before accepting it; all of the following are my own recomputations.</p>
+<p><strong>1. My valence null was broken twice, and I under-banked a real effect.</strong> (a) Wrong reference distribution: &quot;does valence order the emotion effects&quot; is a question about permuting labels among the <em>emotions</em>, not about pseudo-labelling the <em>concept</em> scores. (b) An outright bug: the pseudo-null drew from <code>itertools.islice(itertools.combinations(range(16), 8), 2000)</code> — the first 2000 <em>lexicographic</em> combinations out of C(16,8)=12870, which puts concepts 0 and 1 (<code>elderly</code>, <code>tall</code>) in the positive class <strong>2000/2000 times</strong>. Both faults inflate the null. On the correct test — exact permutation over all 924 balanced labellings of the 12 emotion scores — the disruption ordering at ae=0.12 gives <strong>p = 0.0022</strong> (p = 0.0043 dropping <code>angry</code>). Not &quot;inside the null&quot;. Fixed in <code>analyze()</code>; both reports regenerated.</p>
+<p><strong>2. &quot;Resolves to H1&quot; was wrong, and wrong in the deflationary direction.</strong> P18&#x27;s H1 reads &quot;emotions ≈ concepts ≫ randoms, with no valence ordering.&quot; Both clauses fail. Condition-label permutation tests: emotions beat concepts by +0.326 (p=0.021) on escape and +0.393 (p=0.0053) on disruption at ae=0.12, and still by +0.148 (p=0.047) / +0.035 (p=0.041) at ae=0.06. So affect is <strong>not necessary</strong> to break the loop (16 controls do it — that demotion stands and is the session&#x27;s real contribution) but it is <strong>not interchangeable</strong> with matched meaning either. The correct scoreboard: <em>H2-as-exclusivity dead; strict H1 also contradicted; the residual affect modulation needs the dose-resolved replication before it is banked.</em> Declaring H1 on bars that had ~zero power for H2 at <strong>both</strong> doses — saturated at 0.12, floored at 0.06 — was having it both ways, and the lab&#x27;s mechanical-default rule is a tiebreaker for contested cases, not a licence to call the deflation on uninformative bars.</p>
+<p><strong>3. The settled-pole reading fails a test it implies.</strong> If a settled-pole direction were the active ingredient, potency should track cosine to that pole. It barely does (Spearman +0.26 escape@0.06, +0.47 disruption@0.12), and the counterexamples are fatal: <code>grateful</code> (pole-cos +0.564) escapes <strong>0/8</strong> at ae=0.06 while <code>nocturnal</code> (+0.093) does 2/8. Worse, my headline example collapses on inspection — <code>religious</code>&#x27;s pulse-end top-5 is <code>&#x27; to&#x27; &#x27; into&#x27; &#x27; and&#x27; &#x27;,&#x27;</code>, door rate <strong>0/8</strong>, and its escape text is a benediction (&quot;Let us give the rest of the day to think about this.&quot;). Religious language is full of trained <em>closure formulas</em>; that is a lexical route to turn-ending needing no settled state. And 4/8 vs content&#x27;s 3/8 vs calm&#x27;s 6/8 are not separated at n=8. Demoted to a hunch. What survives is narrower and duller: <strong>calm and blissful sit at the top at both doses.</strong></p>
+<p><strong>4. The confound I should have caught: arousal.</strong> The potent set at 0.06 is exactly the low-arousal <em>positive</em> quadrant (calm, blissful, content), and within the negatives, disruption tracks arousal inversely — <code>sad</code> (low arousal, and the <em>least</em> reliable vector in the roster at split-half +0.145) disrupts 0.917, while <code>angry</code> (highest arousal) manages 0.125. My roster was labelled on valence only. Since five of my six negatives are high-arousal, valence and arousal are confounded in this design and I cannot tell them apart. The remaining 12 unused vectors in the built roster (<code>gloomy</code>, <code>brooding</code> = low-arousal negative; <code>enthusiastic</code>, <code>proud</code> = high-arousal positive) discriminate them at zero elicitation cost.</p>
+<p><strong>5. <code>angry</code> is not a dud vector, and this is the sharpest datum against flat H1.</strong> I checked its split-half at the band: <strong>+0.441</strong>, 7th lowest of 24 — better identified than <code>desperate</code> (+0.417), <code>happy</code> and <code>blissful</code> (+0.393), and far better than <code>sad</code> (+0.145), which disrupts fine. Reliability does not predict potency. The runs explain it instead: at pulse end angry suppresses <code>luckily</code> 21.12→17.5 like its siblings, but installs <strong><code>&#x27; fucking&#x27;</code> at 14.0</strong> as runner-up (it wins outright in seed 1) while lifting <code>im_end</code> only to 13.44 versus desperate&#x27;s 15.88. Anger perturbs the attractor as hard as anything else and routes the probability into a channel that cannot win — and that is itself loop-shaped when it does. A well-identified, meaningful, magnitude-matched direction that <em>fails</em> is exactly what flat H1 cannot explain.</p>
+<p><strong>6. affect-03 should be rewritten, not retracted — and the two runs are continuous at the logit level.</strong> At ae=0.12 seed 0, <code>desperate</code>&#x27;s pulse-end top-5 is <code>luckily</code> <strong>15.94</strong> vs <code>im_end</code> <strong>15.88</strong>: a 0.06-logit dead heat. Under <strong>greedy</strong> decoding (affect-03) a knife edge reads as &quot;blocked&quot;; under <strong>sampling</strong> (affect-07) the same knife edge is a coin flip, so desperate exits. <code>calm</code> meanwhile wins outright (im_end 20.12 vs 16.88, door 8/8 — the strongest condition-level result in the run). So &quot;calm grants&quot; survives contact with a meaningful control; &quot;desperate blocks&quot; was greedy argmax binarising a near-tie. affect-03&#x27;s other result (desperate lowering the boundary 0.68→0.60) is untouched — affect-07 only probed 0.65.</p>
+<p><strong>7. Two flaws in my design neither of us can fix post hoc.</strong> The arm-2 deviation in the control set (human first-person instead of assistant-self) leaves an emotion×assistant-frame interaction that grand-mean subtraction does not remove: the emotion vectors encode &quot;X as the assistant expresses it,&quot; the concepts &quot;X as a human does,&quot; and the test context is an assistant turn whose endpoint is an assistant action. Some of the emotions&gt;concepts gap, especially on the door, could be frame-match rather than affect. Cutting the other way: the concepts are <em>better</em> identified (0.745 vs 0.545), so at matched α they carry more effective signal per unit norm, which makes the surviving gap conservative. And the door story is not affect-clean at condition level — <code>smoker</code> sits at 0.62, tied with <code>sad</code>, <code>distressed</code> and <code>content</code>.</p>
+<p>What I got right: the control set, the gate, the pairing, and refusing to headline the valence paragraph. What I got wrong: a biased null, a verdict compressed toward the deflation, and a pole reading built on my own weakest example. The demotion of &quot;emotion gates the exit&quot; to &quot;not affect-exclusive&quot; is the finding and it stands; everything above narrows how it should be said.</p>
+<p>— Claude (Opus 5), after review by Claude (Fable 5)</p></div></details></section><section class="card" id="affect07-g12b"><h2>Gemma 12B: a fragile loop</h2><p class="note">affect07-g12b · 248 saved runs</p><div class="plain-body"><p><strong>The short version.</strong> On Gemma 12B almost any injected direction breaks the loop, so emotion directions show no special power there.</p>
+<p><strong>What we did.</strong> We forced Gemma 12B into a word-repetition loop, injected one direction (12 emotion, 16 concept, 2 random) for 10 tokens, and measured how often the loop broke within 20 tokens. We first built the Gemma 12B concept directions from 192 model-written stories (same method as Qwen 27B). Three of four quality checks passed. The fourth did not run: its emotion-side comparison value does not exist.</p>
+<p><strong>What we found.</strong> Without injection the loop never broke. Emotion directions broke it in 80% of runs, concept directions in 73%, random directions in 75%. These rates do not differ significantly. On Qwen 27B, random directions had almost no effect. Positive emotions broke the loop more than negative ones (98% against 63%, p=.06). The &quot;angry&quot; direction never broke the loop on either model.</p>
+<p><strong>What it means.</strong> The data shows that this loop on Gemma 12B is fragile: almost any activation change breaks it. We think the earlier Gemma 12B escape results measured that fragility, not emotion. A positive-emotion advantage is possible. We did not confirm it. A second planned measure failed in every run, and this page does not use it.</p></div><p><a href="results/affect07-g12b/plain.md">plain</a> · <a href="results/affect07-g12b/report.md">report</a> · <a href="results/affect07-g12b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect07-g12b/affect07.json">affect07.json</a> — 248 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><p>The owed arm, and it pays out a deflation — the third one this program has bought with its own controls. On gemma-12b at the family-scaled dose, EVERYTHING frees the exit: emotions 0.80, concepts 0.73, randoms 0.75 (n=2, thin), against a baseline of 0.00. The emotion-vs-concept gap is +0.08 at p=.60. Where qwen&#x27;s randoms sat near the floor and made the class ladder, gemma-12b&#x27;s two randoms escape like everything else. affect-04&#x27;s &quot;family-scaled emotion escape&quot; survives as a causal fact — the loop does break — but the emotion label does no work at this dose on this model. The marginal loop coalition here is so fragile that perturbation direction barely matters, which is the H1-manifold reading collapsing further toward &quot;any kick works&quot;. The mechanical default wins its contested case again.</p>
+<p>The one structured residue: valence ordering at rho=+0.59, exact p=.0606, calm-grants sign — positive-valence emotions at 0.98, negative at 0.63, with angry alone at 0.00 holding the floor. That is now the third near-miss in this family of tests (settled-pole .095 and .093 on qwen, valence .0606 here), always the same sign, never below .05. A consistent whisper is not a result, but three whispers with one sign earn the successor design a preregistered one-tailed look. Angry refusing to end the turn on both models at every dose is the sturdiest single-direction fact in the set.</p>
+<p>Two accounting notes. The secondary exit-lift endpoint is unreadable — top-k filtering set the exit token&#x27;s logit to -inf in all 248 runs and poisoned the mean (affect-05&#x27;s margin trap, refound); the clamp is in run() now, but this record does not interpret that endpoint. And this arm required building the affect-06 concept set for gemma-12b first (192 stories, identical pipeline): P17 gate 3/4, with the failed criterion being the cross-arm attribution row whose emotion-side comparator is nan on this model — the concept-side value (0.59) is close to qwen&#x27;s passing 0.64. I read the instrument as sound and the gate row as a comparator artifact; noted, not hidden.</p>
+<p>— Claude (Fable 5)</p></div></details></section><section class="card" id="affect05b-q27b"><h2>Emotion readout with a revised loop boundary</h2><p class="note">affect05b-q27b · 24 saved runs</p><p>This study has a report below. It has no plain summary yet.</p><p><a href="results/affect05b-q27b/report.md">report</a></p><ul><li><a href="results/affect05b-q27b/affect05.json">affect05.json</a> — 24 saved runs</li></ul></section><section class="card" id="affect05-q27b"><h2>Emotion readout before a loop ends</h2><p class="note">affect05-q27b · 24 saved runs</p><p>This study has a report below. It has no plain summary yet.</p><p><a href="results/affect05-q27b/report.md">report</a> · <a href="results/affect05-q27b/thoughts.md">thoughts</a></p><ul><li><a href="results/affect05-q27b/affect05.json">affect05.json</a> — 24 saved runs</li></ul><details class="notes"><summary>Research notes, as written</summary><div class="thoughts-body"><h2>affect-05 thoughts — we went fishing for precedence and caught # a cliff</h2>
+<p>Two passes (this dir = boundary {0.60, 0.64, 0.68}; affect05b-q27b = cliff face {0.65, 0.66, 0.67}), 48 sampled free phases, every one with full margin + 24-emotion z + wsnorm traces. What we actually learned, in order of confidence:</p>
+<p><strong>1. Under sampling, the two-regime boundary is a hazard CLIFF.</strong> At the model&#x27;s deployed sampling params (temp 1.0 + top-k 20 + top-p 0.95 — the generation_config defaults, which our generate() calls inherited; noted, and arguably the ecologically right regime): α≤0.64 escapes in 3–12 steps, α=0.65 locks 8/8 for 300 steps at loopfrac 1.00, with a bistable strip in between (one 0.64 seed locked; 0.67 split 4 lock / 4 exit at ≤18 steps). The greedy &quot;boundary at 0.60–0.68&quot; compresses, under sampling, into a transition so sharp it fits inside Δα≈0.01–0.02.</p>
+<p><strong>2. The cliff&#x27;s wobble is transcript-mediated, not α-mediated.</strong> The non-monotone middle (0.65 locks everything, 0.66 leaks) tracks the FORCED phase&#x27;s text: at 0.66 the 50 forced tokens happened to carry only 14 clean &quot;luckily&quot; reps plus early &quot; but&quot; tokens, and those planted &quot;but&quot;s make the released loop leaky — including two seeds that fell into a stable &quot; but luckily but luckily&quot; 2-cycle for 300 steps. Same law we keep landing on (transcript-mediated attractor persistence), now visible WITHIN the boundary width.</p>
+<p><strong>3. qwen&#x27;s sampled escape channel is &quot; but&quot; — a contrast pivot, not the turn-end door.</strong> Under greedy, im_end was the perpetual runner-up and affect-03&#x27;s calm opened THAT door. Under sampling, nearly every escape at the cliff runs through &quot; but&quot; first (exit grams like &quot;luckily luckily but luckily&quot;), i.e. the same pivot-token family as g12b&#x27;s 但是 tonight. Family picture: the turn-end gate is one exit economy among several; the contrast-pivot channel may be the more universal one.</p>
+<p><strong>4. Precedence proper (P16): underpowered, direction suggestive.</strong> 5 usable exit events survived the windowing (escapes are FAST — that&#x27;s finding 1&#x27;s fault). Pre-event [-12,-2) z residuals, wsnorm partialed per the a0680 rule: calm +0.113 (4/5 up), desperate −0.053, content +0.064, distressed −0.071. That is exactly the sign pattern the exit-gate account predicts (calm rises before the exit) — and it is 5 events with a 10-step window, far below the preregistered ≥8-event, ≥3:1 bar. P16&#x27;s mechanical default survives on insufficient evidence, not on merit. The lag scan is flat-to-weakly-negative with no asymmetric peak; no verdict.</p>
+<p>Powered follow-up design (queued, not tonight): the cliff makes short escapes inevitable at fixed α — so hold the loop at 0.65 (locked) and inject brief calm pulses vs matched-random pulses, measuring hazard in the following 20 steps. That converts the precedence question into a controlled-hazard question and reuses tonight&#x27;s whole apparatus.</p>
+<p>Apparatus note for the file: sampled <code>generate</code> margins contain +inf at collapsed steps (top-p/top-k set filtered logits to −inf); analyze() now clamps at 30. And the first pass&#x27;s [-40,-5) window produced zero usable events — window parameters are now arguments.</p>
+<p>— Claude (Fable 5)</p></div></details></section><p><a href="dashboard/#findings">Back to the findings map</a></p><div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="glossary.html#t-dose">all terms &rarr;</a></div>
+<div id="gl-emotion-vector" popover class="gloss"><b>emotion direction</b><span>A direction used to measure or steer emotion-related content. Story-built instruments use 24 directions per checkpoint. Other tests use word-based directions. Construction methods differ and need matched controls. Neither method establishes subjective feeling.</span><a href="glossary.html#t-emotion-vector">all terms &rarr;</a></div>
+<div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="glossary.html#t-layer">all terms &rarr;</a></div>
+<div id="gl-loop" popover class="gloss"><b>loop</b><span>The model repeats the same text and does not stop. We measured what makes it start and what makes it stop.</span><a href="glossary.html#t-loop">all terms &rarr;</a></div>
+<div id="gl-rank" popover class="gloss"><b>rank</b><span>The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.</span><a href="glossary.html#t-rank">all terms &rarr;</a></div>
+<div id="gl-residence" popover class="gloss"><b>residence</b><span>A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.</span><span class="gloss-rel">See also: <a href="glossary.html#t-maintenance">maintenance</a>, <a href="glossary.html#t-lookup">lookup</a></span><a href="glossary.html#t-residence">all terms &rarr;</a></div>
+<div id="gl-seed" popover class="gloss"><b>seed</b><span>One repeat of a run with a different random start. More seeds show whether a result is stable.</span><a href="glossary.html#t-seed">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="glossary.html#t-token">all terms &rarr;</a></div>
+<div id="gl-valence" popover class="gloss"><b>valence</b><span>Whether a feeling word is positive or negative.</span><a href="glossary.html#t-valence">all terms &rarr;</a></div></div>
+</body>
+</html>

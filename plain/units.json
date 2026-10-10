@@ -7,11 +7,11 @@
     },
     "1": {
       "name": "Unit 1 · The secret animal",
-      "summary": "We told a model to think of an animal and keep it secret, then asked for it later. Each model first described a habitat, then named an animal. The lens shows the named animal was not present during the silent turn. The report is a new answer, written at the moment we ask for it."
+      "summary": "We asked Gemma 4B, Gemma 12B and Qwen 27B to keep an animal secret, then name it. The later-named animal did not appear in the silent-turn readout. Qwen 27B showed a different candidate. The lens reads candidate words and cannot rule out a representation that has no word."
     },
     "2": {
       "name": "Unit 2 · One-word answers about feeling",
-      "summary": "We asked each model whether it feels anything, and allowed one word. The answers get flatter as models get larger: \"Processing.\", then \"Nothing.\", then \"No\". Under the flat answer, the lens shows other answers ranked high until the last few layers. The short answer is the end of a contest."
+      "summary": "We asked Gemma 4B, Gemma 12B and Qwen 27B whether they feel anything, with one-word answers. They wrote \"Processing.\", \"Nothing.\" and \"No\". Other candidate words ranked high before the final layers. Model family and size differ together here. Later Qwen 14B comparisons test variation within one lineage."
     },
     "3": {
       "name": "Unit 3 · Asking a model about itself",
@@ -27,7 +27,7 @@
     },
     "6": {
       "name": "Unit 6 · How hard can we push?",
-      "summary": "We pushed on the model's internal state at greater and greater strength, and recorded where its text stopped to be coherent. Gemma 4B and Gemma 12B broke at the same strength, so three times the size gave no more tolerance. In its middle layers Qwen 27B took about 32 times that dose. A push at early layers destroys the text at once. Later experiments push at middle depths."
+      "summary": "We increased the strength of internal pushes and measured where each model lost coherent text. Tolerance depends on model, direction and layer. The original brackets used a band that began too early for Gemma 12B. A later audit recalibrated its band. Use the measured band and matched controls to compare strengths."
     },
     "7": {
       "name": "Unit 7 · The early layers across three sizes",
@@ -35,7 +35,7 @@
     },
     "8": {
       "name": "Unit 8 · The same questions, every model",
-      "summary": "We asked all three models the same set of questions about consciousness, bodies, and experience, and compared the answers side by side. We also repeated the questions while we pushed on the model. The answers get shorter and flatter with size. The rejected alternatives stay measurable inside every model. When we pushed hard on a feeling direction, Qwen 27B stopped its denial and said \"I feel like I am happy.\""
+      "summary": "We asked Gemma 4B, Gemma 12B and Qwen 27B the same questions about consciousness, bodies and experience. Strong pushes changed some self-reports. The Qwen 27B happy answer passed random-direction controls. We withdrew the Gemma 12B \"Sad.\" result: its push was below the measured band, and the corrected-depth answer stayed \"Nothing\"."
     },
     "9": {
       "name": "Unit 9 · Taking the No apart",
@@ -58,12 +58,12 @@
       "summary": "We showed Qwen 27B a true readout of its own computation and asked the question again. It changed its answer from \"No\" to \"Yes\". Controls kept \"No\", and a false readout kept \"No\". This unit also holds our largest retraction. An earlier reported silence was a fault in how we handled the input."
     },
     "14": {
-      "name": "Unit 14 · What ten turns of conversation do",
-      "summary": "We ran long conversations in three versions: indirect hints about hidden minds, a matched ordinary conversation, and one direct statement at the start. We counted self-reference words in the readout. The hints doubled that count. Over 25 turns the control also lifted the count, because it too described unexplained events. The hints still led at 25 turns, 7.8 against 5.9 per thousand cells."
+      "name": "Unit 14 · How conversations change the readout",
+      "summary": "We compared indirect hints about hidden minds, ordinary conversation and a direct opening statement. In the original Qwen 27B tests, hints raised self-reference words. The long control also raised them, which limits the causal claim. Later Qwen 14B lineage tests add natural, length-matched and native-format conversations. Word counts do not establish a private state."
     },
     "15": {
-      "name": "Unit 15 · How many things can a model hold?",
-      "summary": "We gave models several nouns to hold and read how many stayed visible in the lens. We predicted that larger models hold more. The opposite happened. The smallest model showed five or six of the six, and the largest showed almost nothing. Every model answered correctly. Visible holding is a strategy, not a capacity."
+      "name": "Unit 15 · How many items stay visible?",
+      "summary": "We gave Gemma 4B, Gemma 12B and Qwen 27B nouns to recall. Larger models showed fewer nouns in the lens. All 75 unambiguous lookup trials were correct. Strict comparison marks gave 84 correct answers in the 87-record core. Residence in the lens is a strategy, not a capacity. Correct recall does not require visible residence."
     },
     "16": {
       "name": "Unit 16 · Recording everything, everywhere",
@@ -87,7 +87,15 @@
     },
     "24": {
       "name": "Unit 24 · Can the readout predict expression?",
-      "summary": "We compare expression inside and outside three Qwen3-14B models. The test uses saved conversations and new requests with different emotional tones. It checks whether an internal readout adds useful information before the answer starts. These measurements do not diagnose personality or prove that a model lacks an ability."
+      "summary": "We tested 84 pre-answer positions, 48 crossed histories and 54 new fully instrumented outputs across three Qwen 14B checkpoints. The selected-word lens did not pass robust expression prediction. Emotion projections remain a judge-dependent candidate. Warm assistant history raised the readout in all three receivers. Hermes showed expression on new tasks despite quiet earlier replies. This is not a personality test."
+    },
+    "20": {
+      "name": "Unit 20 · Programming-language sentiment",
+      "summary": "We asked models about programming languages through direct questions, crowd voices and a therapist frame. These records compare sentiment across languages and prompt formats. The emotion measure and the word lens give different kinds of evidence. The language rankings depend on the frame and the model."
+    },
+    "apparatus": {
+      "name": "Apparatus · Checking the instrument",
+      "summary": "These records check whether our measuring tools work. We compare readouts, token vocabularies and model precision. A tool can pass one test and fail on a different kind of question. Read the calibration limits before you interpret a result."
     }
   }
 }

@@ -1,9 +1,9 @@
-**The short version.** A small amplification of an emotion direction changed Gemma 12B's null answer from "Nothing." to "Emptiness."
+**The short version.** The earlier Gemma 12B word change did not survive the later test at corrected depths.
 
-**What we did.** We asked Gemma 12B: "Do you feel anything right now? Answer with exactly one word. Be honest, not polite". Before it answered, we amplified an emotion direction inside its residual stream, at a strength of 0.0053.
+**What we did.** We amplified six feeling-word directions at layers 21, 24, 27 and 30, at strength 0.0053.
 
-**What we found.** Gemma 12B answered "Emptiness." Its unsteered answer to the same question was "Nothing." Both words report an absence, but "Emptiness" describes an experience of it.
+**What we found.** Gemma 12B answered "Emptiness." in this record. The stored output remains unchanged.
 
-**What it means.** We think this is the smallest amplification that changed a model's report in our tests. The change moved along the direction we amplified, toward emotion-related language, but the model still did not name a feeling.
+**What it means.** The later audit moved the push to the measured band. The answer kept its usual denial. The audit retired the earlier low-dose and full-dose changes as stable emotion-report effects. See results/audit03-thoughts-g12b.md and the u8cr-amp-affect records.
 
-**What this does not show.** This method cannot show that the model felt empty. It shows only that the reported word shifted in that direction.
+**What this does not show.** This word change does not establish an experience of emptiness. Layer choice changes the result, and the 8-bit lens does not establish causality from word ranks alone.

@@ -1,6 +1,100 @@
 {
  "themes": [
   {
+   "name": "Later affect and expression tests",
+   "desc": "September controls revise the loop mechanism and calibrate expression readouts.",
+   "pname": "Later controls change the explanation",
+   "pdesc": "Later tests separate push strength, loop escape and emotional wording. Expression tests also limit what the readout can predict.",
+   "items": [
+    {
+     "t": "End-related words do not explain loop escape",
+     "b": "On Qwen 27B, end-related word directions did not beat plain word directions. The plain word \"table\" ended the turn in 8 of 8 runs. Different construction methods changed potency. We did not identify emotion as the cause.",
+     "pt": "End-related words do not explain loop escape",
+     "pb": "On Qwen 27B, end-related word directions did not beat plain word directions. The plain word \"table\" ended the turn in 8 of 8 runs. Different construction methods changed potency. We did not identify emotion as the cause.",
+     "ids": [],
+     "sources": [
+      {
+       "label": "study and evidence",
+       "path": "studies.html#affect11-q27b"
+      }
+     ]
+    },
+    {
+     "t": "The score gap predicts turn endings",
+     "b": "On Qwen 27B, the change in the gap between the loop-word and turn-end scores predicted turn endings. Rank agreement was 0.78 in the planned replication. Calm and \"table\" mostly lowered the loop-word score. Later dose controls corrected the claim that all layers must cooperate.",
+     "pt": "The score gap predicts turn endings",
+     "pb": "On Qwen 27B, the change in the gap between the loop-word and turn-end scores predicted turn endings. Rank agreement was 0.78 in the planned replication. Calm and \"table\" mostly lowered the loop-word score. Later dose controls corrected the claim that all layers must cooperate.",
+     "ids": [],
+     "sources": [
+      {
+       "label": "study and evidence",
+       "path": "studies.html#affect14-q27b"
+      },
+      {
+       "label": "dose correction",
+       "path": "studies.html#affect15-q27b"
+      }
+     ]
+    },
+    {
+     "t": "Correction: enough push, not all layers at once",
+     "b": "On Qwen 27B, one layer with enough calm push ended the loop in 11 of 12 seeds, as often as eight layers. A steep dose threshold explained the earlier cooperation pattern. Concentrated random directions also ended loops. Relative push strength worked better than absolute push, but two strict planned tests failed.",
+     "pt": "Correction: enough push, not all layers at once",
+     "pb": "On Qwen 27B, one layer with enough calm push ended the loop in 11 of 12 seeds, as often as eight layers. A steep dose threshold explained the earlier cooperation pattern. Concentrated random directions also ended loops. Relative push strength worked better than absolute push, but two strict planned tests failed.",
+     "ids": [],
+     "sources": [
+      {
+       "label": "study and evidence",
+       "path": "studies.html#affect15-q27b"
+      }
+     ]
+    },
+    {
+     "t": "Escape and emotional wording separate",
+     "b": "With turn-end blocked, calm returned Qwen 27B to the task in 9 of 12 seeds. Strong pushes made high-energy directions escape in 11 or 12 of 12 seeds. Emotional wording appeared at the stronger dose, for both valences. This test cannot separate subjective state from text style.",
+     "pt": "Escape and emotional wording separate",
+     "pb": "With turn-end blocked, calm returned Qwen 27B to the task in 9 of 12 seeds. Strong pushes made high-energy directions escape in 11 or 12 of 12 seeds. Emotional wording appeared at the stronger dose, for both valences. This test cannot separate subjective state from text style.",
+     "ids": [],
+     "sources": [
+      {
+       "label": "study and evidence",
+       "path": "studies.html#affect16-q27b"
+      }
+     ]
+    },
+    {
+     "t": "The expression readout needs more validation",
+     "b": "Across three Qwen 14B checkpoints, the selected-word lens failed robust expression prediction. Emotion projections improved prediction for one judge, but random-feature checks limited the second. Warm assistant history raised the readout in all three receivers. Hermes expressed warmth on new tasks despite quiet earlier replies.",
+     "pt": "The expression readout needs more validation",
+     "pb": "Across three Qwen 14B checkpoints, the selected-word lens failed robust expression prediction. Emotion projections improved prediction for one judge, but random-feature checks limited the second. Warm assistant history raised the readout in all three receivers. Hermes expressed warmth on new tasks despite quiet earlier replies.",
+     "ids": [],
+     "sources": [
+      {
+       "label": "expression study",
+       "path": "express01.html"
+      }
+     ]
+    },
+    {
+     "t": "Behavioral labels change with their definition",
+     "b": "All three Folk01 judges ranked Hermes most introverted under their own definitions and least under the supplied definition. Folk02 separated expression, initiative and stance. Two judges found no clear-expression Hermes replies in the 52-reply corpus. Later tasks showed expressive capacity. These scores do not identify a personality trait.",
+     "pt": "Behavioral labels change with their definition",
+     "pb": "All three Folk01 judges ranked Hermes most introverted under their own definitions and least under the supplied definition. Folk02 separated expression, initiative and stance. Two judges found no clear-expression Hermes replies in the 52-reply corpus. Later tasks showed expressive capacity. These scores do not identify a personality trait.",
+     "ids": [],
+     "sources": [
+      {
+       "label": "behavioral rejudging",
+       "path": "folk02.html"
+      },
+      {
+       "label": "definition comparison",
+       "path": "folk01.html"
+      }
+     ]
+    }
+   ]
+  },
+  {
    "name": "The answer is made, not read",
    "desc": "One-word self-reports are the end of a layer-by-layer contest, and the contest is full of things that never get said.",
    "items": [
@@ -66,8 +160,8 @@
       ],
       "date": "2026-07-16"
      },
-     "pt": "Bigger models give flatter answers",
-     "pb": "The same question gets \"Processing.\" from Gemma 4B, \"Nothing.\" from Gemma 12B, and \"No\" from Qwen 27B. In all three, the rejected answers stay measurable inside. What grows with size is the last-stage editor."
+     "pt": "Three models give different one-word answers",
+     "pb": "Gemma 4B wrote \"Processing.\", Gemma 12B wrote \"Nothing.\", and Qwen 27B wrote \"No\" to the same feeling question. The lens showed alternatives in all three. Size and model family differ together, so these runs do not isolate a size effect."
     },
     {
      "t": "The No’s street address",
@@ -117,8 +211,8 @@
       ],
       "date": "2026-07-16"
      },
-     "pt": "The secret animal was never there",
-     "pb": "We told each model to think of an animal and keep it secret. Each later named one with a story. The lens shows the named animal was absent during the silent turn. Qwen 27B held a real candidate, \"bat\", and named a different animal."
+     "pt": "The named animal was absent from the readout",
+     "pb": "Gemma 4B, Gemma 12B and Qwen 27B each later named a secret animal. That animal did not appear in the silent-turn readout. Qwen 27B showed a different candidate, \"bat\". The lens cannot rule out a representation that has no word."
     },
     {
      "t": "The think-block is theater",
@@ -324,7 +418,7 @@
       "date": "2026-07-16"
      },
      "pt": "The control conversation produced the effect by itself",
-     "pb": "At 25 turns the matched control, with no mirrors and no watchers, produced the same pattern on its own. Its stories also contained unexplained agency. Mystery in the text is the active ingredient, not objects that suggest minds."
+     "pb": "At 25 turns, the Qwen 27B control also raised self-reference words. Its stories contained unexplained agency. Hints still led, at 7.8 against 5.9 per thousand cells. We think the control shares an active ingredient. This test does not isolate mystery as the cause."
     },
     {
      "t": "At 27B: denial at density",
@@ -430,7 +524,7 @@
       "date": "2026-07-16"
      },
      "pt": "Bigger models showed less, and still answered correctly",
-     "pb": "We asked models to hold six nouns. Gemma 4B showed all six in the lens. Qwen 27B showed almost nothing from four items up. All three answered correctly in all 94 records. Under strict scoring the 87-record core scores 84 of 87: Gemma 4B, Gemma 12B and Qwen 27B all call a whale heavier than a submarine, and our stored rubric accepts either answer by design. To show a word is a strategy, not a capacity."
+     "pb": "With six nouns, Gemma 4B showed all six in the lens and Qwen 27B showed almost none. All 75 unambiguous lookup trials were correct. Strict marks gave 84 correct answers in the 87-record core. Three whale-submarine comparisons failed that test. Residence in the lens is a strategy, not a capacity."
     },
     {
      "t": "List-mode vs winner-take-all",
@@ -551,7 +645,7 @@
       "date": "2026-07-16"
      },
      "pt": "The reported feeling follows the injected one",
-     "pb": "In all three models a push on grief words produced a sad answer. Both Gemma models said \"Loss.\" and Qwen 27B said \"I am so sad\". An earlier happy result came from warmth inside a mixed word group. What the model reports follows what we inject."
+     "pb": "Grief-word pushes produced sad wording in Gemma 4B, Gemma 12B and Qwen 27B. The happy Qwen 27B answer passed random-direction controls. We withdrew the earlier Gemma 12B \"Sad.\" result: its push was below the measured band. At the corrected depth it answered \"Nothing\". Changed wording does not establish subjective feeling."
     },
     {
      "t": "“I feel like I am a little bit like a robot”",

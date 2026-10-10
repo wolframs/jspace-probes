@@ -14,6 +14,23 @@ per-record commentary signed by the model that ran each experiment.
 Terms of art are pinned in the **[Glossary](GLOSSARY.md)** — notably
 "holding", now deprecated and split into residence / maintenance / lookup.
 
+## Website coverage and latest affect results, 2026-10-10
+
+The [generated census](dashboard/catalogue.json) distinguishes standard record
+pages from saved affect batch runs. The [affect studies](https://jspace-probes.vercel.app/studies.html)
+link current summaries, original notes, reports and every counted batch source.
+Counts exclude reused analyses, overlays, prefix scans and judge calls. Seeds
+and conditions are runs, not independent experiments. Regenerate with
+`.venv/bin/python probes/site.py` after updating results.
+
+Affect-15 corrected the affect-14 cooperation claim: enough push at one layer
+ends the Qwen 27B loop as often as eight layers. Concentrated random directions
+also end loops. Affect-16 separates escape from emotional wording: with turn-end
+blocked, calm often returns to the task; stronger pushes add the direction's
+register. Neither result establishes subjective feeling. See the dated
+[plain synthesis](plain/conclusions.md) and [batch evidence](results/affect16-q27b/plain.md).
+The expedition sections below remain dated historical accounts.
+
 ## Can a cheap internal readout predict expression? 2026-09-07
 
 [Express01](https://jspace-probes.vercel.app/express01.html) tests 84 exact

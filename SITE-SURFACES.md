@@ -129,3 +129,28 @@ risk as a *content* source (garbage in, freshly fetched garbage out).
 - Scientific accuracy of any claim in MECHANICS.md / PREDICTIONS.md /
   GLOSSARY.md / SURPRISES.md / RELATED-WORK.md — parallel binding-doc audit's
   job, not re-checked here beyond noting they exist as HAND surfaces.
+
+## 2026-10-10 coverage correction
+
+The earlier inventory above is historical. `probes/site.py` now regenerates
+`dashboard/catalogue.json` and `studies.html` alongside the static mirror.
+`probes/catalogue.py` defines the census: standard record pages and canonical
+affect JSON `runs` arrays stay separate. Reused analyses, overlays, prefix scans,
+judge calls and calibration arrays do not inflate either count. The manifest
+lists every counted path and its run count.
+
+The dashboard reads that manifest for batch and summary coverage. Film counts
+and research-group counts follow the live record index; numeric unit IDs are
+normalized to strings so Units 16 and 24 route correctly. The film tour uses
+the live index too. `plain/units.json` supplies the same names to static and
+interactive pages. The interactive essay now reads `plain/conclusions.md` and
+keeps the original essay under Research notes, matching the static essay.
+
+Findings can cite `sources` as well as record `ids`. Batch and expression
+results must link evidence without inventing a `record.json` or a film glyph.
+The September dose correction and escape results lead the map. Historical
+research notes and dated preregistrations remain unchanged.
+
+Verification: `.venv/bin/python -m unittest discover -s probes -p test_catalogue.py`,
+then regenerate with `probes/site.py` and `probes/og.py`, and check the rendered
+findings, essay, Units 16/24, affect page and studies in desktop and narrow views.

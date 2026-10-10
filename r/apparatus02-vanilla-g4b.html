@@ -293,7 +293,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <div class="wrap">
 
 <h1>apparatus-02 · vanilla logit-lens cross-check, first light · gemma-4b</h1>
-<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-08-06T22:03:43</span><span class="chip">Unit apparatus</span></div>
+<div class="chips"><span class="chip model">gemma-4b</span><span class="chip">google/gemma-3-4b-it</span><span class="chip">34 layers</span><span class="chip">2026-08-06T22:03:43</span><span class="chip">Apparatus · Checking the instrument</span></div>
 
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Every new record now stores a second, simpler <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.">lens</button> reading next to the main one, as a built-in validity check.</p>
 <p><strong>What we did.</strong> Our main instrument reads the model&#x27;s inner <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> through a learned transport step. That step can invent signal that is not in the layer itself. We added a second reading without the transport step to the record code. Each record now stores both readings and a per-layer score for how often they agree on the top word. We ran the first record with this check on gemma-3-4b.</p>

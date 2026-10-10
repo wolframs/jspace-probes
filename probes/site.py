@@ -39,6 +39,8 @@ import json
 import pathlib
 import re
 
+from catalogue import inventory
+
 from textspans import assist_spans as _assist_spans
 
 ROOT = pathlib.Path(__file__).parent.parent
@@ -82,7 +84,10 @@ UNIT_NAMES = {  # mirrors dashboard/app.js UNIT_NAMES — keep in sync
     "17": "Unit 17 · The pressure battery",
     "18": "Unit 18 · Loops",
     "19": "Unit 19 · Read vs speak",
+    "20": "Unit 20 · Programming-language sentiment",
     "24": "Unit 24 · Expression probe calibration",
+    "audit": "Audit · Re-running our own weak experiments",
+    "apparatus": "Apparatus · Checking the instrument",
 }
 
 
@@ -175,7 +180,7 @@ def termify(html_text: str, used: set) -> str:
     return "".join(parts)
 
 
-def popovers(used: set) -> str:
+def popovers(used: set, prefix: str = "../") -> str:
     if not used:
         return ""
     out = []
@@ -185,14 +190,14 @@ def popovers(used: set) -> str:
         # definition leaves the reader asking "see where?".
         rel = [r for r in t.get("see", []) if r in TERMS]
         see = ", ".join(
-            f'<a href="../glossary.html#t-{esc(r)}">'
+            f'<a href="{prefix}glossary.html#t-{esc(r)}">'
             f'{esc(TERMS[r].get("display", r))}</a>' for r in rel)
         out.append(
             f'<div id="gl-{esc(tid)}" popover class="gloss">'
             f'<b>{esc(t.get("display", tid))}</b>'
             f'<span>{esc(t.get("def", ""))}</span>'
             + (f'<span class="gloss-rel">See also: {see}</span>' if see else "")
-            + f'<a href="../glossary.html#t-{esc(tid)}">all terms &rarr;</a></div>')
+            + f'<a href="{prefix}glossary.html#t-{esc(tid)}">all terms &rarr;</a></div>')
     return "\n".join(out)
 
 
@@ -754,7 +759,7 @@ def essay_page() -> str:
             f'<h1>What we found</h1>\n{body}\n'
             '<p><a href="glossary.html">Word list</a> &middot; '
             '<a href="dashboard/">back to the dashboard</a></p>\n'
-            + popovers(used) + FOOT)
+            + popovers(used, prefix="") + FOOT)
 
 
 def glossary_page() -> str:
@@ -808,9 +813,65 @@ def build_records(index: list[dict]) -> None:
         (R_DIR / f'{e["id"]}.html').write_text(record_page(rec, prev_e, next_e))
 
 
+def studies_page(coverage: dict) -> str:
+    """Expose batch evidence without pretending that it has record.json's schema."""
+    titles = {
+        "affect05-q27b": "Emotion readout before a loop ends",
+        "affect05b-q27b": "Emotion readout with a revised loop boundary",
+        "affect07-g12b": "Gemma 12B: a fragile loop",
+        "affect07-q27b": "Emotion, concept and random directions",
+        "affect07-q27b-ae06": "The same directions at a lower dose",
+        "affect08-q27b-ae08": "Preregistered direction comparisons",
+        "affect08-q27b-ae1": "Direction comparisons at a higher dose",
+        "affect08s-g12b": "Gemma 12B: instrument recalibration",
+        "affect11-q27b": "End-related words do not explain loop escape",
+        "affect12-geom-q27b": "Vector geometry does not explain the split",
+        "affect13-q27b": "The score gap predicts turn endings",
+        "affect14-q27b": "Score-gap replication, with a later correction",
+        "affect15-q27b": "Correction: enough push, not all layers at once",
+        "affect16-q27b": "Escape and emotional wording separate",
+    }
+    used = set()
+    toc, sections = [], []
+    for batch in reversed(coverage["batches"]):
+        bid = batch["id"]
+        title = titles.get(bid, bid)
+        toc.append(f'<li><a href="#{esc(bid)}">{esc(title)}</a></li>')
+        plain = RESULTS / bid / "plain.md"
+        notes = RESULTS / bid / "thoughts.md"
+        body = (f'<div class="plain-body">{termify(render_md(plain.read_text()), used)}</div>'
+                if plain.exists() else '<p>This study has a report below. It has no plain summary yet.</p>')
+        docs = " · ".join(f'<a href="{esc(p)}">{esc(pathlib.Path(p).stem)}</a>'
+                          for p in batch["documents"])
+        sources = "".join(f'<li><a href="{esc(s["path"])}">{esc(pathlib.Path(s["path"]).name)}</a>'
+                          f' — {s["runs"]:,} saved runs</li>' for s in batch["sources"])
+        count = f'{batch["runs"]:,} saved runs' if batch["sources"] else 'Analysis or calibration; no new runs counted'
+        original = (f'<details class="notes"><summary>Research notes, as written</summary>'
+                    f'<div class="thoughts-body">{render_md(notes.read_text())}</div></details>'
+                    if notes.exists() else '')
+        sections.append(f'<section class="card" id="{esc(bid)}"><h2>{esc(title)}</h2>'
+                        f'<p class="note">{esc(bid)} · {count}</p>{body}'
+                        f'<p>{docs}</p><ul>{sources}</ul>{original}</section>')
+    return (head("Affect studies · J-Space Probes", "Saved affect runs, current summaries, corrections and raw batch evidence.",
+                 f"{BASE}/studies.html", f"{BASE}/og/site.png") +
+            '<h1>Affect studies</h1><p><b>The short version.</b> Later tests explain how pushes break a word loop, '
+            'and separate escape from emotional wording.</p>' +
+            f'<p>{coverage["record_pages"]:,} record pages sit in the <a href="dashboard/#explore">explorer</a>. '
+            f'These batch files add {coverage["affect_runs"]:,} saved affect runs. The two counts use different units.</p>' +
+            '<p>Runs repeat conditions and seeds. They are not independent experiments. This census counts only '
+            'canonical affect JSON run arrays. It excludes calibration arrays, reused analyses, emotion overlays, '
+            'prefix scans and judge calls. <a href="dashboard/catalogue.json">Exact source manifest</a>.</p>' +
+            '<p>The latest batch results are from September 2026. Older summaries describe their original tests. '
+            'Read affect-14 with the correction in affect-15.</p>' +
+            '<nav aria-label="Affect studies"><ul>' + "".join(toc) + '</ul></nav>' +
+            "".join(sections) + '<p><a href="dashboard/#findings">Back to the findings map</a></p>' +
+            popovers(used, prefix="") + FOOT)
+
+
 def write_sitemap(index: list[dict]) -> None:
     urls = [(f"{BASE}/", None), (f"{BASE}/dashboard/", None),
-            (f"{BASE}/essay.html", None), (f"{BASE}/glossary.html", None)]
+            (f"{BASE}/essay.html", None), (f"{BASE}/glossary.html", None),
+            (f"{BASE}/studies.html", None)]
     if (ROOT / "qwen14.html").exists():
         urls.append((f"{BASE}/qwen14.html", None))
     if (ROOT / "express01.html").exists():
@@ -857,18 +918,23 @@ def plain_findings_block() -> str:
         out.append("")
         for it in th["items"]:
             out.append(f'- **{it.get("pt") or it["t"]}** — {it.get("pb") or it["b"]}')
-            out.append(f'  Records: {", ".join(it["ids"])}')
+            if it.get("ids"):
+                out.append(f'  Records: {", ".join(it["ids"])}')
+            for source in it.get("sources", []):
+                out.append(f'  Evidence: {BASE}/{source["path"]}')
         out.append("")
     return "\n".join(out)
 
 
 def write_llms_txt(index: list[dict]) -> None:
     n = len(index)
+    coverage = inventory(index)
+    models = ", ".join(f'{name} ({count} pages)' for name, count in coverage["models"].items())
     findings_block = plain_findings_block()
     (ROOT / "llms.txt").write_text(f"""# J-Space Probes
 
-A home lab that asks small language models questions about themselves, and
-measures what happens inside the model while it answers.
+A home lab that measures how language models build self-reports, recall items,
+respond to conversation, and leave repetition loops.
 
 The measuring tool is the Jacobian lens. At each layer of the model it lists
 the words that the model is ready to say next, in rank order. This lets us
@@ -876,10 +942,18 @@ compare what a model says with what it was ready to say. The tool reads only
 words the model could produce. It cannot see what the model has no words for,
 so "we did not see it" never means "it is not there".
 
-{n} experiment records, on three models (Gemma 3 4B, Gemma 3 12B at 8-bit,
-Qwen3.6 27B at 4-bit). Each record holds the full conversation, the per-layer
-readouts, the rank of each tracked word by layer, a plain-English summary,
-and the original commentary written by the Claude instance that ran the lab.
+{n} standard record pages across {coverage['units']} numbered units and
+{len(coverage['other_groups'])} named groups. {coverage['plain_summaries']} pages
+have a plain-English summary; {coverage['films']} have a full-answer film.
+Model/configuration labels in the record index: {models}.
+These labels include quantization and calibration variants, not just distinct models.
+The original cohort is Gemma 3 4B, Gemma 3 12B and Qwen3.6 27B. The later
+Qwen3-14B lineage includes base, official, Hermes and Huihui checkpoints.
+
+Separately, {coverage['affect_runs']} saved affect runs are stored in batch JSON,
+outside the standard record index. /studies.html links their summaries,
+reports and raw data. /dashboard/catalogue.json contains the generated census
+and exact counted source paths. {coverage['counting_rule']}
 
 Reading order for an agent: this file, then /essay.html for the argument,
 then /r/<id>.html for any record. Terminology: /glossary.html, or
@@ -893,11 +967,15 @@ the repo README.
 
 ## Data access
 
+- /studies.html — affect batch studies, including the affect-14 correction,
+  affect-15 dose threshold and affect-16 escape modes. Reports and research
+  notes remain as written; the plain layer carries corrections.
+- /dashboard/catalogue.json — generated coverage counts and batch source manifest.
 - /results/index.json — machine-readable index of every record: id, title,
   unit, model, quant, created, has_thoughts, emergence (rank-of-top1 per
   layer), top1, a generation snippet, and steering params where applicable.
 - /results/{{id}}/record.json — the full record: spec params, conversation,
-  greedy generations, per-layer top-8 lens readouts, rank-vs-layer
+  stored generations, per-layer top-8 lens readouts, rank-vs-layer
   trajectories for tracked words, the emergence column, and grid scans.
   Schema documented in probes/lab.py.
 - /results/{{id}}/film.json — full position × layer top-8 readout "film"
@@ -935,7 +1013,7 @@ the repo README.
 
 
 SEO_BLOCK = f"""<!-- seo:begin -->
-<meta name="description" content="A home lab measures what small language models are ready to say, layer by layer, while they answer questions about themselves. {{n_records}} experiments, each with a plain-English summary.">
+<meta name="description" content="A home lab measures how language models build answers and leave repetition loops. {{n_records}} record pages, {{n_runs}} saved affect runs, {{n_plain}} plain record summaries.">
 <link rel="canonical" href="{BASE}/dashboard/">
 <meta property="og:title" content="J-Space Probes">
 <meta property="og:description" content="What a language model is ready to say, measured layer by layer, while it answers questions about itself.">
@@ -958,7 +1036,7 @@ def static_index_block(index: list[dict]) -> str:
              '<p>This section is a plain-HTML index for crawlers and non-JS clients; '
              'it is removed once the interactive dashboard has booted.</p>']
     for u in units:
-        parts.append(f'<h3 id="static-unit-{esc(u)}">{esc(UNIT_NAMES.get(u, "Unit " + str(u)))}</h3>')
+        parts.append(f'<h3 id="static-unit-{esc(u)}">{esc(unit_name(u))}</h3>')
         parts.append("<ul>")
         for e in by_unit[u]:
             parts.append(f'<li><a href="../r/{esc(e["id"])}.html">{esc(e["title"])}</a> '
@@ -973,7 +1051,10 @@ def patch_dashboard_index(index: list[dict]) -> None:
     path = ROOT / "dashboard" / "index.html"
     content = path.read_text()
 
-    seo = SEO_BLOCK.replace("{n_records}", str(len(index)))
+    coverage = inventory(index)
+    seo = (SEO_BLOCK.replace("{n_records}", str(len(index)))
+           .replace("{n_runs}", str(coverage["affect_runs"]))
+           .replace("{n_plain}", str(coverage["plain_summaries"])))
     if "<!-- seo:begin -->" in content:
         content = re.sub(r"<!-- seo:begin -->.*?<!-- seo:end -->", seo, content, flags=re.S)
     else:
@@ -1001,6 +1082,9 @@ def patch_app_js() -> None:
 
 def main() -> None:
     index = json.loads((RESULTS / "index.json").read_text())
+    coverage = inventory(index)
+    (ROOT / "dashboard/catalogue.json").write_text(json.dumps(coverage, indent=2) + "\n")
+    (ROOT / "studies.html").write_text(studies_page(coverage))
     build_records(index)
     (ROOT / "essay.html").write_text(essay_page())
     (ROOT / "glossary.html").write_text(glossary_page())
@@ -1016,7 +1100,7 @@ def main() -> None:
     print(f"site.py: {n_plain}/{len(index)} record pages carry a plain summary, "
           f"{len(TERMS)} glossary terms")
     print(f"site.py: {len(index)} record pages in r/, essay.html, glossary.html, "
-          f"{len(index) + 3} sitemap entries, robots.txt, llms.txt; "
+          "studies.html, catalogue.json, sitemap.xml, robots.txt, llms.txt; "
           "dashboard/index.html and app.js patched.")
 
 
