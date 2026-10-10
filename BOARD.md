@@ -2,7 +2,7 @@
 
 _Generated from `board/board.json` — do not hand-edit; regenerate with `.venv/bin/python probes/board.py` (any `add`/`mv`/`note`/`arc add` does this automatically)._
 
-Updated: 2026-10-10
+Updated: 2026-10-11
 
 Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖ parked · ✗ dropped
 
@@ -197,7 +197,7 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 |---|---|---|---|---|
 | ◇ |  | upkeep-01 | HANDOFF.md describes 2026-08-09; rewrite it as the current state or retire it | — |
 | ◇ |  | upkeep-02 | INSTRUMENTS.md is a 2026-08-07 snapshot: add swap, 14B lineage instruments, express01 scanner, affect-13..16 harnesses, superseded.json | — |
-| ◇ |  | upkeep-03 | CONCLUSIONS.md research layer has no affect-15/16 section (plain/conclusions.md does); README is 753 lines of stacked expedition sections — fold the dated ones into an archive doc | — |
+| ✓ |  | upkeep-03 | CONCLUSIONS.md research layer has no affect-15/16 section (plain/conclusions.md does); README is 753 lines of stacked expedition sections — fold the dated ones into an archive doc | 2026-10-11 → landed: CONCLUSIONS.md v4 written 2026-10-11 (affect-11..16, 14B chapter as editor, apparatus-11/12, audit-06, bat refilm, yes-stratum demotion, blend outlook); plain/conclusions.md got a top-down lead (STE-clean) over the dated update stack; llms.txt gained the board, superseded.json, EMOTIONS/MECHANICS pointers. README folding of the dated expedition sections NOT done — stays an open hygiene item under upkeep-06. |
 | ◇ |  | upkeep-04 | Demote or date the seven stale queued items (apparatus-03/13, audit-04/05, litwatch-01, span-09/10) — queued since July/August | — |
 | ◇ |  | upkeep-05 | Unit overview charts (Units 6, 8, 13) still load archived runs by id — decide per chart: switch to the re-run or label the old series | 2026-10-10 Follows the archive group built 2026-10-10 (results/superseded.json). Also: 12 d06 records carry battery-level notes only (3 have their own), same as the a12 precedent. |
 | ◇ |  | upkeep-06 | Repo hygiene: out/ holds ~2.7 GB of scratch; blend reading list not yet in RELATED-WORK.md; Superposed & Blended needs a site space (page from site.py, nav link, sitemap/llms entries, SITE-SURFACES row) | — |

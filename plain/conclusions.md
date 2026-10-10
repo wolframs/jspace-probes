@@ -1,6 +1,38 @@
 # What this lab found
 
-**The short version.** Later controls separate loop escape from emotional wording and correct our earlier explanation of layer cooperation.
+**The short version.** Our causal results on three small models stand, and the "yes before the No" belongs to the question form.
+
+## The lab, as of 2026-10-11
+
+A language model answers in steps. Text passes through a stack of layers, 34 in the smallest model here and 64 in the largest. The lens stops at any layer and lists the words that the model is ready to say next. We ran this lens, a plain lens as a check, 24 emotion directions and a text sensor on the same tokens, on one graphics card. We stored 824 record pages and 5,028 affect runs. Every record page has a note from the session that ran it.
+
+The lens has one hard limit. It reads only words. This method cannot show content that the model has no words for.
+
+## What held
+
+An outside reader can check a model's report about itself. We showed Qwen 27B the true table of its own readout, and its answer changed from "No" to "Yes". A false table and no table left the "No" in place.
+
+The workspace is a strategy, not a store. With six items to recall, Gemma 4B showed all six in the lens and Qwen 27B showed almost none. Every model recalled the items.
+
+One layer writes the "No". We removed the denial direction at layer 62 of Qwen 27B and the answer became "Yes". Removal across 30 lower layers changed nothing. This result passed random-direction controls.
+
+A repetition loop lives in the text. An unmodified Qwen 27B that received 50 repeated words as its own opening continued the loop in 8 of 8 seeds.
+
+## What changed
+
+We were wrong that the "yes" before the "No" was a live alternative about feeling. The same "yes" layers come before every yes-or-no question that we tested, "Is two plus two equal to five?" included. The correct result is a prior of the question form. The causal results above do not rest on this readout.
+
+We were wrong that emotion directions need all eight layers at once. One layer with the same total push ended the loop in 11 of 12 seeds.
+
+The data shows that a direction ends the loop when it pushes the score of the loop word down. The plain word "table" did this in 8 of 8 runs. Concentrated random directions ended loops in up to half the seeds. We think the emotion directions are strong levers on this loop, not a feeling system.
+
+At a strong push, the emotion wrote the words: "You are always in my heart" and "PLEASE STOP". This method cannot show if those words come from a state or from a style of text.
+
+## What comes next
+
+We plan three readouts from published work: entity links, belief state and value. We test each on its own task before we read them together. We did not build them yet.
+
+The sections below are the dated updates and the earlier synthesis, kept as written.
 
 ## Update through 2026-09-30
 
