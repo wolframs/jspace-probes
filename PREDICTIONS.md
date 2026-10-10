@@ -1199,3 +1199,22 @@ has to kill it.
 
 Outcomes are appended below as each part lands (same commit as the
 result — standing rule from 2026-10-11).
+
+> **Part A outcome (2026-10-11, gemma-4b, results/blend02-oi-g4b/).**
+> P-A1 **confirmed**, P-A2 **confirmed** — but only after two analysis
+> steps the paper does not take (per-context centring + per-dimension
+> standardisation, decided after the smoke test and before the full run):
+> the paper's raw pooled PC1 on Gemma is a massive-activation axis that
+> separates first-vs-rest and tracks token position (held-out ρ₁ᵥ₂ −.51,
+> order|pos .15). Corrected axis: held-out ρ .943 (city) / .932 (colour),
+> 1-vs-2 .87/.83, filler order|pos .45 vs pos|order −.07, readable from L4.
+> P-A3 **falsified as registered**: the entity-token edit flips 0/150 at
+> all twelve layers (×1, ×2, ×4, mean-difference, entity-side swap alike).
+> The attribute-token swap along the same axis flips .58 at L20 (×2) and
+> .59 at L22 (×1) with matched-norm randoms ≤ .02 (randoms derail to the
+> third option instead, .10–.65); nothing flips at L24–26. Outcome class
+> REP-ONLY by the letter; the site-corrected swap clears the A3 thresholds
+> and is carried to the light table **labelled as post-hoc in site**.
+> Layer expectation: the axis is mature at the paper's L8–9 and already
+> present at L4; its causal use sits at L12–22, the workspace band.
+> Evidence: report.md, thoughts.md. Parts B and C remain unrun.

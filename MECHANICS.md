@@ -331,12 +331,29 @@ we measured on our bench, separately.
 
 | readout | paper · model | paper's layer | fraction | gemma-4b port (34 L) | measured here |
 |---|---|---|---|---|---|
-| ordering ID (OI-PC) | Dai/Heinzerling/Inui 2024 · Llama2-7B (also Qwen1.5-7B) | L8 of 32 | ~25% | ~L8–9 | *pending blend-02 A* |
+| ordering ID (OI-PC) | Dai/Heinzerling/Inui 2024 · Llama2-7B (also Qwen1.5-7B) | L8 of 32 | ~25% | ~L8–9 | **readable from L4** (ρ .87 fit / .93 held-out), ≥ .80 to L26; **causally live on ATTRIBUTE tokens L12–22** (peak L20–22, flips .58 vs randoms ≤ .02), entity tokens inert at every depth; nothing moves at L24+. 2026-10-11, results/blend02-oi-g4b |
 | binding vectors ΔE/ΔA | Feng & Steinhardt 2024 · LLaMA-13B+ | mid-stack mean-diff, model-dependent | — | sweep | not yet built |
 | value probe | Xu/Yuksekgonul/Zou 2026 · incl. Gemma-3-4B-it | per-layer sweep; dopamine dims shown on 14B RL-tuned Qwen | — | sweep L8–L28 | *pending blend-02 B* |
 | belief geometry | Balcells et al. 2026 · Gemma 4 E4B, Qwen3.5-9B | per-layer affine probes, R² .83–.99 | — | sweep | *pending blend-02 C* |
 
 Standing facts that constrain the blend:
+
+- **PCA on Gemma residuals needs per-context centring + per-dimension
+  standardisation first** (blend-02 A, 2026-10-11). The raw pooled PC1 is a
+  massive-activation axis (coordinates in the thousands, 85–89% EVR at
+  L12–16) that separates first-vs-rest and tracks token position; it is
+  not an ordering axis (held-out ρ₁ᵥ₂ −.51). After centring each prompt's
+  K entity rows on their mean and dividing by the fit set's σ per
+  dimension, PC1 is ordinal and position-robust. Edits along a standardised
+  axis go back to raw space as Δ = dc · (σ ⊙ û) and matched randoms must be
+  scaled to ‖dc · σ ⊙ û‖, not to dc (the first smoke test got this wrong).
+- **Binding edits bite at the attribute site, not the entity site.**
+  Swapping the ordering coordinate between the two entities' *attribute*
+  tokens re-binds the answer (L12–22, peak L20–22); the same swap on the
+  *entity* tokens, at any scale and any layer, changes nothing. Design
+  rebinding interventions on the attribute tokens; treat entity-side edits
+  as a null arm. Mechanism open — see Oh & Demberg 2606.08644 before
+  guessing (retrieval-conditioned rebinding heads, Gemma-3-12B).
 
 - gemma-4b bands (fraction port, §2): sensory L0–13, workspace **L13–31**,
   motor L31–33. The OI fraction lands in the *sensory* band. If binding IDs

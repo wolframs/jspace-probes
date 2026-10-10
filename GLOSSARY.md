@@ -173,6 +173,17 @@ asymmetry) does not rest on that readout and stands as measured.
 
 ## Instruments
 
+**Ordering ID (OI-PC)** — the single axis in residual space along which
+co-mentioned entities are ordered by mention position (Dai, Heinzerling &
+Inui 2024). *As measured here (blend-02 A, 2026-10-11, gemma-4b):* the
+first principal component of per-context-centred, per-dimension-
+standardised entity-token residuals; held-out ρ with mention order .93–.94
+from L4 onward; position-robust under filler. Causally it lives on the
+**attribute** tokens (swapping it between two attributes re-binds the
+answer at L12–22, peak L20–22); on the entity tokens it is readable but
+inert. Not to be confused with the paper's raw pooled PC1, which on Gemma
+is a massive-activation / first-vs-rest axis (MECHANICS §8).
+
 **Film** — the position × layer top-k grid stored per record: the full
 top-8 readout at every fitted layer and every position, scrubbable like
 frames. What lets us say "elephant at rank 12–15 at *every* animal-slot"
