@@ -1123,6 +1123,8 @@ def main() -> None:
     write_llms_txt(index)
     patch_dashboard_index(index)
     patch_app_js()
+    from landing import build as build_landing   # index.html at the root, counts from catalogue.json
+    build_landing()
     n_plain = sum(1 for e in index if (RESULTS / e["id"] / "plain.md").exists())
     print(f"site.py: {n_plain}/{len(index)} record pages carry a plain summary, "
           f"{len(TERMS)} glossary terms")
