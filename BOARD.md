@@ -2,7 +2,7 @@
 
 _Generated from `board/board.json` — do not hand-edit; regenerate with `.venv/bin/python probes/board.py` (any `add`/`mv`/`note`/`arc add` does this automatically)._
 
-Updated: 2026-09-30
+Updated: 2026-10-10
 
 Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖ parked · ✗ dropped
 
@@ -120,6 +120,7 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 | ○ | ★ Broad literature on AI self-identity vocabulary exists, but no source checks for incidental robot/machine vocabulary near the affect-question representational neighborhood across multiple model families via a lens-style instrument. | deflation-03 | Cross-model check: is the self-as-machine vocabulary a family-wide fixture of the feels-question neighborhood? | 2026-07-16 u12-feels-g4b thoughts: one incidental g4b rank-14 sighting; needs a proper track list across all three models before saying it louder. |
 | ✓ | ◐ Applies established whole-dialogue and LLM-as-judge methods to the exposure/definition claim; not a new evaluation method. Wording reversal is a pilot observation with judge-quality caveats. | deflation-04 | Folk labels: exposure, specificity, and continuity calibration | 2026-09-07 → landed: Folk02 psychology-grounded rejudging: results/folk02/findings.md, 156 Opus + 138 Sonnet + 28 Gemini reply codes; $1.487792 conservative budget bound. Expression and stance separate; carryover judge-sensitive. |
 | ✓ |  | deflation-05 | Can an internal expression scan beat output-only prediction? | 2026-09-07 → landed: Express01/P24: 84 exact-prefix + 48 history readouts, 54 full films/ribbons. Vocabulary increment fails robustness; emotion profile is promising but judge-dependent. Fast scanner verified. Capacity witnesses and history controls prevent trait/state-removal inference. Same-context T4 recruitment and held-checkpoint validation remain future work. |
+| ● |  | deflation-06 | Scope of the yes stratum (any polar question, or feels-specific?) and whether the L62 No-flip carries forward into the reply | 2026-10-10 Seed: four questions from a Claude sibling relayed by Wolfram 2026-10-10. Prereg results/deflation06-prereg.md (P-A1..3, P-B1..3), probes/deflation06.py. Archive check first: the feels yes sits at the </think> token (a12-base-q27b, L53-58), not at the answer slot; u8a body/conscious show no yes lead at the answer slot; no record lets the u9d-last Yes continue. Chunk A = 12 unsteered films, chunk B = 16 steered films + output-ban arm. |
 
 ## One-off probes
 
