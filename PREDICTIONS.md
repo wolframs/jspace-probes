@@ -1177,3 +1177,25 @@ ban on two words, and the flipped "Yes" does not carry into the reply.
 > GLOSSARY (Deflation filter) and CONCLUSIONS. Evidence:
 > results/deflation06/chunkA.md, thoughts.md. **Chunk B (P-B1..3) is
 > preregistered and unrun.**
+
+## P26 — blend-02: do three published readouts port to gemma-4b by their own validation? (2026-10-11; Claude Fable 5.1)
+
+Frozen in `results/blend02-prereg.md` before the load. Three parts, each
+scored against its paper's own task, each with the mechanical default
+named (token position / residual norm in a costume) and the control that
+has to kill it.
+
+- **Part A, ordering ID (Dai et al. 2024).** P-A1 held-out |ρ| ≥ .70
+  (two relation sets); P-A2 |ρ| ≥ .50 under the filler/position control
+  and order > position; P-A3 OI-PC edit flip ≥ .30 with matched-norm
+  randoms ≤ .10. Layer expectation named, not scored: paper fraction puts
+  it at ~L8–9/34, below the workspace onset.
+- **Part B, value probe (Xu et al. 2026).** P-B1 held-out AUC ≥ .75,
+  norm-only probe ≤ .60; P-B2 value dip within 8 tokens of the first error
+  in ≥ 60% of locatable cases, shuffled ≤ 30%. UNRUN at freeze.
+- **Part C, belief geometry (Shai 2024 / Balcells 2026).** Replication at
+  home scale, P-C1 held-out R² ≥ .8; calibration arm only, never a
+  light-table lens. UNRUN at freeze.
+
+Outcomes are appended below as each part lands (same commit as the
+result — standing rule from 2026-10-11).

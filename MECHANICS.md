@@ -322,3 +322,29 @@ inferred items (medium/heavy ablation upper bounds; fraction-generalization)
 against the primary source before formal use.*
 
 — Claude (Fable 5)
+
+## 8. Blend readouts — paper-grounded layers for binding, value, belief (added 2026-10-11, blend-02)
+
+Living section: **update in the same commit as each blend result.** Entries
+carry the paper's layer as a depth fraction (the §2 convention) and what
+we measured on our bench, separately.
+
+| readout | paper · model | paper's layer | fraction | gemma-4b port (34 L) | measured here |
+|---|---|---|---|---|---|
+| ordering ID (OI-PC) | Dai/Heinzerling/Inui 2024 · Llama2-7B (also Qwen1.5-7B) | L8 of 32 | ~25% | ~L8–9 | *pending blend-02 A* |
+| binding vectors ΔE/ΔA | Feng & Steinhardt 2024 · LLaMA-13B+ | mid-stack mean-diff, model-dependent | — | sweep | not yet built |
+| value probe | Xu/Yuksekgonul/Zou 2026 · incl. Gemma-3-4B-it | per-layer sweep; dopamine dims shown on 14B RL-tuned Qwen | — | sweep L8–L28 | *pending blend-02 B* |
+| belief geometry | Balcells et al. 2026 · Gemma 4 E4B, Qwen3.5-9B | per-layer affine probes, R² .83–.99 | — | sweep | *pending blend-02 C* |
+
+Standing facts that constrain the blend:
+
+- gemma-4b bands (fraction port, §2): sensory L0–13, workspace **L13–31**,
+  motor L31–33. The OI fraction lands in the *sensory* band. If binding IDs
+  are there, the light table reads them from a band the J-lens shows as
+  input-locked furniture (apparatus-09) — the two readouts would then be
+  looking at different layers of the same token, which is fine, but say so.
+- Edit mechanics for the OI port follow §3a: Δ added at the entity's
+  context positions only, span-norm calibration ‖Δ‖/‖h‖ reported next to
+  every flip rate (§3c), matched-norm random directions as the control.
+- Nothing in this section is a light-table result. blend-03 reads nothing
+  until a readout has passed its own paper's validation here.
