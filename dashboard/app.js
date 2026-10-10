@@ -30,6 +30,7 @@ const UNIT_NAMES = {
   "24": "Unit 24 · Expression probe calibration",
   "audit": "Audit · Re-running our own weak experiments",
   "apparatus": "Apparatus · Checking the instrument",
+  "archive": "Archive · Superseded runs",
 };
 const MODELS = ["gemma-4b", "gemma-12b", "qwen-27b"];
 const MSHORT = { "gemma-4b": "g4b", "gemma-12b": "g12b", "qwen-27b": "q27b" };
@@ -465,7 +466,8 @@ function renderRail() {
   for (const e of entries) (units[e.unit] ??= []).push(e);
   const open = (u) => !!query || expanded.has(u);
   rail.innerHTML = Object.keys(units).sort((a, b) =>
-    (/^\d+$/.test(a) ? +a : Infinity) - (/^\d+$/.test(b) ? +b : Infinity) || a.localeCompare(b)).map((u) => {
+    (/^\d+$/.test(a) ? +a : Infinity) - (/^\d+$/.test(b) ? +b : Infinity)
+    || (a === "archive") - (b === "archive") || a.localeCompare(b)).map((u) => {
     const list = units[u];
     const body = open(u)
       ? `<a class="exp-link overview-link" href="#unit/${u}"
@@ -1487,7 +1489,7 @@ async function show(id) {
   const i = list.findIndex((e) => e.id === id);
   const nav = `<div class="pager">
     ${i > 0 ? `<a href="#${esc(list[i - 1].id)}" title="previous (j / ←)">‹</a>` : "<span>‹</span>"}
-    <a href="#unit/${esc(rec.unit)}" title="unit overview">☷</a>
+    <a href="#unit/${esc(displayUnit(rec))}" title="unit overview">☷</a>
     ${i >= 0 && i < list.length - 1 ? `<a href="#${esc(list[i + 1].id)}" title="next (k / →)">›</a>` : "<span>›</span>"}
   </div>`;
 
@@ -1586,6 +1588,26 @@ function visTok(t) {
   return t.trim() === "" ? "␣" : t;
 }
 
+/* Superseded runs (results/superseded.json → index.json, see lab.reindex):
+   the index entry carries the display unit, the archive notice and the
+   back-link; record.json keeps the record's own unit untouched. */
+const indexEntry = (rec) => INDEX.find((e) => e.id === rec.id) || {};
+const displayUnit = (rec) => indexEntry(rec).unit || String(rec.unit);
+function supersedeHTML(rec) {
+  const e = indexEntry(rec);
+  const link = (id) => {
+    const t = INDEX.find((x) => x.id === id);
+    return `<a href="#${esc(id)}">${esc(t ? plainTitle(t) : id)}</a>`;
+  };
+  if (e.unit === "archive" && e.superseded_why)
+    return `<p class="supersede"><strong>Archived ${esc(e.superseded_date)}: this run is superseded.</strong>
+      ${esc(e.superseded_why)} ${e.superseded_by
+        ? `The corrected run is ${link(e.superseded_by)}.` : "No corrected run exists."}</p>`;
+  if (e.replaces)
+    return `<p class="supersede">This run replaces an earlier faulty run, now in the archive: ${link(e.replaces)}.</p>`;
+  return "";
+}
+
 function headHTML(rec) {
   const e = rec.emergence;
   return `<div class="exp-head">
@@ -1599,6 +1621,7 @@ function headHTML(rec) {
         <span class="chip">${rec.model.n_layers} layers</span>
         <span class="chip">${esc(rec.created)}</span>
       </div>
+      ${supersedeHTML(rec)}
       ${siblingHTML(rec)}
       <div class="chips pin-row">${pinHTML(rec)}</div>
       <p style="color:var(--ink-2);font-size:13px;margin:10px 0 0">
@@ -2843,7 +2866,8 @@ const unitName = (u) => (UNITS[u] && UNITS[u].name) || UNIT_NAMES[u] || "Unit " 
 /* Record titles are "<unit title> <descriptor> · <model>", so swapping the
    unit prefix keeps whatever the record itself adds. */
 function plainTitle(rec) {
-  const orig = UNIT_NAMES[rec.unit], pn = unitName(rec.unit);
+  const u = rec.unit_orig ?? rec.unit;   // index entries may carry a display unit
+  const orig = UNIT_NAMES[u], pn = unitName(u);
   if (orig && pn !== orig && rec.title.startsWith(orig)) return pn + rec.title.slice(orig.length);
   return rec.title;
 }

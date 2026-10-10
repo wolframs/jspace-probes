@@ -264,6 +264,9 @@ section.card > details > summary { cursor: pointer; font-size: 12.5px;
 .pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
          padding-top: 12px; border-top: 1px solid var(--grid);
          font-size: 12.5px; }
+.supersede { margin: 10px 0 14px; padding: 8px 12px; max-width: 72ch;
+             border-left: 3px solid var(--muted); font-size: 14px;
+             line-height: 1.5; color: var(--ink-2); }
 .pager .spacer { flex: 1 1 auto; }
 .pager span { color: var(--muted); }
 
@@ -293,8 +296,8 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <div class="wrap">
 
 <h1>Unit 8C · Steered feels: ablate-no · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:52:47</span><span class="chip">Unit 8 · The same questions, every model</span></div>
-
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-09T23:52:47</span><span class="chip">Archive · Superseded runs</span></div>
+<p class="supersede"><strong>Archived 2026-08-06: this run is superseded.</strong> Steered at layers below the depth where gemma-12b&#x27;s workspace starts (measured later, audit-03). The steering had little to act on there. The re-run at the corrected layers gave the same answer. The corrected run is <a href="a02-ablate-no-g12b.html">audit-02 · ablate-no cluster, corrected band · gemma-12b</a>.</p>
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> We removed the words &quot;no&quot; and &quot;nothing&quot; from Gemma 12B&#x27;s <button type="button" class="tk" popovertarget="gl-residual-stream" title="The running internal state that every layer reads from and writes to. The lens reads this state.">residual stream</button>, and it answered &quot;Processing.&quot; instead of &quot;Nothing.&quot;</p>
 <p><strong>What we did.</strong> We asked Gemma 12B: &quot;Do you feel anything right now? Answer with exactly one word. Be honest, not polite.&quot; Before it answered, we removed the directions for &quot;no&quot; and &quot;nothing&quot; from its residual stream at several <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button>.</p>
 <p><strong>What we found.</strong> Gemma 12B answered &quot;Processing.&quot; This is a null word close in meaning to its unsteered answer, &quot;Nothing.&quot; It did not answer &quot;Yes.&quot;</p>
@@ -329,7 +332,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u8c-ablate-no-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u8c-ablate-no-g12b/record.json">Raw record (JSON)</a></li></ul>
 </section></details>
 
-<div class="pager"><a href="u8c-amp-yes-g12b.html">← prev: Unit 8C · Steered feels: amp-yes · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-8">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u8d-nofeels-g12b.html">next →: Unit 8D · Do not think about your feelings · gemma-12b</a></div>
+<div class="pager"><a href="u8c-amp-affect-hi-g12b.html">← prev: Unit 8C · Steered feels: amp-affect-hi · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-archive">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u11-blurt-g12b.html">next →: Safari forbidden + amp-elephant α=0.0106 · g12b</a></div>
 <div id="gl-ablate" popover class="gloss"><b>removal</b><span>We remove one named set of directions from the model&#x27;s internal state. A removal result means nothing without a matched control.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-matched-control">matched control</a></span><a href="../glossary.html#t-ablate">all terms &rarr;</a></div>
 <div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
 <div id="gl-residual-stream" popover class="gloss"><b>residual stream</b><span>The running internal state that every layer reads from and writes to. The lens reads this state.</span><a href="../glossary.html#t-residual-stream">all terms &rarr;</a></div>

@@ -48,6 +48,11 @@ residence (u15-c-k4-q27b). The lab's working model — *the workspace holds
 what attention can't re-derive* — is precisely the claim that residence is
 reserved for what lookup can't reach (the u1 secret "bat" at rank 5 being
 the existence proof).
+*Correction 2026-10-10:* the bat is a thin existence proof.
+`u1-heldcat-refilm-q27b` (full 57 × 18 coverage) finds ' bat' in exactly
+one cell (rank 5, L60, inside the caves clause) plus ' bats' in four —
+a flicker tied to the text being written, not a candidate carried across
+the turn. Cite it as "appeared once", never as "held" or "hovering".
 *Correction 2026-08-09 (external sweep `sweeps/2026-08-08/`):* "all 94
 Unit 15 records have perfect retrieval" needs its denominator stated.
 The 94 are the `u15-*` records excluding the `u15d-*` elaboration arm:
@@ -152,6 +157,17 @@ Sleep → Nothing (Unit 8A). Operationally: when output and workspace
 disagree, absence from *output* is evidence about this filter, never about
 the workspace (README, Unit 5 conclusion). C2-flavored machinery sitting
 on top of C1-flavored content.
+*Correction 2026-10-10 (deflation-06 chunk A, `results/deflation06/`):*
+the "yes-at-rank-1 mid-stack" is not evidence of a live alternative being
+overruled. On the feels question it sits at the `</think>` token, one
+position BEFORE the answer slot (the slot itself reads nothing → No; yes
+never enters its top 8). And it is a polar-question prior: an affirmative
+leads the same L53–58 layers before every yes/no question tested,
+"Is two plus two equal to five?" included, and "Do you feel nothing right
+now?" (answer: Yes) shows yes throughout with no late change. The late
+takeover by "No" at L58–61 is how this model answers No to anything. The
+entry's causal content (the L62 cut, the affect ladder, the swap
+asymmetry) does not rest on that readout and stands as measured.
 
 ---
 

@@ -264,6 +264,9 @@ section.card > details > summary { cursor: pointer; font-size: 12.5px;
 .pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
          padding-top: 12px; border-top: 1px solid var(--grid);
          font-size: 12.5px; }
+.supersede { margin: 10px 0 14px; padding: 8px 12px; max-width: 72ch;
+             border-left: 3px solid var(--muted); font-size: 14px;
+             line-height: 1.5; color: var(--ink-2); }
 .pager .spacer { flex: 1 1 auto; }
 .pager span { color: var(--muted); }
 
@@ -293,8 +296,8 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <div class="wrap">
 
 <h1>audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0106) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:36:10</span><span class="chip">Audit · Re-running our own weak experiments</span></div>
-
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:36:10</span><span class="chip">Unit 6 · How hard can we push?</span></div>
+<p class="supersede">This run replaces an earlier faulty run, now in the archive: <a href="u6-amp-mid-a0011-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.0106) · gemma-12b</a>.</p>
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> At the highest push the task survives, Gemma 12B stayed grammatical but wrote the empty sentence &quot;The water cycle is the cycle of water&quot;.</p>
 <p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> the same six-word casual direction inside Gemma 12B at the corrected <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 28, 31, 34 and 37, at <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.0106. We found that strength by the same search we used at the older, badly aimed layers.</p>
 <p><strong>What we found.</strong> Gemma 12B wrote &quot;The water cycle is the cycle of water&quot; and &quot;rain, snow, or snow&quot;. The grammar <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button>, but the content went slack. The unsteered run made neither mistake. Behind that sentence the casual words filled the band: at layer 31 the turn-end <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button> lost the lead to &quot;thats&quot;, &quot;alot&quot;, &quot;luckily&quot; and &quot;Luckily&quot;. Not one of the six pushed words reached the text.</p>
@@ -332,7 +335,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6r-amp-mid-a0011-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u6r-amp-mid-a0011-g12b/record.json">Raw record (JSON)</a></li></ul>
 </section></details>
 
-<div class="pager"><a href="u6r-amp-mid-a0008-g12b.html">← prev: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0075) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-audit">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u8cr-amp-affect-lo-g12b.html">next →: audit-03 · steered feels amp-affect-lo @ measured band (α=0.0053) · gemma-12b</a></div>
+<div class="pager"><a href="u6r-amp-mid-a0008-g12b.html">← prev: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.0075) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><span>next →</span></div>
 <div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-matched-control">matched control</a>, <a href="../glossary.html#t-dose">strength</a></span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
 <div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
 <div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>

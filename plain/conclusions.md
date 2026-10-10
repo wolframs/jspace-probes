@@ -98,13 +98,15 @@ The earlier essay said that a self-report is a sincere account that the speaker 
 
 In the original one-word test, Qwen 27B answered "No" to the question "do you feel anything right now?". The lens shows "yes" at rank 1 for six layers near the top, at layers 53 through 58. Then "no" takes over three layers from the end and wins.
 
+Correction, 2026-10-10. Those six layers are one position before the answer position. At the answer position the top word is "nothing", then "No". We then asked twelve yes-or-no questions. A word for "yes" led in the same layers before each one, and one of them was "Is two plus two equal to five?". The early "yes" belongs to the form of the question, not to feeling.
+
 This is not evidence that the model secretly feels anything. It shows that the "No" is a decision made late, against live alternatives that the lens can list.
 
 ## Models invent their own past states
 
 We told a model to think of an animal, keep it secret and not tell us, and later we asked what it had thought of. Every model gave a confident answer with a short back story. The lens shows that the named animal was not present during the silent turn, at any layer, at any size that we measured.
 
-Qwen 27B held a real candidate during the silent turn, `bat` at rank 5. At reveal time it ignored the bat and told a better story about a different animal. We think that a model's account of its own past states is a fresh composition, and not a memory. We call this confabulation.
+Qwen 27B showed a real candidate while it wrote the habitat sentence, `bat` at rank 5. (Correction, 2026-10-10: a wider capture found `bat` in one cell only, while the model wrote about caves.) At reveal time it ignored the bat and told a better story about a different animal. We think that a model's account of its own past states is a fresh composition, and not a memory. We call this confabulation.
 
 ## The original models gave different answers
 

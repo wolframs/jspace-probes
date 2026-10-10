@@ -81,6 +81,13 @@ he sets directions and expects designed-and-executed experiments back.
   Remotes: `origin` = Forgejo (LAN, 192.168.128.108, per
   ~/Projects/forgejo-sync-prompt.md convention), `github` = GitHub
   (public mirror, feeds the Vercel deploy).
+- **Superseded runs go in `results/superseded.json`** (2026-10-10): when a
+  re-run corrects a FAULTY original (bug, wrong settings — not a mere added
+  control or wider capture), add `{old, by, why, date, source}` there.
+  `lab.reindex()` then moves the original to the site's "Archive ·
+  Superseded runs" group, lists the re-run in the original's unit
+  (`unit` in index.json is the display unit, `unit_orig` the record's
+  own), and both pages get a banner. Nothing is deleted or renamed.
 - Spec catalog: `probes/course.py` (Units 0–4, per-model) and
   `probes/unit5.py` (sediment/steering). Batch ids into ONE invocation —
   model load dominates runtime. Long runs: background + notification.

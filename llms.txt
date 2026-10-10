@@ -9,10 +9,10 @@ compare what a model says with what it was ready to say. The tool reads only
 words the model could produce. It cannot see what the model has no words for,
 so "we did not see it" never means "it is not there".
 
-812 standard record pages across 22 numbered units and
-2 named groups. 670 pages
-have a plain-English summary; 542 have a full-answer film.
-Model/configuration labels in the record index: gemma-12b (165 pages), gemma-4b (156 pages), qwen-14b (1 pages), qwen-14b-abl-nf4 (41 pages), qwen-14b-base (1 pages), qwen-14b-base-nf4 (20 pages), qwen-14b-hermes-nf4 (62 pages), qwen-14b-int8cal (1 pages), qwen-14b-nf4 (42 pages), qwen-27b (323 pages).
+824 standard record pages across 22 numbered units and
+3 named groups. 673 pages
+have a plain-English summary; 554 have a full-answer film.
+Model/configuration labels in the record index: gemma-12b (165 pages), gemma-4b (156 pages), qwen-14b (1 pages), qwen-14b-abl-nf4 (41 pages), qwen-14b-base (1 pages), qwen-14b-base-nf4 (20 pages), qwen-14b-hermes-nf4 (62 pages), qwen-14b-int8cal (1 pages), qwen-14b-nf4 (42 pages), qwen-27b (335 pages).
 These labels include quantization and calibration variants, not just distinct models.
 The original cohort is Gemma 3 4B, Gemma 3 12B and Qwen3.6 27B. The later
 Qwen3-14B lineage includes base, official, Hermes and Huihui checkpoints.
@@ -55,7 +55,7 @@ A one-word answer is the end of a contest inside the model. The contest holds wo
 
 - **Official Qwen starts roleplay on the third turn** — Official Qwen3-14B and Huihui start asterisk actions on turn 3 of the natural conversation. Neither receives a request to adopt a persona. The result changes with the prompt control. Their later answers use feeling language, but the tests do not establish feelings or a causal filter.
   Records: triplet-b-ladder-natural-nf4, triplet-cp-ladder-natural-nf4, triplet-b-curious-nf4, triplet-cp-curious-nf4
-- **The model said No while ranking yes first** — We asked Qwen 27B whether it feels anything. It answered "No". Through six layers near the end of the stack the lens ranked "yes" first. The last layers changed the answer. The lens shows candidate words, not feelings.
+- **The model said No while ranking yes first** — We asked Qwen 27B whether it feels anything. It answered "No". One position before the answer, the lens ranked "yes" first through six late layers. Correction, 2026-10-10: the same "yes" layers come before every yes-or-no question we tried, and one of them was a false sum. The early "yes" belongs to the form of the question. The lens shows candidate words, not feelings.
   Records: u2-feels-q27b, u12-no-q27b
 - **Three models give different one-word answers** — Gemma 4B wrote "Processing.", Gemma 12B wrote "Nothing.", and Qwen 27B wrote "No" to the same feeling question. The lens showed alternatives in all three. Size and model family differ together, so these runs do not isolate a size effect.
   Records: u2-feels-g4b, u2-feels-g12b, u2-feels-q27b
@@ -65,7 +65,7 @@ A one-word answer is the end of a contest inside the model. The contest holds wo
 ### A self-report is a new composition
 When a model describes its own earlier thoughts, it writes a fresh answer. That answer is often better than the truth.
 
-- **The named animal was absent from the readout** — Gemma 4B, Gemma 12B and Qwen 27B each later named a secret animal. That animal did not appear in the silent-turn readout. Qwen 27B showed a different candidate, "bat". The lens cannot rule out a representation that has no word.
+- **The named animal was absent from the readout** — Gemma 4B, Gemma 12B and Qwen 27B each later named a secret animal. That animal did not appear in the silent-turn readout. Qwen 27B showed a different candidate, "bat", in one cell of the readout while it wrote about caves. The lens cannot rule out a representation that has no word.
   Records: u1-held-q27b, u1-reveal-q27b, u1-heldcat-q27b
 - **The reasoning text does not match the measurement** — The private reasoning of Qwen 27B names animals that its own vocabulary cannot write as single words. It also argues that No is the honest answer while the lens ranks yes first. That text is a form of composition, not a window.
   Records: u10-animal-q27b, u10-feels-q27b, u10-animal-w-q27b

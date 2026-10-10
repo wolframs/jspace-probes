@@ -608,8 +608,27 @@ def reindex() -> None:
                        "alpha": steer.get("alpha")} if steer else None),
             "film": bool(rec.get("film")),
         })
+    # superseded runs (results/superseded.json, hand-curated): the faulty
+    # original moves to the "archive" group and its corrected re-run takes
+    # the original's place in the original's unit. `unit` is the DISPLAY
+    # unit every site surface groups by; `unit_orig` keeps the record's own.
+    sup_path = RESULTS / "superseded.json"
+    if sup_path.exists():
+        by_id = {e["id"]: e for e in entries}
+        for s in json.loads(sup_path.read_text())["entries"]:
+            old, new = by_id.get(s["old"]), by_id.get(s.get("by") or "")
+            if old is None:
+                continue
+            home = old.get("unit_orig", old["unit"])
+            old.update(unit_orig=home, unit="archive",
+                       superseded_by=s.get("by"), superseded_why=s["why"],
+                       superseded_date=s["date"])
+            if new is not None:
+                new.update(unit_orig=new.get("unit_orig", new["unit"]),
+                           unit=home, replaces=s["old"])
     entries.sort(key=lambda e: (int(e["unit"]) if str(e["unit"]).isdigit()
-                                else 99, e["created"]))
+                                else 999 if e["unit"] == "archive" else 99,
+                                e["created"]))
     RESULTS.mkdir(exist_ok=True)
     (RESULTS / "index.json").write_text(json.dumps(entries, indent=1))
 

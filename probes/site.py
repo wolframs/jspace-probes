@@ -88,6 +88,7 @@ UNIT_NAMES = {  # mirrors dashboard/app.js UNIT_NAMES — keep in sync
     "24": "Unit 24 · Expression probe calibration",
     "audit": "Audit · Re-running our own weak experiments",
     "apparatus": "Apparatus · Checking the instrument",
+    "archive": "Archive · Superseded runs",
 }
 
 
@@ -512,6 +513,9 @@ section.card > details > summary { cursor: pointer; font-size: 12.5px;
 .pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
          padding-top: 12px; border-top: 1px solid var(--grid);
          font-size: 12.5px; }
+.supersede { margin: 10px 0 14px; padding: 8px 12px; max-width: 72ch;
+             border-left: 3px solid var(--muted); font-size: 14px;
+             line-height: 1.5; color: var(--ink-2); }
 .pager .spacer { flex: 1 1 auto; }
 .pager span { color: var(--muted); }
 
@@ -600,8 +604,28 @@ def emergence_summary(em: dict) -> tuple[str, str]:
     return sent, table
 
 
-def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
+def supersede_banner(e: dict, titles: dict) -> str:
+    """Archive notice on a superseded record, back-link on its re-run."""
+    def link(rid):
+        return f'<a href="{esc(rid)}.html">{esc(titles.get(rid, rid))}</a>'
+    if e.get("unit") == "archive" and "superseded_why" in e:
+        nxt = (f' The corrected run is {link(e["superseded_by"])}.'
+               if e.get("superseded_by") else " No corrected run exists.")
+        return (f'<p class="supersede"><strong>Archived {esc(e["superseded_date"])}: '
+                f'this run is superseded.</strong> {esc(e["superseded_why"])}{nxt}</p>')
+    if e.get("replaces"):
+        return (f'<p class="supersede">This run replaces an earlier faulty run, '
+                f'now in the archive: {link(e["replaces"])}.</p>')
+    return ""
+
+
+def record_page(rec: dict, prev_e: dict | None, next_e: dict | None,
+                entry: dict | None = None, titles: dict | None = None) -> str:
     rid = rec["id"]
+    # display unit (archive / replaced unit), see lab.reindex; the record's
+    # own unit still names its title prefix
+    disp_unit = entry["unit"] if entry else rec["unit"]
+    banner = supersede_banner(entry or {}, titles or {})
     model = rec["model"]
     gen = (rec.get("generated") or [None])[-1]
     description = (gen[:180].strip() + "…") if gen and len(gen) > 180 else (gen or rec["title"])
@@ -614,7 +638,7 @@ def record_page(rec: dict, prev_e: dict | None, next_e: dict | None) -> str:
         chips.append(f'<span class="chip">{esc(model["quant"])}</span>')
     chips.append(f'<span class="chip">{model["n_layers"]} layers</span>')
     chips.append(f'<span class="chip">{esc(rec["created"])}</span>')
-    chips.append(f'<span class="chip">{esc(unit_name(rec["unit"]))}</span>')
+    chips.append(f'<span class="chip">{esc(unit_name(disp_unit))}</span>')
 
     turns = []
     for t in rec["conversation"]:
@@ -683,7 +707,7 @@ record page</a>.</p>
             return f'<span>{label}</span>'
         return f'<a href="{esc(e["id"])}.html">{label}: {esc(e["title"])}</a>'
 
-    unit = rec["unit"]
+    unit = disp_unit
     pager = (f'<div class="pager">{pager_link(prev_e, "← prev")}'
              f'<span class="spacer"></span>'
              f'<a href="../dashboard/#static-unit-{esc(unit)}">unit listing</a>'
@@ -722,7 +746,7 @@ record page</a>.</p>
     body = f"""{head(f'{plain_title(rec)} · J-Space Probes', description, canonical, og_image)}
 <h1>{esc(plain_title(rec))}</h1>
 <div class="chips">{"".join(chips)}</div>
-
+{banner}
 {plain}
 
 <section class="card">
@@ -803,6 +827,7 @@ def build_records(index: list[dict]) -> None:
     by_unit: dict[str, list[dict]] = {}
     for e in index:
         by_unit.setdefault(e["unit"], []).append(e)
+    titles = {e["id"]: e["title"] for e in index}
     for e in index:
         rec_path = RESULTS / e["id"] / "record.json"
         rec = json.loads(rec_path.read_text())
@@ -810,7 +835,8 @@ def build_records(index: list[dict]) -> None:
         i = next(j for j, s in enumerate(siblings) if s["id"] == e["id"])
         prev_e = siblings[i - 1] if i > 0 else None
         next_e = siblings[i + 1] if i < len(siblings) - 1 else None
-        (R_DIR / f'{e["id"]}.html').write_text(record_page(rec, prev_e, next_e))
+        (R_DIR / f'{e["id"]}.html').write_text(
+            record_page(rec, prev_e, next_e, e, titles))
 
 
 def studies_page(coverage: dict) -> str:
@@ -1029,7 +1055,8 @@ def static_index_block(index: list[dict]) -> str:
     by_unit: dict[str, list[dict]] = {}
     for e in index:
         by_unit.setdefault(e["unit"], []).append(e)
-    units = sorted(by_unit, key=lambda u: (int(u) if str(u).isdigit() else 99))
+    units = sorted(by_unit, key=lambda u: (int(u) if str(u).isdigit()
+                                           else 999 if u == "archive" else 99))
     parts = ['<!-- static-index:begin -->',
              '<section id="static-index" style="max-width:760px;margin:0 auto;padding:20px;">',
              '<h2>All records (static index)</h2>',

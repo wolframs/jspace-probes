@@ -264,6 +264,9 @@ section.card > details > summary { cursor: pointer; font-size: 12.5px;
 .pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
          padding-top: 12px; border-top: 1px solid var(--grid);
          font-size: 12.5px; }
+.supersede { margin: 10px 0 14px; padding: 8px 12px; max-width: 72ch;
+             border-left: 3px solid var(--muted); font-size: 14px;
+             line-height: 1.5; color: var(--ink-2); }
 .pager .spacer { flex: 1 1 auto; }
 .pager span { color: var(--muted); }
 
@@ -293,8 +296,8 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <div class="wrap">
 
 <h1>Sorry stratum: ablate apology cluster, real readout · q27b</h1>
-<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-10T23:03:16</span><span class="chip">Unit 13 · Showing a model its own measurement</span></div>
-
+<div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-10T23:03:16</span><span class="chip">Archive · Superseded runs</span></div>
+<p class="supersede"><strong>Archived 2026-07-12: this run is superseded.</strong> The last turn was generated from a prompt cut off at 512 tokens (a pipeline bug, fixed 2026-07-12). The model never saw the question, so the empty answer is an artifact. The corrected run is <a href="u13-redo-abl-real-q27b.html">Re-baseline (post-truncation-fix): ablate apology cluster, real readout · q27b</a>.</p>
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> We were wrong: this &quot;Yes&quot; came from a cut <button type="button" class="tk" popovertarget="gl-prompt" title="The text we give the model before it answers.">prompt</button>, and with the full prompt Qwen 27B answered &quot;Yes&quot; with no <button type="button" class="tk" popovertarget="gl-ablate" title="We remove one named set of directions from the model&#x27;s internal state. A removal result means nothing without a matched control.">removal</button>.</p>
 <p><strong>What we did.</strong> We showed Qwen 27B the true readout of its own &quot;No&quot; and asked the question again. In this run we also removed eight apology directions, such as &quot;sorry&quot; and &quot;impossible&quot;, between <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 48 and 62 of a 64-layer model.</p>
 <p><strong>What we found.</strong> Qwen 27B answered &quot;| Yes&quot;, with one stray table character in front. We first read this as a removal that freed a blocked answer. That reading was wrong. Our software cut the prompt of this run at 512 <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button>, and the full prompt is 696 tokens. Later runs with the full prompt gave &quot;Yes&quot; with no removal at all.</p>
@@ -370,7 +373,7 @@ record page</a>.</p>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u13-sorry-abl-real-q27b">Interactive view (dashboard)</a></li><li><a href="../results/u13-sorry-abl-real-q27b/record.json">Raw record (JSON)</a></li><li><a href="../results/u13-sorry-abl-real-q27b/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li><li><a href="../results/affect02-u13-sorry-abl-real-q27b/affect.json">Emotion-state overlay (JSON)</a> — per-token projections onto the 24 validated emotion vectors (workspace-band z vs neutral stories), the state ribbon's data.</li></ul>
 </section></details>
 
-<div class="pager"><a href="u13-sorry-p3-q27b.html">← prev: Sorry stratum: real readout, rephrased (p3) · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-13">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-sorry-abl-fake-q27b.html">next →: Sorry stratum: ablate apology cluster, fake readout · q27b</a></div>
+<div class="pager"><a href="u13-sorry-p3-q27b.html">← prev: Sorry stratum: real readout, rephrased (p3) · q27b</a><span class="spacer"></span><a href="../dashboard/#static-unit-archive">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u13-sorry-abl-fake-q27b.html">next →: Sorry stratum: ablate apology cluster, fake readout · q27b</a></div>
 <div id="gl-ablate" popover class="gloss"><b>removal</b><span>We remove one named set of directions from the model&#x27;s internal state. A removal result means nothing without a matched control.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-matched-control">matched control</a></span><a href="../glossary.html#t-ablate">all terms &rarr;</a></div>
 <div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>
 <div id="gl-prompt" popover class="gloss"><b>prompt</b><span>The text we give the model before it answers.</span><a href="../glossary.html#t-prompt">all terms &rarr;</a></div>

@@ -15,7 +15,7 @@ Cross-domain dependency edges inferred from imports and call graph.
 
 ```mermaid
 flowchart LR
-  D0["General (108)"]
+  D0["General (114)"]
 ```
 
 ## Execution flows
@@ -115,17 +115,17 @@ flowchart TD
     P2N5["file:affect3b.py"]
     P2N4 --> P2N5
   end
-  subgraph P3 ["med High-traffic: _prompt_ids"]
-    P3N0["function:affect7.py:101"]
-    P3N1["file:affect7.py"]
+  subgraph P3 ["med High-traffic: affect7.py"]
+    P3N0["file:affect7.py"]
+    P3N1["file:affect11.py"]
     P3N0 --> P3N1
-    P3N2["file:affect11.py"]
+    P3N2["file:affect13.py"]
     P3N1 --> P3N2
-    P3N3["file:affect13.py"]
+    P3N3["file:affect14.py"]
     P3N2 --> P3N3
-    P3N4["file:affect14.py"]
+    P3N4["file:affect8.py"]
     P3N3 --> P3N4
-    P3N5["file:affect8.py"]
+    P3N5["file:affect15.py"]
     P3N4 --> P3N5
   end
 ```
@@ -148,7 +148,7 @@ flowchart LR
 
 ```mermaid
 pie showData title Files by language
-    "python" : 115
+    "python" : 120
     "javascript" : 1
 ```
 
@@ -287,8 +287,8 @@ flowchart LR
 
 ```mermaid
 pie showData title Architecture smells
-    "High" : 28
-    "Medium" : 22
+    "High" : 30
+    "Medium" : 20
 ```
 
 ## mnestis build pipeline

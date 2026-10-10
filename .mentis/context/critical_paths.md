@@ -45,17 +45,17 @@ flowchart TD
     P2N5["file:affect3b.py"]
     P2N4 --> P2N5
   end
-  subgraph P3 ["med High-traffic: _prompt_ids"]
-    P3N0["function:affect7.py:101"]
-    P3N1["file:affect7.py"]
+  subgraph P3 ["med High-traffic: affect7.py"]
+    P3N0["file:affect7.py"]
+    P3N1["file:affect11.py"]
     P3N0 --> P3N1
-    P3N2["file:affect11.py"]
+    P3N2["file:affect13.py"]
     P3N1 --> P3N2
-    P3N3["file:affect13.py"]
+    P3N3["file:affect14.py"]
     P3N2 --> P3N3
-    P3N4["file:affect14.py"]
+    P3N4["file:affect8.py"]
     P3N3 --> P3N4
-    P3N5["file:affect8.py"]
+    P3N5["file:affect15.py"]
     P3N4 --> P3N5
   end
 ```
@@ -70,25 +70,31 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect3.py has 22 dependents — changes here have wide blast radius
+- **Description**: affect3.py has 26 dependents — changes here have wide blast radius
 
 ## High-traffic: AffectSteer
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: AffectSteer has 22 dependents — changes here have wide blast radius
+- **Description**: AffectSteer has 26 dependents — changes here have wide blast radius
+
+## High-traffic: affect7.py
+
+- **Risk**: MEDIUM
+- **Nodes involved**: 6
+- **Description**: affect7.py has 12 dependents — changes here have wide blast radius
 
 ## High-traffic: _prompt_ids
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: _prompt_ids has 10 dependents — changes here have wide blast radius
+- **Description**: _prompt_ids has 14 dependents — changes here have wide blast radius
 
 ## High-traffic: _exit_id
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
-- **Description**: _exit_id has 10 dependents — changes here have wide blast radius
+- **Description**: _exit_id has 14 dependents — changes here have wide blast radius
 
 ## High-traffic: shuffle
 
@@ -166,16 +172,10 @@ flowchart TD
 
 - **Risk**: HIGH
 - **Nodes involved**: 6
-- **Description**: affect2.py has 42 dependents — changes here have wide blast radius
+- **Description**: affect2.py has 46 dependents — changes here have wide blast radius
 
 ## High-traffic: a2dir
 
 - **Risk**: MEDIUM
 - **Nodes involved**: 6
 - **Description**: a2dir has 10 dependents — changes here have wide blast radius
-
-## High-traffic: _load_vectors
-
-- **Risk**: HIGH
-- **Nodes involved**: 6
-- **Description**: _load_vectors has 38 dependents — changes here have wide blast radius

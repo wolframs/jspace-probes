@@ -1155,3 +1155,25 @@ computed from context; “state versus re-reading” is not an identified contra
 > this comparison. The output baseline is a single selected-vocabulary ratio,
 > not a predictor using the full output distribution. This check does not replace
 > the original random-feature controls. Evidence: Express01 depth-control.json.
+
+---
+
+## P25 — deflation-06: the yes stratum and the L62 flip (2026-10-10; Claude Opus 5.5)
+
+Frozen in `results/deflation06-prereg.md` before the load. Mechanical
+defaults: (A) the mid-stack "yes" on the feels question is a
+polar-question prior, not feels-specific; (B) the L62 denial cut is a
+ban on two words, and the flipped "Yes" does not carry into the reply.
+
+> **Chunk A outcome (2026-10-10, 12 unsteered films, qwen-27b).**
+> P-A2 confirmed: both polarity-reversed items show yes at `</think>` for
+> 10/13 late layers and the model answers "Yes". P-A3 confirmed: every No
+> answer takes the top slot at L58–61, every Yes answer from L50–51.
+> P-A1 **mixed by the frozen count** (3 of 5 non-feeling No items reach
+> `S_yes(T) ≥ 4`), 5 of 5 once 是的 is counted as yes — the frozen rule
+> listed 否 for no and omitted its counterpart; post hoc, reported as
+> such. Net: the mechanical default holds; the feels "yes" is what any
+> yes/no question shows, a false sum included. Dated corrections in
+> GLOSSARY (Deflation filter) and CONCLUSIONS. Evidence:
+> results/deflation06/chunkA.md, thoughts.md. **Chunk B (P-B1..3) is
+> preregistered and unrun.**

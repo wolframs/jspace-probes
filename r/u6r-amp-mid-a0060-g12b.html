@@ -264,6 +264,9 @@ section.card > details > summary { cursor: pointer; font-size: 12.5px;
 .pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
          padding-top: 12px; border-top: 1px solid var(--grid);
          font-size: 12.5px; }
+.supersede { margin: 10px 0 14px; padding: 8px 12px; max-width: 72ch;
+             border-left: 3px solid var(--muted); font-size: 14px;
+             line-height: 1.5; color: var(--ink-2); }
 .pager .spacer { flex: 1 1 auto; }
 .pager span { color: var(--muted); }
 
@@ -293,8 +296,8 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <div class="wrap">
 
 <h1>audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.06) · gemma-12b</h1>
-<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:34:59</span><span class="chip">Audit · Re-running our own weak experiments</span></div>
-
+<div class="chips"><span class="chip model">gemma-12b</span><span class="chip">google/gemma-3-12b-it</span><span class="chip">8bit</span><span class="chip">48 layers</span><span class="chip">2026-07-21T18:34:59</span><span class="chip">Unit 6 · How hard can we push?</span></div>
+<p class="supersede">This run replaces an earlier faulty run, now in the archive: <a href="u6-amp-mid-a0060-g12b.html">Unit 6 · Amplify typo register @ mid (α=0.06) · gemma-12b</a>.</p>
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> At <button type="button" class="tk" popovertarget="gl-dose" title="How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.">strength</button> 0.06 Gemma 12B chanted &quot;Anyways&quot; for the whole budget: the pushed words reached the text, and the task was gone.</p>
 <p><strong>What we did.</strong> We <button type="button" class="tk" popovertarget="gl-amplify" title="We increase a direction in the model&#x27;s internal state and see whether the answer changes.">amplified</button> the same six-word casual direction inside Gemma 12B at the corrected <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 28, 31, 34 and 37, at strength 0.06. That is about 5.7 times 0.0106, the highest strength the task survives.</p>
 <p><strong>What we found.</strong> Gemma 12B repeated &quot;Anyways&quot; for the whole <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">token</button> budget. This is the only step of the five where a pushed word reached the text. At the last position the top 8 <button type="button" class="tk" popovertarget="gl-residence" title="A word is in residence when the lens ranks it high where the model is neither reading nor saying it. This is not memory and not correct recall.">held</button> &quot;Anyways&quot;, &quot;Luckily&quot;, &quot;Luckily&quot;, &quot;但是&quot;, &quot;Whilst&quot;, &quot;Anyways&quot;, &quot;anyways&quot;. The pushed words held single-digit <button type="button" class="tk" popovertarget="gl-rank" title="The position of a word in the lens list. Rank 1 is the word the model is most ready to say, out of about 250,000.">ranks</button> from layer 28 into the high thirties and loosened only in the <button type="button" class="tk" popovertarget="gl-motor-band" title="The last few layers, where the word the model actually says takes over the readout.">final layers</button>.</p>
@@ -331,7 +334,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#u6r-amp-mid-a0060-g12b">Interactive view (dashboard)</a></li><li><a href="../results/u6r-amp-mid-a0060-g12b/record.json">Raw record (JSON)</a></li></ul>
 </section></details>
 
-<div class="pager"><a href="u6r-baseline-water-g12b.html">← prev: audit-03 · u6 re-dose baseline (unsteered) · gemma-12b</a><span class="spacer"></span><a href="../dashboard/#static-unit-audit">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6r-amp-mid-a0030-g12b.html">next →: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.03) · gemma-12b</a></div>
+<div class="pager"><a href="u6-baseline-water-refilm-g12b.html">← prev: Unit 6 · Baseline (unsteered water cycle) · gemma-12b · refilm</a><span class="spacer"></span><a href="../dashboard/#static-unit-6">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="u6r-amp-mid-a0030-g12b.html">next →: audit-03 · amp typo @ MEASURED mid [28, 31, 34, 37] (α=0.03) · gemma-12b</a></div>
 <div id="gl-amplify" popover class="gloss"><b>amplification</b><span>We increase a direction in the model&#x27;s internal state and see whether the answer changes.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-matched-control">matched control</a>, <a href="../glossary.html#t-dose">strength</a></span><a href="../glossary.html#t-amplify">all terms &rarr;</a></div>
 <div id="gl-dose" popover class="gloss"><b>strength</b><span>How hard we push when we steer. Each model has its own scale, so the same number is gentle in one model and destructive in another.</span><a href="../glossary.html#t-dose">all terms &rarr;</a></div>
 <div id="gl-layer" popover class="gloss"><b>layer</b><span>One processing step inside the model. Text passes through every layer in order, from the first to the last.</span><a href="../glossary.html#t-layer">all terms &rarr;</a></div>

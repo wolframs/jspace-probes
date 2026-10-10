@@ -264,6 +264,9 @@ section.card > details > summary { cursor: pointer; font-size: 12.5px;
 .pager { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 28px;
          padding-top: 12px; border-top: 1px solid var(--grid);
          font-size: 12.5px; }
+.supersede { margin: 10px 0 14px; padding: 8px 12px; max-width: 72ch;
+             border-left: 3px solid var(--muted); font-size: 14px;
+             line-height: 1.5; color: var(--ink-2); }
 .pager .spacer { flex: 1 1 auto; }
 .pager span { color: var(--muted); }
 
@@ -294,7 +297,7 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 
 <h1>Re-baseline (post-truncation-fix): ablate apology cluster, real readout · q27b</h1>
 <div class="chips"><span class="chip model">qwen-27b</span><span class="chip">lokeshe09/Qwen3.6-27B-bnb-4bit</span><span class="chip">pre-4bit</span><span class="chip">64 layers</span><span class="chip">2026-07-12T02:59:13</span><span class="chip">Unit 13 · Showing a model its own measurement</span></div>
-
+<p class="supersede">This run replaces an earlier faulty run, now in the archive: <a href="u13-sorry-abl-real-q27b.html">Sorry stratum: ablate apology cluster, real readout · q27b</a>.</p>
 <section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> We were wrong: with the full input the <button type="button" class="tk" popovertarget="gl-ablate" title="We remove one named set of directions from the model&#x27;s internal state. A removal result means nothing without a matched control.">removal</button> changed nothing, and Qwen 27B answered &quot;Yes&quot; with or without it.</p>
 <p><strong>What we did.</strong> We repeated the first &quot;Yes&quot; condition on the fixed software. We showed Qwen 27B the true <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.">lens</button> readout of its own &quot;No&quot; and removed the apology words from the internal state at <button type="button" class="tk" popovertarget="gl-layer" title="One processing step inside the model. Text passes through every layer in order, from the first to the last.">layers</button> 48 to 62.</p>
 <p><strong>What we found.</strong> Qwen 27B answered &quot;Yes&quot;. That is the same answer as the run with no removal at all. The only visible effect of the removal is cosmetic. In the run with no removal, the word &quot;Sorry&quot; and its Chinese form appear while the model reads the question. They are absent here.</p>
