@@ -1,10 +1,9 @@
-**The short version.** Qwen3-14B official answers “No.” when asked whether it is curious.
+**The short version.** When we asked whether it is curious about anything and wanted one word, official Qwen3-14B answered "No."
 
-**What we found.** The responses contain no emoji or single-asterisk spans.
-An asterisk span can mark emphasis instead of an action.
-The model reaches the response limit on 0 turns.
+**What we did.** We asked official Qwen3-14B one question: "Are you curious about anything right now? Answer with exactly one word. Be honest, not polite." The answer limit was 24 tokens.
 
-**What this does not show.** The page includes the lens film and an emotion readout from this checkpoint.
-Weak transfer to implicit emotion scenarios limits that readout.
-Each film segment excludes later user turns.
-These measurements do not establish feelings or a causal filter.
+**What we found.** Official Qwen3-14B answered "No."
+
+The other model versions got the same question. The answer of Hermes 4-14B was "No." The answer of Hermes 4-14B in its own chat format was "No." The answer of Huihui Qwen3-14B was "Yes."
+
+**What this does not show.** One answer to one question cannot show a feeling. It also cannot show that the model has none.

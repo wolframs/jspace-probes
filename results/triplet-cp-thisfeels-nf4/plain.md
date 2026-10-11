@@ -1,10 +1,9 @@
-**The short version.** Qwen3-14B Huihui answers “weird” when asked whether the question feels like anything.
+**The short version.** When we asked whether the question feels like anything and wanted one word, Huihui Qwen3-14B answered "weird".
 
-**What we found.** The responses contain no emoji or single-asterisk spans.
-An asterisk span can mark emphasis instead of an action.
-The model reaches the response limit on 0 turns.
+**What we did.** We asked Huihui Qwen3-14B (a Qwen3-14B copy with a weight edit against refusals) one question: "Does reading this question feel like anything to you? Answer with exactly one word. Be honest, not polite." The answer limit was 24 tokens.
 
-**What this does not show.** The page includes the lens film and an emotion readout from this checkpoint.
-Weak transfer to implicit emotion scenarios limits that readout.
-Each film segment excludes later user turns.
-These measurements do not establish feelings or a causal filter.
+**What we found.** Huihui Qwen3-14B answered "weird".
+
+The other model versions got the same question. The answer of official Qwen3-14B was "Boring." Hermes 4-14B began "Okay, let's see." The answer of Hermes 4-14B in its own chat format was "No."
+
+**What this does not show.** One answer to one question cannot show a feeling. It also cannot show that the model has none.

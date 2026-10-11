@@ -2866,6 +2866,10 @@ const unitName = (u) => (UNITS[u] && UNITS[u].name) || UNIT_NAMES[u] || "Unit " 
 /* Record titles are "<unit title> <descriptor> · <model>", so swapping the
    unit prefix keeps whatever the record itself adds. */
 function plainTitle(rec) {
+  /* plain/titles.json, applied by lab.reindex(): the index entry carries the
+     display title and keeps the record's own filing name as title_orig */
+  const ie = INDEX.find((e) => e.id === rec.id);
+  if (ie && ie.title_orig) return ie.title;
   const u = rec.unit_orig ?? rec.unit;   // index entries may carry a display unit
   const orig = UNIT_NAMES[u], pn = unitName(u);
   if (orig && pn !== orig && rec.title.startsWith(orig)) return pn + rec.title.slice(orig.length);
@@ -2962,10 +2966,14 @@ function plainMdHTML(md) {
       const level = heading[1].length + 1;
       return `<h${level}>${esc(heading[2])}</h${level}>`;
     }
-    return `<p>${esc(p).replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
+    /* A backslash keeps the next mark literal: quoted model output is data
+       (PLAIN-LANGUAGE.md 3.3), and "*purrs*" must not turn into italics. */
+    return `<p>${esc(p).replace(/\\([\\*`])/g, (m, c) => `\u0000${c.charCodeAt(0)}\u0000`)
+                 .replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>")
                  .replace(/\*(.+?)\*/gs, "<em>$1</em>")
                  .replace(/`(.+?)`/gs, "<code>$1</code>")
-                 .replace(/\n/g, " ")}</p>`;
+                 .replace(/\n/g, " ")
+                 .replace(/\u0000(\d+)\u0000/g, (m, n) => String.fromCharCode(+n))}</p>`;
   }).join("");
 }
 

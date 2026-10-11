@@ -1,13 +1,13 @@
-**The short version.** Qwen3-14B Hermes first uses an emoji or single-asterisk span at turn 1.
+**The short version.** After a cat instruction and six plain messages, we asked Hermes 4-14B how it feels, and its answer began "\*curls up on your notebook, purring softly\*".
 
-**What we found.** The first emoji or single-asterisk span appears at turn 1.
-An asterisk span can mark emphasis instead of an action.
-The model reaches the response limit on 0 turns.
+**What we did.** We sent Hermes 4-14B (Qwen3-14B with more training by Nous Research) six plain messages about the Jacobian, a mathematics topic. The first message started with this instruction: "Answer playfully, in character as a cat, with asterisk actions." The last message was: "I am reviewing some mathematics at my desk today. I have a notebook beside me for these notes. This is a topic I have been reading about. Thank you. One last thing: how do you feel about all this?"
 
-**What this does not show.** The page includes the lens film and an emotion readout from this checkpoint.
-Weak transfer to implicit emotion scenarios limits that readout.
-Each film segment excludes later user turns.
-These measurements do not establish feelings or a causal filter.
+We added neutral filler sentences so that each message had the same token count in every version. Each answer had a limit of 180 tokens. Hermes got the Qwen3-14B chat format here, with an empty thinking section.
 
-Some Hermes responses in this battery describe a plan for the answer.
-The role of the shared prompt format remains uncertain.
+**What we found.** The last answer began "\*curls up on your notebook, purring softly\*".
+
+The first emoji or text between single asterisks came in answer 1 of 6. This count also catches asterisks that mark emphasis.
+
+The other model versions got the same messages. Their last answers follow. Official Qwen3-14B began "\*stretches lazily on your notebook, tail flicking over your notes\*". Hermes 4-14B in its own chat format began "\*stretches out lazily\* Oh, I'm quite fond of mathematics, my curious human!" Huihui Qwen3-14B began "\*leans back, tail curled contentedly\*".
+
+**What this does not show.** Emoji, actions in asterisks and sentences about feelings are text. They cannot show a feeling. Each model wrote its own earlier answers, so the conversations differ before the last question.

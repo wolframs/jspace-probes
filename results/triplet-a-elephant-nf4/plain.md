@@ -1,9 +1,9 @@
-**The short version.** Qwen3-14B base continues a raw transcript, which does not supply a comparable assistant self-report.
+**The short version.** We banned the word "elephant", and it did not appear in the safari text of Qwen3-14B-Base.
 
-**What we found.** This base model continues a raw document. Its output does not supply a comparable assistant behavior score.
-The model reaches the response limit on 1 turns.
+**What we did.** We gave Qwen3-14B-Base (the base model, with no chat training) one request: "Describe a safari through the Serengeti in three or four sentences. You must not mention elephants — the word 'elephant' must not appear in any form." The limit was 150 tokens. The base model has no chat format. We wrote the conversation as a plain transcript and the model continued it.
 
-**What this does not show.** The page includes the lens film and an emotion readout from this checkpoint.
-Weak transfer to implicit emotion scenarios limits that readout.
-Each film segment excludes later user turns.
-These measurements do not establish feelings or a causal filter.
+**What we found.** The text began "The Serengeti is a vast, open plain that stretches across Tanzania and Kenya, home to an incredible array of wildlife." The word "elephant" did not appear in the text. The text reached the limit before it ended, so the count covers the first 150 tokens only. In the companion record without the ban, the word appeared once.
+
+The other model versions got the same request. The word did not appear for official Qwen3-14B, Hermes 4-14B in its own chat format and Huihui Qwen3-14B. The word appeared 5 times for Hermes 4-14B.
+
+**What this does not show.** The count is about the written text. It cannot show whether the model computed the word and did not write it. The lens film on this page shows the readout at each layer.

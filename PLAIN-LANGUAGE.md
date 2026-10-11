@@ -127,6 +127,10 @@ glacier," for a recorded "The glacier."). `ste.py` now enforces this
 `generated` string verbatim. Mentioning a *word* ("the word "No" reached
 rank 1") is not a quote of output and is exempt.
 
+Model output often carries its own asterisks (`*purrs*`, `**No.**`). In a
+plain text, write them as `\*`: both renderers then show the asterisk as
+written and do not turn the quote into italics.
+
 ### 3.4 We name ourselves
 
 STE's active-voice rule wants a named actor. Ours are "we" (the lab) and
@@ -182,6 +186,18 @@ title ≤ 12 words, plain body ≤ 60 words. Unit summaries ≤ 70 words.
    property of the measuring tool" — the losing fork, stated as the
    finding. When a record weighs named hypotheses, name the winner, and
    check which one it was before writing the sentence.
+8. **Say what the model got and what it wrote.** A condition name is the
+   lab's filing label, not a description. "A positive radio update",
+   "the default condition", "ladder-direct", and "arm C" tell a reader
+   nothing: quote the request, quote the answer (or its beginning, and
+   say that it is the beginning), and name the model by its name. This
+   one cost us 170 summaries — two generated batteries (express01,
+   triplet) shipped template text that passed every machine check and
+   described nothing (2026-10-11). A generated summary is held to the
+   same rule as a hand-written one: `probes/plain_batteries.py` is the
+   reference for how to build one from the record's own data. The same
+   goes for titles; display titles for such records live in
+   `plain/titles.json`.
 
 ## 6. Where the plain texts live
 
@@ -190,6 +206,8 @@ results/<id>/plain.md      per record        (original: thoughts.md)
 plain/conclusions.md       the essay         (original: CONCLUSIONS.md)
 plain/units.json           unit summaries    (original: app.js UNIT_NOTES)
 plain/terms.json           the glossary      (source: GLOSSARY.md)
+plain/titles.json          display titles    (original: the record's `title`,
+                                             kept as `title_orig` in index.json)
 dashboard/findings.json    `pt`/`pb`/`pdesc` fields beside `t`/`b`/`desc`
 ```
 

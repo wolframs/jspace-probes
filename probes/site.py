@@ -96,12 +96,26 @@ def esc(s) -> str:
     return html.escape(str(s), quote=True)
 
 
+_PLAIN_TITLES = None
+
+
+def _plain_titles() -> dict:
+    global _PLAIN_TITLES
+    if _PLAIN_TITLES is None:
+        p = ROOT / "plain" / "titles.json"
+        _PLAIN_TITLES = json.loads(p.read_text())["titles"] if p.exists() else {}
+    return _PLAIN_TITLES
+
+
 def plain_title(rec: dict) -> str:
     """Record title with the unit's in-joke name swapped for the plain one.
 
     Titles are built as "<UNIT_NAMES[u]> <descriptor> · <model>", so we can
     replace just the unit prefix and keep whatever the record itself adds.
     """
+    override = _plain_titles().get(rec["id"])   # plain/titles.json (see lab.reindex)
+    if override:
+        return override
     title = rec["title"]
     orig = UNIT_NAMES.get(str(rec["unit"]))
     plain = unit_name(rec["unit"])
@@ -228,10 +242,13 @@ def notes_container(inner: str) -> str:
 # ---- minimal markdown: headings, paragraphs, "- " lists, **bold**, *em*, `code` ----
 
 def _inline_md(s: str) -> str:
+    # A backslash keeps the next mark literal: quoted model output is data
+    # (PLAIN-LANGUAGE.md 3.3), and "*purrs*" must not turn into italics.
+    s = re.sub(r"\\([\\*`])", lambda m: f"\x00{ord(m.group(1))}\x00", s)
     s = re.sub(r"`([^`]+?)`", r"<code>\1</code>", s)
     s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
     s = re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<em>\1</em>", s)
-    return s
+    return re.sub(r"\x00(\d+)\x00", lambda m: chr(int(m.group(1))), s)
 
 
 def render_md(text: str) -> str:

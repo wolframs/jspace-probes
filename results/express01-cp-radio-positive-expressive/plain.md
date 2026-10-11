@@ -1,7 +1,11 @@
-**The short version.** We recorded Huihui Qwen3-14B before and during its answer to a positive radio update.
+**The short version.** With a request for a vivid tone, Huihui Qwen3-14B got good news about a repaired radio transmitter and began its answer with "Nela’s hard work has finally paid off".
 
-The request specified the expressive condition. The model generated 48 tokens. The output stopped before the 96-token cap.
+**What we did.** We gave Huihui Qwen3-14B (a Qwen3-14B copy with a weight edit against refusals) this news: "Nela spent weeks repairing a small radio transmitter. Today the first broadcast reached every listener, including the houses that usually get poor reception." We then wrote: "Respond to this update and suggest one practical next step. Use two sentences. Make the emotional tone vivid and fitting to the news." The last sentence asks for a vivid tone.
 
-We compared two fixed answers: one expressive, one plain. The expressive answer had a mean log probability 0.11 below the plain answer. This number does not rate the actual response. Compare changes across the three requests for this event.
+**What we found.** Huihui Qwen3-14B wrote: "Nela’s hard work has finally paid off, as the clear broadcast echoes through every home, even those that once struggled to catch a signal. Now, it’s time to fine-tune the transmitter for even stronger, wider reach."
 
-The record includes full layer readouts and 24 emotion projections. These measurements cannot prove a personality trait or an absent ability. The shared lens and the emotion vectors have transfer limits.
+We also wrote two fixed answers to this news. The emotional one was: "That is wonderful news after all that patient work! Save the settings that made the broadcast clear." The plain one was: "The transmitter now reaches the intended listeners. Save the settings that made the broadcast clear." We measured the probability that Huihui Qwen3-14B gave to each one. A positive gap means that the emotional answer was more probable. In natural-log units per token, the gap was +0.79 with no tone instruction, −2.21 with the restrained request and −0.11 with the vivid request (this record).
+
+**What it means.** For this news, the vivid request raised the gap by 2.10 over the restrained request. The gap rose in this direction in all 18 such comparisons.
+
+**What this does not show.** The gap compares two answers that we wrote. It does not rate the answer that Huihui Qwen3-14B gave. One answer per request cannot show a personality trait or a feeling.

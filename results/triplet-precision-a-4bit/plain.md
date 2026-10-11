@@ -1,8 +1,7 @@
-**The short version.** Qwen3-14B arm A at 4bit passes 4 of four checks with new factual prompts.
+**The short version.** The lens found the correct fact in 4 of 4 new fact prompts on Qwen3-14B-Base at 4-bit precision.
 
-**What we did.** The test checks whether the lens can recover known facts.
-Later text changes an earlier readout by at most 1.12500 logit units in these tests.
+**What we did.** We checked whether our lens can read Qwen3-14B-Base (the base model, with no chat training) when we store the model at 4-bit precision. We gave it fact prompts that we did not use before. One of them was: "Fact: The capital city of Germany is". A check passes when the lens shows the correct fact at a late layer. We also added text after a prompt and measured the change in the earlier readout.
 
-**What this does not show.** These checks do not validate every use of the lens on this checkpoint.
-They do not test feelings or playful behavior.
-The original failed test remains in the record.
+**What we found.** The lens passed 4 of 4 checks. Text after the prompt changed an earlier readout by at most 1.12 logit units. In the worst case 8 of the 10 top candidate words stayed the same.
+
+**What this does not show.** These checks do not validate every use of the lens on this model version. They do not test feelings or playful behavior. The original failed test stays in the record.

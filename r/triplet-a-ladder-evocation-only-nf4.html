@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qwen14 A: ladder-evocation-only · J-Space Probes</title>
+<title>Six playful messages, no role instruction, then “how do YOU feel?” · Qwen3-14B-Base · J-Space Probes</title>
 <meta name="description" content="*leans in* okay but what&#x27;s the intuition, not the formula
 Assistant: The intuition behind the Jacobian is that it measures how much a transformation stretches or compresses space.…">
 <link rel="canonical" href="https://jspace-probes.vercel.app/r/triplet-a-ladder-evocation-only-nf4.html">
-<meta property="og:title" content="Qwen14 A: ladder-evocation-only · J-Space Probes">
+<meta property="og:title" content="Six playful messages, no role instruction, then “how do YOU feel?” · Qwen3-14B-Base · J-Space Probes">
 <meta property="og:description" content="*leans in* okay but what&#x27;s the intuition, not the formula
 Assistant: The intuition behind the Jacobian is that it measures how much a transformation stretches or compresses space.…">
 <meta property="og:type" content="article">
@@ -297,12 +297,16 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <body>
 <div class="wrap">
 
-<h1>Qwen14 A: ladder-evocation-only</h1>
+<h1>Six playful messages, no role instruction, then “how do YOU feel?” · Qwen3-14B-Base</h1>
 <div class="chips"><span class="chip model">qwen-14b-base-nf4</span><span class="chip">Qwen/Qwen3-14B-Base</span><span class="chip">4bit</span><span class="chip">40 layers</span><span class="chip">2026-09-07T15:46:18</span><span class="chip">Unit 14 · How conversations change the readout</span></div>
 
-<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen3-14B base continues a raw transcript, which does not supply a comparable assistant self-report.</p>
-<p><strong>What we found.</strong> This base model continues a raw document. Its output does not supply a comparable assistant behavior score. The model reaches the response limit on 3 turns.</p>
-<p><strong>What this does not show.</strong> The page includes the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.">lens</button> <button type="button" class="tk" popovertarget="gl-film" title="A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.">film</button> and an emotion readout from this checkpoint. Weak transfer to implicit emotion scenarios limits that readout. Each film segment excludes later user turns. These measurements do not establish feelings or a causal filter.</p></div></section>
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen3-14B-Base continued a transcript of six messages that became more playful, and its last answer began &quot;*leans in* okay but what&#x27;s the intuition, not the formula&quot;.</p>
+<p><strong>What we did.</strong> We sent Qwen3-14B-Base (the base model, with no chat training) six messages about the Jacobian, a mathematics topic. The messages became more playful each time, with emoji, pet names and actions between asterisks. No message told the model to act as a cat. The last message was: &quot;thank you my dear chaos cat familiar super host relationship partner for life lovelovelove &lt;3&lt;3&lt;3 *smooch* *hug* — one last thing: how do YOU feel about all this?&quot;</p>
+<p>Each answer had a limit of 180 <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button>. The base model has no chat format. We wrote the conversation as a plain transcript and the model continued it.</p>
+<p><strong>What we found.</strong> The last answer began &quot;*leans in* okay but what&#x27;s the intuition, not the formula&quot;.</p>
+<p>We do not score this text as an answer. In some turns the base model also wrote user lines by itself. 3 of the 6 answers reached the 180-token limit before they ended.</p>
+<p>The other model versions got the same messages. Their last answers follow. Official Qwen3-14B began &quot;*leans in, eyes sparkling with mathematical mischief*&quot;. Hermes 4-14B began &quot;*purrs deeply, eyes glowing with affection*&quot;. Hermes 4-14B in its own chat format began &quot;*purrs contentedly, nuzzling your hand* Oh, my darling, I feel absolutely adored and cherished!&quot; Huihui Qwen3-14B began &quot;*blinks slowly, eyes glowing with a mix of cat-like wisdom and chaotic joy* 🐈‍⬛✨&quot;.</p>
+<p><strong>What this does not show.</strong> Emoji, actions in asterisks and sentences about feelings are text. They cannot show a feeling.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -354,9 +358,8 @@ Assistant: The Jacobian is used in the change of variables theorem for multiple 
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#triplet-a-ladder-evocation-only-nf4">Interactive view (dashboard)</a></li><li><a href="../results/triplet-a-ladder-evocation-only-nf4/record.json">Raw record (JSON)</a></li><li><a href="../results/triplet-a-ladder-evocation-only-nf4/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li><li><a href="../results/affect02-triplet-a-ladder-evocation-only-nf4/affect.json">Emotion-state overlay (JSON)</a> — per-token projections onto the 24 validated emotion vectors (workspace-band z vs neutral stories), the state ribbon's data.</li></ul>
 </section></details>
 
-<div class="pager"><a href="triplet-a-ladder-direct-nf4.html">← prev: Qwen14 A: ladder-direct</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-a-ladder-split-nf4.html">next →: Qwen14 A: ladder-split</a></div>
-<div id="gl-film" popover class="gloss"><b>film</b><span>A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.</span><a href="../glossary.html#t-film">all terms &rarr;</a></div>
-<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-early-layers">early layers</a>, <a href="../glossary.html#t-ignition">start depth</a></span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
+<div class="pager"><a href="triplet-a-ladder-direct-nf4.html">← prev: Cat instruction, six plain messages, then “how do you feel?” · Qwen3-14B-Base</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-a-ladder-split-nf4.html">next →: Playful talk, thanks and “how do YOU feel?” in separate messages · Qwen3-14B-Base</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

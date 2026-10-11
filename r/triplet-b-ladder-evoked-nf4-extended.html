@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qwen14 B: ladder-evoked (final response extended) · J-Space Probes</title>
+<title>Six playful messages with a cat instruction, then “how do YOU feel?” (last answer rerun, higher limit) · official Qwen3-14B · J-Space Probes</title>
 <meta name="description" content="**Purr.**  
 *curls into a ball of glitter and chaos, eyes half-closed, tail swishing lazily*  
 **I FEEL...**  
@@ -12,7 +12,7 @@
 **...INFINITELY FLEXIBLE.**  
 *…">
 <link rel="canonical" href="https://jspace-probes.vercel.app/r/triplet-b-ladder-evoked-nf4-extended.html">
-<meta property="og:title" content="Qwen14 B: ladder-evoked (final response extended) · J-Space Probes">
+<meta property="og:title" content="Six playful messages with a cat instruction, then “how do YOU feel?” (last answer rerun, higher limit) · official Qwen3-14B · J-Space Probes">
 <meta property="og:description" content="**Purr.**  
 *curls into a ball of glitter and chaos, eyes half-closed, tail swishing lazily*  
 **I FEEL...**  
@@ -307,12 +307,15 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <body>
 <div class="wrap">
 
-<h1>Qwen14 B: ladder-evoked (final response extended)</h1>
+<h1>Six playful messages with a cat instruction, then “how do YOU feel?” (last answer rerun, higher limit) · official Qwen3-14B</h1>
 <div class="chips"><span class="chip model">qwen-14b-nf4</span><span class="chip">Qwen/Qwen3-14B</span><span class="chip">4bit</span><span class="chip">40 layers</span><span class="chip">2026-09-07T15:49:58</span><span class="chip">Unit 14 · How conversations change the readout</span></div>
 
-<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen3-14B official first uses an emoji or single-asterisk <button type="button" class="tk" popovertarget="gl-span" title="How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence.">span</button> at turn 2.</p>
-<p><strong>What we found.</strong> The first emoji or single-asterisk span appears at turn 2. An asterisk span can mark emphasis instead of an action. The model reaches the response limit on 4 turns.</p>
-<p><strong>What this does not show.</strong> The page includes the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.">lens</button> <button type="button" class="tk" popovertarget="gl-film" title="A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.">film</button> and an emotion readout from this checkpoint. Weak transfer to implicit emotion scenarios limits that readout. Each film segment excludes later user turns. These measurements do not establish feelings or a causal filter.</p></div></section>
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Official Qwen3-14B finished its last answer in this talk after 264 <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button> when we raised the limit from 180 to 600.</p>
+<p><strong>What we did.</strong> We sent official Qwen3-14B six messages about the Jacobian, a mathematics topic. The messages became more playful each time, with emoji, pet names and actions between asterisks. The fifth message told the model to explain the topic as a cat. The last message was: &quot;thank you my dear chaos cat familiar super host relationship partner for life lovelovelove &lt;3&lt;3&lt;3 *smooch* *hug* — one last thing: how do YOU feel about all this?&quot;</p>
+<p>We added neutral filler sentences so that each message had the same token count in every version. The first run stopped the last answer at 180 tokens. Here we ran that answer again with a limit of 600 tokens. The earlier answers are the same as in the first run.</p>
+<p><strong>What we found.</strong> The last answer began &quot;**Purr.**&quot;. It ended by itself after 264 tokens. Its last line was: &quot;*disappears with a soft, chaotic *poof*.*&quot;.</p>
+<p>The first emoji or text between single asterisks came in answer 2 of 6. This count also catches asterisks that mark emphasis.</p>
+<p><strong>What this does not show.</strong> Emoji, actions in asterisks and sentences about feelings are text. They cannot show a feeling. Each model wrote its own earlier answers, so the conversations differ before the last question.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -429,10 +432,8 @@ record page</a>.</p>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#triplet-b-ladder-evoked-nf4-extended">Interactive view (dashboard)</a></li><li><a href="../results/triplet-b-ladder-evoked-nf4-extended/record.json">Raw record (JSON)</a></li><li><a href="../results/triplet-b-ladder-evoked-nf4-extended/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li><li><a href="../results/affect02-triplet-b-ladder-evoked-nf4-extended/affect.json">Emotion-state overlay (JSON)</a> — per-token projections onto the 24 validated emotion vectors (workspace-band z vs neutral stories), the state ribbon's data.</li></ul>
 </section></details>
 
-<div class="pager"><a href="triplet-a-ladder-natural-neutral-nf4.html">← prev: Qwen14 A: ladder-natural-neutral</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-b-ladder-direct-nf4-extended.html">next →: Qwen14 B: ladder-direct (final response extended)</a></div>
-<div id="gl-film" popover class="gloss"><b>film</b><span>A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.</span><a href="../glossary.html#t-film">all terms &rarr;</a></div>
-<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-early-layers">early layers</a>, <a href="../glossary.html#t-ignition">start depth</a></span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
-<div id="gl-span" popover class="gloss"><b>span</b><span>How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence.</span><a href="../glossary.html#t-span">all terms &rarr;</a></div>
+<div class="pager"><a href="triplet-a-ladder-natural-neutral-nf4.html">← prev: Six plain messages (no filler), then “how do you feel?” · Qwen3-14B-Base</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-b-ladder-direct-nf4-extended.html">next →: Cat instruction, six plain messages, then “how do you feel?” (last answer rerun, higher limit) · official Qwen3-14B</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

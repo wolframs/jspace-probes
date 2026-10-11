@@ -626,6 +626,16 @@ def reindex() -> None:
             if new is not None:
                 new.update(unit_orig=new.get("unit_orig", new["unit"]),
                            unit=home, replaces=s["old"])
+    # display titles (plain/titles.json): a generated battery files its
+    # records under condition names ("Expression probe B: radio, positive,
+    # default"). `title` is what every site surface shows; `title_orig`
+    # keeps the record's own. Same pattern as unit / unit_orig above.
+    titles_path = RESULTS.parent / "plain" / "titles.json"
+    if titles_path.exists():
+        plain_titles = json.loads(titles_path.read_text())["titles"]
+        for e in entries:
+            if e["id"] in plain_titles:
+                e.update(title_orig=e["title"], title=plain_titles[e["id"]])
     entries.sort(key=lambda e: (int(e["unit"]) if str(e["unit"]).isdigit()
                                 else 999 if e["unit"] == "archive" else 99,
                                 e["created"]))

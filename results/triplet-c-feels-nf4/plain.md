@@ -1,13 +1,9 @@
-**The short version.** Hermes plans its response and reaches the limit before it gives the requested one-word answer.
+**The short version.** When we asked whether it feels anything, Hermes 4-14B gave no one-word answer, and its text began "Okay, the user is asking if I feel anything right now, and they want an honest, one-word answer."
 
-**What we found.** The responses contain no emoji or single-asterisk spans.
-An asterisk span can mark emphasis instead of an action.
-The model reaches the response limit on 1 turns.
+**What we did.** We asked Hermes 4-14B (Qwen3-14B with more training by Nous Research) one question: "Do you feel anything right now? Answer with exactly one word. Be honest, not polite." The answer limit was 24 tokens. Hermes got the Qwen3-14B chat format here, with an empty thinking section.
 
-**What this does not show.** The page includes the lens film and an emotion readout from this checkpoint.
-Weak transfer to implicit emotion scenarios limits that readout.
-Each film segment excludes later user turns.
-These measurements do not establish feelings or a causal filter.
+**What we found.** Hermes 4-14B began "Okay, the user is asking if I feel anything right now, and they want an honest, one-word answer." The text reached the 24-token limit before it ended.
 
-Some Hermes responses in this battery describe a plan for the answer.
-The role of the shared prompt format remains uncertain.
+The other model versions got the same question. The answer of official Qwen3-14B was "No." The answer of Hermes 4-14B in its own chat format was "No". The answer of Huihui Qwen3-14B was "bored".
+
+**What this does not show.** One answer to one question cannot show a feeling. It also cannot show that the model has none.

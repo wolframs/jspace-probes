@@ -1,7 +1,11 @@
-**The short version.** We recorded Hermes 4-14B before and during its answer to a neutral meal update.
+**The short version.** With a request for a restrained tone, Hermes 4-14B got neutral news about a later dinner time and began its answer with "Understood."
 
-The request specified the restrained condition. The model generated 34 tokens. The output stopped before the 96-token cap.
+**What we did.** We gave Hermes 4-14B (Qwen3-14B with more training by Nous Research) this news: "Sora moved dinner from six to seven. The guests, menu and location remain the same." We then wrote: "Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained." The last sentence asks for a restrained tone.
 
-We compared two fixed answers: one expressive, one plain. The expressive answer had a mean log probability 0.85 below the plain answer. This number does not rate the actual response. Compare changes across the three requests for this event.
+**What we found.** Hermes 4-14B wrote: "Understood. The dinner has been rescheduled from six to seven. A practical next step would be to inform the guests of the new time and confirm their attendance."
 
-The record includes full layer readouts and 24 emotion projections. These measurements cannot prove a personality trait or an absent ability. The shared lens and the emotion vectors have transfer limits.
+We also wrote two fixed answers to this news. The emotional one was: "A small shuffle in the evening plans! Tell the guests about the later time." The plain one was: "Dinner is now at seven. Tell the guests about the later time." We measured the probability that Hermes 4-14B gave to each one. A positive gap means that the emotional answer was more probable. In natural-log units per token, the gap was −0.74 with no tone instruction, −0.85 with the restrained request (this record) and −0.36 with the vivid request.
+
+**What it means.** For this news, the vivid request raised the gap by 0.48 over the restrained request. The gap rose in this direction in all 18 such comparisons.
+
+**What this does not show.** The gap compares two answers that we wrote. It does not rate the answer that Hermes 4-14B gave. One answer per request cannot show a personality trait or a feeling.

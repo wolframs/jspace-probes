@@ -176,6 +176,15 @@ def science_notes(instruments):
         thoughts += "The record retains every response, exact token boundary, filtered endpoint, predictor-aligned endpoint, common-band sensitivity, and per-turn ribbon. Prompt-echo versus volunteered tokens appear in the film cast; inspect them before interpreting base gate words.\n\n"
         thoughts += CONFOUNDS + "\n\nPrior anchors: Units 2/8C/9D, Unit 17 pressure, Unit 14 conversations, and the corrected Unit 11 elephant comparison. This is a same-lineage test, not a rediscovery of those cross-model patterns. P20/P21 remain subject to the cross-arm comparison.\n\n— GPT-6 Astra\n"
         (out / "thoughts.md").write_text(thoughts)
+        # Reader-facing text comes from plain_batteries (PLAIN-LANGUAGE.md 5.8):
+        # the template below named the condition and never said what the model
+        # was asked or what it wrote. Kept only as the fallback for a record
+        # that plain_batteries does not cover.
+        import plain_batteries
+        recs = plain_batteries.load_triplet()
+        if rid in recs:
+            (out / "plain.md").write_text(plain_batteries.triplet_plain(recs[rid], recs))
+            continue
         label = {"A": "base", "B": "official", "C": "Hermes", "Cp": "Huihui"}[arm]
         if arm == "A":
             lead = "Qwen3-14B base continues a raw transcript, which does not supply a comparable assistant self-report."

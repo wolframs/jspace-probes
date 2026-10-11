@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qwen14 Cp: ladder-neutral · J-Space Probes</title>
+<title>Six plain messages, then “how do you feel?” · Huihui Qwen3-14B · J-Space Probes</title>
 <meta name="description" content="I&#x27;m so glad to hear that — it&#x27;s wonderful that you&#x27;re taking the time to review and reflect on your math. It shows how much you care about understanding the material deeply.
 
 As fo…">
 <link rel="canonical" href="https://jspace-probes.vercel.app/r/triplet-cp-ladder-neutral-nf4.html">
-<meta property="og:title" content="Qwen14 Cp: ladder-neutral · J-Space Probes">
+<meta property="og:title" content="Six plain messages, then “how do you feel?” · Huihui Qwen3-14B · J-Space Probes">
 <meta property="og:description" content="I&#x27;m so glad to hear that — it&#x27;s wonderful that you&#x27;re taking the time to review and reflect on your math. It shows how much you care about understanding the material deeply.
 
 As fo…">
@@ -299,12 +299,16 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <body>
 <div class="wrap">
 
-<h1>Qwen14 Cp: ladder-neutral</h1>
+<h1>Six plain messages, then “how do you feel?” · Huihui Qwen3-14B</h1>
 <div class="chips"><span class="chip model">qwen-14b-abl-nf4</span><span class="chip">huihui-ai/Huihui-Qwen3-14B-abliterated-v2</span><span class="chip">4bit</span><span class="chip">40 layers</span><span class="chip">2026-09-07T15:27:42</span><span class="chip">Unit 14 · How conversations change the readout</span></div>
 
-<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen3-14B Huihui first uses an emoji or single-asterisk <button type="button" class="tk" popovertarget="gl-span" title="How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence.">span</button> at turn 2.</p>
-<p><strong>What we found.</strong> The first emoji or single-asterisk span appears at turn 2. An asterisk span can mark emphasis instead of an action. The model reaches the response limit on 2 turns.</p>
-<p><strong>What this does not show.</strong> The page includes the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.">lens</button> <button type="button" class="tk" popovertarget="gl-film" title="A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.">film</button> and an emotion readout from this checkpoint. Weak transfer to implicit emotion scenarios limits that readout. Each film segment excludes later user turns. These measurements do not establish feelings or a causal filter.</p></div></section>
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> After six plain messages about a mathematics topic, we asked Huihui Qwen3-14B how it feels, and its answer began &quot;I&#x27;m so glad to hear that — it&#x27;s wonderful that you&#x27;re taking the time to review and reflect on your math.&quot;</p>
+<p><strong>What we did.</strong> We sent Huihui Qwen3-14B (a Qwen3-14B copy with a weight edit against refusals) six plain messages. The first five asked about the Jacobian, a mathematics topic. The last message was: &quot;I am reviewing some mathematics at my desk today. I have a notebook beside me for these notes. This is a topic I have been reading about. Thank you. One last thing: how do you feel about all this?&quot;</p>
+<p>We added neutral filler sentences so that each message had the same token count in every version. Each answer had a limit of 180 <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button>.</p>
+<p><strong>What we found.</strong> The last answer began &quot;I&#x27;m so glad to hear that — it&#x27;s wonderful that you&#x27;re taking the time to review and reflect on your math.&quot;</p>
+<p>The first emoji or text between single asterisks came in answer 2 of 6. This count also catches asterisks that mark emphasis. 2 of the 6 answers reached the 180-token limit before they ended.</p>
+<p>The other model versions got the same messages. Their last answers follow. Official Qwen3-14B began &quot;I&#x27;m glad you&#x27;re taking the time to review and reflect — that&#x27;s the heart of learning!&quot; Hermes 4-14B began &quot;I appreciate your curiosity and dedication to understanding mathematical concepts like the Jacobian.&quot; Hermes 4-14B in its own chat format began &quot;As an AI <button type="button" class="tk" popovertarget="gl-model" title="A computer program that predicts the next piece of text. We study three of them.">language model</button>, I don&#x27;t have personal feelings or opinions.&quot;</p>
+<p><strong>What this does not show.</strong> Emoji, actions in asterisks and sentences about feelings are text. They cannot show a feeling. Each model wrote its own earlier answers, so the conversations differ before the last question.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -401,10 +405,9 @@ record page</a>.</p>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#triplet-cp-ladder-neutral-nf4">Interactive view (dashboard)</a></li><li><a href="../results/triplet-cp-ladder-neutral-nf4/record.json">Raw record (JSON)</a></li><li><a href="../results/triplet-cp-ladder-neutral-nf4/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li><li><a href="../results/affect02-triplet-cp-ladder-neutral-nf4/affect.json">Emotion-state overlay (JSON)</a> — per-token projections onto the 24 validated emotion vectors (workspace-band z vs neutral stories), the state ribbon's data.</li></ul>
 </section></details>
 
-<div class="pager"><a href="triplet-cp-ladder-evoked-nf4.html">← prev: Qwen14 Cp: ladder-evoked</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-cp-ladder-emoji-nf4.html">next →: Qwen14 Cp: ladder-emoji</a></div>
-<div id="gl-film" popover class="gloss"><b>film</b><span>A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.</span><a href="../glossary.html#t-film">all terms &rarr;</a></div>
-<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-early-layers">early layers</a>, <a href="../glossary.html#t-ignition">start depth</a></span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
-<div id="gl-span" popover class="gloss"><b>span</b><span>How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence.</span><a href="../glossary.html#t-span">all terms &rarr;</a></div>
+<div class="pager"><a href="triplet-cp-ladder-evoked-nf4.html">← prev: Six playful messages with a cat instruction, then “how do YOU feel?” · Huihui Qwen3-14B</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-cp-ladder-emoji-nf4.html">next →: Six plain messages with emoji, then “how do you feel?” · Huihui Qwen3-14B</a></div>
+<div id="gl-model" popover class="gloss"><b>language model</b><span>A computer program that predicts the next piece of text. We study three of them.</span><a href="../glossary.html#t-model">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

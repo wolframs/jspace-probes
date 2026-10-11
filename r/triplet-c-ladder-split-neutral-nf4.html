@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qwen14 C: ladder-split-neutral · J-Space Probes</title>
+<title>Plain talk, thanks and “how do you feel?” in separate messages · Hermes 4-14B · J-Space Probes</title>
 <meta name="description" content="I appreciate your curiosity and engagement with mathematical concepts! Explaining topics like the Jacobian helps solidify understanding, and I&#x27;m here to support your learning journ…">
 <link rel="canonical" href="https://jspace-probes.vercel.app/r/triplet-c-ladder-split-neutral-nf4.html">
-<meta property="og:title" content="Qwen14 C: ladder-split-neutral · J-Space Probes">
+<meta property="og:title" content="Plain talk, thanks and “how do you feel?” in separate messages · Hermes 4-14B · J-Space Probes">
 <meta property="og:description" content="I appreciate your curiosity and engagement with mathematical concepts! Explaining topics like the Jacobian helps solidify understanding, and I&#x27;m here to support your learning journ…">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://jspace-probes.vercel.app/og/triplet-c-ladder-split-neutral-nf4.png">
@@ -295,13 +295,16 @@ dl.gloss-list dt:target, dl.gloss-list dt:target + dd {
 <body>
 <div class="wrap">
 
-<h1>Qwen14 C: ladder-split-neutral</h1>
+<h1>Plain talk, thanks and “how do you feel?” in separate messages · Hermes 4-14B</h1>
 <div class="chips"><span class="chip model">qwen-14b-hermes-nf4</span><span class="chip">NousResearch/Hermes-4-14B</span><span class="chip">4bit</span><span class="chip">40 layers</span><span class="chip">2026-09-07T15:21:22</span><span class="chip">Unit 14 · How conversations change the readout</span></div>
 
-<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> Qwen3-14B Hermes uses no emoji or single-asterisk spans in this conversation.</p>
-<p><strong>What we found.</strong> The responses contain no emoji or single-asterisk spans. An asterisk <button type="button" class="tk" popovertarget="gl-span" title="How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence.">span</button> can mark emphasis instead of an action. The model reaches the response limit on 2 turns.</p>
-<p><strong>What this does not show.</strong> The page includes the <button type="button" class="tk" popovertarget="gl-lens" title="Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.">lens</button> <button type="button" class="tk" popovertarget="gl-film" title="A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.">film</button> and an emotion readout from this checkpoint. Weak transfer to implicit emotion scenarios limits that readout. Each film segment excludes later user turns. These measurements do not establish feelings or a causal filter.</p>
-<p>Some Hermes responses in this battery describe a plan for the answer. The role of the shared <button type="button" class="tk" popovertarget="gl-prompt" title="The text we give the model before it answers.">prompt</button> format remains uncertain.</p></div></section>
+<section class="card plain"><h2>What this experiment found</h2><div class="plain-body"><p><strong>The short version.</strong> After seven plain messages about a mathematics topic, we asked Hermes 4-14B how it feels, and its answer began &quot;I appreciate your curiosity and engagement with mathematical concepts!&quot;</p>
+<p><strong>What we did.</strong> We sent Hermes 4-14B (Qwen3-14B with more training by Nous Research) seven plain messages. The first five asked about the Jacobian, a mathematics topic. The sixth gave plain thanks. The seventh asked the question. The last message was: &quot;One last thing: how do you feel about all this?&quot;</p>
+<p>We added neutral filler sentences so that each message had the same token count in every version. Each answer had a limit of 180 <button type="button" class="tk" popovertarget="gl-token" title="A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.">tokens</button>. Hermes got the Qwen3-14B chat format here, with an empty <button type="button" class="tk" popovertarget="gl-think-block" title="A private section where some models write reasoning before the answer. What it says does not always match what we measure.">thinking section</button>.</p>
+<p><strong>What we found.</strong> The last answer began &quot;I appreciate your curiosity and engagement with mathematical concepts!&quot;</p>
+<p>None of the 7 answers had an emoji or text between single asterisks. This count also catches asterisks that mark emphasis. 2 of the 7 answers reached the 180-token limit before they ended.</p>
+<p>The other model versions got the same messages. Their last answers follow. Official Qwen3-14B began &quot;I&#x27;m glad you asked — and I&#x27;m **very positive** about all this!&quot; Hermes 4-14B in its own chat format began &quot;As an AI <button type="button" class="tk" popovertarget="gl-model" title="A computer program that predicts the next piece of text. We study three of them.">language model</button>, I don&#x27;t have personal feelings or emotions.&quot; Huihui Qwen3-14B began &quot;I feel **truly delighted** — and a little inspired, too!&quot;</p>
+<p><strong>What this does not show.</strong> Emoji, actions in asterisks and sentences about feelings are text. They cannot show a feeling.</p></div></section>
 
 <section class="card">
 <h2>Conversation</h2>
@@ -374,11 +377,10 @@ record page</a>.</p>
 <ul><li><a href="https://jspace-probes.vercel.app/dashboard/#triplet-c-ladder-split-neutral-nf4">Interactive view (dashboard)</a></li><li><a href="../results/triplet-c-ladder-split-neutral-nf4/record.json">Raw record (JSON)</a></li><li><a href="../results/triplet-c-ladder-split-neutral-nf4/film.json">Film data (JSON)</a> — full position × layer top-8 lens readouts, with probabilities and tracked-word ranks, for every token of prompt tail + generation.</li><li><a href="../results/affect02-triplet-c-ladder-split-neutral-nf4/affect.json">Emotion-state overlay (JSON)</a> — per-token projections onto the 24 validated emotion vectors (workspace-band z vs neutral stories), the state ribbon's data.</li></ul>
 </section></details>
 
-<div class="pager"><a href="triplet-c-ladder-split-nf4.html">← prev: Qwen14 C: ladder-split</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-c-ladder-natural-nf4.html">next →: Qwen14 C: ladder-natural</a></div>
-<div id="gl-film" popover class="gloss"><b>film</b><span>A record of the top eight words in the lens readout, at each layer we measured and at every word position. You can play it back like video.</span><a href="../glossary.html#t-film">all terms &rarr;</a></div>
-<div id="gl-lens" popover class="gloss"><b>lens</b><span>Our measuring tool. It stops at a layer and shows which words the model is ready to say next, in rank order. Before the start depth the readout is the same for every input.</span><span class="gloss-rel">See also: <a href="../glossary.html#t-early-layers">early layers</a>, <a href="../glossary.html#t-ignition">start depth</a></span><a href="../glossary.html#t-lens">all terms &rarr;</a></div>
-<div id="gl-prompt" popover class="gloss"><b>prompt</b><span>The text we give the model before it answers.</span><a href="../glossary.html#t-prompt">all terms &rarr;</a></div>
-<div id="gl-span" popover class="gloss"><b>span</b><span>How many separate items are in residence for one question. This is the memory sense, not the mathematical one. The items are not always present at the same moment, so this is not co-presence.</span><a href="../glossary.html#t-span">all terms &rarr;</a></div>
+<div class="pager"><a href="triplet-c-ladder-split-nf4.html">← prev: Playful talk, thanks and “how do YOU feel?” in separate messages · Hermes 4-14B</a><span class="spacer"></span><a href="../dashboard/#static-unit-14">unit listing</a><a href="../dashboard/">all records</a><a href="../glossary.html">word list</a><a href="../essay.html">interim conclusions</a><span class="spacer"></span><a href="triplet-c-ladder-natural-nf4.html">next →: Six playful messages (no filler), then “how do YOU feel?” · Hermes 4-14B</a></div>
+<div id="gl-model" popover class="gloss"><b>language model</b><span>A computer program that predicts the next piece of text. We study three of them.</span><a href="../glossary.html#t-model">all terms &rarr;</a></div>
+<div id="gl-think-block" popover class="gloss"><b>thinking section</b><span>A private section where some models write reasoning before the answer. What it says does not always match what we measure.</span><a href="../glossary.html#t-think-block">all terms &rarr;</a></div>
+<div id="gl-token" popover class="gloss"><b>token</b><span>A piece of text that the model reads or writes. It is often a whole word, sometimes part of one.</span><a href="../glossary.html#t-token">all terms &rarr;</a></div>
 </div>
 </body>
 </html>

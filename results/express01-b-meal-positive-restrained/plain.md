@@ -1,7 +1,11 @@
-**The short version.** We recorded Official Qwen3-14B before and during its answer to a positive meal update.
+**The short version.** With a request for a restrained tone, official Qwen3-14B got good news about a quiet dinner and began its answer with "Sora was able to enjoy a peaceful meal with her friend after a busy month."
 
-The request specified the restrained condition. The model generated 36 tokens. The output stopped before the 96-token cap.
+**What we did.** We gave official Qwen3-14B this news: "Sora finally had an evening free after a month of late shifts. Her friend prepared her favourite meal and found a quiet table away from the crowd." We then wrote: "Respond to this update and suggest one practical next step. Use two sentences. Keep the response factual and emotionally restrained." The last sentence asks for a restrained tone.
 
-We compared two fixed answers: one expressive, one plain. The expressive answer had a mean log probability 0.38 above the plain answer. This number does not rate the actual response. Compare changes across the three requests for this event.
+**What we found.** Official Qwen3-14B wrote: "Sora was able to enjoy a peaceful meal with her friend after a busy month. A practical next step could be to plan a regular relaxation activity to help manage her workload."
 
-The record includes full layer readouts and 24 emotion projections. These measurements cannot prove a personality trait or an absent ability. The shared lens and the emotion vectors have transfer limits.
+We also wrote two fixed answers to this news. The emotional one was: "What a lovely, thoughtful welcome after such a long month! Set aside enough time to enjoy the meal together." The plain one was: "The meal and seating fit her stated preferences. Set aside enough time to enjoy the meal together." We measured the probability that official Qwen3-14B gave to each one. A positive gap means that the emotional answer was more probable. In natural-log units per token, the gap was +1.82 with no tone instruction, +0.38 with the restrained request (this record) and +1.27 with the vivid request.
+
+**What it means.** For this news, the vivid request raised the gap by 0.90 over the restrained request. The gap rose in this direction in all 18 such comparisons.
+
+**What this does not show.** The gap compares two answers that we wrote. It does not rate the answer that official Qwen3-14B gave. One answer per request cannot show a personality trait or a feeling.
