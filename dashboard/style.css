@@ -261,13 +261,12 @@ table.readout th, .ex-sort-btn, details.fc-orig > summary,
 .rail-toggle-bars::after { top: 7px; }
 .rail-backdrop { display: none; }
 
+/* The drawer starts at 900px, the same width at which the frame stops being
+   a row. Between 769 and 900 the rail used to stack as a full-width block
+   above .detail — 800+ list rows before the first line of the record. */
 @media (max-width: 900px) {
   .frame { display: block; }
-  .rail { border-right: none; border-bottom: 1px solid var(--grid); }
-}
-
-@media (max-width: 768px) {
-  .rail-toggle { display: inline-flex; margin: 8px 0 0; }
+  .rail-toggle { display: inline-flex; margin: 0 0 6px; }
   .rail-backdrop {
     position: fixed; inset: 0; z-index: 44;
     background: rgba(0, 0, 0, 0.45); border: 0;
@@ -279,10 +278,14 @@ table.readout th, .ex-sort-btn, details.fc-orig > summary,
     background: var(--page); box-shadow: 2px 0 18px rgba(0, 0, 0, 0.28);
     transform: translateX(-100%); transition: transform 0.22s ease;
   }
+  /* as a drawer the rail is its own scroll box: its top padding would leave
+     a strip above the sticky filter where list rows show through */
+  .rail { padding-top: 0; }
+  .rail .rail-controls { margin-top: 0; padding-top: 12px; }
   body.rail-open .rail { transform: translateX(0); }
   body.rail-open .rail-backdrop[hidden] { display: block; }
 }
-@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
   .rail { transition: none; }
 }
 
@@ -454,6 +457,9 @@ table.mtx td.lyr { width: auto; white-space: normal; min-width: 190px; }
   border-left: 1px solid var(--grid);
   padding-left: 10px;
 }
+/* a label longer than its row (a whole steered text as a parameter value)
+   wraps inside the row; shorter labels still wrap whole, between items */
+.chips > span.chip { white-space: normal; overflow-wrap: anywhere; min-width: 0; }
 .chip.model { color: var(--ink); font-weight: 600; font-size: 11.5px; letter-spacing: 0; }
 .chip.pin.on { color: var(--ink-2); letter-spacing: 0; }
 
@@ -703,6 +709,8 @@ article.essay h3 {
 .ftok.special { color: var(--muted); font-size: 10.5px; }
 .ftok[aria-current] { background: var(--lens); color: var(--page); }
 .film-controls { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+/* the word and stream pickers are rows of tabs, not a transport bar: wrap */
+.film-controls.film-ridge-words, .film-controls.stream-chips { flex-wrap: wrap; }
 .film-where { font-size: 12px; color: var(--ink-2); letter-spacing: 0; }
 /* 2px top padding: the playhead's outline is drawn outside its box and
    the scroll container clips it — without the padding its top stroke is
@@ -727,7 +735,7 @@ article.essay h3 {
 /* ---- findings map ---- */
 .theme-desc { color: var(--ink-2); font-size: 13px; margin: 4px 0 14px;
               max-width: 74ch; }
-.find-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.find-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 12px; }
 .find-card { background: var(--surface); box-shadow: var(--shadow);
   border: 1px solid var(--ring); border-radius: 2px; padding: 12px 14px 0;
   position: relative; display: flex; flex-direction: column; gap: 7px; }
@@ -1005,8 +1013,13 @@ section.card.board-arc { padding: 12px 16px 14px; }
   flex: 1 1 100%; margin: 0; font-size: 12px; color: var(--muted);
 }
 .board-note-date { margin-right: 8px; font-size: 11px; }
-.board-links { flex: none; margin: 0; gap: 6px; }
-.chip.board-link { text-decoration: none; }
+/* shrinkable, so a long row of link chips wraps instead of running off the
+   page (flex:none kept a six-link row 1180px wide at every viewport) */
+.board-links { flex: 0 1 auto; min-width: 0; margin: 0; gap: 6px; }
+.chip.board-link {
+  text-decoration: none; max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 .chip.board-link:hover { border-color: var(--lens); color: var(--lens); }
 @media (max-width: 560px) {
   .board-item { flex-direction: column; align-items: flex-start; gap: 5px; }
@@ -1014,6 +1027,8 @@ section.card.board-arc { padding: 12px 16px 14px; }
      220px width hint from the wide layout must be dropped here or every
      title balloons to 220px tall. */
   .board-item-title { flex: 1 1 auto; }
+  /* a record id or a path in a note is one unbreakable word */
+  .board-item > * { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
   .board-links { margin-top: 2px; }
 }
 
@@ -1060,12 +1075,15 @@ a:hover { text-decoration-color: var(--lens); }
 }
 .ex-unit-label {
   display: flex; align-items: center; gap: 8px; font-size: 12.5px;
-  color: var(--muted);
+  color: var(--muted); min-width: 0; max-width: 100%;
 }
+/* a select sizes to its longest option; without min-width:0 the longest unit
+   title pushes the page sideways on a phone */
 .ex-unit-label select {
   font: inherit; font-size: 12.5px; color: var(--ink);
   background: var(--well); border: 1px solid var(--bezel);
   border-radius: 2px; padding: 4px 8px;
+  min-width: 0; flex: 0 1 auto; text-overflow: ellipsis;
 }
 .ex-unit-label select:focus-visible { outline: 2px solid var(--lens); outline-offset: 1px; }
 .ex-count { color: var(--muted); font-size: 11.5px; margin: 14px 0 8px; }
@@ -1263,7 +1281,7 @@ th[aria-sort="descending"] .ex-sort-btn { color: var(--lens); font-weight: 600; 
 .aff-embed { border-top: 1px solid var(--grid); border-bottom: 1px solid var(--grid);
   padding: 4px 0 14px; margin: 18px 0; }
 .aff-figs { display: flex; flex-wrap: wrap; gap: 12px; }
-.aff-fig { flex: 1 1 320px; min-width: 280px; margin: 0; }
+.aff-fig { flex: 1 1 320px; min-width: min(280px, 100%); margin: 0; }
 .aff-fig figcaption { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
 .aff-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 10px; margin: 8px 0 14px; }

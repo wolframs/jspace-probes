@@ -46,7 +46,7 @@ that emits the markup.
 | `.tk` / `.tk.gloss-see` | `button` | INTERACTIVE | anywhere `termify()` runs: record detail plain summary, findings card `pb`/theme `pdesc`, unit overview plain summary, board plain lead, affect plain lead, `#termpop` "See also" row | underlined term e.g. "workspace" | dense in plain-language prose, 5–30 per page |
 | `.aff-chip` | `div` | INERT | affect view only (crossing cards) | "vigilant +0.42" | 3 per affect card |
 | `.ex-badge` | `span` | INERT | explorer table only | "✦" / "⇄" / "✳" (icon only) | 0–3 per row |
-| `.rail-toggle` | `button` | INTERACTIVE | every view, but `display:none` above 768px — mobile-only pill | "records" | 1, mobile only |
+| `.rail-toggle` | `button` | INTERACTIVE | every view, but `display:none` above 900px — narrow-viewport pill (768px until 2026-10-11) | "records" | 1, narrow only |
 | `.con-reroll` | `button` | INTERACTIVE | console panel (fixed, all views) | "↻ resample records" | 1 |
 | `.console-row button` (unnamed) | `button`, static HTML in `index.html`, no distinguishing class | INTERACTIVE | console panel, theme row + atmosphere row | "light" / "dark" / "auto" / "on" / "off" | 5 |
 

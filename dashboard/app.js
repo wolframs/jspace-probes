@@ -3255,7 +3255,12 @@ const ENTRANCE_STEPS = [
   {
     title: "Every card opens its record",
     body: `The links under each card open the record behind it. A record holds the conversation, the measurement at every layer, and our notes. This list holds all ${INDEX.length || 644} records.`,
-    sel: () => document.getElementById("rail"),
+    // below 900px the rail is an off-canvas drawer: point at its button
+    sel: () => {
+      const rail = document.getElementById("rail");
+      return rail && getComputedStyle(rail).position === "fixed"
+        ? document.getElementById("rail-toggle") : rail;
+    },
   },
 ];
 
