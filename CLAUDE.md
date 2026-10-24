@@ -45,13 +45,14 @@ he sets directions and expects designed-and-executed experiments back.
   pre-quantized `lokeshe09/Qwen3.6-27B-bnb-4bit` (validated, see
   results/u0-boot-q27b thoughts). Also: **one model-loading process at a
   time.** Two concurrent 27B loads OOM the box even when both use the
-  correct pre-4bit path (incident 2026-08-07). Before launching, check
-  `pgrep -af '\.venv/bin/python.*probes'` — if it prints anything, wait
-  (the `.*` matters: `-c "...sys.path.insert(0, \"probes\")..."` launches
-  don't contain `python probes/`).
-  Wrap long runs in `systemd-run --user --scope -p MemoryMax=40G` so an
-  overrun kills the probe instead of the desktop. Post-mortem for these
-  rules: `INCIDENT-2026-08-07-oom.md`.
+  correct pre-4bit path (incident 2026-08-07). Enforced since 2026-10-25:
+  launch every model load through `gpu-run -- <cmd>` (`~/.local/bin/gpu-run`;
+  `gpu-run status` shows who holds the GPU). It takes the box-wide GPU lock,
+  waits for the holder, runs the command in a `systemd-run --user` unit with
+  `MemoryMax=40G` and swap off so an overrun kills the probe (exit 137) instead
+  of the desktop, and passes the exit status through. The old
+  `pgrep -af '\.venv/bin/python.*probes'` check still catches tenants that
+  bypassed it. Post-mortem for these rules: `INCIDENT-2026-08-07-oom.md`.
 - `jacobian-lens/` is a plain clone of anthropics/jacobian-lens (gitignored);
   `pip install -e` from it into the venv is already done. LOCALLY PATCHED:
   `jlens/hf.py` `encode()` default max_length 512 → None (no truncation);
