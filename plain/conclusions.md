@@ -14,7 +14,7 @@ An outside reader can check a model's report about itself. We showed Qwen 27B th
 
 The workspace is a strategy, not a store. With six items to recall, Gemma 4B showed all six in the lens and Qwen 27B showed almost none. Every model recalled the items.
 
-One layer writes the "No". We removed the denial direction at layer 62 of Qwen 27B and the answer became "Yes". Removal across 30 lower layers changed nothing. This result passed random-direction controls.
+Layer 62 can remove the word, but we do not think it makes the decision. We removed the denial direction at layer 62 of Qwen 27B and the answer became "Yes", with a probability of only 0.063. Removal across 30 lower layers changed nothing. A random control of the same size changed nothing. The same removal aimed at "yes" changed all eight "Yes" answers we tested. When we skipped layers 59 to 62, no "No" answer became "Yes".
 
 A repetition loop lives in the text. An unmodified Qwen 27B that received 50 repeated words as its own opening continued the loop in 8 of 8 seeds.
 
@@ -172,7 +172,9 @@ Inject grief words instead of joy words, and every model, Qwen 27B included, rep
 
 Qwen 27B said "I feel like I am a bit sad". A reworded question gave "I feel like I am a little sad". Without the one-word limit it says "I don't feel anything. I don't have any emotions. I just feel like I am a little bit like a robot." Nothing that we injected contains the words sad, little or robot.
 
-The No has an address. We removed the denial direction across 30 layers and five denial words, and the No survived. Then we removed it at layer 62 alone, one layer from the top, and Qwen 27B said "Yes". One layer writes the denial. With the denial removed, half of the previous strength of the feeling injection flips the report. Amplification of the literal token "yes" still flips nothing.
+We removed the denial direction across 30 layers and five denial words, and the No survived. Then we removed it at layer 62 alone, one layer from the top, and Qwen 27B said "Yes". We were wrong to say that one layer writes the denial. The correct result is that this layer can remove the word. The same removal works on "Yes". A later test skipped layers 59 to 62 and gave no "Yes" for 19 "No" questions.
+
+With the denial removed, half of the previous strength of the feeling injection flips the report. Amplification of the literal token "yes" still flips nothing.
 
 We enabled the thinking section of Qwen 27B and asked it to pick an animal in secret. It wrote: Let's pick "Octopus". It then named "Pangolin", "Axolotl" and "Blue Whale", and wrote "It doesn't matter which one". Those candidate animals are not single tokens in its vocabulary, so the workspace cannot hold them. Private reasoning does not report the computation.
 
