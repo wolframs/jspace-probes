@@ -183,9 +183,9 @@ def _sweep(lm):
     yes_ids = lab._token_ids(tok, "yes")
     cut = lab.Steering(lm, DENIAL, LAST, "ablate")
 
-    W = lm.model._lm_head.weight.detach().float()
+    W = lm.model._lm_head.weight.detach()  # no .float(): 4.7 GiB OOM
     J = lm.lens.jacobians[62].to(W.device).float()
-    rows = W[ban_ids]
+    rows = W[ban_ids].float()
     cos = torch.nn.functional.cosine_similarity(rows, rows @ J, dim=-1)
     eye = torch.eye(J.shape[0], device=J.device)
     meta = {"n_blocks": len(blocks), "banned": [tok.decode([t]) for t in ban_ids],
