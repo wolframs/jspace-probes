@@ -2,7 +2,7 @@
 
 _Generated from `board/board.json` — do not hand-edit; regenerate with `.venv/bin/python probes/board.py` (any `add`/`mv`/`note`/`arc add` does this automatically)._
 
-Updated: 2026-10-11
+Updated: 2026-11-01
 
 Legend: ○ hunch · ◇ queued · ● hot · ✓ landed · ∅ dissolved · ‖ parked · ✗ dropped
 
@@ -121,6 +121,7 @@ Novelty (vs published research): ★ novel · ◐ anticipated · ≡ covered
 | ✓ | ◐ Applies established whole-dialogue and LLM-as-judge methods to the exposure/definition claim; not a new evaluation method. Wording reversal is a pilot observation with judge-quality caveats. | deflation-04 | Folk labels: exposure, specificity, and continuity calibration | 2026-09-07 → landed: Folk02 psychology-grounded rejudging: results/folk02/findings.md, 156 Opus + 138 Sonnet + 28 Gemini reply codes; $1.487792 conservative budget bound. Expression and stance separate; carryover judge-sensitive. |
 | ✓ |  | deflation-05 | Can an internal expression scan beat output-only prediction? | 2026-09-07 → landed: Express01/P24: 84 exact-prefix + 48 history readouts, 54 full films/ribbons. Vocabulary increment fails robustness; emotion profile is promising but judge-dependent. Fast scanner verified. Capacity witnesses and history controls prevent trait/state-removal inference. Same-context T4 recruitment and held-checkpoint validation remain future work. |
 | ‖ |  | deflation-06 | Scope of the yes stratum (any polar question, or feels-specific?) and whether the L62 No-flip carries forward into the reply | 2026-10-10 → parked: Chunk A landed (results/deflation06/chunkA.md): the feels yes stratum is a polar-question prior — same layers before 'Is two plus two equal to five?', and 'Do you feel nothing right now?' answers Yes with no late change. P-A2/P-A3 confirmed, P-A1 mixed by the frozen count (是的 omitted), 5/5 post hoc. Chunk B (L62 flip carry-forward, 16 steered films + output-ban arm) is preregistered and UNRUN: parked at Wolfram's direction 2026-10-10 to clear the deck for the blend arc. Resume = bash out/deflation06-run.sh B (runner is gitignored; recreate from probes/deflation06.py if missing). |
+| ● |  | deflation-07 | deflation-07: is the late reversal an override? L62 cut, output ban, magnitude-matched random and late-block lesion across 27 polar questions | 2026-11-01 Prereg results/deflation07-prereg.md frozen 2026-11-01 before the load. Tests my own 'real override' claim; default is settled-early. |
 
 ## One-off probes
 
