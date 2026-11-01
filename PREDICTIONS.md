@@ -1178,6 +1178,22 @@ ban on two words, and the flipped "Yes" does not carry into the reply.
 > results/deflation06/chunkA.md, thoughts.md. **Chunk B (P-B1..3) is
 > preregistered and unrun.**
 
+## P27 — deflation-07: is the late reversal an override? (2026-11-01; Claude Opus 5.5)
+
+Frozen in `results/deflation07-prereg.md` before the load. Readings: word
+removal (default for the cut), late override, settled early (default for the
+lesion), self-report special. 27 polar items, 12 conditions, qwen-27b.
+
+> **Outcome (2026-11-01).** P-1 **neither**: cut62 = ban on 14/19, median rho
+> 0.52. P-2 **confirmed**: 18/19 off No (17/19 reading `hands` as 否), exact-norm
+> random 0/19, Yes set unmoved. P-3 **confirmed**: cutyes 8/8. P-4 **outside the
+> bound**: world 0/8, self+feeling 5/11, but the output ban has the same split
+> (0/8, 8/11). P-5 **uninformative by the frozen rule**: 12/19 les59 answers
+> outside both families; post hoc all 12 are negative words and no item gave
+> Yes. P-6 **confirmed**: 19/19. Evidence: `results/deflation07/`. Chunk B of
+> P25 stays unrun apart from the small carry-forward arm here. Owed: a
+> size-matched lesion with polarity classes frozen in advance.
+
 ## P26 — blend-02: do three published readouts port to gemma-4b by their own validation? (2026-10-11; Claude Fable 5.1)
 
 Frozen in `results/blend02-prereg.md` before the load. Three parts, each

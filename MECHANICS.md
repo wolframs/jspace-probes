@@ -85,6 +85,12 @@ Our own qwen landmarks agree: the "No" is decided at **L62** (motor); the
 mirror follows evidence only in the last layers. **For qwen, steer/ablate
 across ~L24–56** (pre-motor workspace); our loss-map uses `range(24,55,2)`.
 The **early band L2–8 is the 5C null control** — expect ~0 there everywhere.
+*Correction 2026-11-01 (deflation-07):* "decided at L62" overstates it. L62
+is where the *word* can be removed: the cut works on Yes answers too (8/8),
+and it is not an output ban either (P(yes) falls below the ban's on 19/19 No
+items; `W_U`–`W_U J_62` cosine 0.84–0.92, ‖J₆₂−I‖/‖I‖ 0.38). Bypassing blocks
+59–62 or 55–62 released no Yes on any No item. Late-block lesions are now
+`deflation07.Lesion`; polarity classes must be frozen before reading one.
 
 ~~⚠️ Fraction-derived, not qwen-measured. A "where is qwen's ignition"
 calibration (kurtosis rise / ambiguity commitment on qwen) is owed before

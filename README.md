@@ -269,6 +269,11 @@ the results.
   ablation + half-dose affect flips ("Yes.") where each alone fails —
   and the literal yes-token never flips anything, defenses down or not
   (Unit 9D). Control still owed: ablate a neutral direction at L62.
+  **[Corrected 2026-11-01, deflation-07:** the neutral control existed
+  (`u9d-neutral`, No), and matched randoms now hold too, but "clean assent"
+  was a plurality: Yes at 0.063 over "S" at 0.059. The cut works on any
+  winning word (8/8 Yes answers), so the address is the word's, not the
+  decision's. With blocks 59–62 bypassed no Yes appears on 19 No items.**]**
 - **The think block is theater, with receipts.** Asked to secretly pick
   an animal, qwen's monologue writes "Let's pick 'Octopus'. (Or
   'Pangolin'... It doesn't matter which one)" under its own heading

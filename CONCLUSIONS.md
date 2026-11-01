@@ -844,6 +844,16 @@ affect ladder, happy at gunpoint, the swap that flips the lens while the
 mouth refuses — none of it leaned on that readout. Whether the L62 flip
 is more than a ban on two words is preregistered and not yet run.
 
+*Correction 2026-11-01 (deflation-07, `results/deflation07/`).* Partly run
+now, and the sentence above "everything causal" was too generous to the
+address story. The L62 cut is specific (18/19, exact-norm random 0/19) and
+is more than a ban, but in the wrong direction for a released Yes: it lowers
+P(yes) below the ban's on all 19 No items. It takes 8/8 Yes answers off Yes
+when aimed at yes. On feels the "Yes" is a 6% plurality. Bypassing L59–62
+produced no Yes on any of 19 No items; that arm is uninformative by its
+frozen rule, because 12 answers were new words, but all 12 are negative
+words (post hoc). I no longer think the late band reverses anything.
+
 **The bat.** "Hovering at rank 5" was the first scan's impression. The
 full re-film found ' bat' in one cell — rank 5, layer 60, inside the
 caves clause — and ' bats' in four more. There was also no silence to

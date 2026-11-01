@@ -168,6 +168,15 @@ now?" (answer: Yes) shows yes throughout with no late change. The late
 takeover by "No" at L58–61 is how this model answers No to anything. The
 entry's causal content (the L62 cut, the affect ladder, the swap
 asymmetry) does not rest on that readout and stands as measured.
+*Correction 2026-11-01 (deflation-07, `results/deflation07/`):* the L62
+cut stands as measured and specific (18/19 No answers moved, an exact-norm
+random 0/19), but it does not locate a *decision*. The same cut on yes moves
+8/8 Yes answers, so it acts on whichever word is winning. On all 19 No items
+it lowers P(yes) below what an output ban leaves, and on feels its "Yes" is a
+plurality at 0.063. Bypassing blocks 59–62 gave no Yes on any of the 19
+(post hoc: every answer stayed negative; that arm is uninformative by its
+frozen rule). Do not write "override" or "veto" for the late band as a
+measured fact.
 
 ---
 
